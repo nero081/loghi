@@ -1,0 +1,257 @@
+{
+    "name": "LaTV",
+    "author": "autore nͥΣrͣoͫ",
+    "image": "https://i.pinimg.com/originals/79/59/1f/79591ffa2065633793c2889d48cdef3e.gif",
+    "info": "Edit by nͥΣrͣoͫ",
+    "groups": [
+        {
+            "name": "cinema",
+            "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Sky_Cinema_-_Logo_2020.svg/390px-Sky_Cinema_-_Logo_2020.svg.png",
+            "stations": [
+                {
+                    "name": "Sky Cinema Action",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Sky_Cinema_Action_-_Logo_2021.svg/512px-Sky_Cinema_Action_-_Logo_2021.svg.png",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2ac/mono.m3u8"
+                },
+                {
+                    "name": "Sky Cinema Collection",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Sky_Cinema_Collection_-_Logo_2019.svg/512px-Sky_Cinema_Collection_-_Logo_2019.svg.png",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2skycinemacollection/mono.m3u8"
+                },
+                {
+                    "name": "Sky Cinema Comedy",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Sky_Cinema_Comedy_-_Logo_2021.svg/512px-Sky_Cinema_Comedy_-_Logo_2021.svg.png",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2skycinemacomedy/mono.m3u8"
+                },
+                {
+                    "name": "Sky Cinema Drama",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Sky_Cinema_Drama_-_Logo_2021.svg/1920px-Sky_Cinema_Drama_-_Logo_2021.svg.png",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2skycinemadrama/mono.m3u8"
+                },
+                {
+                    "name": "Sky Cinema Due",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Sky_Cinema_Due_-_Logo_2021.svg/150px-Sky_Cinema_Due_-_Logo_2021.svg.png",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2skycinemadue/mono.m3u8"
+                },
+                {
+                    "name": "Sky Cinema Family",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Sky_Cinema_Family_-_Logo_2018.svg/512px-Sky_Cinema_Family_-_Logo_2018.svg.png",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2skycinemafamily/mono.m3u8"
+                },
+                {
+                    "name": "Sky Cinema Romance",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Sky_Cinema_Romance_-_Logo_2019.svg/512px-Sky_Cinema_Romance_-_Logo_2019.svg.png?20200812141234",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2skycinemaromance/mono.m3u8"
+                },
+                {
+                    "name": "Sky Cinema Suspense",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Sky_Cinema_Suspense_-_Logo_2019.svg/512px-Sky_Cinema_Suspense_-_Logo_2019.svg.png",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2skycinemasuspence/mono.m3u8"
+                },
+                {
+                    "name": "Sky Cinema Uno",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Sky_Cinema_Uno_-_Logo_2021.svg/512px-Sky_Cinema_Uno_-_Logo_2021.svg.png",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2skycinemauno/mono.m3u8"
+                }
+            ]
+        },
+        {
+            "name": "sport",
+            "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Sky_Sport_-_Logo_2020.svg/512px-Sky_Sport_-_Logo_2020.svg.png",
+            "stations": [
+                {
+                    "name": "Dazn1",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/DAZN_1_Logo.svg/512px-DAZN_1_Logo.svg.png",
+                    "url": "https://calcionew.newkso.ru/calcio/Dazn1/mono.m3u8"
+                },
+                {
+                    "name": "Eurosport 1",
+                    "image": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/netherlands/eurosport-1-hd-nl.png",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2eurosport1/mono.m3u8"
+                },
+                {
+                    "name": "Eurosport 2",
+                    "image": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/netherlands/eurosport-2-hd-nl.png",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2eurosport2/mono.m3u8"
+                },
+                {
+                    "name": "Sky Formula 1",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Sky_Sport_F1_-_Logo_2020.svg/390px-Sky_Sport_F1_-_Logo_2020.svg.png",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2formula/mono.m3u8"
+                },
+                {
+                    "name": "Sky Sport 24",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Sky_Sport_24_-_Logo_2020.svg/500px-Sky_Sport_24_-_Logo_2020.svg.png",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2skysport24/mono.m3u8"
+                },
+                {
+                    "name": "Sky Sport 251",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Sky_Sport_-_Logo_2020.svg/512px-Sky_Sport_-_Logo_2020.svg.png",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2skysport251/mono.m3u8"
+                },
+                {
+                    "name": "Sky Sport 252",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Sky_Sport_-_Logo_2020.svg/512px-Sky_Sport_-_Logo_2020.svg.png",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2skysport252/mono.m3u8"
+                },
+                {
+                    "name": "Sky Sport 253",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Sky_Sport_-_Logo_2020.svg/512px-Sky_Sport_-_Logo_2020.svg.png",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2skysport253/mono.m3u8"
+                },
+                {
+                    "name": "Sky Sport 254",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Sky_Sport_-_Logo_2020.svg/512px-Sky_Sport_-_Logo_2020.svg.png",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2skysport254/mono.m3u8"
+                },
+                {
+                    "name": "Sky Sport 255",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Sky_Sport_-_Logo_2020.svg/512px-Sky_Sport_-_Logo_2020.svg.png",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2skysport255/mono.m3u8"
+                },
+                {
+                    "name": "Sky Sport 256",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Sky_Sport_-_Logo_2020.svg/512px-Sky_Sport_-_Logo_2020.svg.png",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2skysport256/mono.m3u8"
+                },
+                {
+                    "name": "Sky Sport 257",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Sky_Sport_-_Logo_2020.svg/512px-Sky_Sport_-_Logo_2020.svg.png",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2skysport257/mono.m3u8"
+                },
+                {
+                    "name": "Sky Sport 258",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Sky_Sport_-_Logo_2020.svg/512px-Sky_Sport_-_Logo_2020.svg.png",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2sky258/mono.m3u8"
+                },
+                {
+                    "name": "Sky Sport 259",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Sky_Sport_-_Logo_2020.svg/512px-Sky_Sport_-_Logo_2020.svg.png",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2sky259/mono.m3u8"
+                },
+                {
+                    "name": "Sky Sport Arena",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Sky_Sport_Arena_-_Logo_2020.svg/260px-Sky_Sport_Arena_-_Logo_2020.svg.png",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2skysportarena/mono.m3u8"
+                },
+                {
+                    "name": "Sky Sport Calcio",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Sky_Sport_Calcio.svg/390px-Sky_Sport_Calcio.svg.png",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2skysportcalcio/mono.m3u8"
+                },
+                {
+                    "name": "Sky Sport Golf",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Sky_Sport_Golf_Logo_2022.svg/390px-Sky_Sport_Golf_Logo_2022.svg.png",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2skysportgolf/mono.m3u8"
+                },
+                {
+                    "name": "Sky Sport Max",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Sky_Sport_-_Logo_2020.svg/260px-Sky_Sport_-_Logo_2020.svg.png",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2skysportmax/mono.m3u8"
+                },
+                {
+                    "name": "Sky Sport MotoGP",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Sky_Sport_MotoGP_-_Logo_2020.svg/390px-Sky_Sport_MotoGP_-_Logo_2020.svg.png",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2skysportmotogp/mono.m3u8"
+                },
+                {
+                    "name": "Sky Sport Nba",
+                    "image": "https://media.dunkest.com/2021/05/05215917/sky-sport-nba-1024x390.jpg",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2skysportnba/mono.m3u8"
+                },
+                {
+                    "name": "Sky Sport Tennis",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Sky_Sport_Tennis.svg/390px-Sky_Sport_Tennis.svg.png",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2skysporttennis/mono.m3u8"
+                },
+                {
+                    "name": "Sky Sport Uno",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Sky_Sport_Uno_-_Logo_2020.svg/500px-Sky_Sport_Uno_-_Logo_2020.svg.png",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2skysportuno/mono.m3u8"
+                },
+                {
+                    "name": "Sky Sport Uno",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Sky_Sport_Uno_-_Logo_2020.svg/500px-Sky_Sport_Uno_-_Logo_2020.svg.png",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2serie/mono.m3u8"
+                },
+                {
+                    "name": "Solo Calcio",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/SI_Solo_Calcio_logo_%282019%29.svg/390px-SI_Solo_Calcio_logo_%282019%29.svg.png",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2solocalcio/mono.m3u8"
+                },
+				{
+                    "name": "Sky Serie A",
+                    "image": "https://www.dropbox.com/scl/fi/h0ivgknvhz4ci0gvokzso/seriea.png?rlkey=j3n0cncy0gc4azhce247vcj53&dl=1",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2skyserie/mono.m3u8"
+                },
+				{
+                    "name": "La Liga",
+                    "image": "https://www.dropbox.com/scl/fi/bs8k2nc5u1o9ed2jmxkq3/laliga.png?rlkey=ud7o5u49wtx4lznaq94dwql0c&dl=1",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2laliga/mono.m3u8"
+                },
+				{
+                    "name": "Ligue",
+                    "image": "https://www.dropbox.com/scl/fi/w6qpofsk9j6i80wphtzyq/ligue1.png?rlkey=s6wgtx6bntzfetlac5zxuu8vb&dl=1",
+                    "url": "https://calcionew.newkso.ru/calcio/ligue1/mono.m3u8"
+                }
+            ]
+        },
+        {
+            "name": "intrattenimento",
+            "image": "https://www.dropbox.com/scl/fi/cdexym46p56j3hkexqyde/sky2.png?rlkey=hvcw11lulwgzekl9feuyp1s9k&dl=1",
+            "stations": [
+                {
+                    "name": "Comedy Central",
+                    "image": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/spain/comedy-central-es.png",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2comedycentral/mono.m3u8"
+                },
+                {
+                    "name": "Sky Arte",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Logo_sky_arte_2018-2021.png",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2skyarte/mono.m3u8"
+                },
+                {
+                    "name": "Sky Atlantic",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Sky_Atlantic_-_Logo_2020.svg/512px-Sky_Atlantic_-_Logo_2020.svg.png",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2skyatlantic/mono.m3u8"
+                },
+                {
+                    "name": "Sky Crime",
+                    "image": "https://i0.wp.com/www.sky-deals.de/wp-content/uploads/2021/04/Sky-Crime-Logo.jpg?fit=571%2C200&ssl=1",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2skycrime/mono.m3u8"
+                },
+                {
+                    "name": "Sky Documentaries",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Sky_Documentaries.svg/390px-Sky_Documentaries.svg.png",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2skydocumentaries/mono.m3u8"
+                },
+                {
+                    "name": "Sky History",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/History_Logo.svg/571px-History_Logo.svg.png",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2history/mono.m3u8"
+                },
+                {
+                    "name": "Sky Investigation",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Sky_Investigation.svg/512px-Sky_Investigation.svg.png",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2skyinvestigation/mono.m3u8"
+                },
+                {
+                    "name": "Sky Nature",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Sky_Nature.svg/512px-Sky_Nature.svg.png",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2skynature/mono.m3u8"
+                },
+                {
+                    "name": "Sky Uno",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Sky_Uno_-_Logo_2021.svg/512px-Sky_Uno_-_Logo_2021.svg.png",
+                    "url": "https://calcionew.newkso.ru/calcio/calcioX2skyuno/mono.m3u8"
+                }
+            ]
+        },
+        
+		{
+                    "name": "Primafila",
+                    "image": "https://www.dropbox.com/scl/fi/1nqpyd7ukswrq8fhnwraz/Sky_Primafila.svg.jpg?rlkey=nnes0uaosh7m4wqb4u2wlok7y&dl=1",
+                    "url": "https://www.dropbox.com/scl/fi/9gut1v0m8xjk0705lkbs7/PRIMAFILA.w3u?rlkey=ybntv28c22lronea9pzdpxwu3&dl=1"
+                }
+    ]
+}
