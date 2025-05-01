@@ -1,0 +1,944 @@
+{
+    "name": "Sport",
+    "author": "aggiornato da nͥΣrͣoͫ il 01-05-2025",
+    "groups": [
+        {
+            "name": "Italy - Serie B",
+            "image": "https://i2.wp.com/www.latina24ore.it/wp-content/uploads/2015/07/logo-serie-B.png",
+            "stations": [
+                {
+                    "name": " 12:30 Juve Stabia vs Catanzaro - DAZN Italia",
+                    "image": "https://skystreaming.download/content/thumbs/24b7bc051fc0b575dd08e30b1b28e8e3.",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://nfsnew.newkso.ru/nfs/premium1/mono.m3u8"
+                },
+                {
+                    "name": " 12:30 Juve Stabia vs Catanzaro - Fox Soccer Plus",
+                    "image": "https://skystreaming.download/content/thumbs/24b7bc051fc0b575dd08e30b1b28e8e3.",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://ddy6new.newkso.ru/ddy6/premium756/mono.m3u8"
+                },
+                {
+                    "name": " 12:30 Juve Stabia vs Catanzaro - 5 PLUS Israel",
+                    "image": "https://skystreaming.download/content/thumbs/24b7bc051fc0b575dd08e30b1b28e8e3.",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://zekonew.newkso.ru/zeko/premium145/mono.m3u8"
+                },
+                {
+                    "name": " 15:00 Cosenza vs Bari 1908 - DAZN Italia",
+                    "image": "https://skystreaming.download/content/thumbs/a469d5af546b0515c2378382635b97ec.",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://ddy6new.newkso.ru/ddy6/premium55/mono.m3u8"
+                },
+                {
+                    "name": " 15:00 Mantova vs Cesena - DAZN Italia",
+                    "image": "https://skystreaming.download/content/thumbs/260ba3e870be286549faf044e453e38a.",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://windnew.newkso.ru/wind/premium59/mono.m3u8"
+                },
+                {
+                    "name": " 15:00 Modena vs Reggiana - DAZN Italia",
+                    "image": "https://png.pngtree.com/png-vector/20230124/ourmid/pngtree-arrow-icon-3d-play-png-image_6565151.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://windnew.newkso.ru/wind/premium68/mono.m3u8"
+                },
+                {
+                    "name": " 15:00 Pisa vs Frosinone - DAZN Italia",
+                    "image": "https://png.pngtree.com/png-vector/20230124/ourmid/pngtree-arrow-icon-3d-play-png-image_6565151.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://windnew.newkso.ru/wind/premium76/mono.m3u8"
+                },
+                {
+                    "name": " 15:00 Sampdoria vs Cremonese - DAZN Italia",
+                    "image": "https://png.pngtree.com/png-vector/20230124/ourmid/pngtree-arrow-icon-3d-play-png-image_6565151.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://nfsnew.newkso.ru/nfs/premium77/mono.m3u8"
+                },
+                {
+                    "name": " 15:00 Sampdoria vs Cremonese - Fox Soccer Plus",
+                    "image": "https://png.pngtree.com/png-vector/20230124/ourmid/pngtree-arrow-icon-3d-play-png-image_6565151.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://ddy6new.newkso.ru/ddy6/premium756/mono.m3u8"
+                },
+                {
+                    "name": " 15:00 Sampdoria vs Cremonese - 5 PLUS Israel",
+                    "image": "https://png.pngtree.com/png-vector/20230124/ourmid/pngtree-arrow-icon-3d-play-png-image_6565151.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://zekonew.newkso.ru/zeko/premium145/mono.m3u8"
+                },
+                {
+                    "name": " 15:00 Spezia vs Salernitana - DAZN Italia",
+                    "image": "https://png.pngtree.com/png-vector/20230124/ourmid/pngtree-arrow-icon-3d-play-png-image_6565151.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://dokko1new.newkso.ru/dokko1/premium86/mono.m3u8"
+                },
+                {
+                    "name": " 19:30 Sassuolo vs Carrarese - DAZN Italia",
+                    "image": "https://png.pngtree.com/png-vector/20230124/ourmid/pngtree-arrow-icon-3d-play-png-image_6565151.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://ddy6new.newkso.ru/ddy6/premium55/mono.m3u8"
+                },
+                {
+                    "name": " 19:30 Sassuolo vs Carrarese - Fox Soccer Plus",
+                    "image": "https://png.pngtree.com/png-vector/20230124/ourmid/pngtree-arrow-icon-3d-play-png-image_6565151.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://ddy6new.newkso.ru/ddy6/premium756/mono.m3u8"
+                },
+                {
+                    "name": " 19:30 Sassuolo vs Carrarese - 5 LIVE Israel",
+                    "image": "https://png.pngtree.com/png-vector/20230124/ourmid/pngtree-arrow-icon-3d-play-png-image_6565151.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://zekonew.newkso.ru/zeko/premium146/mono.m3u8"
+                }
+            ]
+        },
+        {
+            "name": "UEFA Europa League / Conference League",
+            "image": "https://images.icon-icons.com/12/PNG/96/playsoccersports_juegos_futbo_1762.png",
+            "stations": [
+                {
+                    "name": " 21:00 Simulcast - Sky Sport Austria 1",
+                    "image": "https://png.pngtree.com/png-vector/20230124/ourmid/pngtree-arrow-icon-3d-play-png-image_6565151.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://ddy6new.newkso.ru/ddy6/premium559/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Simulcast - Movistar Liga de Campeones 3",
+                    "image": "https://png.pngtree.com/png-vector/20230124/ourmid/pngtree-arrow-icon-3d-play-png-image_6565151.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://nfsnew.newkso.ru/nfs/premium10/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Simulcast - Canal+ Sport360",
+                    "image": "https://png.pngtree.com/png-vector/20230124/ourmid/pngtree-arrow-icon-3d-play-png-image_6565151.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://windnew.newkso.ru/wind/premium464/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Simulcast - Ziggo Sport 4 NL",
+                    "image": "https://png.pngtree.com/png-vector/20230124/ourmid/pngtree-arrow-icon-3d-play-png-image_6565151.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://windnew.newkso.ru/wind/premium396/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Simulcast - Cosmote Sport 1 HD",
+                    "image": "https://png.pngtree.com/png-vector/20230124/ourmid/pngtree-arrow-icon-3d-play-png-image_6565151.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://dokko1new.newkso.ru/dokko1/premium622/mono.m3u8"
+                }
+            ]
+        },
+        {
+            "name": "UEFA Europa League",
+            "image": "https://images.icon-icons.com/12/PNG/96/playsoccersports_juegos_futbo_1762.png",
+            "stations": [
+                {
+                    "name": " 21:00 Tottenham Hotspur vs Bodø / Glimt - TNT Sports 2 UK",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090253_tottenham-hotspur-x-bod-glimt.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://nfsnew.newkso.ru/nfs/premium32/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Tottenham Hotspur vs Bodø / Glimt - CBS Sports Network USA",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090253_tottenham-hotspur-x-bod-glimt.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://zekonew.newkso.ru/zeko/premium308/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Tottenham Hotspur vs Bodø / Glimt - Premier Sports 2 Ireland",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090253_tottenham-hotspur-x-bod-glimt.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://zekonew.newkso.ru/zeko/premium799/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Tottenham Hotspur vs Bodø / Glimt - Sky Sport Austria 2",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090253_tottenham-hotspur-x-bod-glimt.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://nfsnew.newkso.ru/nfs/premium11/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Tottenham Hotspur vs Bodø / Glimt - Movistar Liga de Campeones 4",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090253_tottenham-hotspur-x-bod-glimt.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://nfsnew.newkso.ru/nfs/premium12/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Tottenham Hotspur vs Bodø / Glimt - DAZN Eleven 1 Portugal",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090253_tottenham-hotspur-x-bod-glimt.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://ddy6new.newkso.ru/ddy6/premium455/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Tottenham Hotspur vs Bodø / Glimt - Sky Sport 254 IT",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090253_tottenham-hotspur-x-bod-glimt.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://nfsnew.newkso.ru/nfs/premium13/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Tottenham Hotspur vs Bodø / Glimt - Polsat Sport Premium 2 Poland",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090253_tottenham-hotspur-x-bod-glimt.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://nfsnew.newkso.ru/nfs/premium14/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Tottenham Hotspur vs Bodø / Glimt - Canal+ Foot France",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090253_tottenham-hotspur-x-bod-glimt.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://windnew.newkso.ru/wind/premium463/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Tottenham Hotspur vs Bodø / Glimt - Canal+ Live 2 France",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090253_tottenham-hotspur-x-bod-glimt.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://windnew.newkso.ru/wind/premium68/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Tottenham Hotspur vs Bodø / Glimt - Ziggo Sport 2 NL",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090253_tottenham-hotspur-x-bod-glimt.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://zekonew.newkso.ru/zeko/premium398/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Tottenham Hotspur vs Bodø / Glimt - TRT Spor Turkey",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090253_tottenham-hotspur-x-bod-glimt.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://windnew.newkso.ru/wind/premium889/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Tottenham Hotspur vs Bodø / Glimt - Digi Sport 2 Romania",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090253_tottenham-hotspur-x-bod-glimt.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://top1new.newkso.ru/top1/premium401/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Tottenham Hotspur vs Bodø / Glimt - Prima Sport 2 Romania",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090253_tottenham-hotspur-x-bod-glimt.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://wikinew.newkso.ru/wiki/premium584/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Tottenham Hotspur vs Bodø / Glimt - Arena Sport 3 Serbia",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090253_tottenham-hotspur-x-bod-glimt.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://windnew.newkso.ru/wind/premium431/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Tottenham Hotspur vs Bodø / Glimt - ESPN Mexico",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090253_tottenham-hotspur-x-bod-glimt.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://nfsnew.newkso.ru/nfs/premium925/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Tottenham Hotspur vs Bodø / Glimt - Cosmote Sport 5 Greece",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090253_tottenham-hotspur-x-bod-glimt.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://dokko1new.newkso.ru/dokko1/premium626/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Tottenham Hotspur vs Bodø / Glimt - Arena Sport 3 Croatia",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090253_tottenham-hotspur-x-bod-glimt.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://ddy6new.newkso.ru/ddy6/premium434/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Tottenham Hotspur vs Bodø / Glimt - MAX Sport 4 Bulgaria",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090253_tottenham-hotspur-x-bod-glimt.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://windnew.newkso.ru/wind/premium475/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Tottenham Hotspur vs Bodø / Glimt - ESPN2 Argentina",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090253_tottenham-hotspur-x-bod-glimt.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://windnew.newkso.ru/wind/premium150/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Tottenham Hotspur vs Bodø / Glimt - SuperSport Variety 3",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090253_tottenham-hotspur-x-bod-glimt.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://ddy6new.newkso.ru/ddy6/premium418/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Tottenham Hotspur vs Bodø / Glimt - beIN Sports MENA 2",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090253_tottenham-hotspur-x-bod-glimt.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://dokko1new.newkso.ru/dokko1/premium92/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Tottenham Hotspur vs Bodø / Glimt - Sport 4 Israel",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090253_tottenham-hotspur-x-bod-glimt.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://zekonew.newkso.ru/zeko/premium143/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Athletic Club vs Manchester United - TNT Sports 1 UK",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090301_athletic-club-x-manchester-united.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://nfsnew.newkso.ru/nfs/premium31/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Athletic Club vs Manchester United - Premier Sports 1 Ireland",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090301_athletic-club-x-manchester-united.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://ddy6new.newkso.ru/ddy6/premium771/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Athletic Club vs Manchester United - Movistar Liga de Campeones",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090301_athletic-club-x-manchester-united.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://zekonew.newkso.ru/zeko/premium435/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Athletic Club vs Manchester United - RTL DE",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090301_athletic-club-x-manchester-united.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://ddy6new.newkso.ru/ddy6/premium740/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Athletic Club vs Manchester United - Sport TV5 Portugal",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090301_athletic-club-x-manchester-united.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://ddy6new.newkso.ru/ddy6/premium290/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Athletic Club vs Manchester United - Polsat Sport Premium 1 Poland",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090301_athletic-club-x-manchester-united.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://nfsnew.newkso.ru/nfs/premium15/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Athletic Club vs Manchester United - Sky Sport 253 IT",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090301_athletic-club-x-manchester-united.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://nfsnew.newkso.ru/nfs/premium16/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Athletic Club vs Manchester United - Sky Sport Calcio IT",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090301_athletic-club-x-manchester-united.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://windnew.newkso.ru/wind/premium870/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Athletic Club vs Manchester United - Canal+ France",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090301_athletic-club-x-manchester-united.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://windnew.newkso.ru/wind/premium121/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Athletic Club vs Manchester United - Canal+ Live 1 France",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090301_athletic-club-x-manchester-united.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://nfsnew.newkso.ru/nfs/premium17/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Athletic Club vs Manchester United - M4 Sports Hungary",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090301_athletic-club-x-manchester-united.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://zekonew.newkso.ru/zeko/premium265/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Athletic Club vs Manchester United - TRT 1 Turkey",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090301_athletic-club-x-manchester-united.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://nfsnew.newkso.ru/nfs/premium18/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Athletic Club vs Manchester United - Stöð 2 Sport 2 Iceland",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090301_athletic-club-x-manchester-united.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://nfsnew.newkso.ru/nfs/premium19/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Athletic Club vs Manchester United - Digi Sport 1 Romania",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090301_athletic-club-x-manchester-united.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://top1new.newkso.ru/top1/premium400/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Athletic Club vs Manchester United - Prima Sport 1 Romania",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090301_athletic-club-x-manchester-united.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://wikinew.newkso.ru/wiki/premium583/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Athletic Club vs Manchester United - Ziggo Sport 1 NL",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090301_athletic-club-x-manchester-united.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://ddy6new.newkso.ru/ddy6/premium393/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Athletic Club vs Manchester United - TUDN USA",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090301_athletic-club-x-manchester-united.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://windnew.newkso.ru/wind/premium66/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Athletic Club vs Manchester United - UniMás",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090301_athletic-club-x-manchester-united.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://nfsnew.newkso.ru/nfs/premium133/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Athletic Club vs Manchester United - ŠTV 1 Slovenia",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090301_athletic-club-x-manchester-united.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://nfsnew.newkso.ru/nfs/premium20/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Athletic Club vs Manchester United - Fox Sports Mexico",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090301_athletic-club-x-manchester-united.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://nfsnew.newkso.ru/nfs/premium929/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Athletic Club vs Manchester United - Arena 2 Premium Serbia",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090301_athletic-club-x-manchester-united.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://ddy6new.newkso.ru/ddy6/premium135/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Athletic Club vs Manchester United - Cosmote Sport 2 Greece",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090301_athletic-club-x-manchester-united.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://dokko1new.newkso.ru/dokko1/premium623/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Athletic Club vs Manchester United - Arena Sport 1 Croatia",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090301_athletic-club-x-manchester-united.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://ddy6new.newkso.ru/ddy6/premium432/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Athletic Club vs Manchester United - MAX Sport 3 Bulgaria",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090301_athletic-club-x-manchester-united.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://ddy6new.newkso.ru/ddy6/premium474/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Athletic Club vs Manchester United - ESPN Argentina",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090301_athletic-club-x-manchester-united.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://ddy6new.newkso.ru/ddy6/premium149/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Athletic Club vs Manchester United - SuperSport Football",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090301_athletic-club-x-manchester-united.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://zekonew.newkso.ru/zeko/premium56/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Athletic Club vs Manchester United - beIN Sports MENA 1",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090301_athletic-club-x-manchester-united.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://dokko1new.newkso.ru/dokko1/premium91/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Athletic Club vs Manchester United - beIN Sports MENA English 1",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090301_athletic-club-x-manchester-united.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://windnew.newkso.ru/wind/premium61/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Athletic Club vs Manchester United - Sport 2 Israel",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090301_athletic-club-x-manchester-united.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://zekonew.newkso.ru/zeko/premium141/mono.m3u8"
+                }
+            ]
+        },
+        {
+            "name": "UEFA Conference League",
+            "image": "https://images.icon-icons.com/12/PNG/96/playsoccersports_juegos_futbo_1762.png",
+            "stations": [
+                {
+                    "name": " 21:00 Real Betis vs Fiorentina - TNT Sports 5 UK",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090188_real-betis-x-fiorentina.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://nfsnew.newkso.ru/nfs/premium21/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Real Betis vs Fiorentina - TV8 IT",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090188_real-betis-x-fiorentina.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://nfsnew.newkso.ru/nfs/premium22/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Real Betis vs Fiorentina - Sky Sport 252 IT",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090188_real-betis-x-fiorentina.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://nfsnew.newkso.ru/nfs/premium23/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Real Betis vs Fiorentina - Sky Sport Uno IT",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090188_real-betis-x-fiorentina.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://ddy6new.newkso.ru/ddy6/premium461/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Real Betis vs Fiorentina - Movistar Liga de Campeones 2",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090188_real-betis-x-fiorentina.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://nfsnew.newkso.ru/nfs/premium24/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Real Betis vs Fiorentina - Sky Sport Austria 4",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090188_real-betis-x-fiorentina.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://nfsnew.newkso.ru/nfs/premium25/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Real Betis vs Fiorentina - DAZN Eleven 3 Portugal",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090188_real-betis-x-fiorentina.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://windnew.newkso.ru/wind/premium457/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Real Betis vs Fiorentina - Polsat Sport Premium 3 Poland",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090188_real-betis-x-fiorentina.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://nfsnew.newkso.ru/nfs/premium26/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Real Betis vs Fiorentina - Ziggo Sport 5 NL",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090188_real-betis-x-fiorentina.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://zekonew.newkso.ru/zeko/premium383/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Real Betis vs Fiorentina - SRF zwei",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090188_real-betis-x-fiorentina.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://nfsnew.newkso.ru/nfs/premium27/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Real Betis vs Fiorentina - Fox Sports Mexico",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090188_real-betis-x-fiorentina.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://nfsnew.newkso.ru/nfs/premium929/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Real Betis vs Fiorentina - Arena Sport 4 Serbia",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090188_real-betis-x-fiorentina.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://windnew.newkso.ru/wind/premium581/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Real Betis vs Fiorentina - Cosmote Sport 3 Greece",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090188_real-betis-x-fiorentina.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://dokko1new.newkso.ru/dokko1/premium624/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Real Betis vs Fiorentina - Ring bg",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090188_real-betis-x-fiorentina.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://windnew.newkso.ru/wind/premium471/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Real Betis vs Fiorentina - SuperSport La Liga",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090188_real-betis-x-fiorentina.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://ddy6new.newkso.ru/ddy6/premium415/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Real Betis vs Fiorentina - beIN Sports MENA 3",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090188_real-betis-x-fiorentina.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://dokko1new.newkso.ru/dokko1/premium93/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Real Betis vs Fiorentina - Sport 1 Israe",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090188_real-betis-x-fiorentina.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://zekonew.newkso.ru/zeko/premium140/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Djurgården vs Chelsea - TNT Sports 4 UK",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090279_djurgrden-x-chelsea.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://nfsnew.newkso.ru/nfs/premium34/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Djurgården vs Chelsea - Sky Sport Austria 3",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090279_djurgrden-x-chelsea.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://nfsnew.newkso.ru/nfs/premium6/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Djurgården vs Chelsea - Movistar Liga de Campeones 5",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090279_djurgrden-x-chelsea.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://windnew.newkso.ru/wind/premium76/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Djurgården vs Chelsea - DAZN Eleven 2 Portugal",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090279_djurgrden-x-chelsea.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://windnew.newkso.ru/wind/premium456/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Djurgården vs Chelsea - Polsat Sport Premium 4 Poland",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090279_djurgrden-x-chelsea.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://nfsnew.newkso.ru/nfs/premium28/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Djurgården vs Chelsea - Sky Sport 255 IT",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090279_djurgrden-x-chelsea.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://nfsnew.newkso.ru/nfs/premium29/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Djurgården vs Chelsea - Sky Sport Max IT",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090279_djurgrden-x-chelsea.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://dokko1new.newkso.ru/dokko1/premium460/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Djurgården vs Chelsea - Canal+ Sport France",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090279_djurgrden-x-chelsea.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://windnew.newkso.ru/wind/premium122/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Djurgården vs Chelsea - Canal+ Live 3 France",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090279_djurgrden-x-chelsea.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://nfsnew.newkso.ru/nfs/premium77/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Djurgården vs Chelsea - Canal+ Sport 360 France",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090279_djurgrden-x-chelsea.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://windnew.newkso.ru/wind/premium464/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Djurgården vs Chelsea - Cytavision Sports 6 Cyprus",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090279_djurgrden-x-chelsea.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://windnew.newkso.ru/wind/premium916/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Djurgården vs Chelsea - Digi Sport 3 Romania",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090279_djurgrden-x-chelsea.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://top1new.newkso.ru/top1/premium402/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Djurgården vs Chelsea - Prima Sport 4 Romania",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090279_djurgrden-x-chelsea.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://wikinew.newkso.ru/wiki/premium586/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Djurgården vs Chelsea - Stöð 2 Sport 3 Iceland",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090279_djurgrden-x-chelsea.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://nfsnew.newkso.ru/nfs/premium7/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Djurgården vs Chelsea - Ziggo Sport 3 NL",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090279_djurgrden-x-chelsea.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://nfsnew.newkso.ru/nfs/premium919/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Djurgården vs Chelsea - Cosmote Sport 7 Greece",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090279_djurgrden-x-chelsea.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://dokko1new.newkso.ru/dokko1/premium628/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Djurgården vs Chelsea - bTV Action Bulgaria",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090279_djurgrden-x-chelsea.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://windnew.newkso.ru/wind/premium481/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Djurgården vs Chelsea - beIN Sports MENA 4",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090279_djurgrden-x-chelsea.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://dokko1new.newkso.ru/dokko1/premium94/mono.m3u8"
+                },
+                {
+                    "name": " 21:00 Djurgården vs Chelsea - Sport 3 Israel",
+                    "image": "https://guardacalcio.art/uploads/posts/2025-05/1746090279_djurgrden-x-chelsea.jpg",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://zekonew.newkso.ru/zeko/premium142/mono.m3u8"
+                }
+            ]
+        },
+        {
+            "name": "Serie A1 Men 2024/2025 - Semi-final - possible game 3",
+            "image": "https://seo-michael.co.uk/content/images/2023/05/dlpi.jpg",
+            "stations": [
+                {
+                    "name": " 16:50 Serie A1 Men 2024/2025 - Semi-final - possible game 3 - Rai Sport 1 IT",
+                    "image": "https://png.pngtree.com/png-vector/20230124/ourmid/pngtree-arrow-icon-3d-play-png-image_6565151.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://ddy6new.newkso.ru/ddy6/premium882/mono.m3u8"
+                }
+            ]
+        },
+        {
+            "name": "Serie A2 2024/2025-Play-in gara 1",
+            "image": "https://seo-michael.co.uk/content/images/2023/05/dlpi.jpg",
+            "stations": [
+                {
+                    "name": " 20:50 Serie A2 2024/2025-Play-in gara 1 - Rai Sport 1 IT",
+                    "image": "https://png.pngtree.com/png-vector/20230124/ourmid/pngtree-arrow-icon-3d-play-png-image_6565151.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://ddy6new.newkso.ru/ddy6/premium882/mono.m3u8"
+                }
+            ]
+        },
+        {
+            "name": "Serie A1",
+            "image": "https://seo-michael.co.uk/content/images/2023/05/dlpi.jpg",
+            "stations": [
+                {
+                    "name": " 18:15 Lube Civitanova vs Trentino - Arena Sport 2 Serbia",
+                    "image": "https://png.pngtree.com/png-vector/20230124/ourmid/pngtree-arrow-icon-3d-play-png-image_6565151.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://zekonew.newkso.ru/zeko/premium430/mono.m3u8"
+                },
+                {
+                    "name": " 18:15 Lube Civitanova vs Trentino - Sportklub HD Croatia",
+                    "image": "https://png.pngtree.com/png-vector/20230124/ourmid/pngtree-arrow-icon-3d-play-png-image_6565151.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://windnew.newkso.ru/wind/premium453/mono.m3u8"
+                },
+                {
+                    "name": " 18:15 Lube Civitanova vs Trentino - MAX Sport 3 Bulgaria",
+                    "image": "https://png.pngtree.com/png-vector/20230124/ourmid/pngtree-arrow-icon-3d-play-png-image_6565151.png",
+                    "userAgent": "User-Agent=Mozilla/5.0 (iPad; CPU OS 133 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                    "referer": "https://webxzplay.cfd/",
+                    "origin": "https://webxzplay.cfd",
+                    "url": "https://ddy6new.newkso.ru/ddy6/premium474/mono.m3u8"
+                }
+            ]
+        }
+    ]
+}
