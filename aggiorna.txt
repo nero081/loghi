@@ -1,1 +1,3 @@
-nuova lista disponibile, il messaggio comparirà per un po di tempo finchè non trovo una logica :)
+'nuova lista disponibile,'
+'il messaggio comparirà per'
+'un po di tempo https://raw.githubusercontent.com/nero081/loghi/main/list.dat '
