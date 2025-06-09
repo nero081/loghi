@@ -1,2 +1,1 @@
-nuova lista disponibile
-aggiorna
+nuova lista disponibile, il messaggio comparirà per un po di tempo finchè non trovo una logica :)
