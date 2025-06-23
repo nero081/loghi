@@ -21,7 +21,7 @@ https://g003-lin-it-cmaf-prd-cf.pcdn07.cssott02.com/nowitlin1/Content/CMAF_CTR_S
 #KODIPROP:inputstream.adaptive.license_key=11151447a65b31d6cb78dd022cb67e8d:1d6be453be1e607c133a28826d509a86
 https://g003-lin-it-cmaf-prd-ak.pcdn07.cssott02.com/nowitlin1/Content/CMAF_CTR_S1/Live/channel(skysport24)/master_2hr-aac.mpd?c3.ri=13721207037569221611
 
-#EXTINF:-1 tvg-name="Sky Sport Uno" tvg-id="Sky.Sport.Uno.it" group-title="Sky Sport Italia" tvg-logo="https://i.postimg.cc/9FnmwrND/uno.png" group-logo="",Sky Sport Uno
+#EXTINF:-1 tvg-name="Sky Sport Uno" tvg-id="Sky Sport Uno" group-title="Sky Sport Italia" tvg-logo="https://i.postimg.cc/9FnmwrND/uno.png" group-logo="",Sky Sport Uno
 #KODIPROP:inputstreamaddon=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=dash
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
