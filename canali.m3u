@@ -1,0 +1,15 @@
+#EXTM3U
+
+#EXTINF:-1 group-title="🇨🇭 Sky & Dazn Svizzera 🇨🇭" tvg-id="RSILa1.ch" tvg-logo="https://i.postimg.cc/WtL5dRXd/rsila1.png",RSI LA 1
+#KODIPROP:inputstream.adaptive.manifest_type=dash
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=
+https://viamotionhsi.netplus.ch/live/eds/rsila1hd/browser-dash/rsila1hd.mpd
+
+
+#EXTINF:-1 group-title="🇨🇭 Sky & Dazn Svizzera 🇨🇭" tvg-id="RSILa2.ch" tvg-logo="https://i.postimg.cc/3J35r52Y/rsila2.png",RSI LA 2
+#KODIPROP:inputstream.adaptive.manifest_type=dash
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=
+https://viamotionhsi.netplus.ch/live/eds/rsila2hd/browser-dash/rsila2hd.mpd
+
