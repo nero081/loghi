@@ -1,43 +1,39 @@
 #EXTM3U
 
-#EXTINF:-1 tvg-name="Sky Sport24" tvg-id="Sky.Sport24.it" group-title="Sky Sport Italia" tvg-logo="https://i.postimg.cc/QNSxs6Qk/24.png" group-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Sky_Sport_-_Logo_2020.svg/640px-Sky_Sport_-_Logo_2020.svg.png",Sky Sport 24
-#KODIPROP:inputstreamaddon=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.manifest_type=dash
-#KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
-#KODIPROP:inputstream.adaptive.license_key=11151447a65b31d6cb78dd022cb67e8d:1d6be453be1e607c133a28826d509a86
-https://g003-lin-it-cmaf-prd-ak.pcdn07.cssott02.com/nowitlin1/Content/CMAF_CTR_S1/Live/channel(skysport24)/master_2hr-aac.mpd?c3.ri=13721207037569221611
+#EXTINF:-1 player-buffer="15" tvg-id="Rai1.it" tvg-name="RAI 1" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Rai_1_-_Logo_2016.svg/1280px-Rai_1_-_Logo_2016.svg.png",Rai 1
+https://viamotionhsi.netplus.ch/live/eds/rai1/browser-dash/rai1.mpd
 
-#EXTINF:-1 tvg-name="Sky Sport Uno" tvg-id="Sky Sport Uno" group-title="Sky Sport Italia" tvg-logo="https://i.postimg.cc/9FnmwrND/uno.png" group-logo="",Sky Sport Uno
-#KODIPROP:inputstreamaddon=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.manifest_type=dash
-#KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
-#KODIPROP:inputstream.adaptive.license_key=1115ca7bae09bbf4364eba27291b88a1:a38624a3b373a79e810f3b20cc295096
-https://g003-lin-it-cmaf-prd-cf.pcdn07.cssott02.com/nowitlin1/Content/CMAF_CTR_S1/Live/channel(skysportuno)/master_2hr-aac.mpd
+#EXTINF:-1 player-buffer="15" tvg-id="Rai2.it" tvg-name="RAI 2" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Rai_2_-_Logo_2016.svg/1280px-Rai_2_-_Logo_2016.svg.png",Rai 2
+https://viamotionhsi.netplus.ch/live/eds/rai2/browser-dash/rai2.mpd
 
-#EXTINF:-1 tvg-name="Sky Sport24" tvg-id="Sky.Sport24.it" group-title="Sky Sport Italia" tvg-logo="https://i.postimg.cc/QNSxs6Qk/24.png" group-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Sky_Sport_-_Logo_2020.svg/640px-Sky_Sport_-_Logo_2020.svg.png",Sky Sport 24
-#KODIPROP:inputstreamaddon=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.manifest_type=dash
-#KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
-#KODIPROP:inputstream.adaptive.license_key=11151447a65b31d6cb78dd022cb67e8d:1d6be453be1e607c133a28826d509a86
-https://g003-lin-it-cmaf-prd-ak.pcdn07.cssott02.com/nowitlin1/Content/CMAF_CTR_S1/Live/channel(skysport24)/master_2hr-aac.mpd?c3.ri=13721207037569221611
+#EXTINF:-1 player-buffer="15" tvg-id="Rai3.it" tvg-name="RAI 3" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Rai_3_-_Logo_2016.svg/1280px-Rai_3_-_Logo_2016.svg.png",Rai 3
+https://viamotionhsi.netplus.ch/live/eds/rai3/browser-dash/rai3.mpd
 
-#EXTINF:-1 tvg-name="Sky Sport Uno" tvg-id="Sky Sport Uno" group-title="Sky Sport Italia" tvg-logo="https://i.postimg.cc/9FnmwrND/uno.png" group-logo="",Sky Sport Uno
-#KODIPROP:inputstreamaddon=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.manifest_type=dash
-#KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
-#KODIPROP:inputstream.adaptive.license_key=1115ca7bae09bbf4364eba27291b88a1:a38624a3b373a79e810f3b20cc295096
-https://g003-lin-it-cmaf-prd-cf.pcdn07.cssott02.com/nowitlin1/Content/CMAF_CTR_S1/Live/channel(skysportuno)/master_2hr-aac.mpd
+#EXTINF:-1 tvg-chno="23" tvg-id="rai 5" tvg-name="Rai 5" tvg-logo="https://i.imgur.com/dEFPWi8.png",Rai 5
+#EXTVLCOPT:http-user-agent=rainet/4.0.4 (Linux;Android 14) ExoPlayerLib/2.18.0
+https://raicinque1-dash-live.akamaized.net/dash/live/664003/raicinque1/manifest.mpd
 
-#EXTINF:-1 tvg-name="Sky Sport24" tvg-id="Sky.Sport24.it" group-title="Sky Italia" tvg-logo="https://i.postimg.cc/QNSxs6Qk/24.png" group-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Sky_Sport_-_Logo_2020.svg/640px-Sky_Sport_-_Logo_2020.svg.png",Sky Sport 24
-#KODIPROP:inputstreamaddon=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.manifest_type=dash
-#KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
-#KODIPROP:inputstream.adaptive.license_key=11151447a65b31d6cb78dd022cb67e8d:1d6be453be1e607c133a28826d509a86
-https://g003-lin-it-cmaf-prd-ak.pcdn07.cssott02.com/nowitlin1/Content/CMAF_CTR_S1/Live/channel(skysport24)/master_2hr-aac.mpd?c3.ri=13721207037569221611
+#EXTINF:-1 tvg-chno="24" tvg-id="rai movie" tvg-name="Rai Movie" tvg-logo="https://nientepopcorn.b-cdn.net/wp-content/uploads/2019/04/rai_movie_canale_digitale_terrestre_chiude.jpg",Rai Movie
+#EXTVLCOPT:http-user-agent=rainet/4.0.4 (Linux;Android 14) ExoPlayerLib/2.18.0
+https://raimovie1-dash-live.akamaized.net/dash/live/663983/raimovie1/manifest.mpd
 
-#EXTINF:-1 tvg-name="Sky Sport Uno" tvg-id="Sky Sport Uno" group-title="Sky Italia" tvg-logo="https://i.postimg.cc/9FnmwrND/uno.png" group-logo="",Sky Sport Uno
-#KODIPROP:inputstreamaddon=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.manifest_type=dash
-#KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
-#KODIPROP:inputstream.adaptive.license_key=1115ca7bae09bbf4364eba27291b88a1:a38624a3b373a79e810f3b20cc295096
-https://g003-lin-it-cmaf-prd-cf.pcdn07.cssott02.com/nowitlin1/Content/CMAF_CTR_S1/Live/channel(skysportuno)/master_2hr-aac.mpd
+#EXTINF:-1 tvg-chno="25" tvg-id="rai premium" tvg-name="Rai Premium" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Rai_Premium_HD_-_Logo_2017.svg/1200px-Rai_Premium_HD_-_Logo_2017.svg.png",Rai Premium
+https://raipremium1-dash-live.akamaized.net/dash/live/663979/raipremium1/manifest.mpd
+
+#EXTINF:-1 tvg-chno="42" tvg-id="rai gulp" tvg-name="Rai Gulp" tvg-logo="http://odmsto.com/uploads/tv_image/sm/rai-gulp-db8wx0eccr3u.png",Rai Gulp
+https://raigulp1-dash-live.akamaized.net/dash/live/663985/raigulp1/manifest.mpd
+
+#EXTINF:-1 tvg-chno="43" tvg-id="rai yoyo" tvg-name="Rai Yoyo" tvg-logo="http://odmsto.com/uploads/tv_image/sm/rai-yoyo-hi2h5j83aalt.png",Rai Yoyo
+https://raiyoyo1-dash-live.akamaized.net/dash/live/663949/raiyoyo1/manifest.mpd
+
+#EXTVLCOPT:http-user-agent=rainet/4.0.4 (Linux;Android 14) ExoPlayerLib/2.18.0
+https://rainews1-dash-live.akamaized.net/dash/live/663981/rainews1/manifest.mpd
+
+#EXTINF:-1 tvg-chno="54" tvg-id="rai storia" tvg-name="Rai Storia" tvg-logo="https://www.santegidio.org/immagini/news/30284/rai-storia.jpg",Rai Storia
+#EXTVLCOPT:http-user-agent=rainet/4.0.4 (Linux;Android 14) ExoPlayerLib/2.18.0
+https://raistoria1-dash-live.akamaized.net/dash/live/663959/raistoria1/manifest.mpd
+
+#EXTINF:-1 tvg-chno="57" tvg-id="rai scuola" tvg-name="Rai Scuola" tvg-logo="https://www.digitaleterrestrefacile.it/wp-content/uploads/2020/05/che-canale-e-rai-scuola-frequenza-rai-play.jpg",Rai Scuola
+#EXTVLCOPT:http-user-agent=rainet/4.0.4 (Linux;Android 14) ExoPlayerLib/2.18.0
+https://raiscuola1-dash-live.akamaized.net/dash/live/663975/raiscuola1/manifest.mpd
+
