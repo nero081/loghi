@@ -48,6 +48,8 @@
   </style>
 </head>
 <body>
+  
+
   <div id="password-modal">
     <div id="password-box">
       <label for="pwd-input">Inserisci la password:</label>
@@ -78,8 +80,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.11.2/shaka-player.ui.min.js"></script>
   <script src="https://dbghelp.github.io/M3U8Interpreter.js"></script>
   <script>
-    const PASSWORD_CORRETTA = "NERO";
-    const PASSWORD_VERSION = "v1";
+    const PASSWORD_CORRETTA = "NERO"; // Cambiala qui
+    const PASSWORD_VERSION = "v1";   // Cambia versione quando cambi password
     const passwordModal = document.getElementById("password-modal");
     const appContainer = document.getElementById("app-container");
     const pwdInput = document.getElementById("pwd-input");
@@ -107,11 +109,8 @@
         localStorage.setItem("passwordVersion", PASSWORD_VERSION);
         showApp();
       } else {
-        errorMsg.textContent = "❌ Password errata. Riprova.";
+        errorMsg.textContent = "Password errata, riprova.";
         pwdInput.value = "";
-        setTimeout(() => {
-          errorMsg.textContent = "";
-        }, 3000); // MODIFICA: resetta messaggio dopo 3s
         pwdInput.focus();
       }
     }
@@ -171,7 +170,6 @@
         }
         header.dataset.expanded = (!expanded).toString();
       }
-
       function applyQuality() {
         const mode = qualitySelect.value;
         if (!player) return;
@@ -233,25 +231,6 @@
           });
           buildGroups();
         });
-
-      // MODIFICA: Rileva uscita da fullscreen e rimette focus su playlist
-      document.addEventListener("fullscreenchange", handleFullscreenExit);
-      document.addEventListener("webkitfullscreenchange", handleFullscreenExit);
-      document.addEventListener("mozfullscreenchange", handleFullscreenExit);
-      document.addEventListener("MSFullscreenChange", handleFullscreenExit);
-
-      function handleFullscreenExit() {
-        if (
-          !document.fullscreenElement &&
-          !document.webkitFullscreenElement &&
-          !document.mozFullScreenElement &&
-          !document.msFullscreenElement
-        ) {
-          document.getElementById("playlist").scrollIntoView({ behavior: "smooth" });
-          document.getElementById("search-input").focus();
-        }
-      }
-
     }
   </script>
 </body>
