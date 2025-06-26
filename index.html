@@ -130,69 +130,73 @@
       const videoContainer = document.getElementById("video-container");
       const qualitySelect = document.getElementById("quality-select");
       let channels = [];
-      let grouped = {};
+      let grouped = [];
       let player;
 
+      // Costruisce la lista canali raggruppata, mantiene ordine M3U e gruppi
       function buildGroups(filteredMode = false) {
         videoList.innerHTML = "";
-        Object.keys(grouped).forEach(group => {
+
+        // Se nessun gruppo o solo "Altri" senza filtraggio, mostra lista piatta
+        if (grouped.length === 1 && grouped[0].name === "Altri" && !filteredMode) {
+          grouped[0].channels.forEach(c => {
+            const li = document.createElement("li");
+            li.innerHTML = `<img src="${c.tvgLogo}" alt="" width="50" height="50" style="margin-right: 10px;" /><span>${c.channelName}</span>`;
+            li.onclick = () => loadChannel(c);
+            videoList.appendChild(li);
+          });
+          return;
+        }
+
+        grouped.forEach(group => {
           const header = document.createElement("li");
           header.className = "group-header";
-          header.textContent = group;
+          header.textContent = group.name;
           header.dataset.expanded = filteredMode.toString();
-          header.onclick = () => toggleGroup(group);
+          header.onclick = () => toggleGroup(group.name);
           videoList.appendChild(header);
 
           if (filteredMode) {
-            grouped[group].forEach(c => {
+            group.channels.forEach(c => {
               const li = document.createElement("li");
-              li.dataset.parent = group;
+              li.dataset.parent = group.name;
               li.innerHTML = `<img src="${c.tvgLogo}" alt="" width="50" height="50" style="margin-right: 10px;" /><span>${c.channelName}</span>`;
-              li.onclick = () => {
-                if (c.licenseKey) {
-                  const keys = JSON.parse(decodeURIComponent(c.licenseKey));
-                  keys.forEach(({ keyId, key }) =>
-                    player.configure({ drm: { clearKeys: { [keyId]: key } } })
-                  );
-                }
-                player.load(c.manifestUrl).then(() => {
-                  applyQuality();
-                  videoElement.play();
-                  goFullscreen();
-                });
-              };
+              li.onclick = () => loadChannel(c);
               header.insertAdjacentElement("afterend", li);
             });
           }
         });
       }
 
-      function toggleGroup(group) {
-        const header = [...document.querySelectorAll(".group-header")].find(h => h.textContent === group);
+      function toggleGroup(groupName) {
+        const header = [...document.querySelectorAll(".group-header")].find(h => h.textContent === groupName);
         const expanded = header.dataset.expanded === "true";
-        document.querySelectorAll(`li[data-parent="${group}"]`).forEach(el => el.remove());
+        document.querySelectorAll(`li[data-parent="${groupName}"]`).forEach(el => el.remove());
         if (!expanded) {
-          grouped[group].forEach(c => {
+          const group = grouped.find(g => g.name === groupName);
+          group.channels.forEach(c => {
             const li = document.createElement("li");
-            li.dataset.parent = group;
+            li.dataset.parent = groupName;
             li.innerHTML = `<img src="${c.tvgLogo}" alt="" width="50" height="50" style="margin-right: 10px;" /><span>${c.channelName}</span>`;
-            li.onclick = () => {
-              if (c.licenseKey) {
-                const keys = JSON.parse(decodeURIComponent(c.licenseKey));
-                keys.forEach(({ keyId, key }) =>
-                  player.configure({ drm: { clearKeys: { [keyId]: key } } })
-                );
-              }
-              player.load(c.manifestUrl).then(() => {
-                applyQuality();
-                videoElement.play();
-                goFullscreen();
-              });
-            };
+            li.onclick = () => loadChannel(c);
             header.insertAdjacentElement("afterend", li);
           });
         }
         header.dataset.expanded = (!expanded).toString();
+      }
+
+      function loadChannel(c) {
+        if (c.licenseKey) {
+          const keys = JSON.parse(decodeURIComponent(c.licenseKey));
+          keys.forEach(({ keyId, key }) =>
+            player.configure({ drm: { clearKeys: { [keyId]: key } } })
+          );
+        }
+        player.load(c.manifestUrl).then(() => {
+          applyQuality();
+          videoElement.play();
+          goFullscreen();
+        });
       }
 
       function applyQuality() {
@@ -229,11 +233,17 @@
       searchInput.addEventListener("input", () => {
         const term = searchInput.value.toLowerCase();
         const filtered = channels.filter(c => c.channelName.toLowerCase().includes(term));
-        grouped = {};
+
+        // Ricostruisco grouped come array, rispettando ordine e gruppi come prima
+        grouped = [];
         filtered.forEach(c => {
           const g = c.groupTitle || "Altri";
-          if (!grouped[g]) grouped[g] = [];
-          grouped[g].push(c);
+          let group = grouped.find(gr => gr.name === g);
+          if (!group) {
+            group = { name: g, channels: [] };
+            grouped.push(group);
+          }
+          group.channels.push(c);
         });
         buildGroups(true);
       });
@@ -249,11 +259,19 @@
           const parser = new M3U8Interpreter(text);
           parser.parse();
           channels = parser.getChannels();
+
+          // Raggruppa canali in array mantenendo ordine e gruppi
+          grouped = [];
           channels.forEach(c => {
             const g = c.groupTitle || "Altri";
-            if (!grouped[g]) grouped[g] = [];
-            grouped[g].push(c);
+            let group = grouped.find(gr => gr.name === g);
+            if (!group) {
+              group = { name: g, channels: [] };
+              grouped.push(group);
+            }
+            group.channels.push(c);
           });
+
           buildGroups();
         });
 
