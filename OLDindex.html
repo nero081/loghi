@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+    <meta content="no-referrer" name="referrer" />
+    <link href="data:image/x-icon;," rel="icon" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.11.2/controls.min.css" rel="stylesheet" />
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        display: flex;
+        height: 100vh;
+        background-color: #282c34;
+      }
+      #playlist {
+        width: 250px;
+        background-color: #282c34;
+        color: #fff;
+        overflow-y: auto;
+        border-right: 1px solid #444;
+        padding: 20px;
+        box-shadow: 2px 0 5px rgb(0 0 0 / 0.2);
+        display: flex;
+        flex-direction: column;
+      }
+      #search-input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #444;
+        border-radius: 5px;
+        background-color: #3c4043;
+        color: #fff;
+        font-size: 1em;
+        box-sizing: border-box;
+      }
+      #quality-select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #444;
+        border-radius: 5px;
+        background-color: #3c4043;
+        color: #fff;
+        font-size: 1em;
+        box-sizing: border-box;
+        cursor: pointer;
+      }
+      #video-container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        z-index: 2;
+        position: relative;
+      }
+      #video {
+        flex: 1;
+        width: 100%;
+        height: 100%;
+        background-color: #000;
+      }
+      #video-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      #video-list li {
+        padding: 10px;
+        margin: 5px 0;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        display: flex;
+        align-items: center;
+      }
+      #video-list li:hover {
+        background-color: #61dafb;
+        transform: scale(1.05);
+      }
+      #video-list img {
+        width: 50px;
+        height: 50px;
+        margin-right: 10px;
+        border-radius: 5px;
+        object-fit: contain;
+      }
+      .video-title {
+        font-size: 1em;
+      }
+      .group-header {
+        font-weight: bold;
+        background-color: #444;
+        padding: 8px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .shaka-controls-container.shaka-show-controls {
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="playlist">
+      <select id="quality-select" aria-label="Seleziona qualità video">
+        <option value="auto">Ris. Automatica</option>
+        <option value="low">Ris. Bassa</option>
+        <option value="medium">Ris. Media</option>
+        <option value="high">Ris. Alta</option>
+      </select>
+      <ul id="video-list"></ul>
+      <input id="search-input" placeholder="Search..." aria-label="Cerca canale" />
+    </div>
+
+    <div id="video-container">
+      <video autoplay id="video" tabindex="0"></video>
+      <div id="video-ui"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.11.2/shaka-player.compiled.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.11.2/shaka-player.ui.min.js"></script>
+    <script src="https://dbghelp.github.io/M3U8Interpreter.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.0.4/pako.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://dbghelp.github.io/xml-epg.js"></script>
+    <script>
+      const xmlepg = new XMLEPG();
+      const searchInput = document.getElementById("search-input");
+      const videoList = document.getElementById("video-list");
+      const videoElement = document.getElementById("video");
+      const videoContainer = document.getElementById("video-container");
+      const qualitySelect = document.getElementById("quality-select");
+
+      let channels = [];
+      let groupedChannels = {};
+      let displayedChannels = [];
+      let player;
+      let focusableItems = [];
+      let currentFocusIndex = 0;
+      let currentQuality = localStorage.getItem('video-quality') || 'auto';
+
+      qualitySelect.value = currentQuality;
+
+      document.addEventListener("keydown", (e) => {
+        if (focusableItems.length === 0) return;
+        switch (e.key) {
+          case "ArrowDown":
+            currentFocusIndex = (currentFocusIndex + 1) % focusableItems.length;
+            updateFocus();
+            break;
+          case "ArrowUp":
+            currentFocusIndex = (currentFocusIndex - 1 + focusableItems.length) % focusableItems.length;
+            updateFocus();
+            break;
+          case "Enter":
+          case " ":
+            focusableItems[currentFocusIndex].click();
+            break;
+          case "Escape":
+            document.exitFullscreen?.();
+            break;
+        }
+      });
+
+      function updateFocus() {
+        focusableItems.forEach((el, i) => {
+          el.style.outline = i === currentFocusIndex ? "2px solid #61dafb" : "none";
+        });
+        if (focusableItems[currentFocusIndex]) {
+          focusableItems[currentFocusIndex].scrollIntoView({ block: "nearest" });
+        }
+      }
+
+      function parseAndSetPlaylist(content) {
+        const interpreter = new M3U8Interpreter(content);
+        interpreter.parse();
+        channels = interpreter.getChannels();
+
+        groupedChannels = {};
+        channels.forEach((c) => {
+          const group = c.groupTitle || "Altri";
+          if (!groupedChannels[group]) groupedChannels[group] = [];
+          groupedChannels[group].push(c);
+        });
+
+        buildGroupList();
+        updateFocusableItems();
+      }
+
+      function buildGroupList() {
+        videoList.innerHTML = "";
+        Object.keys(groupedChannels).forEach((group) => {
+          const li = document.createElement("li");
+          li.className = "group-header";
+          li.textContent = group;
+          li.dataset.expanded = "false";
+          li.onclick = () => toggleGroup(group);
+          videoList.appendChild(li);
+        });
+      }
+
+      function toggleGroup(groupName) {
+        const parentLi = Array.from(document.querySelectorAll("li.group-header"))
+          .find(li => li.textContent === groupName);
+
+        const isExpanded = parentLi.dataset.expanded === "true";
+
+        if (isExpanded) {
+          document.querySelectorAll(`li[data-parent="${groupName}"]`).forEach(li => li.remove());
+          parentLi.dataset.expanded = "false";
+        } else {
+          const channels = groupedChannels[groupName];
+          channels.forEach(c => {
+            const li = document.createElement("li");
+            li.innerHTML = `<img src="${c.tvgLogo}" alt="" /><span class="video-title">${c.channelName}</span>`;
+            li.onclick = () => {
+              loadVideo(c.manifestUrl, c.licenseKey);
+              document.querySelectorAll("#video-list li").forEach(el => el.classList.remove("active"));
+              li.classList.add("active");
+            };
+            li.dataset.parent = groupName;
+            parentLi.insertAdjacentElement("afterend", li);
+          });
+          parentLi.dataset.expanded = "true";
+        }
+        updateFocusableItems(parentLi);
+      }
+
+      function filterPlaylist(term) {
+        if (!term) {
+          buildGroupList();
+        } else {
+          const filteredChannels = channels.filter(c =>
+            c.channelName.toLowerCase().includes(term)
+          );
+          groupedChannels = {};
+          filteredChannels.forEach(c => {
+            const group = c.groupTitle || "Altri";
+            if (!groupedChannels[group]) groupedChannels[group] = [];
+            groupedChannels[group].push(c);
+          });
+          buildGroupList();
+        }
+      }
+
+      function updateFocusableItems(focusElement = null) {
+        focusableItems = Array.from(document.querySelectorAll("#video-list li"));
+        if (focusElement) {
+          const index = focusableItems.indexOf(focusElement);
+          if (index >= 0) {
+            currentFocusIndex = index;
+          }
+        } else {
+          if (currentFocusIndex >= focusableItems.length) currentFocusIndex = 0;
+        }
+        updateFocus();
+      }
+
+      function applyQuality() {
+        if (!player) return;
+        if (currentQuality === "auto") {
+          player.configure({ abr: { enabled: true } });
+        } else {
+          player.configure({ abr: { enabled: false } });
+          const tracks = player.getVariantTracks();
+          let selectedTrack;
+          if (currentQuality === "low") {
+            selectedTrack = tracks.reduce((a, b) => (a.bandwidth < b.bandwidth ? a : b));
+          } else if (currentQuality === "high") {
+            selectedTrack = tracks.reduce((a, b) => (a.bandwidth > b.bandwidth ? a : b));
+          } else if (currentQuality === "medium") {
+            const sorted = tracks.slice().sort((a, b) => a.bandwidth - b.bandwidth);
+            selectedTrack = sorted[Math.floor(sorted.length / 2)];
+          }
+          if (selectedTrack) player.selectVariantTrack(selectedTrack, true);
+        }
+      }
+
+      function loadVideo(manifestUrl, licenseKey) {
+        if (licenseKey && !Array.isArray(licenseKey))
+          licenseKey = JSON.parse(decodeURIComponent(licenseKey));
+        if (licenseKey)
+          licenseKey.forEach(({ keyId, key }) =>
+            player.configure({ drm: { clearKeys: { [keyId]: key } } })
+          );
+        player.load(manifestUrl)
+          .then(() => {
+            applyQuality();
+            videoElement.play();
+            goFullscreen();
+          })
+          .catch(console.error);
+        document.querySelectorAll("#video-list li").forEach(el => el.classList.remove("active"));
+      }
+
+      function goFullscreen() {
+        if (videoContainer.requestFullscreen) videoContainer.requestFullscreen();
+        else if (videoContainer.webkitRequestFullscreen) videoContainer.webkitRequestFullscreen();
+        else if (videoContainer.msRequestFullscreen) videoContainer.msRequestFullscreen();
+      }
+
+      qualitySelect.addEventListener("change", () => {
+        currentQuality = qualitySelect.value;
+        localStorage.setItem("video-quality", currentQuality);
+        applyQuality();
+      });
+
+      shaka.polyfill.installAll();
+      window.onload = () => {
+        player = new shaka.Player(videoElement);
+
+        const ui = new shaka.ui.Overlay(player, document.getElementById("video-container"), videoElement);
+        ui.getControls();
+
+        player.configure({ abr: { enabled: currentQuality === "auto" } });
+
+        const githubPlaylistUrl = "https://raw.githubusercontent.com/nero081/loghi/main/canali.m3u";
+        fetch(githubPlaylistUrl)
+          .then(res => res.text())
+          .then(parseAndSetPlaylist);
+
+        searchInput.addEventListener("input", () =>
+          filterPlaylist(searchInput.value.toLowerCase())
+        );
+      };
+    </script>
+  </body>
+</html>
