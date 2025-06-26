@@ -111,7 +111,7 @@
         pwdInput.value = "";
         setTimeout(() => {
           errorMsg.textContent = "";
-        }, 3000); // MODIFICA: resetta messaggio dopo 3s
+        }, 3000);
         pwdInput.focus();
       }
     }
@@ -133,14 +133,37 @@
       let grouped = {};
       let player;
 
-      function buildGroups() {
+      function buildGroups(filteredMode = false) {
         videoList.innerHTML = "";
         Object.keys(grouped).forEach(group => {
           const header = document.createElement("li");
           header.className = "group-header";
           header.textContent = group;
+          header.dataset.expanded = filteredMode.toString();
           header.onclick = () => toggleGroup(group);
           videoList.appendChild(header);
+
+          if (filteredMode) {
+            grouped[group].forEach(c => {
+              const li = document.createElement("li");
+              li.dataset.parent = group;
+              li.innerHTML = `<img src="${c.tvgLogo}" alt="" width="50" height="50" style="margin-right: 10px;" /><span>${c.channelName}</span>`;
+              li.onclick = () => {
+                if (c.licenseKey) {
+                  const keys = JSON.parse(decodeURIComponent(c.licenseKey));
+                  keys.forEach(({ keyId, key }) =>
+                    player.configure({ drm: { clearKeys: { [keyId]: key } } })
+                  );
+                }
+                player.load(c.manifestUrl).then(() => {
+                  applyQuality();
+                  videoElement.play();
+                  goFullscreen();
+                });
+              };
+              header.insertAdjacentElement("afterend", li);
+            });
+          }
         });
       }
 
@@ -212,7 +235,7 @@
           if (!grouped[g]) grouped[g] = [];
           grouped[g].push(c);
         });
-        buildGroups();
+        buildGroups(true);
       });
 
       shaka.polyfill.installAll();
@@ -234,7 +257,6 @@
           buildGroups();
         });
 
-      // MODIFICA: Rileva uscita da fullscreen e rimette focus su playlist
       document.addEventListener("fullscreenchange", handleFullscreenExit);
       document.addEventListener("webkitfullscreenchange", handleFullscreenExit);
       document.addEventListener("mozfullscreenchange", handleFullscreenExit);
@@ -251,7 +273,6 @@
           document.getElementById("search-input").focus();
         }
       }
-
     }
   </script>
 </body>
