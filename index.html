@@ -25,6 +25,7 @@
       background-color: #61dafb; color: black; cursor: pointer;
     }
     #error-msg { color: #ff6666; height: 20px; font-weight: bold; margin-top: 10px; }
+    
     #playlist {
       width: 250px; background: #282c34; color: white; overflow-y: auto; border-right: 1px solid #444;
       padding: 20px; box-shadow: 2px 0 5px rgba(0,0,0,0.2); display: flex; flex-direction: column;
@@ -129,35 +130,12 @@
       const videoContainer = document.getElementById("video-container");
       const qualitySelect = document.getElementById("quality-select");
       let channels = [];
-      let grouped = new Map();
+      let grouped = {};
       let player;
 
-      function buildSimpleList(filtered = null) {
+      function buildGroups(filteredMode = false) {
         videoList.innerHTML = "";
-        const list = filtered || channels;
-        list.forEach(c => {
-          const li = document.createElement("li");
-          li.innerHTML = `<img src="${c.tvgLogo}" alt="" width="50" height="50" style="margin-right: 10px;" /><span>${c.channelName}</span>`;
-          li.onclick = () => {
-            if (c.licenseKey) {
-              const keys = JSON.parse(decodeURIComponent(c.licenseKey));
-              keys.forEach(({ keyId, key }) =>
-                player.configure({ drm: { clearKeys: { [keyId]: key } } })
-              );
-            }
-            player.load(c.manifestUrl).then(() => {
-              applyQuality();
-              videoElement.play();
-              goFullscreen();
-            });
-          };
-          videoList.appendChild(li);
-        });
-      }
-
-      function buildGroupsFromMap(filteredMode = false) {
-        videoList.innerHTML = "";
-        grouped.forEach((channelList, group) => {
+        Object.keys(grouped).forEach(group => {
           const header = document.createElement("li");
           header.className = "group-header";
           header.textContent = group;
@@ -166,7 +144,7 @@
           videoList.appendChild(header);
 
           if (filteredMode) {
-            channelList.forEach(c => {
+            grouped[group].forEach(c => {
               const li = document.createElement("li");
               li.dataset.parent = group;
               li.innerHTML = `<img src="${c.tvgLogo}" alt="" width="50" height="50" style="margin-right: 10px;" /><span>${c.channelName}</span>`;
@@ -194,7 +172,7 @@
         const expanded = header.dataset.expanded === "true";
         document.querySelectorAll(`li[data-parent="${group}"]`).forEach(el => el.remove());
         if (!expanded) {
-          grouped.get(group).forEach(c => {
+          grouped[group].forEach(c => {
             const li = document.createElement("li");
             li.dataset.parent = group;
             li.innerHTML = `<img src="${c.tvgLogo}" alt="" width="50" height="50" style="margin-right: 10px;" /><span>${c.channelName}</span>`;
@@ -251,18 +229,13 @@
       searchInput.addEventListener("input", () => {
         const term = searchInput.value.toLowerCase();
         const filtered = channels.filter(c => c.channelName.toLowerCase().includes(term));
-        const hasGroups = filtered.some(c => c.groupTitle && c.groupTitle.trim() !== "");
-        if (hasGroups) {
-          grouped = new Map();
-          filtered.forEach(c => {
-            const g = c.groupTitle.trim();
-            if (!grouped.has(g)) grouped.set(g, []);
-            grouped.get(g).push(c);
-          });
-          buildGroupsFromMap(true);
-        } else {
-          buildSimpleList(filtered);
-        }
+        grouped = {};
+        filtered.forEach(c => {
+          const g = c.groupTitle || "Altri";
+          if (!grouped[g]) grouped[g] = [];
+          grouped[g].push(c);
+        });
+        buildGroups(true);
       });
 
       shaka.polyfill.installAll();
@@ -276,18 +249,12 @@
           const parser = new M3U8Interpreter(text);
           parser.parse();
           channels = parser.getChannels();
-          const hasGroups = channels.some(c => c.groupTitle && c.groupTitle.trim() !== "");
-          if (hasGroups) {
-            grouped = new Map();
-            channels.forEach(c => {
-              const g = c.groupTitle.trim();
-              if (!grouped.has(g)) grouped.set(g, []);
-              grouped.get(g).push(c);
-            });
-            buildGroupsFromMap();
-          } else {
-            buildSimpleList();
-          }
+          channels.forEach(c => {
+            const g = c.groupTitle || "Altri";
+            if (!grouped[g]) grouped[g] = [];
+            grouped[g].push(c);
+          });
+          buildGroups();
         });
 
       document.addEventListener("fullscreenchange", handleFullscreenExit);
