@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css">
+  <title>Gruppi</title>
+<script>
+  function verificaPassword() {
+    const password = prompt("Inserisci la password:");
+    const passwordCorretta = "tuaPasswordQui";
+
+    if (password === null || password !== passwordCorretta) {
+      alert("Accesso negato.");
+      document.body.innerHTML = ""; // Nasconde il contenuto della pagina
+    } else {
+      window.location.href = "Gruppi.html";
+    }
+  }
+</script>
+
+</head>
+<body onload="verificaPassword()">
+  <h1>Seleziona un Gruppo</h1>
+  <div class="griglia">
+    
+    <a href="Film_Popolari.html" class="tile">Film Popolari</a>
+    
+    <a href="Film_Al_Cinema.html" class="tile">Film Al Cinema</a>
+    
+    <a href="Animazione.html" class="tile">Animazione</a>
+    
+    <a href="Dramma.html" class="tile">Dramma</a>
+    
+    <a href="Commedia.html" class="tile">Commedia</a>
+    
+    <a href="Horror.html" class="tile">Horror</a>
+    
+    <a href="Documentario.html" class="tile">Documentario</a>
+    
+    <a href="Azione.html" class="tile">Azione</a>
+    
+    <a href="Mistero.html" class="tile">Mistero</a>
+    
+    <a href="Thriller.html" class="tile">Thriller</a>
+    
+    <a href="Famiglia.html" class="tile">Famiglia</a>
+    
+    <a href="Musica.html" class="tile">Musica</a>
+    
+    <a href="Crime.html" class="tile">Crime</a>
+    
+    <a href="Romance.html" class="tile">Romance</a>
+    
+    <a href="Fantascienza.html" class="tile">Fantascienza</a>
+    
+    <a href="Storia.html" class="tile">Storia</a>
+    
+    <a href="Avventura.html" class="tile">Avventura</a>
+    
+    <a href="Guerra.html" class="tile">Guerra</a>
+    
+    <a href="Fantasy.html" class="tile">Fantasy</a>
+    
+    <a href="Western.html" class="tile">Western</a>
+    
+    <a href="Generale.html" class="tile">Generale</a>
+    
+    <a href="televisione_film.html" class="tile">televisione film</a>
+    
+  </div>
+</body>
+</html>
