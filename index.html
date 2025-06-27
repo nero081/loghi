@@ -25,26 +25,73 @@
       background-color: #61dafb; color: black; cursor: pointer;
     }
     #error-msg { color: #ff6666; height: 20px; font-weight: bold; margin-top: 10px; }
-    
+
+    /* Modifiche per playlist a griglia */
     #playlist {
-      width: 250px; background: #282c34; color: white; overflow-y: auto; border-right: 1px solid #444;
-      padding: 20px; box-shadow: 2px 0 5px rgba(0,0,0,0.2); display: flex; flex-direction: column;
+      width: 320px; background: #282c34; color: white; overflow-y: auto; border-right: 1px solid #444;
+      padding: 20px; box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
     }
-    #video-container { flex: 1; display: flex; flex-direction: column; position: relative; z-index: 2; }
-    #video { flex: 1; width: 100%; height: 100%; background: black; }
-    #video-list { list-style: none; padding: 0; margin: 0; }
-    #video-list li {
-      padding: 10px; margin: 5px 0; border-radius: 5px; cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.2s ease; display: flex; align-items: center;
-    }
-    #video-list li:hover { background-color: #61dafb; transform: scale(1.05); }
-    .group-header {
-      font-weight: bold; background-color: #444; padding: 8px; border-radius: 5px; cursor: pointer;
-    }
-    #search-input, #quality-select {
+    #quality-select, #search-input {
       padding: 10px; border: 1px solid #444; border-radius: 5px; background: #3c4043; color: white;
       font-size: 1em; margin-bottom: 10px;
     }
+    #video-list {
+      list-style: none; padding: 0; margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    /* Gruppi come intestazioni */
+    .group-header {
+      width: 100%;
+      font-weight: bold;
+      background-color: #444;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      user-select: none;
+      margin-top: 15px;
+    }
+    /* Singolo canale a icona */
+    #video-list li {
+      width: 90px;
+      cursor: pointer;
+      background: #20232a;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #61dafb88;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 8px 5px;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+      text-align: center;
+      user-select: none;
+    }
+    #video-list li:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px #61dafb;
+    }
+    #video-list li img {
+      width: 70px;
+      height: 70px;
+      object-fit: contain;
+      border-radius: 6px;
+      margin-bottom: 5px;
+    }
+    #video-list li span {
+      font-size: 0.85em;
+      color: white;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      width: 100%;
+    }
+
+    #video-container { flex: 1; display: flex; flex-direction: column; position: relative; z-index: 2; }
+    #video { flex: 1; width: 100%; height: 100%; background: black; }
   </style>
 </head>
 <body>
@@ -65,8 +112,8 @@
         <option value="medium">Ris. Media</option>
         <option value="high">Ris. Alta</option>
       </select>
-      <ul id="video-list"></ul>
       <input id="search-input" placeholder="Cerca canale..." />
+      <ul id="video-list"></ul>
     </div>
     <div id="video-container">
       <video autoplay id="video" poster="//raw.githubusercontent.com/nero081/loghi/main/loghi3/logo.jpg" tabindex="0"></video>
@@ -78,8 +125,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.11.2/shaka-player.ui.min.js"></script>
   <script src="https://dbghelp.github.io/M3U8Interpreter.js"></script>
   <script>
-    const PASSWORD_CORRETTA = "NERO";
-    const PASSWORD_VERSION = "v1";
+    const PASSWORD_CORRETTA = "NERO1";
+    const PASSWORD_VERSION = "v2";
     const passwordModal = document.getElementById("password-modal");
     const appContainer = document.getElementById("app-container");
     const pwdInput = document.getElementById("pwd-input");
@@ -130,73 +177,67 @@
       const videoContainer = document.getElementById("video-container");
       const qualitySelect = document.getElementById("quality-select");
       let channels = [];
-      let grouped = [];
+      let grouped = {};
       let player;
 
-      // Costruisce la lista canali raggruppata, mantiene ordine M3U e gruppi
       function buildGroups(filteredMode = false) {
         videoList.innerHTML = "";
-
-        // Se nessun gruppo o solo "Altri" senza filtraggio, mostra lista piatta
-        if (grouped.length === 1 && grouped[0].name === "Altri" && !filteredMode) {
-          grouped[0].channels.forEach(c => {
-            const li = document.createElement("li");
-            li.innerHTML = `<img src="${c.tvgLogo}" alt="" width="50" height="50" style="margin-right: 10px;" /><span>${c.channelName}</span>`;
-            li.onclick = () => loadChannel(c);
-            videoList.appendChild(li);
-          });
-          return;
-        }
-
-        grouped.forEach(group => {
+        Object.keys(grouped).forEach(group => {
+          // Header gruppo
           const header = document.createElement("li");
           header.className = "group-header";
-          header.textContent = group.name;
+          header.textContent = group;
           header.dataset.expanded = filteredMode.toString();
-          header.onclick = () => toggleGroup(group.name);
+          header.onclick = () => toggleGroup(group);
           videoList.appendChild(header);
 
           if (filteredMode) {
-            group.channels.forEach(c => {
-              const li = document.createElement("li");
-              li.dataset.parent = group.name;
-              li.innerHTML = `<img src="${c.tvgLogo}" alt="" width="50" height="50" style="margin-right: 10px;" /><span>${c.channelName}</span>`;
-              li.onclick = () => loadChannel(c);
+            // Se filtro attivo, mostra subito i canali (griglia sotto header)
+            grouped[group].forEach(c => {
+              const li = createChannelLi(c);
+              li.dataset.parent = group;
               header.insertAdjacentElement("afterend", li);
             });
           }
         });
       }
 
-      function toggleGroup(groupName) {
-        const header = [...document.querySelectorAll(".group-header")].find(h => h.textContent === groupName);
+      function toggleGroup(group) {
+        const header = [...document.querySelectorAll(".group-header")].find(h => h.textContent === group);
         const expanded = header.dataset.expanded === "true";
-        document.querySelectorAll(`li[data-parent="${groupName}"]`).forEach(el => el.remove());
+        // Rimuovi canali sotto gruppo
+        document.querySelectorAll(`li[data-parent="${group}"]`).forEach(el => el.remove());
         if (!expanded) {
-          const group = grouped.find(g => g.name === groupName);
-          group.channels.forEach(c => {
-            const li = document.createElement("li");
-            li.dataset.parent = groupName;
-            li.innerHTML = `<img src="${c.tvgLogo}" alt="" width="50" height="50" style="margin-right: 10px;" /><span>${c.channelName}</span>`;
-            li.onclick = () => loadChannel(c);
+          // Se chiuso, apri e mostra canali sotto header
+          grouped[group].forEach(c => {
+            const li = createChannelLi(c);
+            li.dataset.parent = group;
             header.insertAdjacentElement("afterend", li);
           });
         }
         header.dataset.expanded = (!expanded).toString();
       }
 
-      function loadChannel(c) {
-        if (c.licenseKey) {
-          const keys = JSON.parse(decodeURIComponent(c.licenseKey));
-          keys.forEach(({ keyId, key }) =>
-            player.configure({ drm: { clearKeys: { [keyId]: key } } })
-          );
-        }
-        player.load(c.manifestUrl).then(() => {
-          applyQuality();
-          videoElement.play();
-          goFullscreen();
-        });
+      function createChannelLi(c) {
+        const li = document.createElement("li");
+        li.innerHTML = `
+          <img src="${c.tvgLogo || 'https://via.placeholder.com/70?text=No+Logo'}" alt="${c.channelName}" />
+          <span>${c.channelName}</span>
+        `;
+        li.onclick = () => {
+          if (c.licenseKey) {
+            const keys = JSON.parse(decodeURIComponent(c.licenseKey));
+            keys.forEach(({ keyId, key }) =>
+              player.configure({ drm: { clearKeys: { [keyId]: key } } })
+            );
+          }
+          player.load(c.manifestUrl).then(() => {
+            applyQuality();
+            videoElement.play();
+            goFullscreen();
+          });
+        };
+        return li;
       }
 
       function applyQuality() {
@@ -233,17 +274,11 @@
       searchInput.addEventListener("input", () => {
         const term = searchInput.value.toLowerCase();
         const filtered = channels.filter(c => c.channelName.toLowerCase().includes(term));
-
-        // Ricostruisco grouped come array, rispettando ordine e gruppi come prima
-        grouped = [];
+        grouped = {};
         filtered.forEach(c => {
           const g = c.groupTitle || "Altri";
-          let group = grouped.find(gr => gr.name === g);
-          if (!group) {
-            group = { name: g, channels: [] };
-            grouped.push(group);
-          }
-          group.channels.push(c);
+          if (!grouped[g]) grouped[g] = [];
+          grouped[g].push(c);
         });
         buildGroups(true);
       });
@@ -259,19 +294,12 @@
           const parser = new M3U8Interpreter(text);
           parser.parse();
           channels = parser.getChannels();
-
-          // Raggruppa canali in array mantenendo ordine e gruppi
-          grouped = [];
+          grouped = {};
           channels.forEach(c => {
             const g = c.groupTitle || "Altri";
-            let group = grouped.find(gr => gr.name === g);
-            if (!group) {
-              group = { name: g, channels: [] };
-              grouped.push(group);
-            }
-            group.channels.push(c);
+            if (!grouped[g]) grouped[g] = [];
+            grouped[g].push(c);
           });
-
           buildGroups();
         });
 
