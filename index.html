@@ -130,7 +130,7 @@
     <script src="https://dbghelp.github.io/xml-epg.js"></script>
     <script>
 	
-  const correctPassword = "1123";  // 🔒 Cambiala qui se vuoi
+  const correctPassword = "nero";  // 🔒 Cambiala qui se vuoi
   const passwordKey = "iptv-password-v1"; // cambia versione se cambi password
 
   function checkPassword() {
@@ -352,7 +352,7 @@
 
         player.configure({ abr: { enabled: currentQuality === "auto" } });
 
-        const githubPlaylistUrl = "./canali.m3u";
+        const githubPlaylistUrl = "https://raw.githubusercontent.com/nero081/loghi/main/canali.m3u";
         fetch(githubPlaylistUrl)
           .then(res => res.text())
           .then(parseAndSetPlaylist);
