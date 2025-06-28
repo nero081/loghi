@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Player</title>
+  <meta name="viewport" content="width=1024"> <!-- Simula larghezza desktop -->
   <style>
     body {
       margin: 0;
@@ -12,6 +13,11 @@
       align-items: center;
       justify-content: center;
       font-family: sans-serif;
+      min-height: 100vh;
+    }
+    h2 {
+      color: #eee;
+      font-size: 24px;
     }
     a {
       color: #ccc;
@@ -22,30 +28,15 @@
   </style>
 </head>
 <body>
-  <h2 style="color: #eee;">Riproduzione Canale</h2>
+  <h2>Riproduzione Canale</h2>
   <script>
     const params = new URLSearchParams(window.location.search);
     const url = params.get('url');
     if (url) {
       window.location.href = decodeURIComponent(url);
     } else {
-      document.body.innerHTML = '<p style="color:white;">❌ Nessun URL fornito</p>';
+      document.body.innerHTML += '<p style="color:white;">❌ Nessun URL fornito</p>';
     }
-	
-	
-    const originalLocation = window.location;
-
-    Object.defineProperty(window, 'location', {
-      configurable: false,
-      enumerable: true,
-      get: function () {
-        return originalLocation;
-      },
-      set: function () {
-        console.warn('Reindirizzamento bloccato!');
-      }
-    });
-  
   </script>
   <a href="index.html">⟵ Torna alla home</a>
 </body>
