@@ -31,6 +31,21 @@
     } else {
       document.body.innerHTML = '<p style="color:white;">❌ Nessun URL fornito</p>';
     }
+	
+	
+    const originalLocation = window.location;
+
+    Object.defineProperty(window, 'location', {
+      configurable: false,
+      enumerable: true,
+      get: function () {
+        return originalLocation;
+      },
+      set: function () {
+        console.warn('Reindirizzamento bloccato!');
+      }
+    });
+  
   </script>
   <a href="index.html">⟵ Torna alla home</a>
 </body>
