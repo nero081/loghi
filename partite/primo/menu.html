@@ -13,15 +13,19 @@
 
     body {
       display: flex;
-      justify-content: center; /* centro orizzontale */
-      align-items: center;     /* centro verticale */
+      justify-content: center;
+      align-items: center;
       background: #f0f0f0;
       font-family: sans-serif;
+      padding: 20px;
+      box-sizing: border-box;
     }
 
     .griglia {
       display: flex;
+      flex-wrap: wrap;
       gap: 40px;
+      justify-content: center;
     }
 
     .tile {
@@ -30,9 +34,10 @@
       align-items: center;
       text-decoration: none;
       color: #333;
-      font-size: 1.2em;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
       text-align: center;
+      font-size: 1.2em;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, font-size 0.3s ease;
+      max-width: 160px;
     }
 
     .tile:hover {
@@ -45,6 +50,37 @@
       height: auto;
       margin-top: 10px;
       display: block;
+      transition: width 0.3s ease;
+    }
+
+    @media (max-width: 600px) and (orientation: portrait) {
+      .griglia {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .tile img {
+        width: 100px;
+      }
+
+      .tile {
+        font-size: 1em;
+      }
+    }
+
+    @media (max-width: 900px) and (orientation: landscape) {
+      .griglia {
+        flex-wrap: wrap;
+        gap: 25px;
+      }
+
+      .tile img {
+        width: 120px;
+      }
+
+      .tile {
+        font-size: 1.1em;
+      }
     }
   </style>
 </head>
