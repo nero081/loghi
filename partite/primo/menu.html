@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Scegli un gruppo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+
+    body {
+      display: flex;
+      justify-content: center; /* centro orizzontale */
+      align-items: center;     /* centro verticale */
+      background: #f0f0f0;
+      font-family: sans-serif;
+    }
+
+    .griglia {
+      display: flex;
+      gap: 40px;
+    }
+
+    .tile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: #333;
+      font-size: 1.2em;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+    }
+
+    .tile:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .tile img {
+      width: 150px;
+      height: auto;
+      margin-top: 10px;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="griglia">
+    <a class="tile" href="https://nero081.github.io/loghi/partite/primo/index.html">
+      TV Live
+      <img src="live.png" alt="Live">
+    </a>
+    <a class="tile" href="https://nero081.github.io/loghi/partite/set/index.html">
+      Movies
+      <img src="movies.png" alt="Movies">
+    </a>
+    <a class="tile" href="https://nero081.github.io/loghi/partite/set/index.html">
+      Series
+      <img src="series.png" alt="Series">
+    </a>
+  </div>
+</body>
+</html>
