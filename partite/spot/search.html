@@ -4,12 +4,58 @@
   <meta charset="UTF-8">
   <title>Ricerca Canali</title>
   <style>
-    body { background:#111; color:white; font-family:sans-serif; text-align:center; padding:20px; }
-    select, input { margin:10px; padding:10px; background:#222; color:#eee; border:1px solid #555; border-radius:5px; font-size:16px; }
-    .results { margin-top:20px; display:flex; flex-direction:column; align-items:center; }
-    .result { background:#222; padding:15px; border-radius:8px; margin-bottom:15px; max-width:600px; width:90%; box-shadow:0 2px 8px rgba(0,0,0,0.4); color:#ddd; }
-    .result h3 { margin:0 0 5px; color:#0af; font-size:18px; }
-    .result a { background:#0af; color:#000; text-decoration:none; font-weight:bold; padding:6px 10px; border-radius:4px; display:inline-block; margin-top:8px; }
+    body {
+      background: #111;
+      color: white;
+      font-family: sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+
+    select, input {
+      margin: 10px;
+      padding: 10px;
+      background: #222;
+      color: #eee;
+      border: 1px solid #555;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .results {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .result {
+      background: #222;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      max-width: 600px;
+      width: 90%;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+      color: #ddd;
+    }
+
+    .result h3 {
+      margin: 0 0 5px;
+      color: #0af;
+      font-size: 18px;
+    }
+
+    .result a {
+      background: #0af;
+      color: #000;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 6px 10px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-top: 8px;
+    }
   </style>
 </head>
 <body>
@@ -25,10 +71,13 @@
     const resultsDiv = document.getElementById('results');
     let canali = [];
 
-    // carica lista dei gruppi
-    fetch('fetch(`https://raw.githubusercontent.com/nero081/loghi/main/partite/spot/gruppi_json/${gruppo}.json`)
-')
-      .then(res => res.json())
+    // ✅ Carica la lista dei gruppi
+	
+    fetch('https://raw.githubusercontent.com/nero081/loghi/main/partite/spot/gruppi_json/gruppi.json')
+      .then(res => {
+        if (!res.ok) throw new Error('File gruppi.json non trovato');
+        return res.json();
+      })
       .then(gruppi => {
         gruppi.forEach(g => {
           const opt = document.createElement('option');
@@ -36,19 +85,33 @@
           opt.textContent = g.replace(/_/g, ' ').replace(/alberto sordi/i, '⭐️Alberto Sordi⭐️');
           select.appendChild(opt);
         });
+      })
+      .catch(err => {
+        resultsDiv.innerHTML = `<p style="color:red;">❌ Errore: ${err.message}</p>`;
       });
 
+    // ⚡ Quando selezioni un gruppo
     select.addEventListener('change', () => {
       const gruppo = select.value;
       if (!gruppo) return;
-      fetch(`./gruppi_json/${gruppo}.json`)
-        .then(res => res.json())
+
+      const url = `./gruppi_json/${encodeURIComponent(gruppo)}.json`;
+
+      fetch(url)
+        .then(res => {
+          if (!res.ok) throw new Error(`File non trovato: ${url}`);
+          return res.json();
+        })
         .then(json => {
           canali = json;
           renderResults();
+        })
+        .catch(err => {
+          resultsDiv.innerHTML = `<p style="color:red;">⚠️ ${err.message}</p>`;
         });
     });
 
+    // 🔍 Ricerca in tempo reale
     searchInput.addEventListener('input', renderResults);
 
     function renderResults() {
@@ -64,7 +127,11 @@
       filtrati.forEach(c => {
         const div = document.createElement('div');
         div.className = 'result';
-        div.innerHTML = `<h3>${c.name}</h3><p>🎯 ${c.group}</p><a href="${c.url}" target="_blank">Guarda</a>`;
+        div.innerHTML = `
+          <h3>${c.name}</h3>
+          <p>🎯 ${c.group}</p>
+          <a href="${c.url}" target="_blank">Guarda</a>
+        `;
         resultsDiv.appendChild(div);
       });
     }
