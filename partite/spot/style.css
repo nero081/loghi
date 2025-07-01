@@ -75,13 +75,15 @@ h1 {
 @media screen and (orientation: landscape) {
   body#home .griglia {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 20px;
-    padding: 0 30px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+    padding: 20px 40px;
   }
 
   body#home .tile {
-    font-size: 1em;
-    padding: 14px;
+    max-width: 100%;
+    padding: 18px;
+    font-size: 1.05em;
   }
 }
+
