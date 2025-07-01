@@ -26,90 +26,62 @@ h1 {
   transition: all 0.3s ease;
 }
 
-.tile, .canale {
+.tile {
   background-color: #292929;
   border-radius: 10px;
   text-align: center;
-  text-decoration: none;
   color: #fff;
   padding: 15px;
+  font-size: 1.1em;
+  font-weight: bold;
+  border: none;
   transition: transform 0.2s, box-shadow 0.2s;
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 1em;
+  width: 100%;
+  cursor: pointer;
+  text-decoration: none;
 }
 
-.tile:hover, .canale:hover {
+.tile:hover {
   transform: scale(1.05);
   box-shadow: 0 0 10px rgba(255,255,255,0.2);
 }
 
-.tile {
-  font-weight: bold;
+.tile:focus {
+  outline: 2px solid #fff;
+  background-color: #3a3a3a;
+  box-shadow: 0 0 10px rgba(255,255,255,0.5);
 }
 
-
-.canale img {
-  width: 100%;
-  height: 110px;
-  object-fit: contain;
-  border-radius: 8px;
-  background-color: #111;
-  margin-bottom: 10px;
-}
-
-.canale p {
-  margin: 0;
-  font-size: 0.95em;
-}
-
-/* 📱 Portrait layout compatto */
+/* 📱 Portrait: layout verticale per garantire focus e navigazione */
 @media screen and (orientation: portrait) {
   body#home .griglia {
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 15px;
-    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    padding: 0 20px;
   }
 
-  body#home .tile,
-  body#home .canale {
-    font-size: 0.9em;
-    padding: 10px;
-  }
-
-  body#home .canale img {
-    height: 80px;
-  }
-
-  body#home .canale p {
-    font-size: 0.85em;
+  body#home .tile {
+    font-size: 1.05em;
+    padding: 16px;
   }
 }
 
-/* 🖼️ Landscape layout ampio con più tile, NO zoom */
+/* 🖼️ Landscape: griglia classica */
 @media screen and (orientation: landscape) {
   body#home .griglia {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     gap: 20px;
     padding: 0 30px;
   }
 
-  body#home .canale img {
-    height: 100px;
-  }
-
-  body#home .tile,
-  body#home .canale {
+  body#home .tile {
     font-size: 1em;
-    padding: 12px;
+    padding: 14px;
   }
-  
-  .tile:focus,
-.canale:focus {
-  outline: 2px solid #fff;
-  box-shadow: 0 0 10px rgba(255,255,255,0.4);
-  background-color: #3a3a3a;
-}
-
 }
