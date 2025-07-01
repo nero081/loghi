@@ -49,12 +49,6 @@ h1 {
   font-weight: bold;
 }
 
-.tile:focus,
-.canale:focus {
-  outline: 2px solid #fff;
-  box-shadow: 0 0 10px rgba(255,255,255,0.5);
-}
-
 
 .canale img {
   width: 100%;
@@ -110,4 +104,12 @@ h1 {
     font-size: 1em;
     padding: 12px;
   }
+  
+  .tile:focus,
+.canale:focus {
+  outline: 2px solid #fff;
+  box-shadow: 0 0 10px rgba(255,255,255,0.4);
+  background-color: #3a3a3a;
+}
+
 }
