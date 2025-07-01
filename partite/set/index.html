@@ -2,58 +2,134 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="style.css">
   <title>Gruppi</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
 
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
 
+    .griglia {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+      justify-items: center;
+    }
+
+    .tile {
+      background-color: #292929;
+      border-radius: 10px;
+      text-align: center;
+      color: #fff;
+      padding: 15px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-weight: bold;
+      font-size: 1.1em;
+      text-decoration: none;
+    }
+
+    .tile:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+
+    .tile:focus {
+      outline: 2px solid #fff;
+      background-color: #3a3a3a;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    @media screen and (orientation: portrait) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      }
+
+      .tile {
+        font-size: 1em;
+        padding: 12px;
+      }
+
+      body {
+        padding: 15px;
+      }
+    }
+
+    @media screen and (orientation: landscape) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .tile {
+        font-size: 1.1em;
+        padding: 16px;
+      }
+
+      body {
+        padding: 30px;
+      }
+    }
+  </style>
 </head>
 <body>
   <h1>Seleziona un Gruppo</h1>
   <div class="griglia">
     
-    <a href="Film_Popolari.html" class="tile">Film Popolari</a>
+    <a href="Film_Popolari.html" class="tile" tabindex="0">Film Popolari</a>
     
-    <a href="Film_Al_Cinema.html" class="tile">Film Al Cinema</a>
+    <a href="Film_Al_Cinema.html" class="tile" tabindex="0">Film Al Cinema</a>
     
-    <a href="Animazione.html" class="tile">Animazione</a>
+    <a href="Animazione.html" class="tile" tabindex="0">Animazione</a>
     
-    <a href="Dramma.html" class="tile">Dramma</a>
+    <a href="Dramma.html" class="tile" tabindex="0">Dramma</a>
     
-    <a href="Commedia.html" class="tile">Commedia</a>
+    <a href="Commedia.html" class="tile" tabindex="0">Commedia</a>
     
-    <a href="Horror.html" class="tile">Horror</a>
+    <a href="Horror.html" class="tile" tabindex="0">Horror</a>
     
-    <a href="Documentario.html" class="tile">Documentario</a>
+    <a href="Documentario.html" class="tile" tabindex="0">Documentario</a>
     
-    <a href="Azione.html" class="tile">Azione</a>
+    <a href="Azione.html" class="tile" tabindex="0">Azione</a>
     
-    <a href="Mistero.html" class="tile">Mistero</a>
+    <a href="Mistero.html" class="tile" tabindex="0">Mistero</a>
     
-    <a href="Thriller.html" class="tile">Thriller</a>
+    <a href="Thriller.html" class="tile" tabindex="0">Thriller</a>
     
-    <a href="Famiglia.html" class="tile">Famiglia</a>
+    <a href="Famiglia.html" class="tile" tabindex="0">Famiglia</a>
     
-    <a href="Musica.html" class="tile">Musica</a>
+    <a href="Musica.html" class="tile" tabindex="0">Musica</a>
     
-    <a href="Crime.html" class="tile">Crime</a>
+    <a href="Crime.html" class="tile" tabindex="0">Crime</a>
     
-    <a href="Romance.html" class="tile">Romance</a>
+    <a href="Romance.html" class="tile" tabindex="0">Romance</a>
     
-    <a href="Fantascienza.html" class="tile">Fantascienza</a>
+    <a href="Fantascienza.html" class="tile" tabindex="0">Fantascienza</a>
     
-    <a href="Storia.html" class="tile">Storia</a>
+    <a href="Storia.html" class="tile" tabindex="0">Storia</a>
     
-    <a href="Avventura.html" class="tile">Avventura</a>
+    <a href="Avventura.html" class="tile" tabindex="0">Avventura</a>
     
-    <a href="Guerra.html" class="tile">Guerra</a>
+    <a href="Guerra.html" class="tile" tabindex="0">Guerra</a>
     
-    <a href="Fantasy.html" class="tile">Fantasy</a>
+    <a href="Fantasy.html" class="tile" tabindex="0">Fantasy</a>
     
-    <a href="Western.html" class="tile">Western</a>
+    <a href="Western.html" class="tile" tabindex="0">Western</a>
     
-    <a href="Generale.html" class="tile">Generale</a>
+    <a href="Generale.html" class="tile" tabindex="0">Generale</a>
     
-    <a href="televisione_film.html" class="tile">televisione film</a>
+    <a href="televisione_film.html" class="tile" tabindex="0">televisione film</a>
     
   </div>
 </body>
