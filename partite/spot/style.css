@@ -78,12 +78,15 @@ h1 {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 24px;
     padding: 20px 40px;
+    justify-content: center;
   }
 
   body#home .tile {
-    max-width: 100%;
+    max-width: 240px;
+    width: 100%;
     padding: 18px;
     font-size: 1.05em;
   }
 }
+
 
