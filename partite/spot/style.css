@@ -5,6 +5,8 @@ html, body {
   background-color: #1a1a1a;
   overflow-x: hidden;
   font-family: 'Open Sans', sans-serif;
+
+  /* Safe area inset support (iOS notch) */
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
   padding-left: env(safe-area-inset-left);
@@ -37,28 +39,21 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 1em;
 }
 
 .tile:hover, .canale:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 10px rgba(255,255,255,0.2);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
 .tile {
   font-weight: bold;
+  font-size: 1.1em;
 }
-
-.tile:focus,
-.canale:focus {
-  outline: 2px solid #fff;
-  box-shadow: 0 0 10px rgba(255,255,255,0.5);
-}
-
 
 .canale img {
   width: 100%;
-  height: 110px;
+  height: 120px;
   object-fit: contain;
   border-radius: 8px;
   background-color: #111;
@@ -70,44 +65,65 @@ h1 {
   font-size: 0.95em;
 }
 
-/* 📱 Portrait layout compatto */
+/* 📱 Portrait: solo per homepage */
 @media screen and (orientation: portrait) {
   body#home .griglia {
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 15px;
-    padding: 0 10px;
-  }
-
-  body#home .tile,
-  body#home .canale {
-    font-size: 0.9em;
-    padding: 10px;
-  }
-
-  body#home .canale img {
-    height: 80px;
-  }
-
-  body#home .canale p {
-    font-size: 0.85em;
-  }
-}
-
-/* 🖼️ Landscape layout ampio con più tile, NO zoom */
-@media screen and (orientation: landscape) {
-  body#home .griglia {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 20px;
-    padding: 0 30px;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   }
 
   body#home .canale img {
     height: 100px;
   }
 
-  body#home .tile,
-  body#home .canale {
+  body#home .canale p {
+    font-size: 0.9em;
+  }
+
+  body#home {
+    padding-left: calc(env(safe-area-inset-left) + 15px);
+    padding-right: calc(env(safe-area-inset-right) + 15px);
+  }
+
+  body#home h1 {
+    font-size: 1.4em;
+    margin: 30px 10px;
+  }
+}
+
+/* 🖼️ Landscape: solo per homepage */
+@media screen and (orientation: landscape) {
+  body#home .griglia {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  body#home .canale img {
+    height: 140px;
+  }
+
+  body#home .canale p {
     font-size: 1em;
-    padding: 12px;
+  }
+
+  body#home {
+    padding-left: calc(env(safe-area-inset-left) + 30px);
+    padding-right: calc(env(safe-area-inset-right) + 30px);
+  }
+}
+
+.back {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.back a {
+  color: #aaa;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+/* 💡 Forza dark mode anche se il sistema è in light */
+@media (prefers-color-scheme: dark) {
+  html, body {
+    background-color: #1a1a1a;
   }
 }
