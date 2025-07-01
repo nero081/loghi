@@ -3,35 +3,62 @@
 <head>
   <meta charset="UTF-8">
   <title>Player</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <style>
-    body {
+    html, body {
       margin: 0;
       background: #000;
+      height: 100%;
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
-      font-family: sans-serif;
+      align-items: center;
     }
-    a {
-      color: #ccc;
-      margin-top: 40px;
-      text-decoration: none;
-      font-size: 18px;
+
+    video {
+      width: 100%;
+      height: 100%;
+      background: #111;
     }
   </style>
 </head>
 <body>
-  <h2 style="color: #eee;">Riproduzione Canale</h2>
+  <video id="video" controls autoplay></video>
+
   <script>
+    const video = document.getElementById('video');
     const params = new URLSearchParams(window.location.search);
     const url = params.get('url');
-    if (url) {
-      window.location.href = decodeURIComponent(url);
+
+    function goFullscreen(el) {
+      if (el.requestFullscreen) {
+        el.requestFullscreen();
+      } else if (el.webkitRequestFullscreen) {
+        el.webkitRequestFullscreen();
+      } else if (el.msRequestFullscreen) {
+        el.msRequestFullscreen();
+      }
+    }
+
+    if (!url) {
+      document.body.innerHTML = '<p style="color: white;">❌ Nessun URL fornito</p>';
+    } else if (url.endsWith('.m3u8') && Hls.isSupported()) {
+      const hls = new Hls();
+      hls.loadSource(url);
+      hls.attachMedia(video);
+      hls.on(Hls.Events.MANIFEST_PARSED, function () {
+        video.play();
+        goFullscreen(video);
+      });
+    } else if (video.canPlayType('video/mp4') || video.canPlayType('video/webm')) {
+      video.src = url;
+      video.addEventListener('loadedmetadata', () => {
+        video.play();
+        goFullscreen(video);
+      });
     } else {
-      document.body.innerHTML = '<p style="color:white;">❌ Nessun URL fornito</p>';
+      document.body.innerHTML = `<p style="color:white;">💾 Formato non supportato.<br><a href="${url}" download style="color:#0af;">Scarica il video</a></p>`;
     }
   </script>
-  <a href="index.html">⟵ Torna alla home</a>
 </body>
 </html>
