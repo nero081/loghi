@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>⭐️Cartoni⭐️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .griglia {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+      justify-items: center;
+    }
+
+    .tile, .canale {
+      background-color: #292929;
+      border-radius: 10px;
+      text-align: center;
+      color: #fff;
+      padding: 15px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .tile:hover, .canale:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+
+    .tile {
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+
+    .canale a {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .canale img {
+      width: 100%;
+      height: 120px;
+      object-fit: contain;
+      border-radius: 8px;
+      background-color: #111;
+      margin-bottom: 10px;
+    }
+
+    .canale p {
+      margin: 0;
+      font-size: 0.95em;
+    }
+
+    .placeholder-logo {
+      width: 100%;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #444, #222);
+      font-size: 2em;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      color: #eee;
+    }
+
+    .canale.no-logo:hover .placeholder-logo {
+      background: linear-gradient(135deg, #555, #333);
+    }
+
+    @media screen and (orientation: portrait) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      }
+
+      .canale img, .placeholder-logo {
+        height: 100px;
+      }
+
+      .canale p {
+        font-size: 0.9em;
+      }
+
+      body {
+        padding: 15px;
+      }
+    }
+
+    @media screen and (orientation: landscape) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .canale img, .placeholder-logo {
+        height: 140px;
+      }
+
+      .canale p {
+        font-size: 1em;
+      }
+
+      body {
+        padding: 30px;
+      }
+    }
+
+    .back {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .back a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h1>⭐️Cartoni⭐️</h1>
+  <div class="griglia">
+    
+    <div class="canale no-logo" id="Ella_e_il_principe_segreto_2018">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/50653.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Ella e il principe segreto - 2018</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Topolino_e_I_suoi_amici_Dolcetto_o_scherzetto_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/50654.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Topolino e I suoi amici - Dolcetto o scherzetto - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="10_Lives_Un_gatto_fortunato_m720p_2024_ID36836">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63644.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>10 Lives - Un gatto fortunato [m720p] (2024) [ID36836]</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="200x100_lupo_m720p_2024_ID37152">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63645.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>200x100 lupo [m720p] (2024) [ID37152]</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Arf_m720p_2023_ID37280">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63646.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Arf [m720p] (2023) [ID37280]</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Baby_Shark_s_Big_Movie_m720p_2023_ID36170">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63647.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Baby Shark's Big Movie [m720p] (2023) [ID36170]</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Barbie_and_Stacie_to_the_Rescue_m720p_2024_ID36583">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63648.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Barbie and Stacie to the Rescue [m720p] (2024) [ID36583]</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Flow_Un_mondo_da_salvare_m720p_2024_ID37049">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63649.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Flow - Un mondo da salvare [m720p] (2024) [ID37049]</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Galline_in_fuga_L_alba_dei_nugget_m720p_2023_ID35470">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63650.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Galline in fuga-L'alba dei nugget [m720p] (2023) [ID35470]</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="He_Man_e_She_Ra_Speciale_Natale_m720p_1985_ID35558">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63651.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>He-Man e She-Ra - Speciale Natale [m720p] (1985) [ID35558]</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hilda_e_il_Re_Montagna_m720p_2021_ID34287">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63652.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Hilda e il Re Montagna [m720p] (2021) [ID34287]</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_Cavalieri_dello_zodiaco_Film_3_La_leggenda_dei_guerrieri_scarlatti_m720p_1988_ID34288">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63653.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>I Cavalieri dello zodiaco - Film 3 - La leggenda dei guerrieri scarlatti [m720p] (1988) [ID34288]</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_colori_dell_anima_The_Colors_Within_m720p_2024_ID37217">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63654.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>I colori dell'anima - The Colors Within [m720p] (2024) [ID37217]</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_magico_mondo_di_Billie_m720p_2023_ID36938">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63655.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Il magico mondo di Billie [m720p] (2023) [ID36938]</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_mio_nome_è_Impavido_m720p_2020_ID34719">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63656.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Il mio nome è Impavido [m720p] (2020) [ID34719]</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Signore_degli_Anelli_La_guerra_dei_Rohirrim_m720p_2024_ID37001">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63657.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Il Signore degli Anelli - La guerra dei Rohirrim [m720p] (2024) [ID37001]</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_tre_moschettieri_ciechi_m720p_1936_ID36401">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63658.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>I tre moschettieri ciechi [m720p] (1936) [ID36401]</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Kenshin_Samurai_vagabondo_The_Movie_m720p_1997_ID37148">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63659.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Kenshin - Samurai vagabondo - The Movie [m720p] (1997) [ID37148]</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_Albero_dei_Desideri_m720p_2019_ID37129">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63660.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>L'Albero dei Desideri [m720p] (2019) [ID37129]</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_banda_di_Don_Chisciotte__Missione_Mulini_a_Vento_m720p_2024_ID37229">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63661.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>La banda di Don Chisciotte_ Missione Mulini a Vento [m720p] (2024) [ID37229]</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_regina_delle_nevi_e_la_principessa_m720p_2022_ID34879">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63662.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>La regina delle nevi e la principessa [m720p] (2022) [ID34879]</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_regina_delle_nevi_m720p_1957_ID37087">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63663.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>La regina delle nevi [m720p] (1957) [ID37087]</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="LEGO_Marvel_Avengers_Mission_Demolition_m720p_2024_ID36985">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63664.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>LEGO Marvel Avengers - Mission Demolition [m720p] (2024) [ID36985]</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Le_straordinarie_avventure_di_Michele_Strogoff_m720p_2004_ID28118">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63665.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Le straordinarie avventure di Michele Strogoff [m720p] (2004) [ID28118]</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Linda_e_il_pollo_m720p_2023_ID37064">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63666.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Linda e il pollo [m720p] (2023) [ID37064]</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_elefante_del_mago_m720p_2023_ID34456">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63667.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>L’elefante del mago [m720p] (2023) [ID34456]</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Melanzane_Estate_andalusa_m720p_2003_ID36983">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63668.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Melanzane - Estate andalusa [m720p] (2003) [ID36983]</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Miraculous_Londra_Ai_confini_del_tempo_m720p_2024_ID36972">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63669.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Miraculous Londra - Ai confini del tempo [m720p] (2024) [ID36972]</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="My_Little_Pony_Equestria_Girls_m720p_2013_ID34675">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63670.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>My Little Pony - Equestria Girls [m720p] (2013) [ID34675]</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Niko_e_la_slitta_di_Babbo_Natale_m720p_2024_ID36945">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63671.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Niko e la slitta di Babbo Natale [m720p] (2024) [ID36945]</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Orange_Road_The_Movie_e_poi_l_inizio_di_quella_estate_m720p_1996_ID36359">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63672.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Orange Road The Movie - ...e poi, l'inizio di quella estate... [m720p] (1996) [ID36359]</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ozi_La_voce_della_foresta_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63673.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Ozi - La voce della foresta - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Palla_di_neve_1991">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63674.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Palla di neve - 1991</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Picchiarello_al_campo_estivo_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63675.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Picchiarello al campo estivo - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Piece_by_Piece_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63676.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Piece by Piece - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Plankton_Il_film_2025">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63677.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Plankton - Il film - 2025</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Questa_allegra_gioventù_Un_estate_lunga_un_sogno_1988">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63678.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Questa allegra gioventù - Un'estate lunga un sogno - 1988</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Shadow_Skill_The_Movie_1995">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63679.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Shadow Skill: The Movie - 1995</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sonic_3_Il_film_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63680.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Sonic 3 - Il film - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Spy_Family_Code_White_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63681.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Spy × Family - Code: White - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="That_Christmas_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63682.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>That Christmas - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Witcher_Le_sirene_degli_abissi_2025">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63683.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>The Witcher: Le sirene degli abissi - 2025</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tobia_e_i_Colori_del_Mondo_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63684.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Tobia e i Colori del Mondo - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Totto_chan_The_Little_Girl_at_the_Window_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63685.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Totto-chan: The Little Girl at the Window - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Trolls_3_Tutti_insieme_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63686.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Trolls 3 - Tutti insieme - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Unicorn_Wars_2022">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63687.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Unicorn Wars - 2022</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_avventura_spaziale_Un_film_dei_Looney_Tunes_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63688.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Un'avventura spaziale - Un film dei Looney Tunes - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Vera_Magico_inverno_2019">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63689.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Vera: Magico inverno - 2019</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Wallace_e_Gromit_Le_piume_della_vendetta_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63690.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Wallace e Gromit - Le piume della vendetta - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Yakari_Un_viaggio_spettacolare_2020">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/63691.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Yakari - Un viaggio spettacolare - 2020</p>
+      </a>
+    </div>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>

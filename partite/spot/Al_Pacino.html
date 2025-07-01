@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Al Pacino</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .griglia {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+      justify-items: center;
+    }
+
+    .tile, .canale {
+      background-color: #292929;
+      border-radius: 10px;
+      text-align: center;
+      color: #fff;
+      padding: 15px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .tile:hover, .canale:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+
+    .tile {
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+
+    .canale a {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .canale img {
+      width: 100%;
+      height: 120px;
+      object-fit: contain;
+      border-radius: 8px;
+      background-color: #111;
+      margin-bottom: 10px;
+    }
+
+    .canale p {
+      margin: 0;
+      font-size: 0.95em;
+    }
+
+    .placeholder-logo {
+      width: 100%;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #444, #222);
+      font-size: 2em;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      color: #eee;
+    }
+
+    .canale.no-logo:hover .placeholder-logo {
+      background: linear-gradient(135deg, #555, #333);
+    }
+
+    @media screen and (orientation: portrait) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      }
+
+      .canale img, .placeholder-logo {
+        height: 100px;
+      }
+
+      .canale p {
+        font-size: 0.9em;
+      }
+
+      body {
+        padding: 15px;
+      }
+    }
+
+    @media screen and (orientation: landscape) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .canale img, .placeholder-logo {
+        height: 140px;
+      }
+
+      .canale p {
+        font-size: 1em;
+      }
+
+      body {
+        padding: 30px;
+      }
+    }
+
+    .back {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .back a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Al Pacino</h1>
+  <div class="griglia">
+    
+    <div class="canale no-logo" id="Americani_1992">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44723.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Americani (1992)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Carlito_s_Way_1993">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44724.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Carlito's Way (1993)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Conspiracy_La_cospirazione_2016">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44725.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Conspiracy - La cospirazione (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cruising_1980">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44726.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Cruising (1980)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Donnie_Brasco_1997">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44727.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Donnie Brasco (1997)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hangman_2017_Pacino">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44728.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Hangman 2017 Pacino</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_mercante_di_Venezia_2004">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44729.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Il mercante di Venezia (2004)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_padrino_1972">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44730.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Il padrino (1972)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Padrino_2_1974_Pacino">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44731.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Il Padrino 2 1974 Pacino</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Padrino_3_1990_Pacino">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44732.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Il Padrino 3 1990 Pacino</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Insomnia_2002">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44733.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Insomnia (2002)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_avvocato_del_diavolo_1997">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44734.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>L'avvocato del diavolo (1997)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_canzone_della_vita_Danny_Collins_2015">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44735.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>La canzone della vita - Danny Collins (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_regola_del_sospetto_2003">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44736.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>La regola del sospetto (2003)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lo_spaventapasseri_1973">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44737.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Lo spaventapasseri (1973)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Manglehorn_2014_Pacino">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44738.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Manglehorn 2014 Pacino</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ogni_maledetta_domenica_1999">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44739.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Ogni maledetta domenica (1999)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Panico_a_Needle_Park_1971">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44740.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Panico a Needle Park (1971)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Papà_sei_una_frana_1982">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44741.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Papà, sei una frana (1982)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Paterno_2018">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44742.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Paterno (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Paura_d_amare_1991">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44743.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Paura d'amare (1991)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Phil_Spector_2013">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44744.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Phil Spector (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Quel_pomeriggio_di_un_giorno_da_cani_1975">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44745.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Quel pomeriggio di un giorno da cani (1975)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Revolution_1985">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44746.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Revolution (1985)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Riccardo_III_Un_uomo_un_re_1996">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44747.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Riccardo III - Un uomo, un re (1996)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Rischio_a_due_2005">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44748.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Rischio a due (2005)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="S1m0ne_2002">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44749.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>S1m0ne (2002)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Scarface_1983">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44750.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Scarface (1983)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Scent_of_a_Woman_Profumo_di_donna_1992">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44751.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Scent of a Woman - Profumo di donna (1992)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Seduzione_pericolosa_1989">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44752.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Seduzione pericolosa (1989)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Serpico_1974_Pacino">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44753.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Serpico 1974 Pacino</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_attimo_una_vita_1977">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44754.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Un attimo, una vita (1977)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Uomini_di_parola_2012">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44755.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Uomini di parola (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="You_Don_t_Know_Jack_Il_dottor_morte_2010">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44756.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>You Don't Know Jack - Il dottor morte (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Americani_1992">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57955.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Americani (1992)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Carlito_s_Way_1993">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57956.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Carlito's Way (1993)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Conspiracy_La_cospirazione_2016">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57957.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Conspiracy - La cospirazione (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cruising_1980">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57958.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Cruising (1980)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Donnie_Brasco_1997">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57959.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Donnie Brasco (1997)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hangman_2017_Pacino">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57960.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Hangman 2017 Pacino</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_mercante_di_Venezia_2004">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57961.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Il mercante di Venezia (2004)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_padrino_1972">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57962.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Il padrino (1972)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Padrino_2_1974_Pacino">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57963.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Il Padrino 2 1974 Pacino</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Padrino_3_1990_Pacino">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57964.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Il Padrino 3 1990 Pacino</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Insomnia_2002">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57965.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Insomnia (2002)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_avvocato_del_diavolo_1997">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57966.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>L'avvocato del diavolo (1997)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_canzone_della_vita_Danny_Collins_2015">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57967.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>La canzone della vita - Danny Collins (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_regola_del_sospetto_2003">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57968.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>La regola del sospetto (2003)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lo_spaventapasseri_1973">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57969.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Lo spaventapasseri (1973)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Manglehorn_2014_Pacino">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57970.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Manglehorn 2014 Pacino</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ogni_maledetta_domenica_1999">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57971.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Ogni maledetta domenica (1999)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Panico_a_Needle_Park_1971">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57972.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Panico a Needle Park (1971)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Papà_sei_una_frana_1982">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57973.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Papà, sei una frana (1982)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Paterno_2018">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57974.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Paterno (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Paura_d_amare_1991">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57975.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Paura d'amare (1991)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Phil_Spector_2013">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57976.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Phil Spector (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Quel_pomeriggio_di_un_giorno_da_cani_1975">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57977.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Quel pomeriggio di un giorno da cani (1975)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Revolution_1985">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57978.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Revolution (1985)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Riccardo_III_Un_uomo_un_re_1996">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57979.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Riccardo III - Un uomo, un re (1996)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Rischio_a_due_2005">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57980.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Rischio a due (2005)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="S1m0ne_2002">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57981.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>S1m0ne (2002)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Scarface_1983">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57982.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Scarface (1983)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Scent_of_a_Woman_Profumo_di_donna_1992">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57983.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Scent of a Woman - Profumo di donna (1992)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Seduzione_pericolosa_1989">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57984.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Seduzione pericolosa (1989)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Serpico_1974_Pacino">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57985.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Serpico 1974 Pacino</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_attimo_una_vita_1977">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57986.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Un attimo una vita (1977)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Uomini_di_parola_2012">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57987.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Uomini di parola (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="You_Don_t_Know_Jack_Il_dottor_morte_2010">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57988.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>You Don't Know Jack - Il dottor morte (2010)</p>
+      </a>
+    </div>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>

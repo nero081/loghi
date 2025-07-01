@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>FILM CATTOLICI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .griglia {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+      justify-items: center;
+    }
+
+    .tile, .canale {
+      background-color: #292929;
+      border-radius: 10px;
+      text-align: center;
+      color: #fff;
+      padding: 15px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .tile:hover, .canale:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+
+    .tile {
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+
+    .canale a {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .canale img {
+      width: 100%;
+      height: 120px;
+      object-fit: contain;
+      border-radius: 8px;
+      background-color: #111;
+      margin-bottom: 10px;
+    }
+
+    .canale p {
+      margin: 0;
+      font-size: 0.95em;
+    }
+
+    .placeholder-logo {
+      width: 100%;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #444, #222);
+      font-size: 2em;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      color: #eee;
+    }
+
+    .canale.no-logo:hover .placeholder-logo {
+      background: linear-gradient(135deg, #555, #333);
+    }
+
+    @media screen and (orientation: portrait) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      }
+
+      .canale img, .placeholder-logo {
+        height: 100px;
+      }
+
+      .canale p {
+        font-size: 0.9em;
+      }
+
+      body {
+        padding: 15px;
+      }
+    }
+
+    @media screen and (orientation: landscape) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .canale img, .placeholder-logo {
+        height: 140px;
+      }
+
+      .canale p {
+        font-size: 1em;
+      }
+
+      body {
+        padding: 30px;
+      }
+    }
+
+    .back {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .back a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h1>FILM CATTOLICI</h1>
+  <div class="griglia">
+    
+    <div class="canale no-logo" id="Mosè_1974">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/13509.avi" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Mosè - 1974</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bernadette_LourdesBernadette_Soubirous_Jean_Delannoy_1987_Ita">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/13510.avi" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Bernadette-LourdesBernadette Soubirous - Jean Delannoy 1987 Ita</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Viaggio_di_Gesù_2007">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/13511.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Il Viaggio di Gesù - 2007</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Jesus_1979">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/13512.avi" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Jesus - 1979</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_bambino_di_nome_Gesú_1987">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/13513.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Un bambino di nome Gesú - 1987</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_sepolcro_dei_re_1960">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/13514.avi" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Il sepolcro dei re (1960)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Jesus_Christ_Superstar_1973">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/13515.avi" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Jesus Christ Superstar (1973)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Jesus_Christ_Superstar_1973">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/13516.avi" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Jesus Christ Superstar (1973)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_ultima_tentazione_di_Cristo_M_Scorsese_1988">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/13517.avi" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>L'ultima tentazione di Cristo - M.Scorsese 1988</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_papessa_Giovanna_1972">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/13518.avi" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>La papessa Giovanna - 1972</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_vita_di_Gesù_La_Più_Grande_Storia_Mai_Raccontata">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/13519.avi" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>La vita di Gesù - La Più Grande Storia Mai Raccontata</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_vita_la_morte_di_Gesu">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/13520.avi" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>La vita, la morte di Gesu</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Le_storie_della_bibbia">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/13521.avi" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Le storie della bibbia</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Brian_di_Nazareth_1979">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/13522.avi" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Brian di Nazareth - 1979</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Nazarín_1959">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/13523.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Nazarín (1959)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Nazarin_1958">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/13524.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Nazarin.1958</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_vangelo_secondo_Matteo_1965">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/13525.avi" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Il vangelo secondo Matteo - 1965</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Quo_Vadis_1951">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/13526.avi" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Quo Vadis - 1951</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Vita_e_passione_di_Cristo_1903">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/13527.avi" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>Vita e passione di Cristo - 1903</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_passione_di_Cristo_2004">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/13573.avi" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
+        
+        <p>La passione di Cristo - 2004</p>
+      </a>
+    </div>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>
