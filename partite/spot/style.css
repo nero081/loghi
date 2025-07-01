@@ -1,7 +1,26 @@
-/* Base layout (desktop e landscape mobile) */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #1a1a1a;
+  overflow-x: hidden;
+  font-family: 'Open Sans', sans-serif;
+
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+h1 {
+  text-align: center;
+  margin: 40px 0;
+  color: #fff;
+}
+
 .griglia {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 20px;
   justify-items: center;
   padding: 0 20px;
@@ -9,45 +28,94 @@
 }
 
 .tile, .canale {
-  font-size: 1em;
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
   padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* 📱 Portrait: tile più piccoli e layout più compatto */
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255,255,255,0.2);
+}
+
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+}
+
+.canale p {
+  margin: 0;
+  font-size: 0.95em;
+}
+
+/* 📱 Solo index.html con #home — Portrait */
 @media screen and (orientation: portrait) {
   body#home .griglia {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 15px;
-    padding: 0 10px;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   }
 
-  body#home .tile, 
+  body#home .tile,
   body#home .canale {
     font-size: 0.9em;
-    padding: 10px;
+    padding: 12px;
   }
 
   body#home .canale img {
-    height: 80px;
+    height: 100px;
+  }
+
+  body#home .canale p {
+    font-size: 0.9em;
   }
 
   body#home h1 {
     font-size: 1.3em;
-    margin: 20px 10px;
+    margin: 30px 10px;
   }
 }
 
-/* 🖼️ Landscape: layout ampio, tile non ingranditi */
+/* 🖼️ Solo index.html con #home — Landscape */
 @media screen and (orientation: landscape) {
   body#home .griglia {
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 24px;
-    padding: 0 30px;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   }
 
-  body#home .canale img {
-    height: 120px;
+  body#home h1 {
+    font-size: 1.4em;
   }
 
-  /* Non aumentiamo font-size o padding: manteniamo stile base */
+  /* Mantieni dimensioni base per .tile e .canale */
+}
+
+.back {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.back a {
+  color: #aaa;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+  html, body {
+    background-color: #1a1a1a;
+  }
 }
