@@ -64,43 +64,44 @@ h1 {
   font-size: 0.95em;
 }
 
-/* 📱 Solo index.html con #home — Portrait */
+/* 📱 Portrait */
 @media screen and (orientation: portrait) {
-  body#home .griglia {
+  .griglia {
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   }
 
-  body#home .tile,
-  body#home .canale {
-    font-size: 0.9em;
-    padding: 12px;
-  }
-
-  body#home .canale img {
+  .canale img {
     height: 100px;
   }
 
-  body#home .canale p {
+  .canale p {
     font-size: 0.9em;
   }
 
-  body#home h1 {
-    font-size: 1.3em;
-    margin: 30px 10px;
+  body {
+    padding-left: calc(env(safe-area-inset-left) + 15px);
+    padding-right: calc(env(safe-area-inset-right) + 15px);
   }
 }
 
-/* 🖼️ Solo index.html con #home — Landscape */
+/* 🖼️ Landscape */
 @media screen and (orientation: landscape) {
-  body#home .griglia {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  .griglia {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
 
-  body#home h1 {
-    font-size: 1.4em;
+  .canale img {
+    height: 140px;
   }
 
-  /* Mantieni dimensioni base per .tile e .canale */
+  .canale p {
+    font-size: 1em;
+  }
+
+  body {
+    padding-left: calc(env(safe-area-inset-left) + 30px);
+    padding-right: calc(env(safe-area-inset-right) + 30px);
+  }
 }
 
 .back {
