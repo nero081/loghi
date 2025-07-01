@@ -26,7 +26,8 @@
     let canali = [];
 
     // carica lista dei gruppi
-    fetch('./gruppi_json/gruppi.json')
+    fetch('fetch(`https://raw.githubusercontent.com/nero081/loghi/main/partite/spot/gruppi_json/${gruppo}.json`)
+')
       .then(res => res.json())
       .then(gruppi => {
         gruppi.forEach(g => {
