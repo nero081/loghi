@@ -1,233 +1,308 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <title>Gruppi</title>
+  <meta charset="UTF-8" />
+  <title>Seleziona Gruppo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+
+  <style>
+    body {
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .griglia {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+      justify-items: center;
+    }
+
+    .tile {
+      background-color: #292929;
+      border-radius: 10px;
+      text-align: center;
+      color: #fff;
+      padding: 15px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-weight: bold;
+      font-size: 1.1em;
+      text-decoration: none;
+    }
+
+    .tile:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+
+    .tile:focus {
+      outline: 2px solid #fff;
+      background-color: #3a3a3a;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    @media screen and (orientation: portrait) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      }
+
+      .tile {
+        font-size: 1em;
+        padding: 12px;
+      }
+
+      body {
+        padding: 15px;
+      }
+    }
+
+    @media screen and (orientation: landscape) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .tile {
+        font-size: 1.1em;
+        padding: 16px;
+      }
+
+      body {
+        padding: 30px;
+      }
+    }
+  </style>
 </head>
-<body id="home">
-  <h1>Seleziona un Gruppo</h1>
+<body>
+  <h1>📁 Seleziona un Gruppo</h1>
   <div class="griglia">
     
-	<a href="search.html" class="tile" tabindex="0">Cerca</a>
+      <a class="tile" href="⭐️STORICI⭐️.html" tabindex="0">⭐️STORICI⭐️</a>
     
-    <a href="⭐️STORICI⭐️.html" class="tile" tabindex="0">⭐️STORICI⭐️</a>
+      <a class="tile" href="⭐️XXX_ADULTI_1⭐️.html" tabindex="0">⭐️XXX ADULTI 1⭐️</a>
     
-    <a href="⭐️XXX_ADULTI_1⭐️.html" class="tile" tabindex="0">⭐️XXX ADULTI 1⭐️</a>
+      <a class="tile" href="⭐️EROTICI⭐️.html" tabindex="0">⭐️EROTICI⭐️</a>
     
-    <a href="⭐️EROTICI⭐️.html" class="tile" tabindex="0">⭐️EROTICI⭐️</a>
+      <a class="tile" href="⭐️-NUOVI-INSERITI-2023-⭐️.html" tabindex="0">⭐️-NUOVI-INSERITI-2023-⭐️</a>
     
-    <a href="⭐️-NUOVI-INSERITI-2023-⭐️.html" class="tile" tabindex="0">⭐️-NUOVI-INSERITI-2023-⭐️</a>
+      <a class="tile" href="⭐️⭐️⭐️⭐️⭐️--NUOVI_FILM_AGGIUNTI_--⭐️⭐️⭐️⭐️⭐️.html" tabindex="0">⭐️⭐️⭐️⭐️⭐️--NUOVI FILM AGGIUNTI --⭐️⭐️⭐️⭐️⭐️</a>
     
-    <a href="⭐️⭐️⭐️⭐️⭐️--NUOVI_FILM_AGGIUNTI_--⭐️⭐️⭐️⭐️⭐️.html" class="tile" tabindex="0">⭐️⭐️⭐️⭐️⭐️--NUOVI FILM AGGIUNTI --⭐️⭐️⭐️⭐️⭐️</a>
+      <a class="tile" href="⭐️⭐️⭐️⭐️⭐️--NUOVI_FILM_AGGIUNTI_-2025-⭐️⭐️⭐️⭐️⭐️.html" tabindex="0">⭐️⭐️⭐️⭐️⭐️--NUOVI FILM AGGIUNTI -2025-⭐️⭐️⭐️⭐️⭐️</a>
     
-    <a href="⭐️⭐️⭐️⭐️⭐️--NUOVI_FILM_AGGIUNTI_-2025-⭐️⭐️⭐️⭐️⭐️.html" class="tile" tabindex="0">⭐️⭐️⭐️⭐️⭐️--NUOVI FILM AGGIUNTI -2025-⭐️⭐️⭐️⭐️⭐️</a>
+      <a class="tile" href="⭐️Film_2023⭐️.html" tabindex="0">⭐️Film 2023⭐️</a>
     
-    <a href="⭐️Film_2023⭐️.html" class="tile" tabindex="0">⭐️Film 2023⭐️</a>
+      <a class="tile" href="⭐️Film_Cult⭐️.html" tabindex="0">⭐️Film Cult⭐️</a>
     
-    <a href="⭐️Film_Cult⭐️.html" class="tile" tabindex="0">⭐️Film Cult⭐️</a>
+      <a class="tile" href="⭐️Netflix⭐️.html" tabindex="0">⭐️Netflix⭐️</a>
     
-    <a href="⭐️Netflix⭐️.html" class="tile" tabindex="0">⭐️Netflix⭐️</a>
+      <a class="tile" href="⭐️Animazione⭐️.html" tabindex="0">⭐️Animazione⭐️</a>
     
-    <a href="⭐️Animazione⭐️.html" class="tile" tabindex="0">⭐️Animazione⭐️</a>
+      <a class="tile" href="⭐️Avventura⭐️.html" tabindex="0">⭐️Avventura⭐️</a>
     
-    <a href="⭐️Avventura⭐️.html" class="tile" tabindex="0">⭐️Avventura⭐️</a>
+      <a class="tile" href="⭐️Azione⭐️.html" tabindex="0">⭐️Azione⭐️</a>
     
-    <a href="⭐️Azione⭐️.html" class="tile" tabindex="0">⭐️Azione⭐️</a>
+      <a class="tile" href="⭐️Cartoni⭐️.html" tabindex="0">⭐️Cartoni⭐️</a>
     
-    <a href="⭐️Cartoni⭐️.html" class="tile" tabindex="0">⭐️Cartoni⭐️</a>
+      <a class="tile" href="⭐️Documentari⭐️.html" tabindex="0">⭐️Documentari⭐️</a>
     
-    <a href="⭐️Documentari⭐️.html" class="tile" tabindex="0">⭐️Documentari⭐️</a>
+      <a class="tile" href="⭐️Commedia⭐️.html" tabindex="0">⭐️Commedia⭐️</a>
     
-    <a href="⭐️Commedia⭐️.html" class="tile" tabindex="0">⭐️Commedia⭐️</a>
+      <a class="tile" href="⭐️Commedia_Italiana⭐️.html" tabindex="0">⭐️Commedia Italiana⭐️</a>
     
-    <a href="⭐️Commedia_Italiana⭐️.html" class="tile" tabindex="0">⭐️Commedia Italiana⭐️</a>
+      <a class="tile" href="⭐️Disney⭐️.html" tabindex="0">⭐️Disney⭐️</a>
     
-    <a href="⭐️Disney⭐️.html" class="tile" tabindex="0">⭐️Disney⭐️</a>
+      <a class="tile" href="⭐️Drammatici_M-Z⭐️.html" tabindex="0">⭐️Drammatici M-Z⭐️</a>
     
-    <a href="⭐️Drammatici_M-Z⭐️.html" class="tile" tabindex="0">⭐️Drammatici M-Z⭐️</a>
+      <a class="tile" href="⭐️Drammatici_A-L⭐️.html" tabindex="0">⭐️Drammatici A-L⭐️</a>
     
-    <a href="⭐️Drammatici_A-L⭐️.html" class="tile" tabindex="0">⭐️Drammatici A-L⭐️</a>
+      <a class="tile" href="⭐️Fantascienza⭐️.html" tabindex="0">⭐️Fantascienza⭐️</a>
     
-    <a href="⭐️Fantascienza⭐️.html" class="tile" tabindex="0">⭐️Fantascienza⭐️</a>
+      <a class="tile" href="⭐️Cinepanettone⭐️.html" tabindex="0">⭐️Cinepanettone⭐️</a>
     
-    <a href="⭐️Cinepanettone⭐️.html" class="tile" tabindex="0">⭐️Cinepanettone⭐️</a>
+      <a class="tile" href="⭐️Kevin_Costner⭐️.html" tabindex="0">⭐️Kevin Costner⭐️</a>
     
-    <a href="⭐️Kevin_Costner⭐️.html" class="tile" tabindex="0">⭐️Kevin Costner⭐️</a>
+      <a class="tile" href="⭐️Mario_Merola⭐️.html" tabindex="0">⭐️Mario Merola⭐️</a>
     
-    <a href="⭐️Mario_Merola⭐️.html" class="tile" tabindex="0">⭐️Mario Merola⭐️</a>
+      <a class="tile" href="⭐️Tomas_Milian⭐️.html" tabindex="0">⭐️Tomas Milian⭐️</a>
     
-    <a href="⭐️Tomas_Milian⭐️.html" class="tile" tabindex="0">⭐️Tomas Milian⭐️</a>
+      <a class="tile" href="Al_Pacino.html" tabindex="0">Al Pacino</a>
     
-    <a href="Al_Pacino.html" class="tile" tabindex="0">Al Pacino</a>
+      <a class="tile" href="Brad_Pitt.html" tabindex="0">Brad Pitt</a>
     
-    <a href="Brad_Pitt.html" class="tile" tabindex="0">Brad Pitt</a>
+      <a class="tile" href="⭐️Renato_Pozzetto⭐️.html" tabindex="0">⭐️Renato Pozzetto⭐️</a>
     
-    <a href="⭐️Renato_Pozzetto⭐️.html" class="tile" tabindex="0">⭐️Renato Pozzetto⭐️</a>
+      <a class="tile" href="Harrison_Ford.html" tabindex="0">Harrison Ford</a>
     
-    <a href="Harrison_Ford.html" class="tile" tabindex="0">Harrison Ford</a>
+      <a class="tile" href="Arnold_SCHWARZENEGGER.html" tabindex="0">Arnold SCHWARZENEGGER</a>
     
-    <a href="Arnold_SCHWARZENEGGER.html" class="tile" tabindex="0">Arnold SCHWARZENEGGER</a>
+      <a class="tile" href="⭐️Steven_SEAGAL⭐️.html" tabindex="0">⭐️Steven SEAGAL⭐️</a>
     
-    <a href="⭐️Steven_SEAGAL⭐️.html" class="tile" tabindex="0">⭐️Steven SEAGAL⭐️</a>
+      <a class="tile" href="⭐️Will_Smith⭐️.html" tabindex="0">⭐️Will Smith⭐️</a>
     
-    <a href="⭐️Will_Smith⭐️.html" class="tile" tabindex="0">⭐️Will Smith⭐️</a>
+      <a class="tile" href="Jhon_TRAVOLTA.html" tabindex="0">Jhon TRAVOLTA</a>
     
-    <a href="Jhon_TRAVOLTA.html" class="tile" tabindex="0">Jhon TRAVOLTA</a>
+      <a class="tile" href="⭐️Massimo_Troisi⭐️.html" tabindex="0">⭐️Massimo Troisi⭐️</a>
     
-    <a href="⭐️Massimo_Troisi⭐️.html" class="tile" tabindex="0">⭐️Massimo Troisi⭐️</a>
+      <a class="tile" href="Jean_Claude_Van_Damme.html" tabindex="0">Jean Claude Van Damme</a>
     
-    <a href="Jean_Claude_Van_Damme.html" class="tile" tabindex="0">Jean Claude Van Damme</a>
+      <a class="tile" href="⭐️Carlo_Verdone⭐️.html" tabindex="0">⭐️Carlo Verdone⭐️</a>
     
-    <a href="⭐️Carlo_Verdone⭐️.html" class="tile" tabindex="0">⭐️Carlo Verdone⭐️</a>
+      <a class="tile" href="⭐️Paolo_Villaggio⭐️.html" tabindex="0">⭐️Paolo Villaggio⭐️</a>
     
-    <a href="⭐️Paolo_Villaggio⭐️.html" class="tile" tabindex="0">⭐️Paolo Villaggio⭐️</a>
+      <a class="tile" href="⭐️Alvaro_Vitali⭐️.html" tabindex="0">⭐️Alvaro Vitali⭐️</a>
     
-    <a href="⭐️Alvaro_Vitali⭐️.html" class="tile" tabindex="0">⭐️Alvaro Vitali⭐️</a>
+      <a class="tile" href="Denzel_Washington.html" tabindex="0">Denzel Washington</a>
     
-    <a href="Denzel_Washington.html" class="tile" tabindex="0">Denzel Washington</a>
+      <a class="tile" href="⭐️Bud_Spencer⭐️.html" tabindex="0">⭐️Bud Spencer⭐️</a>
     
-    <a href="⭐️Bud_Spencer⭐️.html" class="tile" tabindex="0">⭐️Bud Spencer⭐️</a>
+      <a class="tile" href="⭐️Nicolas_CAGE⭐️.html" tabindex="0">⭐️Nicolas CAGE⭐️</a>
     
-    <a href="⭐️Nicolas_CAGE⭐️.html" class="tile" tabindex="0">⭐️Nicolas CAGE⭐️</a>
+      <a class="tile" href="⭐️Celentano⭐️.html" tabindex="0">⭐️Celentano⭐️</a>
     
-    <a href="⭐️Celentano⭐️.html" class="tile" tabindex="0">⭐️Celentano⭐️</a>
+      <a class="tile" href="⭐️Nino_D'angelo⭐️.html" tabindex="0">⭐️Nino D'angelo⭐️</a>
     
-    <a href="⭐️Nino_D'angelo⭐️.html" class="tile" tabindex="0">⭐️Nino D'angelo⭐️</a>
+      <a class="tile" href="EDUARDO_DE_FILIPPO.html" tabindex="0">EDUARDO DE FILIPPO</a>
     
-    <a href="EDUARDO_DE_FILIPPO.html" class="tile" tabindex="0">EDUARDO DE FILIPPO</a>
+      <a class="tile" href="⭐️Robert_DE_NIRO⭐️.html" tabindex="0">⭐️Robert DE NIRO⭐️</a>
     
-    <a href="⭐️Robert_DE_NIRO⭐️.html" class="tile" tabindex="0">⭐️Robert DE NIRO⭐️</a>
+      <a class="tile" href="⭐️Leonardo_DI_CAPRIO⭐️.html" tabindex="0">⭐️Leonardo DI CAPRIO⭐️</a>
     
-    <a href="⭐️Leonardo_DI_CAPRIO⭐️.html" class="tile" tabindex="0">⭐️Leonardo DI CAPRIO⭐️</a>
+      <a class="tile" href="⭐️Franco_e_Ciccio⭐️.html" tabindex="0">⭐️Franco e Ciccio⭐️</a>
     
-    <a href="⭐️Franco_e_Ciccio⭐️.html" class="tile" tabindex="0">⭐️Franco e Ciccio⭐️</a>
+      <a class="tile" href="⭐️Tom_Hanks⭐️.html" tabindex="0">⭐️Tom Hanks⭐️</a>
     
-    <a href="⭐️Tom_Hanks⭐️.html" class="tile" tabindex="0">⭐️Tom Hanks⭐️</a>
+      <a class="tile" href="⭐️Diego_Abatantuono⭐️.html" tabindex="0">⭐️Diego Abatantuono⭐️</a>
     
-    <a href="⭐️Diego_Abatantuono⭐️.html" class="tile" tabindex="0">⭐️Diego Abatantuono⭐️</a>
+      <a class="tile" href="⭐️Leonardo_Pieraccioni⭐️.html" tabindex="0">⭐️Leonardo Pieraccioni⭐️</a>
     
-    <a href="⭐️Leonardo_Pieraccioni⭐️.html" class="tile" tabindex="0">⭐️Leonardo Pieraccioni⭐️</a>
+      <a class="tile" href="⭐️Alberto_Sordi⭐️.html" tabindex="0">⭐️Alberto Sordi⭐️</a>
     
-    <a href="⭐️Alberto_Sordi⭐️.html" class="tile" tabindex="0">⭐️Alberto Sordi⭐️</a>
+      <a class="tile" href="⭐️Dario_Argento⭐️.html" tabindex="0">⭐️Dario Argento⭐️</a>
     
-    <a href="⭐️Dario_Argento⭐️.html" class="tile" tabindex="0">⭐️Dario Argento⭐️</a>
+      <a class="tile" href="⭐️Toto⭐️.html" tabindex="0">⭐️Toto⭐️</a>
     
-    <a href="⭐️Toto⭐️.html" class="tile" tabindex="0">⭐️Toto⭐️</a>
+      <a class="tile" href="⭐️Lino_Banfi⭐️.html" tabindex="0">⭐️Lino Banfi⭐️</a>
     
-    <a href="⭐️Lino_Banfi⭐️.html" class="tile" tabindex="0">⭐️Lino Banfi⭐️</a>
+      <a class="tile" href="⭐️Aldo_Giovanni_E_Giacomo⭐️.html" tabindex="0">⭐️Aldo Giovanni E Giacomo⭐️</a>
     
-    <a href="⭐️Aldo_Giovanni_E_Giacomo⭐️.html" class="tile" tabindex="0">⭐️Aldo Giovanni E Giacomo⭐️</a>
+      <a class="tile" href="⭐️Tom_CRUISE⭐️.html" tabindex="0">⭐️Tom CRUISE⭐️</a>
     
-    <a href="⭐️Tom_CRUISE⭐️.html" class="tile" tabindex="0">⭐️Tom CRUISE⭐️</a>
+      <a class="tile" href="⭐️Liam_Neeson⭐️.html" tabindex="0">⭐️Liam Neeson⭐️</a>
     
-    <a href="⭐️Liam_Neeson⭐️.html" class="tile" tabindex="0">⭐️Liam Neeson⭐️</a>
+      <a class="tile" href="⭐️Vincenzo_Salemme⭐️.html" tabindex="0">⭐️Vincenzo Salemme⭐️</a>
     
-    <a href="⭐️Vincenzo_Salemme⭐️.html" class="tile" tabindex="0">⭐️Vincenzo Salemme⭐️</a>
+      <a class="tile" href="⭐️Silvester_STALLONE⭐️.html" tabindex="0">⭐️Silvester STALLONE⭐️</a>
     
-    <a href="⭐️Silvester_STALLONE⭐️.html" class="tile" tabindex="0">⭐️Silvester STALLONE⭐️</a>
+      <a class="tile" href="Bruce_Willis.html" tabindex="0">Bruce Willis</a>
     
-    <a href="Bruce_Willis.html" class="tile" tabindex="0">Bruce Willis</a>
+      <a class="tile" href="⭐️Checco_Zalone⭐️.html" tabindex="0">⭐️Checco Zalone⭐️</a>
     
-    <a href="⭐️Checco_Zalone⭐️.html" class="tile" tabindex="0">⭐️Checco Zalone⭐️</a>
+      <a class="tile" href="⭐️Romantici⭐️.html" tabindex="0">⭐️Romantici⭐️</a>
     
-    <a href="⭐️Romantici⭐️.html" class="tile" tabindex="0">⭐️Romantici⭐️</a>
+      <a class="tile" href="⭐️Horror⭐️.html" tabindex="0">⭐️Horror⭐️</a>
     
-    <a href="⭐️Horror⭐️.html" class="tile" tabindex="0">⭐️Horror⭐️</a>
+      <a class="tile" href="⭐️Thriller⭐️.html" tabindex="0">⭐️Thriller⭐️</a>
     
-    <a href="⭐️Thriller⭐️.html" class="tile" tabindex="0">⭐️Thriller⭐️</a>
+      <a class="tile" href="FILM_CATTOLICI.html" tabindex="0">FILM CATTOLICI</a>
     
-    <a href="FILM_CATTOLICI.html" class="tile" tabindex="0">FILM CATTOLICI</a>
+      <a class="tile" href="⭐️Western⭐️.html" tabindex="0">⭐️Western⭐️</a>
     
-    <a href="⭐️Western⭐️.html" class="tile" tabindex="0">⭐️Western⭐️</a>
+      <a class="tile" href="⭐️Tematici_Bambini_⭐️.html" tabindex="0">⭐️Tematici Bambini ⭐️</a>
     
-    <a href="⭐️Tematici_Bambini_⭐️.html" class="tile" tabindex="0">⭐️Tematici Bambini ⭐️</a>
+      <a class="tile" href="⭐️Tematici_Film_⭐️.html" tabindex="0">⭐️Tematici Film ⭐️</a>
     
-    <a href="⭐️Tematici_Film_⭐️.html" class="tile" tabindex="0">⭐️Tematici Film ⭐️</a>
+      <a class="tile" href="007_SAGA.html" tabindex="0">007 SAGA</a>
     
-    <a href="007_SAGA.html" class="tile" tabindex="0">007 SAGA</a>
+      <a class="tile" href="Alien_SAGA.html" tabindex="0">Alien SAGA</a>
     
-    <a href="Alien_SAGA.html" class="tile" tabindex="0">Alien SAGA</a>
+      <a class="tile" href="Il_Signore_Degli_Anelli_SAGA.html" tabindex="0">Il Signore Degli Anelli SAGA</a>
     
-    <a href="Il_Signore_Degli_Anelli_SAGA.html" class="tile" tabindex="0">Il Signore Degli Anelli SAGA</a>
+      <a class="tile" href="Pirati_Dei_Caraibii_SAGA.html" tabindex="0">Pirati Dei Caraibii SAGA</a>
     
-    <a href="Pirati_Dei_Caraibii_SAGA.html" class="tile" tabindex="0">Pirati Dei Caraibii SAGA</a>
+      <a class="tile" href="Harry_Potter_SAGA.html" tabindex="0">Harry Potter SAGA</a>
     
-    <a href="Harry_Potter_SAGA.html" class="tile" tabindex="0">Harry Potter SAGA</a>
+      <a class="tile" href="Michael_Jai_White.html" tabindex="0">Michael Jai White</a>
     
-    <a href="Michael_Jai_White.html" class="tile" tabindex="0">Michael Jai White</a>
+      <a class="tile" href="⭐️XXX_ADULTI_2⭐️.html" tabindex="0">⭐️XXX ADULTI 2⭐️</a>
     
-    <a href="⭐️XXX_ADULTI_2⭐️.html" class="tile" tabindex="0">⭐️XXX ADULTI 2⭐️</a>
+      <a class="tile" href="⭐️XXX⭐️.html" tabindex="0">⭐️XXX⭐️</a>
     
-    <a href="⭐️XXX⭐️.html" class="tile" tabindex="0">⭐️XXX⭐️</a>
+      <a class="tile" href="primafila.html" tabindex="0">primafila</a>
     
-    <a href="primafila.html" class="tile" tabindex="0">primafila</a>
+      <a class="tile" href="CANALE24.html" tabindex="0">CANALE24</a>
     
-    <a href="CANALE24.html" class="tile" tabindex="0">CANALE24</a>
+      <a class="tile" href="PRIMAFILA-SERVER.html" tabindex="0">PRIMAFILA-SERVER</a>
     
-    <a href="PRIMAFILA-SERVER.html" class="tile" tabindex="0">PRIMAFILA-SERVER</a>
+      <a class="tile" href="Programmi_Tv.html" tabindex="0">Programmi Tv</a>
     
-    <a href="Programmi_Tv.html" class="tile" tabindex="0">Programmi Tv</a>
+      <a class="tile" href="Serie_Rai_&_Mediaset.html" tabindex="0">Serie Rai & Mediaset</a>
     
-    <a href="Serie_Rai_&_Mediaset.html" class="tile" tabindex="0">Serie Rai & Mediaset</a>
+      <a class="tile" href="SERIE-TV-A.html" tabindex="0">SERIE-TV-A</a>
     
-    <a href="SERIE-TV-A.html" class="tile" tabindex="0">SERIE-TV-A</a>
+      <a class="tile" href="SERIE-TV-B.html" tabindex="0">SERIE-TV-B</a>
     
-    <a href="SERIE-TV-B.html" class="tile" tabindex="0">SERIE-TV-B</a>
+      <a class="tile" href="SERIE-TV-C.html" tabindex="0">SERIE-TV-C</a>
     
-    <a href="SERIE-TV-C.html" class="tile" tabindex="0">SERIE-TV-C</a>
+      <a class="tile" href="SERIE-TV-D.html" tabindex="0">SERIE-TV-D</a>
     
-    <a href="SERIE-TV-D.html" class="tile" tabindex="0">SERIE-TV-D</a>
+      <a class="tile" href="SERIE-TV-F.html" tabindex="0">SERIE-TV-F</a>
     
-    <a href="SERIE-TV-F.html" class="tile" tabindex="0">SERIE-TV-F</a>
+      <a class="tile" href="SERIE-TV-G.html" tabindex="0">SERIE-TV-G</a>
     
-    <a href="SERIE-TV-G.html" class="tile" tabindex="0">SERIE-TV-G</a>
+      <a class="tile" href="MASSA-DI-SERIE-MISTE.html" tabindex="0">MASSA-DI-SERIE-MISTE</a>
     
-    <a href="MASSA-DI-SERIE-MISTE.html" class="tile" tabindex="0">MASSA-DI-SERIE-MISTE</a>
+      <a class="tile" href="SERIE-TV-E.html" tabindex="0">SERIE-TV-E</a>
     
-    <a href="SERIE-TV-E.html" class="tile" tabindex="0">SERIE-TV-E</a>
+      <a class="tile" href="SERIE-TV-N.html" tabindex="0">SERIE-TV-N</a>
     
-    <a href="SERIE-TV-N.html" class="tile" tabindex="0">SERIE-TV-N</a>
+      <a class="tile" href="SERIE-TV-W.html" tabindex="0">SERIE-TV-W</a>
     
-    <a href="SERIE-TV-W.html" class="tile" tabindex="0">SERIE-TV-W</a>
+      <a class="tile" href="SERIE-TV-Z.html" tabindex="0">SERIE-TV-Z</a>
     
-    <a href="SERIE-TV-Z.html" class="tile" tabindex="0">SERIE-TV-Z</a>
+      <a class="tile" href="SERIE-TV-H.html" tabindex="0">SERIE-TV-H</a>
     
-    <a href="SERIE-TV-H.html" class="tile" tabindex="0">SERIE-TV-H</a>
+      <a class="tile" href="SERIE-TV-I.html" tabindex="0">SERIE-TV-I</a>
     
-    <a href="SERIE-TV-I.html" class="tile" tabindex="0">SERIE-TV-I</a>
+      <a class="tile" href="SERIE-TV-L.html" tabindex="0">SERIE-TV-L</a>
     
-    <a href="SERIE-TV-L.html" class="tile" tabindex="0">SERIE-TV-L</a>
+      <a class="tile" href="SERIE-TV-M.html" tabindex="0">SERIE-TV-M</a>
     
-    <a href="SERIE-TV-M.html" class="tile" tabindex="0">SERIE-TV-M</a>
+      <a class="tile" href="SERIE-TV-0.html" tabindex="0">SERIE-TV-0</a>
     
-    <a href="SERIE-TV-0.html" class="tile" tabindex="0">SERIE-TV-0</a>
+      <a class="tile" href="SERIE-TV-P.html" tabindex="0">SERIE-TV-P</a>
     
-    <a href="SERIE-TV-P.html" class="tile" tabindex="0">SERIE-TV-P</a>
+      <a class="tile" href="SERIE-TV-T.html" tabindex="0">SERIE-TV-T</a>
     
-    <a href="SERIE-TV-T.html" class="tile" tabindex="0">SERIE-TV-T</a>
+      <a class="tile" href="SERIE-TV-S.html" tabindex="0">SERIE-TV-S</a>
     
-    <a href="SERIE-TV-S.html" class="tile" tabindex="0">SERIE-TV-S</a>
+      <a class="tile" href="SERIE-TV-U.html" tabindex="0">SERIE-TV-U</a>
     
-    <a href="SERIE-TV-U.html" class="tile" tabindex="0">SERIE-TV-U</a>
+      <a class="tile" href="SERIE-TV-Y.html" tabindex="0">SERIE-TV-Y</a>
     
-    <a href="SERIE-TV-Y.html" class="tile" tabindex="0">SERIE-TV-Y</a>
+      <a class="tile" href="SERIE-TV-X.html" tabindex="0">SERIE-TV-X</a>
     
-    <a href="SERIE-TV-X.html" class="tile" tabindex="0">SERIE-TV-X</a>
+      <a class="tile" href="SERIE-TV-V.html" tabindex="0">SERIE-TV-V</a>
     
-    <a href="SERIE-TV-V.html" class="tile" tabindex="0">SERIE-TV-V</a>
+      <a class="tile" href="SERIE-TV-Q.html" tabindex="0">SERIE-TV-Q</a>
     
-    <a href="SERIE-TV-Q.html" class="tile" tabindex="0">SERIE-TV-Q</a>
+      <a class="tile" href="SERIE-TV-R.html" tabindex="0">SERIE-TV-R</a>
     
-    <a href="SERIE-TV-R.html" class="tile" tabindex="0">SERIE-TV-R</a>
+      <a class="tile" href="NUOVI-INSERITI-2024.html" tabindex="0">NUOVI-INSERITI-2024</a>
     
-    <a href="NUOVI-INSERITI-2024.html" class="tile" tabindex="0">NUOVI-INSERITI-2024</a>
+      <a class="tile" href="Serie_Discovery_Plus.html" tabindex="0">Serie Discovery Plus</a>
     
-    <a href="Serie_Discovery_Plus.html" class="tile" tabindex="0">Serie Discovery Plus</a>
-    
-    <a href="Serie_Disney.html" class="tile" tabindex="0">Serie Disney</a>
+      <a class="tile" href="Serie_Disney.html" tabindex="0">Serie Disney</a>
     
   </div>
 </body>
