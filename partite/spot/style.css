@@ -5,7 +5,7 @@ html, body {
   background-color: #1a1a1a;
   overflow-x: hidden;
   font-family: 'Open Sans', sans-serif;
-  
+
   /* Safe area inset support (iOS notch) */
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
@@ -65,41 +65,46 @@ h1 {
   font-size: 0.95em;
 }
 
-/* 📱 Portrait */
+/* 📱 Portrait: solo per homepage */
 @media screen and (orientation: portrait) {
-  .griglia {
+  body#home .griglia {
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   }
 
-  .canale img {
+  body#home .canale img {
     height: 100px;
   }
 
-  .canale p {
+  body#home .canale p {
     font-size: 0.9em;
   }
 
-  body {
+  body#home {
     padding-left: calc(env(safe-area-inset-left) + 15px);
     padding-right: calc(env(safe-area-inset-right) + 15px);
   }
+
+  body#home h1 {
+    font-size: 1.4em;
+    margin: 30px 10px;
+  }
 }
 
-/* 🖼️ Landscape */
+/* 🖼️ Landscape: solo per homepage */
 @media screen and (orientation: landscape) {
-  .griglia {
+  body#home .griglia {
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
 
-  .canale img {
+  body#home .canale img {
     height: 140px;
   }
 
-  .canale p {
+  body#home .canale p {
     font-size: 1em;
   }
 
-  body {
+  body#home {
     padding-left: calc(env(safe-area-inset-left) + 30px);
     padding-right: calc(env(safe-area-inset-right) + 30px);
   }
