@@ -3,184 +3,68 @@
 <head>
   <meta charset="UTF-8">
   <title>Ricerca Canali</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body {
-      background: #111;
-      color: white;
-      font-family: sans-serif;
-      padding: 30px;
-      text-align: center;
-    }
-
-    input, select {
-      padding: 10px;
-      font-size: 18px;
-      margin: 10px;
-      border-radius: 5px;
-      border: 1px solid #444;
-      background: #222;
-      color: #eee;
-    }
-
-    .results {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 20px;
-    }
-
-    .result {
-      background: #222;
-      border-radius: 8px;
-      padding: 15px;
-      margin-bottom: 15px;
-      width: 95%;
-      max-width: 600px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 15px;
-      transition: 0.3s;
-    }
-
-    .result:hover {
-      background: #333;
-      transform: scale(1.01);
-    }
-
-    .result img.logo {
-      width: 64px;
-      height: 64px;
-      object-fit: contain;
-      background: #000;
-      border-radius: 4px;
-    }
-
-    .result .details {
-      flex-grow: 1;
-      min-width: 200px;
-      text-align: left;
-    }
-
-    .result .details h3 {
-      margin: 0;
-      font-size: 18px;
-      color: #0af;
-    }
-
-    .result .details p {
-      margin: 4px 0;
-      font-size: 14px;
-      color: #ccc;
-    }
-
-    .result a.btn {
-      background: #0af;
-      color: #000;
-      padding: 8px 14px;
-      border-radius: 4px;
-      text-decoration: none;
-      font-weight: bold;
-      margin-left: auto;
-    }
-
-    .no-results {
-      color: #999;
-      margin-top: 20px;
-    }
-
-    @media (max-width: 600px) {
-      .result {
-        flex-direction: column;
-        text-align: center;
-      }
-      .result .details {
-        text-align: center;
-      }
-      .result a.btn {
-        margin: 10px auto 0;
-      }
-    }
+    body { background:#111; color:white; font-family:sans-serif; text-align:center; padding:20px; }
+    select, input { margin:10px; padding:10px; background:#222; color:#eee; border:1px solid #555; border-radius:5px; font-size:16px; }
+    .results { margin-top:20px; display:flex; flex-direction:column; align-items:center; }
+    .result { background:#222; padding:15px; border-radius:8px; margin-bottom:15px; max-width:600px; width:90%; box-shadow:0 2px 8px rgba(0,0,0,0.4); color:#ddd; }
+    .result h3 { margin:0 0 5px; color:#0af; font-size:18px; }
+    .result a { background:#0af; color:#000; text-decoration:none; font-weight:bold; padding:6px 10px; border-radius:4px; display:inline-block; margin-top:8px; }
   </style>
 </head>
 <body>
-  <h1>🔎 Cerca un Canale</h1>
-  <input type="text" id="search" placeholder="Es. Calcio, Viva a Vida..." />
-  <select id="groupFilter">
-    <option value="">🎯 Tutti i gruppi</option>
-  </select>
+  <h1>📺 Ricerca Canali</h1>
 
+  <select id="groupSelect"><option value="">🎯 Scegli un gruppo</option></select>
+  <input type="text" id="searchInput" placeholder="🔎 Cerca nome canale..." />
   <div class="results" id="results"></div>
-  <p class="no-results" id="noResults" style="display:none;">😢 Nessun canale trovato</p>
-  <br>
-  <a href="index.html">⟵ Torna alla home</a>
 
   <script>
-    let data = [];
-    let groups = new Set();
+    const select = document.getElementById('groupSelect');
+    const searchInput = document.getElementById('searchInput');
+    const resultsDiv = document.getElementById('results');
+    let canali = [];
 
-    // Carica i canali
-    fetch('https://raw.githubusercontent.com/nero081/loghi/refs/heads/main/partite/spot/search.json')
+    // carica lista dei gruppi
+    fetch('./gruppi_json/gruppi.json')
       .then(res => res.json())
-      .then(json => {
-        data = json;
-        json.forEach(item => groups.add(item.group));
-        populateGroups();
-        renderResults();
+      .then(gruppi => {
+        gruppi.forEach(g => {
+          const opt = document.createElement('option');
+          opt.value = g;
+          opt.textContent = g.replace(/_/g, ' ').replace(/alberto sordi/i, '⭐️Alberto Sordi⭐️');
+          select.appendChild(opt);
+        });
       });
 
-    function populateGroups() {
-      const filter = document.getElementById('groupFilter');
-      [...groups].sort().forEach(group => {
-        const opt = document.createElement('option');
-        opt.value = group;
-        opt.textContent = group;
-        filter.appendChild(opt);
-      });
-    }
+    select.addEventListener('change', () => {
+      const gruppo = select.value;
+      if (!gruppo) return;
+      fetch(`./gruppi_json/${gruppo}.json`)
+        .then(res => res.json())
+        .then(json => {
+          canali = json;
+          renderResults();
+        });
+    });
 
-    document.getElementById('search').addEventListener('input', renderResults);
-    document.getElementById('groupFilter').addEventListener('change', renderResults);
+    searchInput.addEventListener('input', renderResults);
 
     function renderResults() {
-      const term = document.getElementById('search').value.toLowerCase();
-      const groupSel = document.getElementById('groupFilter').value;
-      const list = document.getElementById('results');
-      const noResults = document.getElementById('noResults');
+      const q = searchInput.value.toLowerCase();
+      resultsDiv.innerHTML = '';
+      const filtrati = canali.filter(c => c.name.toLowerCase().includes(q));
 
-      list.innerHTML = '';
-      noResults.style.display = 'none';
-
-      const filtered = data.filter(item => {
-        const matchTerm = item.name.toLowerCase().includes(term) || item.group.toLowerCase().includes(term);
-        const matchGroup = !groupSel || item.group === groupSel;
-        return matchTerm && matchGroup;
-      });
-
-      if (filtered.length === 0) {
-        noResults.style.display = 'block';
+      if (filtrati.length === 0) {
+        resultsDiv.innerHTML = '<p style="color:#888;">😢 Nessun canale trovato</p>';
         return;
       }
 
-      filtered.sort((a, b) => a.name.localeCompare(b.name));
-
-      filtered.forEach(item => {
+      filtrati.forEach(c => {
         const div = document.createElement('div');
         div.className = 'result';
-
-        const logo = item.logo || 'https://via.placeholder.com/64x64?text=📺'; // fallback logo
-
-        div.innerHTML = `
-          <img src="${logo}" alt="${item.name}" class="logo" />
-          <div class="details">
-            <h3>${item.name}</h3>
-            <p>📁 ${item.group}</p>
-          </div>
-          <a href="${item.url}" target="_blank" class="btn">Guarda</a>
-        `;
-        list.appendChild(div);
+        div.innerHTML = `<h3>${c.name}</h3><p>🎯 ${c.group}</p><a href="${c.url}" target="_blank">Guarda</a>`;
+        resultsDiv.appendChild(div);
       });
     }
   </script>
