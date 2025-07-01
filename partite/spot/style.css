@@ -1,14 +1,22 @@
-body {
-  background-color: #1a1a1a;
-  color: #fff;
-  font-family: 'Open Sans', sans-serif;
+html, body {
   margin: 0;
-  padding: 20px;
+  padding: 0;
+  height: 100%;
+  background-color: #1a1a1a;
+  overflow-x: hidden;
+  font-family: 'Open Sans', sans-serif;
+  
+  /* Safe area inset support (iOS notch) */
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
 }
 
 h1 {
   text-align: center;
-  margin-bottom: 40px;
+  margin: 40px 0;
+  color: #fff;
 }
 
 .griglia {
@@ -16,6 +24,7 @@ h1 {
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 20px;
   justify-items: center;
+  padding: 0 20px;
   transition: all 0.3s ease;
 }
 
@@ -71,7 +80,8 @@ h1 {
   }
 
   body {
-    padding: 15px;
+    padding-left: calc(env(safe-area-inset-left) + 15px);
+    padding-right: calc(env(safe-area-inset-right) + 15px);
   }
 }
 
@@ -90,7 +100,8 @@ h1 {
   }
 
   body {
-    padding: 30px;
+    padding-left: calc(env(safe-area-inset-left) + 30px);
+    padding-right: calc(env(safe-area-inset-right) + 30px);
   }
 }
 
@@ -103,4 +114,11 @@ h1 {
   color: #aaa;
   text-decoration: none;
   font-size: 16px;
+}
+
+/* 💡 Forza dark mode anche se il sistema è in light */
+@media (prefers-color-scheme: dark) {
+  html, body {
+    background-color: #1a1a1a;
+  }
 }
