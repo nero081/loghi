@@ -76,17 +76,19 @@ h1 {
   body#home .griglia {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 24px;
-    padding: 20px 40px;
-    justify-content: center;
+    gap: 30px;
+    padding: 30px 40px;
+    justify-items: center;
   }
 
   body#home .tile {
-    max-width: 240px;
-    width: 100%;
+    width: auto;
+    max-width: 200px;
+    min-width: 160px;
     padding: 18px;
     font-size: 1.05em;
   }
 }
+
 
 
