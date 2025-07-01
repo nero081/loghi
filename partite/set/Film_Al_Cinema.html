@@ -1,58 +1,169 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Film Al Cinema</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .griglia {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+      justify-items: center;
+    }
+
+    .canale {
+      background-color: #292929;
+      border-radius: 10px;
+      text-align: center;
+      color: #fff;
+      padding: 15px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .canale img {
+      width: 100%;
+      height: 120px;
+      object-fit: contain;
+      border-radius: 8px;
+      background-color: #111;
+      margin-bottom: 10px;
+    }
+
+    .canale p {
+      margin: 0;
+      font-size: 0.95em;
+    }
+
+    .canale:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+
+    .canale:focus {
+      outline: 2px solid #fff;
+      background-color: #3a3a3a;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    @media screen and (orientation: portrait) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      }
+
+      .canale img {
+        height: 100px;
+      }
+
+      .canale p {
+        font-size: 0.9em;
+      }
+
+      body {
+        padding: 15px;
+      }
+    }
+
+    @media screen and (orientation: landscape) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .canale img {
+        height: 140px;
+      }
+
+      .canale p {
+        font-size: 1em;
+      }
+
+      body {
+        padding: 30px;
+      }
+    }
+
+    .back {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .back a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    .back a:hover {
+      color: #fff;
+    }
+  </style>
 </head>
 <body>
   <h1>Film Al Cinema</h1>
   <div class="griglia">
     
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1226406%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/lJdKd3ArMzIEYeZRd5TRyfXTY6z.jpg" alt="Colpi d'amore (2025) [Azione Commedia Romance] ⭐5.9">
-    <p>Colpi d'amore (2025) [Azione Commedia Romance] ⭐5.9</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1245165%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/oAt2TRbE5061rx1ubkd7mLGz4DS.jpg" alt="Viaggio di Maturità: Mallorca (2025) [Commedia] ⭐5.4">
-    <p>Viaggio di Maturità: Mallorca (2025) [Commedia] ⭐5.4</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1126166%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/eih55jl5HUmwjM3tS7Ys67W7OKf.jpg" alt="Flight Risk - Trappola ad alta quota (2025) [Azione Thriller] ⭐6.1">
-    <p>Flight Risk - Trappola ad alta quota (2025) [Azione Thriller] ⭐6.1</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1195506%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/gzHJSn8I1QxGScttymjbTifloN0.jpg" alt="Mr. Morfina (2025) [Azione Commedia Thriller] ⭐6.9">
-    <p>Mr. Morfina (2025) [Azione Commedia Thriller] ⭐6.9</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1151244%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/6buo5I8pAEIXIa8r9oPna9viNZ3.jpg" alt="Vermiglio (2024) [Dramma] ⭐7.1">
-    <p>Vermiglio (2024) [Dramma] ⭐7.1</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/402431%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/3al2ouBCaZN5UcCNr8HKSiNji28.jpg" alt="Wicked (2024) [Dramma Romance Fantasy] ⭐6.9">
-    <p>Wicked (2024) [Dramma Romance Fantasy] ⭐6.9</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1011985%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/hXx9YEJzRhronB6jtfpzVh19WhY.jpg" alt="Kung Fu Panda 4 (2024) [Animazione Famiglia Azione Commedia Avventura Fantasy] ⭐7.1">
-    <p>Kung Fu Panda 4 (2024) [Animazione Famiglia Azione Commedia Avventura Fantasy] ⭐7.1</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/4348%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/bA4gEvNLIpwVV1JaU4S4yueLjP8.jpg" alt="Orgoglio e pregiudizio (2005) [Dramma Romance] ⭐8.1">
-    <p>Orgoglio e pregiudizio (2005) [Dramma Romance] ⭐8.1</p>
-  </a>
-	
-
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1226406%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/lJdKd3ArMzIEYeZRd5TRyfXTY6z.jpg" alt="Colpi d'amore (2025) [Azione Commedia Romance] ⭐5.9" />
+      <p>Colpi d'amore (2025) [Azione Commedia Romance] ⭐5.9</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1245165%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/oAt2TRbE5061rx1ubkd7mLGz4DS.jpg" alt="Viaggio di Maturità: Mallorca (2025) [Commedia] ⭐5.4" />
+      <p>Viaggio di Maturità: Mallorca (2025) [Commedia] ⭐5.4</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1126166%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/eih55jl5HUmwjM3tS7Ys67W7OKf.jpg" alt="Flight Risk - Trappola ad alta quota (2025) [Azione Thriller] ⭐6.1" />
+      <p>Flight Risk - Trappola ad alta quota (2025) [Azione Thriller] ⭐6.1</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1195506%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/gzHJSn8I1QxGScttymjbTifloN0.jpg" alt="Mr. Morfina (2025) [Azione Commedia Thriller] ⭐6.9" />
+      <p>Mr. Morfina (2025) [Azione Commedia Thriller] ⭐6.9</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1151244%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/6buo5I8pAEIXIa8r9oPna9viNZ3.jpg" alt="Vermiglio (2024) [Dramma] ⭐7.1" />
+      <p>Vermiglio (2024) [Dramma] ⭐7.1</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/402431%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/3al2ouBCaZN5UcCNr8HKSiNji28.jpg" alt="Wicked (2024) [Dramma Romance Fantasy] ⭐6.9" />
+      <p>Wicked (2024) [Dramma Romance Fantasy] ⭐6.9</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1011985%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/hXx9YEJzRhronB6jtfpzVh19WhY.jpg" alt="Kung Fu Panda 4 (2024) [Animazione Famiglia Azione Commedia Avventura Fantasy] ⭐7.1" />
+      <p>Kung Fu Panda 4 (2024) [Animazione Famiglia Azione Commedia Avventura Fantasy] ⭐7.1</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/4348%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/bA4gEvNLIpwVV1JaU4S4yueLjP8.jpg" alt="Orgoglio e pregiudizio (2005) [Dramma Romance] ⭐8.1" />
+      <p>Orgoglio e pregiudizio (2005) [Dramma Romance] ⭐8.1</p>
+    </a>
+    
   </div>
-  <div style="text-align: center; margin-top: 30px;">
-    <a href="index.html" style="color: #aaa;">⟵ Torna alla home</a>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
   </div>
 </body>
 </html>

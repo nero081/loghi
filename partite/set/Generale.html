@@ -1,53 +1,164 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Generale</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .griglia {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+      justify-items: center;
+    }
+
+    .canale {
+      background-color: #292929;
+      border-radius: 10px;
+      text-align: center;
+      color: #fff;
+      padding: 15px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .canale img {
+      width: 100%;
+      height: 120px;
+      object-fit: contain;
+      border-radius: 8px;
+      background-color: #111;
+      margin-bottom: 10px;
+    }
+
+    .canale p {
+      margin: 0;
+      font-size: 0.95em;
+    }
+
+    .canale:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+
+    .canale:focus {
+      outline: 2px solid #fff;
+      background-color: #3a3a3a;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    @media screen and (orientation: portrait) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      }
+
+      .canale img {
+        height: 100px;
+      }
+
+      .canale p {
+        font-size: 0.9em;
+      }
+
+      body {
+        padding: 15px;
+      }
+    }
+
+    @media screen and (orientation: landscape) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .canale img {
+        height: 140px;
+      }
+
+      .canale p {
+        font-size: 1em;
+      }
+
+      body {
+        padding: 30px;
+      }
+    }
+
+    .back {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .back a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    .back a:hover {
+      color: #fff;
+    }
+  </style>
 </head>
 <body>
   <h1>Generale</h1>
   <div class="griglia">
     
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1234352%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/pYidYKe9L71m6RTjN9wRloDHV8C.jpg" alt="I Delitti del BarLume - La Girata (2024) [Generale] ⭐6.2">
-    <p>I Delitti del BarLume - La Girata (2024) [Generale] ⭐6.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1201469%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/gVV9mvFNcCEQc6TdmZxavPviZHL.jpg" alt="The Great Adventure: A Journey Inside Africa Eco Race 2022 (2023) [Generale] ⭐0.0">
-    <p>The Great Adventure: A Journey Inside Africa Eco Race 2022 (2023) [Generale] ⭐0.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/970851%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/ibpQxfU7eQSsfZ0MJQxN27MHJHt.jpg" alt="La nuova scuola genovese (2022) [Generale] ⭐7.8">
-    <p>La nuova scuola genovese (2022) [Generale] ⭐7.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/738511%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/nK72ygJXUWNpCIyx5UneNC2Tqo.jpg" alt="I Am Fatou (2020) [Generale] ⭐7.0">
-    <p>I Am Fatou (2020) [Generale] ⭐7.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1080713%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/iwk4QRu4QPpVamvSOowEXRqjNdf.jpg" alt="Pandora (2016) [Generale] ⭐9.0">
-    <p>Pandora (2016) [Generale] ⭐9.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/125350%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/akZiwo3beX7JjpUvGX1CHypxrFj.jpg" alt="UFC 150: Henderson vs. Edgar II (2012) [Generale] ⭐9.2">
-    <p>UFC 150: Henderson vs. Edgar II (2012) [Generale] ⭐9.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/254389%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/gImWD4TQa5V0k9oXTYxgjz9ooz7.jpg" alt="Anus Beauté (2000) [Generale] ⭐7.5">
-    <p>Anus Beauté (2000) [Generale] ⭐7.5</p>
-  </a>
-	
-
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1234352%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/pYidYKe9L71m6RTjN9wRloDHV8C.jpg" alt="I Delitti del BarLume - La Girata (2024) [Generale] ⭐6.2" />
+      <p>I Delitti del BarLume - La Girata (2024) [Generale] ⭐6.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1201469%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/gVV9mvFNcCEQc6TdmZxavPviZHL.jpg" alt="The Great Adventure: A Journey Inside Africa Eco Race 2022 (2023) [Generale] ⭐0.0" />
+      <p>The Great Adventure: A Journey Inside Africa Eco Race 2022 (2023) [Generale] ⭐0.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/970851%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/ibpQxfU7eQSsfZ0MJQxN27MHJHt.jpg" alt="La nuova scuola genovese (2022) [Generale] ⭐7.8" />
+      <p>La nuova scuola genovese (2022) [Generale] ⭐7.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/738511%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/nK72ygJXUWNpCIyx5UneNC2Tqo.jpg" alt="I Am Fatou (2020) [Generale] ⭐7.0" />
+      <p>I Am Fatou (2020) [Generale] ⭐7.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1080713%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/iwk4QRu4QPpVamvSOowEXRqjNdf.jpg" alt="Pandora (2016) [Generale] ⭐9.0" />
+      <p>Pandora (2016) [Generale] ⭐9.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/125350%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/akZiwo3beX7JjpUvGX1CHypxrFj.jpg" alt="UFC 150: Henderson vs. Edgar II (2012) [Generale] ⭐9.2" />
+      <p>UFC 150: Henderson vs. Edgar II (2012) [Generale] ⭐9.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/254389%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/gImWD4TQa5V0k9oXTYxgjz9ooz7.jpg" alt="Anus Beauté (2000) [Generale] ⭐7.5" />
+      <p>Anus Beauté (2000) [Generale] ⭐7.5</p>
+    </a>
+    
   </div>
-  <div style="text-align: center; margin-top: 30px;">
-    <a href="index.html" style="color: #aaa;">⟵ Torna alla home</a>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
   </div>
 </body>
 </html>

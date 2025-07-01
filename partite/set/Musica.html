@@ -1,178 +1,289 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Musica</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .griglia {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+      justify-items: center;
+    }
+
+    .canale {
+      background-color: #292929;
+      border-radius: 10px;
+      text-align: center;
+      color: #fff;
+      padding: 15px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .canale img {
+      width: 100%;
+      height: 120px;
+      object-fit: contain;
+      border-radius: 8px;
+      background-color: #111;
+      margin-bottom: 10px;
+    }
+
+    .canale p {
+      margin: 0;
+      font-size: 0.95em;
+    }
+
+    .canale:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+
+    .canale:focus {
+      outline: 2px solid #fff;
+      background-color: #3a3a3a;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    @media screen and (orientation: portrait) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      }
+
+      .canale img {
+        height: 100px;
+      }
+
+      .canale p {
+        font-size: 0.9em;
+      }
+
+      body {
+        padding: 15px;
+      }
+    }
+
+    @media screen and (orientation: landscape) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .canale img {
+        height: 140px;
+      }
+
+      .canale p {
+        font-size: 1em;
+      }
+
+      body {
+        padding: 30px;
+      }
+    }
+
+    .back {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .back a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    .back a:hover {
+      color: #fff;
+    }
+  </style>
 </head>
 <body>
   <h1>Musica</h1>
   <div class="griglia">
     
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1075456%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/gijoj4mBrTo3PBgL3jXrfnNDZVJ.jpg" alt="O'Dessa (2025) [Musica Dramma Fantascienza] ⭐5.8">
-    <p>O'Dessa (2025) [Musica Dramma Fantascienza] ⭐5.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/799766%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/bBwQX0Dn4b6riK1pNNYcmATaSQ5.jpg" alt="Better Man (2024) [Musica Dramma] ⭐7.8">
-    <p>Better Man (2024) [Musica Dramma] ⭐7.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1397314%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/c44zM4fWJ55ImcEnqf7UL4dsCSB.jpg" alt="Avicii - My Last Show (2024) [Musica Documentario] ⭐7.5">
-    <p>Avicii - My Last Show (2024) [Musica Documentario] ⭐7.5</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1063549%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/v4mk7RY5z4l3ILOMMOcrG29vR1o.jpg" alt="Gaga Chromatica Ball (2024) [Musica] ⭐8.3">
-    <p>Gaga Chromatica Ball (2024) [Musica] ⭐8.3</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/802219%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/a8kjzaTY6SSqTf0iCcgpd2WiTTW.jpg" alt="Bob Marley - One love (2024) [Musica Storia Dramma] ⭐6.7">
-    <p>Bob Marley - One love (2024) [Musica Storia Dramma] ⭐6.7</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1160164%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/jf3YO8hOqGHCupsREf5qymYq1n.jpg" alt="TAYLOR SWIFT | THE ERAS TOUR (2023) [Musica] ⭐8.2">
-    <p>TAYLOR SWIFT | THE ERAS TOUR (2023) [Musica] ⭐8.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/812635%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/iLhp2fqA0VDIhnC20QHDnw5Yrcf.jpg" alt="Chevalier (2023) [Musica Dramma Storia] ⭐6.3">
-    <p>Chevalier (2023) [Musica Dramma Storia] ⭐6.3</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1123287%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/fVC6z68GbLHqf4LCgJUGfArlzXb.jpg" alt="Milli Vanilli (2023) [Musica Documentario] ⭐7.2">
-    <p>Milli Vanilli (2023) [Musica Documentario] ⭐7.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1059811%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/pq2p8ovf8PZps2HafvJaLrZK8gS.jpg" alt="Flora and Son (2023) [Musica Commedia Dramma] ⭐6.9">
-    <p>Flora and Son (2023) [Musica Commedia Dramma] ⭐6.9</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/929569%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/9xvEhZZMOmLIkqe4khrtF5TkOnO.jpg" alt="World's Best (2023) [Musica Famiglia Commedia] ⭐6.2">
-    <p>World's Best (2023) [Musica Famiglia Commedia] ⭐6.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/668047%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/6zhEoFyRNJxgoy7sPrL7kG4ZosD.jpg" alt="Press Play - La musica della nostra vita (2022) [Musica Romance Fantascienza] ⭐6.6">
-    <p>Press Play - La musica della nostra vita (2022) [Musica Romance Fantascienza] ⭐6.6</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/939790%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/v8tVvNTIDL2KP7a5iLDtqF2NhNL.jpg" alt="OLIVIA RODRIGO: driving home 2 u (a SOUR film) (2022) [Musica Documentario] ⭐7.8">
-    <p>OLIVIA RODRIGO: driving home 2 u (a SOUR film) (2022) [Musica Documentario] ⭐7.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/498402%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/nluokoaueV5by7B15ZE4KEsjMTR.jpg" alt="Aline - La voce dell'amore (2020) [Musica Commedia Dramma Famiglia] ⭐6.6">
-    <p>Aline - La voce dell'amore (2020) [Musica Commedia Dramma Famiglia] ⭐6.6</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/768410%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/kgH1sTqrKH3rjAXPo1kZ6kwypM.jpg" alt="Shawn Mendes: Live in Concert (2020) [Musica Documentario] ⭐8.0">
-    <p>Shawn Mendes: Live in Concert (2020) [Musica Documentario] ⭐8.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/768141%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/4iroJUn8YuQBekDwGy7r61YHXiu.jpg" alt="Folklore: The Long Pond Studio Sessions (2020) [Musica Documentario] ⭐8.5">
-    <p>Folklore: The Long Pond Studio Sessions (2020) [Musica Documentario] ⭐8.5</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/719643%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/2u1cyQgBpWWypISdbUDCu2hasGV.jpg" alt="Black Is King (2020) [Musica] ⭐7.3">
-    <p>Black Is King (2020) [Musica] ⭐7.3</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/593680%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/6DQvNzUFjKj3pfbBNsMl1UJKTzp.jpg" alt="Step Up - Year of the Dance (2019) [Musica Dramma] ⭐6.1">
-    <p>Step Up - Year of the Dance (2019) [Musica Dramma] ⭐6.1</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/440918%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/pR1Z8ZXXmqndNEVyM4ZB1HwpyV2.jpg" alt="Teen Spirit - A un passo dal sogno (2019) [Musica Dramma] ⭐6.0">
-    <p>Teen Spirit - A un passo dal sogno (2019) [Musica Dramma] ⭐6.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/438373%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/hDyxp7NZstZcq6t1CGOdnvqZ9sq.jpg" alt="Chi canterà per te? (2018) [Musica Dramma Mistero] ⭐7.1">
-    <p>Chi canterà per te? (2018) [Musica Dramma Mistero] ⭐7.1</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/424694%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/guQaXtD3hyCqAkX9AdjPALlaR1A.jpg" alt="Bohemian Rhapsody (2018) [Musica Dramma] ⭐8.0">
-    <p>Bohemian Rhapsody (2018) [Musica Dramma] ⭐8.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/479626%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/wLUMbMGCvc4YxhWzJBnhdgO1tSw.jpg" alt="Avicii - La vera storia (2017) [Musica Documentario] ⭐8.0">
-    <p>Avicii - La vera storia (2017) [Musica Documentario] ⭐8.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/468302%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/49q4CTKlHX5Y8pzSsr27akt6lhR.jpg" alt="Ammore e malavita (2017) [Musica Commedia Romance Crime] ⭐6.6">
-    <p>Ammore e malavita (2017) [Musica Commedia Romance Crime] ⭐6.6</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/382399%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/qLDidtRPwG3OyCPgKKulZRUfiEm.jpg" alt="New York Academy (2016) [Musica Romance Dramma] ⭐7.1">
-    <p>New York Academy (2016) [Musica Romance Dramma] ⭐7.1</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/85373%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/87BynMDsMwCmjn33zzSrzVjpZ7f.jpg" alt="StreetDance 2 (2012) [Musica Romance Dramma] ⭐6.2">
-    <p>StreetDance 2 (2012) [Musica Romance Dramma] ⭐6.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/41592%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/7SsiRWEeZKWGMa5I8zMSMBY1QWN.jpg" alt="StreetDance 3D (2010) [Musica Romance Dramma] ⭐6.5">
-    <p>StreetDance 3D (2010) [Musica Romance Dramma] ⭐6.5</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/21724%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/zP4mmgmt0OzIz7Cjk4dgxG0SZJA.jpg" alt="Dance Flick (2009) [Musica Commedia Azione] ⭐4.9">
-    <p>Dance Flick (2009) [Musica Commedia Azione] ⭐4.9</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/14871%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/5J2HY98mKjMlu1TZTsOPUyJQapk.jpg" alt="Ballare per un sogno (2008) [Musica Romance Dramma Commedia] ⭐6.0">
-    <p>Ballare per un sogno (2008) [Musica Romance Dramma Commedia] ⭐6.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/13655%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/7IXMqZnwccogptThay3togKIFWw.jpg" alt="Camp Rock (2008) [Musica Commedia Dramma Romance Famiglia televisione film] ⭐6.4">
-    <p>Camp Rock (2008) [Musica Commedia Dramma Romance Famiglia televisione film] ⭐6.4</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/67915%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/rPem4ClrBg0tYMdWzTHLIsn68ZK.jpg" alt="Indochine: Alice et June Tour (2007) [Musica] ⭐8.0">
-    <p>Indochine: Alice et June Tour (2007) [Musica] ⭐8.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/9762%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/fmw52kXk2kN8AQil7tgOD41gt4Q.jpg" alt="Step Up (2006) [Musica Dramma Romance Crime] ⭐6.9">
-    <p>Step Up (2006) [Musica Dramma Romance Crime] ⭐6.9</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/203697%3Flang%3Dit" target="_blank">
-    <img src="" alt="Iona - Live in London - Special Features DVD2 (2004) [Musica Documentario] ⭐7.0">
-    <p>Iona - Live in London - Special Features DVD2 (2004) [Musica Documentario] ⭐7.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/12508%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/uf9arCN27SnDzTHLr9RdlfnVq8j.jpg" alt="Rock Star (2001) [Musica Dramma Commedia] ⭐6.7">
-    <p>Rock Star (2001) [Musica Dramma Commedia] ⭐6.7</p>
-  </a>
-	
-
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1075456%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/gijoj4mBrTo3PBgL3jXrfnNDZVJ.jpg" alt="O'Dessa (2025) [Musica Dramma Fantascienza] ⭐5.8" />
+      <p>O'Dessa (2025) [Musica Dramma Fantascienza] ⭐5.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/799766%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/bBwQX0Dn4b6riK1pNNYcmATaSQ5.jpg" alt="Better Man (2024) [Musica Dramma] ⭐7.8" />
+      <p>Better Man (2024) [Musica Dramma] ⭐7.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1397314%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/c44zM4fWJ55ImcEnqf7UL4dsCSB.jpg" alt="Avicii - My Last Show (2024) [Musica Documentario] ⭐7.5" />
+      <p>Avicii - My Last Show (2024) [Musica Documentario] ⭐7.5</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1063549%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/v4mk7RY5z4l3ILOMMOcrG29vR1o.jpg" alt="Gaga Chromatica Ball (2024) [Musica] ⭐8.3" />
+      <p>Gaga Chromatica Ball (2024) [Musica] ⭐8.3</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/802219%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/a8kjzaTY6SSqTf0iCcgpd2WiTTW.jpg" alt="Bob Marley - One love (2024) [Musica Storia Dramma] ⭐6.7" />
+      <p>Bob Marley - One love (2024) [Musica Storia Dramma] ⭐6.7</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1160164%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/jf3YO8hOqGHCupsREf5qymYq1n.jpg" alt="TAYLOR SWIFT | THE ERAS TOUR (2023) [Musica] ⭐8.2" />
+      <p>TAYLOR SWIFT | THE ERAS TOUR (2023) [Musica] ⭐8.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/812635%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/iLhp2fqA0VDIhnC20QHDnw5Yrcf.jpg" alt="Chevalier (2023) [Musica Dramma Storia] ⭐6.3" />
+      <p>Chevalier (2023) [Musica Dramma Storia] ⭐6.3</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1123287%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/fVC6z68GbLHqf4LCgJUGfArlzXb.jpg" alt="Milli Vanilli (2023) [Musica Documentario] ⭐7.2" />
+      <p>Milli Vanilli (2023) [Musica Documentario] ⭐7.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1059811%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/pq2p8ovf8PZps2HafvJaLrZK8gS.jpg" alt="Flora and Son (2023) [Musica Commedia Dramma] ⭐6.9" />
+      <p>Flora and Son (2023) [Musica Commedia Dramma] ⭐6.9</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/929569%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/9xvEhZZMOmLIkqe4khrtF5TkOnO.jpg" alt="World's Best (2023) [Musica Famiglia Commedia] ⭐6.2" />
+      <p>World's Best (2023) [Musica Famiglia Commedia] ⭐6.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/668047%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/6zhEoFyRNJxgoy7sPrL7kG4ZosD.jpg" alt="Press Play - La musica della nostra vita (2022) [Musica Romance Fantascienza] ⭐6.6" />
+      <p>Press Play - La musica della nostra vita (2022) [Musica Romance Fantascienza] ⭐6.6</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/939790%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/v8tVvNTIDL2KP7a5iLDtqF2NhNL.jpg" alt="OLIVIA RODRIGO: driving home 2 u (a SOUR film) (2022) [Musica Documentario] ⭐7.8" />
+      <p>OLIVIA RODRIGO: driving home 2 u (a SOUR film) (2022) [Musica Documentario] ⭐7.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/498402%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/nluokoaueV5by7B15ZE4KEsjMTR.jpg" alt="Aline - La voce dell'amore (2020) [Musica Commedia Dramma Famiglia] ⭐6.6" />
+      <p>Aline - La voce dell'amore (2020) [Musica Commedia Dramma Famiglia] ⭐6.6</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/768410%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/kgH1sTqrKH3rjAXPo1kZ6kwypM.jpg" alt="Shawn Mendes: Live in Concert (2020) [Musica Documentario] ⭐8.0" />
+      <p>Shawn Mendes: Live in Concert (2020) [Musica Documentario] ⭐8.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/768141%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/4iroJUn8YuQBekDwGy7r61YHXiu.jpg" alt="Folklore: The Long Pond Studio Sessions (2020) [Musica Documentario] ⭐8.5" />
+      <p>Folklore: The Long Pond Studio Sessions (2020) [Musica Documentario] ⭐8.5</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/719643%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/2u1cyQgBpWWypISdbUDCu2hasGV.jpg" alt="Black Is King (2020) [Musica] ⭐7.3" />
+      <p>Black Is King (2020) [Musica] ⭐7.3</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/593680%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/6DQvNzUFjKj3pfbBNsMl1UJKTzp.jpg" alt="Step Up - Year of the Dance (2019) [Musica Dramma] ⭐6.1" />
+      <p>Step Up - Year of the Dance (2019) [Musica Dramma] ⭐6.1</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/440918%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/pR1Z8ZXXmqndNEVyM4ZB1HwpyV2.jpg" alt="Teen Spirit - A un passo dal sogno (2019) [Musica Dramma] ⭐6.0" />
+      <p>Teen Spirit - A un passo dal sogno (2019) [Musica Dramma] ⭐6.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/438373%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/hDyxp7NZstZcq6t1CGOdnvqZ9sq.jpg" alt="Chi canterà per te? (2018) [Musica Dramma Mistero] ⭐7.1" />
+      <p>Chi canterà per te? (2018) [Musica Dramma Mistero] ⭐7.1</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/424694%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/guQaXtD3hyCqAkX9AdjPALlaR1A.jpg" alt="Bohemian Rhapsody (2018) [Musica Dramma] ⭐8.0" />
+      <p>Bohemian Rhapsody (2018) [Musica Dramma] ⭐8.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/479626%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/wLUMbMGCvc4YxhWzJBnhdgO1tSw.jpg" alt="Avicii - La vera storia (2017) [Musica Documentario] ⭐8.0" />
+      <p>Avicii - La vera storia (2017) [Musica Documentario] ⭐8.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/468302%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/49q4CTKlHX5Y8pzSsr27akt6lhR.jpg" alt="Ammore e malavita (2017) [Musica Commedia Romance Crime] ⭐6.6" />
+      <p>Ammore e malavita (2017) [Musica Commedia Romance Crime] ⭐6.6</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/382399%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/qLDidtRPwG3OyCPgKKulZRUfiEm.jpg" alt="New York Academy (2016) [Musica Romance Dramma] ⭐7.1" />
+      <p>New York Academy (2016) [Musica Romance Dramma] ⭐7.1</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/85373%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/87BynMDsMwCmjn33zzSrzVjpZ7f.jpg" alt="StreetDance 2 (2012) [Musica Romance Dramma] ⭐6.2" />
+      <p>StreetDance 2 (2012) [Musica Romance Dramma] ⭐6.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/41592%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/7SsiRWEeZKWGMa5I8zMSMBY1QWN.jpg" alt="StreetDance 3D (2010) [Musica Romance Dramma] ⭐6.5" />
+      <p>StreetDance 3D (2010) [Musica Romance Dramma] ⭐6.5</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/21724%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/zP4mmgmt0OzIz7Cjk4dgxG0SZJA.jpg" alt="Dance Flick (2009) [Musica Commedia Azione] ⭐4.9" />
+      <p>Dance Flick (2009) [Musica Commedia Azione] ⭐4.9</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/14871%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/5J2HY98mKjMlu1TZTsOPUyJQapk.jpg" alt="Ballare per un sogno (2008) [Musica Romance Dramma Commedia] ⭐6.0" />
+      <p>Ballare per un sogno (2008) [Musica Romance Dramma Commedia] ⭐6.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/13655%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/7IXMqZnwccogptThay3togKIFWw.jpg" alt="Camp Rock (2008) [Musica Commedia Dramma Romance Famiglia televisione film] ⭐6.4" />
+      <p>Camp Rock (2008) [Musica Commedia Dramma Romance Famiglia televisione film] ⭐6.4</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/67915%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/rPem4ClrBg0tYMdWzTHLIsn68ZK.jpg" alt="Indochine: Alice et June Tour (2007) [Musica] ⭐8.0" />
+      <p>Indochine: Alice et June Tour (2007) [Musica] ⭐8.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/9762%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/fmw52kXk2kN8AQil7tgOD41gt4Q.jpg" alt="Step Up (2006) [Musica Dramma Romance Crime] ⭐6.9" />
+      <p>Step Up (2006) [Musica Dramma Romance Crime] ⭐6.9</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/203697%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="" alt="Iona - Live in London - Special Features DVD2 (2004) [Musica Documentario] ⭐7.0" />
+      <p>Iona - Live in London - Special Features DVD2 (2004) [Musica Documentario] ⭐7.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/12508%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/uf9arCN27SnDzTHLr9RdlfnVq8j.jpg" alt="Rock Star (2001) [Musica Dramma Commedia] ⭐6.7" />
+      <p>Rock Star (2001) [Musica Dramma Commedia] ⭐6.7</p>
+    </a>
+    
   </div>
-  <div style="text-align: center; margin-top: 30px;">
-    <a href="index.html" style="color: #aaa;">⟵ Torna alla home</a>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
   </div>
 </body>
 </html>

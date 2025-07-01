@@ -1,448 +1,559 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Fantasy</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .griglia {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+      justify-items: center;
+    }
+
+    .canale {
+      background-color: #292929;
+      border-radius: 10px;
+      text-align: center;
+      color: #fff;
+      padding: 15px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .canale img {
+      width: 100%;
+      height: 120px;
+      object-fit: contain;
+      border-radius: 8px;
+      background-color: #111;
+      margin-bottom: 10px;
+    }
+
+    .canale p {
+      margin: 0;
+      font-size: 0.95em;
+    }
+
+    .canale:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+
+    .canale:focus {
+      outline: 2px solid #fff;
+      background-color: #3a3a3a;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    @media screen and (orientation: portrait) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      }
+
+      .canale img {
+        height: 100px;
+      }
+
+      .canale p {
+        font-size: 0.9em;
+      }
+
+      body {
+        padding: 15px;
+      }
+    }
+
+    @media screen and (orientation: landscape) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .canale img {
+        height: 140px;
+      }
+
+      .canale p {
+        font-size: 1em;
+      }
+
+      body {
+        padding: 30px;
+      }
+    }
+
+    .back {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .back a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    .back a:hover {
+      color: #fff;
+    }
+  </style>
 </head>
 <body>
   <h1>Fantasy</h1>
   <div class="griglia">
     
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1376854%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/gqDrYaRye1W3bAvkfaJF5bWJMr4.jpg" alt="The Witches (2024) [Fantasy] ⭐10.0">
-    <p>The Witches (2024) [Fantasy] ⭐10.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/831395%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/zrd6blans3SqghHSxPAl7tqnaOf.jpg" alt="Tuesday (2024) [Fantasy Dramma] ⭐6.8">
-    <p>Tuesday (2024) [Fantasy Dramma] ⭐6.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1039773%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/fcYjmrPP25EVXvSkXHQPaYM1oRU.jpg" alt="La società americana dei Magical Negroes (2024) [Fantasy Commedia] ⭐4.9">
-    <p>La società americana dei Magical Negroes (2024) [Fantasy Commedia] ⭐4.9</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1026999%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/831vlt8OLuPX4nMVaWHXPRblgsf.jpg" alt="L'accademia di Mr. Kleks (2024) [Fantasy Avventura Famiglia] ⭐6.1">
-    <p>L'accademia di Mr. Kleks (2024) [Fantasy Avventura Famiglia] ⭐6.1</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/974262%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/jaYo0psDw6b1DMLH7pcXJwKpepv.jpg" alt="Descendants: L’Ascesa di Red (2024) [Fantasy Avventura Famiglia Commedia] ⭐6.9">
-    <p>Descendants: L’Ascesa di Red (2024) [Fantasy Avventura Famiglia Commedia] ⭐6.9</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/763215%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/o0KszzsiJdDqx7qN5D9f0wcISZb.jpg" alt="Damsel (2024) [Fantasy Azione Avventura] ⭐7.0">
-    <p>Damsel (2024) [Fantasy Azione Avventura] ⭐7.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1189198%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/ykkVuQgvjrVWiEe7TvUQZOrLUgC.jpg" alt="Genie (2023) [Fantasy Commedia] ⭐6.6">
-    <p>Genie (2023) [Fantasy Commedia] ⭐6.6</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1023845%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/wUoVaU3mFMORZeUFD8HihFYYakT.jpg" alt="Silver e il libro dei sogni (2023) [Fantasy Romance] ⭐5.8">
-    <p>Silver e il libro dei sogni (2023) [Fantasy Romance] ⭐5.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/991708%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/piG2K4yaa1CO6flhWQPSVkgPvhH.jpg" alt="El Conde (2023) [Fantasy Commedia Horror] ⭐6.2">
-    <p>El Conde (2023) [Fantasy Commedia Horror] ⭐6.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/455476%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/n3jVNAEegUKu2qIsGysDP1Ba7EQ.jpg" alt="I Cavalieri dello zodiaco (2023) [Fantasy Azione Avventura Fantascienza] ⭐6.4">
-    <p>I Cavalieri dello zodiaco (2023) [Fantasy Azione Avventura Fantascienza] ⭐6.4</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/830896%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/49NQGuvaMWYeAD22h135tFd2Grs.jpg" alt="The Portable Door (2023) [Fantasy Avventura Commedia] ⭐6.5">
-    <p>The Portable Door (2023) [Fantasy Avventura Commedia] ⭐6.5</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/919355%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/zkGFADykBtfPfTv7YJooxTH52ph.jpg" alt="Dragon Knight (2022) [Fantasy Avventura Azione] ⭐6.2">
-    <p>Dragon Knight (2022) [Fantasy Avventura Azione] ⭐6.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/732459%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/bIp7UbNKaBBxA9086jLCCRuXA6W.jpg" alt="Blade of the 47 Ronin (2022) [Fantasy] ⭐6.5">
-    <p>Blade of the 47 Ronin (2022) [Fantasy] ⭐6.5</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1013860%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/g4yJTzMtOBUTAR2Qnmj8TYIcFVq.jpg" alt="R.I.P.D. 2: Rise of the Damned (2022) [Fantasy Azione Commedia] ⭐6.3">
-    <p>R.I.P.D. 2: Rise of the Damned (2022) [Fantasy Azione Commedia] ⭐6.3</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/642885%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/ejmMQggGCqTvKw0HbJkfj9qFWmR.jpg" alt="Hocus Pocus 2 (2022) [Fantasy Commedia Famiglia] ⭐7.2">
-    <p>Hocus Pocus 2 (2022) [Fantasy Commedia Famiglia] ⭐7.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/338953%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/y2BMvZyzYP2bXk5xhCZKgH52DuZ.jpg" alt="Animali fantastici - I segreti di Silente (2022) [Fantasy Avventura] ⭐6.6">
-    <p>Animali fantastici - I segreti di Silente (2022) [Fantasy Avventura] ⭐6.6</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/897992%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/eQ6DKclRghjLL2G4jYPwZLMTM6l.jpg" alt="The Amazing Mr. Blunden (2021) [Fantasy Famiglia Avventura televisione film] ⭐6.2">
-    <p>The Amazing Mr. Blunden (2021) [Fantasy Famiglia Avventura televisione film] ⭐6.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/593910%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/5PyD7OXH0rIr9kVOk55g286c9jJ.jpg" alt="Cenerentola (2021) [Fantasy Romance Commedia] ⭐6.4">
-    <p>Cenerentola (2021) [Fantasy Romance Commedia] ⭐6.4</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/785457%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/rvWKprnB7GnXUFeS0TK2s93JKoZ.jpg" alt="Afterlife of the Party (2021) [Fantasy Commedia Dramma] ⭐6.7">
-    <p>Afterlife of the Party (2021) [Fantasy Commedia Dramma] ⭐6.7</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/611698%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/iul7zWHU6guBOI846vuHTybOoHj.jpg" alt="L'eroe dei due mondi (2021) [Fantasy Azione Avventura Dramma] ⭐7.1">
-    <p>L'eroe dei due mondi (2021) [Fantasy Azione Avventura Dramma] ⭐7.1</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/672647%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/zsgbHw3UK5EBpTfcVNB2e7dAiHA.jpg" alt="La mappa delle piccole cose perfette (2021) [Fantasy Romance] ⭐7.1">
-    <p>La mappa delle piccole cose perfette (2021) [Fantasy Romance] ⭐7.1</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/615761%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/d5ntHxpLEHw2RSmoL5sqdlQznr8.jpg" alt="Undine - Un Amore per Sempre (2020) [Fantasy Dramma Romance] ⭐6.5">
-    <p>Undine - Un Amore per Sempre (2020) [Fantasy Dramma Romance] ⭐6.5</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/671583%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/nPssJyLEty9EOUOkhWJx73UbNmR.jpg" alt="Upside-Down Magic - Magia Imperfetta (2020) [Fantasy Famiglia televisione film] ⭐7.2">
-    <p>Upside-Down Magic - Magia Imperfetta (2020) [Fantasy Famiglia televisione film] ⭐7.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/599521%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/dFNhlaPEeDhimwZ0eenpwe1x5Tm.jpg" alt="Z-O-M-B-I-E-S 2 (2020) [Fantasy Romance televisione film] ⭐7.5">
-    <p>Z-O-M-B-I-E-S 2 (2020) [Fantasy Romance televisione film] ⭐7.5</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/520725%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/lXlRw3SAQ95J1PgZNLPl6VDxCBs.jpg" alt="Il principe dimenticato (2020) [Fantasy Avventura Commedia] ⭐5.7">
-    <p>Il principe dimenticato (2020) [Fantasy Avventura Commedia] ⭐5.7</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/487083%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/x6zfPqBQO5tFsfj7CP5BXZl7Koj.jpg" alt="Paradise Hills (2019) [Fantasy Fantascienza Thriller] ⭐6.0">
-    <p>Paradise Hills (2019) [Fantasy Fantascienza Thriller] ⭐6.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/576026%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/8RGoJE0Po8q2UOzCFtxzG44Ay8f.jpg" alt="Un elfo per amico (2019) [Fantasy Famiglia] ⭐7.0">
-    <p>Un elfo per amico (2019) [Fantasy Famiglia] ⭐7.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/636698%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/mFaVMZvmICRQMmBZZguVrgDzyBT.jpg" alt="L'uomo senza gravità (2019) [Fantasy Dramma Commedia] ⭐7.1">
-    <p>L'uomo senza gravità (2019) [Fantasy Dramma Commedia] ⭐7.1</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/536869%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/lHhvDjXw8FBq4UeNpVrdCCkjwuE.jpg" alt="Cats (2019) [Fantasy Commedia Dramma] ⭐4.1">
-    <p>Cats (2019) [Fantasy Commedia Dramma] ⭐4.1</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/456740%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/v58oqIHFi5hqmKl7k722vevYITc.jpg" alt="Hellboy (2019) [Fantasy Horror Azione Avventura] ⭐5.6">
-    <p>Hellboy (2019) [Fantasy Horror Azione Avventura] ⭐5.6</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/460885%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/4hNN81ztyTXiw5ZOktZtydivfup.jpg" alt="Mandy (2018) [Fantasy Azione Horror] ⭐6.2">
-    <p>Mandy (2018) [Fantasy Azione Horror] ⭐6.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/424781%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/peTl1V04E9ppvhgvNmSX0r2ALqO.jpg" alt="Sorry to Bother You (2018) [Fantasy Fantascienza Commedia] ⭐6.8">
-    <p>Sorry to Bother You (2018) [Fantasy Fantascienza Commedia] ⭐6.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/433150%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/oi6CgVTaDQAuCRbQqXjevlpa8kk.jpg" alt="Il ragazzo invisibile - Seconda generazione (2018) [Fantasy] ⭐6.4">
-    <p>Il ragazzo invisibile - Seconda generazione (2018) [Fantasy] ⭐6.4</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/338952%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/fe8Mxrpu7OhBuE9Qp8XIxJ00whX.jpg" alt="Animali fantastici - I crimini di Grindelwald (2018) [Fantasy Avventura] ⭐6.8">
-    <p>Animali fantastici - I crimini di Grindelwald (2018) [Fantasy Avventura] ⭐6.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/349067%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/ddhqbkOlSScOzBwh62yFpp4Iw0N.jpg" alt="Tigers Are Not Afraid (2017) [Fantasy Horror Dramma Thriller] ⭐6.9">
-    <p>Tigers Are Not Afraid (2017) [Fantasy Horror Dramma Thriller] ⭐6.9</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/419831%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/cvit6HDbXHE6W5kGPd47jd0wthQ.jpg" alt="I Kill Giants (2017) [Fantasy Dramma] ⭐6.2">
-    <p>I Kill Giants (2017) [Fantasy Dramma] ⭐6.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/353491%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/2NQ48l5plPWDJ0Zs18VcVqGrwke.jpg" alt="La Torre Nera (2017) [Fantasy Azione Fantascienza] ⭐5.8">
-    <p>La Torre Nera (2017) [Fantasy Azione Fantascienza] ⭐5.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/404947%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/vRiUN3Hg6vAg0o2lT3HPnWnIIC5.jpg" alt="Sinister Squad (2016) [Fantasy Azione Horror] ⭐2.8">
-    <p>Sinister Squad (2016) [Fantasy Azione Horror] ⭐2.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/337556%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/1jX0Aqm0gCg6pzwgPgDkDcFVpAt.jpg" alt="Ruby Red III - Verde smeraldo (2016) [Fantasy Azione Mistero] ⭐6.9">
-    <p>Ruby Red III - Verde smeraldo (2016) [Fantasy Azione Mistero] ⭐6.9</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/258230%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/o26qsA9FTvupfFE593dcrMbdxbf.jpg" alt="Sette minuti dopo la mezzanotte (2016) [Fantasy Avventura Famiglia] ⭐7.3">
-    <p>Sette minuti dopo la mezzanotte (2016) [Fantasy Avventura Famiglia] ⭐7.3</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/346672%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/zpNCZ7WCvrL6FfYpEoqOtWxzwPb.jpg" alt="Underworld: Blood Wars (2016) [Fantasy Azione Thriller Fantascienza] ⭐5.9">
-    <p>Underworld: Blood Wars (2016) [Fantasy Azione Thriller Fantascienza] ⭐5.9</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/259316%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/8JbmIu4Uvegaf7rOnyiO7PbuX2A.jpg" alt="Animali fantastici e dove trovarli (2016) [Fantasy Avventura] ⭐7.3">
-    <p>Animali fantastici e dove trovarli (2016) [Fantasy Avventura] ⭐7.3</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/274854%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/deeaV6rjyks9LlxiL720Zt76pUg.jpg" alt="The Last Witch Hunter - L'ultimo cacciatore di streghe (2015) [Fantasy Azione Avventura Horror] ⭐6.0">
-    <p>The Last Witch Hunter - L'ultimo cacciatore di streghe (2015) [Fantasy Azione Avventura Horror] ⭐6.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/305638%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/2KzQWUAi9w2kPeGrBnejx9eu2Rs.jpg" alt="La figlia della sciamana (2015) [Fantasy Avventura Dramma] ⭐5.8">
-    <p>La figlia della sciamana (2015) [Fantasy Avventura Dramma] ⭐5.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/266647%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/4ahEs32uc60mmMdHRZmmU9eLqRN.jpg" alt="Pan - Viaggio sull'isola che non c'è (2015) [Fantasy Avventura Famiglia Azione] ⭐6.0">
-    <p>Pan - Viaggio sull'isola che non c'è (2015) [Fantasy Avventura Famiglia Azione] ⭐6.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/300803%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/vaRDdcJx8eR5pcGxNcLmBT0h8b.jpg" alt="DragonHeart 3 - La maledizione dello stregone (2015) [Fantasy] ⭐5.4">
-    <p>DragonHeart 3 - La maledizione dello stregone (2015) [Fantasy] ⭐5.4</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/197796%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/d8lHh5YJt3l2gga4DRqgxcOksyV.jpg" alt="La bella e la bestia (2014) [Fantasy Romance] ⭐6.2">
-    <p>La bella e la bestia (2014) [Fantasy Romance] ⭐6.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/224141%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/fDvPiswo5col2rnsOPuPudKYAlP.jpg" alt="Into the Woods (2014) [Fantasy Commedia] ⭐5.8">
-    <p>Into the Woods (2014) [Fantasy Commedia] ⭐5.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/102651%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/c2g83Ux98pi1fGAs42xUYfJHf4Q.jpg" alt="Maleficent (2014) [Fantasy Avventura Azione Famiglia Romance] ⭐7.1">
-    <p>Maleficent (2014) [Fantasy Avventura Azione Famiglia Romance] ⭐7.1</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/237710%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/wmOXRjryqYjwaaJAtzkLoXR9j6V.jpg" alt="100 volte Natale (2013) [Fantasy Famiglia] ⭐5.7">
-    <p>100 volte Natale (2013) [Fantasy Famiglia] ⭐5.7</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/81005%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/l5tG3xcglOz16JUt3lYQjHSIFJd.jpg" alt="Il cacciatore di giganti (2013) [Fantasy Azione Avventura Dramma] ⭐5.9">
-    <p>Il cacciatore di giganti (2013) [Fantasy Azione Avventura Dramma] ⭐5.9</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/60304%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/blXPoircKZ0QqE4m1jBI4AOJqb2.jpg" alt="Hansel & Gretel - Cacciatori di streghe (2013) [Fantasy Horror Azione] ⭐6.1">
-    <p>Hansel & Gretel - Cacciatori di streghe (2013) [Fantasy Horror Azione] ⭐6.1</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/57158%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/5Rtu8VJsM0282ljMS9l0VKx67av.jpg" alt="Lo Hobbit: La desolazione di Smaug (2013) [Fantasy Avventura Azione] ⭐7.6">
-    <p>Lo Hobbit: La desolazione di Smaug (2013) [Fantasy Avventura Azione] ⭐7.6</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/49524%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/noPI1xbVr11hivGFbrGe5gfe9P3.jpg" alt="R.I.P.D. - Poliziotti dall'aldilà (2013) [Fantasy Azione Commedia] ⭐5.8">
-    <p>R.I.P.D. - Poliziotti dall'aldilà (2013) [Fantasy Azione Commedia] ⭐5.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/175774%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/w8dfFuVN1oz0VJQqNwIQpU07zDk.jpg" alt="Ruby Red (2013) [Fantasy Dramma Romance] ⭐7.0">
-    <p>Ruby Red (2013) [Fantasy Dramma Romance] ⭐7.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/123553%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/eaNMaRlFd0laqI6kB8GWGSVYPtA.jpg" alt="Shadowhunters - Città di ossa (2013) [Fantasy Azione Mistero] ⭐6.4">
-    <p>Shadowhunters - Città di ossa (2013) [Fantasy Azione Mistero] ⭐6.4</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/57165%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/7l0tGRyWfemhMulEzTUrJW0Abgm.jpg" alt="La furia dei titani (2012) [Fantasy Avventura Azione] ⭐5.7">
-    <p>La furia dei titani (2012) [Fantasy Avventura Azione] ⭐5.7</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/71864%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/7LPoJZzz5Sit4jVJwtXhfQiG2ml.jpg" alt="L'incredibile vita di Timothy Green (2012) [Fantasy Dramma Commedia Famiglia] ⭐7.0">
-    <p>L'incredibile vita di Timothy Green (2012) [Fantasy Dramma Commedia Famiglia] ⭐7.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/37958%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/85Qw9VfnPpKrWfDsvTy2H8p8CGk.jpg" alt="Immortals (2011) [Fantasy Azione Dramma] ⭐6.0">
-    <p>Immortals (2011) [Fantasy Azione Dramma] ⭐6.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/50479%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/hgS7dPj4e6IYzDXn5IHA6XIbKfl.jpg" alt="Avalon High (2011) [Fantasy Famiglia Dramma televisione film] ⭐6.2">
-    <p>Avalon High (2011) [Fantasy Famiglia Dramma televisione film] ⭐6.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/59436%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/hfdsTXO6wIJ9uywIgnqzNYDWYQK.jpg" alt="Midnight in Paris (2011) [Fantasy Commedia Romance] ⭐7.5">
-    <p>Midnight in Paris (2011) [Fantasy Commedia Romance] ⭐7.5</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/47327%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/AvSHPhZxhMA8ns1DEwx7jEuUtAj.jpg" alt="Drive Angry (2011) [Fantasy Thriller Azione Crime] ⭐5.5">
-    <p>Drive Angry (2011) [Fantasy Thriller Azione Crime] ⭐5.5</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/51256%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/8ymQBbSpiUm1R0ztyDz5cNGec9w.jpg" alt="La spettacolare festa di Natale di Ciuchino (2010) [Fantasy Animazione Commedia Famiglia] ⭐5.8">
-    <p>La spettacolare festa di Natale di Ciuchino (2010) [Fantasy Animazione Commedia Famiglia] ⭐5.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/27022%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/acF3jMWygCTBkoQLP7GFmPeyjIp.jpg" alt="L'apprendista stregone (2010) [Fantasy Avventura Azione] ⭐6.1">
-    <p>L'apprendista stregone (2010) [Fantasy Avventura Azione] ⭐6.1</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/35552%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/nRMZs3ZI9wUXn6uTeRNBSXno6uT.jpg" alt="Adèle e l'enigma del faraone (2010) [Fantasy Avventura Azione Mistero] ⭐6.2">
-    <p>Adèle e l'enigma del faraone (2010) [Fantasy Avventura Azione Mistero] ⭐6.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/23488%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/uRKt8nYdy7EO4uqeKVVpZRmqrxF.jpg" alt="Dorian Gray (2009) [Fantasy Dramma Thriller] ⭐6.0">
-    <p>Dorian Gray (2009) [Fantasy Dramma Thriller] ⭐6.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/8960%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/hi1EBSfVVcj5yF1EFhXPgVSjNuy.jpg" alt="Hancock (2008) [Fantasy Azione] ⭐6.3">
-    <p>Hancock (2008) [Fantasy Azione] ⭐6.3</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/8966%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/n8nYzzKGP30M6u8sUon1YJmCgm8.jpg" alt="Twilight (2008) [Fantasy Dramma Romance] ⭐6.3">
-    <p>Twilight (2008) [Fantasy Dramma Romance] ⭐6.3</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/2698%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/qXHs00mI08savtPZO7qOhPNbRpi.jpg" alt="Un'impresa da Dio (2007) [Fantasy Commedia Famiglia] ⭐5.6">
-    <p>Un'impresa da Dio (2007) [Fantasy Commedia Famiglia] ⭐5.6</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/9954%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/ic7bNEfSbjfT2Os7ebSRS4xe94s.jpg" alt="The Covenant (2006) [Fantasy Horror Avventura Azione] ⭐5.6">
-    <p>The Covenant (2006) [Fantasy Horror Avventura Azione] ⭐5.6</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/16140%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/eHr62EQOZIgkXlQLPWrwxjHOnZZ.jpg" alt="Death Note 2 - Il film - L'ultimo nome (2006) [Fantasy Thriller Mistero] ⭐7.1">
-    <p>Death Note 2 - Il film - L'ultimo nome (2006) [Fantasy Thriller Mistero] ⭐7.1</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/14208%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/kAWTXqFaMkQo5vqRRZeB9qkevdi.jpg" alt="The Librarian 2 - Ritorno alle miniere di Re Salomone (2006) [Fantasy Azione Avventura] ⭐6.2">
-    <p>The Librarian 2 - Ritorno alle miniere di Re Salomone (2006) [Fantasy Azione Avventura] ⭐6.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1417%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/fZaGhQbcZjawczIH1aI32NZE1HN.jpg" alt="Il labirinto del fauno (2006) [Fantasy Dramma Guerra] ⭐7.8">
-    <p>Il labirinto del fauno (2006) [Fantasy Dramma Guerra] ⭐7.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/2486%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/x67bjXBWxnuUEbNbKBUoBsf2vUN.jpg" alt="Eragon (2006) [Fantasy Azione Avventura Famiglia] ⭐5.1">
-    <p>Eragon (2006) [Fantasy Azione Avventura Famiglia] ⭐5.1</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/834%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/apn0WDnVsU3Ivf7RrPhnd6qVPWE.jpg" alt="Underworld: Evolution (2006) [Fantasy Azione Thriller] ⭐6.6">
-    <p>Underworld: Evolution (2006) [Fantasy Azione Thriller] ⭐6.6</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/11283%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/oLxNrV86ZvDD1topY79ov0nbLsW.jpg" alt="Nanny McPhee - Tata Matilda (2005) [Fantasy Commedia Famiglia] ⭐6.7">
-    <p>Nanny McPhee - Tata Matilda (2005) [Fantasy Commedia Famiglia] ⭐6.7</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/10214%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/dvMVTu4TUuyshVCl8sP5cz8Mh1m.jpg" alt="The Mask 2 (2005) [Fantasy Commedia Famiglia Avventura] ⭐4.2">
-    <p>The Mask 2 (2005) [Fantasy Commedia Famiglia Avventura] ⭐4.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/561%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/oaWsGohG0HA9Ps6831OgZU2CJ3k.jpg" alt="Constantine (2005) [Fantasy Azione Horror] ⭐7.1">
-    <p>Constantine (2005) [Fantasy Azione Horror] ⭐7.1</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1487%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/4M9gl3QBZzJ8n9Jd9mVHeVQfjEx.jpg" alt="Hellboy (2004) [Fantasy Azione] ⭐6.7">
-    <p>Hellboy (2004) [Fantasy Azione] ⭐6.7</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/9480%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/mtZuruaJssrLleI53VogSve44D9.jpg" alt="Daredevil (2003) [Fantasy Azione] ⭐5.3">
-    <p>Daredevil (2003) [Fantasy Azione] ⭐5.3</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/277%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/e1lRZSWYF4aEMxjGmphN94aSQos.jpg" alt="Underworld (2003) [Fantasy Azione Thriller] ⭐6.8">
-    <p>Underworld (2003) [Fantasy Azione Thriller] ⭐6.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/9021%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/xdULpn6IxOhsiaT1kMiHXF95QKR.jpg" alt="Che fine ha fatto Santa Clause? (2002) [Fantasy Commedia Famiglia] ⭐6.0">
-    <p>Che fine ha fatto Santa Clause? (2002) [Fantasy Commedia Famiglia] ⭐6.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/36586%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/oLYi9lndeuvZlGR8upIKV0pgA0E.jpg" alt="Blade II (2002) [Fantasy Horror Azione Thriller] ⭐6.6">
-    <p>Blade II (2002) [Fantasy Horror Azione Thriller] ⭐6.6</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/9597%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/svFMqTQJtlOms1PBLSlKkYWklt8.jpg" alt="Vidocq - La maschera senza volto (2001) [Fantasy Azione Thriller Crime Fantascienza Mistero] ⭐5.9">
-    <p>Vidocq - La maschera senza volto (2001) [Fantasy Azione Thriller Crime Fantascienza Mistero] ⭐5.9</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/10836%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/iwlcp8D9vY2SEwlvDr0FSnpLv3H.jpg" alt="Dagon - La mutazione del male (2001) [Fantasy Horror Thriller] ⭐6.1">
-    <p>Dagon - La mutazione del male (2001) [Fantasy Horror Thriller] ⭐6.1</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1636%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/6ielQeIi3U31ihrQdegPPz7cwTX.jpg" alt="Indiavolato (2000) [Fantasy Commedia Romance] ⭐6.1">
-    <p>Indiavolato (2000) [Fantasy Commedia Romance] ⭐6.1</p>
-  </a>
-	
-
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1376854%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/gqDrYaRye1W3bAvkfaJF5bWJMr4.jpg" alt="The Witches (2024) [Fantasy] ⭐10.0" />
+      <p>The Witches (2024) [Fantasy] ⭐10.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/831395%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/zrd6blans3SqghHSxPAl7tqnaOf.jpg" alt="Tuesday (2024) [Fantasy Dramma] ⭐6.8" />
+      <p>Tuesday (2024) [Fantasy Dramma] ⭐6.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1039773%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/fcYjmrPP25EVXvSkXHQPaYM1oRU.jpg" alt="La società americana dei Magical Negroes (2024) [Fantasy Commedia] ⭐4.9" />
+      <p>La società americana dei Magical Negroes (2024) [Fantasy Commedia] ⭐4.9</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1026999%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/831vlt8OLuPX4nMVaWHXPRblgsf.jpg" alt="L'accademia di Mr. Kleks (2024) [Fantasy Avventura Famiglia] ⭐6.1" />
+      <p>L'accademia di Mr. Kleks (2024) [Fantasy Avventura Famiglia] ⭐6.1</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/974262%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/jaYo0psDw6b1DMLH7pcXJwKpepv.jpg" alt="Descendants: L’Ascesa di Red (2024) [Fantasy Avventura Famiglia Commedia] ⭐6.9" />
+      <p>Descendants: L’Ascesa di Red (2024) [Fantasy Avventura Famiglia Commedia] ⭐6.9</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/763215%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/o0KszzsiJdDqx7qN5D9f0wcISZb.jpg" alt="Damsel (2024) [Fantasy Azione Avventura] ⭐7.0" />
+      <p>Damsel (2024) [Fantasy Azione Avventura] ⭐7.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1189198%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/ykkVuQgvjrVWiEe7TvUQZOrLUgC.jpg" alt="Genie (2023) [Fantasy Commedia] ⭐6.6" />
+      <p>Genie (2023) [Fantasy Commedia] ⭐6.6</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1023845%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/wUoVaU3mFMORZeUFD8HihFYYakT.jpg" alt="Silver e il libro dei sogni (2023) [Fantasy Romance] ⭐5.8" />
+      <p>Silver e il libro dei sogni (2023) [Fantasy Romance] ⭐5.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/991708%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/piG2K4yaa1CO6flhWQPSVkgPvhH.jpg" alt="El Conde (2023) [Fantasy Commedia Horror] ⭐6.2" />
+      <p>El Conde (2023) [Fantasy Commedia Horror] ⭐6.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/455476%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/n3jVNAEegUKu2qIsGysDP1Ba7EQ.jpg" alt="I Cavalieri dello zodiaco (2023) [Fantasy Azione Avventura Fantascienza] ⭐6.4" />
+      <p>I Cavalieri dello zodiaco (2023) [Fantasy Azione Avventura Fantascienza] ⭐6.4</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/830896%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/49NQGuvaMWYeAD22h135tFd2Grs.jpg" alt="The Portable Door (2023) [Fantasy Avventura Commedia] ⭐6.5" />
+      <p>The Portable Door (2023) [Fantasy Avventura Commedia] ⭐6.5</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/919355%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/zkGFADykBtfPfTv7YJooxTH52ph.jpg" alt="Dragon Knight (2022) [Fantasy Avventura Azione] ⭐6.2" />
+      <p>Dragon Knight (2022) [Fantasy Avventura Azione] ⭐6.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/732459%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/bIp7UbNKaBBxA9086jLCCRuXA6W.jpg" alt="Blade of the 47 Ronin (2022) [Fantasy] ⭐6.5" />
+      <p>Blade of the 47 Ronin (2022) [Fantasy] ⭐6.5</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1013860%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/g4yJTzMtOBUTAR2Qnmj8TYIcFVq.jpg" alt="R.I.P.D. 2: Rise of the Damned (2022) [Fantasy Azione Commedia] ⭐6.3" />
+      <p>R.I.P.D. 2: Rise of the Damned (2022) [Fantasy Azione Commedia] ⭐6.3</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/642885%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/ejmMQggGCqTvKw0HbJkfj9qFWmR.jpg" alt="Hocus Pocus 2 (2022) [Fantasy Commedia Famiglia] ⭐7.2" />
+      <p>Hocus Pocus 2 (2022) [Fantasy Commedia Famiglia] ⭐7.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/338953%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/y2BMvZyzYP2bXk5xhCZKgH52DuZ.jpg" alt="Animali fantastici - I segreti di Silente (2022) [Fantasy Avventura] ⭐6.6" />
+      <p>Animali fantastici - I segreti di Silente (2022) [Fantasy Avventura] ⭐6.6</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/897992%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/eQ6DKclRghjLL2G4jYPwZLMTM6l.jpg" alt="The Amazing Mr. Blunden (2021) [Fantasy Famiglia Avventura televisione film] ⭐6.2" />
+      <p>The Amazing Mr. Blunden (2021) [Fantasy Famiglia Avventura televisione film] ⭐6.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/593910%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/5PyD7OXH0rIr9kVOk55g286c9jJ.jpg" alt="Cenerentola (2021) [Fantasy Romance Commedia] ⭐6.4" />
+      <p>Cenerentola (2021) [Fantasy Romance Commedia] ⭐6.4</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/785457%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/rvWKprnB7GnXUFeS0TK2s93JKoZ.jpg" alt="Afterlife of the Party (2021) [Fantasy Commedia Dramma] ⭐6.7" />
+      <p>Afterlife of the Party (2021) [Fantasy Commedia Dramma] ⭐6.7</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/611698%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/iul7zWHU6guBOI846vuHTybOoHj.jpg" alt="L'eroe dei due mondi (2021) [Fantasy Azione Avventura Dramma] ⭐7.1" />
+      <p>L'eroe dei due mondi (2021) [Fantasy Azione Avventura Dramma] ⭐7.1</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/672647%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/zsgbHw3UK5EBpTfcVNB2e7dAiHA.jpg" alt="La mappa delle piccole cose perfette (2021) [Fantasy Romance] ⭐7.1" />
+      <p>La mappa delle piccole cose perfette (2021) [Fantasy Romance] ⭐7.1</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/615761%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/d5ntHxpLEHw2RSmoL5sqdlQznr8.jpg" alt="Undine - Un Amore per Sempre (2020) [Fantasy Dramma Romance] ⭐6.5" />
+      <p>Undine - Un Amore per Sempre (2020) [Fantasy Dramma Romance] ⭐6.5</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/671583%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/nPssJyLEty9EOUOkhWJx73UbNmR.jpg" alt="Upside-Down Magic - Magia Imperfetta (2020) [Fantasy Famiglia televisione film] ⭐7.2" />
+      <p>Upside-Down Magic - Magia Imperfetta (2020) [Fantasy Famiglia televisione film] ⭐7.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/599521%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/dFNhlaPEeDhimwZ0eenpwe1x5Tm.jpg" alt="Z-O-M-B-I-E-S 2 (2020) [Fantasy Romance televisione film] ⭐7.5" />
+      <p>Z-O-M-B-I-E-S 2 (2020) [Fantasy Romance televisione film] ⭐7.5</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/520725%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/lXlRw3SAQ95J1PgZNLPl6VDxCBs.jpg" alt="Il principe dimenticato (2020) [Fantasy Avventura Commedia] ⭐5.7" />
+      <p>Il principe dimenticato (2020) [Fantasy Avventura Commedia] ⭐5.7</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/487083%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/x6zfPqBQO5tFsfj7CP5BXZl7Koj.jpg" alt="Paradise Hills (2019) [Fantasy Fantascienza Thriller] ⭐6.0" />
+      <p>Paradise Hills (2019) [Fantasy Fantascienza Thriller] ⭐6.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/576026%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/8RGoJE0Po8q2UOzCFtxzG44Ay8f.jpg" alt="Un elfo per amico (2019) [Fantasy Famiglia] ⭐7.0" />
+      <p>Un elfo per amico (2019) [Fantasy Famiglia] ⭐7.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/636698%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/mFaVMZvmICRQMmBZZguVrgDzyBT.jpg" alt="L'uomo senza gravità (2019) [Fantasy Dramma Commedia] ⭐7.1" />
+      <p>L'uomo senza gravità (2019) [Fantasy Dramma Commedia] ⭐7.1</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/536869%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/lHhvDjXw8FBq4UeNpVrdCCkjwuE.jpg" alt="Cats (2019) [Fantasy Commedia Dramma] ⭐4.1" />
+      <p>Cats (2019) [Fantasy Commedia Dramma] ⭐4.1</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/456740%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/v58oqIHFi5hqmKl7k722vevYITc.jpg" alt="Hellboy (2019) [Fantasy Horror Azione Avventura] ⭐5.6" />
+      <p>Hellboy (2019) [Fantasy Horror Azione Avventura] ⭐5.6</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/460885%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/4hNN81ztyTXiw5ZOktZtydivfup.jpg" alt="Mandy (2018) [Fantasy Azione Horror] ⭐6.2" />
+      <p>Mandy (2018) [Fantasy Azione Horror] ⭐6.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/424781%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/peTl1V04E9ppvhgvNmSX0r2ALqO.jpg" alt="Sorry to Bother You (2018) [Fantasy Fantascienza Commedia] ⭐6.8" />
+      <p>Sorry to Bother You (2018) [Fantasy Fantascienza Commedia] ⭐6.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/433150%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/oi6CgVTaDQAuCRbQqXjevlpa8kk.jpg" alt="Il ragazzo invisibile - Seconda generazione (2018) [Fantasy] ⭐6.4" />
+      <p>Il ragazzo invisibile - Seconda generazione (2018) [Fantasy] ⭐6.4</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/338952%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/fe8Mxrpu7OhBuE9Qp8XIxJ00whX.jpg" alt="Animali fantastici - I crimini di Grindelwald (2018) [Fantasy Avventura] ⭐6.8" />
+      <p>Animali fantastici - I crimini di Grindelwald (2018) [Fantasy Avventura] ⭐6.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/349067%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/ddhqbkOlSScOzBwh62yFpp4Iw0N.jpg" alt="Tigers Are Not Afraid (2017) [Fantasy Horror Dramma Thriller] ⭐6.9" />
+      <p>Tigers Are Not Afraid (2017) [Fantasy Horror Dramma Thriller] ⭐6.9</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/419831%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/cvit6HDbXHE6W5kGPd47jd0wthQ.jpg" alt="I Kill Giants (2017) [Fantasy Dramma] ⭐6.2" />
+      <p>I Kill Giants (2017) [Fantasy Dramma] ⭐6.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/353491%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/2NQ48l5plPWDJ0Zs18VcVqGrwke.jpg" alt="La Torre Nera (2017) [Fantasy Azione Fantascienza] ⭐5.8" />
+      <p>La Torre Nera (2017) [Fantasy Azione Fantascienza] ⭐5.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/404947%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/vRiUN3Hg6vAg0o2lT3HPnWnIIC5.jpg" alt="Sinister Squad (2016) [Fantasy Azione Horror] ⭐2.8" />
+      <p>Sinister Squad (2016) [Fantasy Azione Horror] ⭐2.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/337556%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/1jX0Aqm0gCg6pzwgPgDkDcFVpAt.jpg" alt="Ruby Red III - Verde smeraldo (2016) [Fantasy Azione Mistero] ⭐6.9" />
+      <p>Ruby Red III - Verde smeraldo (2016) [Fantasy Azione Mistero] ⭐6.9</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/258230%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/o26qsA9FTvupfFE593dcrMbdxbf.jpg" alt="Sette minuti dopo la mezzanotte (2016) [Fantasy Avventura Famiglia] ⭐7.3" />
+      <p>Sette minuti dopo la mezzanotte (2016) [Fantasy Avventura Famiglia] ⭐7.3</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/346672%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/zpNCZ7WCvrL6FfYpEoqOtWxzwPb.jpg" alt="Underworld: Blood Wars (2016) [Fantasy Azione Thriller Fantascienza] ⭐5.9" />
+      <p>Underworld: Blood Wars (2016) [Fantasy Azione Thriller Fantascienza] ⭐5.9</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/259316%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/8JbmIu4Uvegaf7rOnyiO7PbuX2A.jpg" alt="Animali fantastici e dove trovarli (2016) [Fantasy Avventura] ⭐7.3" />
+      <p>Animali fantastici e dove trovarli (2016) [Fantasy Avventura] ⭐7.3</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/274854%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/deeaV6rjyks9LlxiL720Zt76pUg.jpg" alt="The Last Witch Hunter - L'ultimo cacciatore di streghe (2015) [Fantasy Azione Avventura Horror] ⭐6.0" />
+      <p>The Last Witch Hunter - L'ultimo cacciatore di streghe (2015) [Fantasy Azione Avventura Horror] ⭐6.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/305638%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/2KzQWUAi9w2kPeGrBnejx9eu2Rs.jpg" alt="La figlia della sciamana (2015) [Fantasy Avventura Dramma] ⭐5.8" />
+      <p>La figlia della sciamana (2015) [Fantasy Avventura Dramma] ⭐5.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/266647%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/4ahEs32uc60mmMdHRZmmU9eLqRN.jpg" alt="Pan - Viaggio sull'isola che non c'è (2015) [Fantasy Avventura Famiglia Azione] ⭐6.0" />
+      <p>Pan - Viaggio sull'isola che non c'è (2015) [Fantasy Avventura Famiglia Azione] ⭐6.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/300803%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/vaRDdcJx8eR5pcGxNcLmBT0h8b.jpg" alt="DragonHeart 3 - La maledizione dello stregone (2015) [Fantasy] ⭐5.4" />
+      <p>DragonHeart 3 - La maledizione dello stregone (2015) [Fantasy] ⭐5.4</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/197796%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/d8lHh5YJt3l2gga4DRqgxcOksyV.jpg" alt="La bella e la bestia (2014) [Fantasy Romance] ⭐6.2" />
+      <p>La bella e la bestia (2014) [Fantasy Romance] ⭐6.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/224141%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/fDvPiswo5col2rnsOPuPudKYAlP.jpg" alt="Into the Woods (2014) [Fantasy Commedia] ⭐5.8" />
+      <p>Into the Woods (2014) [Fantasy Commedia] ⭐5.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/102651%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/c2g83Ux98pi1fGAs42xUYfJHf4Q.jpg" alt="Maleficent (2014) [Fantasy Avventura Azione Famiglia Romance] ⭐7.1" />
+      <p>Maleficent (2014) [Fantasy Avventura Azione Famiglia Romance] ⭐7.1</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/237710%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/wmOXRjryqYjwaaJAtzkLoXR9j6V.jpg" alt="100 volte Natale (2013) [Fantasy Famiglia] ⭐5.7" />
+      <p>100 volte Natale (2013) [Fantasy Famiglia] ⭐5.7</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/81005%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/l5tG3xcglOz16JUt3lYQjHSIFJd.jpg" alt="Il cacciatore di giganti (2013) [Fantasy Azione Avventura Dramma] ⭐5.9" />
+      <p>Il cacciatore di giganti (2013) [Fantasy Azione Avventura Dramma] ⭐5.9</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/60304%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/blXPoircKZ0QqE4m1jBI4AOJqb2.jpg" alt="Hansel & Gretel - Cacciatori di streghe (2013) [Fantasy Horror Azione] ⭐6.1" />
+      <p>Hansel & Gretel - Cacciatori di streghe (2013) [Fantasy Horror Azione] ⭐6.1</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/57158%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/5Rtu8VJsM0282ljMS9l0VKx67av.jpg" alt="Lo Hobbit: La desolazione di Smaug (2013) [Fantasy Avventura Azione] ⭐7.6" />
+      <p>Lo Hobbit: La desolazione di Smaug (2013) [Fantasy Avventura Azione] ⭐7.6</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/49524%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/noPI1xbVr11hivGFbrGe5gfe9P3.jpg" alt="R.I.P.D. - Poliziotti dall'aldilà (2013) [Fantasy Azione Commedia] ⭐5.8" />
+      <p>R.I.P.D. - Poliziotti dall'aldilà (2013) [Fantasy Azione Commedia] ⭐5.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/175774%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/w8dfFuVN1oz0VJQqNwIQpU07zDk.jpg" alt="Ruby Red (2013) [Fantasy Dramma Romance] ⭐7.0" />
+      <p>Ruby Red (2013) [Fantasy Dramma Romance] ⭐7.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/123553%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/eaNMaRlFd0laqI6kB8GWGSVYPtA.jpg" alt="Shadowhunters - Città di ossa (2013) [Fantasy Azione Mistero] ⭐6.4" />
+      <p>Shadowhunters - Città di ossa (2013) [Fantasy Azione Mistero] ⭐6.4</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/57165%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/7l0tGRyWfemhMulEzTUrJW0Abgm.jpg" alt="La furia dei titani (2012) [Fantasy Avventura Azione] ⭐5.7" />
+      <p>La furia dei titani (2012) [Fantasy Avventura Azione] ⭐5.7</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/71864%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/7LPoJZzz5Sit4jVJwtXhfQiG2ml.jpg" alt="L'incredibile vita di Timothy Green (2012) [Fantasy Dramma Commedia Famiglia] ⭐7.0" />
+      <p>L'incredibile vita di Timothy Green (2012) [Fantasy Dramma Commedia Famiglia] ⭐7.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/37958%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/85Qw9VfnPpKrWfDsvTy2H8p8CGk.jpg" alt="Immortals (2011) [Fantasy Azione Dramma] ⭐6.0" />
+      <p>Immortals (2011) [Fantasy Azione Dramma] ⭐6.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/50479%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/hgS7dPj4e6IYzDXn5IHA6XIbKfl.jpg" alt="Avalon High (2011) [Fantasy Famiglia Dramma televisione film] ⭐6.2" />
+      <p>Avalon High (2011) [Fantasy Famiglia Dramma televisione film] ⭐6.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/59436%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/hfdsTXO6wIJ9uywIgnqzNYDWYQK.jpg" alt="Midnight in Paris (2011) [Fantasy Commedia Romance] ⭐7.5" />
+      <p>Midnight in Paris (2011) [Fantasy Commedia Romance] ⭐7.5</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/47327%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/AvSHPhZxhMA8ns1DEwx7jEuUtAj.jpg" alt="Drive Angry (2011) [Fantasy Thriller Azione Crime] ⭐5.5" />
+      <p>Drive Angry (2011) [Fantasy Thriller Azione Crime] ⭐5.5</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/51256%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/8ymQBbSpiUm1R0ztyDz5cNGec9w.jpg" alt="La spettacolare festa di Natale di Ciuchino (2010) [Fantasy Animazione Commedia Famiglia] ⭐5.8" />
+      <p>La spettacolare festa di Natale di Ciuchino (2010) [Fantasy Animazione Commedia Famiglia] ⭐5.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/27022%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/acF3jMWygCTBkoQLP7GFmPeyjIp.jpg" alt="L'apprendista stregone (2010) [Fantasy Avventura Azione] ⭐6.1" />
+      <p>L'apprendista stregone (2010) [Fantasy Avventura Azione] ⭐6.1</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/35552%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/nRMZs3ZI9wUXn6uTeRNBSXno6uT.jpg" alt="Adèle e l'enigma del faraone (2010) [Fantasy Avventura Azione Mistero] ⭐6.2" />
+      <p>Adèle e l'enigma del faraone (2010) [Fantasy Avventura Azione Mistero] ⭐6.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/23488%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/uRKt8nYdy7EO4uqeKVVpZRmqrxF.jpg" alt="Dorian Gray (2009) [Fantasy Dramma Thriller] ⭐6.0" />
+      <p>Dorian Gray (2009) [Fantasy Dramma Thriller] ⭐6.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/8960%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/hi1EBSfVVcj5yF1EFhXPgVSjNuy.jpg" alt="Hancock (2008) [Fantasy Azione] ⭐6.3" />
+      <p>Hancock (2008) [Fantasy Azione] ⭐6.3</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/8966%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/n8nYzzKGP30M6u8sUon1YJmCgm8.jpg" alt="Twilight (2008) [Fantasy Dramma Romance] ⭐6.3" />
+      <p>Twilight (2008) [Fantasy Dramma Romance] ⭐6.3</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/2698%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/qXHs00mI08savtPZO7qOhPNbRpi.jpg" alt="Un'impresa da Dio (2007) [Fantasy Commedia Famiglia] ⭐5.6" />
+      <p>Un'impresa da Dio (2007) [Fantasy Commedia Famiglia] ⭐5.6</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/9954%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/ic7bNEfSbjfT2Os7ebSRS4xe94s.jpg" alt="The Covenant (2006) [Fantasy Horror Avventura Azione] ⭐5.6" />
+      <p>The Covenant (2006) [Fantasy Horror Avventura Azione] ⭐5.6</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/16140%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/eHr62EQOZIgkXlQLPWrwxjHOnZZ.jpg" alt="Death Note 2 - Il film - L'ultimo nome (2006) [Fantasy Thriller Mistero] ⭐7.1" />
+      <p>Death Note 2 - Il film - L'ultimo nome (2006) [Fantasy Thriller Mistero] ⭐7.1</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/14208%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/kAWTXqFaMkQo5vqRRZeB9qkevdi.jpg" alt="The Librarian 2 - Ritorno alle miniere di Re Salomone (2006) [Fantasy Azione Avventura] ⭐6.2" />
+      <p>The Librarian 2 - Ritorno alle miniere di Re Salomone (2006) [Fantasy Azione Avventura] ⭐6.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1417%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/fZaGhQbcZjawczIH1aI32NZE1HN.jpg" alt="Il labirinto del fauno (2006) [Fantasy Dramma Guerra] ⭐7.8" />
+      <p>Il labirinto del fauno (2006) [Fantasy Dramma Guerra] ⭐7.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/2486%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/x67bjXBWxnuUEbNbKBUoBsf2vUN.jpg" alt="Eragon (2006) [Fantasy Azione Avventura Famiglia] ⭐5.1" />
+      <p>Eragon (2006) [Fantasy Azione Avventura Famiglia] ⭐5.1</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/834%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/apn0WDnVsU3Ivf7RrPhnd6qVPWE.jpg" alt="Underworld: Evolution (2006) [Fantasy Azione Thriller] ⭐6.6" />
+      <p>Underworld: Evolution (2006) [Fantasy Azione Thriller] ⭐6.6</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/11283%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/oLxNrV86ZvDD1topY79ov0nbLsW.jpg" alt="Nanny McPhee - Tata Matilda (2005) [Fantasy Commedia Famiglia] ⭐6.7" />
+      <p>Nanny McPhee - Tata Matilda (2005) [Fantasy Commedia Famiglia] ⭐6.7</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/10214%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/dvMVTu4TUuyshVCl8sP5cz8Mh1m.jpg" alt="The Mask 2 (2005) [Fantasy Commedia Famiglia Avventura] ⭐4.2" />
+      <p>The Mask 2 (2005) [Fantasy Commedia Famiglia Avventura] ⭐4.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/561%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/oaWsGohG0HA9Ps6831OgZU2CJ3k.jpg" alt="Constantine (2005) [Fantasy Azione Horror] ⭐7.1" />
+      <p>Constantine (2005) [Fantasy Azione Horror] ⭐7.1</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1487%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/4M9gl3QBZzJ8n9Jd9mVHeVQfjEx.jpg" alt="Hellboy (2004) [Fantasy Azione] ⭐6.7" />
+      <p>Hellboy (2004) [Fantasy Azione] ⭐6.7</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/9480%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/mtZuruaJssrLleI53VogSve44D9.jpg" alt="Daredevil (2003) [Fantasy Azione] ⭐5.3" />
+      <p>Daredevil (2003) [Fantasy Azione] ⭐5.3</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/277%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/e1lRZSWYF4aEMxjGmphN94aSQos.jpg" alt="Underworld (2003) [Fantasy Azione Thriller] ⭐6.8" />
+      <p>Underworld (2003) [Fantasy Azione Thriller] ⭐6.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/9021%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/xdULpn6IxOhsiaT1kMiHXF95QKR.jpg" alt="Che fine ha fatto Santa Clause? (2002) [Fantasy Commedia Famiglia] ⭐6.0" />
+      <p>Che fine ha fatto Santa Clause? (2002) [Fantasy Commedia Famiglia] ⭐6.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/36586%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/oLYi9lndeuvZlGR8upIKV0pgA0E.jpg" alt="Blade II (2002) [Fantasy Horror Azione Thriller] ⭐6.6" />
+      <p>Blade II (2002) [Fantasy Horror Azione Thriller] ⭐6.6</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/9597%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/svFMqTQJtlOms1PBLSlKkYWklt8.jpg" alt="Vidocq - La maschera senza volto (2001) [Fantasy Azione Thriller Crime Fantascienza Mistero] ⭐5.9" />
+      <p>Vidocq - La maschera senza volto (2001) [Fantasy Azione Thriller Crime Fantascienza Mistero] ⭐5.9</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/10836%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/iwlcp8D9vY2SEwlvDr0FSnpLv3H.jpg" alt="Dagon - La mutazione del male (2001) [Fantasy Horror Thriller] ⭐6.1" />
+      <p>Dagon - La mutazione del male (2001) [Fantasy Horror Thriller] ⭐6.1</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1636%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/6ielQeIi3U31ihrQdegPPz7cwTX.jpg" alt="Indiavolato (2000) [Fantasy Commedia Romance] ⭐6.1" />
+      <p>Indiavolato (2000) [Fantasy Commedia Romance] ⭐6.1</p>
+    </a>
+    
   </div>
-  <div style="text-align: center; margin-top: 30px;">
-    <a href="index.html" style="color: #aaa;">⟵ Torna alla home</a>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
   </div>
 </body>
 </html>

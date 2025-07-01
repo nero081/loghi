@@ -1,838 +1,949 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Romance</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .griglia {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+      justify-items: center;
+    }
+
+    .canale {
+      background-color: #292929;
+      border-radius: 10px;
+      text-align: center;
+      color: #fff;
+      padding: 15px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .canale img {
+      width: 100%;
+      height: 120px;
+      object-fit: contain;
+      border-radius: 8px;
+      background-color: #111;
+      margin-bottom: 10px;
+    }
+
+    .canale p {
+      margin: 0;
+      font-size: 0.95em;
+    }
+
+    .canale:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+
+    .canale:focus {
+      outline: 2px solid #fff;
+      background-color: #3a3a3a;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    @media screen and (orientation: portrait) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      }
+
+      .canale img {
+        height: 100px;
+      }
+
+      .canale p {
+        font-size: 0.9em;
+      }
+
+      body {
+        padding: 15px;
+      }
+    }
+
+    @media screen and (orientation: landscape) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .canale img {
+        height: 140px;
+      }
+
+      .canale p {
+        font-size: 1em;
+      }
+
+      body {
+        padding: 30px;
+      }
+    }
+
+    .back {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .back a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    .back a:hover {
+      color: #fff;
+    }
+  </style>
 </head>
 <body>
   <h1>Romance</h1>
   <div class="griglia">
     
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1272149%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/qyY79HuC7pZXyU9QKDUjl7PqQks.jpg" alt="Bridget Jones - Un amore di ragazzo (2025) [Romance Commedia Dramma] ⭐6.6">
-    <p>Bridget Jones - Un amore di ragazzo (2025) [Romance Commedia Dramma] ⭐6.6</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1294203%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/xFsFYqCxvDXtkCljhHq8n9Drldb.jpg" alt="È colpa mia: Londra (2025) [Romance Dramma] ⭐7.4">
-    <p>È colpa mia: Londra (2025) [Romance Dramma] ⭐7.4</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1214481%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/8oCatCCkwfLQ9eLwI3ozsKq742D.jpg" alt="Love Forever (2025) [Romance Commedia Dramma] ⭐5.1">
-    <p>Love Forever (2025) [Romance Commedia Dramma] ⭐5.1</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1387198%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/8X33lFdh36O2l8eQaYMeN3gu3ku.jpg" alt="Amore a 39 gradi (2024) [Romance Dramma Commedia] ⭐7.1">
-    <p>Amore a 39 gradi (2024) [Romance Dramma Commedia] ⭐7.1</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/988512%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/fEbJku8PDizV2P5IQmHA0dcyf50.jpg" alt="Running on Empty (2024) [Romance Commedia] ⭐5.7">
-    <p>Running on Empty (2024) [Romance Commedia] ⭐5.7</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1290486%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/4t80WORFWqDYf4BRwV2jrXNHJdN.jpg" alt="The Merry Gentlemen (2024) [Romance Commedia] ⭐5.8">
-    <p>The Merry Gentlemen (2024) [Romance Commedia] ⭐5.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1032472%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/siJxsEqgEbMCn1xtsTiSnUDZQY8.jpg" alt="Touch (2024) [Romance Dramma] ⭐7.4">
-    <p>Touch (2024) [Romance Dramma] ⭐7.4</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1104171%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/uFZfYvKZUTntdxSh5dbVLfLoa8q.jpg" alt="Appuntamento a Natale (2024) [Romance Commedia] ⭐6.4">
-    <p>Appuntamento a Natale (2024) [Romance Commedia] ⭐6.4</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1024452%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/Bu1cgfaLOqELu11qRdmzYX6o6K.jpg" alt="French Girl (2024) [Romance Commedia] ⭐6.4">
-    <p>French Girl (2024) [Romance Commedia] ⭐6.4</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1068518%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/5Yyv5YFQOQ6LpVMUdc4SCXsZijn.jpg" alt="Haunted Heart - L'isola dell'inganno (2024) [Romance Thriller] ⭐5.7">
-    <p>Haunted Heart - L'isola dell'inganno (2024) [Romance Thriller] ⭐5.7</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1352821%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/rFUHBnk69F5cjMBOyPQf5HxrEOt.jpg" alt="Un vero gentiluomo (2024) [Romance Dramma] ⭐6.2">
-    <p>Un vero gentiluomo (2024) [Romance Dramma] ⭐6.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1029330%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/zsvD0BjEQIIoh2PpE5X7VXmSrQO.jpg" alt="Someone like you - L’eco del cuore (2024) [Romance Dramma] ⭐7.3">
-    <p>Someone like you - L’eco del cuore (2024) [Romance Dramma] ⭐7.3</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1255350%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/tUfsU0HfwyJdi8VQgMB04YxaWaQ.jpg" alt="Find Me Falling - Un'isola dove innamorarsi (2024) [Romance Commedia Musica] ⭐6.6">
-    <p>Find Me Falling - Un'isola dove innamorarsi (2024) [Romance Commedia Musica] ⭐6.6</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1257750%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/oiKaiTNITetOy4OOxT6Zoh7trVV.jpg" alt="Honeymoonish (2024) [Romance Commedia] ⭐6.7">
-    <p>Honeymoonish (2024) [Romance Commedia] ⭐6.7</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1096342%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/36fk8UW5zFPYuCsqAAwZZQZs8hi.jpg" alt="Uno splendido disastro 2 - Il matrimonio (2024) [Romance Commedia Dramma] ⭐5.5">
-    <p>Uno splendido disastro 2 - Il matrimonio (2024) [Romance Commedia Dramma] ⭐5.5</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1093231%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/5tTr614aOldDJqyhzoATCtHv5CM.jpg" alt="La madre della sposa (2024) [Romance Commedia] ⭐5.9">
-    <p>La madre della sposa (2024) [Romance Commedia] ⭐5.9</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/843527%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/Y5P4Q3q8nrruZ9aD3wXeJS2Plg.jpg" alt="L'idea che ho di te (2024) [Romance Dramma Commedia] ⭐7.4">
-    <p>L'idea che ho di te (2024) [Romance Dramma Commedia] ⭐7.4</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/968441%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/kUX5ourGUJDG0yvEeS3uooZS0dS.jpg" alt="Música (2024) [Romance Commedia Musica] ⭐6.4">
-    <p>Música (2024) [Romance Commedia Musica] ⭐6.4</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1017633%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/lqsXM2gvHCukTFPpKFRMOYBN0FV.jpg" alt="Come far innamorare Billy Walsh (2024) [Romance Commedia] ⭐6.4">
-    <p>Come far innamorare Billy Walsh (2024) [Romance Commedia] ⭐6.4</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1257130%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/jsLJHJKpp3hjp8CC1XkJAwF3BxU.jpg" alt="No Pressure (2024) [Romance Commedia] ⭐5.3">
-    <p>No Pressure (2024) [Romance Commedia] ⭐5.3</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1019420%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/gSQI95os0tEJ4AEI192JzxCCE7S.jpg" alt="Irish Wish - Solo un desiderio (2024) [Romance Commedia Fantasy] ⭐6.2">
-    <p>Irish Wish - Solo un desiderio (2024) [Romance Commedia Fantasy] ⭐6.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1230085%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/eiFhCPQZ5QhsK0WFXMqwT1XqhBR.jpg" alt="Cenere (2024) [Romance Dramma Fantasy] ⭐5.7">
-    <p>Cenere (2024) [Romance Dramma Fantasy] ⭐5.7</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1014590%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/rgV4h8zEh3KX3gJCqgHTuVx7P1k.jpg" alt="arte e bugie (2024)" tvg-logo="https://image.tmdb.org/t/p/w500/rgV4h8zEh3KX3gJCqgHTuVx7P1k.jpg" type="movie" group-title="Romance",Upgraded: amore, arte e bugie (2024) [Romance Commedia] ⭐7.2">
-    <p>arte e bugie (2024)" tvg-logo="https://image.tmdb.org/t/p/w500/rgV4h8zEh3KX3gJCqgHTuVx7P1k.jpg" type="movie" group-title="Romance",Upgraded: amore, arte e bugie (2024) [Romance Commedia] ⭐7.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1100642%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/e1fvQdD63RP2MS9jCB8jzg7fkdr.jpg" alt="Era solo un messaggio prima di Natale (2023) [Romance Commedia televisione film] ⭐6.4">
-    <p>Era solo un messaggio prima di Natale (2023) [Romance Commedia televisione film] ⭐6.4</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1150521%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/bRDWHhiVLllPWBU2ADV61acyqT7.jpg" alt="Christmas on Windmill Way (2023) [Romance Commedia televisione film] ⭐6.0">
-    <p>Christmas on Windmill Way (2023) [Romance Commedia televisione film] ⭐6.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1104102%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/bGjcWn55YmVsDn1SORwqnHYPTLo.jpg" alt="Amore e swing (2023) [Romance Commedia televisione film] ⭐7.6">
-    <p>Amore e swing (2023) [Romance Commedia televisione film] ⭐7.6</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1066575%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/32jzdFfVwzHGwjqNWnfnUzF6iAC.jpg" alt="I limoni d'inverno (2023) [Romance] ⭐6.3">
-    <p>I limoni d'inverno (2023) [Romance] ⭐6.3</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/986280%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/jGWCzlTEIfTAl6MdWRYIgUKSs0N.jpg" alt="Foglie al vento (2023) [Romance Commedia Dramma] ⭐7.2">
-    <p>Foglie al vento (2023) [Romance Commedia Dramma] ⭐7.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/975043%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/gW0JEpeHO108GSgN521GT8xQy5F.jpg" alt="Storia di una confessione (2023) [Romance Commedia Dramma] ⭐6.2">
-    <p>Storia di una confessione (2023) [Romance Commedia Dramma] ⭐6.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/561717%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/zTMsnzB55eRRXG9rOI2fgx8Of3i.jpg" alt="The Perfect Find - Tutto è davvero possibile (2023) [Romance Commedia] ⭐6.1">
-    <p>The Perfect Find - Tutto è davvero possibile (2023) [Romance Commedia] ⭐6.1</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/846961%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/6MF3JvIZkluUijw9rvDKNqPT8kC.jpg" alt="One True Loves (2023) [Romance Commedia Dramma] ⭐6.4">
-    <p>One True Loves (2023) [Romance Commedia Dramma] ⭐6.4</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1211066%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/o2SDh1kWl2uzgrNtVWRGqE4xU0l.jpg" alt="La bisbetica domata 2 (2023) [Romance Commedia] ⭐5.5">
-    <p>La bisbetica domata 2 (2023) [Romance Commedia] ⭐5.5</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1077426%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/oDxyCXsxjXSLaj2uQtcMj5Vjth3.jpg" alt="Una gran voglia di vivere (2023) [Romance Commedia] ⭐5.6">
-    <p>Una gran voglia di vivere (2023) [Romance Commedia] ⭐5.6</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1176139%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/5Er8nN27yDke1CSVeOHB32suz5E.jpg" alt="Il tuo Natale o il mio? 2 (2023) [Romance Commedia] ⭐6.2">
-    <p>Il tuo Natale o il mio? 2 (2023) [Romance Commedia] ⭐6.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1202584%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/bhIIk5nZRCHQVPXz06oR90Ftye2.jpg" alt="Come sempre a Natale (2023) [Romance Commedia Dramma] ⭐5.9">
-    <p>Come sempre a Natale (2023) [Romance Commedia Dramma] ⭐5.9</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1044302%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/lbSnmvAfL57XthsZ6o4Uwt1bB5z.jpg" alt="Ultima chiamata per Istanbul (2023) [Romance Dramma] ⭐6.3">
-    <p>Ultima chiamata per Istanbul (2023) [Romance Dramma] ⭐6.3</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1073170%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/liVS0KJMviz4iOfbrZkLqdCzBIp.jpg" alt="Zoey 102 (2023) [Romance Commedia] ⭐6.8">
-    <p>Zoey 102 (2023) [Romance Commedia] ⭐6.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/912916%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/mg4n7RR3H9UdaLULMLQd671MZln.jpg" alt="L'altra Zoey (2023) [Romance Dramma Commedia] ⭐7.0">
-    <p>L'altra Zoey (2023) [Romance Dramma Commedia] ⭐7.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/353577%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/4uREvTfhhgNuX1rzWWBxwFeYoJD.jpg" alt="La probabilità statistica dell'amore a prima vista (2023) [Romance Dramma] ⭐7.2">
-    <p>La probabilità statistica dell'amore a prima vista (2023) [Romance Dramma] ⭐7.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/936952%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/9TURnuPLt5mZDWaayCY2QfI7TlE.jpg" alt="Una torta per l'uomo giusto (2023) [Romance Commedia Dramma] ⭐7.0">
-    <p>Una torta per l'uomo giusto (2023) [Romance Commedia Dramma] ⭐7.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/921636%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/5dliMQ2ODbGNoq0hlefdnuXQxMw.jpg" alt="The Out-Laws - Suoceri fuorilegge (2023) [Romance Azione Commedia] ⭐6.0">
-    <p>The Out-Laws - Suoceri fuorilegge (2023) [Romance Azione Commedia] ⭐6.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/758336%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/85z02NZ32wUF9iQm5PJdiQkmTjP.jpg" alt="Love Again (2023) [Romance Dramma Commedia] ⭐6.7">
-    <p>Love Again (2023) [Romance Dramma Commedia] ⭐6.7</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1016121%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/fZ8VmEPzZZFcONrLEJa6h0xQ8Sf.jpg" alt="Uno splendido disastro (2023) [Romance Dramma Commedia] ⭐6.7">
-    <p>Uno splendido disastro (2023) [Romance Dramma Commedia] ⭐6.7</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/932430%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/zVgRfuBvsFTU4mFvDt1Qlqo1CRo.jpg" alt="Prom Pact (2023) [Romance Commedia] ⭐7.3">
-    <p>Prom Pact (2023) [Romance Commedia] ⭐7.3</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/881462%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/gGtzr9huoZFm0SoQmXYAAcwO4ty.jpg" alt="Era ora (2023) [Romance Commedia Dramma] ⭐6.7">
-    <p>Era ora (2023) [Romance Commedia Dramma] ⭐6.7</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/818648%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/g5B0MzkowLVyuGp2K1HU7fgmRVO.jpg" alt="Il futuro in un bacio (2023) [Romance Commedia] ⭐6.2">
-    <p>Il futuro in un bacio (2023) [Romance Commedia] ⭐6.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/869112%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/lu7II0I3yFjr2KELRkda6KG3MKk.jpg" alt="Mi ricorda qualcuno (2023) [Romance Commedia Dramma] ⭐5.8">
-    <p>Mi ricorda qualcuno (2023) [Romance Commedia Dramma] ⭐5.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/866413%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/x5E4TndwASNkaK2hwgeYfsIVo2x.jpg" alt="You People (2023) [Romance Commedia] ⭐5.6">
-    <p>You People (2023) [Romance Commedia] ⭐5.6</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/785521%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/vdgUNCruHI6jX9TU4vvplgpDtL7.jpg" alt="Battle: Freestyle (2022) [Romance Dramma] ⭐5.5">
-    <p>Battle: Freestyle (2022) [Romance Dramma] ⭐5.5</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1016661%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/zwkneUe28THVEQnDSTBHPoytPDY.jpg" alt="Il pretendente (2022) [Romance televisione film Storia] ⭐6.9">
-    <p>Il pretendente (2022) [Romance televisione film Storia] ⭐6.9</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/928769%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/1NXe9caUGbnw49hQlqlXXfvTgeI.jpg" alt="AI Love You (2022) [Romance Fantascienza Dramma] ⭐6.0">
-    <p>AI Love You (2022) [Romance Fantascienza Dramma] ⭐6.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1032591%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/arfVVSPDfhNZxZwbNOYGz4tozlE.jpg" alt="I colori del Natale (2022) [Romance Commedia Dramma televisione film] ⭐5.6">
-    <p>I colori del Natale (2022) [Romance Commedia Dramma televisione film] ⭐5.6</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1029578%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/7WSMNERoqgtOwV1Q5xDmAiLvMeE.jpg" alt="Natale tutto incluso (2022) [Romance Commedia Dramma televisione film] ⭐6.0">
-    <p>Natale tutto incluso (2022) [Romance Commedia Dramma televisione film] ⭐6.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1045341%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/as6DAMoyyz8bXazkA224vh3PnJv.jpg" alt="Prima di andare via (2022) [Romance Dramma] ⭐5.2">
-    <p>Prima di andare via (2022) [Romance Dramma] ⭐5.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/633657%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/a0tSiNq9Ze4ucWFU6oRPd4OEGJr.jpg" alt="The Good House (2022) [Romance Dramma Commedia] ⭐6.4">
-    <p>The Good House (2022) [Romance Dramma Commedia] ⭐6.4</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/758330%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/yLmDXwVmxlmID7sXBLrAweVF5Yx.jpg" alt="Il piacere è tutto mio (2022) [Romance Dramma] ⭐7.0">
-    <p>Il piacere è tutto mio (2022) [Romance Dramma] ⭐7.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/826942%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/kkjmAUFuuHMQftFMmN43TbsswS7.jpg" alt="Spin Me Round (2022) [Romance Commedia] ⭐5.0">
-    <p>Spin Me Round (2022) [Romance Commedia] ⭐5.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/828613%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/q3eSY8Cb95MTtSQYJSBzvECNDue.jpg" alt="La scelta del destino (2022) [Romance Commedia] ⭐7.5">
-    <p>La scelta del destino (2022) [Romance Commedia] ⭐7.5</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/916053%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/lPXGYpRzcc6pk8pD6eEeykfc7UF.jpg" alt="Un regalo da Tiffany (2022) [Romance Commedia Dramma] ⭐6.7">
-    <p>Un regalo da Tiffany (2022) [Romance Commedia Dramma] ⭐6.7</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1053080%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/5aYsIglNgGZXkvvs9QBz0BP83UM.jpg" alt="Giusto in tempo per Natale (2022) [Romance Commedia] ⭐6.1">
-    <p>Giusto in tempo per Natale (2022) [Romance Commedia] ⭐6.1</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1025805%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/sioiDcvldcz36RlrsXGtAbesqwp.jpg" alt="Ardente pazienza (2022) [Romance Dramma] ⭐6.7">
-    <p>Ardente pazienza (2022) [Romance Dramma] ⭐6.7</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/865559%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/eSMw8azkBkRfX5v9qiINFy9iCJP.jpg" alt="Il tuo Natale o il mio? (2022) [Romance Commedia] ⭐6.4">
-    <p>Il tuo Natale o il mio? (2022) [Romance Commedia] ⭐6.4</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/936960%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/4CxDiIEBsWGQIdCMHhL65jrBssu.jpg" alt="Natale con te (2022) [Romance Commedia] ⭐5.8">
-    <p>Natale con te (2022) [Romance Commedia] ⭐5.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/962232%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/7Us3DE5wHfIBG9mAlWSRRQ4fY3U.jpg" alt="Oltre l’universo (2022) [Romance Dramma Musica] ⭐8.0">
-    <p>Oltre l’universo (2022) [Romance Dramma Musica] ⭐8.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/888479%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/slLGOl6rTiMVySAYesYUFnJaaTf.jpg" alt="Time Is Up 2 (2022) [Romance Dramma] ⭐6.1">
-    <p>Time Is Up 2 (2022) [Romance Dramma] ⭐6.1</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/826769%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/1pUXn05oYa8tL66t0oavMVG1vha.jpg" alt="Rosaline (2022) [Romance Dramma Commedia] ⭐7.1">
-    <p>Rosaline (2022) [Romance Dramma Commedia] ⭐7.1</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/934756%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/zl1LcVBIOp14D18F09vgGKYpUX3.jpg" alt="Love in the Villa - Innamorarsi a Verona (2022) [Romance Commedia] ⭐6.0">
-    <p>Love in the Villa - Innamorarsi a Verona (2022) [Romance Commedia] ⭐6.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/829560%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/my5w73OU9quMkzLJ4oM8VZbmA8H.jpg" alt="Altri 365 giorni (2022) [Romance Dramma] ⭐6.4">
-    <p>Altri 365 giorni (2022) [Romance Dramma] ⭐6.4</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/805327%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/mddG20nvrfi7mfijCA982ktnqeC.jpg" alt="Linee parallele (2022) [Romance Dramma Commedia] ⭐6.9">
-    <p>Linee parallele (2022) [Romance Dramma Commedia] ⭐6.9</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/648743%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/37kl496Ucx2m0iq2r0keLPQKjR0.jpg" alt="Non è il karma! (2022) [Romance Commedia] ⭐6.9">
-    <p>Non è il karma! (2022) [Romance Commedia] ⭐6.9</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/818612%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/8e44J55JBVOMExHZps1rZYvpTY5.jpg" alt="La stagione dei matrimoni (2022) [Romance Commedia] ⭐6.2">
-    <p>La stagione dei matrimoni (2022) [Romance Commedia] ⭐6.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/787787%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/aLeswI1zxf2xN5iIdcJpqx9XEnX.jpg" alt="Tutto è possibile (2022) [Romance Commedia Dramma] ⭐5.8">
-    <p>Tutto è possibile (2022) [Romance Commedia Dramma] ⭐5.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/873127%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/jTz5U9m2vdYLVIpkuymbtTbfQA5.jpg" alt="Sotto il sole di Amalfi (2022) [Romance Commedia] ⭐5.8">
-    <p>Sotto il sole di Amalfi (2022) [Romance Commedia] ⭐5.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/820912%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/s99WrKSEVR4RVvwm5Zn2cqrHTMM.jpg" alt="Persuasione (2022) [Romance Dramma Commedia] ⭐6.0">
-    <p>Persuasione (2022) [Romance Dramma Commedia] ⭐6.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/953233%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/qGFJDqPYzBLl9MGJ9OugfNd88xh.jpg" alt="La bisbetica domata (2022) [Romance Commedia] ⭐5.5">
-    <p>La bisbetica domata (2022) [Romance Commedia] ⭐5.5</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/818750%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/7bbgqNGNrbW38dxg9QqBzGkVnVL.jpg" alt="The In Between - Non ti perderò (2022) [Romance Fantascienza Dramma] ⭐7.4">
-    <p>The In Between - Non ti perderò (2022) [Romance Fantascienza Dramma] ⭐7.4</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/790525%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/g6m5UVvNimtafCkDOM8heiWvnlK.jpg" alt="Sempre più bello (2022) [Romance Commedia] ⭐6.0">
-    <p>Sempre più bello (2022) [Romance Commedia] ⭐6.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/615904%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/tujeqMkbxMoaBI24o5kpDLMQ7PJ.jpg" alt="Marry Me - Sposami (2022) [Romance Commedia Musica] ⭐6.6">
-    <p>Marry Me - Sposami (2022) [Romance Commedia Musica] ⭐6.6</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/927855%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/w7QEQww3K60YhS9zMidJk641fES.jpg" alt="Tattiche d'amore (2022) [Romance Commedia] ⭐7.1">
-    <p>Tattiche d'amore (2022) [Romance Commedia] ⭐7.1</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/790142%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/flpmnY7ROYDeGtURZb5Nt4xIPlg.jpg" alt="Il trattamento reale (2022) [Romance Commedia] ⭐6.7">
-    <p>Il trattamento reale (2022) [Romance Commedia] ⭐6.7</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/776327%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/hh7YUEj3HXpHKetOlMiPMgwFfuc.jpg" alt="Blackout Love (2022) [Romance Commedia] ⭐4.8">
-    <p>Blackout Love (2022) [Romance Commedia] ⭐4.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/797787%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/uGCv49xmS0AV2GehXkiTSAEg2QH.jpg" alt="Man in Love (2021) [Romance Dramma] ⭐7.1">
-    <p>Man in Love (2021) [Romance Dramma] ⭐7.1</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/743173%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/puBoQMQiPJQBz1sjMSfYBpc7QoA.jpg" alt="Per tutta la vita (2021) [Romance Commedia Dramma] ⭐5.8">
-    <p>Per tutta la vita (2021) [Romance Commedia Dramma] ⭐5.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/612491%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/oDiqRgmWKfWYplyTXhKVdpvBRb8.jpg" alt="Supereroi (2021) [Romance Commedia Dramma] ⭐7.2">
-    <p>Supereroi (2021) [Romance Commedia Dramma] ⭐7.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/878111%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/1qkUG6UcUXwkrobQOtWfjcPQr76.jpg" alt="A Christmas No. 1 (2021) [Romance Commedia Musica Dramma] ⭐5.6">
-    <p>A Christmas No. 1 (2021) [Romance Commedia Musica Dramma] ⭐5.6</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/887645%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/gkby2TBAsohytU4nrVVyynPjERj.jpg" alt="Amore senza mezze misure (2021) [Romance Commedia] ⭐6.0">
-    <p>Amore senza mezze misure (2021) [Romance Commedia] ⭐6.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/785533%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/ya1rx5JbOVP0Mj1YBAs5Mjoojfx.jpg" alt="Nei panni di una principessa - Inseguendo la stella (2021) [Romance Commedia] ⭐6.8">
-    <p>Nei panni di una principessa - Inseguendo la stella (2021) [Romance Commedia] ⭐6.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/763148%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/dxWHyMY4HoXH8LiEhYlga2OtK5B.jpg" alt="Time Is Up (2021) [Romance Dramma] ⭐6.5">
-    <p>Time Is Up (2021) [Romance Dramma] ⭐6.5</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/806950%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/n7KFEbhEmoKY3N1AnK2MlmYBWCa.jpg" alt="Anni da Cane (2021) [Romance Commedia] ⭐6.4">
-    <p>Anni da Cane (2021) [Romance Commedia] ⭐6.4</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/785539%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/7w4gX4zRlONqThjhmjdxw93FAXt.jpg" alt="Resort to Love - All'amore non si sfugge (2021) [Romance Commedia] ⭐7.2">
-    <p>Resort to Love - All'amore non si sfugge (2021) [Romance Commedia] ⭐7.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/506281%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/yqldwzQDSLWADLaVeSQfBpGO2aC.jpg" alt="Il mondo che verrà (2021) [Romance Dramma Western] ⭐7.0">
-    <p>Il mondo che verrà (2021) [Romance Dramma Western] ⭐7.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/614409%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/a2KaX2J9w1E3AaclMgnGra9WAVZ.jpg" alt="Tua per sempre (2021) [Romance Commedia Dramma] ⭐7.5">
-    <p>Tua per sempre (2021) [Romance Commedia Dramma] ⭐7.5</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/746039%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/3QtYNYNTHDvpGIgztEMPiX1v70z.jpg" alt="Un Natale senza tempo (2020) [Romance televisione film] ⭐6.4">
-    <p>Un Natale senza tempo (2020) [Romance televisione film] ⭐6.4</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/632322%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/aQ6FE2M2PPsx4CyCH2lpcxn1cuU.jpg" alt="All My Life (2020) [Romance Dramma] ⭐7.8">
-    <p>All My Life (2020) [Romance Dramma] ⭐7.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/796649%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/rx3p97KAUDaz7PXt9xwlEWn8CZd.jpg" alt="Namaste Wahala (2020) [Romance Commedia Musica] ⭐7.1">
-    <p>Namaste Wahala (2020) [Romance Commedia Musica] ⭐7.1</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/576920%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/irXWELZfWW8tehfNV82O2UT258r.jpg" alt="Pattini d'argento (2020) [Romance Avventura Dramma Famiglia] ⭐7.6">
-    <p>Pattini d'argento (2020) [Romance Avventura Dramma Famiglia] ⭐7.6</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/754053%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/2kYZhqn8ipjpsAlSxwQRUjQ4ps8.jpg" alt="L'appuntamento natalizio di papà (2020) [Romance Commedia] ⭐6.2">
-    <p>L'appuntamento natalizio di papà (2020) [Romance Commedia] ⭐6.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/628333%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/1BjSAxd3ssV9b7ImZWHy0RVEWo0.jpg" alt="Il profumo dell'erba selvatica (2020) [Romance Dramma] ⭐5.2">
-    <p>Il profumo dell'erba selvatica (2020) [Romance Dramma] ⭐5.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/520172%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/zxulO3BV9ISDBxMWnwmqdhMFLaB.jpg" alt="Non ti presento i miei (2020) [Romance Commedia] ⭐7.2">
-    <p>Non ti presento i miei (2020) [Romance Commedia] ⭐7.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/710356%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/sofUvABVfBSXzrJOGpdqxu2c9yl.jpg" alt="Intreccio di destini (2020) [Romance Dramma] ⭐7.3">
-    <p>Intreccio di destini (2020) [Romance Dramma] ⭐7.3</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/734280%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/gA0SwJiwm3cbzfXdVO5kYaoDaMk.jpg" alt="Mezzanotte al Magnolia (2020) [Romance Commedia televisione film] ⭐6.3">
-    <p>Mezzanotte al Magnolia (2020) [Romance Commedia televisione film] ⭐6.3</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/664031%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/d5LUnh5fH6ArY4eXnMZ20tKZxEU.jpg" alt="Sul più bello (2020) [Romance Commedia] ⭐6.9">
-    <p>Sul più bello (2020) [Romance Commedia] ⭐6.9</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/470610%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/z7TSx67Sb7XSC7ddG5POu71uCEU.jpg" alt="Endless (2020) [Romance Dramma Fantasy] ⭐6.7">
-    <p>Endless (2020) [Romance Dramma Fantasy] ⭐6.7</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/606679%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/f0tn0AnJfURA600hNVdqAecswGg.jpg" alt="L'assistente della Star (2020) [Romance Commedia Musica Dramma] ⭐7.0">
-    <p>L'assistente della Star (2020) [Romance Commedia Musica Dramma] ⭐7.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/606566%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/scN9Jd3n1sUjGLKeSyb43y8Fnr0.jpg" alt="Gli anni più belli (2020) [Romance Dramma Commedia] ⭐6.8">
-    <p>Gli anni più belli (2020) [Romance Dramma Commedia] ⭐6.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/576156%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/6FYGT8RXy6HHnxrkQi7buJImtDY.jpg" alt="The Lovebirds (2020) [Romance Commedia] ⭐6.1">
-    <p>The Lovebirds (2020) [Romance Commedia] ⭐6.1</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/613504%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/Afdodj82LSt0pivvnvfoDW2z29h.jpg" alt="After 2 (2020) [Romance Dramma] ⭐7.2">
-    <p>After 2 (2020) [Romance Dramma] ⭐7.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/664413%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/1di3hZFENsfAeOW1CeaZ9YskA0E.jpg" alt="365 giorni (2020) [Romance Dramma] ⭐7.0">
-    <p>365 giorni (2020) [Romance Dramma] ⭐7.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/565426%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/twcYZFOPlbyd3xrQzr5rEuEg0H.jpg" alt="P.S. Ti amo ancora (2020) [Romance Commedia] ⭐6.8">
-    <p>P.S. Ti amo ancora (2020) [Romance Commedia] ⭐6.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/508791%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/jqUNpRLJdwaEMUOc8FyaQtAF80K.jpg" alt="Il sole è anche una stella (2019) [Romance Dramma] ⭐7.0">
-    <p>Il sole è anche una stella (2019) [Romance Dramma] ⭐7.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/602609%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/eJi209Hfgc25yk4LjeF4YbdveOo.jpg" alt="Good Sam (2019) [Romance Dramma Commedia] ⭐6.0">
-    <p>Good Sam (2019) [Romance Dramma Commedia] ⭐6.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/531438%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/gJlaaXGzjzMYATdw986chesGeJX.jpg" alt="Un safari per Natale (2019) [Romance Commedia] ⭐6.5">
-    <p>Un safari per Natale (2019) [Romance Commedia] ⭐6.5</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/615585%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/uODpjkTLI8njATnYG0SQ8UpMR9u.jpg" alt="Un Natale da favola (2019) [Romance televisione film Commedia] ⭐6.6">
-    <p>Un Natale da favola (2019) [Romance televisione film Commedia] ⭐6.6</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/513576%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/hR1ePcbEFxPKuhSWNuJ5ox5rKKi.jpg" alt="Finché forse non vi separi (2019) [Romance Commedia] ⭐6.6">
-    <p>Finché forse non vi separi (2019) [Romance Commedia] ⭐6.6</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/630916%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/o94uiYVMIrdUSMawgjpmA6rP4jA.jpg" alt="Natale al Plaza (2019) [Romance televisione film] ⭐6.4">
-    <p>Natale al Plaza (2019) [Romance televisione film] ⭐6.4</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/295151%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/tuEfOByeINDZsI5O72j8r7wBAsJ.jpg" alt="Let It Snow - Innamorarsi sotto la neve (2019) [Romance Commedia] ⭐6.1">
-    <p>Let It Snow - Innamorarsi sotto la neve (2019) [Romance Commedia] ⭐6.1</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/582873%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/kOC91b6y0CKbwmPHZLlBnXkNGlV.jpg" alt="Martin Eden (2019) [Romance Dramma] ⭐7.0">
-    <p>Martin Eden (2019) [Romance Dramma] ⭐7.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/543540%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/rrAYdezO3h1mjdYTaQyTXoj8IZ4.jpg" alt="The Perfect Date (2019) [Romance Commedia] ⭐6.4">
-    <p>The Perfect Date (2019) [Romance Commedia] ⭐6.4</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/606117%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/ozBX0u5caaJFli9AssqJmARb5R.jpg" alt="A Cinderella Story: Christmas Wish (2019) [Romance Musica Commedia Fantasy] ⭐6.4">
-    <p>A Cinderella Story: Christmas Wish (2019) [Romance Musica Commedia Fantasy] ⭐6.4</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/553608%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/hefzmSfoWxOmf1IV343abaJ037Y.jpg" alt="Cenerentola Pop (2019) [Romance Commedia] ⭐6.4">
-    <p>Cenerentola Pop (2019) [Romance Commedia] ⭐6.4</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/527641%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/nuIlrl1jBwvKSOjXGqba418nwWF.jpg" alt="A un metro da te (2019) [Romance Dramma] ⭐8.2">
-    <p>A un metro da te (2019) [Romance Dramma] ⭐8.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/454619%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/pPkWwEmXTBj9DTXnMEiit0ZiM05.jpg" alt="Overboard (2018) [Romance Commedia] ⭐6.7">
-    <p>Overboard (2018) [Romance Commedia] ⭐6.7</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/555850%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/j1gzexjGuGggUnp4Q1HS0y6n1PJ.jpg" alt="Il calendario di Natale (2018) [Romance Commedia Famiglia] ⭐6.6">
-    <p>Il calendario di Natale (2018) [Romance Commedia Famiglia] ⭐6.6</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/477510%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/aVX8CI7k2ohWRMyk1djjwEizbJP.jpg" alt="Dog Days (2018) [Romance Commedia] ⭐6.7">
-    <p>Dog Days (2018) [Romance Commedia] ⭐6.7</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/465136%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/bLcCsuf8DfND8pRt2NpLWBGmamw.jpg" alt="Ogni giorno (2018) [Romance Fantasy] ⭐7.2">
-    <p>Ogni giorno (2018) [Romance Fantasy] ⭐7.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/451955%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/nb3nWf1Unt9b3NJryLZ6jYDdL4v.jpg" alt="Doppio amore (2017) [Romance Thriller Dramma] ⭐6.1">
-    <p>Doppio amore (2017) [Romance Thriller Dramma] ⭐6.1</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/433950%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/laijmNN64UKXnOdtM45cTsm3Bo8.jpg" alt="Daytime Shooting Star (2017) [Romance] ⭐7.4">
-    <p>Daytime Shooting Star (2017) [Romance] ⭐7.4</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/488113%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/zsprSXns09y7PQADawTiHej2H1Q.jpg" alt="Matrimonio sulla neve (2017) [Romance Famiglia televisione film] ⭐5.4">
-    <p>Matrimonio sulla neve (2017) [Romance Famiglia televisione film] ⭐5.4</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/332283%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/2tf31sTHi3XDqopvEaxLadPIYHh.jpg" alt="Mary Shelley - Un amore immortale (2017) [Romance Dramma] ⭐7.0">
-    <p>Mary Shelley - Un amore immortale (2017) [Romance Dramma] ⭐7.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/443486%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/bROOXcRwF61Wz4yLwInW4Uohkii.jpg" alt="Rosso Istanbul (2017) [Romance Dramma] ⭐5.7">
-    <p>Rosso Istanbul (2017) [Romance Dramma] ⭐5.7</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/483104%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/x0IGQsMzVbsF7noj5cCfEk1GU7s.jpg" alt="Un principe per Natale (2017) [Romance televisione film] ⭐6.6">
-    <p>Un principe per Natale (2017) [Romance televisione film] ⭐6.6</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/310888%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/9q3elxn4LLsgOykhjV5YPutnDb2.jpg" alt="Ti amo presidente (2016) [Romance Dramma] ⭐5.7">
-    <p>Ti amo presidente (2016) [Romance Dramma] ⭐5.7</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/302688%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/fmyIVgPI1l3x47pX5yizn7vy890.jpg" alt="Il mio grosso grasso matrimonio greco 2 (2016) [Romance Commedia] ⭐6.0">
-    <p>Il mio grosso grasso matrimonio greco 2 (2016) [Romance Commedia] ⭐6.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/351819%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/m71E9pAxEVYiZZ0spxrUhtpNdXG.jpg" alt="Cinquanta sbavature di nero (2016) [Romance Commedia] ⭐4.9">
-    <p>Cinquanta sbavature di nero (2016) [Romance Commedia] ⭐4.9</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/419502%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/sbzJ4H1m3VKRa0oHEf18YZyoTaV.jpg" alt="La cena di Natale (2016) [Romance Commedia] ⭐5.4">
-    <p>La cena di Natale (2016) [Romance Commedia] ⭐5.4</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/339148%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/ycXZv4H1uGXi2QsXq7DGM0bcXZ9.jpg" alt="A Hong Kong è già domani (2016) [Romance] ⭐5.9">
-    <p>A Hong Kong è già domani (2016) [Romance] ⭐5.9</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/326270%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/w8Au7v586QTC6rbmO0xGLfkbZix.jpg" alt="Wax - We Are The X (2016) [Romance] ⭐7.2">
-    <p>Wax - We Are The X (2016) [Romance] ⭐7.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/316002%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/znPsDmQVKW0BuBnaErIAPo49X3i.jpg" alt="Accidental Love (2015) [Romance Commedia] ⭐4.3">
-    <p>Accidental Love (2015) [Romance Commedia] ⭐4.3</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/258480%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/6eSuNLVYKiZZ17m2NXu95Islyuu.jpg" alt="Carol (2015) [Romance Dramma] ⭐7.5">
-    <p>Carol (2015) [Romance Dramma] ⭐7.5</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/167073%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/cs7W8j5lI7qzRW6tKSj9p1Q0Ze7.jpg" alt="Brooklyn (2015) [Romance Dramma Storia] ⭐7.3">
-    <p>Brooklyn (2015) [Romance Dramma Storia] ⭐7.3</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/314405%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/fYf4Ni3pFDaRme4e9YsluHZE9ki.jpg" alt="Il racconto dei racconti - Tale of Tales (2015) [Romance Fantasy Horror] ⭐6.4">
-    <p>Il racconto dei racconti - Tale of Tales (2015) [Romance Fantasy Horror] ⭐6.4</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/150689%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/e5ptdIKFxaWVanL2b05CIrU8zMx.jpg" alt="Cenerentola (2015) [Romance Fantasy Famiglia Dramma] ⭐6.8">
-    <p>Cenerentola (2015) [Romance Fantasy Famiglia Dramma] ⭐6.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/363757%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/9vB90zBKopkkqLDCt9mB4Q7HHnz.jpg" alt="Io che amo solo te (2015) [Romance Commedia] ⭐5.8">
-    <p>Io che amo solo te (2015) [Romance Commedia] ⭐5.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/332340%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/qdzNS1RZSFPecMQjN0fa4VkcddG.jpg" alt="Man Up - Un amore per caso (2015) [Romance Commedia] ⭐6.6">
-    <p>Man Up - Un amore per caso (2015) [Romance Commedia] ⭐6.6</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/295832%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/qXKqml7CaEpUQT7dlia5rXNilfA.jpg" alt="Fratelli unici (2014) [Romance Commedia] ⭐6.0">
-    <p>Fratelli unici (2014) [Romance Commedia] ⭐6.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/200727%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/chzeHGagHF1Oflcq9Et9ZFUYHDU.jpg" alt="#ScrivimiAncora (2014) [Romance Dramma Commedia] ⭐7.8">
-    <p>#ScrivimiAncora (2014) [Romance Dramma Commedia] ⭐7.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/138697%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/ni156mhL5xsWlv7ha3dTfi6ZS28.jpg" alt="Don Jon (2013) [Romance Commedia Dramma] ⭐6.0">
-    <p>Don Jon (2013) [Romance Commedia Dramma] ⭐6.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/112949%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/2CbJ3HTb6SFbMeguYH52UQSHOwY.jpg" alt="Vicino a te non ho paura (2013) [Romance Thriller] ⭐7.2">
-    <p>Vicino a te non ho paura (2013) [Romance Thriller] ⭐7.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/89604%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/3qWQWkawKVxSo0zDYpARUVAoZ6B.jpg" alt="Big Love (2012) [Romance Thriller] ⭐4.5">
-    <p>Big Love (2012) [Romance Thriller] ⭐4.5</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/43539%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/nCl2I0yGwKop0qBIpwXWJA7zQPP.jpg" alt="The Next Three Days (2010) [Romance Dramma Thriller Crime] ⭐7.1">
-    <p>The Next Three Days (2010) [Romance Dramma Thriller Crime] ⭐7.1</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/34016%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/g8R2dYvZKWJI8B8pzYHgi80dq0P.jpg" alt="Lei è troppo per me (2010) [Romance Commedia] ⭐6.5">
-    <p>Lei è troppo per me (2010) [Romance Commedia] ⭐6.5</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/24803%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/r1bFBBj3VMek0oEtgm9N51OqVjF.jpg" alt="Julie & Julia (2009) [Romance Dramma] ⭐6.7">
-    <p>Julie & Julia (2009) [Romance Dramma] ⭐6.7</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/41427%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/xXV9u5kEUmRqP1IazGud0kYQvYq.jpg" alt="Questo piccolo grande amore (2009) [Romance] ⭐5.6">
-    <p>Questo piccolo grande amore (2009) [Romance] ⭐5.6</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/20036%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/25I6X1Y9opO6NGTqftVKbeQ3OoX.jpg" alt="Un principe tutto mio 3 (2008) [Romance Commedia] ⭐5.6">
-    <p>Un principe tutto mio 3 (2008) [Romance Commedia] ⭐5.6</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/18093%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/tmJ0CVnrMMfTXXWwqvVH5a4CqNA.jpg" alt="L'abbazia di Northanger (2007) [Romance Dramma televisione film] ⭐6.8">
-    <p>L'abbazia di Northanger (2007) [Romance Dramma televisione film] ⭐6.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/9767%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/fL2GzQ6RU1EIxE2kxIkp3tU1tXn.jpg" alt="ti lascio, ti... (2006)" tvg-logo="https://image.tmdb.org/t/p/w500/fL2GzQ6RU1EIxE2kxIkp3tU1tXn.jpg" type="movie" group-title="Romance",Ti odio, ti lascio, ti... (2006) [Romance Commedia] ⭐5.9">
-    <p>ti lascio, ti... (2006)" tvg-logo="https://image.tmdb.org/t/p/w500/fL2GzQ6RU1EIxE2kxIkp3tU1tXn.jpg" type="movie" group-title="Romance",Ti odio, ti lascio, ti... (2006) [Romance Commedia] ⭐5.9</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/15590%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/grw6Z9fGAk8RpPjXWYxKPCyDInd.jpg" alt="Un principe tutto mio 2 - Un matrimonio da favola (2006) [Romance Commedia Famiglia] ⭐5.8">
-    <p>Un principe tutto mio 2 - Un matrimonio da favola (2006) [Romance Commedia Famiglia] ⭐5.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/4379%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/cLtaxWQGSGlSP03GgUKVXR2UD0M.jpg" alt="Quel mostro di suocera (2005) [Romance Commedia] ⭐6.2">
-    <p>Quel mostro di suocera (2005) [Romance Commedia] ⭐6.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/3933%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/hs8i1Vpwrx6KBd00louOTP61Dp8.jpg" alt="La sposa cadavere (2005) [Romance Fantasy Animazione] ⭐7.6">
-    <p>La sposa cadavere (2005) [Romance Fantasy Animazione] ⭐7.6</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/10677%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/da0EgOSBzkzEpdXhacfvc1MSoAf.jpg" alt="Dirty Dancing 2 (2004) [Romance Dramma] ⭐6.4">
-    <p>Dirty Dancing 2 (2004) [Romance Dramma] ⭐6.4</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/12090%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/198QQG4YmQQLKL3gVchL8svgg36.jpg" alt="Oggi sposi... niente sesso! (2003) [Romance Commedia] ⭐5.8">
-    <p>Oggi sposi... niente sesso! (2003) [Romance Commedia] ⭐5.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/8051%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/hHsySHxhgaTJNRuG8YjS5MTnFW7.jpg" alt="Ubriaco d'amore (2002) [Romance Dramma Commedia] ⭐7.1">
-    <p>Ubriaco d'amore (2002) [Romance Dramma Commedia] ⭐7.1</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/2642%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/ckgFLhYwQJ07xs7MLjVWWq349fp.jpg" alt="Two Weeks Notice - Due settimane per innamorarsi (2002) [Romance Commedia] ⭐6.4">
-    <p>Two Weeks Notice - Due settimane per innamorarsi (2002) [Romance Commedia] ⭐6.4</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/11013%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/2oXkpknFYWTLeSo6lhMnmRnQXRb.jpg" alt="Secretary (2002) [Romance Dramma Commedia] ⭐6.8">
-    <p>Secretary (2002) [Romance Dramma Commedia] ⭐6.8</p>
-  </a>
-	
-
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1272149%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/qyY79HuC7pZXyU9QKDUjl7PqQks.jpg" alt="Bridget Jones - Un amore di ragazzo (2025) [Romance Commedia Dramma] ⭐6.6" />
+      <p>Bridget Jones - Un amore di ragazzo (2025) [Romance Commedia Dramma] ⭐6.6</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1294203%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/xFsFYqCxvDXtkCljhHq8n9Drldb.jpg" alt="È colpa mia: Londra (2025) [Romance Dramma] ⭐7.4" />
+      <p>È colpa mia: Londra (2025) [Romance Dramma] ⭐7.4</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1214481%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/8oCatCCkwfLQ9eLwI3ozsKq742D.jpg" alt="Love Forever (2025) [Romance Commedia Dramma] ⭐5.1" />
+      <p>Love Forever (2025) [Romance Commedia Dramma] ⭐5.1</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1387198%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/8X33lFdh36O2l8eQaYMeN3gu3ku.jpg" alt="Amore a 39 gradi (2024) [Romance Dramma Commedia] ⭐7.1" />
+      <p>Amore a 39 gradi (2024) [Romance Dramma Commedia] ⭐7.1</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/988512%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/fEbJku8PDizV2P5IQmHA0dcyf50.jpg" alt="Running on Empty (2024) [Romance Commedia] ⭐5.7" />
+      <p>Running on Empty (2024) [Romance Commedia] ⭐5.7</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1290486%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/4t80WORFWqDYf4BRwV2jrXNHJdN.jpg" alt="The Merry Gentlemen (2024) [Romance Commedia] ⭐5.8" />
+      <p>The Merry Gentlemen (2024) [Romance Commedia] ⭐5.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1032472%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/siJxsEqgEbMCn1xtsTiSnUDZQY8.jpg" alt="Touch (2024) [Romance Dramma] ⭐7.4" />
+      <p>Touch (2024) [Romance Dramma] ⭐7.4</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1104171%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/uFZfYvKZUTntdxSh5dbVLfLoa8q.jpg" alt="Appuntamento a Natale (2024) [Romance Commedia] ⭐6.4" />
+      <p>Appuntamento a Natale (2024) [Romance Commedia] ⭐6.4</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1024452%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/Bu1cgfaLOqELu11qRdmzYX6o6K.jpg" alt="French Girl (2024) [Romance Commedia] ⭐6.4" />
+      <p>French Girl (2024) [Romance Commedia] ⭐6.4</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1068518%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/5Yyv5YFQOQ6LpVMUdc4SCXsZijn.jpg" alt="Haunted Heart - L'isola dell'inganno (2024) [Romance Thriller] ⭐5.7" />
+      <p>Haunted Heart - L'isola dell'inganno (2024) [Romance Thriller] ⭐5.7</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1352821%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/rFUHBnk69F5cjMBOyPQf5HxrEOt.jpg" alt="Un vero gentiluomo (2024) [Romance Dramma] ⭐6.2" />
+      <p>Un vero gentiluomo (2024) [Romance Dramma] ⭐6.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1029330%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/zsvD0BjEQIIoh2PpE5X7VXmSrQO.jpg" alt="Someone like you - L’eco del cuore (2024) [Romance Dramma] ⭐7.3" />
+      <p>Someone like you - L’eco del cuore (2024) [Romance Dramma] ⭐7.3</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1255350%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/tUfsU0HfwyJdi8VQgMB04YxaWaQ.jpg" alt="Find Me Falling - Un'isola dove innamorarsi (2024) [Romance Commedia Musica] ⭐6.6" />
+      <p>Find Me Falling - Un'isola dove innamorarsi (2024) [Romance Commedia Musica] ⭐6.6</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1257750%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/oiKaiTNITetOy4OOxT6Zoh7trVV.jpg" alt="Honeymoonish (2024) [Romance Commedia] ⭐6.7" />
+      <p>Honeymoonish (2024) [Romance Commedia] ⭐6.7</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1096342%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/36fk8UW5zFPYuCsqAAwZZQZs8hi.jpg" alt="Uno splendido disastro 2 - Il matrimonio (2024) [Romance Commedia Dramma] ⭐5.5" />
+      <p>Uno splendido disastro 2 - Il matrimonio (2024) [Romance Commedia Dramma] ⭐5.5</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1093231%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/5tTr614aOldDJqyhzoATCtHv5CM.jpg" alt="La madre della sposa (2024) [Romance Commedia] ⭐5.9" />
+      <p>La madre della sposa (2024) [Romance Commedia] ⭐5.9</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/843527%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/Y5P4Q3q8nrruZ9aD3wXeJS2Plg.jpg" alt="L'idea che ho di te (2024) [Romance Dramma Commedia] ⭐7.4" />
+      <p>L'idea che ho di te (2024) [Romance Dramma Commedia] ⭐7.4</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/968441%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/kUX5ourGUJDG0yvEeS3uooZS0dS.jpg" alt="Música (2024) [Romance Commedia Musica] ⭐6.4" />
+      <p>Música (2024) [Romance Commedia Musica] ⭐6.4</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1017633%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/lqsXM2gvHCukTFPpKFRMOYBN0FV.jpg" alt="Come far innamorare Billy Walsh (2024) [Romance Commedia] ⭐6.4" />
+      <p>Come far innamorare Billy Walsh (2024) [Romance Commedia] ⭐6.4</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1257130%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/jsLJHJKpp3hjp8CC1XkJAwF3BxU.jpg" alt="No Pressure (2024) [Romance Commedia] ⭐5.3" />
+      <p>No Pressure (2024) [Romance Commedia] ⭐5.3</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1019420%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/gSQI95os0tEJ4AEI192JzxCCE7S.jpg" alt="Irish Wish - Solo un desiderio (2024) [Romance Commedia Fantasy] ⭐6.2" />
+      <p>Irish Wish - Solo un desiderio (2024) [Romance Commedia Fantasy] ⭐6.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1230085%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/eiFhCPQZ5QhsK0WFXMqwT1XqhBR.jpg" alt="Cenere (2024) [Romance Dramma Fantasy] ⭐5.7" />
+      <p>Cenere (2024) [Romance Dramma Fantasy] ⭐5.7</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1014590%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/rgV4h8zEh3KX3gJCqgHTuVx7P1k.jpg" alt="arte e bugie (2024)" tvg-logo="https://image.tmdb.org/t/p/w500/rgV4h8zEh3KX3gJCqgHTuVx7P1k.jpg" type="movie" group-title="Romance",Upgraded: amore, arte e bugie (2024) [Romance Commedia] ⭐7.2" />
+      <p>arte e bugie (2024)" tvg-logo="https://image.tmdb.org/t/p/w500/rgV4h8zEh3KX3gJCqgHTuVx7P1k.jpg" type="movie" group-title="Romance",Upgraded: amore, arte e bugie (2024) [Romance Commedia] ⭐7.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1100642%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/e1fvQdD63RP2MS9jCB8jzg7fkdr.jpg" alt="Era solo un messaggio prima di Natale (2023) [Romance Commedia televisione film] ⭐6.4" />
+      <p>Era solo un messaggio prima di Natale (2023) [Romance Commedia televisione film] ⭐6.4</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1150521%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/bRDWHhiVLllPWBU2ADV61acyqT7.jpg" alt="Christmas on Windmill Way (2023) [Romance Commedia televisione film] ⭐6.0" />
+      <p>Christmas on Windmill Way (2023) [Romance Commedia televisione film] ⭐6.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1104102%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/bGjcWn55YmVsDn1SORwqnHYPTLo.jpg" alt="Amore e swing (2023) [Romance Commedia televisione film] ⭐7.6" />
+      <p>Amore e swing (2023) [Romance Commedia televisione film] ⭐7.6</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1066575%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/32jzdFfVwzHGwjqNWnfnUzF6iAC.jpg" alt="I limoni d'inverno (2023) [Romance] ⭐6.3" />
+      <p>I limoni d'inverno (2023) [Romance] ⭐6.3</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/986280%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/jGWCzlTEIfTAl6MdWRYIgUKSs0N.jpg" alt="Foglie al vento (2023) [Romance Commedia Dramma] ⭐7.2" />
+      <p>Foglie al vento (2023) [Romance Commedia Dramma] ⭐7.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/975043%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/gW0JEpeHO108GSgN521GT8xQy5F.jpg" alt="Storia di una confessione (2023) [Romance Commedia Dramma] ⭐6.2" />
+      <p>Storia di una confessione (2023) [Romance Commedia Dramma] ⭐6.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/561717%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/zTMsnzB55eRRXG9rOI2fgx8Of3i.jpg" alt="The Perfect Find - Tutto è davvero possibile (2023) [Romance Commedia] ⭐6.1" />
+      <p>The Perfect Find - Tutto è davvero possibile (2023) [Romance Commedia] ⭐6.1</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/846961%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/6MF3JvIZkluUijw9rvDKNqPT8kC.jpg" alt="One True Loves (2023) [Romance Commedia Dramma] ⭐6.4" />
+      <p>One True Loves (2023) [Romance Commedia Dramma] ⭐6.4</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1211066%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/o2SDh1kWl2uzgrNtVWRGqE4xU0l.jpg" alt="La bisbetica domata 2 (2023) [Romance Commedia] ⭐5.5" />
+      <p>La bisbetica domata 2 (2023) [Romance Commedia] ⭐5.5</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1077426%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/oDxyCXsxjXSLaj2uQtcMj5Vjth3.jpg" alt="Una gran voglia di vivere (2023) [Romance Commedia] ⭐5.6" />
+      <p>Una gran voglia di vivere (2023) [Romance Commedia] ⭐5.6</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1176139%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/5Er8nN27yDke1CSVeOHB32suz5E.jpg" alt="Il tuo Natale o il mio? 2 (2023) [Romance Commedia] ⭐6.2" />
+      <p>Il tuo Natale o il mio? 2 (2023) [Romance Commedia] ⭐6.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1202584%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/bhIIk5nZRCHQVPXz06oR90Ftye2.jpg" alt="Come sempre a Natale (2023) [Romance Commedia Dramma] ⭐5.9" />
+      <p>Come sempre a Natale (2023) [Romance Commedia Dramma] ⭐5.9</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1044302%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/lbSnmvAfL57XthsZ6o4Uwt1bB5z.jpg" alt="Ultima chiamata per Istanbul (2023) [Romance Dramma] ⭐6.3" />
+      <p>Ultima chiamata per Istanbul (2023) [Romance Dramma] ⭐6.3</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1073170%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/liVS0KJMviz4iOfbrZkLqdCzBIp.jpg" alt="Zoey 102 (2023) [Romance Commedia] ⭐6.8" />
+      <p>Zoey 102 (2023) [Romance Commedia] ⭐6.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/912916%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/mg4n7RR3H9UdaLULMLQd671MZln.jpg" alt="L'altra Zoey (2023) [Romance Dramma Commedia] ⭐7.0" />
+      <p>L'altra Zoey (2023) [Romance Dramma Commedia] ⭐7.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/353577%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/4uREvTfhhgNuX1rzWWBxwFeYoJD.jpg" alt="La probabilità statistica dell'amore a prima vista (2023) [Romance Dramma] ⭐7.2" />
+      <p>La probabilità statistica dell'amore a prima vista (2023) [Romance Dramma] ⭐7.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/936952%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/9TURnuPLt5mZDWaayCY2QfI7TlE.jpg" alt="Una torta per l'uomo giusto (2023) [Romance Commedia Dramma] ⭐7.0" />
+      <p>Una torta per l'uomo giusto (2023) [Romance Commedia Dramma] ⭐7.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/921636%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/5dliMQ2ODbGNoq0hlefdnuXQxMw.jpg" alt="The Out-Laws - Suoceri fuorilegge (2023) [Romance Azione Commedia] ⭐6.0" />
+      <p>The Out-Laws - Suoceri fuorilegge (2023) [Romance Azione Commedia] ⭐6.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/758336%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/85z02NZ32wUF9iQm5PJdiQkmTjP.jpg" alt="Love Again (2023) [Romance Dramma Commedia] ⭐6.7" />
+      <p>Love Again (2023) [Romance Dramma Commedia] ⭐6.7</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1016121%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/fZ8VmEPzZZFcONrLEJa6h0xQ8Sf.jpg" alt="Uno splendido disastro (2023) [Romance Dramma Commedia] ⭐6.7" />
+      <p>Uno splendido disastro (2023) [Romance Dramma Commedia] ⭐6.7</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/932430%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/zVgRfuBvsFTU4mFvDt1Qlqo1CRo.jpg" alt="Prom Pact (2023) [Romance Commedia] ⭐7.3" />
+      <p>Prom Pact (2023) [Romance Commedia] ⭐7.3</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/881462%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/gGtzr9huoZFm0SoQmXYAAcwO4ty.jpg" alt="Era ora (2023) [Romance Commedia Dramma] ⭐6.7" />
+      <p>Era ora (2023) [Romance Commedia Dramma] ⭐6.7</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/818648%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/g5B0MzkowLVyuGp2K1HU7fgmRVO.jpg" alt="Il futuro in un bacio (2023) [Romance Commedia] ⭐6.2" />
+      <p>Il futuro in un bacio (2023) [Romance Commedia] ⭐6.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/869112%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/lu7II0I3yFjr2KELRkda6KG3MKk.jpg" alt="Mi ricorda qualcuno (2023) [Romance Commedia Dramma] ⭐5.8" />
+      <p>Mi ricorda qualcuno (2023) [Romance Commedia Dramma] ⭐5.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/866413%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/x5E4TndwASNkaK2hwgeYfsIVo2x.jpg" alt="You People (2023) [Romance Commedia] ⭐5.6" />
+      <p>You People (2023) [Romance Commedia] ⭐5.6</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/785521%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/vdgUNCruHI6jX9TU4vvplgpDtL7.jpg" alt="Battle: Freestyle (2022) [Romance Dramma] ⭐5.5" />
+      <p>Battle: Freestyle (2022) [Romance Dramma] ⭐5.5</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1016661%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/zwkneUe28THVEQnDSTBHPoytPDY.jpg" alt="Il pretendente (2022) [Romance televisione film Storia] ⭐6.9" />
+      <p>Il pretendente (2022) [Romance televisione film Storia] ⭐6.9</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/928769%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/1NXe9caUGbnw49hQlqlXXfvTgeI.jpg" alt="AI Love You (2022) [Romance Fantascienza Dramma] ⭐6.0" />
+      <p>AI Love You (2022) [Romance Fantascienza Dramma] ⭐6.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1032591%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/arfVVSPDfhNZxZwbNOYGz4tozlE.jpg" alt="I colori del Natale (2022) [Romance Commedia Dramma televisione film] ⭐5.6" />
+      <p>I colori del Natale (2022) [Romance Commedia Dramma televisione film] ⭐5.6</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1029578%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/7WSMNERoqgtOwV1Q5xDmAiLvMeE.jpg" alt="Natale tutto incluso (2022) [Romance Commedia Dramma televisione film] ⭐6.0" />
+      <p>Natale tutto incluso (2022) [Romance Commedia Dramma televisione film] ⭐6.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1045341%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/as6DAMoyyz8bXazkA224vh3PnJv.jpg" alt="Prima di andare via (2022) [Romance Dramma] ⭐5.2" />
+      <p>Prima di andare via (2022) [Romance Dramma] ⭐5.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/633657%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/a0tSiNq9Ze4ucWFU6oRPd4OEGJr.jpg" alt="The Good House (2022) [Romance Dramma Commedia] ⭐6.4" />
+      <p>The Good House (2022) [Romance Dramma Commedia] ⭐6.4</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/758330%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/yLmDXwVmxlmID7sXBLrAweVF5Yx.jpg" alt="Il piacere è tutto mio (2022) [Romance Dramma] ⭐7.0" />
+      <p>Il piacere è tutto mio (2022) [Romance Dramma] ⭐7.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/826942%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/kkjmAUFuuHMQftFMmN43TbsswS7.jpg" alt="Spin Me Round (2022) [Romance Commedia] ⭐5.0" />
+      <p>Spin Me Round (2022) [Romance Commedia] ⭐5.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/828613%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/q3eSY8Cb95MTtSQYJSBzvECNDue.jpg" alt="La scelta del destino (2022) [Romance Commedia] ⭐7.5" />
+      <p>La scelta del destino (2022) [Romance Commedia] ⭐7.5</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/916053%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/lPXGYpRzcc6pk8pD6eEeykfc7UF.jpg" alt="Un regalo da Tiffany (2022) [Romance Commedia Dramma] ⭐6.7" />
+      <p>Un regalo da Tiffany (2022) [Romance Commedia Dramma] ⭐6.7</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1053080%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/5aYsIglNgGZXkvvs9QBz0BP83UM.jpg" alt="Giusto in tempo per Natale (2022) [Romance Commedia] ⭐6.1" />
+      <p>Giusto in tempo per Natale (2022) [Romance Commedia] ⭐6.1</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1025805%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/sioiDcvldcz36RlrsXGtAbesqwp.jpg" alt="Ardente pazienza (2022) [Romance Dramma] ⭐6.7" />
+      <p>Ardente pazienza (2022) [Romance Dramma] ⭐6.7</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/865559%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/eSMw8azkBkRfX5v9qiINFy9iCJP.jpg" alt="Il tuo Natale o il mio? (2022) [Romance Commedia] ⭐6.4" />
+      <p>Il tuo Natale o il mio? (2022) [Romance Commedia] ⭐6.4</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/936960%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/4CxDiIEBsWGQIdCMHhL65jrBssu.jpg" alt="Natale con te (2022) [Romance Commedia] ⭐5.8" />
+      <p>Natale con te (2022) [Romance Commedia] ⭐5.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/962232%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/7Us3DE5wHfIBG9mAlWSRRQ4fY3U.jpg" alt="Oltre l’universo (2022) [Romance Dramma Musica] ⭐8.0" />
+      <p>Oltre l’universo (2022) [Romance Dramma Musica] ⭐8.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/888479%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/slLGOl6rTiMVySAYesYUFnJaaTf.jpg" alt="Time Is Up 2 (2022) [Romance Dramma] ⭐6.1" />
+      <p>Time Is Up 2 (2022) [Romance Dramma] ⭐6.1</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/826769%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/1pUXn05oYa8tL66t0oavMVG1vha.jpg" alt="Rosaline (2022) [Romance Dramma Commedia] ⭐7.1" />
+      <p>Rosaline (2022) [Romance Dramma Commedia] ⭐7.1</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/934756%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/zl1LcVBIOp14D18F09vgGKYpUX3.jpg" alt="Love in the Villa - Innamorarsi a Verona (2022) [Romance Commedia] ⭐6.0" />
+      <p>Love in the Villa - Innamorarsi a Verona (2022) [Romance Commedia] ⭐6.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/829560%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/my5w73OU9quMkzLJ4oM8VZbmA8H.jpg" alt="Altri 365 giorni (2022) [Romance Dramma] ⭐6.4" />
+      <p>Altri 365 giorni (2022) [Romance Dramma] ⭐6.4</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/805327%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/mddG20nvrfi7mfijCA982ktnqeC.jpg" alt="Linee parallele (2022) [Romance Dramma Commedia] ⭐6.9" />
+      <p>Linee parallele (2022) [Romance Dramma Commedia] ⭐6.9</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/648743%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/37kl496Ucx2m0iq2r0keLPQKjR0.jpg" alt="Non è il karma! (2022) [Romance Commedia] ⭐6.9" />
+      <p>Non è il karma! (2022) [Romance Commedia] ⭐6.9</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/818612%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/8e44J55JBVOMExHZps1rZYvpTY5.jpg" alt="La stagione dei matrimoni (2022) [Romance Commedia] ⭐6.2" />
+      <p>La stagione dei matrimoni (2022) [Romance Commedia] ⭐6.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/787787%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/aLeswI1zxf2xN5iIdcJpqx9XEnX.jpg" alt="Tutto è possibile (2022) [Romance Commedia Dramma] ⭐5.8" />
+      <p>Tutto è possibile (2022) [Romance Commedia Dramma] ⭐5.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/873127%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/jTz5U9m2vdYLVIpkuymbtTbfQA5.jpg" alt="Sotto il sole di Amalfi (2022) [Romance Commedia] ⭐5.8" />
+      <p>Sotto il sole di Amalfi (2022) [Romance Commedia] ⭐5.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/820912%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/s99WrKSEVR4RVvwm5Zn2cqrHTMM.jpg" alt="Persuasione (2022) [Romance Dramma Commedia] ⭐6.0" />
+      <p>Persuasione (2022) [Romance Dramma Commedia] ⭐6.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/953233%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/qGFJDqPYzBLl9MGJ9OugfNd88xh.jpg" alt="La bisbetica domata (2022) [Romance Commedia] ⭐5.5" />
+      <p>La bisbetica domata (2022) [Romance Commedia] ⭐5.5</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/818750%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/7bbgqNGNrbW38dxg9QqBzGkVnVL.jpg" alt="The In Between - Non ti perderò (2022) [Romance Fantascienza Dramma] ⭐7.4" />
+      <p>The In Between - Non ti perderò (2022) [Romance Fantascienza Dramma] ⭐7.4</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/790525%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/g6m5UVvNimtafCkDOM8heiWvnlK.jpg" alt="Sempre più bello (2022) [Romance Commedia] ⭐6.0" />
+      <p>Sempre più bello (2022) [Romance Commedia] ⭐6.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/615904%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/tujeqMkbxMoaBI24o5kpDLMQ7PJ.jpg" alt="Marry Me - Sposami (2022) [Romance Commedia Musica] ⭐6.6" />
+      <p>Marry Me - Sposami (2022) [Romance Commedia Musica] ⭐6.6</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/927855%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/w7QEQww3K60YhS9zMidJk641fES.jpg" alt="Tattiche d'amore (2022) [Romance Commedia] ⭐7.1" />
+      <p>Tattiche d'amore (2022) [Romance Commedia] ⭐7.1</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/790142%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/flpmnY7ROYDeGtURZb5Nt4xIPlg.jpg" alt="Il trattamento reale (2022) [Romance Commedia] ⭐6.7" />
+      <p>Il trattamento reale (2022) [Romance Commedia] ⭐6.7</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/776327%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/hh7YUEj3HXpHKetOlMiPMgwFfuc.jpg" alt="Blackout Love (2022) [Romance Commedia] ⭐4.8" />
+      <p>Blackout Love (2022) [Romance Commedia] ⭐4.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/797787%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/uGCv49xmS0AV2GehXkiTSAEg2QH.jpg" alt="Man in Love (2021) [Romance Dramma] ⭐7.1" />
+      <p>Man in Love (2021) [Romance Dramma] ⭐7.1</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/743173%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/puBoQMQiPJQBz1sjMSfYBpc7QoA.jpg" alt="Per tutta la vita (2021) [Romance Commedia Dramma] ⭐5.8" />
+      <p>Per tutta la vita (2021) [Romance Commedia Dramma] ⭐5.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/612491%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/oDiqRgmWKfWYplyTXhKVdpvBRb8.jpg" alt="Supereroi (2021) [Romance Commedia Dramma] ⭐7.2" />
+      <p>Supereroi (2021) [Romance Commedia Dramma] ⭐7.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/878111%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/1qkUG6UcUXwkrobQOtWfjcPQr76.jpg" alt="A Christmas No. 1 (2021) [Romance Commedia Musica Dramma] ⭐5.6" />
+      <p>A Christmas No. 1 (2021) [Romance Commedia Musica Dramma] ⭐5.6</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/887645%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/gkby2TBAsohytU4nrVVyynPjERj.jpg" alt="Amore senza mezze misure (2021) [Romance Commedia] ⭐6.0" />
+      <p>Amore senza mezze misure (2021) [Romance Commedia] ⭐6.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/785533%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/ya1rx5JbOVP0Mj1YBAs5Mjoojfx.jpg" alt="Nei panni di una principessa - Inseguendo la stella (2021) [Romance Commedia] ⭐6.8" />
+      <p>Nei panni di una principessa - Inseguendo la stella (2021) [Romance Commedia] ⭐6.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/763148%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/dxWHyMY4HoXH8LiEhYlga2OtK5B.jpg" alt="Time Is Up (2021) [Romance Dramma] ⭐6.5" />
+      <p>Time Is Up (2021) [Romance Dramma] ⭐6.5</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/806950%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/n7KFEbhEmoKY3N1AnK2MlmYBWCa.jpg" alt="Anni da Cane (2021) [Romance Commedia] ⭐6.4" />
+      <p>Anni da Cane (2021) [Romance Commedia] ⭐6.4</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/785539%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/7w4gX4zRlONqThjhmjdxw93FAXt.jpg" alt="Resort to Love - All'amore non si sfugge (2021) [Romance Commedia] ⭐7.2" />
+      <p>Resort to Love - All'amore non si sfugge (2021) [Romance Commedia] ⭐7.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/506281%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/yqldwzQDSLWADLaVeSQfBpGO2aC.jpg" alt="Il mondo che verrà (2021) [Romance Dramma Western] ⭐7.0" />
+      <p>Il mondo che verrà (2021) [Romance Dramma Western] ⭐7.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/614409%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/a2KaX2J9w1E3AaclMgnGra9WAVZ.jpg" alt="Tua per sempre (2021) [Romance Commedia Dramma] ⭐7.5" />
+      <p>Tua per sempre (2021) [Romance Commedia Dramma] ⭐7.5</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/746039%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/3QtYNYNTHDvpGIgztEMPiX1v70z.jpg" alt="Un Natale senza tempo (2020) [Romance televisione film] ⭐6.4" />
+      <p>Un Natale senza tempo (2020) [Romance televisione film] ⭐6.4</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/632322%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/aQ6FE2M2PPsx4CyCH2lpcxn1cuU.jpg" alt="All My Life (2020) [Romance Dramma] ⭐7.8" />
+      <p>All My Life (2020) [Romance Dramma] ⭐7.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/796649%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/rx3p97KAUDaz7PXt9xwlEWn8CZd.jpg" alt="Namaste Wahala (2020) [Romance Commedia Musica] ⭐7.1" />
+      <p>Namaste Wahala (2020) [Romance Commedia Musica] ⭐7.1</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/576920%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/irXWELZfWW8tehfNV82O2UT258r.jpg" alt="Pattini d'argento (2020) [Romance Avventura Dramma Famiglia] ⭐7.6" />
+      <p>Pattini d'argento (2020) [Romance Avventura Dramma Famiglia] ⭐7.6</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/754053%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/2kYZhqn8ipjpsAlSxwQRUjQ4ps8.jpg" alt="L'appuntamento natalizio di papà (2020) [Romance Commedia] ⭐6.2" />
+      <p>L'appuntamento natalizio di papà (2020) [Romance Commedia] ⭐6.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/628333%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/1BjSAxd3ssV9b7ImZWHy0RVEWo0.jpg" alt="Il profumo dell'erba selvatica (2020) [Romance Dramma] ⭐5.2" />
+      <p>Il profumo dell'erba selvatica (2020) [Romance Dramma] ⭐5.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/520172%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/zxulO3BV9ISDBxMWnwmqdhMFLaB.jpg" alt="Non ti presento i miei (2020) [Romance Commedia] ⭐7.2" />
+      <p>Non ti presento i miei (2020) [Romance Commedia] ⭐7.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/710356%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/sofUvABVfBSXzrJOGpdqxu2c9yl.jpg" alt="Intreccio di destini (2020) [Romance Dramma] ⭐7.3" />
+      <p>Intreccio di destini (2020) [Romance Dramma] ⭐7.3</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/734280%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/gA0SwJiwm3cbzfXdVO5kYaoDaMk.jpg" alt="Mezzanotte al Magnolia (2020) [Romance Commedia televisione film] ⭐6.3" />
+      <p>Mezzanotte al Magnolia (2020) [Romance Commedia televisione film] ⭐6.3</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/664031%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/d5LUnh5fH6ArY4eXnMZ20tKZxEU.jpg" alt="Sul più bello (2020) [Romance Commedia] ⭐6.9" />
+      <p>Sul più bello (2020) [Romance Commedia] ⭐6.9</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/470610%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/z7TSx67Sb7XSC7ddG5POu71uCEU.jpg" alt="Endless (2020) [Romance Dramma Fantasy] ⭐6.7" />
+      <p>Endless (2020) [Romance Dramma Fantasy] ⭐6.7</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/606679%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/f0tn0AnJfURA600hNVdqAecswGg.jpg" alt="L'assistente della Star (2020) [Romance Commedia Musica Dramma] ⭐7.0" />
+      <p>L'assistente della Star (2020) [Romance Commedia Musica Dramma] ⭐7.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/606566%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/scN9Jd3n1sUjGLKeSyb43y8Fnr0.jpg" alt="Gli anni più belli (2020) [Romance Dramma Commedia] ⭐6.8" />
+      <p>Gli anni più belli (2020) [Romance Dramma Commedia] ⭐6.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/576156%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/6FYGT8RXy6HHnxrkQi7buJImtDY.jpg" alt="The Lovebirds (2020) [Romance Commedia] ⭐6.1" />
+      <p>The Lovebirds (2020) [Romance Commedia] ⭐6.1</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/613504%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/Afdodj82LSt0pivvnvfoDW2z29h.jpg" alt="After 2 (2020) [Romance Dramma] ⭐7.2" />
+      <p>After 2 (2020) [Romance Dramma] ⭐7.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/664413%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/1di3hZFENsfAeOW1CeaZ9YskA0E.jpg" alt="365 giorni (2020) [Romance Dramma] ⭐7.0" />
+      <p>365 giorni (2020) [Romance Dramma] ⭐7.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/565426%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/twcYZFOPlbyd3xrQzr5rEuEg0H.jpg" alt="P.S. Ti amo ancora (2020) [Romance Commedia] ⭐6.8" />
+      <p>P.S. Ti amo ancora (2020) [Romance Commedia] ⭐6.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/508791%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/jqUNpRLJdwaEMUOc8FyaQtAF80K.jpg" alt="Il sole è anche una stella (2019) [Romance Dramma] ⭐7.0" />
+      <p>Il sole è anche una stella (2019) [Romance Dramma] ⭐7.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/602609%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/eJi209Hfgc25yk4LjeF4YbdveOo.jpg" alt="Good Sam (2019) [Romance Dramma Commedia] ⭐6.0" />
+      <p>Good Sam (2019) [Romance Dramma Commedia] ⭐6.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/531438%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/gJlaaXGzjzMYATdw986chesGeJX.jpg" alt="Un safari per Natale (2019) [Romance Commedia] ⭐6.5" />
+      <p>Un safari per Natale (2019) [Romance Commedia] ⭐6.5</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/615585%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/uODpjkTLI8njATnYG0SQ8UpMR9u.jpg" alt="Un Natale da favola (2019) [Romance televisione film Commedia] ⭐6.6" />
+      <p>Un Natale da favola (2019) [Romance televisione film Commedia] ⭐6.6</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/513576%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/hR1ePcbEFxPKuhSWNuJ5ox5rKKi.jpg" alt="Finché forse non vi separi (2019) [Romance Commedia] ⭐6.6" />
+      <p>Finché forse non vi separi (2019) [Romance Commedia] ⭐6.6</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/630916%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/o94uiYVMIrdUSMawgjpmA6rP4jA.jpg" alt="Natale al Plaza (2019) [Romance televisione film] ⭐6.4" />
+      <p>Natale al Plaza (2019) [Romance televisione film] ⭐6.4</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/295151%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/tuEfOByeINDZsI5O72j8r7wBAsJ.jpg" alt="Let It Snow - Innamorarsi sotto la neve (2019) [Romance Commedia] ⭐6.1" />
+      <p>Let It Snow - Innamorarsi sotto la neve (2019) [Romance Commedia] ⭐6.1</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/582873%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/kOC91b6y0CKbwmPHZLlBnXkNGlV.jpg" alt="Martin Eden (2019) [Romance Dramma] ⭐7.0" />
+      <p>Martin Eden (2019) [Romance Dramma] ⭐7.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/543540%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/rrAYdezO3h1mjdYTaQyTXoj8IZ4.jpg" alt="The Perfect Date (2019) [Romance Commedia] ⭐6.4" />
+      <p>The Perfect Date (2019) [Romance Commedia] ⭐6.4</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/606117%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/ozBX0u5caaJFli9AssqJmARb5R.jpg" alt="A Cinderella Story: Christmas Wish (2019) [Romance Musica Commedia Fantasy] ⭐6.4" />
+      <p>A Cinderella Story: Christmas Wish (2019) [Romance Musica Commedia Fantasy] ⭐6.4</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/553608%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/hefzmSfoWxOmf1IV343abaJ037Y.jpg" alt="Cenerentola Pop (2019) [Romance Commedia] ⭐6.4" />
+      <p>Cenerentola Pop (2019) [Romance Commedia] ⭐6.4</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/527641%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/nuIlrl1jBwvKSOjXGqba418nwWF.jpg" alt="A un metro da te (2019) [Romance Dramma] ⭐8.2" />
+      <p>A un metro da te (2019) [Romance Dramma] ⭐8.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/454619%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/pPkWwEmXTBj9DTXnMEiit0ZiM05.jpg" alt="Overboard (2018) [Romance Commedia] ⭐6.7" />
+      <p>Overboard (2018) [Romance Commedia] ⭐6.7</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/555850%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/j1gzexjGuGggUnp4Q1HS0y6n1PJ.jpg" alt="Il calendario di Natale (2018) [Romance Commedia Famiglia] ⭐6.6" />
+      <p>Il calendario di Natale (2018) [Romance Commedia Famiglia] ⭐6.6</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/477510%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/aVX8CI7k2ohWRMyk1djjwEizbJP.jpg" alt="Dog Days (2018) [Romance Commedia] ⭐6.7" />
+      <p>Dog Days (2018) [Romance Commedia] ⭐6.7</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/465136%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/bLcCsuf8DfND8pRt2NpLWBGmamw.jpg" alt="Ogni giorno (2018) [Romance Fantasy] ⭐7.2" />
+      <p>Ogni giorno (2018) [Romance Fantasy] ⭐7.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/451955%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/nb3nWf1Unt9b3NJryLZ6jYDdL4v.jpg" alt="Doppio amore (2017) [Romance Thriller Dramma] ⭐6.1" />
+      <p>Doppio amore (2017) [Romance Thriller Dramma] ⭐6.1</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/433950%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/laijmNN64UKXnOdtM45cTsm3Bo8.jpg" alt="Daytime Shooting Star (2017) [Romance] ⭐7.4" />
+      <p>Daytime Shooting Star (2017) [Romance] ⭐7.4</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/488113%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/zsprSXns09y7PQADawTiHej2H1Q.jpg" alt="Matrimonio sulla neve (2017) [Romance Famiglia televisione film] ⭐5.4" />
+      <p>Matrimonio sulla neve (2017) [Romance Famiglia televisione film] ⭐5.4</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/332283%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/2tf31sTHi3XDqopvEaxLadPIYHh.jpg" alt="Mary Shelley - Un amore immortale (2017) [Romance Dramma] ⭐7.0" />
+      <p>Mary Shelley - Un amore immortale (2017) [Romance Dramma] ⭐7.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/443486%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/bROOXcRwF61Wz4yLwInW4Uohkii.jpg" alt="Rosso Istanbul (2017) [Romance Dramma] ⭐5.7" />
+      <p>Rosso Istanbul (2017) [Romance Dramma] ⭐5.7</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/483104%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/x0IGQsMzVbsF7noj5cCfEk1GU7s.jpg" alt="Un principe per Natale (2017) [Romance televisione film] ⭐6.6" />
+      <p>Un principe per Natale (2017) [Romance televisione film] ⭐6.6</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/310888%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/9q3elxn4LLsgOykhjV5YPutnDb2.jpg" alt="Ti amo presidente (2016) [Romance Dramma] ⭐5.7" />
+      <p>Ti amo presidente (2016) [Romance Dramma] ⭐5.7</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/302688%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/fmyIVgPI1l3x47pX5yizn7vy890.jpg" alt="Il mio grosso grasso matrimonio greco 2 (2016) [Romance Commedia] ⭐6.0" />
+      <p>Il mio grosso grasso matrimonio greco 2 (2016) [Romance Commedia] ⭐6.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/351819%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/m71E9pAxEVYiZZ0spxrUhtpNdXG.jpg" alt="Cinquanta sbavature di nero (2016) [Romance Commedia] ⭐4.9" />
+      <p>Cinquanta sbavature di nero (2016) [Romance Commedia] ⭐4.9</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/419502%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/sbzJ4H1m3VKRa0oHEf18YZyoTaV.jpg" alt="La cena di Natale (2016) [Romance Commedia] ⭐5.4" />
+      <p>La cena di Natale (2016) [Romance Commedia] ⭐5.4</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/339148%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/ycXZv4H1uGXi2QsXq7DGM0bcXZ9.jpg" alt="A Hong Kong è già domani (2016) [Romance] ⭐5.9" />
+      <p>A Hong Kong è già domani (2016) [Romance] ⭐5.9</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/326270%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/w8Au7v586QTC6rbmO0xGLfkbZix.jpg" alt="Wax - We Are The X (2016) [Romance] ⭐7.2" />
+      <p>Wax - We Are The X (2016) [Romance] ⭐7.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/316002%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/znPsDmQVKW0BuBnaErIAPo49X3i.jpg" alt="Accidental Love (2015) [Romance Commedia] ⭐4.3" />
+      <p>Accidental Love (2015) [Romance Commedia] ⭐4.3</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/258480%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/6eSuNLVYKiZZ17m2NXu95Islyuu.jpg" alt="Carol (2015) [Romance Dramma] ⭐7.5" />
+      <p>Carol (2015) [Romance Dramma] ⭐7.5</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/167073%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/cs7W8j5lI7qzRW6tKSj9p1Q0Ze7.jpg" alt="Brooklyn (2015) [Romance Dramma Storia] ⭐7.3" />
+      <p>Brooklyn (2015) [Romance Dramma Storia] ⭐7.3</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/314405%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/fYf4Ni3pFDaRme4e9YsluHZE9ki.jpg" alt="Il racconto dei racconti - Tale of Tales (2015) [Romance Fantasy Horror] ⭐6.4" />
+      <p>Il racconto dei racconti - Tale of Tales (2015) [Romance Fantasy Horror] ⭐6.4</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/150689%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/e5ptdIKFxaWVanL2b05CIrU8zMx.jpg" alt="Cenerentola (2015) [Romance Fantasy Famiglia Dramma] ⭐6.8" />
+      <p>Cenerentola (2015) [Romance Fantasy Famiglia Dramma] ⭐6.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/363757%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/9vB90zBKopkkqLDCt9mB4Q7HHnz.jpg" alt="Io che amo solo te (2015) [Romance Commedia] ⭐5.8" />
+      <p>Io che amo solo te (2015) [Romance Commedia] ⭐5.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/332340%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/qdzNS1RZSFPecMQjN0fa4VkcddG.jpg" alt="Man Up - Un amore per caso (2015) [Romance Commedia] ⭐6.6" />
+      <p>Man Up - Un amore per caso (2015) [Romance Commedia] ⭐6.6</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/295832%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/qXKqml7CaEpUQT7dlia5rXNilfA.jpg" alt="Fratelli unici (2014) [Romance Commedia] ⭐6.0" />
+      <p>Fratelli unici (2014) [Romance Commedia] ⭐6.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/200727%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/chzeHGagHF1Oflcq9Et9ZFUYHDU.jpg" alt="#ScrivimiAncora (2014) [Romance Dramma Commedia] ⭐7.8" />
+      <p>#ScrivimiAncora (2014) [Romance Dramma Commedia] ⭐7.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/138697%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/ni156mhL5xsWlv7ha3dTfi6ZS28.jpg" alt="Don Jon (2013) [Romance Commedia Dramma] ⭐6.0" />
+      <p>Don Jon (2013) [Romance Commedia Dramma] ⭐6.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/112949%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/2CbJ3HTb6SFbMeguYH52UQSHOwY.jpg" alt="Vicino a te non ho paura (2013) [Romance Thriller] ⭐7.2" />
+      <p>Vicino a te non ho paura (2013) [Romance Thriller] ⭐7.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/89604%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/3qWQWkawKVxSo0zDYpARUVAoZ6B.jpg" alt="Big Love (2012) [Romance Thriller] ⭐4.5" />
+      <p>Big Love (2012) [Romance Thriller] ⭐4.5</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/43539%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/nCl2I0yGwKop0qBIpwXWJA7zQPP.jpg" alt="The Next Three Days (2010) [Romance Dramma Thriller Crime] ⭐7.1" />
+      <p>The Next Three Days (2010) [Romance Dramma Thriller Crime] ⭐7.1</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/34016%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/g8R2dYvZKWJI8B8pzYHgi80dq0P.jpg" alt="Lei è troppo per me (2010) [Romance Commedia] ⭐6.5" />
+      <p>Lei è troppo per me (2010) [Romance Commedia] ⭐6.5</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/24803%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/r1bFBBj3VMek0oEtgm9N51OqVjF.jpg" alt="Julie & Julia (2009) [Romance Dramma] ⭐6.7" />
+      <p>Julie & Julia (2009) [Romance Dramma] ⭐6.7</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/41427%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/xXV9u5kEUmRqP1IazGud0kYQvYq.jpg" alt="Questo piccolo grande amore (2009) [Romance] ⭐5.6" />
+      <p>Questo piccolo grande amore (2009) [Romance] ⭐5.6</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/20036%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/25I6X1Y9opO6NGTqftVKbeQ3OoX.jpg" alt="Un principe tutto mio 3 (2008) [Romance Commedia] ⭐5.6" />
+      <p>Un principe tutto mio 3 (2008) [Romance Commedia] ⭐5.6</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/18093%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/tmJ0CVnrMMfTXXWwqvVH5a4CqNA.jpg" alt="L'abbazia di Northanger (2007) [Romance Dramma televisione film] ⭐6.8" />
+      <p>L'abbazia di Northanger (2007) [Romance Dramma televisione film] ⭐6.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/9767%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/fL2GzQ6RU1EIxE2kxIkp3tU1tXn.jpg" alt="ti lascio, ti... (2006)" tvg-logo="https://image.tmdb.org/t/p/w500/fL2GzQ6RU1EIxE2kxIkp3tU1tXn.jpg" type="movie" group-title="Romance",Ti odio, ti lascio, ti... (2006) [Romance Commedia] ⭐5.9" />
+      <p>ti lascio, ti... (2006)" tvg-logo="https://image.tmdb.org/t/p/w500/fL2GzQ6RU1EIxE2kxIkp3tU1tXn.jpg" type="movie" group-title="Romance",Ti odio, ti lascio, ti... (2006) [Romance Commedia] ⭐5.9</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/15590%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/grw6Z9fGAk8RpPjXWYxKPCyDInd.jpg" alt="Un principe tutto mio 2 - Un matrimonio da favola (2006) [Romance Commedia Famiglia] ⭐5.8" />
+      <p>Un principe tutto mio 2 - Un matrimonio da favola (2006) [Romance Commedia Famiglia] ⭐5.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/4379%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/cLtaxWQGSGlSP03GgUKVXR2UD0M.jpg" alt="Quel mostro di suocera (2005) [Romance Commedia] ⭐6.2" />
+      <p>Quel mostro di suocera (2005) [Romance Commedia] ⭐6.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/3933%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/hs8i1Vpwrx6KBd00louOTP61Dp8.jpg" alt="La sposa cadavere (2005) [Romance Fantasy Animazione] ⭐7.6" />
+      <p>La sposa cadavere (2005) [Romance Fantasy Animazione] ⭐7.6</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/10677%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/da0EgOSBzkzEpdXhacfvc1MSoAf.jpg" alt="Dirty Dancing 2 (2004) [Romance Dramma] ⭐6.4" />
+      <p>Dirty Dancing 2 (2004) [Romance Dramma] ⭐6.4</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/12090%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/198QQG4YmQQLKL3gVchL8svgg36.jpg" alt="Oggi sposi... niente sesso! (2003) [Romance Commedia] ⭐5.8" />
+      <p>Oggi sposi... niente sesso! (2003) [Romance Commedia] ⭐5.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/8051%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/hHsySHxhgaTJNRuG8YjS5MTnFW7.jpg" alt="Ubriaco d'amore (2002) [Romance Dramma Commedia] ⭐7.1" />
+      <p>Ubriaco d'amore (2002) [Romance Dramma Commedia] ⭐7.1</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/2642%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/ckgFLhYwQJ07xs7MLjVWWq349fp.jpg" alt="Two Weeks Notice - Due settimane per innamorarsi (2002) [Romance Commedia] ⭐6.4" />
+      <p>Two Weeks Notice - Due settimane per innamorarsi (2002) [Romance Commedia] ⭐6.4</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/11013%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/2oXkpknFYWTLeSo6lhMnmRnQXRb.jpg" alt="Secretary (2002) [Romance Dramma Commedia] ⭐6.8" />
+      <p>Secretary (2002) [Romance Dramma Commedia] ⭐6.8</p>
+    </a>
+    
   </div>
-  <div style="text-align: center; margin-top: 30px;">
-    <a href="index.html" style="color: #aaa;">⟵ Torna alla home</a>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
   </div>
 </body>
 </html>

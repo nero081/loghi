@@ -1,173 +1,284 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Storia</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .griglia {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+      justify-items: center;
+    }
+
+    .canale {
+      background-color: #292929;
+      border-radius: 10px;
+      text-align: center;
+      color: #fff;
+      padding: 15px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .canale img {
+      width: 100%;
+      height: 120px;
+      object-fit: contain;
+      border-radius: 8px;
+      background-color: #111;
+      margin-bottom: 10px;
+    }
+
+    .canale p {
+      margin: 0;
+      font-size: 0.95em;
+    }
+
+    .canale:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+
+    .canale:focus {
+      outline: 2px solid #fff;
+      background-color: #3a3a3a;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    @media screen and (orientation: portrait) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      }
+
+      .canale img {
+        height: 100px;
+      }
+
+      .canale p {
+        font-size: 0.9em;
+      }
+
+      body {
+        padding: 15px;
+      }
+    }
+
+    @media screen and (orientation: landscape) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .canale img {
+        height: 140px;
+      }
+
+      .canale p {
+        font-size: 1em;
+      }
+
+      body {
+        padding: 30px;
+      }
+    }
+
+    .back {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .back a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    .back a:hover {
+      color: #fff;
+    }
+  </style>
 </head>
 <body>
   <h1>Storia</h1>
   <div class="griglia">
     
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/610219%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/n8uQmraOqvKEOEz9qAe3kfEDX0.jpg" alt="The Fire Inside: Lotta per la vittoria (2024) [Storia Dramma] ⭐7.3">
-    <p>The Fire Inside: Lotta per la vittoria (2024) [Storia Dramma] ⭐7.3</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1038263%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/zwJjRrAimyaTgebCpkWEKSD0ui8.jpg" alt="Maria (2024) [Storia Dramma Musica] ⭐6.5">
-    <p>Maria (2024) [Storia Dramma Musica] ⭐6.5</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/647245%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/aw0kj6bdwggH7T8guchel2akUBN.jpg" alt="Reagan - Un presidente sotto i riflettori (2024) [Storia Dramma] ⭐6.2">
-    <p>Reagan - Un presidente sotto i riflettori (2024) [Storia Dramma] ⭐6.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/495278%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/sc63iAezxCU20PiqfRr6GdWBKtK.jpg" alt="Limonov (2024) [Storia Dramma] ⭐6.4">
-    <p>Limonov (2024) [Storia Dramma] ⭐6.4</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/798612%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/ooo4D4kyZyFee5aiNfwZ43oKOkc.jpg" alt="SHIRLEY: in corsa per la Casa Bianca (2024) [Storia Dramma] ⭐6.8">
-    <p>SHIRLEY: in corsa per la Casa Bianca (2024) [Storia Dramma] ⭐6.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/792293%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/zWXzchtDhxSUkrx9IFtvKK9Jvfo.jpg" alt="Dumb Money - Non chiamateli Sprovveduti (2023) [Storia Commedia Dramma] ⭐6.7">
-    <p>Dumb Money - Non chiamateli Sprovveduti (2023) [Storia Commedia Dramma] ⭐6.7</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/760774%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/d6Lj8LBUlva5h3ST9fDRQTKT5pm.jpg" alt="One Life (2023) [Storia Dramma] ⭐7.8">
-    <p>One Life (2023) [Storia Dramma] ⭐7.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/862557%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/gKh28PVUqt1vY2oAdFlauXkDacW.jpg" alt="The Hill (2023) [Storia Dramma] ⭐7.7">
-    <p>The Hill (2023) [Storia Dramma] ⭐7.7</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/753342%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/5Meo32HdrjIyN7Ne8vxBiPg2nSl.jpg" alt="Napoleon (2023) [Storia Guerra Romance] ⭐6.3">
-    <p>Napoleon (2023) [Storia Guerra Romance] ⭐6.3</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/707103%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/raS1aFNS8DLbnhAR0r6amI2iWOp.jpg" alt="Emily (2022) [Storia Dramma Romance] ⭐6.9">
-    <p>Emily (2022) [Storia Dramma Romance] ⭐6.9</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/693349%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/aRzKglvZ5nfAdXT6p5oRuSi8TVj.jpg" alt="L'ombra di Caravaggio (2022) [Storia Dramma] ⭐6.5">
-    <p>L'ombra di Caravaggio (2022) [Storia Dramma] ⭐6.5</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/606870%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/lSmABMwMrNlyhzJJmxZjpWmr4Bp.jpg" alt="Harry Haft - Storia di un sopravvissuto (2022) [Storia Azione Dramma] ⭐6.8">
-    <p>Harry Haft - Storia di un sopravvissuto (2022) [Storia Azione Dramma] ⭐6.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/649394%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/jwAFMIDPG0YcuYOSUIa1U3eItbz.jpg" alt="Worth - Il patto (2021) [Storia Dramma] ⭐6.7">
-    <p>Worth - Il patto (2021) [Storia Dramma] ⭐6.7</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/454527%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/zBtmhMg5ruTgOKikFCdXYvVFkOj.jpg" alt="Benedetta (2021) [Storia Dramma Romance] ⭐6.6">
-    <p>Benedetta (2021) [Storia Dramma Romance] ⭐6.6</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/748787%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/gaOXkNlXMqBPVVobnbDqcU3ZH79.jpg" alt="Il Re degli scacchi (2021) [Storia Dramma Guerra Thriller] ⭐7.0">
-    <p>Il Re degli scacchi (2021) [Storia Dramma Guerra Thriller] ⭐7.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/661804%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/lfxs2YnuuLR037Ad4wesW5O9oUW.jpg" alt="De Gaulle (2020) [Storia Dramma] ⭐6.1">
-    <p>De Gaulle (2020) [Storia Dramma] ⭐6.1</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/517412%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/aN5KsDfbzOKgVXOkbEEvFACKAlY.jpg" alt="Tesla (2020) [Storia Dramma] ⭐5.8">
-    <p>Tesla (2020) [Storia Dramma] ⭐5.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/520552%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/oSSvHwbYp8zk09wuzG0QiM0oamD.jpg" alt="Frontiere selvagge (2019) [Storia Azione Dramma] ⭐6.2">
-    <p>Frontiere selvagge (2019) [Storia Azione Dramma] ⭐6.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/411728%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/cFtqSjKgLH625uTqltfUmT1HHCv.jpg" alt="Il professore e il pazzo (2019) [Storia Dramma Mistero Thriller] ⭐7.2">
-    <p>Il professore e il pazzo (2019) [Storia Dramma Mistero Thriller] ⭐7.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/399121%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/uwl1vbEQtv21tNs6YN16j2e5hWX.jpg" alt="L'ufficiale e la spia (2019) [Storia Dramma Thriller] ⭐7.1">
-    <p>L'ufficiale e la spia (2019) [Storia Dramma Thriller] ⭐7.1</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/432165%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/jyx1NjCpp4yrT8MO2OERblKGunr.jpg" alt="Il re vichingo (2018) [Storia Avventura Azione] ⭐6.4">
-    <p>Il re vichingo (2018) [Storia Avventura Azione] ⭐6.4</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/369972%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/ozomfUEI0DxQv2wvoucVMU3lPSw.jpg" alt="First Man - Il primo uomo (2018) [Storia Dramma] ⭐7.0">
-    <p>First Man - Il primo uomo (2018) [Storia Dramma] ⭐7.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/375262%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/8xC6Xkga9CMX9HX07XhUDAW3eMi.jpg" alt="La favorita (2018) [Storia Commedia Dramma] ⭐7.5">
-    <p>La favorita (2018) [Storia Commedia Dramma] ⭐7.5</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/438421%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/fcPNxoxYoO8GkpE7VWVVlDAqBap.jpg" alt="Il giocatore di scacchi (2017) [Storia Dramma] ⭐6.4">
-    <p>Il giocatore di scacchi (2017) [Storia Dramma] ⭐6.4</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/402529%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/qGEx8u38SBfrfFyNwS6iqLLzjvH.jpg" alt="All eyez on me (2017) [Storia Dramma Musica] ⭐6.7">
-    <p>All eyez on me (2017) [Storia Dramma Musica] ⭐6.7</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/298582%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/e9c2JOwJlWUfIZRaxIWE2BZt5GV.jpg" alt="Full Out (2015) [Storia Dramma Famiglia] ⭐7.2">
-    <p>Full Out (2015) [Storia Dramma Famiglia] ⭐7.2</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/313074%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/jzGCV0V4B5L0VgmAYGMawqaIhha.jpg" alt="La spada della vendetta (2015) [Storia] ⭐4.8">
-    <p>La spada della vendetta (2015) [Storia] ⭐4.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/285783%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/z2AVV3LXh3mkLPY769H8Oi9E7ab.jpg" alt="The Walk (2015) [Storia Dramma Avventura] ⭐7.0">
-    <p>The Walk (2015) [Storia Dramma Avventura] ⭐7.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/273895%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/2Sp8qd8wZkRW3RDGUUXBqwl7d4r.jpg" alt="Selma - La strada per la libertà (2014) [Storia Dramma] ⭐7.4">
-    <p>Selma - La strada per la libertà (2014) [Storia Dramma] ⭐7.4</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/205596%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/5Uc82xW62CoDMbSvcopOq5Zn6uK.jpg" alt="The Imitation Game (2014) [Storia Dramma Thriller Guerra] ⭐8.0">
-    <p>The Imitation Game (2014) [Storia Dramma Thriller Guerra] ⭐8.0</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/82695%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/PrI0MJU2LLNm091h5DZLT0vV63.jpg" alt="Les Misérables (2012) [Storia Dramma] ⭐7.3">
-    <p>Les Misérables (2012) [Storia Dramma] ⭐7.3</p>
-  </a>
-	
-
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/610219%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/n8uQmraOqvKEOEz9qAe3kfEDX0.jpg" alt="The Fire Inside: Lotta per la vittoria (2024) [Storia Dramma] ⭐7.3" />
+      <p>The Fire Inside: Lotta per la vittoria (2024) [Storia Dramma] ⭐7.3</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/1038263%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/zwJjRrAimyaTgebCpkWEKSD0ui8.jpg" alt="Maria (2024) [Storia Dramma Musica] ⭐6.5" />
+      <p>Maria (2024) [Storia Dramma Musica] ⭐6.5</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/647245%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/aw0kj6bdwggH7T8guchel2akUBN.jpg" alt="Reagan - Un presidente sotto i riflettori (2024) [Storia Dramma] ⭐6.2" />
+      <p>Reagan - Un presidente sotto i riflettori (2024) [Storia Dramma] ⭐6.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/495278%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/sc63iAezxCU20PiqfRr6GdWBKtK.jpg" alt="Limonov (2024) [Storia Dramma] ⭐6.4" />
+      <p>Limonov (2024) [Storia Dramma] ⭐6.4</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/798612%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/ooo4D4kyZyFee5aiNfwZ43oKOkc.jpg" alt="SHIRLEY: in corsa per la Casa Bianca (2024) [Storia Dramma] ⭐6.8" />
+      <p>SHIRLEY: in corsa per la Casa Bianca (2024) [Storia Dramma] ⭐6.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/792293%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/zWXzchtDhxSUkrx9IFtvKK9Jvfo.jpg" alt="Dumb Money - Non chiamateli Sprovveduti (2023) [Storia Commedia Dramma] ⭐6.7" />
+      <p>Dumb Money - Non chiamateli Sprovveduti (2023) [Storia Commedia Dramma] ⭐6.7</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/760774%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/d6Lj8LBUlva5h3ST9fDRQTKT5pm.jpg" alt="One Life (2023) [Storia Dramma] ⭐7.8" />
+      <p>One Life (2023) [Storia Dramma] ⭐7.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/862557%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/gKh28PVUqt1vY2oAdFlauXkDacW.jpg" alt="The Hill (2023) [Storia Dramma] ⭐7.7" />
+      <p>The Hill (2023) [Storia Dramma] ⭐7.7</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/753342%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/5Meo32HdrjIyN7Ne8vxBiPg2nSl.jpg" alt="Napoleon (2023) [Storia Guerra Romance] ⭐6.3" />
+      <p>Napoleon (2023) [Storia Guerra Romance] ⭐6.3</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/707103%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/raS1aFNS8DLbnhAR0r6amI2iWOp.jpg" alt="Emily (2022) [Storia Dramma Romance] ⭐6.9" />
+      <p>Emily (2022) [Storia Dramma Romance] ⭐6.9</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/693349%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/aRzKglvZ5nfAdXT6p5oRuSi8TVj.jpg" alt="L'ombra di Caravaggio (2022) [Storia Dramma] ⭐6.5" />
+      <p>L'ombra di Caravaggio (2022) [Storia Dramma] ⭐6.5</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/606870%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/lSmABMwMrNlyhzJJmxZjpWmr4Bp.jpg" alt="Harry Haft - Storia di un sopravvissuto (2022) [Storia Azione Dramma] ⭐6.8" />
+      <p>Harry Haft - Storia di un sopravvissuto (2022) [Storia Azione Dramma] ⭐6.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/649394%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/jwAFMIDPG0YcuYOSUIa1U3eItbz.jpg" alt="Worth - Il patto (2021) [Storia Dramma] ⭐6.7" />
+      <p>Worth - Il patto (2021) [Storia Dramma] ⭐6.7</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/454527%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/zBtmhMg5ruTgOKikFCdXYvVFkOj.jpg" alt="Benedetta (2021) [Storia Dramma Romance] ⭐6.6" />
+      <p>Benedetta (2021) [Storia Dramma Romance] ⭐6.6</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/748787%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/gaOXkNlXMqBPVVobnbDqcU3ZH79.jpg" alt="Il Re degli scacchi (2021) [Storia Dramma Guerra Thriller] ⭐7.0" />
+      <p>Il Re degli scacchi (2021) [Storia Dramma Guerra Thriller] ⭐7.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/661804%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/lfxs2YnuuLR037Ad4wesW5O9oUW.jpg" alt="De Gaulle (2020) [Storia Dramma] ⭐6.1" />
+      <p>De Gaulle (2020) [Storia Dramma] ⭐6.1</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/517412%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/aN5KsDfbzOKgVXOkbEEvFACKAlY.jpg" alt="Tesla (2020) [Storia Dramma] ⭐5.8" />
+      <p>Tesla (2020) [Storia Dramma] ⭐5.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/520552%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/oSSvHwbYp8zk09wuzG0QiM0oamD.jpg" alt="Frontiere selvagge (2019) [Storia Azione Dramma] ⭐6.2" />
+      <p>Frontiere selvagge (2019) [Storia Azione Dramma] ⭐6.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/411728%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/cFtqSjKgLH625uTqltfUmT1HHCv.jpg" alt="Il professore e il pazzo (2019) [Storia Dramma Mistero Thriller] ⭐7.2" />
+      <p>Il professore e il pazzo (2019) [Storia Dramma Mistero Thriller] ⭐7.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/399121%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/uwl1vbEQtv21tNs6YN16j2e5hWX.jpg" alt="L'ufficiale e la spia (2019) [Storia Dramma Thriller] ⭐7.1" />
+      <p>L'ufficiale e la spia (2019) [Storia Dramma Thriller] ⭐7.1</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/432165%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/jyx1NjCpp4yrT8MO2OERblKGunr.jpg" alt="Il re vichingo (2018) [Storia Avventura Azione] ⭐6.4" />
+      <p>Il re vichingo (2018) [Storia Avventura Azione] ⭐6.4</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/369972%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/ozomfUEI0DxQv2wvoucVMU3lPSw.jpg" alt="First Man - Il primo uomo (2018) [Storia Dramma] ⭐7.0" />
+      <p>First Man - Il primo uomo (2018) [Storia Dramma] ⭐7.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/375262%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/8xC6Xkga9CMX9HX07XhUDAW3eMi.jpg" alt="La favorita (2018) [Storia Commedia Dramma] ⭐7.5" />
+      <p>La favorita (2018) [Storia Commedia Dramma] ⭐7.5</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/438421%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/fcPNxoxYoO8GkpE7VWVVlDAqBap.jpg" alt="Il giocatore di scacchi (2017) [Storia Dramma] ⭐6.4" />
+      <p>Il giocatore di scacchi (2017) [Storia Dramma] ⭐6.4</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/402529%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/qGEx8u38SBfrfFyNwS6iqLLzjvH.jpg" alt="All eyez on me (2017) [Storia Dramma Musica] ⭐6.7" />
+      <p>All eyez on me (2017) [Storia Dramma Musica] ⭐6.7</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/298582%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/e9c2JOwJlWUfIZRaxIWE2BZt5GV.jpg" alt="Full Out (2015) [Storia Dramma Famiglia] ⭐7.2" />
+      <p>Full Out (2015) [Storia Dramma Famiglia] ⭐7.2</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/313074%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/jzGCV0V4B5L0VgmAYGMawqaIhha.jpg" alt="La spada della vendetta (2015) [Storia] ⭐4.8" />
+      <p>La spada della vendetta (2015) [Storia] ⭐4.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/285783%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/z2AVV3LXh3mkLPY769H8Oi9E7ab.jpg" alt="The Walk (2015) [Storia Dramma Avventura] ⭐7.0" />
+      <p>The Walk (2015) [Storia Dramma Avventura] ⭐7.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/273895%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/2Sp8qd8wZkRW3RDGUUXBqwl7d4r.jpg" alt="Selma - La strada per la libertà (2014) [Storia Dramma] ⭐7.4" />
+      <p>Selma - La strada per la libertà (2014) [Storia Dramma] ⭐7.4</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/205596%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/5Uc82xW62CoDMbSvcopOq5Zn6uK.jpg" alt="The Imitation Game (2014) [Storia Dramma Thriller Guerra] ⭐8.0" />
+      <p>The Imitation Game (2014) [Storia Dramma Thriller Guerra] ⭐8.0</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/82695%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/PrI0MJU2LLNm091h5DZLT0vV63.jpg" alt="Les Misérables (2012) [Storia Dramma] ⭐7.3" />
+      <p>Les Misérables (2012) [Storia Dramma] ⭐7.3</p>
+    </a>
+    
   </div>
-  <div style="text-align: center; margin-top: 30px;">
-    <a href="index.html" style="color: #aaa;">⟵ Torna alla home</a>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
   </div>
 </body>
 </html>

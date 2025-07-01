@@ -1,58 +1,169 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Western</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .griglia {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+      justify-items: center;
+    }
+
+    .canale {
+      background-color: #292929;
+      border-radius: 10px;
+      text-align: center;
+      color: #fff;
+      padding: 15px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .canale img {
+      width: 100%;
+      height: 120px;
+      object-fit: contain;
+      border-radius: 8px;
+      background-color: #111;
+      margin-bottom: 10px;
+    }
+
+    .canale p {
+      margin: 0;
+      font-size: 0.95em;
+    }
+
+    .canale:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+
+    .canale:focus {
+      outline: 2px solid #fff;
+      background-color: #3a3a3a;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    @media screen and (orientation: portrait) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      }
+
+      .canale img {
+        height: 100px;
+      }
+
+      .canale p {
+        font-size: 0.9em;
+      }
+
+      body {
+        padding: 15px;
+      }
+    }
+
+    @media screen and (orientation: landscape) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .canale img {
+        height: 140px;
+      }
+
+      .canale p {
+        font-size: 1em;
+      }
+
+      body {
+        padding: 30px;
+      }
+    }
+
+    .back {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .back a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    .back a:hover {
+      color: #fff;
+    }
+  </style>
 </head>
 <body>
   <h1>Western</h1>
   <div class="griglia">
     
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/932086%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/fxcjfrM7RwTblLOWmIGM0DKyr8i.jpg" alt="Horizon: An American Saga - Capitolo 1 (2024) [Western Dramma] ⭐6.9">
-    <p>Horizon: An American Saga - Capitolo 1 (2024) [Western Dramma] ⭐6.9</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/843380%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/tepYZoEg5gkUwnwQD5Cx9ZqZ7iZ.jpg" alt="Morto per un dollaro (2022) [Western Thriller Azione Dramma] ⭐5.8">
-    <p>Morto per un dollaro (2022) [Western Thriller Azione Dramma] ⭐5.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/440161%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/IODV6O00svruw0V44PbB0AnONp.jpg" alt="I fratelli Sisters (2018) [Western Dramma Commedia] ⭐6.8">
-    <p>I fratelli Sisters (2018) [Western Dramma Commedia] ⭐6.8</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/338766%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/z7M9gXN2e14in05FsGr2LBaagd0.jpg" alt="Hell or High Water (2016) [Western Crime Dramma] ⭐7.3">
-    <p>Hell or High Water (2016) [Western Crime Dramma] ⭐7.3</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/333386%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/fn9sifyK4SZFeQxJ5QBOE9D0na8.jpg" alt="Il duello (2016) [Western Dramma] ⭐5.4">
-    <p>Il duello (2016) [Western Dramma] ⭐5.4</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/215379%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/k6bnwONpNr3UnyTOeRkiQsb6yml.jpg" alt="Young Ones - L'ultima generazione (2014) [Western Azione Dramma Fantascienza] ⭐5.7">
-    <p>Young Ones - L'ultima generazione (2014) [Western Azione Dramma Fantascienza] ⭐5.7</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/13470%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/xLpb4mQV6OYMFSbgWG9cn7b1ats.jpg" alt="L'ultimo pellerossa (2007) [Western Dramma Storia televisione film Guerra] ⭐6.5">
-    <p>L'ultimo pellerossa (2007) [Western Dramma Storia televisione film Guerra] ⭐6.5</p>
-  </a>
-	
-  <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/5176%3Flang%3Dit" target="_blank">
-    <img src="https://image.tmdb.org/t/p/w500/rCGMLTCPX1jsXlGr6yLTHkfbruF.jpg" alt="Quel treno per Yuma (2007) [Western] ⭐7.2">
-    <p>Quel treno per Yuma (2007) [Western] ⭐7.2</p>
-  </a>
-	
-
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/932086%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/fxcjfrM7RwTblLOWmIGM0DKyr8i.jpg" alt="Horizon: An American Saga - Capitolo 1 (2024) [Western Dramma] ⭐6.9" />
+      <p>Horizon: An American Saga - Capitolo 1 (2024) [Western Dramma] ⭐6.9</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/843380%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/tepYZoEg5gkUwnwQD5Cx9ZqZ7iZ.jpg" alt="Morto per un dollaro (2022) [Western Thriller Azione Dramma] ⭐5.8" />
+      <p>Morto per un dollaro (2022) [Western Thriller Azione Dramma] ⭐5.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/440161%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/IODV6O00svruw0V44PbB0AnONp.jpg" alt="I fratelli Sisters (2018) [Western Dramma Commedia] ⭐6.8" />
+      <p>I fratelli Sisters (2018) [Western Dramma Commedia] ⭐6.8</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/338766%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/z7M9gXN2e14in05FsGr2LBaagd0.jpg" alt="Hell or High Water (2016) [Western Crime Dramma] ⭐7.3" />
+      <p>Hell or High Water (2016) [Western Crime Dramma] ⭐7.3</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/333386%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/fn9sifyK4SZFeQxJ5QBOE9D0na8.jpg" alt="Il duello (2016) [Western Dramma] ⭐5.4" />
+      <p>Il duello (2016) [Western Dramma] ⭐5.4</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/215379%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/k6bnwONpNr3UnyTOeRkiQsb6yml.jpg" alt="Young Ones - L'ultima generazione (2014) [Western Azione Dramma Fantascienza] ⭐5.7" />
+      <p>Young Ones - L'ultima generazione (2014) [Western Azione Dramma Fantascienza] ⭐5.7</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/13470%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/xLpb4mQV6OYMFSbgWG9cn7b1ats.jpg" alt="L'ultimo pellerossa (2007) [Western Dramma Storia televisione film Guerra] ⭐6.5" />
+      <p>L'ultimo pellerossa (2007) [Western Dramma Storia televisione film Guerra] ⭐6.5</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//vixsrc.to/movie/5176%3Flang%3Dit" target="_blank" tabindex="0">
+      <img src="https://image.tmdb.org/t/p/w500/rCGMLTCPX1jsXlGr6yLTHkfbruF.jpg" alt="Quel treno per Yuma (2007) [Western] ⭐7.2" />
+      <p>Quel treno per Yuma (2007) [Western] ⭐7.2</p>
+    </a>
+    
   </div>
-  <div style="text-align: center; margin-top: 30px;">
-    <a href="index.html" style="color: #aaa;">⟵ Torna alla home</a>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
   </div>
 </body>
 </html>
