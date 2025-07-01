@@ -3,65 +3,129 @@
 <head>
   <meta charset="UTF-8">
   <title>⭐️Tematici Bambini ⭐️</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
   <style>
     body {
-      background: #111;
-      color: white;
-      font-family: sans-serif;
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: 'Open Sans', sans-serif;
       margin: 0;
       padding: 20px;
     }
 
     h1 {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
     }
 
     .griglia {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
       gap: 20px;
-      justify-content: center;
+      justify-items: center;
     }
 
-    .canale {
-      background: #222;
+    .tile, .canale {
+      background-color: #292929;
       border-radius: 10px;
-      padding: 15px;
       text-align: center;
-      transition: 0.3s;
-      text-decoration: none;
-      color: white;
+      color: #fff;
+      padding: 15px;
+      transition: transform 0.2s, box-shadow 0.2s;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
-    .canale:hover {
-      background: #333;
-      transform: scale(1.02);
+    .tile:hover, .canale:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
     }
 
-    .canale img.logo {
-      width: 100px;
-      height: 100px;
+    .tile {
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+
+    .canale a {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .canale img {
+      width: 100%;
+      height: 120px;
       object-fit: contain;
+      border-radius: 8px;
+      background-color: #111;
       margin-bottom: 10px;
-      background: #000;
-      border-radius: 6px;
     }
 
     .canale p {
       margin: 0;
-      font-size: 15px;
-      word-break: break-word;
+      font-size: 0.95em;
+    }
+
+    .placeholder-logo {
+      width: 100%;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #444, #222);
+      font-size: 2em;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      color: #eee;
+    }
+
+    .canale.no-logo:hover .placeholder-logo {
+      background: linear-gradient(135deg, #555, #333);
+    }
+
+    @media screen and (orientation: portrait) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      }
+
+      .canale img, .placeholder-logo {
+        height: 100px;
+      }
+
+      .canale p {
+        font-size: 0.9em;
+      }
+
+      body {
+        padding: 15px;
+      }
+    }
+
+    @media screen and (orientation: landscape) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .canale img, .placeholder-logo {
+        height: 140px;
+      }
+
+      .canale p {
+        font-size: 1em;
+      }
+
+      body {
+        padding: 30px;
+      }
     }
 
     .back {
       text-align: center;
-      margin-top: 30px;
+      margin-top: 40px;
     }
 
     .back a {
@@ -69,179 +133,214 @@
       text-decoration: none;
       font-size: 16px;
     }
-
-    @media (max-width: 600px) {
-      .canale img.logo {
-        width: 80px;
-        height: 80px;
-      }
-
-      .canale p {
-        font-size: 14px;
-      }
-    }
   </style>
 </head>
 <body>
   <h1>⭐️Tematici Bambini ⭐️</h1>
   <div class="griglia">
     
-    <div class="canale" id="Alvinnn_The_Chipmunks_Channel">
+    <div class="canale no-logo" id="Alvinnn_The_Chipmunks_Channel">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9919" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Alvinnn The Chipmunks Channel</p>
       </a>
     </div>
     
-    <div class="canale" id="Anna_dai_Capelli_Rossi_Channel">
+    <div class="canale no-logo" id="Anna_dai_Capelli_Rossi_Channel">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9920" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Anna dai Capelli Rossi Channel</p>
       </a>
     </div>
     
-    <div class="canale" id="Belle_e_Sebastien_Channel">
+    <div class="canale no-logo" id="Belle_e_Sebastien_Channel">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9921" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Belle e Sebastien Channel</p>
       </a>
     </div>
     
-    <div class="canale" id="Bing_Channel">
+    <div class="canale no-logo" id="Bing_Channel">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9922" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Bing Channel</p>
       </a>
     </div>
     
-    <div class="canale" id="Blaze_e_le_Mega_Macchine_Channel_Merged">
+    <div class="canale no-logo" id="Blaze_e_le_Mega_Macchine_Channel_Merged">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9923" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Blaze e le Mega Macchine Channel Merged</p>
       </a>
     </div>
     
-    <div class="canale" id="Bob_Aggiustatutto_Channel_Merged">
+    <div class="canale no-logo" id="Bob_Aggiustatutto_Channel_Merged">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9924" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Bob Aggiustatutto Channel Merged</p>
       </a>
     </div>
     
-    <div class="canale" id="Candy_Candy_Channel_Merged">
+    <div class="canale no-logo" id="Candy_Candy_Channel_Merged">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9925" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Candy Candy Channel Merged</p>
       </a>
     </div>
     
-    <div class="canale" id="C_era_Una_Volta_Pollon_Channel_Merged">
+    <div class="canale no-logo" id="C_era_Una_Volta_Pollon_Channel_Merged">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9926" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>C'era Una Volta Pollon Channel Merged</p>
       </a>
     </div>
     
-    <div class="canale" id="Cip_Ciop_Channel_Merged">
+    <div class="canale no-logo" id="Cip_Ciop_Channel_Merged">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9927" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Cip & Ciop Channel Merged</p>
       </a>
     </div>
     
-    <div class="canale" id="Esplorando_Il_Corpo_Umano_Channel_Merged">
+    <div class="canale no-logo" id="Esplorando_Il_Corpo_Umano_Channel_Merged">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9928" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Esplorando Il Corpo Umano Channel Merged</p>
       </a>
     </div>
     
-    <div class="canale" id="Hello_Spank_Channel_Merged">
+    <div class="canale no-logo" id="Hello_Spank_Channel_Merged">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9929" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Hello! Spank Channel Merged</p>
       </a>
     </div>
     
-    <div class="canale" id="I_Numerotti_Channel">
+    <div class="canale no-logo" id="I_Numerotti_Channel">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9930" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>I Numerotti Channel</p>
       </a>
     </div>
     
-    <div class="canale" id="La_Casa_Di_Topolino_Channel">
+    <div class="canale no-logo" id="La_Casa_Di_Topolino_Channel">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9932" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La Casa Di Topolino Channel</p>
       </a>
     </div>
     
-    <div class="canale" id="L_ape_Maia_3d_Channel">
+    <div class="canale no-logo" id="L_ape_Maia_3d_Channel">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9933" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>L'ape Maia 3d Channel</p>
       </a>
     </div>
     
-    <div class="canale" id="LEGO_Ninjago_Channel_Merged">
+    <div class="canale no-logo" id="LEGO_Ninjago_Channel_Merged">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9934" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>LEGO Ninjago Channel Merged</p>
       </a>
     </div>
     
-    <div class="canale" id="Looney_Tunes_Channel_Merged">
+    <div class="canale no-logo" id="Looney_Tunes_Channel_Merged">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9935" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Looney Tunes Channel Merged</p>
       </a>
     </div>
     
-    <div class="canale" id="Paw_Patrol_Channel_Merged">
+    <div class="canale no-logo" id="Paw_Patrol_Channel_Merged">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9937" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Paw Patrol Channel Merged</p>
       </a>
     </div>
     
-    <div class="canale" id="Pippi_Calze_Lunghe_Channel_Merged">
+    <div class="canale no-logo" id="Pippi_Calze_Lunghe_Channel_Merged">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9938" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Pippi Calze Lunghe Channel Merged</p>
       </a>
     </div>
     
-    <div class="canale" id="PJ_Masks_Super_pigiamini_Channel_Merged">
+    <div class="canale no-logo" id="PJ_Masks_Super_pigiamini_Channel_Merged">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9939" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>PJ Masks Super pigiamini Channel Merged</p>
       </a>
     </div>
     
-    <div class="canale" id="Tom_E_Jerry_Channel">
+    <div class="canale no-logo" id="Tom_E_Jerry_Channel">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9940" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Tom E Jerry Channel</p>
       </a>
     </div>
     
-    <div class="canale" id="mondo_tv_kids">
+    <div class="canale no-logo" id="mondo_tv_kids">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9941" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>mondo tv kids</p>
       </a>
     </div>
     
-    <div class="canale" id="TARTARUGHE_NINJA_CHANELL">
+    <div class="canale no-logo" id="TARTARUGHE_NINJA_CHANELL">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/50716" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>TARTARUGHE-NINJA-CHANELL</p>
       </a>
     </div>
     
-    <div class="canale" id="Masha_e_Orso_Channel_Merged">
+    <div class="canale no-logo" id="Masha_e_Orso_Channel_Merged">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/71113" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Masha e Orso Channel Merged</p>
       </a>

@@ -3,65 +3,129 @@
 <head>
   <meta charset="UTF-8">
   <title>⭐️Tematici Film ⭐️</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
   <style>
     body {
-      background: #111;
-      color: white;
-      font-family: sans-serif;
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: 'Open Sans', sans-serif;
       margin: 0;
       padding: 20px;
     }
 
     h1 {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
     }
 
     .griglia {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
       gap: 20px;
-      justify-content: center;
+      justify-items: center;
     }
 
-    .canale {
-      background: #222;
+    .tile, .canale {
+      background-color: #292929;
       border-radius: 10px;
-      padding: 15px;
       text-align: center;
-      transition: 0.3s;
-      text-decoration: none;
-      color: white;
+      color: #fff;
+      padding: 15px;
+      transition: transform 0.2s, box-shadow 0.2s;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
-    .canale:hover {
-      background: #333;
-      transform: scale(1.02);
+    .tile:hover, .canale:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
     }
 
-    .canale img.logo {
-      width: 100px;
-      height: 100px;
+    .tile {
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+
+    .canale a {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .canale img {
+      width: 100%;
+      height: 120px;
       object-fit: contain;
+      border-radius: 8px;
+      background-color: #111;
       margin-bottom: 10px;
-      background: #000;
-      border-radius: 6px;
     }
 
     .canale p {
       margin: 0;
-      font-size: 15px;
-      word-break: break-word;
+      font-size: 0.95em;
+    }
+
+    .placeholder-logo {
+      width: 100%;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #444, #222);
+      font-size: 2em;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      color: #eee;
+    }
+
+    .canale.no-logo:hover .placeholder-logo {
+      background: linear-gradient(135deg, #555, #333);
+    }
+
+    @media screen and (orientation: portrait) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      }
+
+      .canale img, .placeholder-logo {
+        height: 100px;
+      }
+
+      .canale p {
+        font-size: 0.9em;
+      }
+
+      body {
+        padding: 15px;
+      }
+    }
+
+    @media screen and (orientation: landscape) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .canale img, .placeholder-logo {
+        height: 140px;
+      }
+
+      .canale p {
+        font-size: 1em;
+      }
+
+      body {
+        padding: 30px;
+      }
     }
 
     .back {
       text-align: center;
-      margin-top: 30px;
+      margin-top: 40px;
     }
 
     .back a {
@@ -69,312 +133,385 @@
       text-decoration: none;
       font-size: 16px;
     }
-
-    @media (max-width: 600px) {
-      .canale img.logo {
-        width: 80px;
-        height: 80px;
-      }
-
-      .canale p {
-        font-size: 14px;
-      }
-    }
   </style>
 </head>
 <body>
   <h1>⭐️Tematici Film ⭐️</h1>
   <div class="griglia">
     
-    <div class="canale" id="CINEMA_WESTEN">
+    <div class="canale no-logo" id="CINEMA_WESTEN">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/50831" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>CINEMA WESTEN</p>
       </a>
     </div>
     
-    <div class="canale" id="Adriano_Celentano_Channel">
+    <div class="canale no-logo" id="Adriano_Celentano_Channel">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9942" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Adriano Celentano Channel</p>
       </a>
     </div>
     
-    <div class="canale" id="Alberto_Sordi_Channel">
+    <div class="canale no-logo" id="Alberto_Sordi_Channel">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9943" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Alberto Sordi Channel</p>
       </a>
     </div>
     
-    <div class="canale" id="Aldo_Giovanni_Giacomo_Channel">
+    <div class="canale no-logo" id="Aldo_Giovanni_Giacomo_Channel">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9944" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Aldo Giovanni Giacomo Channel</p>
       </a>
     </div>
     
-    <div class="canale" id="Alessandro_Siani_Channel">
+    <div class="canale no-logo" id="Alessandro_Siani_Channel">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9945" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Alessandro Siani Channel</p>
       </a>
     </div>
     
-    <div class="canale" id="Alvaro_Vitale_Channel">
+    <div class="canale no-logo" id="Alvaro_Vitale_Channel">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9946" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Alvaro Vitale Channel</p>
       </a>
     </div>
     
-    <div class="canale" id="Angelina_Jolie_Channel">
+    <div class="canale no-logo" id="Angelina_Jolie_Channel">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9947" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Angelina Jolie Channel</p>
       </a>
     </div>
     
-    <div class="canale" id="Biagio_Izzo_Channel">
+    <div class="canale no-logo" id="Biagio_Izzo_Channel">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9948" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Biagio Izzo Channel</p>
       </a>
     </div>
     
-    <div class="canale" id="Boldi_De_Sica_Channel">
+    <div class="canale no-logo" id="Boldi_De_Sica_Channel">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9949" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Boldi & De Sica Channel</p>
       </a>
     </div>
     
-    <div class="canale" id="Bud_Spencer_Channel">
+    <div class="canale no-logo" id="Bud_Spencer_Channel">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9950" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Bud Spencer Channel</p>
       </a>
     </div>
     
-    <div class="canale" id="Carlo_Verdone_Channel">
+    <div class="canale no-logo" id="Carlo_Verdone_Channel">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9951" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Carlo Verdone Channel</p>
       </a>
     </div>
     
-    <div class="canale" id="Checco_Zalone_Channel">
+    <div class="canale no-logo" id="Checco_Zalone_Channel">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9952" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Checco Zalone Channel</p>
       </a>
     </div>
     
-    <div class="canale" id="Chuck_Norris_Channel">
+    <div class="canale no-logo" id="Chuck_Norris_Channel">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9953" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Chuck Norris Channel</p>
       </a>
     </div>
     
-    <div class="canale" id="Clint_Eastwood_Channel">
+    <div class="canale no-logo" id="Clint_Eastwood_Channel">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9954" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Clint Eastwood Channel</p>
       </a>
     </div>
     
-    <div class="canale" id="Dario_Argento_Channel">
+    <div class="canale no-logo" id="Dario_Argento_Channel">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9955" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Dario Argento Channel</p>
       </a>
     </div>
     
-    <div class="canale" id="Diego_Abatantuomo_Channel">
+    <div class="canale no-logo" id="Diego_Abatantuomo_Channel">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9956" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Diego Abatantuomo Channel</p>
       </a>
     </div>
     
-    <div class="canale" id="Ficarra_Picone_Channel">
+    <div class="canale no-logo" id="Ficarra_Picone_Channel">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9957" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Ficarra & Picone Channel</p>
       </a>
     </div>
     
-    <div class="canale" id="Franco_Ciccio_Channel">
+    <div class="canale no-logo" id="Franco_Ciccio_Channel">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9958" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Franco & Ciccio Channel</p>
       </a>
     </div>
     
-    <div class="canale" id="Horror_Channel">
+    <div class="canale no-logo" id="Horror_Channel">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9959" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Horror Channel</p>
       </a>
     </div>
     
-    <div class="canale" id="Jason_Statham_Channel">
+    <div class="canale no-logo" id="Jason_Statham_Channel">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9960" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Jason Statham Channel</p>
       </a>
     </div>
     
-    <div class="canale" id="Leonardo_Pieraccioni_Channel">
+    <div class="canale no-logo" id="Leonardo_Pieraccioni_Channel">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9961" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Leonardo Pieraccioni Channel</p>
       </a>
     </div>
     
-    <div class="canale" id="Lino_Banfi_Channel">
+    <div class="canale no-logo" id="Lino_Banfi_Channel">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9962" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Lino Banfi Channel</p>
       </a>
     </div>
     
-    <div class="canale" id="Marvel_Channel">
+    <div class="canale no-logo" id="Marvel_Channel">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9963" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Marvel Channel</p>
       </a>
     </div>
     
-    <div class="canale" id="Nicola_Cage_Channel">
+    <div class="canale no-logo" id="Nicola_Cage_Channel">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9964" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Nicola Cage Channel</p>
       </a>
     </div>
     
-    <div class="canale" id="Paolo_Villaggio_Channel">
+    <div class="canale no-logo" id="Paolo_Villaggio_Channel">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9965" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Paolo Villaggio Channel</p>
       </a>
     </div>
     
-    <div class="canale" id="Roberto_Benigni_Channel">
+    <div class="canale no-logo" id="Roberto_Benigni_Channel">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9966" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Roberto Benigni Channel</p>
       </a>
     </div>
     
-    <div class="canale" id="Steven_Seagal_Channel">
+    <div class="canale no-logo" id="Steven_Seagal_Channel">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9967" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Steven Seagal Channel</p>
       </a>
     </div>
     
-    <div class="canale" id="ToTò_Channel">
+    <div class="canale no-logo" id="ToTò_Channel">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/9968" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>ToTò Channel</p>
       </a>
     </div>
     
-    <div class="canale" id="RAMBO_CHANELL">
+    <div class="canale no-logo" id="RAMBO_CHANELL">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/50717" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>RAMBO-CHANELL</p>
       </a>
     </div>
     
-    <div class="canale" id="rocky_channel">
+    <div class="canale no-logo" id="rocky_channel">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/50754" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>rocky-channel</p>
       </a>
     </div>
     
-    <div class="canale" id="cinema_oscar">
+    <div class="canale no-logo" id="cinema_oscar">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/50755" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>cinema oscar</p>
       </a>
     </div>
     
-    <div class="canale" id="cinema_panettone">
+    <div class="canale no-logo" id="cinema_panettone">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/50773" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>cinema-panettone</p>
       </a>
     </div>
     
-    <div class="canale" id="CINEMA_007_CHANNEL">
+    <div class="canale no-logo" id="CINEMA_007_CHANNEL">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/50821" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>CINEMA-007 CHANNEL</p>
       </a>
     </div>
     
-    <div class="canale" id="MISSION_IMPOSSIBLE_CHANELL">
+    <div class="canale no-logo" id="MISSION_IMPOSSIBLE_CHANELL">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/50822" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>MISSION-IMPOSSIBLE-CHANELL</p>
       </a>
     </div>
     
-    <div class="canale" id="Fast_Furious_CHANELL">
+    <div class="canale no-logo" id="Fast_Furious_CHANELL">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/50823" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Fast & Furious CHANELL</p>
       </a>
     </div>
     
-    <div class="canale" id="Cinema_Thriller_PULSE_TV">
+    <div class="canale no-logo" id="Cinema_Thriller_PULSE_TV">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/50826" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Cinema -Thriller-PULSE TV</p>
       </a>
     </div>
     
-    <div class="canale" id="CINEMA_ALVARO_VITALE">
+    <div class="canale no-logo" id="CINEMA_ALVARO_VITALE">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/50832" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>CINEMA ALVARO VITALE</p>
       </a>
     </div>
     
-    <div class="canale" id="CINEMA_ARMA_LETALE">
+    <div class="canale no-logo" id="CINEMA_ARMA_LETALE">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/50833" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>CINEMA ARMA LETALE</p>
       </a>
     </div>
     
-    <div class="canale" id="CINEMA_bourne">
+    <div class="canale no-logo" id="CINEMA_bourne">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/50834" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>CINEMA bourne</p>
       </a>
     </div>
     
-    <div class="canale" id="cinema_Jean_Claude">
+    <div class="canale no-logo" id="cinema_Jean_Claude">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/50835" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>cinema Jean-Claude</p>
       </a>
     </div>
     
-    <div class="canale" id="Cinema_Predator">
+    <div class="canale no-logo" id="Cinema_Predator">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/50836" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Cinema Predator</p>
       </a>
     </div>
     
-    <div class="canale" id="NINO_D_ANGELO_CHANELL">
+    <div class="canale no-logo" id="NINO_D_ANGELO_CHANELL">
       <a href="http://163.172.51.230:80/vood-chanell/BhBphgxjPp/56220" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>NINO D ANGELO CHANELL</p>
       </a>

@@ -3,65 +3,129 @@
 <head>
   <meta charset="UTF-8">
   <title>⭐️Renato Pozzetto⭐️</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
   <style>
     body {
-      background: #111;
-      color: white;
-      font-family: sans-serif;
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: 'Open Sans', sans-serif;
       margin: 0;
       padding: 20px;
     }
 
     h1 {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
     }
 
     .griglia {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
       gap: 20px;
-      justify-content: center;
+      justify-items: center;
     }
 
-    .canale {
-      background: #222;
+    .tile, .canale {
+      background-color: #292929;
       border-radius: 10px;
-      padding: 15px;
       text-align: center;
-      transition: 0.3s;
-      text-decoration: none;
-      color: white;
+      color: #fff;
+      padding: 15px;
+      transition: transform 0.2s, box-shadow 0.2s;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
-    .canale:hover {
-      background: #333;
-      transform: scale(1.02);
+    .tile:hover, .canale:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
     }
 
-    .canale img.logo {
-      width: 100px;
-      height: 100px;
+    .tile {
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+
+    .canale a {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .canale img {
+      width: 100%;
+      height: 120px;
       object-fit: contain;
+      border-radius: 8px;
+      background-color: #111;
       margin-bottom: 10px;
-      background: #000;
-      border-radius: 6px;
     }
 
     .canale p {
       margin: 0;
-      font-size: 15px;
-      word-break: break-word;
+      font-size: 0.95em;
+    }
+
+    .placeholder-logo {
+      width: 100%;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #444, #222);
+      font-size: 2em;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      color: #eee;
+    }
+
+    .canale.no-logo:hover .placeholder-logo {
+      background: linear-gradient(135deg, #555, #333);
+    }
+
+    @media screen and (orientation: portrait) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      }
+
+      .canale img, .placeholder-logo {
+        height: 100px;
+      }
+
+      .canale p {
+        font-size: 0.9em;
+      }
+
+      body {
+        padding: 15px;
+      }
+    }
+
+    @media screen and (orientation: landscape) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .canale img, .placeholder-logo {
+        height: 140px;
+      }
+
+      .canale p {
+        font-size: 1em;
+      }
+
+      body {
+        padding: 30px;
+      }
     }
 
     .back {
       text-align: center;
-      margin-top: 30px;
+      margin-top: 40px;
     }
 
     .back a {
@@ -69,487 +133,610 @@
       text-decoration: none;
       font-size: 16px;
     }
-
-    @media (max-width: 600px) {
-      .canale img.logo {
-        width: 80px;
-        height: 80px;
-      }
-
-      .canale p {
-        font-size: 14px;
-      }
-    }
   </style>
 </head>
 <body>
   <h1>⭐️Renato Pozzetto⭐️</h1>
   <div class="griglia">
     
-    <div class="canale" id="7_chili_in_7_giorni_1986">
+    <div class="canale no-logo" id="7_chili_in_7_giorni_1986">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44795.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>7 chili in 7 giorni (1986)</p>
       </a>
     </div>
     
-    <div class="canale" id="Agenzia_Riccardo_Finzi_1979_Pozzetto">
+    <div class="canale no-logo" id="Agenzia_Riccardo_Finzi_1979_Pozzetto">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44796.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Agenzia Riccardo Finzi 1979 Pozzetto</p>
       </a>
     </div>
     
-    <div class="canale" id="A_mezzanotte_va_la_ronda_del_piacere_1975">
+    <div class="canale no-logo" id="A_mezzanotte_va_la_ronda_del_piacere_1975">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44797.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>A mezzanotte va la ronda del piacere (1975)</p>
       </a>
     </div>
     
-    <div class="canale" id="Culo_e_camicia_1981">
+    <div class="canale no-logo" id="Culo_e_camicia_1981">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44798.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Culo e camicia (1981)</p>
       </a>
     </div>
     
-    <div class="canale" id="Da_grande_1987">
+    <div class="canale no-logo" id="Da_grande_1987">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44799.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Da grande (1987)</p>
       </a>
     </div>
     
-    <div class="canale" id="Due_cuori_una_cappella_1975">
+    <div class="canale no-logo" id="Due_cuori_una_cappella_1975">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44800.avi" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Due cuori, una cappella (1975)</p>
       </a>
     </div>
     
-    <div class="canale" id="Fico_d_India_1980">
+    <div class="canale no-logo" id="Fico_d_India_1980">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44801.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Fico d'India (1980)</p>
       </a>
     </div>
     
-    <div class="canale" id="Gran_bollito_1977">
+    <div class="canale no-logo" id="Gran_bollito_1977">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44802.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Gran bollito (1977)</p>
       </a>
     </div>
     
-    <div class="canale" id="Grandi_magazzini_1986">
+    <div class="canale no-logo" id="Grandi_magazzini_1986">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44803.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Grandi magazzini (1986)</p>
       </a>
     </div>
     
-    <div class="canale" id="Il_ragazzo_di_campagna_1984">
+    <div class="canale no-logo" id="Il_ragazzo_di_campagna_1984">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44804.avi" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Il ragazzo di campagna (1984)</p>
       </a>
     </div>
     
-    <div class="canale" id="Infelici_e_contenti_1992">
+    <div class="canale no-logo" id="Infelici_e_contenti_1992">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44805.avi" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Infelici e contenti (1992)</p>
       </a>
     </div>
     
-    <div class="canale" id="Io_tigro_tu_tigri_egli_tigra_1978">
+    <div class="canale no-logo" id="Io_tigro_tu_tigri_egli_tigra_1978">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44806.avi" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Io tigro, tu tigri, egli tigra (1978)</p>
       </a>
     </div>
     
-    <div class="canale" id="La_casa_stregata_1982">
+    <div class="canale no-logo" id="La_casa_stregata_1982">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44807.avi" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La casa stregata (1982)</p>
       </a>
     </div>
     
-    <div class="canale" id="La_patata_bollente_1979">
+    <div class="canale no-logo" id="La_patata_bollente_1979">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44808.avi" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La patata bollente (1979)</p>
       </a>
     </div>
     
-    <div class="canale" id="La_poliziotta_1974">
+    <div class="canale no-logo" id="La_poliziotta_1974">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44809.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La poliziotta (1974)</p>
       </a>
     </div>
     
-    <div class="canale" id="Lei_mi_parla_ancora_2021">
+    <div class="canale no-logo" id="Lei_mi_parla_ancora_2021">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44810.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Lei mi parla ancora (2021)</p>
       </a>
     </div>
     
-    <div class="canale" id="Lui_è_peggio_di_me_1985">
+    <div class="canale no-logo" id="Lui_è_peggio_di_me_1985">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44811.avi" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Lui è peggio di me (1985)</p>
       </a>
     </div>
     
-    <div class="canale" id="Mani_di_fata_1983">
+    <div class="canale no-logo" id="Mani_di_fata_1983">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44812.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Mani di fata (1983)</p>
       </a>
     </div>
     
-    <div class="canale" id="Mia_moglie_è_una_strega_1980">
+    <div class="canale no-logo" id="Mia_moglie_è_una_strega_1980">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44813.avi" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Mia moglie è una strega (1980)</p>
       </a>
     </div>
     
-    <div class="canale" id="Nessuno_è_perfetto_1981">
+    <div class="canale no-logo" id="Nessuno_è_perfetto_1981">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44814.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Nessuno è perfetto (1981)</p>
       </a>
     </div>
     
-    <div class="canale" id="Noi_uomini_duri_1987">
+    <div class="canale no-logo" id="Noi_uomini_duri_1987">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44815.avi" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Noi uomini duri (1987)</p>
       </a>
     </div>
     
-    <div class="canale" id="Oh_Serafina_1976">
+    <div class="canale no-logo" id="Oh_Serafina_1976">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44816.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Oh, Serafina! (1976)</p>
       </a>
     </div>
     
-    <div class="canale" id="Papà_dice_messa_1996">
+    <div class="canale no-logo" id="Papà_dice_messa_1996">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44817.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Papà dice messa (1996)</p>
       </a>
     </div>
     
-    <div class="canale" id="Porca_vacca_1982">
+    <div class="canale no-logo" id="Porca_vacca_1982">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44818.avi" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Porca vacca (1982)</p>
       </a>
     </div>
     
-    <div class="canale" id="Questo_E_Quello_1981_Pozzetto">
+    <div class="canale no-logo" id="Questo_E_Quello_1981_Pozzetto">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44819.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Questo E Quello 1981 Pozzetto</p>
       </a>
     </div>
     
-    <div class="canale" id="Ricchi_ricchissimi_praticamente_in_mutande_1982">
+    <div class="canale no-logo" id="Ricchi_ricchissimi_praticamente_in_mutande_1982">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44820.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Ricchi, ricchissimi... praticamente in mutande (1982)</p>
       </a>
     </div>
     
-    <div class="canale" id="Roba_da_ricchi_1987">
+    <div class="canale no-logo" id="Roba_da_ricchi_1987">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44821.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Roba da ricchi (1987)</p>
       </a>
     </div>
     
-    <div class="canale" id="Sono_fotogenico_1980">
+    <div class="canale no-logo" id="Sono_fotogenico_1980">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44822.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Sono fotogenico (1980)</p>
       </a>
     </div>
     
-    <div class="canale" id="Sturmtruppen_1976">
+    <div class="canale no-logo" id="Sturmtruppen_1976">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44823.avi" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Sturmtruppen (1976)</p>
       </a>
     </div>
     
-    <div class="canale" id="Tre_tigri_contro_tre_tigri_1977">
+    <div class="canale no-logo" id="Tre_tigri_contro_tre_tigri_1977">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44824.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Tre tigri contro tre tigri (1977)</p>
       </a>
     </div>
     
-    <div class="canale" id="Un_Amore_Su_Misura_2006_Pozzetto">
+    <div class="canale no-logo" id="Un_Amore_Su_Misura_2006_Pozzetto">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44825.avi" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Un Amore Su Misura 2006 Pozzetto</p>
       </a>
     </div>
     
-    <div class="canale" id="Uno_contro_l_altro_praticamente_amici_1981">
+    <div class="canale no-logo" id="Uno_contro_l_altro_praticamente_amici_1981">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44826.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Uno contro l'altro, praticamente amici (1981)</p>
       </a>
     </div>
     
-    <div class="canale" id="Un_Povero_Ricco_1983">
+    <div class="canale no-logo" id="Un_Povero_Ricco_1983">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44827.avi" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Un Povero Ricco (1983)</p>
       </a>
     </div>
     
-    <div class="canale" id="7_chili_in_7_giorni_1986">
+    <div class="canale no-logo" id="7_chili_in_7_giorni_1986">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58027.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>7 chili in 7 giorni (1986)</p>
       </a>
     </div>
     
-    <div class="canale" id="Agenzia_Riccardo_Finzi_1979_Pozzetto">
+    <div class="canale no-logo" id="Agenzia_Riccardo_Finzi_1979_Pozzetto">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58028.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Agenzia Riccardo Finzi 1979 Pozzetto</p>
       </a>
     </div>
     
-    <div class="canale" id="A_mezzanotte_va_la_ronda_del_piacere_1975">
+    <div class="canale no-logo" id="A_mezzanotte_va_la_ronda_del_piacere_1975">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58029.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>A mezzanotte va la ronda del piacere (1975)</p>
       </a>
     </div>
     
-    <div class="canale" id="Culo_e_camicia_1981">
+    <div class="canale no-logo" id="Culo_e_camicia_1981">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58030.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Culo e camicia (1981)</p>
       </a>
     </div>
     
-    <div class="canale" id="Da_grande_1987">
+    <div class="canale no-logo" id="Da_grande_1987">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58031.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Da grande (1987)</p>
       </a>
     </div>
     
-    <div class="canale" id="Due_cuori_una_cappella_1975">
+    <div class="canale no-logo" id="Due_cuori_una_cappella_1975">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58032.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Due cuori, una cappella (1975)</p>
       </a>
     </div>
     
-    <div class="canale" id="Fico_d_India_1980">
+    <div class="canale no-logo" id="Fico_d_India_1980">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58033.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Fico d'India (1980)</p>
       </a>
     </div>
     
-    <div class="canale" id="Gran_bollito_1977">
+    <div class="canale no-logo" id="Gran_bollito_1977">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58034.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Gran bollito (1977)</p>
       </a>
     </div>
     
-    <div class="canale" id="Grandi_magazzini_1986">
+    <div class="canale no-logo" id="Grandi_magazzini_1986">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58035.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Grandi magazzini (1986)</p>
       </a>
     </div>
     
-    <div class="canale" id="Il_ragazzo_di_campagna_1984">
+    <div class="canale no-logo" id="Il_ragazzo_di_campagna_1984">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58036.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Il ragazzo di campagna (1984)</p>
       </a>
     </div>
     
-    <div class="canale" id="Infelici_e_contenti_1992">
+    <div class="canale no-logo" id="Infelici_e_contenti_1992">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58037.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Infelici e contenti (1992)</p>
       </a>
     </div>
     
-    <div class="canale" id="Io_tigro_tu_tigri_egli_tigra_1978">
+    <div class="canale no-logo" id="Io_tigro_tu_tigri_egli_tigra_1978">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58038.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Io tigro, tu tigri, egli tigra (1978)</p>
       </a>
     </div>
     
-    <div class="canale" id="La_casa_stregata_1982">
+    <div class="canale no-logo" id="La_casa_stregata_1982">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58039.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La casa stregata (1982)</p>
       </a>
     </div>
     
-    <div class="canale" id="La_patata_bollente_1979">
+    <div class="canale no-logo" id="La_patata_bollente_1979">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58040.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La patata bollente (1979)</p>
       </a>
     </div>
     
-    <div class="canale" id="La_poliziotta_1974">
+    <div class="canale no-logo" id="La_poliziotta_1974">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58041.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La poliziotta (1974)</p>
       </a>
     </div>
     
-    <div class="canale" id="Lei_mi_parla_ancora_2021">
+    <div class="canale no-logo" id="Lei_mi_parla_ancora_2021">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58042.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Lei mi parla ancora (2021)</p>
       </a>
     </div>
     
-    <div class="canale" id="Lui_è_peggio_di_me_1985">
+    <div class="canale no-logo" id="Lui_è_peggio_di_me_1985">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58043.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Lui è peggio di me (1985)</p>
       </a>
     </div>
     
-    <div class="canale" id="Mani_di_fata_1983">
+    <div class="canale no-logo" id="Mani_di_fata_1983">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58044.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Mani di fata (1983)</p>
       </a>
     </div>
     
-    <div class="canale" id="Mia_moglie_è_una_strega_1980">
+    <div class="canale no-logo" id="Mia_moglie_è_una_strega_1980">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58045.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Mia moglie è una strega (1980)</p>
       </a>
     </div>
     
-    <div class="canale" id="Nessuno_è_perfetto_1981">
+    <div class="canale no-logo" id="Nessuno_è_perfetto_1981">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58046.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Nessuno è perfetto (1981)</p>
       </a>
     </div>
     
-    <div class="canale" id="Noi_uomini_duri_1987">
+    <div class="canale no-logo" id="Noi_uomini_duri_1987">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58047.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Noi uomini duri (1987)</p>
       </a>
     </div>
     
-    <div class="canale" id="Oh_Serafina_1976">
+    <div class="canale no-logo" id="Oh_Serafina_1976">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58048.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Oh, Serafina! (1976)</p>
       </a>
     </div>
     
-    <div class="canale" id="Papà_dice_messa_1996">
+    <div class="canale no-logo" id="Papà_dice_messa_1996">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58049.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Papà dice messa (1996)</p>
       </a>
     </div>
     
-    <div class="canale" id="Porca_vacca_1982">
+    <div class="canale no-logo" id="Porca_vacca_1982">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58050.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Porca vacca (1982)</p>
       </a>
     </div>
     
-    <div class="canale" id="Questo_E_Quello_1981_Pozzetto">
+    <div class="canale no-logo" id="Questo_E_Quello_1981_Pozzetto">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58051.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Questo E Quello 1981 Pozzetto</p>
       </a>
     </div>
     
-    <div class="canale" id="Ricchi_ricchissimi_praticamente_in_mutande_1982">
+    <div class="canale no-logo" id="Ricchi_ricchissimi_praticamente_in_mutande_1982">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58052.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Ricchi, ricchissimi... praticamente in mutande (1982)</p>
       </a>
     </div>
     
-    <div class="canale" id="Ricky_Barabba_1992">
+    <div class="canale no-logo" id="Ricky_Barabba_1992">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58053.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Ricky & Barabba (1992)</p>
       </a>
     </div>
     
-    <div class="canale" id="Roba_da_ricchi_1987">
+    <div class="canale no-logo" id="Roba_da_ricchi_1987">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58054.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Roba da ricchi (1987)</p>
       </a>
     </div>
     
-    <div class="canale" id="Sono_fotogenico_1980">
+    <div class="canale no-logo" id="Sono_fotogenico_1980">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58055.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Sono fotogenico (1980)</p>
       </a>
     </div>
     
-    <div class="canale" id="Sturmtruppen_1976">
+    <div class="canale no-logo" id="Sturmtruppen_1976">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58056.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Sturmtruppen (1976)</p>
       </a>
     </div>
     
-    <div class="canale" id="Tre_tigri_contro_tre_tigri_1977">
+    <div class="canale no-logo" id="Tre_tigri_contro_tre_tigri_1977">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58057.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Tre tigri contro tre tigri (1977)</p>
       </a>
     </div>
     
-    <div class="canale" id="Un_Amore_Su_Misura_2006_Pozzetto">
+    <div class="canale no-logo" id="Un_Amore_Su_Misura_2006_Pozzetto">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58058.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Un Amore Su Misura 2006 Pozzetto</p>
       </a>
     </div>
     
-    <div class="canale" id="Uno_contro_l_altro_praticamente_amici_1981">
+    <div class="canale no-logo" id="Uno_contro_l_altro_praticamente_amici_1981">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58059.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Uno contro l'altro, praticamente amici (1981)</p>
       </a>
     </div>
     
-    <div class="canale" id="Un_Povero_Ricco_1983">
+    <div class="canale no-logo" id="Un_Povero_Ricco_1983">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58060.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Un Povero Ricco (1983)</p>
       </a>

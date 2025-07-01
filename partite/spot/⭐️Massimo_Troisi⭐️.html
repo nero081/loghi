@@ -3,65 +3,129 @@
 <head>
   <meta charset="UTF-8">
   <title>⭐️Massimo Troisi⭐️</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
   <style>
     body {
-      background: #111;
-      color: white;
-      font-family: sans-serif;
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: 'Open Sans', sans-serif;
       margin: 0;
       padding: 20px;
     }
 
     h1 {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
     }
 
     .griglia {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
       gap: 20px;
-      justify-content: center;
+      justify-items: center;
     }
 
-    .canale {
-      background: #222;
+    .tile, .canale {
+      background-color: #292929;
       border-radius: 10px;
-      padding: 15px;
       text-align: center;
-      transition: 0.3s;
-      text-decoration: none;
-      color: white;
+      color: #fff;
+      padding: 15px;
+      transition: transform 0.2s, box-shadow 0.2s;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
-    .canale:hover {
-      background: #333;
-      transform: scale(1.02);
+    .tile:hover, .canale:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
     }
 
-    .canale img.logo {
-      width: 100px;
-      height: 100px;
+    .tile {
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+
+    .canale a {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .canale img {
+      width: 100%;
+      height: 120px;
       object-fit: contain;
+      border-radius: 8px;
+      background-color: #111;
       margin-bottom: 10px;
-      background: #000;
-      border-radius: 6px;
     }
 
     .canale p {
       margin: 0;
-      font-size: 15px;
-      word-break: break-word;
+      font-size: 0.95em;
+    }
+
+    .placeholder-logo {
+      width: 100%;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #444, #222);
+      font-size: 2em;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      color: #eee;
+    }
+
+    .canale.no-logo:hover .placeholder-logo {
+      background: linear-gradient(135deg, #555, #333);
+    }
+
+    @media screen and (orientation: portrait) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      }
+
+      .canale img, .placeholder-logo {
+        height: 100px;
+      }
+
+      .canale p {
+        font-size: 0.9em;
+      }
+
+      body {
+        padding: 15px;
+      }
+    }
+
+    @media screen and (orientation: landscape) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .canale img, .placeholder-logo {
+        height: 140px;
+      }
+
+      .canale p {
+        font-size: 1em;
+      }
+
+      body {
+        padding: 30px;
+      }
     }
 
     .back {
       text-align: center;
-      margin-top: 30px;
+      margin-top: 40px;
     }
 
     .back a {
@@ -69,214 +133,259 @@
       text-decoration: none;
       font-size: 16px;
     }
-
-    @media (max-width: 600px) {
-      .canale img.logo {
-        width: 80px;
-        height: 80px;
-      }
-
-      .canale p {
-        font-size: 14px;
-      }
-    }
   </style>
 </head>
 <body>
   <h1>⭐️Massimo Troisi⭐️</h1>
   <div class="griglia">
     
-    <div class="canale" id="Hotel_Colonial_1987">
+    <div class="canale no-logo" id="Hotel_Colonial_1987">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45001.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Hotel Colonial (1987)</p>
       </a>
     </div>
     
-    <div class="canale" id="Il_mio_amico_Massimo_2022">
+    <div class="canale no-logo" id="Il_mio_amico_Massimo_2022">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45002.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Il mio amico Massimo (2022)</p>
       </a>
     </div>
     
-    <div class="canale" id="Il_postino_1994">
+    <div class="canale no-logo" id="Il_postino_1994">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45003.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Il postino (1994)</p>
       </a>
     </div>
     
-    <div class="canale" id="Il_viaggio_di_Capitan_Fracassa_1990">
+    <div class="canale no-logo" id="Il_viaggio_di_Capitan_Fracassa_1990">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45004.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Il viaggio di Capitan Fracassa (1990)</p>
       </a>
     </div>
     
-    <div class="canale" id="Laggiu_Qualcuno_Mi_Ama_2022_Troisi">
+    <div class="canale no-logo" id="Laggiu_Qualcuno_Mi_Ama_2022_Troisi">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45005.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Laggiu Qualcuno Mi Ama 2022 Troisi</p>
       </a>
     </div>
     
-    <div class="canale" id="Le_vie_del_Signore_sono_finite_1987">
+    <div class="canale no-logo" id="Le_vie_del_Signore_sono_finite_1987">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45006.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Le vie del Signore sono finite (1987)</p>
       </a>
     </div>
     
-    <div class="canale" id="Non_ci_resta_che_piangere_1984">
+    <div class="canale no-logo" id="Non_ci_resta_che_piangere_1984">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45007.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Non ci resta che piangere (1984)</p>
       </a>
     </div>
     
-    <div class="canale" id="Pensavo_fosse_amore_invece_era_un_calesse_1991">
+    <div class="canale no-logo" id="Pensavo_fosse_amore_invece_era_un_calesse_1991">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45008.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Pensavo fosse amore... invece era un calesse (1991)</p>
       </a>
     </div>
     
-    <div class="canale" id="Ricomincio_da_tre_1981">
+    <div class="canale no-logo" id="Ricomincio_da_tre_1981">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45009.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Ricomincio da tre (1981)</p>
       </a>
     </div>
     
-    <div class="canale" id="Scusate_il_ritardo_1983">
+    <div class="canale no-logo" id="Scusate_il_ritardo_1983">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45010.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Scusate il ritardo (1983)</p>
       </a>
     </div>
     
-    <div class="canale" id="Buon_compleanno_Massimo_2023">
+    <div class="canale no-logo" id="Buon_compleanno_Massimo_2023">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58331.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Buon compleanno Massimo (2023)</p>
       </a>
     </div>
     
-    <div class="canale" id="Che_ora_è_1989">
+    <div class="canale no-logo" id="Che_ora_è_1989">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58332.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Che ora è (1989)</p>
       </a>
     </div>
     
-    <div class="canale" id="Hotel_Colonial_1987">
+    <div class="canale no-logo" id="Hotel_Colonial_1987">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58333.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Hotel Colonial (1987)</p>
       </a>
     </div>
     
-    <div class="canale" id="Il_mio_amico_Massimo_2022">
+    <div class="canale no-logo" id="Il_mio_amico_Massimo_2022">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58334.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Il mio amico Massimo (2022)</p>
       </a>
     </div>
     
-    <div class="canale" id="Il_postino_1994">
+    <div class="canale no-logo" id="Il_postino_1994">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58335.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Il postino (1994)</p>
       </a>
     </div>
     
-    <div class="canale" id="Il_viaggio_di_Capitan_Fracassa_1990">
+    <div class="canale no-logo" id="Il_viaggio_di_Capitan_Fracassa_1990">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58336.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Il viaggio di Capitan Fracassa (1990)</p>
       </a>
     </div>
     
-    <div class="canale" id="Laggiu_Qualcuno_Mi_Ama_2022_Troisi">
+    <div class="canale no-logo" id="Laggiu_Qualcuno_Mi_Ama_2022_Troisi">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58337.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Laggiu Qualcuno Mi Ama 2022 Troisi</p>
       </a>
     </div>
     
-    <div class="canale" id="La_Smorfia_1_Parte_Troisi">
+    <div class="canale no-logo" id="La_Smorfia_1_Parte_Troisi">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58338.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La Smorfia 1 Parte Troisi</p>
       </a>
     </div>
     
-    <div class="canale" id="La_Smorfia_2_Parte_Troisi">
+    <div class="canale no-logo" id="La_Smorfia_2_Parte_Troisi">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58339.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La Smorfia 2 Parte Troisi</p>
       </a>
     </div>
     
-    <div class="canale" id="La_Smorfia_3_Parte_Troisi">
+    <div class="canale no-logo" id="La_Smorfia_3_Parte_Troisi">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58340.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La Smorfia 3 Parte Troisi</p>
       </a>
     </div>
     
-    <div class="canale" id="Le_vie_del_Signore_sono_finite_1987">
+    <div class="canale no-logo" id="Le_vie_del_Signore_sono_finite_1987">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58341.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Le vie del Signore sono finite (1987)</p>
       </a>
     </div>
     
-    <div class="canale" id="Morto_Troisi_viva_Troisi_1982">
+    <div class="canale no-logo" id="Morto_Troisi_viva_Troisi_1982">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58342.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Morto Troisi, viva Troisi! (1982)</p>
       </a>
     </div>
     
-    <div class="canale" id="No_grazie_il_caffè_mi_rende_nervoso_1982">
+    <div class="canale no-logo" id="No_grazie_il_caffè_mi_rende_nervoso_1982">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58343.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>No grazie, il caffè mi rende nervoso (1982)</p>
       </a>
     </div>
     
-    <div class="canale" id="Non_ci_resta_che_piangere_1984">
+    <div class="canale no-logo" id="Non_ci_resta_che_piangere_1984">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58344.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Non ci resta che piangere (1984)</p>
       </a>
     </div>
     
-    <div class="canale" id="Pensavo_fosse_amore_invece_era_un_calesse_1991">
+    <div class="canale no-logo" id="Pensavo_fosse_amore_invece_era_un_calesse_1991">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58345.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Pensavo fosse amore... invece era un calesse (1991)</p>
       </a>
     </div>
     
-    <div class="canale" id="Ricomincio_da_tre_1981">
+    <div class="canale no-logo" id="Ricomincio_da_tre_1981">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58346.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Ricomincio da tre (1981)</p>
       </a>
     </div>
     
-    <div class="canale" id="Scusate_il_ritardo_1983">
+    <div class="canale no-logo" id="Scusate_il_ritardo_1983">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58347.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Scusate il ritardo (1983)</p>
       </a>
     </div>
     
-    <div class="canale" id="Splendor_1988_Troisi">
+    <div class="canale no-logo" id="Splendor_1988_Troisi">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58348.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Splendor 1988 Troisi</p>
       </a>

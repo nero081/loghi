@@ -3,65 +3,129 @@
 <head>
   <meta charset="UTF-8">
   <title>⭐️EROTICI⭐️</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
   <style>
     body {
-      background: #111;
-      color: white;
-      font-family: sans-serif;
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: 'Open Sans', sans-serif;
       margin: 0;
       padding: 20px;
     }
 
     h1 {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
     }
 
     .griglia {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
       gap: 20px;
-      justify-content: center;
+      justify-items: center;
     }
 
-    .canale {
-      background: #222;
+    .tile, .canale {
+      background-color: #292929;
       border-radius: 10px;
-      padding: 15px;
       text-align: center;
-      transition: 0.3s;
-      text-decoration: none;
-      color: white;
+      color: #fff;
+      padding: 15px;
+      transition: transform 0.2s, box-shadow 0.2s;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
-    .canale:hover {
-      background: #333;
-      transform: scale(1.02);
+    .tile:hover, .canale:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
     }
 
-    .canale img.logo {
-      width: 100px;
-      height: 100px;
+    .tile {
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+
+    .canale a {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .canale img {
+      width: 100%;
+      height: 120px;
       object-fit: contain;
+      border-radius: 8px;
+      background-color: #111;
       margin-bottom: 10px;
-      background: #000;
-      border-radius: 6px;
     }
 
     .canale p {
       margin: 0;
-      font-size: 15px;
-      word-break: break-word;
+      font-size: 0.95em;
+    }
+
+    .placeholder-logo {
+      width: 100%;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #444, #222);
+      font-size: 2em;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      color: #eee;
+    }
+
+    .canale.no-logo:hover .placeholder-logo {
+      background: linear-gradient(135deg, #555, #333);
+    }
+
+    @media screen and (orientation: portrait) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      }
+
+      .canale img, .placeholder-logo {
+        height: 100px;
+      }
+
+      .canale p {
+        font-size: 0.9em;
+      }
+
+      body {
+        padding: 15px;
+      }
+    }
+
+    @media screen and (orientation: landscape) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .canale img, .placeholder-logo {
+        height: 140px;
+      }
+
+      .canale p {
+        font-size: 1em;
+      }
+
+      body {
+        padding: 30px;
+      }
     }
 
     .back {
       text-align: center;
-      margin-top: 30px;
+      margin-top: 40px;
     }
 
     .back a {
@@ -69,508 +133,637 @@
       text-decoration: none;
       font-size: 16px;
     }
-
-    @media (max-width: 600px) {
-      .canale img.logo {
-        width: 80px;
-        height: 80px;
-      }
-
-      .canale p {
-        font-size: 14px;
-      }
-    }
   </style>
 </head>
 <body>
   <h1>⭐️EROTICI⭐️</h1>
   <div class="griglia">
     
-    <div class="canale" id="Carnalità_1974">
+    <div class="canale no-logo" id="Carnalità_1974">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59256.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Carnalità (1974)</p>
       </a>
     </div>
     
-    <div class="canale" id="Emanuelle_in_America_1977">
+    <div class="canale no-logo" id="Emanuelle_in_America_1977">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59257.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Emanuelle in America (1977)</p>
       </a>
     </div>
     
-    <div class="canale" id="Il_giardino_di_cemento_1993">
+    <div class="canale no-logo" id="Il_giardino_di_cemento_1993">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59258.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Il giardino di cemento (1993)</p>
       </a>
     </div>
     
-    <div class="canale" id="Il_Macellaio_1997_Erotici">
+    <div class="canale no-logo" id="Il_Macellaio_1997_Erotici">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59259.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Il Macellaio 1997 Erotici</p>
       </a>
     </div>
     
-    <div class="canale" id="L_adolescente_1976">
+    <div class="canale no-logo" id="L_adolescente_1976">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59260.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>L'adolescente (1976)</p>
       </a>
     </div>
     
-    <div class="canale" id="La_felicità_nel_peccato_1975">
+    <div class="canale no-logo" id="La_felicità_nel_peccato_1975">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59261.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La felicità nel peccato (1975)</p>
       </a>
     </div>
     
-    <div class="canale" id="La_ragazzina_1974">
+    <div class="canale no-logo" id="La_ragazzina_1974">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59262.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La ragazzina (1974)</p>
       </a>
     </div>
     
-    <div class="canale" id="Malabimba_1979_Erotici">
+    <div class="canale no-logo" id="Malabimba_1979_Erotici">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59263.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Malabimba 1979 Erotici</p>
       </a>
     </div>
     
-    <div class="canale" id="Ma_mère_2004">
+    <div class="canale no-logo" id="Ma_mère_2004">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59264.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Ma mère (2004)</p>
       </a>
     </div>
     
-    <div class="canale" id="Quella_età_maliziosa_1975">
+    <div class="canale no-logo" id="Quella_età_maliziosa_1975">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59265.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Quella età maliziosa (1975)</p>
       </a>
     </div>
     
-    <div class="canale" id="Valérie_Diario_di_una_ninfomane_2008">
+    <div class="canale no-logo" id="Valérie_Diario_di_una_ninfomane_2008">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59266.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Valérie - Diario di una ninfomane (2008)</p>
       </a>
     </div>
     
-    <div class="canale" id="Action_1979_Erotici">
+    <div class="canale no-logo" id="Action_1979_Erotici">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67351.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Action 1979 Erotici</p>
       </a>
     </div>
     
-    <div class="canale" id="Appassionata_1974">
+    <div class="canale no-logo" id="Appassionata_1974">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67352.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Appassionata (1974)</p>
       </a>
     </div>
     
-    <div class="canale" id="Baise_moi_Scopami_2000">
+    <div class="canale no-logo" id="Baise_moi_Scopami_2000">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67353.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Baise-moi - Scopami (2000)</p>
       </a>
     </div>
     
-    <div class="canale" id="Caligola_e_Messalina_1981">
+    <div class="canale no-logo" id="Caligola_e_Messalina_1981">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67354.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Caligola e Messalina (1981)</p>
       </a>
     </div>
     
-    <div class="canale" id="Capriccio_1987">
+    <div class="canale no-logo" id="Capriccio_1987">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67355.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Capriccio (1987)</p>
       </a>
     </div>
     
-    <div class="canale" id="Corto_Circuiti_1999_2000_Erotici">
+    <div class="canale no-logo" id="Corto_Circuiti_1999_2000_Erotici">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67356.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Corto Circuiti 1999-2000 Erotici</p>
       </a>
     </div>
     
-    <div class="canale" id="Cose_molto_cattive_1998">
+    <div class="canale no-logo" id="Cose_molto_cattive_1998">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67357.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Cose molto cattive (1998)</p>
       </a>
     </div>
     
-    <div class="canale" id="Così_fan_tutte_1992">
+    <div class="canale no-logo" id="Così_fan_tutte_1992">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67358.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Così fan tutte (1992)</p>
       </a>
     </div>
     
-    <div class="canale" id="E_Adesso_Sesso_2002_Erotici">
+    <div class="canale no-logo" id="E_Adesso_Sesso_2002_Erotici">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67359.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>E Adesso Sesso 2002 Erotici</p>
       </a>
     </div>
     
-    <div class="canale" id="Ecstasy_1989">
+    <div class="canale no-logo" id="Ecstasy_1989">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67360.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Ecstasy (1989)</p>
       </a>
     </div>
     
-    <div class="canale" id="Emanuelle_nera_n_2_1976">
+    <div class="canale no-logo" id="Emanuelle_nera_n_2_1976">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67361.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Emanuelle nera n° 2 (1976)</p>
       </a>
     </div>
     
-    <div class="canale" id="Fallo_2013_Erotici">
+    <div class="canale no-logo" id="Fallo_2013_Erotici">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67362.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Fallo! 2013 Erotici</p>
       </a>
     </div>
     
-    <div class="canale" id="Fermo_Posta_1995_Erotici">
+    <div class="canale no-logo" id="Fermo_Posta_1995_Erotici">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67363.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Fermo Posta 1995 Erotici</p>
       </a>
     </div>
     
-    <div class="canale" id="Histoire_D_O_1975_Erotici">
+    <div class="canale no-logo" id="Histoire_D_O_1975_Erotici">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67364.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Histoire D'O 1975 Erotici</p>
       </a>
     </div>
     
-    <div class="canale" id="Il_caro_estinto_1965">
+    <div class="canale no-logo" id="Il_caro_estinto_1965">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67365.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Il caro estinto (1965)</p>
       </a>
     </div>
     
-    <div class="canale" id="Ilsa_La_Belva_Del_Deserto_1975_Erotici">
+    <div class="canale no-logo" id="Ilsa_La_Belva_Del_Deserto_1975_Erotici">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67366.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Ilsa La Belva Del Deserto 1975 Erotici</p>
       </a>
     </div>
     
-    <div class="canale" id="I_racconti_immorali_di_Borowczyk_1974">
+    <div class="canale no-logo" id="I_racconti_immorali_di_Borowczyk_1974">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67367.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>I racconti immorali di Borowczyk (1974)</p>
       </a>
     </div>
     
-    <div class="canale" id="L_amante_di_Lady_Chatterley_1981">
+    <div class="canale no-logo" id="L_amante_di_Lady_Chatterley_1981">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67368.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>L'amante di Lady Chatterley (1981)</p>
       </a>
     </div>
     
-    <div class="canale" id="L_uomo_che_guarda_1994">
+    <div class="canale no-logo" id="L_uomo_che_guarda_1994">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67369.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>L'uomo che guarda (1994)</p>
       </a>
     </div>
     
-    <div class="canale" id="La_chiave_1983">
+    <div class="canale no-logo" id="La_chiave_1983">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67370.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La chiave (1983)</p>
       </a>
     </div>
     
-    <div class="canale" id="La_iena_1997">
+    <div class="canale no-logo" id="La_iena_1997">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67371.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La iena (1997)</p>
       </a>
     </div>
     
-    <div class="canale" id="La_minorenne_1974">
+    <div class="canale no-logo" id="La_minorenne_1974">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67372.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La minorenne (1974)</p>
       </a>
     </div>
     
-    <div class="canale" id="La_montagna_sacra_1973">
+    <div class="canale no-logo" id="La_montagna_sacra_1973">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67373.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La montagna sacra (1973)</p>
       </a>
     </div>
     
-    <div class="canale" id="La_pretora_1976">
+    <div class="canale no-logo" id="La_pretora_1976">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67374.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La pretora (1976)</p>
       </a>
     </div>
     
-    <div class="canale" id="La_Vacanza_1971">
+    <div class="canale no-logo" id="La_Vacanza_1971">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67375.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La Vacanza (1971)</p>
       </a>
     </div>
     
-    <div class="canale" id="La_vedova_del_Trullo_1979">
+    <div class="canale no-logo" id="La_vedova_del_Trullo_1979">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67376.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La vedova del Trullo (1979)</p>
       </a>
     </div>
     
-    <div class="canale" id="Le_hostess_1971">
+    <div class="canale no-logo" id="Le_hostess_1971">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67377.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Le hostess (1971)</p>
       </a>
     </div>
     
-    <div class="canale" id="Lo_Zoo_Di_Venere_1986_Erotici">
+    <div class="canale no-logo" id="Lo_Zoo_Di_Venere_1986_Erotici">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67378.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Lo Zoo Di Venere 1986 Erotici</p>
       </a>
     </div>
     
-    <div class="canale" id="Miranda_1985">
+    <div class="canale no-logo" id="Miranda_1985">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67379.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Miranda (1985)</p>
       </a>
     </div>
     
-    <div class="canale" id="Monamour_2006_Erotici">
+    <div class="canale no-logo" id="Monamour_2006_Erotici">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67380.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Monamour 2006 Erotici</p>
       </a>
     </div>
     
-    <div class="canale" id="Monella_1997_Erotici">
+    <div class="canale no-logo" id="Monella_1997_Erotici">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67381.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Monella 1997 Erotici</p>
       </a>
     </div>
     
-    <div class="canale" id="Nerosubianco_1969">
+    <div class="canale no-logo" id="Nerosubianco_1969">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67382.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Nerosubianco (1969)</p>
       </a>
     </div>
     
-    <div class="canale" id="Nymphomaniac_Volume_1_2013">
+    <div class="canale no-logo" id="Nymphomaniac_Volume_1_2013">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67383.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Nymphomaniac - Volume 1 (2013)</p>
       </a>
     </div>
     
-    <div class="canale" id="Nymphomaniac_Volume_2_2014_Erotici">
+    <div class="canale no-logo" id="Nymphomaniac_Volume_2_2014_Erotici">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67384.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Nymphomaniac Volume 2 2014 Erotici</p>
       </a>
     </div>
     
-    <div class="canale" id="Paprika_1991">
+    <div class="canale no-logo" id="Paprika_1991">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67385.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Paprika (1991)</p>
       </a>
     </div>
     
-    <div class="canale" id="Salon_Kitty_1976">
+    <div class="canale no-logo" id="Salon_Kitty_1976">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67386.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Salon Kitty (1976)</p>
       </a>
     </div>
     
-    <div class="canale" id="Senso_45_2001_Erotici">
+    <div class="canale no-logo" id="Senso_45_2001_Erotici">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67387.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Senso 45 2001 Erotici</p>
       </a>
     </div>
     
-    <div class="canale" id="Suor_Emanuelle_1977">
+    <div class="canale no-logo" id="Suor_Emanuelle_1977">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67388.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Suor Emanuelle (1977)</p>
       </a>
     </div>
     
-    <div class="canale" id="Tokyo_Decadence_1992">
+    <div class="canale no-logo" id="Tokyo_Decadence_1992">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67389.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Tokyo Decadence (1992)</p>
       </a>
     </div>
     
-    <div class="canale" id="Tra_sgre_dire_2000">
+    <div class="canale no-logo" id="Tra_sgre_dire_2000">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67390.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Tra(sgre)dire (2000)</p>
       </a>
     </div>
     
-    <div class="canale" id="Vanessa_1977_Erotici">
+    <div class="canale no-logo" id="Vanessa_1977_Erotici">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67391.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Vanessa 1977 Erotici</p>
       </a>
     </div>
     
-    <div class="canale" id="Velluto_nero_1976">
+    <div class="canale no-logo" id="Velluto_nero_1976">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67392.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Velluto nero (1976)</p>
       </a>
     </div>
     
-    <div class="canale" id="Voodoo_Passion_Porno_Shock_1977_Erotici">
+    <div class="canale no-logo" id="Voodoo_Passion_Porno_Shock_1977_Erotici">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67393.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Voodoo Passion Porno Shock 1977 Erotici</p>
       </a>
     </div>
     
-    <div class="canale" id="Desiderando_Giulia_1986">
+    <div class="canale no-logo" id="Desiderando_Giulia_1986">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67854.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Desiderando Giulia (1986)</p>
       </a>
     </div>
     
-    <div class="canale" id="Ecco_l_impero_dei_sensi_1976">
+    <div class="canale no-logo" id="Ecco_l_impero_dei_sensi_1976">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67855.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Ecco l'impero dei sensi (1976)</p>
       </a>
     </div>
     
-    <div class="canale" id="La_novizia_1975">
+    <div class="canale no-logo" id="La_novizia_1975">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67856.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La novizia (1975)</p>
       </a>
     </div>
     
-    <div class="canale" id="Malombra_1984">
+    <div class="canale no-logo" id="Malombra_1984">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67857.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Malombra (1984)</p>
       </a>
     </div>
     
-    <div class="canale" id="Peccati_di_gioventù_1975">
+    <div class="canale no-logo" id="Peccati_di_gioventù_1975">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67858.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Peccati di gioventù (1975)</p>
       </a>
     </div>
     
-    <div class="canale" id="Supers_Vixens_1975_Erotici">
+    <div class="canale no-logo" id="Supers_Vixens_1975_Erotici">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67859.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Supers Vixens 1975 Erotici</p>
       </a>
     </div>
     
-    <div class="canale" id="Così_fan_tutte_1992">
+    <div class="canale no-logo" id="Così_fan_tutte_1992">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67961.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Così fan tutte - 1992</p>
       </a>
     </div>
     
-    <div class="canale" id="Fermo_posta_Tinto_Brass_1995">
+    <div class="canale no-logo" id="Fermo_posta_Tinto_Brass_1995">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67962.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Fermo posta Tinto Brass - 1995</p>
       </a>
     </div>
     
-    <div class="canale" id="Go_Go_Tales_2007">
+    <div class="canale no-logo" id="Go_Go_Tales_2007">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67963.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Go Go Tales - 2007</p>
       </a>
     </div>
     
-    <div class="canale" id="Il_caro_estinto_1965">
+    <div class="canale no-logo" id="Il_caro_estinto_1965">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67964.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Il caro estinto - 1965</p>
       </a>
     </div>
     
-    <div class="canale" id="Le_foto_di_Gioia_1987">
+    <div class="canale no-logo" id="Le_foto_di_Gioia_1987">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67965.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Le foto di Gioia - 1987</p>
       </a>
     </div>
     
-    <div class="canale" id="Miracolo_a_Santa_Monica_1992">
+    <div class="canale no-logo" id="Miracolo_a_Santa_Monica_1992">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67966.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Miracolo a Santa Monica - 1992</p>
       </a>
     </div>
     
-    <div class="canale" id="Quel_gran_pezzo_dell_Ubalda_tutta_nuda_e_tutta_calda_1972">
+    <div class="canale no-logo" id="Quel_gran_pezzo_dell_Ubalda_tutta_nuda_e_tutta_calda_1972">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67967.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Quel gran pezzo dell'Ubalda tutta nuda e tutta calda - 1972</p>
       </a>
     </div>
     
-    <div class="canale" id="Sessomatto_1973">
+    <div class="canale no-logo" id="Sessomatto_1973">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67968.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Sessomatto - 1973</p>
       </a>
     </div>
     
-    <div class="canale" id="Velluto_blu_1986">
+    <div class="canale no-logo" id="Velluto_blu_1986">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67969.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Velluto blu - 1986</p>
       </a>
     </div>
     
-    <div class="canale" id="Wittgenstein_1993">
+    <div class="canale no-logo" id="Wittgenstein_1993">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67970.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Wittgenstein - 1993</p>
       </a>

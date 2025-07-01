@@ -3,65 +3,129 @@
 <head>
   <meta charset="UTF-8">
   <title>Arnold SCHWARZENEGGER</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
   <style>
     body {
-      background: #111;
-      color: white;
-      font-family: sans-serif;
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: 'Open Sans', sans-serif;
       margin: 0;
       padding: 20px;
     }
 
     h1 {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
     }
 
     .griglia {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
       gap: 20px;
-      justify-content: center;
+      justify-items: center;
     }
 
-    .canale {
-      background: #222;
+    .tile, .canale {
+      background-color: #292929;
       border-radius: 10px;
-      padding: 15px;
       text-align: center;
-      transition: 0.3s;
-      text-decoration: none;
-      color: white;
+      color: #fff;
+      padding: 15px;
+      transition: transform 0.2s, box-shadow 0.2s;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
-    .canale:hover {
-      background: #333;
-      transform: scale(1.02);
+    .tile:hover, .canale:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
     }
 
-    .canale img.logo {
-      width: 100px;
-      height: 100px;
+    .tile {
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+
+    .canale a {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .canale img {
+      width: 100%;
+      height: 120px;
       object-fit: contain;
+      border-radius: 8px;
+      background-color: #111;
       margin-bottom: 10px;
-      background: #000;
-      border-radius: 6px;
     }
 
     .canale p {
       margin: 0;
-      font-size: 15px;
-      word-break: break-word;
+      font-size: 0.95em;
+    }
+
+    .placeholder-logo {
+      width: 100%;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #444, #222);
+      font-size: 2em;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      color: #eee;
+    }
+
+    .canale.no-logo:hover .placeholder-logo {
+      background: linear-gradient(135deg, #555, #333);
+    }
+
+    @media screen and (orientation: portrait) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      }
+
+      .canale img, .placeholder-logo {
+        height: 100px;
+      }
+
+      .canale p {
+        font-size: 0.9em;
+      }
+
+      body {
+        padding: 15px;
+      }
+    }
+
+    @media screen and (orientation: landscape) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .canale img, .placeholder-logo {
+        height: 140px;
+      }
+
+      .canale p {
+        font-size: 1em;
+      }
+
+      body {
+        padding: 30px;
+      }
     }
 
     .back {
       text-align: center;
-      margin-top: 30px;
+      margin-top: 40px;
     }
 
     .back a {
@@ -69,389 +133,484 @@
       text-decoration: none;
       font-size: 16px;
     }
-
-    @media (max-width: 600px) {
-      .canale img.logo {
-        width: 80px;
-        height: 80px;
-      }
-
-      .canale p {
-        font-size: 14px;
-      }
-    }
   </style>
 </head>
 <body>
   <h1>Arnold SCHWARZENEGGER</h1>
   <div class="griglia">
     
-    <div class="canale" id="Aftermath_La_Vendetta_2017_Schwar">
+    <div class="canale no-logo" id="Aftermath_La_Vendetta_2017_Schwar">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44859.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Aftermath La Vendetta 2017 Schwar</p>
       </a>
     </div>
     
-    <div class="canale" id="Atto_Di_Forza_Total_Recall_1990_Schwar">
+    <div class="canale no-logo" id="Atto_Di_Forza_Total_Recall_1990_Schwar">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44860.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Atto Di Forza Total Recall 1990 Schwar</p>
       </a>
     </div>
     
-    <div class="canale" id="Codice_Magnum_1986">
+    <div class="canale no-logo" id="Codice_Magnum_1986">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44861.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Codice Magnum (1986)</p>
       </a>
     </div>
     
-    <div class="canale" id="Commando_1985">
+    <div class="canale no-logo" id="Commando_1985">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44862.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Commando (1985)</p>
       </a>
     </div>
     
-    <div class="canale" id="Conan_il_barbaro_1982">
+    <div class="canale no-logo" id="Conan_il_barbaro_1982">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44863.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Conan il barbaro (1982)</p>
       </a>
     </div>
     
-    <div class="canale" id="Conan_il_distruttore_1984">
+    <div class="canale no-logo" id="Conan_il_distruttore_1984">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44864.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Conan il distruttore (1984)</p>
       </a>
     </div>
     
-    <div class="canale" id="Contagious_2015_Schwar">
+    <div class="canale no-logo" id="Contagious_2015_Schwar">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44865.avi" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Contagious 2015 Schwar</p>
       </a>
     </div>
     
-    <div class="canale" id="Danko_1988">
+    <div class="canale no-logo" id="Danko_1988">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44866.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Danko (1988)</p>
       </a>
     </div>
     
-    <div class="canale" id="Danni_collaterali_2002">
+    <div class="canale no-logo" id="Danni_collaterali_2002">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44867.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Danni collaterali (2002)</p>
       </a>
     </div>
     
-    <div class="canale" id="Escape_Plan_Fuga_dall_inferno_2013">
+    <div class="canale no-logo" id="Escape_Plan_Fuga_dall_inferno_2013">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44868.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Escape Plan - Fuga dall'inferno (2013)</p>
       </a>
     </div>
     
-    <div class="canale" id="Giorni_contati_End_of_Days_1999">
+    <div class="canale no-logo" id="Giorni_contati_End_of_Days_1999">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44869.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Giorni contati - End of Days (1999)</p>
       </a>
     </div>
     
-    <div class="canale" id="I_gemelli_1988">
+    <div class="canale no-logo" id="I_gemelli_1988">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44870.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>I gemelli (1988)</p>
       </a>
     </div>
     
-    <div class="canale" id="Il_Sesto_Giorno_2000_Schwar">
+    <div class="canale no-logo" id="Il_Sesto_Giorno_2000_Schwar">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44871.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Il Sesto Giorno 2000 Schwar</p>
       </a>
     </div>
     
-    <div class="canale" id="Junior_1994">
+    <div class="canale no-logo" id="Junior_1994">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44872.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Junior (1994)</p>
       </a>
     </div>
     
-    <div class="canale" id="L_Eliminatore_Eraser_1996">
+    <div class="canale no-logo" id="L_Eliminatore_Eraser_1996">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44873.avi" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>L'Eliminatore - Eraser (1996)</p>
       </a>
     </div>
     
-    <div class="canale" id="L_Implacabile_The_Running_Man_1987_Schwar">
+    <div class="canale no-logo" id="L_Implacabile_The_Running_Man_1987_Schwar">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44874.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>L'Implacabile The Running Man 1987 Schwar</p>
       </a>
     </div>
     
-    <div class="canale" id="Last_Action_Hero_1993_Schwar">
+    <div class="canale no-logo" id="Last_Action_Hero_1993_Schwar">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44875.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Last Action Hero 1993 Schwar</p>
       </a>
     </div>
     
-    <div class="canale" id="Predator_1987">
+    <div class="canale no-logo" id="Predator_1987">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44876.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Predator (1987)</p>
       </a>
     </div>
     
-    <div class="canale" id="Pumping_Iron_Uomo_D_Acciaio_1977_Schwar">
+    <div class="canale no-logo" id="Pumping_Iron_Uomo_D_Acciaio_1977_Schwar">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44877.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Pumping Iron Uomo D'Acciaio 1977 Schwar</p>
       </a>
     </div>
     
-    <div class="canale" id="Sabotage_2014">
+    <div class="canale no-logo" id="Sabotage_2014">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44878.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Sabotage (2014)</p>
       </a>
     </div>
     
-    <div class="canale" id="Terminator_1984">
+    <div class="canale no-logo" id="Terminator_1984">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44879.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Terminator (1984)</p>
       </a>
     </div>
     
-    <div class="canale" id="Terminator_2_Il_giorno_del_giudizio_1991">
+    <div class="canale no-logo" id="Terminator_2_Il_giorno_del_giudizio_1991">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44880.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Terminator 2 - Il giorno del giudizio (1991)</p>
       </a>
     </div>
     
-    <div class="canale" id="Terminator_3_Le_macchine_ribelli_2003">
+    <div class="canale no-logo" id="Terminator_3_Le_macchine_ribelli_2003">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44881.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Terminator 3 - Le macchine ribelli (2003)</p>
       </a>
     </div>
     
-    <div class="canale" id="Terminator_Destino_oscuro_2019">
+    <div class="canale no-logo" id="Terminator_Destino_oscuro_2019">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44882.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Terminator - Destino oscuro (2019)</p>
       </a>
     </div>
     
-    <div class="canale" id="True_Lies_1994">
+    <div class="canale no-logo" id="True_Lies_1994">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44884.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>True Lies (1994)</p>
       </a>
     </div>
     
-    <div class="canale" id="Una_promessa_è_una_promessa_1996">
+    <div class="canale no-logo" id="Una_promessa_è_una_promessa_1996">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44885.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Una promessa è una promessa (1996)</p>
       </a>
     </div>
     
-    <div class="canale" id="Aftermath_La_Vendetta_2017_Schwar">
+    <div class="canale no-logo" id="Aftermath_La_Vendetta_2017_Schwar">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58092.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Aftermath La Vendetta 2017 Schwar</p>
       </a>
     </div>
     
-    <div class="canale" id="Atto_Di_Forza_Total_Recall_1990_Schwar">
+    <div class="canale no-logo" id="Atto_Di_Forza_Total_Recall_1990_Schwar">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58093.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Atto Di Forza Total Recall 1990 Schwar</p>
       </a>
     </div>
     
-    <div class="canale" id="Codice_Magnum_1986">
+    <div class="canale no-logo" id="Codice_Magnum_1986">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58094.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Codice Magnum (1986)</p>
       </a>
     </div>
     
-    <div class="canale" id="Commando_1985">
+    <div class="canale no-logo" id="Commando_1985">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58095.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Commando (1985)</p>
       </a>
     </div>
     
-    <div class="canale" id="Conan_il_barbaro_1982">
+    <div class="canale no-logo" id="Conan_il_barbaro_1982">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58096.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Conan il barbaro (1982)</p>
       </a>
     </div>
     
-    <div class="canale" id="Conan_il_distruttore_1984">
+    <div class="canale no-logo" id="Conan_il_distruttore_1984">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58097.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Conan il distruttore (1984)</p>
       </a>
     </div>
     
-    <div class="canale" id="Contagious_2015_Schwar">
+    <div class="canale no-logo" id="Contagious_2015_Schwar">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58098.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Contagious 2015 Schwar</p>
       </a>
     </div>
     
-    <div class="canale" id="Danko_1988">
+    <div class="canale no-logo" id="Danko_1988">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58099.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Danko (1988)</p>
       </a>
     </div>
     
-    <div class="canale" id="Danni_collaterali_2002">
+    <div class="canale no-logo" id="Danni_collaterali_2002">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58100.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Danni collaterali (2002)</p>
       </a>
     </div>
     
-    <div class="canale" id="Escape_Plan_Fuga_dall_inferno_2013">
+    <div class="canale no-logo" id="Escape_Plan_Fuga_dall_inferno_2013">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58101.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Escape Plan - Fuga dall'inferno (2013)</p>
       </a>
     </div>
     
-    <div class="canale" id="Giorni_contati_End_of_Days_1999">
+    <div class="canale no-logo" id="Giorni_contati_End_of_Days_1999">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58102.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Giorni contati - End of Days (1999)</p>
       </a>
     </div>
     
-    <div class="canale" id="I_gemelli_1988">
+    <div class="canale no-logo" id="I_gemelli_1988">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58103.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>I gemelli (1988)</p>
       </a>
     </div>
     
-    <div class="canale" id="Il_Sesto_Giorno_2000_Schwar">
+    <div class="canale no-logo" id="Il_Sesto_Giorno_2000_Schwar">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58104.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Il Sesto Giorno 2000 Schwar</p>
       </a>
     </div>
     
-    <div class="canale" id="Junior_1994">
+    <div class="canale no-logo" id="Junior_1994">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58105.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Junior (1994)</p>
       </a>
     </div>
     
-    <div class="canale" id="L_Eliminatore_Eraser_1996">
+    <div class="canale no-logo" id="L_Eliminatore_Eraser_1996">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58106.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>L'Eliminatore - Eraser (1996)</p>
       </a>
     </div>
     
-    <div class="canale" id="L_implacabile_The_Running_Man_1987">
+    <div class="canale no-logo" id="L_implacabile_The_Running_Man_1987">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58107.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>L'implacabile - The Running Man (1987)</p>
       </a>
     </div>
     
-    <div class="canale" id="Last_Action_Hero_1993_Schwar">
+    <div class="canale no-logo" id="Last_Action_Hero_1993_Schwar">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58108.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Last Action Hero 1993 Schwar</p>
       </a>
     </div>
     
-    <div class="canale" id="Predator_1987">
+    <div class="canale no-logo" id="Predator_1987">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58109.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Predator (1987)</p>
       </a>
     </div>
     
-    <div class="canale" id="Pumping_Iron_Uomo_D_Acciaio_1977_Schwar">
+    <div class="canale no-logo" id="Pumping_Iron_Uomo_D_Acciaio_1977_Schwar">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58110.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Pumping Iron Uomo D'Acciaio 1977 Schwar</p>
       </a>
     </div>
     
-    <div class="canale" id="Sabotage_2014">
+    <div class="canale no-logo" id="Sabotage_2014">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58111.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Sabotage (2014)</p>
       </a>
     </div>
     
-    <div class="canale" id="Terminator_1984">
+    <div class="canale no-logo" id="Terminator_1984">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58112.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Terminator (1984)</p>
       </a>
     </div>
     
-    <div class="canale" id="Terminator_2_Il_giorno_del_giudizio_1991">
+    <div class="canale no-logo" id="Terminator_2_Il_giorno_del_giudizio_1991">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58113.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Terminator 2 - Il giorno del giudizio (1991)</p>
       </a>
     </div>
     
-    <div class="canale" id="Terminator_3_Le_macchine_ribelli_2003">
+    <div class="canale no-logo" id="Terminator_3_Le_macchine_ribelli_2003">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58114.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Terminator 3 - Le macchine ribelli (2003)</p>
       </a>
     </div>
     
-    <div class="canale" id="Terminator_Destino_oscuro_2019">
+    <div class="canale no-logo" id="Terminator_Destino_oscuro_2019">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58115.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Terminator - Destino oscuro (2019)</p>
       </a>
     </div>
     
-    <div class="canale" id="Terminator_Genisys_2015">
+    <div class="canale no-logo" id="Terminator_Genisys_2015">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58116.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Terminator Genisys (2015)</p>
       </a>
     </div>
     
-    <div class="canale" id="True_Lies_1994">
+    <div class="canale no-logo" id="True_Lies_1994">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58117.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>True Lies (1994)</p>
       </a>
     </div>
     
-    <div class="canale" id="Una_promessa_è_una_promessa_1996">
+    <div class="canale no-logo" id="Una_promessa_è_una_promessa_1996">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58118.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Una promessa è una promessa (1996)</p>
       </a>

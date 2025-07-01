@@ -3,65 +3,129 @@
 <head>
   <meta charset="UTF-8">
   <title>⭐️Leonardo DI CAPRIO⭐️</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
   <style>
     body {
-      background: #111;
-      color: white;
-      font-family: sans-serif;
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: 'Open Sans', sans-serif;
       margin: 0;
       padding: 20px;
     }
 
     h1 {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
     }
 
     .griglia {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
       gap: 20px;
-      justify-content: center;
+      justify-items: center;
     }
 
-    .canale {
-      background: #222;
+    .tile, .canale {
+      background-color: #292929;
       border-radius: 10px;
-      padding: 15px;
       text-align: center;
-      transition: 0.3s;
-      text-decoration: none;
-      color: white;
+      color: #fff;
+      padding: 15px;
+      transition: transform 0.2s, box-shadow 0.2s;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
-    .canale:hover {
-      background: #333;
-      transform: scale(1.02);
+    .tile:hover, .canale:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
     }
 
-    .canale img.logo {
-      width: 100px;
-      height: 100px;
+    .tile {
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+
+    .canale a {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .canale img {
+      width: 100%;
+      height: 120px;
       object-fit: contain;
+      border-radius: 8px;
+      background-color: #111;
       margin-bottom: 10px;
-      background: #000;
-      border-radius: 6px;
     }
 
     .canale p {
       margin: 0;
-      font-size: 15px;
-      word-break: break-word;
+      font-size: 0.95em;
+    }
+
+    .placeholder-logo {
+      width: 100%;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #444, #222);
+      font-size: 2em;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      color: #eee;
+    }
+
+    .canale.no-logo:hover .placeholder-logo {
+      background: linear-gradient(135deg, #555, #333);
+    }
+
+    @media screen and (orientation: portrait) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      }
+
+      .canale img, .placeholder-logo {
+        height: 100px;
+      }
+
+      .canale p {
+        font-size: 0.9em;
+      }
+
+      body {
+        padding: 15px;
+      }
+    }
+
+    @media screen and (orientation: landscape) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .canale img, .placeholder-logo {
+        height: 140px;
+      }
+
+      .canale p {
+        font-size: 1em;
+      }
+
+      body {
+        padding: 30px;
+      }
     }
 
     .back {
       text-align: center;
-      margin-top: 30px;
+      margin-top: 40px;
     }
 
     .back a {
@@ -69,193 +133,232 @@
       text-decoration: none;
       font-size: 16px;
     }
-
-    @media (max-width: 600px) {
-      .canale img.logo {
-        width: 80px;
-        height: 80px;
-      }
-
-      .canale p {
-        font-size: 14px;
-      }
-    }
   </style>
 </head>
 <body>
   <h1>⭐️Leonardo DI CAPRIO⭐️</h1>
   <div class="griglia">
     
-    <div class="canale" id="Blood_Diamond_Diamanti_di_sangue_2006">
+    <div class="canale no-logo" id="Blood_Diamond_Diamanti_di_sangue_2006">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57792.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Blood Diamond - Diamanti di sangue (2006)</p>
       </a>
     </div>
     
-    <div class="canale" id="Buon_Compleanno_Mr_Grape_1993_Di_Caprio">
+    <div class="canale no-logo" id="Buon_Compleanno_Mr_Grape_1993_Di_Caprio">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57793.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Buon Compleanno Mr.Grape 1993 Di Caprio</p>
       </a>
     </div>
     
-    <div class="canale" id="C_era_una_volta_a_Hollywood_2019">
+    <div class="canale no-logo" id="C_era_una_volta_a_Hollywood_2019">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57794.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>C'era una volta a… Hollywood (2019)</p>
       </a>
     </div>
     
-    <div class="canale" id="Django_Unchained_2012">
+    <div class="canale no-logo" id="Django_Unchained_2012">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57795.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Django Unchained (2012)</p>
       </a>
     </div>
     
-    <div class="canale" id="Don_t_Look_Up_2021">
+    <div class="canale no-logo" id="Don_t_Look_Up_2021">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57796.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Don't Look Up (2021)</p>
       </a>
     </div>
     
-    <div class="canale" id="Gangs_of_New_York_2002">
+    <div class="canale no-logo" id="Gangs_of_New_York_2002">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57797.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Gangs of New York (2002)</p>
       </a>
     </div>
     
-    <div class="canale" id="Il_grande_Gatsby_2013">
+    <div class="canale no-logo" id="Il_grande_Gatsby_2013">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57798.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Il grande Gatsby (2013)</p>
       </a>
     </div>
     
-    <div class="canale" id="Inception_2010">
+    <div class="canale no-logo" id="Inception_2010">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57799.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Inception (2010)</p>
       </a>
     </div>
     
-    <div class="canale" id="J_Edgar_2011_Di_Caprio">
+    <div class="canale no-logo" id="J_Edgar_2011_Di_Caprio">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57800.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>J.Edgar 2011 Di Caprio</p>
       </a>
     </div>
     
-    <div class="canale" id="Killers_of_the_Flower_Moon_2023">
+    <div class="canale no-logo" id="Killers_of_the_Flower_Moon_2023">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57801.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Killers of the Flower Moon (2023)</p>
       </a>
     </div>
     
-    <div class="canale" id="La_maschera_di_ferro_1998">
+    <div class="canale no-logo" id="La_maschera_di_ferro_1998">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57802.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La maschera di ferro (1998)</p>
       </a>
     </div>
     
-    <div class="canale" id="La_stanza_di_Marvin_1996">
+    <div class="canale no-logo" id="La_stanza_di_Marvin_1996">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57803.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La stanza di Marvin (1996)</p>
       </a>
     </div>
     
-    <div class="canale" id="Nessuna_verità_2008">
+    <div class="canale no-logo" id="Nessuna_verità_2008">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57804.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Nessuna verità (2008)</p>
       </a>
     </div>
     
-    <div class="canale" id="Poeti_dall_inferno_1995">
+    <div class="canale no-logo" id="Poeti_dall_inferno_1995">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57805.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Poeti dall'inferno (1995)</p>
       </a>
     </div>
     
-    <div class="canale" id="Pronti_a_morire_1995">
+    <div class="canale no-logo" id="Pronti_a_morire_1995">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57806.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Pronti a morire (1995)</p>
       </a>
     </div>
     
-    <div class="canale" id="Revenant_Redivivo_2015">
+    <div class="canale no-logo" id="Revenant_Redivivo_2015">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57807.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Revenant - Redivivo (2015)</p>
       </a>
     </div>
     
-    <div class="canale" id="Revolutionary_Road_2008">
+    <div class="canale no-logo" id="Revolutionary_Road_2008">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57808.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Revolutionary Road (2008)</p>
       </a>
     </div>
     
-    <div class="canale" id="Ritorno_dal_nulla_1995">
+    <div class="canale no-logo" id="Ritorno_dal_nulla_1995">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57809.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Ritorno dal nulla (1995)</p>
       </a>
     </div>
     
-    <div class="canale" id="Romeo_Giulietta_di_William_Shakespeare_1996">
+    <div class="canale no-logo" id="Romeo_Giulietta_di_William_Shakespeare_1996">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57810.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Romeo + Giulietta di William Shakespeare - 1996</p>
       </a>
     </div>
     
-    <div class="canale" id="Shutter_Island_2010">
+    <div class="canale no-logo" id="Shutter_Island_2010">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57811.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Shutter Island (2010)</p>
       </a>
     </div>
     
-    <div class="canale" id="The_Aviator_2004">
+    <div class="canale no-logo" id="The_Aviator_2004">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57812.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>The Aviator (2004)</p>
       </a>
     </div>
     
-    <div class="canale" id="The_Beach_2000">
+    <div class="canale no-logo" id="The_Beach_2000">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57813.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>The Beach (2000)</p>
       </a>
     </div>
     
-    <div class="canale" id="The_Departed_Il_bene_e_il_male_2006">
+    <div class="canale no-logo" id="The_Departed_Il_bene_e_il_male_2006">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57814.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>The Departed - Il bene e il male (2006)</p>
       </a>
     </div>
     
-    <div class="canale" id="The_Wolf_of_Wall_Street_2013">
+    <div class="canale no-logo" id="The_Wolf_of_Wall_Street_2013">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57815.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>The Wolf of Wall Street (2013)</p>
       </a>
     </div>
     
-    <div class="canale" id="Titanic_1997">
+    <div class="canale no-logo" id="Titanic_1997">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57816.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Titanic (1997)</p>
       </a>

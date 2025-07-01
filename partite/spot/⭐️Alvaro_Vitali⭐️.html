@@ -3,65 +3,129 @@
 <head>
   <meta charset="UTF-8">
   <title>⭐️Alvaro Vitali⭐️</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
   <style>
     body {
-      background: #111;
-      color: white;
-      font-family: sans-serif;
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: 'Open Sans', sans-serif;
       margin: 0;
       padding: 20px;
     }
 
     h1 {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
     }
 
     .griglia {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
       gap: 20px;
-      justify-content: center;
+      justify-items: center;
     }
 
-    .canale {
-      background: #222;
+    .tile, .canale {
+      background-color: #292929;
       border-radius: 10px;
-      padding: 15px;
       text-align: center;
-      transition: 0.3s;
-      text-decoration: none;
-      color: white;
+      color: #fff;
+      padding: 15px;
+      transition: transform 0.2s, box-shadow 0.2s;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
-    .canale:hover {
-      background: #333;
-      transform: scale(1.02);
+    .tile:hover, .canale:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
     }
 
-    .canale img.logo {
-      width: 100px;
-      height: 100px;
+    .tile {
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+
+    .canale a {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .canale img {
+      width: 100%;
+      height: 120px;
       object-fit: contain;
+      border-radius: 8px;
+      background-color: #111;
       margin-bottom: 10px;
-      background: #000;
-      border-radius: 6px;
     }
 
     .canale p {
       margin: 0;
-      font-size: 15px;
-      word-break: break-word;
+      font-size: 0.95em;
+    }
+
+    .placeholder-logo {
+      width: 100%;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #444, #222);
+      font-size: 2em;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      color: #eee;
+    }
+
+    .canale.no-logo:hover .placeholder-logo {
+      background: linear-gradient(135deg, #555, #333);
+    }
+
+    @media screen and (orientation: portrait) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      }
+
+      .canale img, .placeholder-logo {
+        height: 100px;
+      }
+
+      .canale p {
+        font-size: 0.9em;
+      }
+
+      body {
+        padding: 15px;
+      }
+    }
+
+    @media screen and (orientation: landscape) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .canale img, .placeholder-logo {
+        height: 140px;
+      }
+
+      .canale p {
+        font-size: 1em;
+      }
+
+      body {
+        padding: 30px;
+      }
     }
 
     .back {
       text-align: center;
-      margin-top: 30px;
+      margin-top: 40px;
     }
 
     .back a {
@@ -69,312 +133,385 @@
       text-decoration: none;
       font-size: 16px;
     }
-
-    @media (max-width: 600px) {
-      .canale img.logo {
-        width: 80px;
-        height: 80px;
-      }
-
-      .canale p {
-        font-size: 14px;
-      }
-    }
   </style>
 </head>
 <body>
   <h1>⭐️Alvaro Vitali⭐️</h1>
   <div class="griglia">
     
-    <div class="canale" id="Gian_Burrasca_1982">
+    <div class="canale no-logo" id="Gian_Burrasca_1982">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45114.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Gian Burrasca (1982)</p>
       </a>
     </div>
     
-    <div class="canale" id="Giggi_il_Bullo_1982">
+    <div class="canale no-logo" id="Giggi_il_Bullo_1982">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45115.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Giggi il Bullo (1982)</p>
       </a>
     </div>
     
-    <div class="canale" id="Il_tifoso_l_arbitro_e_il_calciatore_1983">
+    <div class="canale no-logo" id="Il_tifoso_l_arbitro_e_il_calciatore_1983">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45116.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Il tifoso, l'arbitro e il calciatore (1983)</p>
       </a>
     </div>
     
-    <div class="canale" id="L_Insegnante_1975">
+    <div class="canale no-logo" id="L_Insegnante_1975">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45117.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>L'Insegnante (1975)</p>
       </a>
     </div>
     
-    <div class="canale" id="L_onorevole_con_l_amante_sotto_il_letto_1981">
+    <div class="canale no-logo" id="L_onorevole_con_l_amante_sotto_il_letto_1981">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45118.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>L'onorevole con l'amante sotto il letto (1981)</p>
       </a>
     </div>
     
-    <div class="canale" id="La_dottoressa_del_distretto_militare_1976">
+    <div class="canale no-logo" id="La_dottoressa_del_distretto_militare_1976">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45119.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La dottoressa del distretto militare (1976)</p>
       </a>
     </div>
     
-    <div class="canale" id="La_dottoressa_preferisce_i_marinai_1981">
+    <div class="canale no-logo" id="La_dottoressa_preferisce_i_marinai_1981">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45120.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La dottoressa preferisce i marinai (1981)</p>
       </a>
     </div>
     
-    <div class="canale" id="La_liceale_al_mare_con_l_amica_di_papà_1980">
+    <div class="canale no-logo" id="La_liceale_al_mare_con_l_amica_di_papà_1980">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45121.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La liceale al mare con l'amica di papà (1980)</p>
       </a>
     </div>
     
-    <div class="canale" id="La_liceale_nella_classe_dei_ripetenti_1978">
+    <div class="canale no-logo" id="La_liceale_nella_classe_dei_ripetenti_1978">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45122.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La liceale nella classe dei ripetenti (1978)</p>
       </a>
     </div>
     
-    <div class="canale" id="La_poliziotta_a_New_York_1981">
+    <div class="canale no-logo" id="La_poliziotta_a_New_York_1981">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45123.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La poliziotta a New York (1981)</p>
       </a>
     </div>
     
-    <div class="canale" id="La_professoressa_di_scienze_naturali_1976">
+    <div class="canale no-logo" id="La_professoressa_di_scienze_naturali_1976">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45124.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La professoressa di scienze naturali (1976)</p>
       </a>
     </div>
     
-    <div class="canale" id="La_ripetente_fa_l_occhietto_al_preside_1980">
+    <div class="canale no-logo" id="La_ripetente_fa_l_occhietto_al_preside_1980">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45125.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La ripetente fa l'occhietto al preside (1980)</p>
       </a>
     </div>
     
-    <div class="canale" id="La_Soldatessa_Alle_Grandi_Manovre_1979_Vitali">
+    <div class="canale no-logo" id="La_Soldatessa_Alle_Grandi_Manovre_1979_Vitali">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45126.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La Soldatessa Alle Grandi Manovre 1979 Vitali</p>
       </a>
     </div>
     
-    <div class="canale" id="La_vergine_il_toro_e_il_capricorno_1977">
+    <div class="canale no-logo" id="La_vergine_il_toro_e_il_capricorno_1977">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45127.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La vergine, il toro e il capricorno (1977)</p>
       </a>
     </div>
     
-    <div class="canale" id="Paulo_Roberto_Cotechiño_centravanti_di_sfondamento_1983">
+    <div class="canale no-logo" id="Paulo_Roberto_Cotechiño_centravanti_di_sfondamento_1983">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45128.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Paulo Roberto Cotechiño centravanti di sfondamento (1983)</p>
       </a>
     </div>
     
-    <div class="canale" id="Per_amore_di_Poppea_1977">
+    <div class="canale no-logo" id="Per_amore_di_Poppea_1977">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45129.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Per amore di Poppea (1977)</p>
       </a>
     </div>
     
-    <div class="canale" id="Pierino_colpisce_ancora_1982">
+    <div class="canale no-logo" id="Pierino_colpisce_ancora_1982">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45130.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Pierino colpisce ancora (1982)</p>
       </a>
     </div>
     
-    <div class="canale" id="Pierino_contro_tutti_1981">
+    <div class="canale no-logo" id="Pierino_contro_tutti_1981">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45131.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Pierino contro tutti (1981)</p>
       </a>
     </div>
     
-    <div class="canale" id="Pierino_medico_della_SAUB_1981">
+    <div class="canale no-logo" id="Pierino_medico_della_SAUB_1981">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45132.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Pierino medico della SAUB (1981)</p>
       </a>
     </div>
     
-    <div class="canale" id="Pierino_torna_a_scuola_1990">
+    <div class="canale no-logo" id="Pierino_torna_a_scuola_1990">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45133.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Pierino torna a scuola (1990)</p>
       </a>
     </div>
     
-    <div class="canale" id="Taxi_Girl_1977">
+    <div class="canale no-logo" id="Taxi_Girl_1977">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45134.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Taxi Girl (1977)</p>
       </a>
     </div>
     
-    <div class="canale" id="Gian_Burrasca_1982">
+    <div class="canale no-logo" id="Gian_Burrasca_1982">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58455.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Gian Burrasca (1982)</p>
       </a>
     </div>
     
-    <div class="canale" id="Giggi_il_bullo_1982">
+    <div class="canale no-logo" id="Giggi_il_bullo_1982">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58456.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Giggi il bullo (1982)</p>
       </a>
     </div>
     
-    <div class="canale" id="Il_tifoso_l_arbitro_e_il_calciatore_1983">
+    <div class="canale no-logo" id="Il_tifoso_l_arbitro_e_il_calciatore_1983">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58457.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Il tifoso, l'arbitro e il calciatore (1983)</p>
       </a>
     </div>
     
-    <div class="canale" id="L_Insegnante_1975">
+    <div class="canale no-logo" id="L_Insegnante_1975">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58458.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>L'Insegnante (1975)</p>
       </a>
     </div>
     
-    <div class="canale" id="L_onorevole_con_l_amante_sotto_il_letto_1981">
+    <div class="canale no-logo" id="L_onorevole_con_l_amante_sotto_il_letto_1981">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58459.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>L'onorevole con l'amante sotto il letto (1981)</p>
       </a>
     </div>
     
-    <div class="canale" id="La_dottoressa_del_distretto_militare_1976">
+    <div class="canale no-logo" id="La_dottoressa_del_distretto_militare_1976">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58460.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La dottoressa del distretto militare (1976)</p>
       </a>
     </div>
     
-    <div class="canale" id="La_dottoressa_preferisce_i_marinai_1981">
+    <div class="canale no-logo" id="La_dottoressa_preferisce_i_marinai_1981">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58461.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La dottoressa preferisce i marinai (1981)</p>
       </a>
     </div>
     
-    <div class="canale" id="La_liceale_al_mare_con_l_amica_di_papà_1980">
+    <div class="canale no-logo" id="La_liceale_al_mare_con_l_amica_di_papà_1980">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58462.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La liceale al mare con l'amica di papà (1980)</p>
       </a>
     </div>
     
-    <div class="canale" id="La_liceale_nella_classe_dei_ripetenti_1978">
+    <div class="canale no-logo" id="La_liceale_nella_classe_dei_ripetenti_1978">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58463.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La liceale nella classe dei ripetenti (1978)</p>
       </a>
     </div>
     
-    <div class="canale" id="La_poliziotta_a_New_York_1981">
+    <div class="canale no-logo" id="La_poliziotta_a_New_York_1981">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58464.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La poliziotta a New York (1981)</p>
       </a>
     </div>
     
-    <div class="canale" id="La_professoressa_di_scienze_naturali_1976">
+    <div class="canale no-logo" id="La_professoressa_di_scienze_naturali_1976">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58465.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La professoressa di scienze naturali (1976)</p>
       </a>
     </div>
     
-    <div class="canale" id="La_ripetente_fa_l_occhietto_al_preside_1980">
+    <div class="canale no-logo" id="La_ripetente_fa_l_occhietto_al_preside_1980">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58466.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La ripetente fa l'occhietto al preside (1980)</p>
       </a>
     </div>
     
-    <div class="canale" id="La_Soldatessa_Alle_Grandi_Manovre_1979_Vitali">
+    <div class="canale no-logo" id="La_Soldatessa_Alle_Grandi_Manovre_1979_Vitali">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58467.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La Soldatessa Alle Grandi Manovre 1979 Vitali</p>
       </a>
     </div>
     
-    <div class="canale" id="La_vergine_il_toro_e_il_capricorno_1977">
+    <div class="canale no-logo" id="La_vergine_il_toro_e_il_capricorno_1977">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58468.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La vergine, il toro e il capricorno (1977)</p>
       </a>
     </div>
     
-    <div class="canale" id="Paulo_Roberto_Cotechiño_centravanti_di_sfondamento_1983">
+    <div class="canale no-logo" id="Paulo_Roberto_Cotechiño_centravanti_di_sfondamento_1983">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58469.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Paulo Roberto Cotechiño centravanti di sfondamento (1983)</p>
       </a>
     </div>
     
-    <div class="canale" id="Per_amore_di_Poppea_1977">
+    <div class="canale no-logo" id="Per_amore_di_Poppea_1977">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58470.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Per amore di Poppea (1977)</p>
       </a>
     </div>
     
-    <div class="canale" id="Pierino_colpisce_ancora_1982">
+    <div class="canale no-logo" id="Pierino_colpisce_ancora_1982">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58471.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Pierino colpisce ancora (1982)</p>
       </a>
     </div>
     
-    <div class="canale" id="Pierino_contro_tutti_1981">
+    <div class="canale no-logo" id="Pierino_contro_tutti_1981">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58472.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Pierino contro tutti (1981)</p>
       </a>
     </div>
     
-    <div class="canale" id="Pierino_medico_della_SAUB_1981">
+    <div class="canale no-logo" id="Pierino_medico_della_SAUB_1981">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58473.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Pierino medico della SAUB (1981)</p>
       </a>
     </div>
     
-    <div class="canale" id="Pierino_torna_a_scuola_1990">
+    <div class="canale no-logo" id="Pierino_torna_a_scuola_1990">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58474.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Pierino torna a scuola (1990)</p>
       </a>
     </div>
     
-    <div class="canale" id="Taxi_Girl_1977">
+    <div class="canale no-logo" id="Taxi_Girl_1977">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58475.mkv" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Taxi Girl (1977)</p>
       </a>

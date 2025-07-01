@@ -3,65 +3,129 @@
 <head>
   <meta charset="UTF-8">
   <title>⭐️Mario Merola⭐️</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
   <style>
     body {
-      background: #111;
-      color: white;
-      font-family: sans-serif;
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: 'Open Sans', sans-serif;
       margin: 0;
       padding: 20px;
     }
 
     h1 {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
     }
 
     .griglia {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
       gap: 20px;
-      justify-content: center;
+      justify-items: center;
     }
 
-    .canale {
-      background: #222;
+    .tile, .canale {
+      background-color: #292929;
       border-radius: 10px;
-      padding: 15px;
       text-align: center;
-      transition: 0.3s;
-      text-decoration: none;
-      color: white;
+      color: #fff;
+      padding: 15px;
+      transition: transform 0.2s, box-shadow 0.2s;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
-    .canale:hover {
-      background: #333;
-      transform: scale(1.02);
+    .tile:hover, .canale:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
     }
 
-    .canale img.logo {
-      width: 100px;
-      height: 100px;
+    .tile {
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+
+    .canale a {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .canale img {
+      width: 100%;
+      height: 120px;
       object-fit: contain;
+      border-radius: 8px;
+      background-color: #111;
       margin-bottom: 10px;
-      background: #000;
-      border-radius: 6px;
     }
 
     .canale p {
       margin: 0;
-      font-size: 15px;
-      word-break: break-word;
+      font-size: 0.95em;
+    }
+
+    .placeholder-logo {
+      width: 100%;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #444, #222);
+      font-size: 2em;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      color: #eee;
+    }
+
+    .canale.no-logo:hover .placeholder-logo {
+      background: linear-gradient(135deg, #555, #333);
+    }
+
+    @media screen and (orientation: portrait) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      }
+
+      .canale img, .placeholder-logo {
+        height: 100px;
+      }
+
+      .canale p {
+        font-size: 0.9em;
+      }
+
+      body {
+        padding: 15px;
+      }
+    }
+
+    @media screen and (orientation: landscape) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .canale img, .placeholder-logo {
+        height: 140px;
+      }
+
+      .canale p {
+        font-size: 1em;
+      }
+
+      body {
+        padding: 30px;
+      }
     }
 
     .back {
       text-align: center;
-      margin-top: 30px;
+      margin-top: 40px;
     }
 
     .back a {
@@ -69,144 +133,169 @@
       text-decoration: none;
       font-size: 16px;
     }
-
-    @media (max-width: 600px) {
-      .canale img.logo {
-        width: 80px;
-        height: 80px;
-      }
-
-      .canale p {
-        font-size: 14px;
-      }
-    }
   </style>
 </head>
 <body>
   <h1>⭐️Mario Merola⭐️</h1>
   <div class="griglia">
     
-    <div class="canale" id="Tradimento_1982">
+    <div class="canale no-logo" id="Tradimento_1982">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44690.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Tradimento (1982)</p>
       </a>
     </div>
     
-    <div class="canale" id="Zappatore_1980">
+    <div class="canale no-logo" id="Zappatore_1980">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44691.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Zappatore (1980)</p>
       </a>
     </div>
     
-    <div class="canale" id="Carcerato_1981">
+    <div class="canale no-logo" id="Carcerato_1981">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57908.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Carcerato (1981)</p>
       </a>
     </div>
     
-    <div class="canale" id="Cient_Anne_1999">
+    <div class="canale no-logo" id="Cient_Anne_1999">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57909.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Cient'Anne (1999)</p>
       </a>
     </div>
     
-    <div class="canale" id="Da_Corleone_a_Brooklyn_1979">
+    <div class="canale no-logo" id="Da_Corleone_a_Brooklyn_1979">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57910.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Da Corleone a Brooklyn (1979)</p>
       </a>
     </div>
     
-    <div class="canale" id="Giuramento_1982">
+    <div class="canale no-logo" id="Giuramento_1982">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57911.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Giuramento (1982)</p>
       </a>
     </div>
     
-    <div class="canale" id="Guapparia_1984">
+    <div class="canale no-logo" id="Guapparia_1984">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57912.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Guapparia (1984)</p>
       </a>
     </div>
     
-    <div class="canale" id="I_contrabbandieri_di_Santa_Lucia_1979">
+    <div class="canale no-logo" id="I_contrabbandieri_di_Santa_Lucia_1979">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57913.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>I contrabbandieri di Santa Lucia (1979)</p>
       </a>
     </div>
     
-    <div class="canale" id="I_Figli_So_Pezzi_E_Core_1982_Merola">
+    <div class="canale no-logo" id="I_Figli_So_Pezzi_E_Core_1982_Merola">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57914.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>I Figli So' Pezzi 'E Core 1982 Merola</p>
       </a>
     </div>
     
-    <div class="canale" id="Il_mammasantissima_1979">
+    <div class="canale no-logo" id="Il_mammasantissima_1979">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57915.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Il mammasantissima (1979)</p>
       </a>
     </div>
     
-    <div class="canale" id="Il_Triangolo_Della_Camorra_1981_Merola">
+    <div class="canale no-logo" id="Il_Triangolo_Della_Camorra_1981_Merola">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57916.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Il Triangolo Della Camorra 1981 Merola</p>
       </a>
     </div>
     
-    <div class="canale" id="L_ultimo_guappo_1978">
+    <div class="canale no-logo" id="L_ultimo_guappo_1978">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57917.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>L'ultimo guappo (1978)</p>
       </a>
     </div>
     
-    <div class="canale" id="Lacrime_napulitane_1981">
+    <div class="canale no-logo" id="Lacrime_napulitane_1981">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57918.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Lacrime napulitane (1981)</p>
       </a>
     </div>
     
-    <div class="canale" id="La_tua_vita_per_mio_figlio_1980">
+    <div class="canale no-logo" id="La_tua_vita_per_mio_figlio_1980">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57919.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>La tua vita per mio figlio (1980)</p>
       </a>
     </div>
     
-    <div class="canale" id="Sgarro_alla_camorra_1973">
+    <div class="canale no-logo" id="Sgarro_alla_camorra_1973">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57920.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Sgarro alla camorra (1973)</p>
       </a>
     </div>
     
-    <div class="canale" id="Torna_1984">
+    <div class="canale no-logo" id="Torna_1984">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57921.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Torna (1984)</p>
       </a>
     </div>
     
-    <div class="canale" id="Tradimento_1982">
+    <div class="canale no-logo" id="Tradimento_1982">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57922.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Tradimento (1982)</p>
       </a>
     </div>
     
-    <div class="canale" id="Zappatore_1980">
+    <div class="canale no-logo" id="Zappatore_1980">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/57923.mp4" target="_blank">
+        
+          <div class="placeholder-logo">🎬</div>
         
         <p>Zappatore (1980)</p>
       </a>
