@@ -28,6 +28,7 @@
     }
 
     .tile {
+	  width: 75%;
       background-color: #292929;
       border-radius: 10px;
       text-align: center;
@@ -41,6 +42,17 @@
       font-size: 1.1em;
       text-decoration: none;
     }
+	
+	.tile img {
+  width: 100%;
+  max-width: 150px;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.tile:hover img {
+  transform: scale(1.1);
+}
 
     .tile:hover {
       transform: scale(1.05);
@@ -87,224 +99,552 @@
 <body>
   <h1>📁 Film & Serie</h1>
   <div class="griglia">
-      
-	  <a href="search.html" class="tile" tabindex="0">Cerca</a>
-    
-      <a class="tile" href="⭐️STORICI⭐️.html" tabindex="0">⭐️STORICI⭐️</a>
-    
-      <a class="tile" href="⭐️XXX_ADULTI_1⭐️.html" tabindex="0">⭐️XXX ADULTI 1⭐️</a>
-    
-      <a class="tile" href="⭐️EROTICI⭐️.html" tabindex="0">⭐️EROTICI⭐️</a>
-    
-      <a class="tile" href="⭐️-NUOVI-INSERITI-2023-⭐️.html" tabindex="0">⭐️-NUOVI-INSERITI-2023-⭐️</a>
-    
-      <a class="tile" href="⭐️⭐️⭐️⭐️⭐️--NUOVI_FILM_AGGIUNTI_--⭐️⭐️⭐️⭐️⭐️.html" tabindex="0">⭐️⭐️⭐️⭐️⭐️--NUOVI FILM AGGIUNTI --⭐️⭐️⭐️⭐️⭐️</a>
-    
-      <a class="tile" href="⭐️⭐️⭐️⭐️⭐️--NUOVI_FILM_AGGIUNTI_-2025-⭐️⭐️⭐️⭐️⭐️.html" tabindex="0">⭐️⭐️⭐️⭐️⭐️--NUOVI FILM AGGIUNTI -2025-⭐️⭐️⭐️⭐️⭐️</a>
-    
-      <a class="tile" href="⭐️Film_2023⭐️.html" tabindex="0">⭐️Film 2023⭐️</a>
-    
-      <a class="tile" href="⭐️Film_Cult⭐️.html" tabindex="0">⭐️Film Cult⭐️</a>
-    
-      <a class="tile" href="⭐️Netflix⭐️.html" tabindex="0">⭐️Netflix⭐️</a>
-    
-      <a class="tile" href="⭐️Animazione⭐️.html" tabindex="0">⭐️Animazione⭐️</a>
-    
-      <a class="tile" href="⭐️Avventura⭐️.html" tabindex="0">⭐️Avventura⭐️</a>
-    
-      <a class="tile" href="⭐️Azione⭐️.html" tabindex="0">⭐️Azione⭐️</a>
-    
-      <a class="tile" href="⭐️Cartoni⭐️.html" tabindex="0">⭐️Cartoni⭐️</a>
-    
-      <a class="tile" href="⭐️Documentari⭐️.html" tabindex="0">⭐️Documentari⭐️</a>
-    
-      <a class="tile" href="⭐️Commedia⭐️.html" tabindex="0">⭐️Commedia⭐️</a>
-    
-      <a class="tile" href="⭐️Commedia_Italiana⭐️.html" tabindex="0">⭐️Commedia Italiana⭐️</a>
-    
-      <a class="tile" href="⭐️Disney⭐️.html" tabindex="0">⭐️Disney⭐️</a>
-    
-      <a class="tile" href="⭐️Drammatici_M-Z⭐️.html" tabindex="0">⭐️Drammatici M-Z⭐️</a>
-    
-      <a class="tile" href="⭐️Drammatici_A-L⭐️.html" tabindex="0">⭐️Drammatici A-L⭐️</a>
-    
-      <a class="tile" href="⭐️Fantascienza⭐️.html" tabindex="0">⭐️Fantascienza⭐️</a>
-    
-      <a class="tile" href="⭐️Cinepanettone⭐️.html" tabindex="0">⭐️Cinepanettone⭐️</a>
-    
-      <a class="tile" href="⭐️Kevin_Costner⭐️.html" tabindex="0">⭐️Kevin Costner⭐️</a>
-    
-      <a class="tile" href="⭐️Mario_Merola⭐️.html" tabindex="0">⭐️Mario Merola⭐️</a>
-    
-      <a class="tile" href="⭐️Tomas_Milian⭐️.html" tabindex="0">⭐️Tomas Milian⭐️</a>
-    
-      <a class="tile" href="Al_Pacino.html" tabindex="0">Al Pacino</a>
-    
-      <a class="tile" href="Brad_Pitt.html" tabindex="0">Brad Pitt</a>
-    
-      <a class="tile" href="⭐️Renato_Pozzetto⭐️.html" tabindex="0">⭐️Renato Pozzetto⭐️</a>
-    
-      <a class="tile" href="Harrison_Ford.html" tabindex="0">Harrison Ford</a>
-    
-      <a class="tile" href="Arnold_SCHWARZENEGGER.html" tabindex="0">Arnold SCHWARZENEGGER</a>
-    
-      <a class="tile" href="⭐️Steven_SEAGAL⭐️.html" tabindex="0">⭐️Steven SEAGAL⭐️</a>
-    
-      <a class="tile" href="⭐️Will_Smith⭐️.html" tabindex="0">⭐️Will Smith⭐️</a>
-    
-      <a class="tile" href="Jhon_TRAVOLTA.html" tabindex="0">Jhon TRAVOLTA</a>
-    
-      <a class="tile" href="⭐️Massimo_Troisi⭐️.html" tabindex="0">⭐️Massimo Troisi⭐️</a>
-    
-      <a class="tile" href="Jean_Claude_Van_Damme.html" tabindex="0">Jean Claude Van Damme</a>
-    
-      <a class="tile" href="⭐️Carlo_Verdone⭐️.html" tabindex="0">⭐️Carlo Verdone⭐️</a>
-    
-      <a class="tile" href="⭐️Paolo_Villaggio⭐️.html" tabindex="0">⭐️Paolo Villaggio⭐️</a>
-    
-      <a class="tile" href="⭐️Alvaro_Vitali⭐️.html" tabindex="0">⭐️Alvaro Vitali⭐️</a>
-    
-      <a class="tile" href="Denzel_Washington.html" tabindex="0">Denzel Washington</a>
-    
-      <a class="tile" href="⭐️Bud_Spencer⭐️.html" tabindex="0">⭐️Bud Spencer⭐️</a>
-    
-      <a class="tile" href="⭐️Nicolas_CAGE⭐️.html" tabindex="0">⭐️Nicolas CAGE⭐️</a>
-    
-      <a class="tile" href="⭐️Celentano⭐️.html" tabindex="0">⭐️Celentano⭐️</a>
-    
-      <a class="tile" href="⭐️Nino_D'angelo⭐️.html" tabindex="0">⭐️Nino D'angelo⭐️</a>
-    
-      <a class="tile" href="EDUARDO_DE_FILIPPO.html" tabindex="0">EDUARDO DE FILIPPO</a>
-    
-      <a class="tile" href="⭐️Robert_DE_NIRO⭐️.html" tabindex="0">⭐️Robert DE NIRO⭐️</a>
-    
-      <a class="tile" href="⭐️Leonardo_DI_CAPRIO⭐️.html" tabindex="0">⭐️Leonardo DI CAPRIO⭐️</a>
-    
-      <a class="tile" href="⭐️Franco_e_Ciccio⭐️.html" tabindex="0">⭐️Franco e Ciccio⭐️</a>
-    
-      <a class="tile" href="⭐️Tom_Hanks⭐️.html" tabindex="0">⭐️Tom Hanks⭐️</a>
-    
-      <a class="tile" href="⭐️Diego_Abatantuono⭐️.html" tabindex="0">⭐️Diego Abatantuono⭐️</a>
-    
-      <a class="tile" href="⭐️Leonardo_Pieraccioni⭐️.html" tabindex="0">⭐️Leonardo Pieraccioni⭐️</a>
-    
-      <a class="tile" href="⭐️Alberto_Sordi⭐️.html" tabindex="0">⭐️Alberto Sordi⭐️</a>
-    
-      <a class="tile" href="⭐️Dario_Argento⭐️.html" tabindex="0">⭐️Dario Argento⭐️</a>
-    
-      <a class="tile" href="⭐️Toto⭐️.html" tabindex="0">⭐️Toto⭐️</a>
-    
-      <a class="tile" href="⭐️Lino_Banfi⭐️.html" tabindex="0">⭐️Lino Banfi⭐️</a>
-    
-      <a class="tile" href="⭐️Aldo_Giovanni_E_Giacomo⭐️.html" tabindex="0">⭐️Aldo Giovanni E Giacomo⭐️</a>
-    
-      <a class="tile" href="⭐️Tom_CRUISE⭐️.html" tabindex="0">⭐️Tom CRUISE⭐️</a>
-    
-      <a class="tile" href="⭐️Liam_Neeson⭐️.html" tabindex="0">⭐️Liam Neeson⭐️</a>
-    
-      <a class="tile" href="⭐️Vincenzo_Salemme⭐️.html" tabindex="0">⭐️Vincenzo Salemme⭐️</a>
-    
-      <a class="tile" href="⭐️Silvester_STALLONE⭐️.html" tabindex="0">⭐️Silvester STALLONE⭐️</a>
-    
-      <a class="tile" href="Bruce_Willis.html" tabindex="0">Bruce Willis</a>
-    
-      <a class="tile" href="⭐️Checco_Zalone⭐️.html" tabindex="0">⭐️Checco Zalone⭐️</a>
-    
-      <a class="tile" href="⭐️Romantici⭐️.html" tabindex="0">⭐️Romantici⭐️</a>
-    
-      <a class="tile" href="⭐️Horror⭐️.html" tabindex="0">⭐️Horror⭐️</a>
-    
-      <a class="tile" href="⭐️Thriller⭐️.html" tabindex="0">⭐️Thriller⭐️</a>
-    
-      <a class="tile" href="FILM_CATTOLICI.html" tabindex="0">FILM CATTOLICI</a>
-    
-      <a class="tile" href="⭐️Western⭐️.html" tabindex="0">⭐️Western⭐️</a>
-    
-      <a class="tile" href="⭐️Tematici_Bambini_⭐️.html" tabindex="0">⭐️Tematici Bambini ⭐️</a>
-    
-      <a class="tile" href="⭐️Tematici_Film_⭐️.html" tabindex="0">⭐️Tematici Film ⭐️</a>
-    
-      <a class="tile" href="007_SAGA.html" tabindex="0">007 SAGA</a>
-    
-      <a class="tile" href="Alien_SAGA.html" tabindex="0">Alien SAGA</a>
-    
-      <a class="tile" href="Il_Signore_Degli_Anelli_SAGA.html" tabindex="0">Il Signore Degli Anelli SAGA</a>
-    
-      <a class="tile" href="Pirati_Dei_Caraibii_SAGA.html" tabindex="0">Pirati Dei Caraibii SAGA</a>
-    
-      <a class="tile" href="Harry_Potter_SAGA.html" tabindex="0">Harry Potter SAGA</a>
-    
-      <a class="tile" href="Michael_Jai_White.html" tabindex="0">Michael Jai White</a>
-    
-      <a class="tile" href="⭐️XXX_ADULTI_2⭐️.html" tabindex="0">⭐️XXX ADULTI 2⭐️</a>
-    
-      <a class="tile" href="⭐️XXX⭐️.html" tabindex="0">⭐️XXX⭐️</a>
-    
-      <a class="tile" href="primafila.html" tabindex="0">primafila</a>
-    
-      <a class="tile" href="CANALE24.html" tabindex="0">CANALE24</a>
-    
-      <a class="tile" href="PRIMAFILA-SERVER.html" tabindex="0">PRIMAFILA-SERVER</a>
-    
-      <a class="tile" href="Programmi_Tv.html" tabindex="0">Programmi Tv</a>
-    
-      <a class="tile" href="Serie_Rai_&_Mediaset.html" tabindex="0">Serie Rai & Mediaset</a>
-    
-      <a class="tile" href="SERIE-TV-A.html" tabindex="0">SERIE-TV-A</a>
-    
-      <a class="tile" href="SERIE-TV-B.html" tabindex="0">SERIE-TV-B</a>
-    
-      <a class="tile" href="SERIE-TV-C.html" tabindex="0">SERIE-TV-C</a>
-    
-      <a class="tile" href="SERIE-TV-D.html" tabindex="0">SERIE-TV-D</a>
-    
-      <a class="tile" href="SERIE-TV-F.html" tabindex="0">SERIE-TV-F</a>
-    
-      <a class="tile" href="SERIE-TV-G.html" tabindex="0">SERIE-TV-G</a>
-    
-      <a class="tile" href="MASSA-DI-SERIE-MISTE.html" tabindex="0">MASSA-DI-SERIE-MISTE</a>
-    
-      <a class="tile" href="SERIE-TV-E.html" tabindex="0">SERIE-TV-E</a>
-    
-      <a class="tile" href="SERIE-TV-N.html" tabindex="0">SERIE-TV-N</a>
-    
-      <a class="tile" href="SERIE-TV-W.html" tabindex="0">SERIE-TV-W</a>
-    
-      <a class="tile" href="SERIE-TV-Z.html" tabindex="0">SERIE-TV-Z</a>
-    
-      <a class="tile" href="SERIE-TV-H.html" tabindex="0">SERIE-TV-H</a>
-    
-      <a class="tile" href="SERIE-TV-I.html" tabindex="0">SERIE-TV-I</a>
-    
-      <a class="tile" href="SERIE-TV-L.html" tabindex="0">SERIE-TV-L</a>
-    
-      <a class="tile" href="SERIE-TV-M.html" tabindex="0">SERIE-TV-M</a>
-    
-      <a class="tile" href="SERIE-TV-0.html" tabindex="0">SERIE-TV-0</a>
-    
-      <a class="tile" href="SERIE-TV-P.html" tabindex="0">SERIE-TV-P</a>
-    
-      <a class="tile" href="SERIE-TV-T.html" tabindex="0">SERIE-TV-T</a>
-    
-      <a class="tile" href="SERIE-TV-S.html" tabindex="0">SERIE-TV-S</a>
-    
-      <a class="tile" href="SERIE-TV-U.html" tabindex="0">SERIE-TV-U</a>
-    
-      <a class="tile" href="SERIE-TV-Y.html" tabindex="0">SERIE-TV-Y</a>
-    
-      <a class="tile" href="SERIE-TV-X.html" tabindex="0">SERIE-TV-X</a>
-    
-      <a class="tile" href="SERIE-TV-V.html" tabindex="0">SERIE-TV-V</a>
-    
-      <a class="tile" href="SERIE-TV-Q.html" tabindex="0">SERIE-TV-Q</a>
-    
-      <a class="tile" href="SERIE-TV-R.html" tabindex="0">SERIE-TV-R</a>
-    
-      <a class="tile" href="NUOVI-INSERITI-2024.html" tabindex="0">NUOVI-INSERITI-2024</a>
-    
-      <a class="tile" href="Serie_Discovery_Plus.html" tabindex="0">Serie Discovery Plus</a>
-    
-      <a class="tile" href="Serie_Disney.html" tabindex="0">Serie Disney</a>
+  
+  
+       <a class="tile" href="search.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🔍</div>
+  <div>⭐Cerca⭐️</div>
+</a>
+		
+     <a class="tile" href="⭐️STORICI⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️STORICI⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️XXX_ADULTI_1⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️XXX ADULTI 1⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️EROTICI⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️EROTICI⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️-NUOVI-INSERITI-2023-⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️-NUOVI-INSERITI-2023-⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️⭐️⭐️⭐️⭐️--NUOVI_FILM_AGGIUNTI_--⭐️⭐️⭐️⭐️⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️⭐️⭐️⭐️⭐️--NUOVI FILM AGGIUNTI --⭐️⭐️⭐️⭐️⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️⭐️⭐️⭐️⭐️--NUOVI_FILM_AGGIUNTI_-2025-⭐️⭐️⭐️⭐️⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️⭐️⭐️⭐️⭐️--NUOVI FILM AGGIUNTI -2025-⭐️⭐️⭐️⭐️⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Film_2023⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Film 2023⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Film_Cult⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Film Cult⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Netflix⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Netflix⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Animazione⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Animazione⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Avventura⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Avventura⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Azione⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Azione⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Cartoni⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Cartoni⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Documentari⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Documentari⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Commedia⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Commedia⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Commedia_Italiana⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Commedia Italiana⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Disney⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Disney⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Drammatici_M-Z⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Drammatici M-Z⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Drammatici_A-L⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Drammatici A-L⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Fantascienza⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Fantascienza⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Cinepanettone⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Cinepanettone⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Kevin_Costner⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Kevin Costner⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Mario_Merola⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Mario Merola⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Tomas_Milian⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Tomas Milian⭐️</div>
+</a>
+    
+     <a class="tile" href="Al_Pacino.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>Al Pacino</div>
+</a>
+    
+     <a class="tile" href="Brad_Pitt.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>Brad Pitt</div>
+</a>
+    
+     <a class="tile" href="⭐️Renato_Pozzetto⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Renato Pozzetto⭐️</div>
+</a>
+    
+     <a class="tile" href="Harrison_Ford.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>Harrison Ford</div>
+</a>
+    
+     <a class="tile" href="Arnold_SCHWARZENEGGER.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>Arnold SCHWARZENEGGER</div>
+</a>
+    
+     <a class="tile" href="⭐️Steven_SEAGAL⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Steven SEAGAL⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Will_Smith⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Will Smith⭐️</div>
+</a>
+    
+     <a class="tile" href="Jhon_TRAVOLTA.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>Jhon TRAVOLTA</div>
+</a>
+    
+     <a class="tile" href="⭐️Massimo_Troisi⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Massimo Troisi⭐️</div>
+</a>
+    
+     <a class="tile" href="Jean_Claude_Van_Damme.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>Jean Claude Van Damme</div>
+</a>
+    
+     <a class="tile" href="⭐️Carlo_Verdone⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Carlo Verdone⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Paolo_Villaggio⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Paolo Villaggio⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Alvaro_Vitali⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Alvaro Vitali⭐️</div>
+</a>
+    
+     <a class="tile" href="Denzel_Washington.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>Denzel Washington</div>
+</a>
+    
+     <a class="tile" href="⭐️Bud_Spencer⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Bud Spencer⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Nicolas_CAGE⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Nicolas CAGE⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Celentano⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Celentano⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Nino_D'angelo⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Nino D'angelo⭐️</div>
+</a>
+    
+     <a class="tile" href="EDUARDO_DE_FILIPPO.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>EDUARDO DE FILIPPO</div>
+</a>
+    
+     <a class="tile" href="⭐️Robert_DE_NIRO⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Robert DE NIRO⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Leonardo_DI_CAPRIO⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Leonardo DI CAPRIO⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Franco_e_Ciccio⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Franco e Ciccio⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Tom_Hanks⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Tom Hanks⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Diego_Abatantuono⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Diego Abatantuono⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Leonardo_Pieraccioni⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Leonardo Pieraccioni⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Alberto_Sordi⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Alberto Sordi⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Dario_Argento⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Dario Argento⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Toto⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Toto⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Lino_Banfi⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Lino Banfi⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Aldo_Giovanni_E_Giacomo⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Aldo Giovanni E Giacomo⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Tom_CRUISE⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Tom CRUISE⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Liam_Neeson⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Liam Neeson⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Vincenzo_Salemme⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Vincenzo Salemme⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Silvester_STALLONE⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Silvester STALLONE⭐️</div>
+</a>
+    
+     <a class="tile" href="Bruce_Willis.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>Bruce Willis</div>
+</a>
+    
+     <a class="tile" href="⭐️Checco_Zalone⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Checco Zalone⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Romantici⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Romantici⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Horror⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Horror⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Thriller⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Thriller⭐️</div>
+</a>
+    
+     <a class="tile" href="FILM_CATTOLICI.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>FILM CATTOLICI</div>
+</a>
+    
+     <a class="tile" href="⭐️Western⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Western⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Tematici_Bambini_⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Tematici Bambini ⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️Tematici_Film_⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️Tematici Film ⭐️</div>
+</a>
+    
+     <a class="tile" href="007_SAGA.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>007 SAGA</div>
+</a>
+    
+     <a class="tile" href="Alien_SAGA.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>Alien SAGA</div>
+</a>
+    
+     <a class="tile" href="Il_Signore_Degli_Anelli_SAGA.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>Il Signore Degli Anelli SAGA</div>
+</a>
+    
+     <a class="tile" href="Pirati_Dei_Caraibii_SAGA.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>Pirati Dei Caraibii SAGA</div>
+</a>
+    
+     <a class="tile" href="Harry_Potter_SAGA.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>Harry Potter SAGA</div>
+</a>
+    
+     <a class="tile" href="Michael_Jai_White.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>Michael Jai White</div>
+</a>
+    
+     <a class="tile" href="⭐️XXX_ADULTI_2⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️XXX ADULTI 2⭐️</div>
+</a>
+    
+     <a class="tile" href="⭐️XXX⭐️.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>⭐️XXX⭐️</div>
+</a>
+    
+     <a class="tile" href="primafila.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>primafila</div>
+</a>
+    
+     <a class="tile" href="CANALE24.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>CANALE24</div>
+</a>
+    
+     <a class="tile" href="PRIMAFILA-SERVER.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>PRIMAFILA-SERVER</div>
+</a>
+    
+     <a class="tile" href="Programmi_Tv.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>Programmi Tv</div>
+</a>
+    
+     <a class="tile" href="Serie_Rai_&_Mediaset.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>Serie Rai & Mediaset</div>
+</a>
+    
+     <a class="tile" href="SERIE-TV-A.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>SERIE-TV-A</div>
+</a>
+    
+     <a class="tile" href="SERIE-TV-B.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>SERIE-TV-B</div>
+</a>
+    
+     <a class="tile" href="SERIE-TV-C.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>SERIE-TV-C</div>
+</a>
+    
+     <a class="tile" href="SERIE-TV-D.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>SERIE-TV-D</div>
+</a>
+    
+     <a class="tile" href="SERIE-TV-F.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>SERIE-TV-F</div>
+</a>
+    
+     <a class="tile" href="SERIE-TV-G.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>SERIE-TV-G</div>
+</a>
+    
+     <a class="tile" href="MASSA-DI-SERIE-MISTE.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>MASSA-DI-SERIE-MISTE</div>
+</a>
+    
+     <a class="tile" href="SERIE-TV-E.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>SERIE-TV-E</div>
+</a>
+    
+     <a class="tile" href="SERIE-TV-N.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>SERIE-TV-N</div>
+</a>
+    
+     <a class="tile" href="SERIE-TV-W.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>SERIE-TV-W</div>
+</a>
+    
+     <a class="tile" href="SERIE-TV-Z.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>SERIE-TV-Z</div>
+</a>
+    
+     <a class="tile" href="SERIE-TV-H.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>SERIE-TV-H</div>
+</a>
+    
+     <a class="tile" href="SERIE-TV-I.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>SERIE-TV-I</div>
+</a>
+    
+     <a class="tile" href="SERIE-TV-L.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>SERIE-TV-L</div>
+</a>
+    
+     <a class="tile" href="SERIE-TV-M.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>SERIE-TV-M</div>
+</a>
+    
+     <a class="tile" href="SERIE-TV-0.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>SERIE-TV-0</div>
+</a>
+    
+     <a class="tile" href="SERIE-TV-P.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>SERIE-TV-P</div>
+</a>
+    
+     <a class="tile" href="SERIE-TV-T.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>SERIE-TV-T</div>
+</a>
+    
+     <a class="tile" href="SERIE-TV-S.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>SERIE-TV-S</div>
+</a>
+    
+     <a class="tile" href="SERIE-TV-U.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>SERIE-TV-U</div>
+</a>
+    
+     <a class="tile" href="SERIE-TV-Y.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>SERIE-TV-Y</div>
+</a>
+    
+     <a class="tile" href="SERIE-TV-X.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>SERIE-TV-X</div>
+</a>
+    
+     <a class="tile" href="SERIE-TV-V.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>SERIE-TV-V</div>
+</a>
+    
+     <a class="tile" href="SERIE-TV-Q.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>SERIE-TV-Q</div>
+</a>
+    
+     <a class="tile" href="SERIE-TV-R.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>SERIE-TV-R</div>
+</a>
+    
+     <a class="tile" href="NUOVI-INSERITI-2024.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>NUOVI-INSERITI-2024</div>
+</a>
+    
+     <a class="tile" href="Serie_Discovery_Plus.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>Serie Discovery Plus</div>
+</a>
+    
+     <a class="tile" href="Serie_Disney.html" tabindex="0" style="display: inline-block; text-align: center; text-decoration: none; color: black;  margin: 10px;">
+  <div style="font-size: 48px;">🎬</div>
+  <div>Serie Disney</div>
+</a>
     
   </div>
 </body>
