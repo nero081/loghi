@@ -2,77 +2,63 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <title>Video Player con Controlli</title>
-  <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
+  <title>Player con Audio e Fullscreen</title>
   <style>
     body {
-      background-color: black;
+      margin: 0;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
       color: white;
-      text-align: center;
       font-family: sans-serif;
-      padding: 20px;
+      user-select: none;
+      cursor: pointer;
     }
-    .video-js {
-      max-width: 800px;
-      margin: 0 auto;
-      border-radius: 10px;
+    #play-button {
+      padding: 20px 40px;
+      background: #1e90ff;
+      border-radius: 8px;
+      font-size: 24px;
+      text-align: center;
+      user-select: none;
+    }
+    video {
+      display: none;
+      width: 100vw;
+      height: 100vh;
+      object-fit: contain;
+      background: black;
     }
   </style>
 </head>
 <body>
-  
-  <video
-    id="my-video"
-    class="video-js"
-    controls
-    preload="auto"
-    width="800"
-    height="450"
-    data-setup='{"controls": true, "fluid": false, "aspectRatio":"16:9"}'
-  >
+  <div id="play-button">▶ Clicca per riprodurre </div>
+  <video id="video" controls>
     <source src="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55886.mp4" type="video/mp4" />
-    <p class="vjs-no-js">Per visualizzare il video, abilita JavaScript.</p>
+    Il tuo browser non supporta il video HTML5.
   </video>
 
-  <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="it">
-<head>
-  <meta charset="UTF-8" />
-  <title>Video Player con Controlli</title>
-  <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
-  <style>
-    body {
-      background-color: black;
-      color: white;
-      text-align: center;
-      font-family: sans-serif;
-      padding: 20px;
-    }
-    .video-js {
-      max-width: 800px;
-      margin: 0 auto;
-      border-radius: 10px;
-    }
-  </style>
-</head>
-<body>
-  
-  <video
-    id="my-video"
-    class="video-js"
-    controls
-    preload="auto"
-    width="800"
-    height="450"
-    data-setup='{"controls": true, "fluid": false, "aspectRatio":"16:9"}'
-  >
-    <source src="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55886.mp4" type="video/mp4" />
-    <p class="vjs-no-js">Per visualizzare il video, abilita JavaScript.</p>
-  </video>
+  <script>
+    const playBtn = document.getElementById('play-button');
+    const video = document.getElementById('video');
 
-  <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+    playBtn.addEventListener('click', () => {
+      playBtn.style.display = 'none';
+      video.style.display = 'block';
+      video.play().then(() => {
+        if (video.requestFullscreen) {
+          video.requestFullscreen();
+        } else if (video.webkitRequestFullscreen) {
+          video.webkitRequestFullscreen();
+        } else if (video.msRequestFullscreen) {
+          video.msRequestFullscreen();
+        }
+      }).catch(e => {
+        console.log('Errore riproduzione:', e);
+      });
+    });
+  </script>
 </body>
 </html>
