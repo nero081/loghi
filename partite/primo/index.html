@@ -8,6 +8,29 @@
  
 </head>
 <body>
+<script>
+  function creaStellina() {
+    const stellina = document.createElement('div');
+    stellina.classList.add('stellina');
+
+    const size = Math.random() * 10 + 15; // 15–25px
+    const left = Math.random() * window.innerWidth;
+    const duration = Math.random() * 3 + 2; // 2–5s
+
+    stellina.style.left = `${left}px`;
+    stellina.style.width = `${size}px`;
+    stellina.style.height = `${size}px`;
+    stellina.style.animationDuration = `${duration}s`;
+
+    document.body.appendChild(stellina);
+
+    setTimeout(() => {
+      stellina.remove();
+    }, duration * 1000);
+  }
+
+  setInterval(creaStellina, 300);
+</script>
   <h1>📺 Live Tv</h1>
   <div class="griglia">
     
