@@ -95,7 +95,7 @@ h1::before {
   font-size: 0.95em;
 
 }
-.canale:hover {
+.canale:focus {
   transform: scale(1.1) rotate(-3deg);
   box-shadow:
     0 10px 20px rgba(0, 0, 0, 0.35),
