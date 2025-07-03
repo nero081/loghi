@@ -76,6 +76,7 @@ h1::before {
 .canale p {
   margin: 0;
   font-size: 0.95em;
+  color: yellow;
 }
 .canale:hover {
   transform: scale(1.1) rotate(-3deg);
