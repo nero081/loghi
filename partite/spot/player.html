@@ -2,36 +2,50 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <title>Player</title>
+  <title>Player Video</title>
+  <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
   <style>
     body {
-      margin: 0;
       background: #000;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      color: white;
       font-family: sans-serif;
+      text-align: center;
+      padding: 20px;
     }
-    a {
-      color: #ccc;
-      margin-top: 40px;
-      text-decoration: none;
-      font-size: 18px;
+    video {
+      max-width: 800px;
+      width: 100%;
+      margin: auto;
+      display: block;
+      border-radius: 10px;
     }
   </style>
 </head>
 <body>
-  <h2 style="color: #eee;">Riproduzione Canale</h2>
+  <h2>🎬 Video Player</h2>
+
+  <video id="my-video" class="video-js" controls preload="auto" width="800" height="450" data-setup="{}">
+    <source id="video-source" src="" type="video/mp4" />
+    <p class="vjs-no-js">Per visualizzare questo video, abilita JavaScript.</p>
+  </video>
+
+  <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
   <script>
     const params = new URLSearchParams(window.location.search);
-    const url = params.get('url');
+    const url = params.get("url");
+
     if (url) {
-      window.location.href = decodeURIComponent(url);
+      const videoUrl = decodeURIComponent(url);
+      const player = videojs("my-video");
+      player.src({ type: "video/mp4", src: videoUrl });
+      player.ready(() => {
+        player.play().catch(() => {
+          console.warn("Autoplay bloccato. Premi play manualmente.");
+        });
+      });
     } else {
-      document.body.innerHTML = '<p style="color:white;">❌ Nessun URL fornito</p>';
+      document.body.innerHTML = "<p style='color:red;'>❌ Nessun URL fornito</p>";
     }
   </script>
-  <a href="index.html">⟵ Torna alla home</a>
 </body>
 </html>
