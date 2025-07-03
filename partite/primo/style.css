@@ -1,8 +1,11 @@
- @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
+
 body {
   position: relative;
   overflow-x: hidden;
-  background-color: #1a1a1a;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
   font-family: 'Comic Neue', cursive, sans-serif;
   margin: 0;
   padding: 20px;
@@ -89,12 +92,13 @@ h1::before {
   position: relative; /* per stellina */
   z-index: 1;
 }
+
 .canale p {
   color: yellow;
   margin: 0;
   font-size: 0.95em;
-
 }
+
 .canale:focus {
   transform: scale(1.1) rotate(-3deg);
   box-shadow:
@@ -103,9 +107,8 @@ h1::before {
   z-index: 10;
 }
 
-
 /* Stellina burst piccola su ogni canale */
- .canale::before {
+.canale::before {
   content: "";
   position: absolute;
   top: 5px;
@@ -119,6 +122,8 @@ h1::before {
   transform-origin: center;
   pointer-events: none;
 }
+
+/* Animazione stellina cadente */
 @keyframes fall {
   0% {
     transform: translateY(-50px) rotate(0deg);
@@ -141,4 +146,11 @@ h1::before {
   animation: fall linear;
   pointer-events: none;
   z-index: 999;
+}
+
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
