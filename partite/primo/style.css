@@ -74,18 +74,6 @@ h1::before {
   margin-bottom: 10px;
 }
 
-.canale p {
-  margin: 0;
-  font-size: 0.95em;
-
-}
-.canale:hover {
-  transform: scale(1.1) rotate(-3deg);
-  box-shadow:
-    0 10px 20px rgba(0, 0, 0, 0.35),
-    inset 0 0 15px #fff5c7;
-  z-index: 10;
-}
 .canale {
   background: #292929;
   border: 2px solid #ffcc00;
@@ -101,6 +89,20 @@ h1::before {
   position: relative; /* per stellina */
   z-index: 1;
 }
+.canale p {
+  color:yellow;
+  margin: 0;
+  font-size: 0.95em;
+
+}
+.canale:hover {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+}
+
 
 /* Stellina burst piccola su ogni canale */
  .canale::before {
