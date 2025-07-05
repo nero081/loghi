@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Bulgaria</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+}
+
+h1 {
+  font-size: 4rem;
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+}
+
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+  justify-items: center;
+}
+
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+}
+
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  z-index: 1;
+}
+
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+}
+
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+}
+
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+  </style>
+</head>
+<body>
+  <h1>Bulgaria</h1>
+  <div class="griglia">
+    
+      <a class="canale" href="https://kool.to//play/2164896592/index.m3u8" target="_blank" title="NOVA TV .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="NOVA TV .s" />
+        
+        <p>NOVA TV .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/2261886020/index.m3u8" target="_blank" title="NOVA TV .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="NOVA TV .c" />
+        
+        <p>NOVA TV .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/2355422756/index.m3u8" target="_blank" title="BNT 1 .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="BNT 1 .c" />
+        
+        <p>BNT 1 .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/2650040518/index.m3u8" target="_blank" title="BTV .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="BTV .s" />
+        
+        <p>BTV .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3800908036/index.m3u8" target="_blank" title="BTV .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="BTV .c" />
+        
+        <p>BTV .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/2356277850/index.m3u8" target="_blank" title="PLANETA .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="PLANETA .s" />
+        
+        <p>PLANETA .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3988717339/index.m3u8" target="_blank" title="CINEMAX 2 .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="CINEMAX 2 .c" />
+        
+        <p>CINEMAX 2 .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1602513781/index.m3u8" target="_blank" title="MAX SPORT 4 .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="MAX SPORT 4 .c" />
+        
+        <p>MAX SPORT 4 .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3772974425/index.m3u8" target="_blank" title="WNESS TV .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="WNESS TV .c" />
+        
+        <p>WNESS TV .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/2771280932/index.m3u8" target="_blank" title="NOVA SPORT .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="NOVA SPORT .c" />
+        
+        <p>NOVA SPORT .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3984233559/index.m3u8" target="_blank" title="DIEMA SPORT .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="DIEMA SPORT .c" />
+        
+        <p>DIEMA SPORT .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/2529026777/index.m3u8" target="_blank" title="BNT 1 .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="BNT 1 .s" />
+        
+        <p>BNT 1 .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/2945858102/index.m3u8" target="_blank" title="DIEMA SPORT 2 .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="DIEMA SPORT 2 .s" />
+        
+        <p>DIEMA SPORT 2 .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1149528404/index.m3u8" target="_blank" title="BNT 4 .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="BNT 4 .c" />
+        
+        <p>BNT 4 .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/4194813727/index.m3u8" target="_blank" title="FEN TV .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="FEN TV .c" />
+        
+        <p>FEN TV .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3986995045/index.m3u8" target="_blank" title="MAX SPORT 3 .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="MAX SPORT 3 .c" />
+        
+        <p>MAX SPORT 3 .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/2169709312/index.m3u8" target="_blank" title="PLOVDIVSKA PRAVOSLAVNA TV .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="PLOVDIVSKA PRAVOSLAVNA TV .c" />
+        
+        <p>PLOVDIVSKA PRAVOSLAVNA TV .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/2542225813/index.m3u8" target="_blank" title="VIASAT NATURE .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="VIASAT NATURE .s" />
+        
+        <p>VIASAT NATURE .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/2550224292/index.m3u8" target="_blank" title="NOVA NEWS .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="NOVA NEWS .c" />
+        
+        <p>NOVA NEWS .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1461004363/index.m3u8" target="_blank" title="CODE FASHION TV .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="CODE FASHION TV .c" />
+        
+        <p>CODE FASHION TV .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/4121223228/index.m3u8" target="_blank" title="ACTION BOX .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="ACTION BOX .c" />
+        
+        <p>ACTION BOX .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3652191999/index.m3u8" target="_blank" title="BTV CINEMA .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="BTV CINEMA .c" />
+        
+        <p>BTV CINEMA .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/2539971589/index.m3u8" target="_blank" title="MAX SPORT 1 .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="MAX SPORT 1 .c" />
+        
+        <p>MAX SPORT 1 .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1404761373/index.m3u8" target="_blank" title="BTV COMEDY .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="BTV COMEDY .c" />
+        
+        <p>BTV COMEDY .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1198132906/index.m3u8" target="_blank" title="EUROSPORT 1 .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="EUROSPORT 1 .c" />
+        
+        <p>EUROSPORT 1 .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/536338491/index.m3u8" target="_blank" title="BTV ACTION .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="BTV ACTION .s" />
+        
+        <p>BTV ACTION .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/2977990447/index.m3u8" target="_blank" title="BULGARIA ON AIR .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="BULGARIA ON AIR .c" />
+        
+        <p>BULGARIA ON AIR .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1802488789/index.m3u8" target="_blank" title="BTV CINEMA .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="BTV CINEMA .s" />
+        
+        <p>BTV CINEMA .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/4269935167/index.m3u8" target="_blank" title="HBO .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="HBO .c" />
+        
+        <p>HBO .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/630852751/index.m3u8" target="_blank" title="COMEDY BOX .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="COMEDY BOX .c" />
+        
+        <p>COMEDY BOX .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/2231668112/index.m3u8" target="_blank" title="HISTORY CHANNEL .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="HISTORY CHANNEL .s" />
+        
+        <p>HISTORY CHANNEL .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1710746124/index.m3u8" target="_blank" title="JIM JAM .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="JIM JAM .s" />
+        
+        <p>JIM JAM .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3566525947/index.m3u8" target="_blank" title="MAGIC TV .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="MAGIC TV .c" />
+        
+        <p>MAGIC TV .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/2143126970/index.m3u8" target="_blank" title="CBS REALITY .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="CBS REALITY .c" />
+        
+        <p>CBS REALITY .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/4144011582/index.m3u8" target="_blank" title="FOOD NETWORK .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="FOOD NETWORK .s" />
+        
+        <p>FOOD NETWORK .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1421125992/index.m3u8" target="_blank" title="MAX SPORT 1 .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="MAX SPORT 1 .s" />
+        
+        <p>MAX SPORT 1 .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/782948666/index.m3u8" target="_blank" title="DIEMA SPORT .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="DIEMA SPORT .s" />
+        
+        <p>DIEMA SPORT .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/779418120/index.m3u8" target="_blank" title="MAX SPORT 3 .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="MAX SPORT 3 .s" />
+        
+        <p>MAX SPORT 3 .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1972526918/index.m3u8" target="_blank" title="KINONOVA .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="KINONOVA .s" />
+        
+        <p>KINONOVA .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3591341829/index.m3u8" target="_blank" title="DIEMA SPORT 2 .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="DIEMA SPORT 2 .c" />
+        
+        <p>DIEMA SPORT 2 .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/566807500/index.m3u8" target="_blank" title="FEN TV .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="FEN TV .s" />
+        
+        <p>FEN TV .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/13268090/index.m3u8" target="_blank" title="EUROSPORT 2 .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="EUROSPORT 2 .c" />
+        
+        <p>EUROSPORT 2 .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/2041249158/index.m3u8" target="_blank" title="DIEMA .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="DIEMA .c" />
+        
+        <p>DIEMA .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1715237185/index.m3u8" target="_blank" title="FOX CRIME .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="FOX CRIME .s" />
+        
+        <p>FOX CRIME .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/379201128/index.m3u8" target="_blank" title="DIEMA FAMILY .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="DIEMA FAMILY .s" />
+        
+        <p>DIEMA FAMILY .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1063393777/index.m3u8" target="_blank" title="BALKANIKA MUSIC TV .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="BALKANIKA MUSIC TV .c" />
+        
+        <p>BALKANIKA MUSIC TV .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/904693821/index.m3u8" target="_blank" title="TIANKOV FOLK .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="TIANKOV FOLK .s" />
+        
+        <p>TIANKOV FOLK .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/367205987/index.m3u8" target="_blank" title="KINO NOVA .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="KINO NOVA .c" />
+        
+        <p>KINO NOVA .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3949964981/index.m3u8" target="_blank" title="DIEMA SPORT 3 .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="DIEMA SPORT 3 .c" />
+        
+        <p>DIEMA SPORT 3 .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1337595654/index.m3u8" target="_blank" title="DISCOVERY CHANNEL .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="DISCOVERY CHANNEL .s" />
+        
+        <p>DISCOVERY CHANNEL .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1793487407/index.m3u8" target="_blank" title="FOX CRIME .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="FOX CRIME .c" />
+        
+        <p>FOX CRIME .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1822214929/index.m3u8" target="_blank" title="HBO 2 .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="HBO 2 .c" />
+        
+        <p>HBO 2 .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3692629984/index.m3u8" target="_blank" title="FOOD NETWORK .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="FOOD NETWORK .c" />
+        
+        <p>FOOD NETWORK .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/2622760472/index.m3u8" target="_blank" title="MAX SPORT 4 .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="MAX SPORT 4 .s" />
+        
+        <p>MAX SPORT 4 .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1032040630/index.m3u8" target="_blank" title="DIEMA FAMILY .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="DIEMA FAMILY .c" />
+        
+        <p>DIEMA FAMILY .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1090435732/index.m3u8" target="_blank" title="7/8 TV .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="7/8 TV .c" />
+        
+        <p>7/8 TV .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1383754365/index.m3u8" target="_blank" title="BG MUSIC .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="BG MUSIC .s" />
+        
+        <p>BG MUSIC .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3938899839/index.m3u8" target="_blank" title="DIEMA TV .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="DIEMA TV .s" />
+        
+        <p>DIEMA TV .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/2905091345/index.m3u8" target="_blank" title="BTV ACTION .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="BTV ACTION .c" />
+        
+        <p>BTV ACTION .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1103383282/index.m3u8" target="_blank" title="NAT GEO .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="NAT GEO .c" />
+        
+        <p>NAT GEO .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1819053706/index.m3u8" target="_blank" title="PLANETA TV .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="PLANETA TV .c" />
+        
+        <p>PLANETA TV .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3916212970/index.m3u8" target="_blank" title="VTK .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="VTK .c" />
+        
+        <p>VTK .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3679243852/index.m3u8" target="_blank" title="BTV STORY .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="BTV STORY .c" />
+        
+        <p>BTV STORY .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3502546645/index.m3u8" target="_blank" title="MAX SPORT 2 .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="MAX SPORT 2 .c" />
+        
+        <p>MAX SPORT 2 .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3328545244/index.m3u8" target="_blank" title="EVROKOM .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="EVROKOM .s" />
+        
+        <p>EVROKOM .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3533398255/index.m3u8" target="_blank" title="CINEMAX .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="CINEMAX .s" />
+        
+        <p>CINEMAX .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3577968635/index.m3u8" target="_blank" title="CINEMAX .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="CINEMAX .c" />
+        
+        <p>CINEMAX .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1984286700/index.m3u8" target="_blank" title="HBO 2 .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="HBO 2 .s" />
+        
+        <p>HBO 2 .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3967660473/index.m3u8" target="_blank" title="BNT 3 .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="BNT 3 .s" />
+        
+        <p>BNT 3 .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3781507127/index.m3u8" target="_blank" title="BTV COMEDY .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="BTV COMEDY .s" />
+        
+        <p>BTV COMEDY .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/235695536/index.m3u8" target="_blank" title="VIASAT HISTORY .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="VIASAT HISTORY .c" />
+        
+        <p>VIASAT HISTORY .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3214541036/index.m3u8" target="_blank" title="FOX .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="FOX .s" />
+        
+        <p>FOX .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/4137989444/index.m3u8" target="_blank" title="BNT 3 .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="BNT 3 .c" />
+        
+        <p>BNT 3 .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/4097263521/index.m3u8" target="_blank" title="AXN .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="AXN .c" />
+        
+        <p>AXN .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1918230108/index.m3u8" target="_blank" title="BG MUSIC CHANNEL .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="BG MUSIC CHANNEL .c" />
+        
+        <p>BG MUSIC CHANNEL .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1375527585/index.m3u8" target="_blank" title="HBO 3 .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="HBO 3 .c" />
+        
+        <p>HBO 3 .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3599796967/index.m3u8" target="_blank" title="MAGIC TV .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="MAGIC TV .s" />
+        
+        <p>MAGIC TV .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/2558410791/index.m3u8" target="_blank" title="THE VOICE .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="THE VOICE .s" />
+        
+        <p>THE VOICE .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1541535727/index.m3u8" target="_blank" title="FEN FOLK .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="FEN FOLK .c" />
+        
+        <p>FEN FOLK .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/4262594289/index.m3u8" target="_blank" title="NICKELODEON .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="NICKELODEON .s" />
+        
+        <p>NICKELODEON .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/876686464/index.m3u8" target="_blank" title="HISTORY .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="HISTORY .c" />
+        
+        <p>HISTORY .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/934472657/index.m3u8" target="_blank" title="CINEMA PLUS .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="CINEMA PLUS .s" />
+        
+        <p>CINEMA PLUS .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1588054328/index.m3u8" target="_blank" title="BALKANIKA .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="BALKANIKA .s" />
+        
+        <p>BALKANIKA .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1036143516/index.m3u8" target="_blank" title="NICKELODEON .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="NICKELODEON .c" />
+        
+        <p>NICKELODEON .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1540493006/index.m3u8" target="_blank" title="24 KITCHEN .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="24 KITCHEN .c" />
+        
+        <p>24 KITCHEN .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/2986022367/index.m3u8" target="_blank" title="DSTV .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="DSTV .c" />
+        
+        <p>DSTV .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3236112686/index.m3u8" target="_blank" title="FOX .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="FOX .c" />
+        
+        <p>FOX .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1176264166/index.m3u8" target="_blank" title="NAT GEO .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="NAT GEO .s" />
+        
+        <p>NAT GEO .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/937172426/index.m3u8" target="_blank" title="NICK JR .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="NICK JR .s" />
+        
+        <p>NICK JR .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/2474272926/index.m3u8" target="_blank" title="NAT GEO WILD .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="NAT GEO WILD .s" />
+        
+        <p>NAT GEO WILD .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1032729392/index.m3u8" target="_blank" title="COMEDY PLUS .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="COMEDY PLUS .s" />
+        
+        <p>COMEDY PLUS .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3753516110/index.m3u8" target="_blank" title="EPIC DRAMA .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="EPIC DRAMA .c" />
+        
+        <p>EPIC DRAMA .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1426505444/index.m3u8" target="_blank" title="ALFA TV .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="ALFA TV .s" />
+        
+        <p>ALFA TV .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3732887862/index.m3u8" target="_blank" title="TLC .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="TLC .s" />
+        
+        <p>TLC .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3208497021/index.m3u8" target="_blank" title="AUTO MOTOR SPORT .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="AUTO MOTOR SPORT .s" />
+        
+        <p>AUTO MOTOR SPORT .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1926603815/index.m3u8" target="_blank" title="EURONEWS .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="EURONEWS .c" />
+        
+        <p>EURONEWS .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1799700824/index.m3u8" target="_blank" title="WORLD FIGHT CHANNEL .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="WORLD FIGHT CHANNEL .s" />
+        
+        <p>WORLD FIGHT CHANNEL .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3429908435/index.m3u8" target="_blank" title="BABY TV .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="BABY TV .c" />
+        
+        <p>BABY TV .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/4025501657/index.m3u8" target="_blank" title="ANIMAL PLANET .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="ANIMAL PLANET .s" />
+        
+        <p>ANIMAL PLANET .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1318605640/index.m3u8" target="_blank" title="AGRO TV .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="AGRO TV .c" />
+        
+        <p>AGRO TV .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/2369997090/index.m3u8" target="_blank" title="BBC EARTH .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="BBC EARTH .s" />
+        
+        <p>BBC EARTH .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/153846227/index.m3u8" target="_blank" title="CINE BOX .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="CINE BOX .c" />
+        
+        <p>CINE BOX .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/283245961/index.m3u8" target="_blank" title="RETRO MUSIC .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="RETRO MUSIC .s" />
+        
+        <p>RETRO MUSIC .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3418660084/index.m3u8" target="_blank" title="BNT 2 .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="BNT 2 .c" />
+        
+        <p>BNT 2 .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3692292745/index.m3u8" target="_blank" title="TV 1000 .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="TV 1000 .c" />
+        
+        <p>TV 1000 .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/2180719613/index.m3u8" target="_blank" title="HBO .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="HBO .s" />
+        
+        <p>HBO .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/2497402570/index.m3u8" target="_blank" title="NOVA NEWS .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="NOVA NEWS .s" />
+        
+        <p>NOVA NEWS .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1606160440/index.m3u8" target="_blank" title="AMC .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="AMC .c" />
+        
+        <p>AMC .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3995006118/index.m3u8" target="_blank" title="VIASAT NATURE .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="VIASAT NATURE .c" />
+        
+        <p>VIASAT NATURE .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3416795335/index.m3u8" target="_blank" title="BABY TV .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="BABY TV .s" />
+        
+        <p>BABY TV .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/2701553908/index.m3u8" target="_blank" title="TLC .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="TLC .c" />
+        
+        <p>TLC .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/91910041/index.m3u8" target="_blank" title="TRAVEL TV .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="TRAVEL TV .c" />
+        
+        <p>TRAVEL TV .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/2135288369/index.m3u8" target="_blank" title="FOX LIFE .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="FOX LIFE .c" />
+        
+        <p>FOX LIFE .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/212348644/index.m3u8" target="_blank" title="ROMA TV .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="ROMA TV .c" />
+        
+        <p>ROMA TV .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/549796346/index.m3u8" target="_blank" title="AMC .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="AMC .s" />
+        
+        <p>AMC .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1583181225/index.m3u8" target="_blank" title="BNT 4 .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="BNT 4 .s" />
+        
+        <p>BNT 4 .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3909993444/index.m3u8" target="_blank" title="24 KITCHEN .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="24 KITCHEN .s" />
+        
+        <p>24 KITCHEN .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3692483927/index.m3u8" target="_blank" title="BOX TV .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="BOX TV .c" />
+        
+        <p>BOX TV .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/21081072/index.m3u8" target="_blank" title="INVESTIGATION DISCOVERY .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="INVESTIGATION DISCOVERY .c" />
+        
+        <p>INVESTIGATION DISCOVERY .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3687579037/index.m3u8" target="_blank" title="TV 1000 .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="TV 1000 .s" />
+        
+        <p>TV 1000 .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3079780913/index.m3u8" target="_blank" title="EUROFOLK TV .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="EUROFOLK TV .c" />
+        
+        <p>EUROFOLK TV .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/2473349072/index.m3u8" target="_blank" title="TV EVROPA .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="TV EVROPA .c" />
+        
+        <p>TV EVROPA .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1975892045/index.m3u8" target="_blank" title="HGTV .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="HGTV .c" />
+        
+        <p>HGTV .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3253967644/index.m3u8" target="_blank" title="CITY TV .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="CITY TV .c" />
+        
+        <p>CITY TV .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3134106340/index.m3u8" target="_blank" title="BULGARIA 24 .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="BULGARIA 24 .s" />
+        
+        <p>BULGARIA 24 .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/2523527914/index.m3u8" target="_blank" title="ANIMAL PLANET .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="ANIMAL PLANET .c" />
+        
+        <p>ANIMAL PLANET .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1708359465/index.m3u8" target="_blank" title="AUTO MOTOR SPORT .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="AUTO MOTOR SPORT .c" />
+        
+        <p>AUTO MOTOR SPORT .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/913203329/index.m3u8" target="_blank" title="BTV LADY .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="BTV LADY .s" />
+        
+        <p>BTV LADY .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3598389734/index.m3u8" target="_blank" title="EKIDS .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="EKIDS .c" />
+        
+        <p>EKIDS .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/36225782/index.m3u8" target="_blank" title="TV999 .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="TV999 .c" />
+        
+        <p>TV999 .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/805571294/index.m3u8" target="_blank" title="NICK JR .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="NICK JR .c" />
+        
+        <p>NICK JR .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/2032068489/index.m3u8" target="_blank" title="BULGARIA 24 .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="BULGARIA 24 .c" />
+        
+        <p>BULGARIA 24 .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/320132024/index.m3u8" target="_blank" title="MAX SPORT 2 .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="MAX SPORT 2 .s" />
+        
+        <p>MAX SPORT 2 .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/376803656/index.m3u8" target="_blank" title="CARTOON NETWORK .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="CARTOON NETWORK .s" />
+        
+        <p>CARTOON NETWORK .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/2084100828/index.m3u8" target="_blank" title="MOVIE STAR .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="MOVIE STAR .c" />
+        
+        <p>MOVIE STAR .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3781491829/index.m3u8" target="_blank" title="CINEMAX 2 .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="CINEMAX 2 .s" />
+        
+        <p>CINEMAX 2 .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1266114284/index.m3u8" target="_blank" title="DISCOVERY WORLD .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="DISCOVERY WORLD .c" />
+        
+        <p>DISCOVERY WORLD .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1130624059/index.m3u8" target="_blank" title="FOLKLOR .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="FOLKLOR .s" />
+        
+        <p>FOLKLOR .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3093560896/index.m3u8" target="_blank" title="NAT GEO WILD .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="NAT GEO WILD .c" />
+        
+        <p>NAT GEO WILD .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/4023386050/index.m3u8" target="_blank" title="THE VOICE TV .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="THE VOICE TV .c" />
+        
+        <p>THE VOICE TV .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3764864653/index.m3u8" target="_blank" title="MTV 00S .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="MTV 00S .c" />
+        
+        <p>MTV 00S .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/618262489/index.m3u8" target="_blank" title="TV 1 .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="TV 1 .c" />
+        
+        <p>TV 1 .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/2800458330/index.m3u8" target="_blank" title="ALJAZEERA ENGLISH .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="ALJAZEERA ENGLISH .c" />
+        
+        <p>ALJAZEERA ENGLISH .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1807489071/index.m3u8" target="_blank" title="MTV .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="MTV .s" />
+        
+        <p>MTV .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3508377609/index.m3u8" target="_blank" title="BNT 2 .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="BNT 2 .s" />
+        
+        <p>BNT 2 .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3392903209/index.m3u8" target="_blank" title="FILM PLUS .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="FILM PLUS .c" />
+        
+        <p>FILM PLUS .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1490544367/index.m3u8" target="_blank" title="PLANETA FOLK .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="PLANETA FOLK .c" />
+        
+        <p>PLANETA FOLK .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/2035738277/index.m3u8" target="_blank" title="TRAVEL CHANNEL .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="TRAVEL CHANNEL .s" />
+        
+        <p>TRAVEL CHANNEL .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/131717508/index.m3u8" target="_blank" title="BOX TV .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="BOX TV .s" />
+        
+        <p>BOX TV .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1260775004/index.m3u8" target="_blank" title="HBO 3 .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="HBO 3 .s" />
+        
+        <p>HBO 3 .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1666254526/index.m3u8" target="_blank" title="TVN BULGARIA .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="TVN BULGARIA .c" />
+        
+        <p>TVN BULGARIA .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1832108544/index.m3u8" target="_blank" title="DIZI CHANNEL .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="DIZI CHANNEL .c" />
+        
+        <p>DIZI CHANNEL .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3324742664/index.m3u8" target="_blank" title="CITY TV .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="CITY TV .s" />
+        
+        <p>CITY TV .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3694629916/index.m3u8" target="_blank" title="DSTV .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="DSTV .s" />
+        
+        <p>DSTV .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3865054049/index.m3u8" target="_blank" title="HOBBY LOV .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="HOBBY LOV .c" />
+        
+        <p>HOBBY LOV .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3564883209/index.m3u8" target="_blank" title="ICONCERTS .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="ICONCERTS .s" />
+        
+        <p>ICONCERTS .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3284828278/index.m3u8" target="_blank" title="FILMBOX EXTRA .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="FILMBOX EXTRA .s" />
+        
+        <p>FILMBOX EXTRA .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3151238370/index.m3u8" target="_blank" title="HIT MIX .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="HIT MIX .c" />
+        
+        <p>HIT MIX .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3350268377/index.m3u8" target="_blank" title="DA VINCI LEARNING .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="DA VINCI LEARNING .c" />
+        
+        <p>DA VINCI LEARNING .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/927756604/index.m3u8" target="_blank" title="RING .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="RING .c" />
+        
+        <p>RING .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3788101792/index.m3u8" target="_blank" title="AXN BLACK .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="AXN BLACK .c" />
+        
+        <p>AXN BLACK .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3471251446/index.m3u8" target="_blank" title="MOVIE STAR .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="MOVIE STAR .s" />
+        
+        <p>MOVIE STAR .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1242163609/index.m3u8" target="_blank" title="STAR CRIME .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="STAR CRIME .c" />
+        
+        <p>STAR CRIME .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/609687320/index.m3u8" target="_blank" title="DISCOVERY SCIENCE .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="DISCOVERY SCIENCE .s" />
+        
+        <p>DISCOVERY SCIENCE .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1793684627/index.m3u8" target="_blank" title="TV PLUS .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="TV PLUS .s" />
+        
+        <p>TV PLUS .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/2157640092/index.m3u8" target="_blank" title="FOLKLOR TV .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="FOLKLOR TV .c" />
+        
+        <p>FOLKLOR TV .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3336674119/index.m3u8" target="_blank" title="FILM PLUS .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="FILM PLUS .s" />
+        
+        <p>FILM PLUS .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1347565371/index.m3u8" target="_blank" title="DISCOVERY SCIENCE .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="DISCOVERY SCIENCE .c" />
+        
+        <p>DISCOVERY SCIENCE .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/681770962/index.m3u8" target="_blank" title="WILD TV .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="WILD TV .s" />
+        
+        <p>WILD TV .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/593884695/index.m3u8" target="_blank" title="DUCK TV .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="DUCK TV .c" />
+        
+        <p>DUCK TV .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/4284215108/index.m3u8" target="_blank" title="STAR LIFE .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="STAR LIFE .c" />
+        
+        <p>STAR LIFE .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1966113455/index.m3u8" target="_blank" title="TIANKOV ORIENT FOLK .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="TIANKOV ORIENT FOLK .c" />
+        
+        <p>TIANKOV ORIENT FOLK .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/293243409/index.m3u8" target="_blank" title="SKAT TV .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="SKAT TV .s" />
+        
+        <p>SKAT TV .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/2843528813/index.m3u8" target="_blank" title="VIASAT HISTORY .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="VIASAT HISTORY .s" />
+        
+        <p>VIASAT HISTORY .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/4134081780/index.m3u8" target="_blank" title="CARTOON NETWORK .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="CARTOON NETWORK .c" />
+        
+        <p>CARTOON NETWORK .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/2114825503/index.m3u8" target="_blank" title="BLOOMBERG TV .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="BLOOMBERG TV .c" />
+        
+        <p>BLOOMBERG TV .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1804212747/index.m3u8" target="_blank" title="MOTORVISION .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="MOTORVISION .c" />
+        
+        <p>MOTORVISION .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/616423683/index.m3u8" target="_blank" title="DUCK TV .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="DUCK TV .s" />
+        
+        <p>DUCK TV .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/981381135/index.m3u8" target="_blank" title="SPORTAL [LIVE DURING EVENTS ONLY] .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="SPORTAL [LIVE DURING EVENTS ONLY] .s" />
+        
+        <p>SPORTAL [LIVE DURING EVENTS ONLY] .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3066884648/index.m3u8" target="_blank" title="FIGHTBOX .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="FIGHTBOX .s" />
+        
+        <p>FIGHTBOX .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1600902519/index.m3u8" target="_blank" title="VIASAT EXPLORER .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="VIASAT EXPLORER .s" />
+        
+        <p>VIASAT EXPLORER .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3250423496/index.m3u8" target="_blank" title="EVROKOM .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="EVROKOM .c" />
+        
+        <p>EVROKOM .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3938292130/index.m3u8" target="_blank" title="V2BEAT TV .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="V2BEAT TV .c" />
+        
+        <p>V2BEAT TV .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1386348539/index.m3u8" target="_blank" title="WORLD FASHION CHANNEL .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="WORLD FASHION CHANNEL .c" />
+        
+        <p>WORLD FASHION CHANNEL .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/2376279153/index.m3u8" target="_blank" title="BLOOMBERG .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="BLOOMBERG .s" />
+        
+        <p>BLOOMBERG .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3119534972/index.m3u8" target="_blank" title="BOOMERANG .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="BOOMERANG .s" />
+        
+        <p>BOOMERANG .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/442015131/index.m3u8" target="_blank" title="BSTV .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="BSTV .s" />
+        
+        <p>BSTV .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/508166537/index.m3u8" target="_blank" title="DESTINATIONS .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="DESTINATIONS .s" />
+        
+        <p>DESTINATIONS .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1285652493/index.m3u8" target="_blank" title="ID EXTRA .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="ID EXTRA .s" />
+        
+        <p>ID EXTRA .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1518399743/index.m3u8" target="_blank" title="RING .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="RING .s" />
+        
+        <p>RING .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1226141210/index.m3u8" target="_blank" title="TV 1 .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="TV 1 .s" />
+        
+        <p>TV 1 .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/241553435/index.m3u8" target="_blank" title="VTV .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="VTV .s" />
+        
+        <p>VTV .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1106460317/index.m3u8" target="_blank" title="E KIDS .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="E KIDS .s" />
+        
+        <p>E KIDS .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/1707089745/index.m3u8" target="_blank" title="RODINA .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="RODINA .s" />
+        
+        <p>RODINA .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/2679524542/index.m3u8" target="_blank" title="TV EVROPA .s">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="TV EVROPA .s" />
+        
+        <p>TV EVROPA .s</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3815634294/index.m3u8" target="_blank" title="JIMJAM .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="JIMJAM .c" />
+        
+        <p>JIMJAM .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/880817015/index.m3u8" target="_blank" title="KANAL 0 .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="KANAL 0 .c" />
+        
+        <p>KANAL 0 .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/289340232/index.m3u8" target="_blank" title="LIGHT CHANNEL .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="LIGHT CHANNEL .c" />
+        
+        <p>LIGHT CHANNEL .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3127852812/index.m3u8" target="_blank" title="SKAT .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="SKAT .c" />
+        
+        <p>SKAT .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/3032872784/index.m3u8" target="_blank" title="STAR CHANNEL .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="STAR CHANNEL .c" />
+        
+        <p>STAR CHANNEL .c</p>
+      </a>
+    
+      <a class="canale" href="https://kool.to//play/519380707/index.m3u8" target="_blank" title="TIANKOV FOLK .c">
+        
+          <img src="https://www.kool.to//favicon.ico" alt="TIANKOV FOLK .c" />
+        
+        <p>TIANKOV FOLK .c</p>
+      </a>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>
