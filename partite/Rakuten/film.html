@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>film</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+}
+
+h1 {
+  font-size: 4rem;
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+}
+
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+  justify-items: center;
+}
+
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+}
+
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  z-index: 1;
+}
+
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+}
+
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+}
+
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+  </style>
+</head>
+<body>
+  <h1>film</h1>
+  <div class="griglia">
+    
+      <a class="canale" href="https://d4a4999341764c67a67e9ec9eb3790ab.mediatailor.eu-west-1.amazonaws.com/v1/master/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-5984/master.m3u8" target="_blank" title="Film Top - Rakuten TV">
+        
+          <div style="font-size: 48px;">📺</div>
+        
+        <p>Film Top - Rakuten TV</p>
+      </a>
+    
+      <a class="canale" href="https://87f2e2e5e7624e3bad85da1ca2ed31a7.mediatailor.eu-west-1.amazonaws.com/v1/master/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-6067/master.m3u8" target="_blank" title="Azione - Rakuten TV">
+        
+          <div style="font-size: 48px;">📺</div>
+        
+        <p>Azione - Rakuten TV</p>
+      </a>
+    
+      <a class="canale" href="https://b8bc6c4b9be64bd6aeb3b92aa8521ed4.mediatailor.eu-west-1.amazonaws.com/v1/master/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-6184/master.m3u8" target="_blank" title="Commedia - Rakuten TV">
+        
+          <div style="font-size: 48px;">📺</div>
+        
+        <p>Commedia - Rakuten TV</p>
+      </a>
+    
+      <a class="canale" href="https://f84e0b1628464fab846160df957f269e.mediatailor.eu-west-1.amazonaws.com/v1/master/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-6094/master.m3u8" target="_blank" title="Dramma - Rakuten TV">
+        
+          <div style="font-size: 48px;">📺</div>
+        
+        <p>Dramma - Rakuten TV</p>
+      </a>
+    
+      <a class="canale" href="https://3e0f2491d8634a58967529df3f424c0d.mediatailor.eu-west-1.amazonaws.com/v1/master/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-6193/master.m3u8" target="_blank" title="Romance - Rakuten TV">
+        
+          <div style="font-size: 48px;">📺</div>
+        
+        <p>Romance - Rakuten TV</p>
+      </a>
+    
+      <a class="canale" href="https://asian-cinema-rakuten-tv-it.fast.rakuten.tv/v1/master/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-6431/master.m3u8" target="_blank" title="Film Asiatici - Rakuten TV">
+        
+          <div style="font-size: 48px;">📺</div>
+        
+        <p>Film Asiatici - Rakuten TV</p>
+      </a>
+    
+      <a class="canale" href="https://sci-fi-rakuten-tv-it.fast.rakuten.tv/v1/master/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-6430/master.m3u8" target="_blank" title="Fantascienza - Rakuten TV">
+        
+          <div style="font-size: 48px;">📺</div>
+        
+        <p>Fantascienza - Rakuten TV</p>
+      </a>
+    
+      <a class="canale" href="https://73e5474be2ae422487b18295a9782482.mediatailor.eu-west-1.amazonaws.com/v1/master/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-4548/master.m3u8" target="_blank" title="Trailers">
+        
+          <div style="font-size: 48px;">📺</div>
+        
+        <p>Trailers</p>
+      </a>
+    
+      <a class="canale" href="https://9d597739.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWl0X0JpenphcnJvTW92aWVzX0hMUw/playlist.m3u8" target="_blank" title="Cine Aliens">
+        
+          <div style="font-size: 48px;">📺</div>
+        
+        <p>Cine Aliens</p>
+      </a>
+    
+      <a class="canale" href="https://7f495636.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWl0X0NpbmVtYVNlZ3JldG9fSExT/playlist.m3u8" target="_blank" title="Comicità Piccante Movies">
+        
+          <div style="font-size: 48px;">📺</div>
+        
+        <p>Comicità Piccante Movies</p>
+      </a>
+    
+      <a class="canale" href="https://f7ad58aa.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWl0X1dQX0hMUw/playlist.m3u8" target="_blank" title="CineWestern">
+        
+          <div style="font-size: 48px;">📺</div>
+        
+        <p>CineWestern</p>
+      </a>
+    
+      <a class="canale" href="https://d39g1vxj2ef6in.cloudfront.net/v1/master/3fec3e5cac39a52b2132f9c66c83dae043dc17d4/prod-rakuten-stitched/master.m3u8" target="_blank" title="Dark Matter - Halloween 2024">
+        
+          <div style="font-size: 48px;">📺</div>
+        
+        <p>Dark Matter - Halloween 2024</p>
+      </a>
+    
+      <a class="canale" href="https://9a97f2f113334de59d1c4dc093b76280.mediatailor.us-east-1.amazonaws.com/v1/master/f4e8c53a8367a5b58e20ce054ea3ce25a3e904d3/RakutenTV-it_CGtv/playlist.m3u8" target="_blank" title="CG Grandi Film">
+        
+          <div style="font-size: 48px;">📺</div>
+        
+        <p>CG Grandi Film</p>
+      </a>
+    
+      <a class="canale" href="https://136d462a71e843a886633ffc9d0f9bb2.mediatailor.us-east-1.amazonaws.com/v1/master/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RakutenTV-it_Serially/playlist.m3u8" target="_blank" title="Brividy Cinema">
+        
+          <div style="font-size: 48px;">📺</div>
+        
+        <p>Brividy Cinema</p>
+      </a>
+    
+      <a class="canale" href="https://30a2c5f3e66e4b208d68c6b61d5db155.mediatailor.us-east-1.amazonaws.com/v1/master/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RakutenTV-it_GrjngoFilmWestern/playlist.m3u8" target="_blank" title="Grjngo - Film Western">
+        
+          <div style="font-size: 48px;">📺</div>
+        
+        <p>Grjngo - Film Western</p>
+      </a>
+    
+      <a class="canale" href="https://253cf8b2.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWl0X1Jpc2F0ZWFsbGl0YWxpYW5hX0hMUw/playlist.m3u8" target="_blank" title="Alberto Sordi & Co">
+        
+          <div style="font-size: 48px;">📺</div>
+        
+        <p>Alberto Sordi & Co</p>
+      </a>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>
