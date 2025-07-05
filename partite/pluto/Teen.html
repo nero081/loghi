@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Teen</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .griglia {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+      justify-items: center;
+    }
+
+    .canale {
+      background-color: #292929;
+      border-radius: 10px;
+      text-align: center;
+      color: #fff;
+      padding: 15px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .canale img {
+      width: 100%;
+      height: 120px;
+      object-fit: contain;
+      border-radius: 8px;
+      background-color: #111;
+      margin-bottom: 10px;
+    }
+
+    .canale p {
+      margin: 0;
+      font-size: 0.95em;
+    }
+
+    .canale:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+
+    .canale:focus {
+      outline: 2px solid #fff;
+      background-color: #3a3a3a;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    @media screen and (orientation: portrait) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      }
+
+      .canale img {
+        height: 100px;
+      }
+
+      .canale p {
+        font-size: 0.9em;
+      }
+
+      body {
+        padding: 15px;
+      }
+    }
+
+    @media screen and (orientation: landscape) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .canale img {
+        height: 140px;
+      }
+
+      .canale p {
+        font-size: 1em;
+      }
+
+      body {
+        padding: 30px;
+      }
+    }
+
+    .back {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .back a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    .back a:hover {
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <h1>Teen</h1>
+  <div class="griglia">
+    
+    <a class="canale" href="player.html?url=https%3A//cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/6093f7b5bb49b90007cecaad/master.m3u8%3FadvertisingId%3D%26appName%3Dweb%26appVersion%3Dunknown%26appStoreUrl%3D%26architecture%3D%26buildVersion%3D%26clientTime%3D0%26deviceDNT%3D0%26deviceId%3D20664759-d419-463e-a951-d3017e124bfa%26deviceMake%3DChrome%26deviceModel%3Dweb%26deviceType%3Dweb%26deviceVersion%3Dunknown%26includeExtendedEvents%3Dfalse%26sid%3Dd9d4bb78-0b85-4b27-8c05-9d50ac78dfa2%26userId%3D%26serverSideAds%3Dtrue" target="_blank" tabindex="0">
+      <img src="https://images.pluto.tv/channels/6093f7b5bb49b90007cecaad/colorLogoPNG.png" alt="Super! Pop" />
+      <p>Super! Pop</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/609401db8cf51c00084b592e/master.m3u8%3FadvertisingId%3D%26appName%3Dweb%26appVersion%3Dunknown%26appStoreUrl%3D%26architecture%3D%26buildVersion%3D%26clientTime%3D0%26deviceDNT%3D0%26deviceId%3D4f5d79a9-5670-4b88-a526-badf5f6d3be8%26deviceMake%3DChrome%26deviceModel%3Dweb%26deviceType%3Dweb%26deviceVersion%3Dunknown%26includeExtendedEvents%3Dfalse%26sid%3D5269cbcf-6f63-4d43-89e3-3aedf8b7ac9b%26userId%3D%26serverSideAds%3Dtrue" target="_blank" tabindex="0">
+      <img src="https://images.pluto.tv/channels/609401db8cf51c00084b592e/colorLogoPNG.png" alt="Super! iCarly" />
+      <p>Super! iCarly</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/6304ed62410a4c00083c0291/master.m3u8%3FadvertisingId%3D%26appName%3Dweb%26appVersion%3Dunknown%26appStoreUrl%3D%26architecture%3D%26buildVersion%3D%26clientTime%3D0%26deviceDNT%3D0%26deviceId%3Da1b082cd-b55c-46e1-9d32-c3575f9bb012%26deviceMake%3DChrome%26deviceModel%3Dweb%26deviceType%3Dweb%26deviceVersion%3Dunknown%26includeExtendedEvents%3Dfalse%26sid%3D86cd5c16-a62e-4f99-9bf3-a2f123195ce9%26userId%3D%26serverSideAds%3Dtrue" target="_blank" tabindex="0">
+      <img src="https://images.pluto.tv/channels/6304ed62410a4c00083c0291/colorLogoPNG.png" alt="Super! Zoey 101" />
+      <p>Super! Zoey 101</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/63c012504faf1c0007abfa93/master.m3u8%3FadvertisingId%3D%26appName%3Dweb%26appVersion%3Dunknown%26appStoreUrl%3D%26architecture%3D%26buildVersion%3D%26clientTime%3D0%26deviceDNT%3D0%26deviceId%3Dc8d50ecc-bc09-471e-93a5-4e790dbfa036%26deviceMake%3DChrome%26deviceModel%3Dweb%26deviceType%3Dweb%26deviceVersion%3Dunknown%26includeExtendedEvents%3Dfalse%26sid%3D44621d0e-9514-405f-8851-7a6968add8ae%26userId%3D%26serverSideAds%3Dtrue" target="_blank" tabindex="0">
+      <img src="https://images.pluto.tv/channels/63c012504faf1c0007abfa93/colorLogoPNG.png" alt="Super! Victorious" />
+      <p>Super! Victorious</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/666174c9f999220008769012/master.m3u8%3FadvertisingId%3D%26appName%3Dweb%26appVersion%3Dunknown%26appStoreUrl%3D%26architecture%3D%26buildVersion%3D%26clientTime%3D0%26deviceDNT%3D0%26deviceId%3Ddf1b6117-aa68-43c3-99f2-83ea4fbcf47e%26deviceMake%3DChrome%26deviceModel%3Dweb%26deviceType%3Dweb%26deviceVersion%3Dunknown%26includeExtendedEvents%3Dfalse%26sid%3Dedd9a61d-b98a-4988-b0bb-792e3d6f225a%26userId%3D%26serverSideAds%3Dtrue" target="_blank" tabindex="0">
+      <img src="https://images.pluto.tv/channels/666174c9f999220008769012/colorLogoPNG.png" alt="Super! Big Time Rush" />
+      <p>Super! Big Time Rush</p>
+    </a>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>

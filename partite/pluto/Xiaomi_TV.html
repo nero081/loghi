@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Xiaomi TV</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .griglia {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+      justify-items: center;
+    }
+
+    .canale {
+      background-color: #292929;
+      border-radius: 10px;
+      text-align: center;
+      color: #fff;
+      padding: 15px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .canale img {
+      width: 100%;
+      height: 120px;
+      object-fit: contain;
+      border-radius: 8px;
+      background-color: #111;
+      margin-bottom: 10px;
+    }
+
+    .canale p {
+      margin: 0;
+      font-size: 0.95em;
+    }
+
+    .canale:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+
+    .canale:focus {
+      outline: 2px solid #fff;
+      background-color: #3a3a3a;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    @media screen and (orientation: portrait) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      }
+
+      .canale img {
+        height: 100px;
+      }
+
+      .canale p {
+        font-size: 0.9em;
+      }
+
+      body {
+        padding: 15px;
+      }
+    }
+
+    @media screen and (orientation: landscape) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .canale img {
+        height: 140px;
+      }
+
+      .canale p {
+        font-size: 1em;
+      }
+
+      body {
+        padding: 30px;
+      }
+    }
+
+    .back {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .back a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    .back a:hover {
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <h1>Xiaomi TV</h1>
+  <div class="griglia">
+    
+    <a class="canale" href="player.html?url=https%3A//cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/65158fe20371a8000868809a/master.m3u8%3FadvertisingId%3D%26appName%3Dweb%26appVersion%3Dunknown%26appStoreUrl%3D%26architecture%3D%26buildVersion%3D%26clientTime%3D0%26deviceDNT%3D0%26deviceId%3D0c5f10b3-5734-43e2-b099-57c610c2ee5d%26deviceMake%3DChrome%26deviceModel%3Dweb%26deviceType%3Dweb%26deviceVersion%3Dunknown%26includeExtendedEvents%3Dfalse%26sid%3Dc8bca4a6-d2b3-48f9-ae66-14faf8e5a4a7%26userId%3D%26serverSideAds%3Dtrue" target="_blank" tabindex="0">
+      <img src="https://images.pluto.tv/channels/65158fe20371a8000868809a/colorLogoPNG.png" alt="Pluto TV Film" />
+      <p>Pluto TV Film</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/651593a42c585100085b9d09/master.m3u8%3FadvertisingId%3D%26appName%3Dweb%26appVersion%3Dunknown%26appStoreUrl%3D%26architecture%3D%26buildVersion%3D%26clientTime%3D0%26deviceDNT%3D0%26deviceId%3D6a8de824-f768-4d4b-a11c-7a101f2b89cf%26deviceMake%3DChrome%26deviceModel%3Dweb%26deviceType%3Dweb%26deviceVersion%3Dunknown%26includeExtendedEvents%3Dfalse%26sid%3Dd7d6d61d-24a2-427c-bf8d-5505c58ec9a4%26userId%3D%26serverSideAds%3Dtrue" target="_blank" tabindex="0">
+      <img src="https://images.pluto.tv/channels/651593a42c585100085b9d09/colorLogoPNG.png" alt="Pluto TV Film Azione" />
+      <p>Pluto TV Film Azione</p>
+    </a>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>

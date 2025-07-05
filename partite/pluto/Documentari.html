@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Documentari</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .griglia {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+      justify-items: center;
+    }
+
+    .canale {
+      background-color: #292929;
+      border-radius: 10px;
+      text-align: center;
+      color: #fff;
+      padding: 15px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .canale img {
+      width: 100%;
+      height: 120px;
+      object-fit: contain;
+      border-radius: 8px;
+      background-color: #111;
+      margin-bottom: 10px;
+    }
+
+    .canale p {
+      margin: 0;
+      font-size: 0.95em;
+    }
+
+    .canale:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+
+    .canale:focus {
+      outline: 2px solid #fff;
+      background-color: #3a3a3a;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    @media screen and (orientation: portrait) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      }
+
+      .canale img {
+        height: 100px;
+      }
+
+      .canale p {
+        font-size: 0.9em;
+      }
+
+      body {
+        padding: 15px;
+      }
+    }
+
+    @media screen and (orientation: landscape) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .canale img {
+        height: 140px;
+      }
+
+      .canale p {
+        font-size: 1em;
+      }
+
+      body {
+        padding: 30px;
+      }
+    }
+
+    .back {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .back a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    .back a:hover {
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <h1>Documentari</h1>
+  <div class="griglia">
+    
+    <a class="canale" href="player.html?url=https%3A//cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/60802b37709d6b0007b0c549/master.m3u8%3FadvertisingId%3D%26appName%3Dweb%26appVersion%3Dunknown%26appStoreUrl%3D%26architecture%3D%26buildVersion%3D%26clientTime%3D0%26deviceDNT%3D0%26deviceId%3D985646f9-4f82-422f-9042-4aa900433dd6%26deviceMake%3DChrome%26deviceModel%3Dweb%26deviceType%3Dweb%26deviceVersion%3Dunknown%26includeExtendedEvents%3Dfalse%26sid%3Dcc3fab0a-ebd6-47f1-bcf1-b9937af1beee%26userId%3D%26serverSideAds%3Dtrue" target="_blank" tabindex="0">
+      <img src="https://images.pluto.tv/channels/60802b37709d6b0007b0c549/colorLogoPNG.png" alt="Pluto TV Natura" />
+      <p>Pluto TV Natura</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/608aa8a5709d6b0007b132fe/master.m3u8%3FadvertisingId%3D%26appName%3Dweb%26appVersion%3Dunknown%26appStoreUrl%3D%26architecture%3D%26buildVersion%3D%26clientTime%3D0%26deviceDNT%3D0%26deviceId%3Dcb509882-d27a-4381-8583-c31dd6d829c3%26deviceMake%3DChrome%26deviceModel%3Dweb%26deviceType%3Dweb%26deviceVersion%3Dunknown%26includeExtendedEvents%3Dfalse%26sid%3D4ef4178a-b9e3-4bb1-9b9e-71085f0943ac%26userId%3D%26serverSideAds%3Dtrue" target="_blank" tabindex="0">
+      <img src="https://images.pluto.tv/channels/608aa8a5709d6b0007b132fe/colorLogoPNG.png" alt="Pluto TV Documentari" />
+      <p>Pluto TV Documentari</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/610a9ebe8c2ac2000734776e/master.m3u8%3FadvertisingId%3D%26appName%3Dweb%26appVersion%3Dunknown%26appStoreUrl%3D%26architecture%3D%26buildVersion%3D%26clientTime%3D0%26deviceDNT%3D0%26deviceId%3Dbdf24e87-2aca-4d46-9e2b-1fa7899aa484%26deviceMake%3DChrome%26deviceModel%3Dweb%26deviceType%3Dweb%26deviceVersion%3Dunknown%26includeExtendedEvents%3Dfalse%26sid%3Dad294e34-155a-4b06-a5cc-1b9b102f147f%26userId%3D%26serverSideAds%3Dtrue" target="_blank" tabindex="0">
+      <img src="https://images.pluto.tv/channels/610a9ebe8c2ac2000734776e/colorLogoPNG.png" alt="Naturescape" />
+      <p>Naturescape</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/65253fdf3fd33c00080214a3/master.m3u8%3FadvertisingId%3D%26appName%3Dweb%26appVersion%3Dunknown%26appStoreUrl%3D%26architecture%3D%26buildVersion%3D%26clientTime%3D0%26deviceDNT%3D0%26deviceId%3D11c16849-9d37-479b-af9f-bdc26a44fc79%26deviceMake%3DChrome%26deviceModel%3Dweb%26deviceType%3Dweb%26deviceVersion%3Dunknown%26includeExtendedEvents%3Dfalse%26sid%3D8fe0a4f6-0f8d-4aaf-b238-6427ca7c8a39%26userId%3D%26serverSideAds%3Dtrue" target="_blank" tabindex="0">
+      <img src="https://images.pluto.tv/channels/65253fdf3fd33c00080214a3/colorLogoPNG.png" alt="Pluto TV Storia" />
+      <p>Pluto TV Storia</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/653660b4295b840008a70ba3/master.m3u8%3FadvertisingId%3D%26appName%3Dweb%26appVersion%3Dunknown%26appStoreUrl%3D%26architecture%3D%26buildVersion%3D%26clientTime%3D0%26deviceDNT%3D0%26deviceId%3D0013d0d7-47af-4838-9478-53312bd64746%26deviceMake%3DChrome%26deviceModel%3Dweb%26deviceType%3Dweb%26deviceVersion%3Dunknown%26includeExtendedEvents%3Dfalse%26sid%3D59be9bcb-2053-411d-b7bc-df907d9e361e%26userId%3D%26serverSideAds%3Dtrue" target="_blank" tabindex="0">
+      <img src="https://images.pluto.tv/channels/653660b4295b840008a70ba3/colorLogoPNG.png" alt="Le vite degli altri" />
+      <p>Le vite degli altri</p>
+    </a>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>

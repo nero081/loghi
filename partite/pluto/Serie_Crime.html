@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Serie Crime</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .griglia {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+      justify-items: center;
+    }
+
+    .canale {
+      background-color: #292929;
+      border-radius: 10px;
+      text-align: center;
+      color: #fff;
+      padding: 15px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .canale img {
+      width: 100%;
+      height: 120px;
+      object-fit: contain;
+      border-radius: 8px;
+      background-color: #111;
+      margin-bottom: 10px;
+    }
+
+    .canale p {
+      margin: 0;
+      font-size: 0.95em;
+    }
+
+    .canale:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+
+    .canale:focus {
+      outline: 2px solid #fff;
+      background-color: #3a3a3a;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    @media screen and (orientation: portrait) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      }
+
+      .canale img {
+        height: 100px;
+      }
+
+      .canale p {
+        font-size: 0.9em;
+      }
+
+      body {
+        padding: 15px;
+      }
+    }
+
+    @media screen and (orientation: landscape) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .canale img {
+        height: 140px;
+      }
+
+      .canale p {
+        font-size: 1em;
+      }
+
+      body {
+        padding: 30px;
+      }
+    }
+
+    .back {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .back a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    .back a:hover {
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <h1>Serie Crime</h1>
+  <div class="griglia">
+    
+    <a class="canale" href="player.html?url=https%3A//cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/608aa777b907770007e5d05d/master.m3u8%3FadvertisingId%3D%26appName%3Dweb%26appVersion%3Dunknown%26appStoreUrl%3D%26architecture%3D%26buildVersion%3D%26clientTime%3D0%26deviceDNT%3D0%26deviceId%3D094d1743-bf2d-4adc-833d-5537cb256763%26deviceMake%3DChrome%26deviceModel%3Dweb%26deviceType%3Dweb%26deviceVersion%3Dunknown%26includeExtendedEvents%3Dfalse%26sid%3Dfaa9073d-1e98-4f1e-a672-0d73564124a5%26userId%3D%26serverSideAds%3Dtrue" target="_blank" tabindex="0">
+      <img src="https://images.pluto.tv/channels/608aa777b907770007e5d05d/colorLogoPNG.png" alt="Pluto TV Crime" />
+      <p>Pluto TV Crime</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/625e6cc905e09f00073addee/master.m3u8%3FadvertisingId%3D%26appName%3Dweb%26appVersion%3Dunknown%26appStoreUrl%3D%26architecture%3D%26buildVersion%3D%26clientTime%3D0%26deviceDNT%3D0%26deviceId%3D0ad82501-beea-4183-8eef-186d81872a52%26deviceMake%3DChrome%26deviceModel%3Dweb%26deviceType%3Dweb%26deviceVersion%3Dunknown%26includeExtendedEvents%3Dfalse%26sid%3D889744f8-be82-408f-bf64-f7a12a112689%26userId%3D%26serverSideAds%3Dtrue" target="_blank" tabindex="0">
+      <img src="https://images.pluto.tv/channels/625e6cc905e09f00073addee/colorLogoPNG.png" alt="Squadra Speciale Cobra 11" />
+      <p>Squadra Speciale Cobra 11</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/638f286445264d00084ec6dc/master.m3u8%3FadvertisingId%3D%26appName%3Dweb%26appVersion%3Dunknown%26appStoreUrl%3D%26architecture%3D%26buildVersion%3D%26clientTime%3D0%26deviceDNT%3D0%26deviceId%3De74244c2-d898-45ce-a8c4-a0bddea1d786%26deviceMake%3DChrome%26deviceModel%3Dweb%26deviceType%3Dweb%26deviceVersion%3Dunknown%26includeExtendedEvents%3Dfalse%26sid%3Db087a62d-4b4a-484a-9280-2a6df0785459%26userId%3D%26serverSideAds%3Dtrue" target="_blank" tabindex="0">
+      <img src="https://images.pluto.tv/channels/638f286445264d00084ec6dc/colorLogoPNG.png" alt="Autostop per il cielo" />
+      <p>Autostop per il cielo</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/66a8c7aefe11e500085b1587/master.m3u8%3FadvertisingId%3D%26appName%3Dweb%26appVersion%3Dunknown%26appStoreUrl%3D%26architecture%3D%26buildVersion%3D%26clientTime%3D0%26deviceDNT%3D0%26deviceId%3De9960354-f942-4c32-a00c-1ba17dfe9bf2%26deviceMake%3DChrome%26deviceModel%3Dweb%26deviceType%3Dweb%26deviceVersion%3Dunknown%26includeExtendedEvents%3Dfalse%26sid%3Ddb4db447-bce8-40a0-9eb6-38ac2b1cf38e%26userId%3D%26serverSideAds%3Dtrue" target="_blank" tabindex="0">
+      <img src="https://images.pluto.tv/channels/66a8c7aefe11e500085b1587/colorLogoPNG.png" alt="Cherif" />
+      <p>Cherif</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/66a8c8b3d2d50d000821fc4c/master.m3u8%3FadvertisingId%3D%26appName%3Dweb%26appVersion%3Dunknown%26appStoreUrl%3D%26architecture%3D%26buildVersion%3D%26clientTime%3D0%26deviceDNT%3D0%26deviceId%3D82fc00f0-f7c2-48df-9967-6f405c627d87%26deviceMake%3DChrome%26deviceModel%3Dweb%26deviceType%3Dweb%26deviceVersion%3Dunknown%26includeExtendedEvents%3Dfalse%26sid%3D6927ae1d-7c5b-4e44-a12b-5a140fdf6263%26userId%3D%26serverSideAds%3Dtrue" target="_blank" tabindex="0">
+      <img src="https://images.pluto.tv/channels/66a8c8b3d2d50d000821fc4c/colorLogoPNG.png" alt="Tandem" />
+      <p>Tandem</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/66d7120815d2c60008cec006/master.m3u8%3FadvertisingId%3D%26appName%3Dweb%26appVersion%3Dunknown%26appStoreUrl%3D%26architecture%3D%26buildVersion%3D%26clientTime%3D0%26deviceDNT%3D0%26deviceId%3Dba59c8d4-b596-4ace-aeae-599889c646c3%26deviceMake%3DChrome%26deviceModel%3Dweb%26deviceType%3Dweb%26deviceVersion%3Dunknown%26includeExtendedEvents%3Dfalse%26sid%3D209c8faf-dcf1-4940-9543-40423ab51880%26userId%3D%26serverSideAds%3Dtrue" target="_blank" tabindex="0">
+      <img src="https://images.pluto.tv/channels/66d7120815d2c60008cec006/colorLogoPNG.png" alt="Flashpoint" />
+      <p>Flashpoint</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/66d9a98961dbf00008efb5fc/master.m3u8%3FadvertisingId%3D%26appName%3Dweb%26appVersion%3Dunknown%26appStoreUrl%3D%26architecture%3D%26buildVersion%3D%26clientTime%3D0%26deviceDNT%3D0%26deviceId%3Dd36e0b25-969e-4b06-a090-dee96c55876d%26deviceMake%3DChrome%26deviceModel%3Dweb%26deviceType%3Dweb%26deviceVersion%3Dunknown%26includeExtendedEvents%3Dfalse%26sid%3D59dbf3c1-481d-4707-acf1-2022c4fe2fa5%26userId%3D%26serverSideAds%3Dtrue" target="_blank" tabindex="0">
+      <img src="https://images.pluto.tv/channels/66d9a98961dbf00008efb5fc/colorLogoPNG.png" alt="Sulle tracce del crimine" />
+      <p>Sulle tracce del crimine</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/66d9aa4315d2c60008d4ac40/master.m3u8%3FadvertisingId%3D%26appName%3Dweb%26appVersion%3Dunknown%26appStoreUrl%3D%26architecture%3D%26buildVersion%3D%26clientTime%3D0%26deviceDNT%3D0%26deviceId%3D606603fa-6bed-479d-a8ea-499ac108e1e7%26deviceMake%3DChrome%26deviceModel%3Dweb%26deviceType%3Dweb%26deviceVersion%3Dunknown%26includeExtendedEvents%3Dfalse%26sid%3Daaee7e32-bf7f-466e-a4ca-440c19e1b051%26userId%3D%26serverSideAds%3Dtrue" target="_blank" tabindex="0">
+      <img src="https://images.pluto.tv/channels/66d9aa4315d2c60008d4ac40/colorLogoPNG.png" alt="Alice Nevers" />
+      <p>Alice Nevers</p>
+    </a>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>

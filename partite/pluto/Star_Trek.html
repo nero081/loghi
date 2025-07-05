@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Star Trek</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .griglia {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+      justify-items: center;
+    }
+
+    .canale {
+      background-color: #292929;
+      border-radius: 10px;
+      text-align: center;
+      color: #fff;
+      padding: 15px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .canale img {
+      width: 100%;
+      height: 120px;
+      object-fit: contain;
+      border-radius: 8px;
+      background-color: #111;
+      margin-bottom: 10px;
+    }
+
+    .canale p {
+      margin: 0;
+      font-size: 0.95em;
+    }
+
+    .canale:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+
+    .canale:focus {
+      outline: 2px solid #fff;
+      background-color: #3a3a3a;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    @media screen and (orientation: portrait) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      }
+
+      .canale img {
+        height: 100px;
+      }
+
+      .canale p {
+        font-size: 0.9em;
+      }
+
+      body {
+        padding: 15px;
+      }
+    }
+
+    @media screen and (orientation: landscape) {
+      .griglia {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .canale img {
+        height: 140px;
+      }
+
+      .canale p {
+        font-size: 1em;
+      }
+
+      body {
+        padding: 30px;
+      }
+    }
+
+    .back {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .back a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    .back a:hover {
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <h1>Star Trek</h1>
+  <div class="griglia">
+    
+    <a class="canale" href="player.html?url=https%3A//cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/6581a09edfed030008e12b39/master.m3u8%3FadvertisingId%3D%26appName%3Dweb%26appVersion%3Dunknown%26appStoreUrl%3D%26architecture%3D%26buildVersion%3D%26clientTime%3D0%26deviceDNT%3D0%26deviceId%3Dd42741c3-ff59-4d32-9795-2cc09fcd9d04%26deviceMake%3DChrome%26deviceModel%3Dweb%26deviceType%3Dweb%26deviceVersion%3Dunknown%26includeExtendedEvents%3Dfalse%26sid%3D3ce46300-5759-4ce5-b14f-2adeba66fd9d%26userId%3D%26serverSideAds%3Dtrue" target="_blank" tabindex="0">
+      <img src="https://images.pluto.tv/channels/6581a09edfed030008e12b39/colorLogoPNG.png" alt="Star Trek: The Original Series" />
+      <p>Star Trek: The Original Series</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/65cb73d33ba51e00084cabad/master.m3u8%3FadvertisingId%3D%26appName%3Dweb%26appVersion%3Dunknown%26appStoreUrl%3D%26architecture%3D%26buildVersion%3D%26clientTime%3D0%26deviceDNT%3D0%26deviceId%3D5af99947-2a84-4cec-8966-d9619b0fa724%26deviceMake%3DChrome%26deviceModel%3Dweb%26deviceType%3Dweb%26deviceVersion%3Dunknown%26includeExtendedEvents%3Dfalse%26sid%3D5b12c5f6-91cf-42cb-9461-4263a86622b2%26userId%3D%26serverSideAds%3Dtrue" target="_blank" tabindex="0">
+      <img src="https://images.pluto.tv/channels/65cb73d33ba51e00084cabad/colorLogoPNG.png" alt="Star Trek: Voyager" />
+      <p>Star Trek: Voyager</p>
+    </a>
+    
+    <a class="canale" href="player.html?url=https%3A//cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/65cb783b3af63d00087bedda/master.m3u8%3FadvertisingId%3D%26appName%3Dweb%26appVersion%3Dunknown%26appStoreUrl%3D%26architecture%3D%26buildVersion%3D%26clientTime%3D0%26deviceDNT%3D0%26deviceId%3D93b12924-7965-4332-8113-cdb89110ff1a%26deviceMake%3DChrome%26deviceModel%3Dweb%26deviceType%3Dweb%26deviceVersion%3Dunknown%26includeExtendedEvents%3Dfalse%26sid%3Dd0883d71-d35d-4dec-881c-acb43f52301d%26userId%3D%26serverSideAds%3Dtrue" target="_blank" tabindex="0">
+      <img src="https://images.pluto.tv/channels/65cb783b3af63d00087bedda/colorLogoPNG.png" alt="Star Trek: Deep Space Nine" />
+      <p>Star Trek: Deep Space Nine</p>
+    </a>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>
