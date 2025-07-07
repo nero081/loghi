@@ -81,10 +81,24 @@
       body {
         padding: 30px;
       }
+	  /* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2; /* Trasparenza desiderata */
+  pointer-events: none; /* Per non interferire con altri elementi */
+  z-index: -1; /* Dietro tutto */
+}
     }
   </style>
 </head>
 <body>
+<!-- Immagine di sfondo trasparente che segue lo scroll -->
+  <img id="background-image" src="https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png" alt="Sfondo trasparente" />
   <h1>🎬 Film </h1>
    <div class="griglia">
     
