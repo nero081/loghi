@@ -46,7 +46,7 @@ h1::before {
 
 .griglia {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 30px; /* Aumentato da 20px per più spazio hover */
   justify-items: center;
   padding: 10px; /* Padding per evitare il bordo stretto */
