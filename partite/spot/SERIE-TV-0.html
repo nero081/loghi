@@ -6,133 +6,209 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
   <style>
-    body {
-      background-color: #1a1a1a;
-      color: #fff;
-      font-family: 'Open Sans', sans-serif;
-      margin: 0;
-      padding: 20px;
-    }
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
 
-    h1 {
-      text-align: center;
-      margin-bottom: 40px;
-    }
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
 
-    .griglia {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 20px;
-      justify-items: center;
-    }
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
 
-    .tile, .canale {
-      background-color: #292929;
-      border-radius: 10px;
-      text-align: center;
-      color: #fff;
-      padding: 15px;
-      transition: transform 0.2s, box-shadow 0.2s;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
 
-    .tile:hover, .canale:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-    }
+h1 {
+  font-size: 4rem;
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+}
 
-    .tile {
-      font-weight: bold;
-      font-size: 1.1em;
-    }
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
 
-    .canale a {
-      text-decoration: none;
-      color: inherit;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
 
-    .canale img {
-      width: 100%;
-      height: 120px;
-      object-fit: contain;
-      border-radius: 8px;
-      background-color: #111;
-      margin-bottom: 10px;
-    }
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
 
-    .canale p {
-      margin: 0;
-      font-size: 0.95em;
-    }
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
 
-    .placeholder-logo {
-      width: 100%;
-      height: 120px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #444, #222);
-      font-size: 2em;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      color: #eee;
-    }
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
 
-    .canale.no-logo:hover .placeholder-logo {
-      background: linear-gradient(135deg, #555, #333);
-    }
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
 
-    @media screen and (orientation: portrait) {
-      .griglia {
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      }
+.canale a {
+  text-decoration: none;
+  color: inherit;
+}
 
-      .canale img, .placeholder-logo {
-        height: 100px;
-      }
 
-      .canale p {
-        font-size: 0.9em;
-      }
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+  text-decoration: none;
+}
 
-      body {
-        padding: 15px;
-      }
-    }
 
-    @media screen and (orientation: landscape) {
-      .griglia {
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      }
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
 
-      .canale img, .placeholder-logo {
-        height: 140px;
-      }
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
 
-      .canale p {
-        font-size: 1em;
-      }
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
 
-      body {
-        padding: 30px;
-      }
-    }
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
 
-    .back {
-      text-align: center;
-      margin-top: 40px;
-    }
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
 
-    .back a {
-      color: #aaa;
-      text-decoration: none;
-      font-size: 16px;
-    }
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
   </style>
 </head>
 <body>
@@ -142,7 +218,7 @@
     <div class="canale no-logo" id="October_Faction_S01_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/63449.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>October Faction S01 E01</p>
       </a>
@@ -151,7 +227,7 @@
     <div class="canale no-logo" id="October_Faction_S01_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/63450.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>October Faction S01 E02</p>
       </a>
@@ -160,7 +236,7 @@
     <div class="canale no-logo" id="October_Faction_S01_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/63451.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>October Faction S01 E03</p>
       </a>
@@ -169,7 +245,7 @@
     <div class="canale no-logo" id="October_Faction_S01_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/63452.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>October Faction S01 E04</p>
       </a>
@@ -178,7 +254,7 @@
     <div class="canale no-logo" id="October_Faction_S01_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/63453.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>October Faction S01 E05</p>
       </a>
@@ -187,7 +263,7 @@
     <div class="canale no-logo" id="October_Faction_S01_E06">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/63454.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>October Faction S01 E06</p>
       </a>
@@ -196,7 +272,7 @@
     <div class="canale no-logo" id="October_Faction_S01_E07">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/63455.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>October Faction S01 E07</p>
       </a>
@@ -205,7 +281,7 @@
     <div class="canale no-logo" id="October_Faction_S01_E08">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/63456.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>October Faction S01 E08</p>
       </a>
@@ -214,7 +290,7 @@
     <div class="canale no-logo" id="October_Faction_S01_E09">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/63457.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>October Faction S01 E09</p>
       </a>
@@ -223,7 +299,7 @@
     <div class="canale no-logo" id="October_Faction_S01_E10">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/63458.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>October Faction S01 E10</p>
       </a>
@@ -232,7 +308,7 @@
     <div class="canale no-logo" id="Odio_il_Natale_S01_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/63459.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Odio il Natale S01 E01</p>
       </a>
@@ -241,7 +317,7 @@
     <div class="canale no-logo" id="Odio_il_Natale_S01_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/63460.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Odio il Natale S01 E02</p>
       </a>
@@ -250,7 +326,7 @@
     <div class="canale no-logo" id="Odio_il_Natale_S01_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/63461.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Odio il Natale S01 E03</p>
       </a>
@@ -259,7 +335,7 @@
     <div class="canale no-logo" id="Odio_il_Natale_S01_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/63462.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Odio il Natale S01 E04</p>
       </a>
@@ -268,7 +344,7 @@
     <div class="canale no-logo" id="Odio_il_Natale_S01_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/63463.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Odio il Natale S01 E05</p>
       </a>
@@ -277,7 +353,7 @@
     <div class="canale no-logo" id="Odio_il_Natale_S01_E06">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/63464.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Odio il Natale S01 E06</p>
       </a>
@@ -286,7 +362,7 @@
     <div class="canale no-logo" id="Odio_il_Natale_S02_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/63465.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Odio il Natale S02 E01</p>
       </a>
@@ -295,7 +371,7 @@
     <div class="canale no-logo" id="Odio_il_Natale_S02_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/63466.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Odio il Natale S02 E02</p>
       </a>
@@ -304,7 +380,7 @@
     <div class="canale no-logo" id="Odio_il_Natale_S02_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/63467.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Odio il Natale S02 E03</p>
       </a>
@@ -313,7 +389,7 @@
     <div class="canale no-logo" id="Odio_il_Natale_S02_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/63468.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Odio il Natale S02 E04</p>
       </a>
@@ -322,7 +398,7 @@
     <div class="canale no-logo" id="Odio_il_Natale_S02_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/63469.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Odio il Natale S02 E05</p>
       </a>
@@ -331,7 +407,7 @@
     <div class="canale no-logo" id="Odio_il_Natale_S02_E06">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/63470.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Odio il Natale S02 E06</p>
       </a>
@@ -340,7 +416,7 @@
     <div class="canale no-logo" id="Oktoberfest_Birra_e_Sangue_S01_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34314.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oktoberfest: Birra e Sangue S01 E01</p>
       </a>
@@ -349,7 +425,7 @@
     <div class="canale no-logo" id="Oktoberfest_Birra_e_Sangue_S01_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34315.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oktoberfest: Birra e Sangue S01 E02</p>
       </a>
@@ -358,7 +434,7 @@
     <div class="canale no-logo" id="Oktoberfest_Birra_e_Sangue_S01_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34316.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oktoberfest: Birra e Sangue S01 E03</p>
       </a>
@@ -367,7 +443,7 @@
     <div class="canale no-logo" id="Oktoberfest_Birra_e_Sangue_S01_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34317.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oktoberfest: Birra e Sangue S01 E04</p>
       </a>
@@ -376,7 +452,7 @@
     <div class="canale no-logo" id="Oktoberfest_Birra_e_Sangue_S01_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34318.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oktoberfest: Birra e Sangue S01 E05</p>
       </a>
@@ -385,7 +461,7 @@
     <div class="canale no-logo" id="Oktoberfest_Birra_e_Sangue_S01_E06">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34319.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oktoberfest: Birra e Sangue S01 E06</p>
       </a>
@@ -394,7 +470,7 @@
     <div class="canale no-logo" id="On_My_Block_S01_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34320.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On My Block S01 E01</p>
       </a>
@@ -403,7 +479,7 @@
     <div class="canale no-logo" id="On_My_Block_S01_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34321.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On My Block S01 E02</p>
       </a>
@@ -412,7 +488,7 @@
     <div class="canale no-logo" id="On_My_Block_S01_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34322.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On My Block S01 E03</p>
       </a>
@@ -421,7 +497,7 @@
     <div class="canale no-logo" id="On_My_Block_S01_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34323.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On My Block S01 E04</p>
       </a>
@@ -430,7 +506,7 @@
     <div class="canale no-logo" id="On_My_Block_S01_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34324.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On My Block S01 E05</p>
       </a>
@@ -439,7 +515,7 @@
     <div class="canale no-logo" id="On_My_Block_S01_E06">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34325.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On My Block S01 E06</p>
       </a>
@@ -448,7 +524,7 @@
     <div class="canale no-logo" id="On_My_Block_S01_E07">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34326.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On My Block S01 E07</p>
       </a>
@@ -457,7 +533,7 @@
     <div class="canale no-logo" id="On_My_Block_S01_E08">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34327.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On My Block S01 E08</p>
       </a>
@@ -466,7 +542,7 @@
     <div class="canale no-logo" id="On_My_Block_S01_E09">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34328.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On My Block S01 E09</p>
       </a>
@@ -475,7 +551,7 @@
     <div class="canale no-logo" id="On_My_Block_S01_E10">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34329.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On My Block S01 E10</p>
       </a>
@@ -484,7 +560,7 @@
     <div class="canale no-logo" id="On_My_Block_S01_E11">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34330.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On My Block S01 E11</p>
       </a>
@@ -493,7 +569,7 @@
     <div class="canale no-logo" id="On_My_Block_S01_E12">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34331.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On My Block S01 E12</p>
       </a>
@@ -502,7 +578,7 @@
     <div class="canale no-logo" id="On_My_Block_S01_E13">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34332.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On My Block S01 E13</p>
       </a>
@@ -511,7 +587,7 @@
     <div class="canale no-logo" id="On_My_Block_S01_E14">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34333.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On My Block S01 E14</p>
       </a>
@@ -520,7 +596,7 @@
     <div class="canale no-logo" id="On_My_Block_S01_E15">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34334.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On My Block S01 E15</p>
       </a>
@@ -529,7 +605,7 @@
     <div class="canale no-logo" id="On_My_Block_S01_E16">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34335.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On My Block S01 E16</p>
       </a>
@@ -538,7 +614,7 @@
     <div class="canale no-logo" id="On_My_Block_S01_E17">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34336.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On My Block S01 E17</p>
       </a>
@@ -547,7 +623,7 @@
     <div class="canale no-logo" id="On_My_Block_S01_E18">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34337.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On My Block S01 E18</p>
       </a>
@@ -556,7 +632,7 @@
     <div class="canale no-logo" id="On_My_Block_S01_E19">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34338.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On My Block S01 E19</p>
       </a>
@@ -565,7 +641,7 @@
     <div class="canale no-logo" id="On_My_Block_S01_E20">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34339.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On My Block S01 E20</p>
       </a>
@@ -574,7 +650,7 @@
     <div class="canale no-logo" id="On_My_Block_S01_E21">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34340.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On My Block S01 E21</p>
       </a>
@@ -583,7 +659,7 @@
     <div class="canale no-logo" id="On_My_Block_S01_E22">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34341.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On My Block S01 E22</p>
       </a>
@@ -592,7 +668,7 @@
     <div class="canale no-logo" id="On_My_Block_S01_E23">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34342.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On My Block S01 E23</p>
       </a>
@@ -601,7 +677,7 @@
     <div class="canale no-logo" id="On_My_Block_S01_E24">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34343.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On My Block S01 E24</p>
       </a>
@@ -610,7 +686,7 @@
     <div class="canale no-logo" id="On_My_Block_S01_E25">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34344.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On My Block S01 E25</p>
       </a>
@@ -619,7 +695,7 @@
     <div class="canale no-logo" id="On_My_Block_S01_E26">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34345.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On My Block S01 E26</p>
       </a>
@@ -628,7 +704,7 @@
     <div class="canale no-logo" id="On_My_Block_S01_E27">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34346.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On My Block S01 E27</p>
       </a>
@@ -637,7 +713,7 @@
     <div class="canale no-logo" id="On_My_Block_S01_E28">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34347.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On My Block S01 E28</p>
       </a>
@@ -646,7 +722,7 @@
     <div class="canale no-logo" id="On_My_Block_S01_E29">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34348.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On My Block S01 E29</p>
       </a>
@@ -655,7 +731,7 @@
     <div class="canale no-logo" id="On_My_Block_S01_E30">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34349.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On My Block S01 E30</p>
       </a>
@@ -664,7 +740,7 @@
     <div class="canale no-logo" id="On_My_Block_S01_E31">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34350.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On My Block S01 E31</p>
       </a>
@@ -673,7 +749,7 @@
     <div class="canale no-logo" id="On_My_Block_S01_E32">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34351.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On My Block S01 E32</p>
       </a>
@@ -682,7 +758,7 @@
     <div class="canale no-logo" id="On_My_Block_S01_E33">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34352.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On My Block S01 E33</p>
       </a>
@@ -691,7 +767,7 @@
     <div class="canale no-logo" id="On_My_Block_S01_E34">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34353.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On My Block S01 E34</p>
       </a>
@@ -700,7 +776,7 @@
     <div class="canale no-logo" id="On_My_Block_S01_E35">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34354.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On My Block S01 E35</p>
       </a>
@@ -709,7 +785,7 @@
     <div class="canale no-logo" id="On_My_Block_S01_E36">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34355.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On My Block S01 E36</p>
       </a>
@@ -718,7 +794,7 @@
     <div class="canale no-logo" id="On_My_Block_S01_E37">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34356.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On My Block S01 E37</p>
       </a>
@@ -727,7 +803,7 @@
     <div class="canale no-logo" id="On_My_Block_S01_E38">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34357.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On My Block S01 E38</p>
       </a>
@@ -736,7 +812,7 @@
     <div class="canale no-logo" id="Oni_La_leggenda_del_dio_del_tuono_S01_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34358.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oni: La leggenda del dio del tuono S01 E01</p>
       </a>
@@ -745,7 +821,7 @@
     <div class="canale no-logo" id="Oni_La_leggenda_del_dio_del_tuono_S01_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34359.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oni: La leggenda del dio del tuono S01 E02</p>
       </a>
@@ -754,7 +830,7 @@
     <div class="canale no-logo" id="Oni_La_leggenda_del_dio_del_tuono_S01_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34360.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oni: La leggenda del dio del tuono S01 E03</p>
       </a>
@@ -763,7 +839,7 @@
     <div class="canale no-logo" id="Oni_La_leggenda_del_dio_del_tuono_S01_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34361.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oni: La leggenda del dio del tuono S01 E04</p>
       </a>
@@ -772,7 +848,7 @@
     <div class="canale no-logo" id="Ooku_Le_stanze_proibite_S01_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34362.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ooku - Le stanze proibite S01 E01</p>
       </a>
@@ -781,7 +857,7 @@
     <div class="canale no-logo" id="Ooku_Le_stanze_proibite_S01_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34363.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ooku - Le stanze proibite S01 E02</p>
       </a>
@@ -790,7 +866,7 @@
     <div class="canale no-logo" id="Ooku_Le_stanze_proibite_S01_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34364.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ooku - Le stanze proibite S01 E03</p>
       </a>
@@ -799,7 +875,7 @@
     <div class="canale no-logo" id="Ooku_Le_stanze_proibite_S01_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34365.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ooku - Le stanze proibite S01 E04</p>
       </a>
@@ -808,7 +884,7 @@
     <div class="canale no-logo" id="Ooku_Le_stanze_proibite_S01_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34366.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ooku - Le stanze proibite S01 E05</p>
       </a>
@@ -817,7 +893,7 @@
     <div class="canale no-logo" id="Ooku_Le_stanze_proibite_S01_E06">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34367.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ooku - Le stanze proibite S01 E06</p>
       </a>
@@ -826,7 +902,7 @@
     <div class="canale no-logo" id="Ooku_Le_stanze_proibite_S01_E07">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34368.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ooku - Le stanze proibite S01 E07</p>
       </a>
@@ -835,7 +911,7 @@
     <div class="canale no-logo" id="Ooku_Le_stanze_proibite_S01_E08">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34369.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ooku - Le stanze proibite S01 E08</p>
       </a>
@@ -844,7 +920,7 @@
     <div class="canale no-logo" id="Ooku_Le_stanze_proibite_S01_E09">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34370.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ooku - Le stanze proibite S01 E09</p>
       </a>
@@ -853,7 +929,7 @@
     <div class="canale no-logo" id="Ooku_Le_stanze_proibite_S01_E10">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34371.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ooku - Le stanze proibite S01 E10</p>
       </a>
@@ -862,7 +938,7 @@
     <div class="canale no-logo" id="Operazione_Amore_S01_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34378.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Operazione Amore S01 E01</p>
       </a>
@@ -871,7 +947,7 @@
     <div class="canale no-logo" id="Operazione_Amore_S01_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34379.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Operazione Amore S01 E02</p>
       </a>
@@ -880,7 +956,7 @@
     <div class="canale no-logo" id="Operazione_Amore_S01_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34380.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Operazione Amore S01 E03</p>
       </a>
@@ -889,7 +965,7 @@
     <div class="canale no-logo" id="Operazione_Amore_S01_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34381.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Operazione Amore S01 E04</p>
       </a>
@@ -898,7 +974,7 @@
     <div class="canale no-logo" id="Operazione_Amore_S01_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34382.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Operazione Amore S01 E05</p>
       </a>
@@ -907,7 +983,7 @@
     <div class="canale no-logo" id="Operazione_Amore_S01_E06">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34383.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Operazione Amore S01 E06</p>
       </a>
@@ -916,7 +992,7 @@
     <div class="canale no-logo" id="Operazione_Amore_S01_E07">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34384.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Operazione Amore S01 E07</p>
       </a>
@@ -925,7 +1001,7 @@
     <div class="canale no-logo" id="Operazione_Amore_S01_E08">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34385.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Operazione Amore S01 E08</p>
       </a>
@@ -934,7 +1010,7 @@
     <div class="canale no-logo" id="Operazione_Amore_S01_E09">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34386.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Operazione Amore S01 E09</p>
       </a>
@@ -943,7 +1019,7 @@
     <div class="canale no-logo" id="Operazione_Amore_S01_E10">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34387.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Operazione Amore S01 E10</p>
       </a>
@@ -952,7 +1028,7 @@
     <div class="canale no-logo" id="Operazione_Amore_S01_E11">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34388.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Operazione Amore S01 E11</p>
       </a>
@@ -961,7 +1037,7 @@
     <div class="canale no-logo" id="Operazione_Amore_S01_E12">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34389.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Operazione Amore S01 E12</p>
       </a>
@@ -970,7 +1046,7 @@
     <div class="canale no-logo" id="Operazione_Amore_S01_E13">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34390.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Operazione Amore S01 E13</p>
       </a>
@@ -979,7 +1055,7 @@
     <div class="canale no-logo" id="Operazione_Amore_S01_E14">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34391.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Operazione Amore S01 E14</p>
       </a>
@@ -988,7 +1064,7 @@
     <div class="canale no-logo" id="Operazione_Amore_S01_E15">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34392.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Operazione Amore S01 E15</p>
       </a>
@@ -997,7 +1073,7 @@
     <div class="canale no-logo" id="Operazione_Amore_S01_E16">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34393.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Operazione Amore S01 E16</p>
       </a>
@@ -1006,7 +1082,7 @@
     <div class="canale no-logo" id="Operazione_Amore_S01_E17">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34394.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Operazione Amore S01 E17</p>
       </a>
@@ -1015,7 +1091,7 @@
     <div class="canale no-logo" id="Operazione_Amore_S01_E18">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34395.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Operazione Amore S01 E18</p>
       </a>
@@ -1024,7 +1100,7 @@
     <div class="canale no-logo" id="Operazione_Amore_S01_E19">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34396.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Operazione Amore S01 E19</p>
       </a>
@@ -1033,7 +1109,7 @@
     <div class="canale no-logo" id="Operazione_Amore_S01_E20">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34397.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Operazione Amore S01 E20</p>
       </a>
@@ -1042,7 +1118,7 @@
     <div class="canale no-logo" id="Operazione_Amore_S01_E21">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34398.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Operazione Amore S01 E21</p>
       </a>
@@ -1051,7 +1127,7 @@
     <div class="canale no-logo" id="Oscuro_desiderio_S01_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34399.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oscuro desiderio S01 E01</p>
       </a>
@@ -1060,7 +1136,7 @@
     <div class="canale no-logo" id="Oscuro_desiderio_S01_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34400.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oscuro desiderio S01 E02</p>
       </a>
@@ -1069,7 +1145,7 @@
     <div class="canale no-logo" id="Oscuro_desiderio_S01_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34401.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oscuro desiderio S01 E03</p>
       </a>
@@ -1078,7 +1154,7 @@
     <div class="canale no-logo" id="Oscuro_desiderio_S01_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34402.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oscuro desiderio S01 E04</p>
       </a>
@@ -1087,7 +1163,7 @@
     <div class="canale no-logo" id="Oscuro_desiderio_S01_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34403.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oscuro desiderio S01 E05</p>
       </a>
@@ -1096,7 +1172,7 @@
     <div class="canale no-logo" id="Oscuro_desiderio_S01_E06">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34404.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oscuro desiderio S01 E06</p>
       </a>
@@ -1105,7 +1181,7 @@
     <div class="canale no-logo" id="Oscuro_desiderio_S01_E07">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34405.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oscuro desiderio S01 E07</p>
       </a>
@@ -1114,7 +1190,7 @@
     <div class="canale no-logo" id="Oscuro_desiderio_S01_E08">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34406.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oscuro desiderio S01 E08</p>
       </a>
@@ -1123,7 +1199,7 @@
     <div class="canale no-logo" id="Oscuro_desiderio_S01_E09">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34407.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oscuro desiderio S01 E09</p>
       </a>
@@ -1132,7 +1208,7 @@
     <div class="canale no-logo" id="Oscuro_desiderio_S01_E10">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34408.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oscuro desiderio S01 E10</p>
       </a>
@@ -1141,7 +1217,7 @@
     <div class="canale no-logo" id="Oscuro_desiderio_S01_E11">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34409.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oscuro desiderio S01 E11</p>
       </a>
@@ -1150,7 +1226,7 @@
     <div class="canale no-logo" id="Oscuro_desiderio_S01_E12">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34410.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oscuro desiderio S01 E12</p>
       </a>
@@ -1159,7 +1235,7 @@
     <div class="canale no-logo" id="Oscuro_desiderio_S01_E13">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34411.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oscuro desiderio S01 E13</p>
       </a>
@@ -1168,7 +1244,7 @@
     <div class="canale no-logo" id="Oscuro_desiderio_S01_E14">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34412.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oscuro desiderio S01 E14</p>
       </a>
@@ -1177,7 +1253,7 @@
     <div class="canale no-logo" id="Oscuro_desiderio_S01_E15">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34413.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oscuro desiderio S01 E15</p>
       </a>
@@ -1186,7 +1262,7 @@
     <div class="canale no-logo" id="Oscuro_desiderio_S01_E16">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34414.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oscuro desiderio S01 E16</p>
       </a>
@@ -1195,7 +1271,7 @@
     <div class="canale no-logo" id="Oscuro_desiderio_S01_E17">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34415.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oscuro desiderio S01 E17</p>
       </a>
@@ -1204,7 +1280,7 @@
     <div class="canale no-logo" id="Oscuro_desiderio_S01_E18">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34416.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oscuro desiderio S01 E18</p>
       </a>
@@ -1213,7 +1289,7 @@
     <div class="canale no-logo" id="Oscuro_desiderio_S01_E19">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34417.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oscuro desiderio S01 E19</p>
       </a>
@@ -1222,7 +1298,7 @@
     <div class="canale no-logo" id="Oscuro_desiderio_S01_E20">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34418.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oscuro desiderio S01 E20</p>
       </a>
@@ -1231,7 +1307,7 @@
     <div class="canale no-logo" id="Oscuro_desiderio_S01_E21">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34419.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oscuro desiderio S01 E21</p>
       </a>
@@ -1240,7 +1316,7 @@
     <div class="canale no-logo" id="Oscuro_desiderio_S01_E22">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34420.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oscuro desiderio S01 E22</p>
       </a>
@@ -1249,7 +1325,7 @@
     <div class="canale no-logo" id="Oscuro_desiderio_S01_E23">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34421.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oscuro desiderio S01 E23</p>
       </a>
@@ -1258,7 +1334,7 @@
     <div class="canale no-logo" id="Oscuro_desiderio_S01_E24">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34422.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oscuro desiderio S01 E24</p>
       </a>
@@ -1267,7 +1343,7 @@
     <div class="canale no-logo" id="Oscuro_desiderio_S01_E25">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34423.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oscuro desiderio S01 E25</p>
       </a>
@@ -1276,7 +1352,7 @@
     <div class="canale no-logo" id="Oscuro_desiderio_S01_E26">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34424.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oscuro desiderio S01 E26</p>
       </a>
@@ -1285,7 +1361,7 @@
     <div class="canale no-logo" id="Oscuro_desiderio_S01_E27">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34425.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oscuro desiderio S01 E27</p>
       </a>
@@ -1294,7 +1370,7 @@
     <div class="canale no-logo" id="Oscuro_desiderio_S01_E28">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34426.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oscuro desiderio S01 E28</p>
       </a>
@@ -1303,7 +1379,7 @@
     <div class="canale no-logo" id="Oscuro_desiderio_S01_E29">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34427.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oscuro desiderio S01 E29</p>
       </a>
@@ -1312,7 +1388,7 @@
     <div class="canale no-logo" id="Oscuro_desiderio_S01_E30">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34428.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oscuro desiderio S01 E30</p>
       </a>
@@ -1321,7 +1397,7 @@
     <div class="canale no-logo" id="Oscuro_desiderio_S01_E31">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34429.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oscuro desiderio S01 E31</p>
       </a>
@@ -1330,7 +1406,7 @@
     <div class="canale no-logo" id="Oscuro_desiderio_S01_E32">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34430.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oscuro desiderio S01 E32</p>
       </a>
@@ -1339,7 +1415,7 @@
     <div class="canale no-logo" id="Oscuro_desiderio_S01_E33">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/34431.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oscuro desiderio S01 E33</p>
       </a>
@@ -1348,7 +1424,7 @@
     <div class="canale no-logo" id="ONE_PIECE_S01_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37236.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>ONE PIECE S01 E01</p>
       </a>
@@ -1357,7 +1433,7 @@
     <div class="canale no-logo" id="ONE_PIECE_S01_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37237.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>ONE PIECE S01 E02</p>
       </a>
@@ -1366,7 +1442,7 @@
     <div class="canale no-logo" id="ONE_PIECE_S01_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37238.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>ONE PIECE S01 E03</p>
       </a>
@@ -1375,7 +1451,7 @@
     <div class="canale no-logo" id="ONE_PIECE_S01_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37239.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>ONE PIECE S01 E04</p>
       </a>
@@ -1384,7 +1460,7 @@
     <div class="canale no-logo" id="ONE_PIECE_S01_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37240.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>ONE PIECE S01 E05</p>
       </a>
@@ -1393,7 +1469,7 @@
     <div class="canale no-logo" id="ONE_PIECE_S01_E06">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37241.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>ONE PIECE S01 E06</p>
       </a>
@@ -1402,7 +1478,7 @@
     <div class="canale no-logo" id="ONE_PIECE_S01_E07">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37242.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>ONE PIECE S01 E07</p>
       </a>
@@ -1411,7 +1487,7 @@
     <div class="canale no-logo" id="ONE_PIECE_S01_E08">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37243.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>ONE PIECE S01 E08</p>
       </a>
@@ -1420,7 +1496,7 @@
     <div class="canale no-logo" id="Open_Your_Eyes_S01_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37276.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Open Your Eyes S01 E01</p>
       </a>
@@ -1429,7 +1505,7 @@
     <div class="canale no-logo" id="Open_Your_Eyes_S01_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37277.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Open Your Eyes S01 E02</p>
       </a>
@@ -1438,7 +1514,7 @@
     <div class="canale no-logo" id="Open_Your_Eyes_S01_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37278.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Open Your Eyes S01 E03</p>
       </a>
@@ -1447,7 +1523,7 @@
     <div class="canale no-logo" id="Open_Your_Eyes_S01_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37279.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Open Your Eyes S01 E04</p>
       </a>
@@ -1456,7 +1532,7 @@
     <div class="canale no-logo" id="Open_Your_Eyes_S01_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37280.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Open Your Eyes S01 E05</p>
       </a>
@@ -1465,7 +1541,7 @@
     <div class="canale no-logo" id="Open_Your_Eyes_S01_E06">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37281.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Open Your Eyes S01 E06</p>
       </a>
@@ -1474,7 +1550,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S01_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37319.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S01 E01</p>
       </a>
@@ -1483,7 +1559,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S01_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37321.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S01 E02</p>
       </a>
@@ -1492,7 +1568,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S01_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37322.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S01 E03</p>
       </a>
@@ -1501,7 +1577,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S01_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37323.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S01 E04</p>
       </a>
@@ -1510,7 +1586,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S01_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37324.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S01 E05</p>
       </a>
@@ -1519,7 +1595,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S01_E06">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37325.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S01 E06</p>
       </a>
@@ -1528,7 +1604,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S01_E07">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37326.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S01 E07</p>
       </a>
@@ -1537,7 +1613,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S01_E08">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37327.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S01 E08</p>
       </a>
@@ -1546,7 +1622,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S01_E09">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37328.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S01 E09</p>
       </a>
@@ -1555,7 +1631,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S01_E10">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37329.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S01 E10</p>
       </a>
@@ -1564,7 +1640,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S01_E11">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37330.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S01 E11</p>
       </a>
@@ -1573,7 +1649,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S01_E12">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37331.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S01 E12</p>
       </a>
@@ -1582,7 +1658,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S01_E13">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37332.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S01 E13</p>
       </a>
@@ -1591,7 +1667,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S02_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37341.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S02 E01</p>
       </a>
@@ -1600,7 +1676,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S02_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37343.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S02 E02</p>
       </a>
@@ -1609,7 +1685,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S02_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37345.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S02 E03</p>
       </a>
@@ -1618,7 +1694,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S02_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37347.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S02 E04</p>
       </a>
@@ -1627,7 +1703,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S02_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37349.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S02 E05</p>
       </a>
@@ -1636,7 +1712,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S02_E06">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37350.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S02 E06</p>
       </a>
@@ -1645,7 +1721,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S02_E07">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37351.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S02 E07</p>
       </a>
@@ -1654,7 +1730,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S02_E08">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37352.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S02 E08</p>
       </a>
@@ -1663,7 +1739,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S02_E09">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37353.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S02 E09</p>
       </a>
@@ -1672,7 +1748,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S02_E10">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37354.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S02 E10</p>
       </a>
@@ -1681,7 +1757,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S02_E11">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37355.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S02 E11</p>
       </a>
@@ -1690,7 +1766,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S02_E12">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37356.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S02 E12</p>
       </a>
@@ -1699,7 +1775,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S02_E13">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37357.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S02 E13</p>
       </a>
@@ -1708,7 +1784,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S03_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37370.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S03 E01</p>
       </a>
@@ -1717,7 +1793,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S03_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37371.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S03 E02</p>
       </a>
@@ -1726,7 +1802,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S03_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37372.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S03 E03</p>
       </a>
@@ -1735,7 +1811,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S03_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37373.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S03 E04</p>
       </a>
@@ -1744,7 +1820,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S03_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37374.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S03 E05</p>
       </a>
@@ -1753,7 +1829,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S03_E06">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37375.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S03 E06</p>
       </a>
@@ -1762,7 +1838,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S03_E07">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37376.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S03 E07</p>
       </a>
@@ -1771,7 +1847,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S03_E08">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37377.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S03 E08</p>
       </a>
@@ -1780,7 +1856,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S03_E09">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37378.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S03 E09</p>
       </a>
@@ -1789,7 +1865,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S03_E10">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37379.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S03 E10</p>
       </a>
@@ -1798,7 +1874,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S03_E11">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37380.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S03 E11</p>
       </a>
@@ -1807,7 +1883,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S03_E12">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37381.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S03 E12</p>
       </a>
@@ -1816,7 +1892,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S03_E13">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37382.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S03 E13</p>
       </a>
@@ -1825,7 +1901,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S04_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37393.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S04 E01</p>
       </a>
@@ -1834,7 +1910,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S04_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37394.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S04 E02</p>
       </a>
@@ -1843,7 +1919,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S04_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37395.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S04 E03</p>
       </a>
@@ -1852,7 +1928,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S04_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37396.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S04 E04</p>
       </a>
@@ -1861,7 +1937,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S04_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37397.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S04 E05</p>
       </a>
@@ -1870,7 +1946,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S04_E06">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37398.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S04 E06</p>
       </a>
@@ -1879,7 +1955,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S04_E07">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37399.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S04 E07</p>
       </a>
@@ -1888,7 +1964,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S04_E08">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37400.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S04 E08</p>
       </a>
@@ -1897,7 +1973,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S04_E09">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37401.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S04 E09</p>
       </a>
@@ -1906,7 +1982,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S04_E10">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37402.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S04 E10</p>
       </a>
@@ -1915,7 +1991,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S04_E11">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37403.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S04 E11</p>
       </a>
@@ -1924,7 +2000,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S04_E12">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37404.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S04 E12</p>
       </a>
@@ -1933,7 +2009,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S04_E13">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37405.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S04 E13</p>
       </a>
@@ -1942,7 +2018,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S05_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37406.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S05 E01</p>
       </a>
@@ -1951,7 +2027,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S05_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37407.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S05 E02</p>
       </a>
@@ -1960,7 +2036,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S05_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37408.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S05 E03</p>
       </a>
@@ -1969,7 +2045,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S05_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37409.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S05 E04</p>
       </a>
@@ -1978,7 +2054,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S05_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37410.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S05 E05</p>
       </a>
@@ -1987,7 +2063,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S05_E06">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37411.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S05 E06</p>
       </a>
@@ -1996,7 +2072,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S05_E07">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37412.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S05 E07</p>
       </a>
@@ -2005,7 +2081,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S05_E08">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37413.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S05 E08</p>
       </a>
@@ -2014,7 +2090,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S05_E09">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37414.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S05 E09</p>
       </a>
@@ -2023,7 +2099,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S05_E10">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37415.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S05 E10</p>
       </a>
@@ -2032,7 +2108,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S05_E11">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37416.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S05 E11</p>
       </a>
@@ -2041,7 +2117,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S05_E12">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37417.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S05 E12</p>
       </a>
@@ -2050,7 +2126,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S05_E13">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37418.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S05 E13</p>
       </a>
@@ -2059,7 +2135,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S06_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37419.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S06 E01</p>
       </a>
@@ -2068,7 +2144,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S06_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37420.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S06 E02</p>
       </a>
@@ -2077,7 +2153,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S06_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37421.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S06 E03</p>
       </a>
@@ -2086,7 +2162,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S06_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37422.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S06 E04</p>
       </a>
@@ -2095,7 +2171,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S06_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37423.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S06 E05</p>
       </a>
@@ -2104,7 +2180,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S06_E06">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37424.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S06 E06</p>
       </a>
@@ -2113,7 +2189,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S06_E07">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37425.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S06 E07</p>
       </a>
@@ -2122,7 +2198,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S06_E08">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37426.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S06 E08</p>
       </a>
@@ -2131,7 +2207,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S06_E09">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37427.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S06 E09</p>
       </a>
@@ -2140,7 +2216,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S06_E10">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37428.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S06 E10</p>
       </a>
@@ -2149,7 +2225,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S06_E11">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37429.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S06 E11</p>
       </a>
@@ -2158,7 +2234,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S06_E12">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37430.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S06 E12</p>
       </a>
@@ -2167,7 +2243,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S06_E13">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37431.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S06 E13</p>
       </a>
@@ -2176,7 +2252,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S07_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37455.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S07 E01</p>
       </a>
@@ -2185,7 +2261,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S07_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37456.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S07 E02</p>
       </a>
@@ -2194,7 +2270,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S07_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37457.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S07 E03</p>
       </a>
@@ -2203,7 +2279,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S07_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37458.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S07 E04</p>
       </a>
@@ -2212,7 +2288,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S07_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37459.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S07 E05</p>
       </a>
@@ -2221,7 +2297,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S07_E06">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37460.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S07 E06</p>
       </a>
@@ -2230,7 +2306,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S07_E07">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37461.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S07 E07</p>
       </a>
@@ -2239,7 +2315,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S07_E08">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37462.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S07 E08</p>
       </a>
@@ -2248,7 +2324,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S07_E09">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37463.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S07 E09</p>
       </a>
@@ -2257,7 +2333,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S07_E10">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37464.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S07 E10</p>
       </a>
@@ -2266,7 +2342,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S07_E11">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37465.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S07 E11</p>
       </a>
@@ -2275,7 +2351,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S07_E12">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37466.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S07 E12</p>
       </a>
@@ -2284,7 +2360,7 @@
     <div class="canale no-logo" id="Orange_Is_the_New_Black_S07_E13">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37467.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orange Is the New Black S07 E13</p>
       </a>
@@ -2293,7 +2369,7 @@
     <div class="canale no-logo" id="Orphan_Black_S01_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37516.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S01 E01</p>
       </a>
@@ -2302,7 +2378,7 @@
     <div class="canale no-logo" id="Orphan_Black_S01_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37517.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S01 E02</p>
       </a>
@@ -2311,7 +2387,7 @@
     <div class="canale no-logo" id="Orphan_Black_S01_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37518.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S01 E03</p>
       </a>
@@ -2320,7 +2396,7 @@
     <div class="canale no-logo" id="Orphan_Black_S01_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37519.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S01 E04</p>
       </a>
@@ -2329,7 +2405,7 @@
     <div class="canale no-logo" id="Orphan_Black_S01_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37520.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S01 E05</p>
       </a>
@@ -2338,7 +2414,7 @@
     <div class="canale no-logo" id="Orphan_Black_S01_E06">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37521.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S01 E06</p>
       </a>
@@ -2347,7 +2423,7 @@
     <div class="canale no-logo" id="Orphan_Black_S01_E07">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37522.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S01 E07</p>
       </a>
@@ -2356,7 +2432,7 @@
     <div class="canale no-logo" id="Orphan_Black_S01_E08">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37523.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S01 E08</p>
       </a>
@@ -2365,7 +2441,7 @@
     <div class="canale no-logo" id="Orphan_Black_S01_E09">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37524.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S01 E09</p>
       </a>
@@ -2374,7 +2450,7 @@
     <div class="canale no-logo" id="Orphan_Black_S01_E10">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37525.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S01 E10</p>
       </a>
@@ -2383,7 +2459,7 @@
     <div class="canale no-logo" id="Orphan_Black_S02_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37529.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S02 E01</p>
       </a>
@@ -2392,7 +2468,7 @@
     <div class="canale no-logo" id="Orphan_Black_S02_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37531.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S02 E02</p>
       </a>
@@ -2401,7 +2477,7 @@
     <div class="canale no-logo" id="Orphan_Black_S02_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37533.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S02 E03</p>
       </a>
@@ -2410,7 +2486,7 @@
     <div class="canale no-logo" id="Orphan_Black_S02_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37535.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S02 E04</p>
       </a>
@@ -2419,7 +2495,7 @@
     <div class="canale no-logo" id="Orphan_Black_S02_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37537.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S02 E05</p>
       </a>
@@ -2428,7 +2504,7 @@
     <div class="canale no-logo" id="Orphan_Black_S02_E06">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37539.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S02 E06</p>
       </a>
@@ -2437,7 +2513,7 @@
     <div class="canale no-logo" id="Orphan_Black_S02_E07">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37541.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S02 E07</p>
       </a>
@@ -2446,7 +2522,7 @@
     <div class="canale no-logo" id="Orphan_Black_S02_E08">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37543.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S02 E08</p>
       </a>
@@ -2455,7 +2531,7 @@
     <div class="canale no-logo" id="Orphan_Black_S02_E09">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37545.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S02 E09</p>
       </a>
@@ -2464,7 +2540,7 @@
     <div class="canale no-logo" id="Orphan_Black_S02_E10">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37547.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S02 E10</p>
       </a>
@@ -2473,7 +2549,7 @@
     <div class="canale no-logo" id="Orphan_Black_S03_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37554.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S03 E01</p>
       </a>
@@ -2482,7 +2558,7 @@
     <div class="canale no-logo" id="Orphan_Black_S03_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37555.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S03 E02</p>
       </a>
@@ -2491,7 +2567,7 @@
     <div class="canale no-logo" id="Orphan_Black_S03_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37556.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S03 E03</p>
       </a>
@@ -2500,7 +2576,7 @@
     <div class="canale no-logo" id="Orphan_Black_S03_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37557.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S03 E04</p>
       </a>
@@ -2509,7 +2585,7 @@
     <div class="canale no-logo" id="Orphan_Black_S03_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37558.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S03 E05</p>
       </a>
@@ -2518,7 +2594,7 @@
     <div class="canale no-logo" id="Orphan_Black_S03_E06">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37559.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S03 E06</p>
       </a>
@@ -2527,7 +2603,7 @@
     <div class="canale no-logo" id="Orphan_Black_S03_E07">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37560.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S03 E07</p>
       </a>
@@ -2536,7 +2612,7 @@
     <div class="canale no-logo" id="Orphan_Black_S03_E08">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37561.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S03 E08</p>
       </a>
@@ -2545,7 +2621,7 @@
     <div class="canale no-logo" id="Orphan_Black_S03_E09">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37562.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S03 E09</p>
       </a>
@@ -2554,7 +2630,7 @@
     <div class="canale no-logo" id="Orphan_Black_S03_E10">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37563.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S03 E10</p>
       </a>
@@ -2563,7 +2639,7 @@
     <div class="canale no-logo" id="Orphan_Black_S04_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37589.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S04 E01</p>
       </a>
@@ -2572,7 +2648,7 @@
     <div class="canale no-logo" id="Orphan_Black_S04_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37590.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S04 E02</p>
       </a>
@@ -2581,7 +2657,7 @@
     <div class="canale no-logo" id="Orphan_Black_S04_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37591.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S04 E03</p>
       </a>
@@ -2590,7 +2666,7 @@
     <div class="canale no-logo" id="Orphan_Black_S04_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37592.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S04 E04</p>
       </a>
@@ -2599,7 +2675,7 @@
     <div class="canale no-logo" id="Orphan_Black_S04_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37593.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S04 E05</p>
       </a>
@@ -2608,7 +2684,7 @@
     <div class="canale no-logo" id="Orphan_Black_S04_E06">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37594.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S04 E06</p>
       </a>
@@ -2617,7 +2693,7 @@
     <div class="canale no-logo" id="Orphan_Black_S04_E07">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37595.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S04 E07</p>
       </a>
@@ -2626,7 +2702,7 @@
     <div class="canale no-logo" id="Orphan_Black_S04_E08">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37596.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S04 E08</p>
       </a>
@@ -2635,7 +2711,7 @@
     <div class="canale no-logo" id="Orphan_Black_S04_E09">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37597.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S04 E09</p>
       </a>
@@ -2644,7 +2720,7 @@
     <div class="canale no-logo" id="Orphan_Black_S04_E10">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37598.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S04 E10</p>
       </a>
@@ -2653,7 +2729,7 @@
     <div class="canale no-logo" id="Orphan_Black_S05_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37623.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S05 E01</p>
       </a>
@@ -2662,7 +2738,7 @@
     <div class="canale no-logo" id="Orphan_Black_S05_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37624.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S05 E02</p>
       </a>
@@ -2671,7 +2747,7 @@
     <div class="canale no-logo" id="Orphan_Black_S05_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37625.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S05 E03</p>
       </a>
@@ -2680,7 +2756,7 @@
     <div class="canale no-logo" id="Orphan_Black_S05_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37626.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S05 E04</p>
       </a>
@@ -2689,7 +2765,7 @@
     <div class="canale no-logo" id="Orphan_Black_S05_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37627.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S05 E05</p>
       </a>
@@ -2698,7 +2774,7 @@
     <div class="canale no-logo" id="Orphan_Black_S05_E06">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37628.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S05 E06</p>
       </a>
@@ -2707,7 +2783,7 @@
     <div class="canale no-logo" id="Orphan_Black_S05_E07">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37629.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S05 E07</p>
       </a>
@@ -2716,7 +2792,7 @@
     <div class="canale no-logo" id="Orphan_Black_S05_E08">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37630.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S05 E08</p>
       </a>
@@ -2725,7 +2801,7 @@
     <div class="canale no-logo" id="Orphan_Black_S05_E09">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37631.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S05 E09</p>
       </a>
@@ -2734,7 +2810,7 @@
     <div class="canale no-logo" id="Orphan_Black_S05_E10">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37632.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Orphan Black S05 E10</p>
       </a>
@@ -2743,7 +2819,7 @@
     <div class="canale no-logo" id="Ossessione_S01_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37633.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ossessione S01 E01</p>
       </a>
@@ -2752,7 +2828,7 @@
     <div class="canale no-logo" id="Ossessione_S01_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37634.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ossessione S01 E02</p>
       </a>
@@ -2761,7 +2837,7 @@
     <div class="canale no-logo" id="Ossessione_S01_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37635.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ossessione S01 E03</p>
       </a>
@@ -2770,7 +2846,7 @@
     <div class="canale no-logo" id="Ossessione_S01_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37636.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ossessione S01 E04</p>
       </a>
@@ -2779,7 +2855,7 @@
     <div class="canale no-logo" id="Ozark_S01_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37685.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S01 E01</p>
       </a>
@@ -2788,7 +2864,7 @@
     <div class="canale no-logo" id="Ozark_S01_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37686.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S01 E02</p>
       </a>
@@ -2797,7 +2873,7 @@
     <div class="canale no-logo" id="Ozark_S01_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37687.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S01 E03</p>
       </a>
@@ -2806,7 +2882,7 @@
     <div class="canale no-logo" id="Ozark_S01_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37688.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S01 E04</p>
       </a>
@@ -2815,7 +2891,7 @@
     <div class="canale no-logo" id="Ozark_S01_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37689.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S01 E05</p>
       </a>
@@ -2824,7 +2900,7 @@
     <div class="canale no-logo" id="Ozark_S01_E06">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37690.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S01 E06</p>
       </a>
@@ -2833,7 +2909,7 @@
     <div class="canale no-logo" id="Ozark_S01_E07">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37691.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S01 E07</p>
       </a>
@@ -2842,7 +2918,7 @@
     <div class="canale no-logo" id="Ozark_S01_E08">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37692.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S01 E08</p>
       </a>
@@ -2851,7 +2927,7 @@
     <div class="canale no-logo" id="Ozark_S01_E09">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37693.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S01 E09</p>
       </a>
@@ -2860,7 +2936,7 @@
     <div class="canale no-logo" id="Ozark_S01_E10">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37694.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S01 E10</p>
       </a>
@@ -2869,7 +2945,7 @@
     <div class="canale no-logo" id="Ozark_S02_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37719.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S02 E01</p>
       </a>
@@ -2878,7 +2954,7 @@
     <div class="canale no-logo" id="Ozark_S02_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37720.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S02 E02</p>
       </a>
@@ -2887,7 +2963,7 @@
     <div class="canale no-logo" id="Ozark_S02_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37721.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S02 E03</p>
       </a>
@@ -2896,7 +2972,7 @@
     <div class="canale no-logo" id="Ozark_S02_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37722.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S02 E04</p>
       </a>
@@ -2905,7 +2981,7 @@
     <div class="canale no-logo" id="Ozark_S02_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37723.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S02 E05</p>
       </a>
@@ -2914,7 +2990,7 @@
     <div class="canale no-logo" id="Ozark_S02_E06">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37724.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S02 E06</p>
       </a>
@@ -2923,7 +2999,7 @@
     <div class="canale no-logo" id="Ozark_S02_E07">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37725.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S02 E07</p>
       </a>
@@ -2932,7 +3008,7 @@
     <div class="canale no-logo" id="Ozark_S02_E08">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37726.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S02 E08</p>
       </a>
@@ -2941,7 +3017,7 @@
     <div class="canale no-logo" id="Ozark_S02_E09">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37727.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S02 E09</p>
       </a>
@@ -2950,7 +3026,7 @@
     <div class="canale no-logo" id="Ozark_S02_E10">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37728.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S02 E10</p>
       </a>
@@ -2959,7 +3035,7 @@
     <div class="canale no-logo" id="Ozark_S03_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37753.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S03 E01</p>
       </a>
@@ -2968,7 +3044,7 @@
     <div class="canale no-logo" id="Ozark_S03_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37754.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S03 E02</p>
       </a>
@@ -2977,7 +3053,7 @@
     <div class="canale no-logo" id="Ozark_S03_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37755.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S03 E03</p>
       </a>
@@ -2986,7 +3062,7 @@
     <div class="canale no-logo" id="Ozark_S03_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37756.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S03 E04</p>
       </a>
@@ -2995,7 +3071,7 @@
     <div class="canale no-logo" id="Ozark_S03_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37757.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S03 E05</p>
       </a>
@@ -3004,7 +3080,7 @@
     <div class="canale no-logo" id="Ozark_S03_E06">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37758.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S03 E06</p>
       </a>
@@ -3013,7 +3089,7 @@
     <div class="canale no-logo" id="Ozark_S03_E07">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37759.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S03 E07</p>
       </a>
@@ -3022,7 +3098,7 @@
     <div class="canale no-logo" id="Ozark_S03_E08">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37760.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S03 E08</p>
       </a>
@@ -3031,7 +3107,7 @@
     <div class="canale no-logo" id="Ozark_S03_E09">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37761.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S03 E09</p>
       </a>
@@ -3040,7 +3116,7 @@
     <div class="canale no-logo" id="Ozark_S03_E10">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37762.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S03 E10</p>
       </a>
@@ -3049,7 +3125,7 @@
     <div class="canale no-logo" id="Ozark_S04_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37763.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S04 E01</p>
       </a>
@@ -3058,7 +3134,7 @@
     <div class="canale no-logo" id="Ozark_S04_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37764.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S04 E02</p>
       </a>
@@ -3067,7 +3143,7 @@
     <div class="canale no-logo" id="Ozark_S04_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37765.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S04 E03</p>
       </a>
@@ -3076,7 +3152,7 @@
     <div class="canale no-logo" id="Ozark_S04_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37766.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S04 E04</p>
       </a>
@@ -3085,7 +3161,7 @@
     <div class="canale no-logo" id="Ozark_S04_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37767.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S04 E05</p>
       </a>
@@ -3094,7 +3170,7 @@
     <div class="canale no-logo" id="Ozark_S04_E06">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37768.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S04 E06</p>
       </a>
@@ -3103,7 +3179,7 @@
     <div class="canale no-logo" id="Ozark_S04_E07">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37769.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S04 E07</p>
       </a>
@@ -3112,7 +3188,7 @@
     <div class="canale no-logo" id="Ozark_S04_E08">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37770.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S04 E08</p>
       </a>
@@ -3121,7 +3197,7 @@
     <div class="canale no-logo" id="Ozark_S04_E09">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37771.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S04 E09</p>
       </a>
@@ -3130,7 +3206,7 @@
     <div class="canale no-logo" id="Ozark_S04_E10">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37772.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S04 E10</p>
       </a>
@@ -3139,7 +3215,7 @@
     <div class="canale no-logo" id="Ozark_S04_E11">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37773.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S04 E11</p>
       </a>
@@ -3148,7 +3224,7 @@
     <div class="canale no-logo" id="Ozark_S04_E12">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37774.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S04 E12</p>
       </a>
@@ -3157,7 +3233,7 @@
     <div class="canale no-logo" id="Ozark_S04_E13">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37775.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S04 E13</p>
       </a>
@@ -3166,7 +3242,7 @@
     <div class="canale no-logo" id="Ozark_S04_E14">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/37776.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ozark S04 E14</p>
       </a>
@@ -3175,7 +3251,7 @@
     <div class="canale no-logo" id="Occupied_S01_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/42089.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Occupied S01 E01</p>
       </a>
@@ -3184,7 +3260,7 @@
     <div class="canale no-logo" id="Occupied_S01_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/42090.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Occupied S01 E02</p>
       </a>
@@ -3193,7 +3269,7 @@
     <div class="canale no-logo" id="Occupied_S01_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/42091.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Occupied S01 E03</p>
       </a>
@@ -3202,7 +3278,7 @@
     <div class="canale no-logo" id="Occupied_S01_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/42092.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Occupied S01 E04</p>
       </a>
@@ -3211,7 +3287,7 @@
     <div class="canale no-logo" id="Occupied_S01_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/42093.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Occupied S01 E05</p>
       </a>
@@ -3220,7 +3296,7 @@
     <div class="canale no-logo" id="Occupied_S01_E06">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/42094.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Occupied S01 E06</p>
       </a>
@@ -3229,7 +3305,7 @@
     <div class="canale no-logo" id="Occupied_S01_E07">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/42095.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Occupied S01 E07</p>
       </a>
@@ -3238,7 +3314,7 @@
     <div class="canale no-logo" id="Occupied_S01_E08">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/42096.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Occupied S01 E08</p>
       </a>
@@ -3247,7 +3323,7 @@
     <div class="canale no-logo" id="Occupied_S01_E09">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/42097.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Occupied S01 E09</p>
       </a>
@@ -3256,7 +3332,7 @@
     <div class="canale no-logo" id="Occupied_S01_E10">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/42098.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Occupied S01 E10</p>
       </a>
@@ -3265,7 +3341,7 @@
     <div class="canale no-logo" id="Occupied_S02_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/42099.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Occupied S02 E01</p>
       </a>
@@ -3274,7 +3350,7 @@
     <div class="canale no-logo" id="Occupied_S02_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/42100.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Occupied S02 E02</p>
       </a>
@@ -3283,7 +3359,7 @@
     <div class="canale no-logo" id="Occupied_S02_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/42101.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Occupied S02 E03</p>
       </a>
@@ -3292,7 +3368,7 @@
     <div class="canale no-logo" id="Occupied_S02_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/42102.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Occupied S02 E04</p>
       </a>
@@ -3301,7 +3377,7 @@
     <div class="canale no-logo" id="Occupied_S02_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/42103.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Occupied S02 E05</p>
       </a>
@@ -3310,7 +3386,7 @@
     <div class="canale no-logo" id="Occupied_S02_E06">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/42104.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Occupied S02 E06</p>
       </a>
@@ -3319,7 +3395,7 @@
     <div class="canale no-logo" id="Occupied_S02_E07">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/42105.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Occupied S02 E07</p>
       </a>
@@ -3328,7 +3404,7 @@
     <div class="canale no-logo" id="Occupied_S02_E08">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/42106.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Occupied S02 E08</p>
       </a>
@@ -3337,7 +3413,7 @@
     <div class="canale no-logo" id="Omicidio_a_Easttown_S01_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/46713.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Omicidio a Easttown S01 E01</p>
       </a>
@@ -3346,7 +3422,7 @@
     <div class="canale no-logo" id="Omicidio_a_Easttown_S01_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/46714.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Omicidio a Easttown S01 E02</p>
       </a>
@@ -3355,7 +3431,7 @@
     <div class="canale no-logo" id="Omicidio_a_Easttown_S01_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/46715.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Omicidio a Easttown S01 E03</p>
       </a>
@@ -3364,7 +3440,7 @@
     <div class="canale no-logo" id="Omicidio_a_Easttown_S01_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/46716.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Omicidio a Easttown S01 E04</p>
       </a>
@@ -3373,7 +3449,7 @@
     <div class="canale no-logo" id="Omicidio_a_Easttown_S01_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/46717.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Omicidio a Easttown S01 E05</p>
       </a>
@@ -3382,7 +3458,7 @@
     <div class="canale no-logo" id="Omicidio_a_Easttown_S01_E06">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/46718.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Omicidio a Easttown S01 E06</p>
       </a>
@@ -3391,7 +3467,7 @@
     <div class="canale no-logo" id="Omicidio_a_Easttown_S01_E07">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/46719.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Omicidio a Easttown S01 E07</p>
       </a>
@@ -3400,7 +3476,7 @@
     <div class="canale no-logo" id="One_Day_S01_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/50846.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>One Day S01 E01</p>
       </a>
@@ -3409,7 +3485,7 @@
     <div class="canale no-logo" id="One_Day_S01_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/50847.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>One Day S01 E02</p>
       </a>
@@ -3418,7 +3494,7 @@
     <div class="canale no-logo" id="One_Day_S01_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/50848.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>One Day S01 E03</p>
       </a>
@@ -3427,7 +3503,7 @@
     <div class="canale no-logo" id="One_Day_S01_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/50849.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>One Day S01 E04</p>
       </a>
@@ -3436,7 +3512,7 @@
     <div class="canale no-logo" id="One_Day_S01_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/50850.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>One Day S01 E05</p>
       </a>
@@ -3445,7 +3521,7 @@
     <div class="canale no-logo" id="One_Day_S01_E06">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/50851.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>One Day S01 E06</p>
       </a>
@@ -3454,7 +3530,7 @@
     <div class="canale no-logo" id="One_Day_S01_E07">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/50852.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>One Day S01 E07</p>
       </a>
@@ -3463,7 +3539,7 @@
     <div class="canale no-logo" id="One_Day_S01_E08">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/50853.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>One Day S01 E08</p>
       </a>
@@ -3472,7 +3548,7 @@
     <div class="canale no-logo" id="One_Day_S01_E09">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/50854.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>One Day S01 E09</p>
       </a>
@@ -3481,7 +3557,7 @@
     <div class="canale no-logo" id="One_Day_S01_E10">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/50855.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>One Day S01 E10</p>
       </a>
@@ -3490,7 +3566,7 @@
     <div class="canale no-logo" id="One_Day_S01_E11">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/50856.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>One Day S01 E11</p>
       </a>
@@ -3499,7 +3575,7 @@
     <div class="canale no-logo" id="One_Day_S01_E12">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/50857.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>One Day S01 E12</p>
       </a>
@@ -3508,7 +3584,7 @@
     <div class="canale no-logo" id="One_Day_S01_E13">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/50858.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>One Day S01 E13</p>
       </a>
@@ -3517,7 +3593,7 @@
     <div class="canale no-logo" id="One_Day_S01_E14">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/50859.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>One Day S01 E14</p>
       </a>
@@ -3526,7 +3602,7 @@
     <div class="canale no-logo" id="Ombre_dal_Passato_S01_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/52451.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ombre dal Passato S01 E01</p>
       </a>
@@ -3535,7 +3611,7 @@
     <div class="canale no-logo" id="Ombre_dal_Passato_S01_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/52452.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ombre dal Passato S01 E02</p>
       </a>
@@ -3544,7 +3620,7 @@
     <div class="canale no-logo" id="Ombre_dal_Passato_S01_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/52453.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ombre dal Passato S01 E03</p>
       </a>
@@ -3553,7 +3629,7 @@
     <div class="canale no-logo" id="Ombre_dal_Passato_S01_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/52454.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ombre dal Passato S01 E04</p>
       </a>
@@ -3562,7 +3638,7 @@
     <div class="canale no-logo" id="Ombre_dal_Passato_S01_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/52455.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ombre dal Passato S01 E05</p>
       </a>
@@ -3571,7 +3647,7 @@
     <div class="canale no-logo" id="Ombre_dal_Passato_S01_E06">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/52456.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ombre dal Passato S01 E06</p>
       </a>
@@ -3580,7 +3656,7 @@
     <div class="canale no-logo" id="Owning_Manhattan_S01_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/52854.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Owning Manhattan S01 E01</p>
       </a>
@@ -3589,7 +3665,7 @@
     <div class="canale no-logo" id="Owning_Manhattan_S01_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/52855.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Owning Manhattan S01 E02</p>
       </a>
@@ -3598,7 +3674,7 @@
     <div class="canale no-logo" id="Owning_Manhattan_S01_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/52856.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Owning Manhattan S01 E03</p>
       </a>
@@ -3607,7 +3683,7 @@
     <div class="canale no-logo" id="Owning_Manhattan_S01_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/52857.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Owning Manhattan S01 E04</p>
       </a>
@@ -3616,7 +3692,7 @@
     <div class="canale no-logo" id="Owning_Manhattan_S01_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/52858.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Owning Manhattan S01 E05</p>
       </a>
@@ -3625,7 +3701,7 @@
     <div class="canale no-logo" id="Owning_Manhattan_S01_E06">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/52859.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Owning Manhattan S01 E06</p>
       </a>
@@ -3634,7 +3710,7 @@
     <div class="canale no-logo" id="Owning_Manhattan_S01_E07">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/52860.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Owning Manhattan S01 E07</p>
       </a>
@@ -3643,7 +3719,7 @@
     <div class="canale no-logo" id="Outer_Banks_S01_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/53760.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Outer Banks S01 E01</p>
       </a>
@@ -3652,7 +3728,7 @@
     <div class="canale no-logo" id="Outer_Banks_S01_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/53761.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Outer Banks S01 E02</p>
       </a>
@@ -3661,7 +3737,7 @@
     <div class="canale no-logo" id="Outer_Banks_S01_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/53762.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Outer Banks S01 E03</p>
       </a>
@@ -3670,7 +3746,7 @@
     <div class="canale no-logo" id="Outer_Banks_S01_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/53763.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Outer Banks S01 E04</p>
       </a>
@@ -3679,7 +3755,7 @@
     <div class="canale no-logo" id="Outer_Banks_S01_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/53764.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Outer Banks S01 E05</p>
       </a>
@@ -3688,7 +3764,7 @@
     <div class="canale no-logo" id="Outer_Banks_S01_E06">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/53765.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Outer Banks S01 E06</p>
       </a>
@@ -3697,7 +3773,7 @@
     <div class="canale no-logo" id="Outer_Banks_S01_E07">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/53766.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Outer Banks S01 E07</p>
       </a>
@@ -3706,7 +3782,7 @@
     <div class="canale no-logo" id="Outer_Banks_S01_E08">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/53767.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Outer Banks S01 E08</p>
       </a>
@@ -3715,7 +3791,7 @@
     <div class="canale no-logo" id="Outer_Banks_S01_E09">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/53768.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Outer Banks S01 E09</p>
       </a>
@@ -3724,7 +3800,7 @@
     <div class="canale no-logo" id="Outer_Banks_S01_E10">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/53769.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Outer Banks S01 E10</p>
       </a>
@@ -3733,7 +3809,7 @@
     <div class="canale no-logo" id="Outer_Banks_S02_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/53770.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Outer Banks S02 E01</p>
       </a>
@@ -3742,7 +3818,7 @@
     <div class="canale no-logo" id="Outer_Banks_S02_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/53771.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Outer Banks S02 E02</p>
       </a>
@@ -3751,7 +3827,7 @@
     <div class="canale no-logo" id="Outer_Banks_S02_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/53772.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Outer Banks S02 E03</p>
       </a>
@@ -3760,7 +3836,7 @@
     <div class="canale no-logo" id="Outer_Banks_S02_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/53773.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Outer Banks S02 E04</p>
       </a>
@@ -3769,7 +3845,7 @@
     <div class="canale no-logo" id="Outer_Banks_S02_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/53774.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Outer Banks S02 E05</p>
       </a>
@@ -3778,7 +3854,7 @@
     <div class="canale no-logo" id="Outer_Banks_S02_E06">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/53775.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Outer Banks S02 E06</p>
       </a>
@@ -3787,7 +3863,7 @@
     <div class="canale no-logo" id="Outer_Banks_S02_E07">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/53776.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Outer Banks S02 E07</p>
       </a>
@@ -3796,7 +3872,7 @@
     <div class="canale no-logo" id="Outer_Banks_S02_E08">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/53777.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Outer Banks S02 E08</p>
       </a>
@@ -3805,7 +3881,7 @@
     <div class="canale no-logo" id="Outer_Banks_S02_E09">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/53778.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Outer Banks S02 E09</p>
       </a>
@@ -3814,7 +3890,7 @@
     <div class="canale no-logo" id="Outer_Banks_S02_E10">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/53779.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Outer Banks S02 E10</p>
       </a>
@@ -3823,7 +3899,7 @@
     <div class="canale no-logo" id="Outer_Banks_S03_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/53780.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Outer Banks S03 E01</p>
       </a>
@@ -3832,7 +3908,7 @@
     <div class="canale no-logo" id="Outer_Banks_S03_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/53781.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Outer Banks S03 E02</p>
       </a>
@@ -3841,7 +3917,7 @@
     <div class="canale no-logo" id="Outer_Banks_S03_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/53782.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Outer Banks S03 E03</p>
       </a>
@@ -3850,7 +3926,7 @@
     <div class="canale no-logo" id="Outer_Banks_S03_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/53783.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Outer Banks S03 E04</p>
       </a>
@@ -3859,7 +3935,7 @@
     <div class="canale no-logo" id="Outer_Banks_S03_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/53784.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Outer Banks S03 E05</p>
       </a>
@@ -3868,7 +3944,7 @@
     <div class="canale no-logo" id="Outer_Banks_S03_E06">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/53785.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Outer Banks S03 E06</p>
       </a>
@@ -3877,7 +3953,7 @@
     <div class="canale no-logo" id="Outer_Banks_S03_E07">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/53786.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Outer Banks S03 E07</p>
       </a>
@@ -3886,7 +3962,7 @@
     <div class="canale no-logo" id="Outer_Banks_S03_E08">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/53787.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Outer Banks S03 E08</p>
       </a>
@@ -3895,7 +3971,7 @@
     <div class="canale no-logo" id="Outer_Banks_S04_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/53788.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Outer Banks S04 E01</p>
       </a>
@@ -3904,7 +3980,7 @@
     <div class="canale no-logo" id="Outer_Banks_S04_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/53789.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Outer Banks S04 E02</p>
       </a>
@@ -3913,7 +3989,7 @@
     <div class="canale no-logo" id="Outer_Banks_S04_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/53790.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Outer Banks S04 E03</p>
       </a>
@@ -3922,7 +3998,7 @@
     <div class="canale no-logo" id="Outer_Banks_S04_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/53791.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Outer Banks S04 E04</p>
       </a>
@@ -3931,7 +4007,7 @@
     <div class="canale no-logo" id="Outer_Banks_S04_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/53792.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Outer Banks S04 E05</p>
       </a>
@@ -3940,7 +4016,7 @@
     <div class="canale no-logo" id="Outer_Banks_S04_E06">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/53793.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Outer Banks S04 E06</p>
       </a>
@@ -3949,7 +4025,7 @@
     <div class="canale no-logo" id="Outer_Banks_S04_E07">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/53794.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Outer Banks S04 E07</p>
       </a>
@@ -3958,7 +4034,7 @@
     <div class="canale no-logo" id="Ogni_minuto_conta_S01_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/54893.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ogni minuto conta S01 E01</p>
       </a>
@@ -3967,7 +4043,7 @@
     <div class="canale no-logo" id="Ogni_minuto_conta_S01_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/54894.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ogni minuto conta S01 E02</p>
       </a>
@@ -3976,7 +4052,7 @@
     <div class="canale no-logo" id="Ogni_minuto_conta_S01_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/54895.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ogni minuto conta S01 E03</p>
       </a>
@@ -3985,7 +4061,7 @@
     <div class="canale no-logo" id="Ogni_minuto_conta_S01_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/54896.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ogni minuto conta S01 E04</p>
       </a>
@@ -3994,7 +4070,7 @@
     <div class="canale no-logo" id="Ogni_minuto_conta_S01_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/54897.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ogni minuto conta S01 E05</p>
       </a>
@@ -4003,7 +4079,7 @@
     <div class="canale no-logo" id="Ogni_minuto_conta_S01_E06">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/54898.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ogni minuto conta S01 E06</p>
       </a>
@@ -4012,7 +4088,7 @@
     <div class="canale no-logo" id="Ogni_minuto_conta_S01_E07">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/54899.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ogni minuto conta S01 E07</p>
       </a>
@@ -4021,7 +4097,7 @@
     <div class="canale no-logo" id="Ogni_minuto_conta_S01_E08">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/54900.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ogni minuto conta S01 E08</p>
       </a>
@@ -4030,7 +4106,7 @@
     <div class="canale no-logo" id="Ogni_minuto_conta_S01_E09">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/54901.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ogni minuto conta S01 E09</p>
       </a>
@@ -4039,7 +4115,7 @@
     <div class="canale no-logo" id="Ogni_minuto_conta_S01_E10">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/54902.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ogni minuto conta S01 E10</p>
       </a>
@@ -4048,7 +4124,7 @@
     <div class="canale no-logo" id="Oceani_del_mondo_S01_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/55060.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oceani del mondo S01 E01</p>
       </a>
@@ -4057,7 +4133,7 @@
     <div class="canale no-logo" id="Oceani_del_mondo_S01_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/55061.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oceani del mondo S01 E02</p>
       </a>
@@ -4066,7 +4142,7 @@
     <div class="canale no-logo" id="Oceani_del_mondo_S01_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/55062.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oceani del mondo S01 E03</p>
       </a>
@@ -4075,7 +4151,7 @@
     <div class="canale no-logo" id="Oceani_del_mondo_S01_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/55063.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oceani del mondo S01 E04</p>
       </a>
@@ -4084,7 +4160,7 @@
     <div class="canale no-logo" id="Oceani_del_mondo_S01_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/55064.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Oceani del mondo S01 E05</p>
       </a>
@@ -4093,7 +4169,7 @@
     <div class="canale no-logo" id="On_Call_Di_pattuglia_S01_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/55739.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On Call - Di pattuglia S01 E01</p>
       </a>
@@ -4102,7 +4178,7 @@
     <div class="canale no-logo" id="On_Call_Di_pattuglia_S01_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/55740.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On Call - Di pattuglia S01 E02</p>
       </a>
@@ -4111,7 +4187,7 @@
     <div class="canale no-logo" id="On_Call_Di_pattuglia_S01_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/55741.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On Call - Di pattuglia S01 E03</p>
       </a>
@@ -4120,7 +4196,7 @@
     <div class="canale no-logo" id="On_Call_Di_pattuglia_S01_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/55742.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On Call - Di pattuglia S01 E04</p>
       </a>
@@ -4129,7 +4205,7 @@
     <div class="canale no-logo" id="On_Call_Di_pattuglia_S01_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/55743.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On Call - Di pattuglia S01 E05</p>
       </a>
@@ -4138,7 +4214,7 @@
     <div class="canale no-logo" id="On_Call_Di_pattuglia_S01_E06">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/55744.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On Call - Di pattuglia S01 E06</p>
       </a>
@@ -4147,7 +4223,7 @@
     <div class="canale no-logo" id="On_Call_Di_pattuglia_S01_E07">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/55745.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On Call - Di pattuglia S01 E07</p>
       </a>
@@ -4156,7 +4232,7 @@
     <div class="canale no-logo" id="On_Call_Di_pattuglia_S01_E08">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/55746.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On Call - Di pattuglia S01 E08</p>
       </a>
@@ -4165,7 +4241,7 @@
     <div class="canale no-logo" id="On_Call_Di_pattuglia_S01_E09">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/55747.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>On Call - Di pattuglia S01 E09</p>
       </a>
@@ -4174,7 +4250,7 @@
     <div class="canale no-logo" id="Obliterated_Una_notte_da_panico_S01_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/63441.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Obliterated - Una notte da panico S01 E01</p>
       </a>
@@ -4183,7 +4259,7 @@
     <div class="canale no-logo" id="Obliterated_Una_notte_da_panico_S01_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/63442.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Obliterated - Una notte da panico S01 E02</p>
       </a>
@@ -4192,7 +4268,7 @@
     <div class="canale no-logo" id="Obliterated_Una_notte_da_panico_S01_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/63443.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Obliterated - Una notte da panico S01 E03</p>
       </a>
@@ -4201,7 +4277,7 @@
     <div class="canale no-logo" id="Obliterated_Una_notte_da_panico_S01_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/63444.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Obliterated - Una notte da panico S01 E04</p>
       </a>
@@ -4210,7 +4286,7 @@
     <div class="canale no-logo" id="Obliterated_Una_notte_da_panico_S01_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/63445.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Obliterated - Una notte da panico S01 E05</p>
       </a>
@@ -4219,7 +4295,7 @@
     <div class="canale no-logo" id="Obliterated_Una_notte_da_panico_S01_E06">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/63446.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Obliterated - Una notte da panico S01 E06</p>
       </a>
@@ -4228,7 +4304,7 @@
     <div class="canale no-logo" id="Obliterated_Una_notte_da_panico_S01_E07">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/63447.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Obliterated - Una notte da panico S01 E07</p>
       </a>
@@ -4237,7 +4313,7 @@
     <div class="canale no-logo" id="Obliterated_Una_notte_da_panico_S01_E08">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/63448.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Obliterated - Una notte da panico S01 E08</p>
       </a>
@@ -4246,7 +4322,7 @@
     <div class="canale no-logo" id="Overcompensating_l_inganno_S01_E01">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/71765.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Overcompensating: l’inganno S01 E01</p>
       </a>
@@ -4255,7 +4331,7 @@
     <div class="canale no-logo" id="Overcompensating_l_inganno_S01_E02">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/71766.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Overcompensating: l’inganno S01 E02</p>
       </a>
@@ -4264,7 +4340,7 @@
     <div class="canale no-logo" id="Overcompensating_l_inganno_S01_E03">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/71767.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Overcompensating: l’inganno S01 E03</p>
       </a>
@@ -4273,7 +4349,7 @@
     <div class="canale no-logo" id="Overcompensating_l_inganno_S01_E04">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/71768.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Overcompensating: l’inganno S01 E04</p>
       </a>
@@ -4282,7 +4358,7 @@
     <div class="canale no-logo" id="Overcompensating_l_inganno_S01_E05">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/71769.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Overcompensating: l’inganno S01 E05</p>
       </a>
@@ -4291,7 +4367,7 @@
     <div class="canale no-logo" id="Overcompensating_l_inganno_S01_E06">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/71770.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Overcompensating: l’inganno S01 E06</p>
       </a>
@@ -4300,7 +4376,7 @@
     <div class="canale no-logo" id="Overcompensating_l_inganno_S01_E07">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/71771.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Overcompensating: l’inganno S01 E07</p>
       </a>
@@ -4309,7 +4385,7 @@
     <div class="canale no-logo" id="Overcompensating_l_inganno_S01_E08">
       <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/71772.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Overcompensating: l’inganno S01 E08</p>
       </a>

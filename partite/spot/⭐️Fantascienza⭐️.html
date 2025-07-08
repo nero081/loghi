@@ -6,133 +6,209 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
   <style>
-    body {
-      background-color: #1a1a1a;
-      color: #fff;
-      font-family: 'Open Sans', sans-serif;
-      margin: 0;
-      padding: 20px;
-    }
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
 
-    h1 {
-      text-align: center;
-      margin-bottom: 40px;
-    }
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
 
-    .griglia {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 20px;
-      justify-items: center;
-    }
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
 
-    .tile, .canale {
-      background-color: #292929;
-      border-radius: 10px;
-      text-align: center;
-      color: #fff;
-      padding: 15px;
-      transition: transform 0.2s, box-shadow 0.2s;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
 
-    .tile:hover, .canale:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-    }
+h1 {
+  font-size: 4rem;
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+}
 
-    .tile {
-      font-weight: bold;
-      font-size: 1.1em;
-    }
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
 
-    .canale a {
-      text-decoration: none;
-      color: inherit;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
 
-    .canale img {
-      width: 100%;
-      height: 120px;
-      object-fit: contain;
-      border-radius: 8px;
-      background-color: #111;
-      margin-bottom: 10px;
-    }
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
 
-    .canale p {
-      margin: 0;
-      font-size: 0.95em;
-    }
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
 
-    .placeholder-logo {
-      width: 100%;
-      height: 120px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #444, #222);
-      font-size: 2em;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      color: #eee;
-    }
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
 
-    .canale.no-logo:hover .placeholder-logo {
-      background: linear-gradient(135deg, #555, #333);
-    }
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
 
-    @media screen and (orientation: portrait) {
-      .griglia {
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      }
+.canale a {
+  text-decoration: none;
+  color: inherit;
+}
 
-      .canale img, .placeholder-logo {
-        height: 100px;
-      }
 
-      .canale p {
-        font-size: 0.9em;
-      }
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+  text-decoration: none;
+}
 
-      body {
-        padding: 15px;
-      }
-    }
 
-    @media screen and (orientation: landscape) {
-      .griglia {
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      }
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
 
-      .canale img, .placeholder-logo {
-        height: 140px;
-      }
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
 
-      .canale p {
-        font-size: 1em;
-      }
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
 
-      body {
-        padding: 30px;
-      }
-    }
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
 
-    .back {
-      text-align: center;
-      margin-top: 40px;
-    }
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
 
-    .back a {
-      color: #aaa;
-      text-decoration: none;
-      font-size: 16px;
-    }
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
   </style>
 </head>
 <body>
@@ -142,7 +218,7 @@
     <div class="canale no-logo" id="3022_2019">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59267.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>3022 (2019)</p>
       </a>
@@ -151,7 +227,7 @@
     <div class="canale no-logo" id="A_R_I_Il_Mio_Amico_Robot_2020_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59268.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>A.R.I. Il Mio Amico Robot 2020 Fantasy</p>
       </a>
@@ -160,7 +236,7 @@
     <div class="canale no-logo" id="Abigail_2019">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59269.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Abigail (2019)</p>
       </a>
@@ -169,7 +245,7 @@
     <div class="canale no-logo" id="Alice_attraverso_lo_specchio_2016">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59270.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Alice attraverso lo specchio (2016)</p>
       </a>
@@ -178,7 +254,7 @@
     <div class="canale no-logo" id="Alien_Expedition_2018_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59271.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Alien Expedition 2018 Fantasy</p>
       </a>
@@ -187,7 +263,7 @@
     <div class="canale no-logo" id="Alone_2017">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59272.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Alone (2017)</p>
       </a>
@@ -196,7 +272,7 @@
     <div class="canale no-logo" id="Anastasia_Once_Upon_A_Time_2020_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59273.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Anastasia Once Upon A Time 2020 Fantasy</p>
       </a>
@@ -205,7 +281,7 @@
     <div class="canale no-logo" id="Andròn_The_Black_Labyrinth_2015">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59274.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Andròn: The Black Labyrinth (2015)</p>
       </a>
@@ -214,7 +290,7 @@
     <div class="canale no-logo" id="Aniara_Rotta_Su_Marte_2018_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59275.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Aniara Rotta Su Marte 2018 Fantasy</p>
       </a>
@@ -223,7 +299,7 @@
     <div class="canale no-logo" id="Anon_2018">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59276.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Anon (2018)</p>
       </a>
@@ -232,7 +308,7 @@
     <div class="canale no-logo" id="Ant_Man_2015">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59277.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ant-Man (2015)</p>
       </a>
@@ -241,7 +317,7 @@
     <div class="canale no-logo" id="Ant_Man_and_the_Wasp_2018">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59278.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ant-Man and the Wasp (2018)</p>
       </a>
@@ -250,7 +326,7 @@
     <div class="canale no-logo" id="Ares_2016">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59279.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ares (2016)</p>
       </a>
@@ -259,7 +335,7 @@
     <div class="canale no-logo" id="Artemis_Fowl_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59280.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Artemis Fowl (2020)</p>
       </a>
@@ -268,7 +344,7 @@
     <div class="canale no-logo" id="Attraction_2017">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59281.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Attraction (2017)</p>
       </a>
@@ -277,7 +353,7 @@
     <div class="canale no-logo" id="Attraction_2_Invasion_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59282.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Attraction 2 - Invasion (2020)</p>
       </a>
@@ -286,7 +362,7 @@
     <div class="canale no-logo" id="Blade_Runner_1982">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59283.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Blade Runner (1982)</p>
       </a>
@@ -295,7 +371,7 @@
     <div class="canale no-logo" id="Bloodshot_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59284.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Bloodshot (2020)</p>
       </a>
@@ -304,7 +380,7 @@
     <div class="canale no-logo" id="Cats_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59285.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Cats (2020)</p>
       </a>
@@ -313,7 +389,7 @@
     <div class="canale no-logo" id="Code_8_Parte_1_2019_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59286.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Code 8 Parte 1 2019 Fantasy</p>
       </a>
@@ -322,7 +398,7 @@
     <div class="canale no-logo" id="Coherence_2013_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59287.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Coherence 2013 Fantasy</p>
       </a>
@@ -331,7 +407,7 @@
     <div class="canale no-logo" id="Corto_circuito_1986">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59288.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Corto circuito (1986)</p>
       </a>
@@ -340,7 +416,7 @@
     <div class="canale no-logo" id="Corto_circuito_2_1988">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59289.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Corto circuito 2 (1988)</p>
       </a>
@@ -349,7 +425,7 @@
     <div class="canale no-logo" id="Crimson_Peak_2015">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59290.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Crimson Peak (2015)</p>
       </a>
@@ -358,7 +434,7 @@
     <div class="canale no-logo" id="Deadpool_2016">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59291.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Deadpool (2016)</p>
       </a>
@@ -367,7 +443,7 @@
     <div class="canale no-logo" id="Divergent_2014">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59292.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Divergent (2014)</p>
       </a>
@@ -376,7 +452,7 @@
     <div class="canale no-logo" id="Dracula_Untold_2014">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59293.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Dracula Untold (2014)</p>
       </a>
@@ -385,7 +461,7 @@
     <div class="canale no-logo" id="Dragonfly_Il_Segno_Della_Libellula_2002_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59294.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Dragonfly Il Segno Della Libellula 2002 Fantasy</p>
       </a>
@@ -394,7 +470,7 @@
     <div class="canale no-logo" id="Dragonheart_1_Cuore_Di_Drago_1996_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59295.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Dragonheart 1 Cuore Di Drago 1996 Fantasy</p>
       </a>
@@ -403,7 +479,7 @@
     <div class="canale no-logo" id="Dragonheart_2_Una_nuova_avventura_2000">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59296.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Dragonheart 2 - Una nuova avventura - 2000</p>
       </a>
@@ -412,7 +488,7 @@
     <div class="canale no-logo" id="DragonHeart_3_La_maledizione_dello_stregone_2015">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59297.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>DragonHeart 3 - La maledizione dello stregone (2015)</p>
       </a>
@@ -421,7 +497,7 @@
     <div class="canale no-logo" id="Dragonheart_4_La_Battaglia_Per_L_Heartfire_2017_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59298.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Dragonheart 4 La Battaglia Per L'Heartfire 2017 Fantasy</p>
       </a>
@@ -430,7 +506,7 @@
     <div class="canale no-logo" id="Fahrenheit_451_2018">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59299.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Fahrenheit 451 (2018)</p>
       </a>
@@ -439,7 +515,7 @@
     <div class="canale no-logo" id="Gravity_2013">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59300.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Gravity (2013)</p>
       </a>
@@ -448,7 +524,7 @@
     <div class="canale no-logo" id="Gremlins_1984">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59301.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Gremlins (1984)</p>
       </a>
@@ -457,7 +533,7 @@
     <div class="canale no-logo" id="Gremlins_2_La_nuova_stirpe_1990">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59302.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Gremlins 2 - La nuova stirpe (1990)</p>
       </a>
@@ -466,7 +542,7 @@
     <div class="canale no-logo" id="Guardians_Il_risveglio_dei_guardiani_2017">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59303.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Guardians - Il risveglio dei guardiani (2017)</p>
       </a>
@@ -475,7 +551,7 @@
     <div class="canale no-logo" id="Hellboy_1_2004_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59304.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Hellboy 1 2004 Fantasy</p>
       </a>
@@ -484,7 +560,7 @@
     <div class="canale no-logo" id="Hellboy_The_Golden_Army_2008">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59305.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Hellboy - The Golden Army (2008)</p>
       </a>
@@ -493,7 +569,7 @@
     <div class="canale no-logo" id="Hellboy_2019">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59306.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Hellboy (2019)</p>
       </a>
@@ -502,7 +578,7 @@
     <div class="canale no-logo" id="High_Life_2018">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59307.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>High Life (2018)</p>
       </a>
@@ -511,7 +587,7 @@
     <div class="canale no-logo" id="I_guardiani_dei_mondi_2018">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59308.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>I guardiani dei mondi (2018)</p>
       </a>
@@ -520,7 +596,7 @@
     <div class="canale no-logo" id="Il_Corvo_1994_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59309.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Il Corvo 1994 Fantasy</p>
       </a>
@@ -529,7 +605,7 @@
     <div class="canale no-logo" id="Il_labirinto_del_fauno_2006">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59310.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Il labirinto del fauno (2006)</p>
       </a>
@@ -538,7 +614,7 @@
     <div class="canale no-logo" id="Il_regno_del_fuoco_2002">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59311.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Il regno del fuoco (2002)</p>
       </a>
@@ -547,7 +623,7 @@
     <div class="canale no-logo" id="Il_regno_di_Wuba_2015">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59312.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Il regno di Wuba (2015)</p>
       </a>
@@ -556,7 +632,7 @@
     <div class="canale no-logo" id="Inkheart_La_leggenda_di_cuore_d_inchiostro_2008">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59313.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Inkheart - La leggenda di cuore d'inchiostro (2008)</p>
       </a>
@@ -565,7 +641,7 @@
     <div class="canale no-logo" id="Interferenze_2018">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59314.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Interferenze (2018)</p>
       </a>
@@ -574,7 +650,7 @@
     <div class="canale no-logo" id="Iron_Sky_The_Coming_Race_2019_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59315.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Iron Sky The Coming Race 2019 Fantasy</p>
       </a>
@@ -583,7 +659,7 @@
     <div class="canale no-logo" id="Kill_Mode_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59316.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Kill Mode (2020)</p>
       </a>
@@ -592,7 +668,7 @@
     <div class="canale no-logo" id="King_Arthur_Il_potere_della_spada_2017">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59317.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>King Arthur - Il potere della spada (2017)</p>
       </a>
@@ -601,7 +677,7 @@
     <div class="canale no-logo" id="L_incredibile_Hulk_2008">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59318.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>L'incredibile Hulk (2008)</p>
       </a>
@@ -610,7 +686,7 @@
     <div class="canale no-logo" id="L_A_Apocalypse_Apocalisse_a_Los_Angeles_2014">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59319.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>L.A. Apocalypse - Apocalisse a Los Angeles (2014)</p>
       </a>
@@ -619,7 +695,7 @@
     <div class="canale no-logo" id="La_bella_e_la_bestia_2017">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59320.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>La bella e la bestia (2017)</p>
       </a>
@@ -628,7 +704,7 @@
     <div class="canale no-logo" id="La_leggenda_del_cacciatore_di_vampiri_2012">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59321.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>La leggenda del cacciatore di vampiri (2012)</p>
       </a>
@@ -637,7 +713,7 @@
     <div class="canale no-logo" id="La_quinta_onda_2016">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59322.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>La quinta onda (2016)</p>
       </a>
@@ -646,7 +722,7 @@
     <div class="canale no-logo" id="La_Torre_Nera_2017">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59323.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>La Torre Nera (2017)</p>
       </a>
@@ -655,7 +731,7 @@
     <div class="canale no-logo" id="Life_Non_Oltrepassare_Il_Limimte_2017_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59324.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Life Non Oltrepassare Il Limimte 2017 Fantasy</p>
       </a>
@@ -664,7 +740,7 @@
     <div class="canale no-logo" id="Maleficent_Signora_del_male_2019">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59325.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Maleficent - Signora del male (2019)</p>
       </a>
@@ -673,7 +749,7 @@
     <div class="canale no-logo" id="Maze_Runner_Il_labirinto_2014">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59326.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Maze Runner - Il labirinto (2014)</p>
       </a>
@@ -682,7 +758,7 @@
     <div class="canale no-logo" id="Maze_Runner_La_fuga_2015">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59327.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Maze Runner - La fuga (2015)</p>
       </a>
@@ -691,7 +767,7 @@
     <div class="canale no-logo" id="Maze_Runner_La_rivelazione_2018">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59328.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Maze Runner - La rivelazione (2018)</p>
       </a>
@@ -700,7 +776,7 @@
     <div class="canale no-logo" id="Miss_Peregrine_La_casa_dei_ragazzi_speciali_2016">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59329.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Miss Peregrine - La casa dei ragazzi speciali (2016)</p>
       </a>
@@ -709,7 +785,7 @@
     <div class="canale no-logo" id="Monster_Trucks_2016">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59330.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Monster Trucks (2016)</p>
       </a>
@@ -718,7 +794,7 @@
     <div class="canale no-logo" id="Morgan_2016">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59331.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Morgan (2016)</p>
       </a>
@@ -727,7 +803,7 @@
     <div class="canale no-logo" id="Occupation_2018">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59332.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Occupation (2018)</p>
       </a>
@@ -736,7 +812,7 @@
     <div class="canale no-logo" id="Only_Minaccia_Letale_2019_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59333.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Only Minaccia Letale 2019 Fantasy</p>
       </a>
@@ -745,7 +821,7 @@
     <div class="canale no-logo" id="Osiride_Il_9_pianeta_2016">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59334.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Osiride - Il 9° pianeta (2016)</p>
       </a>
@@ -754,7 +830,7 @@
     <div class="canale no-logo" id="Percy_Jackson_e_gli_dei_dell_Olimpo_Il_ladro_di_fulmini_2010">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59335.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Percy Jackson e gli dei dell'Olimpo - Il ladro di fulmini (2010)</p>
       </a>
@@ -763,7 +839,7 @@
     <div class="canale no-logo" id="Percy_Jackson_e_gli_Dei_dell_Olimpo_Il_mare_dei_mostri_2013">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59336.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Percy Jackson e gli Dei dell'Olimpo - Il mare dei mostri (2013)</p>
       </a>
@@ -772,7 +848,7 @@
     <div class="canale no-logo" id="Pinocchio_2002">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59337.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Pinocchio (2002)</p>
       </a>
@@ -781,7 +857,7 @@
     <div class="canale no-logo" id="Pinocchio_2019">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59338.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Pinocchio (2019)</p>
       </a>
@@ -790,7 +866,7 @@
     <div class="canale no-logo" id="Power_Rangers_2017">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59339.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Power Rangers (2017)</p>
       </a>
@@ -799,7 +875,7 @@
     <div class="canale no-logo" id="Proximity_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59340.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Proximity (2020)</p>
       </a>
@@ -808,7 +884,7 @@
     <div class="canale no-logo" id="Revolt_2017">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59341.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Revolt (2017)</p>
       </a>
@@ -817,7 +893,7 @@
     <div class="canale no-logo" id="Ritrova_Te_Stesso_Black_Box_2020_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59342.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ritrova Te Stesso Black Box 2020 Fantasy</p>
       </a>
@@ -826,7 +902,7 @@
     <div class="canale no-logo" id="Sette_Minuti_Dopo_La_Mezzanotte_2017_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59343.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Sette Minuti Dopo La Mezzanotte 2017 Fantasy</p>
       </a>
@@ -835,7 +911,7 @@
     <div class="canale no-logo" id="Slaughterhouse_Rulez_2018_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59344.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Slaughterhouse Rulez 2018 Fantasy</p>
       </a>
@@ -844,7 +920,7 @@
     <div class="canale no-logo" id="Snowpiercer_2013">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59345.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Snowpiercer (2013)</p>
       </a>
@@ -853,7 +929,7 @@
     <div class="canale no-logo" id="Sonic_2020_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59346.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Sonic 2020 Fantasy</p>
       </a>
@@ -862,7 +938,7 @@
     <div class="canale no-logo" id="Stormageddon_2015">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59347.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Stormageddon (2015)</p>
       </a>
@@ -871,7 +947,7 @@
     <div class="canale no-logo" id="Super_Palla_Di_Pelo_2019_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59348.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Super Palla Di Pelo 2019 Fantasy</p>
       </a>
@@ -880,7 +956,7 @@
     <div class="canale no-logo" id="Tartarughe_Ninja_2014">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59349.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Tartarughe Ninja (2014)</p>
       </a>
@@ -889,7 +965,7 @@
     <div class="canale no-logo" id="Tartarughe_Ninja_Fuori_dall_ombra_2016">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59350.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Tartarughe Ninja: Fuori dall'ombra (2016)</p>
       </a>
@@ -898,7 +974,7 @@
     <div class="canale no-logo" id="Tenet_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59351.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Tenet (2020)</p>
       </a>
@@ -907,7 +983,7 @@
     <div class="canale no-logo" id="Avengers_Age_of_Ultron_2015">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59352.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Avengers: Age of Ultron (2015)</p>
       </a>
@@ -916,7 +992,7 @@
     <div class="canale no-logo" id="The_Breed_La_razza_del_male_2006">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59353.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>The Breed - La razza del male (2006)</p>
       </a>
@@ -925,7 +1001,7 @@
     <div class="canale no-logo" id="The_Curse_of_Sleeping_Beauty_2016">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59354.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>The Curse of Sleeping Beauty (2016)</p>
       </a>
@@ -934,7 +1010,7 @@
     <div class="canale no-logo" id="The_Great_Wall_2016">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59355.mkv" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>The Great Wall (2016)</p>
       </a>
@@ -943,7 +1019,7 @@
     <div class="canale no-logo" id="The_Illusionist_L_illusionista_2006">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59356.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>The Illusionist - L'illusionista (2006)</p>
       </a>
@@ -952,7 +1028,7 @@
     <div class="canale no-logo" id="The_Last_Survivors_2014">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59357.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>The Last Survivors (2014)</p>
       </a>
@@ -961,7 +1037,7 @@
     <div class="canale no-logo" id="The_Last_Witch_Hunter_L_ultimo_cacciatore_di_streghe_2015">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59358.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>The Last Witch Hunter - L'ultimo cacciatore di streghe (2015)</p>
       </a>
@@ -970,7 +1046,7 @@
     <div class="canale no-logo" id="The_Recall_2017_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59359.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>The Recall 2017 Fantasy</p>
       </a>
@@ -979,7 +1055,7 @@
     <div class="canale no-logo" id="The_Scythian_I_lupi_di_Ares_2018">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59360.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>The Scythian – I lupi di Ares (2018)</p>
       </a>
@@ -988,7 +1064,7 @@
     <div class="canale no-logo" id="Tigers_Are_Not_Afraid_2017">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59361.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Tigers Are Not Afraid (2017)</p>
       </a>
@@ -997,7 +1073,7 @@
     <div class="canale no-logo" id="Time_Freak_2018">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59362.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Time Freak (2018)</p>
       </a>
@@ -1006,7 +1082,7 @@
     <div class="canale no-logo" id="Tokyo_Ghoul_S_2019">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59363.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Tokyo Ghoul 'S' (2019)</p>
       </a>
@@ -1015,7 +1091,7 @@
     <div class="canale no-logo" id="Transformers_2007">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59364.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Transformers (2007)</p>
       </a>
@@ -1024,7 +1100,7 @@
     <div class="canale no-logo" id="Transformers_La_vendetta_del_caduto_2009">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59365.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Transformers - La vendetta del caduto (2009)</p>
       </a>
@@ -1033,7 +1109,7 @@
     <div class="canale no-logo" id="Transformers_3_2011">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59366.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Transformers 3 (2011)</p>
       </a>
@@ -1042,7 +1118,7 @@
     <div class="canale no-logo" id="Transformers_4_L_era_dell_estinzione_2014">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59367.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Transformers 4 - L'era dell'estinzione (2014)</p>
       </a>
@@ -1051,7 +1127,7 @@
     <div class="canale no-logo" id="Transformers_5_L_Utimo_Cavaliere_2017_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59368.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Transformers 5 L'Utimo Cavaliere 2017 Fantasy</p>
       </a>
@@ -1060,7 +1136,7 @@
     <div class="canale no-logo" id="Underwater_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59369.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Underwater (2020)</p>
       </a>
@@ -1069,7 +1145,7 @@
     <div class="canale no-logo" id="Un_ponte_per_Terabithia_2007">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59370.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Un ponte per Terabithia (2007)</p>
       </a>
@@ -1078,7 +1154,7 @@
     <div class="canale no-logo" id="Vivarium_2020_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59371.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Vivarium 2020 Fantasy</p>
       </a>
@@ -1087,7 +1163,7 @@
     <div class="canale no-logo" id="V_Per_Vendetta_2005_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59372.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>V Per Vendetta 2005 Fantasy</p>
       </a>
@@ -1096,7 +1172,7 @@
     <div class="canale no-logo" id="Warcraft_L_inizio_2016">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59373.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Warcraft - L'inizio (2016)</p>
       </a>
@@ -1105,7 +1181,7 @@
     <div class="canale no-logo" id="Wonder_Woman_2017">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59374.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Wonder Woman (2017)</p>
       </a>
@@ -1114,7 +1190,7 @@
     <div class="canale no-logo" id="21_12_2012_La_Profezia_Dei_Maya_2011_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62365.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>21-12-2012 La Profezia Dei Maya 2011 Fantasy</p>
       </a>
@@ -1123,7 +1199,7 @@
     <div class="canale no-logo" id="2067_Battaglia_per_il_futuro_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62366.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>2067 - Battaglia per il futuro (2020)</p>
       </a>
@@ -1132,7 +1208,7 @@
     <div class="canale no-logo" id="2151_Minaccia_Aliena_2017_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62367.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>2151 Minaccia Aliena 2017 Fantasy</p>
       </a>
@@ -1141,7 +1217,7 @@
     <div class="canale no-logo" id="Alienate_Lotta_per_la_Terra_2016">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62368.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Alienate – Lotta per la Terra (2016)</p>
       </a>
@@ -1150,7 +1226,7 @@
     <div class="canale no-logo" id="Alien_Outpost_L_Invasione_2015_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62369.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Alien Outpost L'Invasione 2015 Fantasy</p>
       </a>
@@ -1159,7 +1235,7 @@
     <div class="canale no-logo" id="Archive_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62370.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Archive (2020)</p>
       </a>
@@ -1168,7 +1244,7 @@
     <div class="canale no-logo" id="Bliss_2021">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62371.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Bliss (2021)</p>
       </a>
@@ -1177,7 +1253,7 @@
     <div class="canale no-logo" id="Chaos_Walking_2021">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62372.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Chaos Walking (2021)</p>
       </a>
@@ -1186,7 +1262,7 @@
     <div class="canale no-logo" id="Come_True_2021_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62373.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Come True 2021 Fantasy</p>
       </a>
@@ -1195,7 +1271,7 @@
     <div class="canale no-logo" id="Doctor_Strange_2016">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62374.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Doctor Strange (2016)</p>
       </a>
@@ -1204,7 +1280,7 @@
     <div class="canale no-logo" id="Dune_Drifter_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62375.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Dune Drifter (2020)</p>
       </a>
@@ -1213,7 +1289,7 @@
     <div class="canale no-logo" id="Ex_Machina_2015">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62376.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ex Machina (2015)</p>
       </a>
@@ -1222,7 +1298,7 @@
     <div class="canale no-logo" id="Frammenti_dal_passato_Reminiscence_2021">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62377.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Frammenti dal passato - Reminiscence (2021)</p>
       </a>
@@ -1231,7 +1307,7 @@
     <div class="canale no-logo" id="Franklyn_2008">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62378.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Franklyn (2008)</p>
       </a>
@@ -1240,7 +1316,7 @@
     <div class="canale no-logo" id="GG_Turbo_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62379.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>GG Turbo (2020)</p>
       </a>
@@ -1249,7 +1325,7 @@
     <div class="canale no-logo" id="Godzilla_1998">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62380.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Godzilla (1998)</p>
       </a>
@@ -1258,7 +1334,7 @@
     <div class="canale no-logo" id="Godzilla_2014">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62381.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Godzilla (2014)</p>
       </a>
@@ -1267,7 +1343,7 @@
     <div class="canale no-logo" id="Godzilla_vs_Kong_2021">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62382.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Godzilla vs. Kong (2021)</p>
       </a>
@@ -1276,7 +1352,7 @@
     <div class="canale no-logo" id="Infinite_2021">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62383.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Infinite (2021)</p>
       </a>
@@ -1285,7 +1361,7 @@
     <div class="canale no-logo" id="L_eroe_dei_due_mondi_2021">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62384.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>L'eroe dei due mondi (2021)</p>
       </a>
@@ -1294,7 +1370,7 @@
     <div class="canale no-logo" id="La_guerra_di_domani_2021">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62385.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>La guerra di domani (2021)</p>
       </a>
@@ -1303,7 +1379,7 @@
     <div class="canale no-logo" id="La_mappa_delle_piccole_cose_perfette_2021">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62386.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>La mappa delle piccole cose perfette (2021)</p>
       </a>
@@ -1312,7 +1388,7 @@
     <div class="canale no-logo" id="Life_Like_2019">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62387.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Life Like (2019)</p>
       </a>
@@ -1321,7 +1397,7 @@
     <div class="canale no-logo" id="Little_Fish_2020_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62388.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Little Fish 2020 Fantasy</p>
       </a>
@@ -1330,7 +1406,7 @@
     <div class="canale no-logo" id="Max_Steel_2016">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62389.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Max Steel (2016)</p>
       </a>
@@ -1339,7 +1415,7 @@
     <div class="canale no-logo" id="Monster_Hunter_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62390.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Monster Hunter (2020)</p>
       </a>
@@ -1348,7 +1424,7 @@
     <div class="canale no-logo" id="Mortal_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62391.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Mortal (2020)</p>
       </a>
@@ -1357,7 +1433,7 @@
     <div class="canale no-logo" id="Pandorum_L_Universo_Parallelo_2010_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62392.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Pandorum L’Universo Parallelo 2010 Fantasy</p>
       </a>
@@ -1366,7 +1442,7 @@
     <div class="canale no-logo" id="Paradise_Hills_2020_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62393.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Paradise Hills 2020 Fantasy</p>
       </a>
@@ -1375,7 +1451,7 @@
     <div class="canale no-logo" id="Perfect_2018">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62394.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Perfect (2018)</p>
       </a>
@@ -1384,7 +1460,7 @@
     <div class="canale no-logo" id="Predestination_2014">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62395.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Predestination (2014)</p>
       </a>
@@ -1393,7 +1469,7 @@
     <div class="canale no-logo" id="Settlers_Colonia_marziana_2021">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62396.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Settlers - Colonia marziana (2021)</p>
       </a>
@@ -1402,7 +1478,7 @@
     <div class="canale no-logo" id="Skylines_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62397.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Skylines (2020)</p>
       </a>
@@ -1411,7 +1487,7 @@
     <div class="canale no-logo" id="Sputnik_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62398.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Sputnik (2020)</p>
       </a>
@@ -1420,7 +1496,7 @@
     <div class="canale no-logo" id="Star_Trek_12_Into_Darkness_2013_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62399.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Star Trek 12 Into Darkness 2013 Fantasy</p>
       </a>
@@ -1429,7 +1505,7 @@
     <div class="canale no-logo" id="Star_Trek_Beyond_2016">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62400.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Star Trek Beyond (2016)</p>
       </a>
@@ -1438,7 +1514,7 @@
     <div class="canale no-logo" id="Synchronic_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62401.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Synchronic (2020)</p>
       </a>
@@ -1447,7 +1523,7 @@
     <div class="canale no-logo" id="Terminus_2015">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62402.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Terminus (2015)</p>
       </a>
@@ -1456,7 +1532,7 @@
     <div class="canale no-logo" id="The_Butterfly_Effect_1_2004_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62403.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>The Butterfly Effect 1 2004 Fantasy</p>
       </a>
@@ -1465,7 +1541,7 @@
     <div class="canale no-logo" id="The_Butterfly_Effect_2_2006">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62404.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>The Butterfly Effect 2 (2006)</p>
       </a>
@@ -1474,7 +1550,7 @@
     <div class="canale no-logo" id="The_Colony_Tides_2021_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62405.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>The Colony Tides 2021 Fantasy</p>
       </a>
@@ -1483,7 +1559,7 @@
     <div class="canale no-logo" id="The_Host_2013">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62406.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>The Host (2013)</p>
       </a>
@@ -1492,7 +1568,7 @@
     <div class="canale no-logo" id="The_New_Mutants_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62407.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>The New Mutants (2020)</p>
       </a>
@@ -1501,7 +1577,7 @@
     <div class="canale no-logo" id="The_Unhealer_Il_potere_del_male_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62408.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>The Unhealer - Il potere del male (2020)</p>
       </a>
@@ -1510,7 +1586,7 @@
     <div class="canale no-logo" id="TRON_Legacy_2010">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62409.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>TRON: Legacy (2010)</p>
       </a>
@@ -1519,7 +1595,7 @@
     <div class="canale no-logo" id="Una_sirena_a_Parigi_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62410.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Una sirena a Parigi (2020)</p>
       </a>
@@ -1528,7 +1604,7 @@
     <div class="canale no-logo" id="Upside_Down_Magic_Magia_Imperfetta_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62411.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Upside-Down Magic - Magia Imperfetta (2020)</p>
       </a>
@@ -1537,7 +1613,7 @@
     <div class="canale no-logo" id="Valentine_The_Dark_Avenger_2017">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62412.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Valentine - The Dark Avenger (2017)</p>
       </a>
@@ -1546,7 +1622,7 @@
     <div class="canale no-logo" id="Voyagers_2021">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62413.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Voyagers (2021)</p>
       </a>
@@ -1555,7 +1631,7 @@
     <div class="canale no-logo" id="Willow_1988">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62414.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Willow (1988)</p>
       </a>
@@ -1564,7 +1640,7 @@
     <div class="canale no-logo" id="Wonder_Woman_1984_2020_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62415.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Wonder Woman 1984 2020 Fantasy</p>
       </a>
@@ -1573,7 +1649,7 @@
     <div class="canale no-logo" id="2022_I_Sopravvissuti_1973_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62416.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>2022 I Sopravvissuti 1973 Fantasy</p>
       </a>
@@ -1582,7 +1658,7 @@
     <div class="canale no-logo" id="After_Yang_2022">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62417.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>After Yang (2022)</p>
       </a>
@@ -1591,7 +1667,7 @@
     <div class="canale no-logo" id="Animali_fantastici_I_segreti_di_Silente_2022">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62418.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Animali fantastici - I segreti di Silente (2022)</p>
       </a>
@@ -1600,7 +1676,7 @@
     <div class="canale no-logo" id="Cenerentola_2015">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62419.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Cenerentola (2015)</p>
       </a>
@@ -1609,7 +1685,7 @@
     <div class="canale no-logo" id="Cenerentola_2021">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62420.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Cenerentola (2021)</p>
       </a>
@@ -1618,7 +1694,7 @@
     <div class="canale no-logo" id="Cosmoball_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62421.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Cosmoball (2020)</p>
       </a>
@@ -1627,7 +1703,7 @@
     <div class="canale no-logo" id="Crimes_of_the_Future_2022">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62422.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Crimes of the Future (2022)</p>
       </a>
@@ -1636,7 +1712,7 @@
     <div class="canale no-logo" id="Doctor_Strange_nel_Multiverso_della_Follia_2022">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62423.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Doctor Strange nel Multiverso della Follia (2022)</p>
       </a>
@@ -1645,7 +1721,7 @@
     <div class="canale no-logo" id="Dual_Il_clone_2022">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62424.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Dual - Il clone (2022)</p>
       </a>
@@ -1654,7 +1730,7 @@
     <div class="canale no-logo" id="Encounter_L_incontro_2021">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62425.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Encounter - L'incontro (2021)</p>
       </a>
@@ -1663,7 +1739,7 @@
     <div class="canale no-logo" id="Eternals_2021">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62426.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Eternals (2021)</p>
       </a>
@@ -1672,7 +1748,7 @@
     <div class="canale no-logo" id="Everything_Everywhere_All_at_Once_2022">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62427.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Everything Everywhere All at Once (2022)</p>
       </a>
@@ -1681,7 +1757,7 @@
     <div class="canale no-logo" id="Firestarter_2022">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62428.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Firestarter (2022)</p>
       </a>
@@ -1690,7 +1766,7 @@
     <div class="canale no-logo" id="Ghostbusters_Legacy_2021">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62429.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ghostbusters - Legacy (2021)</p>
       </a>
@@ -1699,7 +1775,7 @@
     <div class="canale no-logo" id="Il_GGG_Il_Grande_Gigante_Gentile_2016">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62430.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Il GGG - Il Grande Gigante Gentile (2016)</p>
       </a>
@@ -1708,7 +1784,7 @@
     <div class="canale no-logo" id="Il_mago_di_Oz_1939">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62431.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Il mago di Oz (1939)</p>
       </a>
@@ -1717,7 +1793,7 @@
     <div class="canale no-logo" id="Ipersonnia_2022">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62432.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ipersonnia (2022)</p>
       </a>
@@ -1726,7 +1802,7 @@
     <div class="canale no-logo" id="Iron_Mask_La_leggenda_del_dragone_2019">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62433.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Iron Mask - La leggenda del dragone (2019)</p>
       </a>
@@ -1735,7 +1811,7 @@
     <div class="canale no-logo" id="Killerobots_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62434.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Killerobots (2020)</p>
       </a>
@@ -1744,7 +1820,7 @@
     <div class="canale no-logo" id="L_ultimo_giorno_sulla_Terra_2021">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62435.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>L'ultimo giorno sulla Terra (2021)</p>
       </a>
@@ -1753,7 +1829,7 @@
     <div class="canale no-logo" id="La_bella_e_la_bestia_2014">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62436.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>La bella e la bestia (2014)</p>
       </a>
@@ -1762,7 +1838,7 @@
     <div class="canale no-logo" id="La_gang_dei_supereroi_2022">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62437.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>La gang dei supereroi (2022)</p>
       </a>
@@ -1771,7 +1847,7 @@
     <div class="canale no-logo" id="Memory_Trappole_della_mente_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62438.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Memory - Trappole della mente (2020)</p>
       </a>
@@ -1780,7 +1856,7 @@
     <div class="canale no-logo" id="Monster_High_The_Movie_2022_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62439.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Monster High The Movie 2022 Fantasy</p>
       </a>
@@ -1789,7 +1865,7 @@
     <div class="canale no-logo" id="Moonfall_2022">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62440.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Moonfall (2022)</p>
       </a>
@@ -1798,7 +1874,7 @@
     <div class="canale no-logo" id="Occupation_Rainfall_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62441.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Occupation - Rainfall (2020)</p>
       </a>
@@ -1807,7 +1883,7 @@
     <div class="canale no-logo" id="Press_Play_La_musica_della_nostra_vita_2022">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62442.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Press Play - La musica della nostra vita (2022)</p>
       </a>
@@ -1816,7 +1892,7 @@
     <div class="canale no-logo" id="Project_Gemini_2022">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62443.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Project Gemini (2022)</p>
       </a>
@@ -1825,7 +1901,7 @@
     <div class="canale no-logo" id="Ragazze_Ribelli_Riot_Girls_2019">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62444.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ragazze Ribelli - Riot Girls (2019)</p>
       </a>
@@ -1834,7 +1910,7 @@
     <div class="canale no-logo" id="Rubikon_2022">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62445.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Rubikon (2022)</p>
       </a>
@@ -1843,7 +1919,7 @@
     <div class="canale no-logo" id="Secret_Headquarters_2022_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62446.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Secret Headquarters 2022 Fantasy</p>
       </a>
@@ -1852,7 +1928,7 @@
     <div class="canale no-logo" id="Shang_Chi_e_la_leggenda_dei_dieci_anelli_2021">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62447.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Shang-Chi e la leggenda dei dieci anelli (2021)</p>
       </a>
@@ -1861,7 +1937,7 @@
     <div class="canale no-logo" id="Sir_Gawain_E_Il_Cavaliere_Verde_2020_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62448.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Sir Gawain E Il Cavaliere Verde 2020 Fantasy</p>
       </a>
@@ -1870,7 +1946,7 @@
     <div class="canale no-logo" id="Solis_Trappola_nello_spazio_2018">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62449.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Solis - Trappola nello spazio (2018)</p>
       </a>
@@ -1879,7 +1955,7 @@
     <div class="canale no-logo" id="Solitary_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62450.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Solitary (2020)</p>
       </a>
@@ -1888,7 +1964,7 @@
     <div class="canale no-logo" id="Sonic_2_2022_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62451.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Sonic 2 2022 Fantasy</p>
       </a>
@@ -1897,7 +1973,7 @@
     <div class="canale no-logo" id="Spiderwick_Le_cronache_2008">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62452.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Spiderwick - Le cronache (2008)</p>
       </a>
@@ -1906,7 +1982,7 @@
     <div class="canale no-logo" id="Stargate_1994">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62453.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Stargate (1994)</p>
       </a>
@@ -1915,7 +1991,7 @@
     <div class="canale no-logo" id="Stargate_Continuum_2008">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62454.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Stargate: Continuum (2008)</p>
       </a>
@@ -1924,7 +2000,7 @@
     <div class="canale no-logo" id="Stargate_SG_1_L_Arca_Della_Verita_2008_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62455.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Stargate SG-1 L'Arca Della Verita 2008 Fantasy</p>
       </a>
@@ -1933,7 +2009,7 @@
     <div class="canale no-logo" id="The_Clone_Chiave_Per_L_Immortalita_2022_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62456.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>The Clone Chiave Per L'Immortalita 2022 Fantasy</p>
       </a>
@@ -1942,7 +2018,7 @@
     <div class="canale no-logo" id="The_Giver_Il_mondo_di_Jonas_2014">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62457.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>The Giver - Il mondo di Jonas (2014)</p>
       </a>
@@ -1951,7 +2027,7 @@
     <div class="canale no-logo" id="The_In_Between_Non_ti_perderò_2022">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62458.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>The In Between - Non ti perderò (2022)</p>
       </a>
@@ -1960,7 +2036,7 @@
     <div class="canale no-logo" id="The_Last_Warrior_La_Spada_Magica_2021_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62459.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>The Last Warrior La Spada Magica 2021 Fantasy</p>
       </a>
@@ -1969,7 +2045,7 @@
     <div class="canale no-logo" id="The_Shadow_L_Uomo_Ombra_1994_Fantasy">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62460.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>The Shadow L'Uomo Ombra 1994 Fantasy</p>
       </a>
@@ -1978,7 +2054,7 @@
     <div class="canale no-logo" id="Thor_Love_and_Thunder_2022">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62461.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Thor: Love and Thunder (2022)</p>
       </a>
@@ -1987,7 +2063,7 @@
     <div class="canale no-logo" id="Tre_noci_per_Cenerentola_2021">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62462.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Tre noci per Cenerentola (2021)</p>
       </a>
@@ -1996,7 +2072,7 @@
     <div class="canale no-logo" id="Venom_La_furia_di_Carnage_2021">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62463.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Venom - La furia di Carnage (2021)</p>
       </a>
@@ -2005,7 +2081,7 @@
     <div class="canale no-logo" id="Warning_2021">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62464.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Warning (2021)</p>
       </a>
@@ -2014,7 +2090,7 @@
     <div class="canale no-logo" id="Zona_414_2021">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62465.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Zona 414 (2021)</p>
       </a>

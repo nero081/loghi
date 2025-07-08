@@ -6,133 +6,209 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
   <style>
-    body {
-      background-color: #1a1a1a;
-      color: #fff;
-      font-family: 'Open Sans', sans-serif;
-      margin: 0;
-      padding: 20px;
-    }
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
 
-    h1 {
-      text-align: center;
-      margin-bottom: 40px;
-    }
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
 
-    .griglia {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 20px;
-      justify-items: center;
-    }
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
 
-    .tile, .canale {
-      background-color: #292929;
-      border-radius: 10px;
-      text-align: center;
-      color: #fff;
-      padding: 15px;
-      transition: transform 0.2s, box-shadow 0.2s;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
 
-    .tile:hover, .canale:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-    }
+h1 {
+  font-size: 4rem;
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+}
 
-    .tile {
-      font-weight: bold;
-      font-size: 1.1em;
-    }
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
 
-    .canale a {
-      text-decoration: none;
-      color: inherit;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
 
-    .canale img {
-      width: 100%;
-      height: 120px;
-      object-fit: contain;
-      border-radius: 8px;
-      background-color: #111;
-      margin-bottom: 10px;
-    }
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
 
-    .canale p {
-      margin: 0;
-      font-size: 0.95em;
-    }
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
 
-    .placeholder-logo {
-      width: 100%;
-      height: 120px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #444, #222);
-      font-size: 2em;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      color: #eee;
-    }
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
 
-    .canale.no-logo:hover .placeholder-logo {
-      background: linear-gradient(135deg, #555, #333);
-    }
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
 
-    @media screen and (orientation: portrait) {
-      .griglia {
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      }
+.canale a {
+  text-decoration: none;
+  color: inherit;
+}
 
-      .canale img, .placeholder-logo {
-        height: 100px;
-      }
 
-      .canale p {
-        font-size: 0.9em;
-      }
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+  text-decoration: none;
+}
 
-      body {
-        padding: 15px;
-      }
-    }
 
-    @media screen and (orientation: landscape) {
-      .griglia {
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      }
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
 
-      .canale img, .placeholder-logo {
-        height: 140px;
-      }
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
 
-      .canale p {
-        font-size: 1em;
-      }
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
 
-      body {
-        padding: 30px;
-      }
-    }
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
 
-    .back {
-      text-align: center;
-      margin-top: 40px;
-    }
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
 
-    .back a {
-      color: #aaa;
-      text-decoration: none;
-      font-size: 16px;
-    }
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
   </style>
 </head>
 <body>
@@ -142,7 +218,7 @@
     <div class="canale no-logo" id="Amore_mio_aiutami_1969">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58581.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Amore mio aiutami (1969)</p>
       </a>
@@ -151,7 +227,7 @@
     <div class="canale no-logo" id="Arrivano_i_dollari_1957">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58582.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Arrivano i dollari! (1957)</p>
       </a>
@@ -160,7 +236,7 @@
     <div class="canale no-logo" id="Assolto_per_aver_commesso_il_fatto_1992">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58583.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Assolto per aver commesso il fatto (1992)</p>
       </a>
@@ -169,7 +245,7 @@
     <div class="canale no-logo" id="Bello_onesto_emigrato_Australia_sposerebbe_compaesana_illibata_1971">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58584.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Bello, onesto, emigrato Australia sposerebbe compaesana illibata (1971)</p>
       </a>
@@ -178,7 +254,7 @@
     <div class="canale no-logo" id="Bertoldo_Bertoldino_e_Cacasenno_1984">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58585.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Bertoldo, Bertoldino e Cacasenno (1984)</p>
       </a>
@@ -187,7 +263,7 @@
     <div class="canale no-logo" id="Bravissimo_1955">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58586.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Bravissimo (1955)</p>
       </a>
@@ -196,7 +272,7 @@
     <div class="canale no-logo" id="Brevi_amori_a_Palma_di_Majorca_1959">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58587.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Brevi amori a Palma di Majorca (1959)</p>
       </a>
@@ -205,7 +281,7 @@
     <div class="canale no-logo" id="Buonanotte_avvocato_1955">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58588.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Buonanotte... avvocato! (1955)</p>
       </a>
@@ -214,7 +290,7 @@
     <div class="canale no-logo" id="Detenuto_In_Attesa_Di_Giudizio_1972_Sordi">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58589.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Detenuto In Attesa Di Giudizio 1972 Sordi</p>
       </a>
@@ -223,7 +299,7 @@
     <div class="canale no-logo" id="Domenica_è_sempre_domenica_1958">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58590.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Domenica è sempre domenica (1958)</p>
       </a>
@@ -232,7 +308,7 @@
     <div class="canale no-logo" id="Dove_vai_in_vacanza_1978">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58591.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Dove vai in vacanza? (1978)</p>
       </a>
@@ -241,7 +317,7 @@
     <div class="canale no-logo" id="Due_notti_con_Cleopatra_1954">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58592.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Due notti con Cleopatra (1954)</p>
       </a>
@@ -250,7 +326,7 @@
     <div class="canale no-logo" id="Era_di_venerdì_17_1956">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58593.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Era di venerdì 17 (1956)</p>
       </a>
@@ -259,7 +335,7 @@
     <div class="canale no-logo" id="Finché_c_è_guerra_c_è_speranza_1974">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58594.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Finché c'è guerra c'è speranza (1974)</p>
       </a>
@@ -268,7 +344,7 @@
     <div class="canale no-logo" id="Fumo_di_Londra_1966">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58595.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Fumo di Londra (1966)</p>
       </a>
@@ -277,7 +353,7 @@
     <div class="canale no-logo" id="Guardia_Guardia_Scelta_1956_Sordi">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58596.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Guardia Guardia Scelta.....1956 Sordi</p>
       </a>
@@ -286,7 +362,7 @@
     <div class="canale no-logo" id="I_tre_aquilotti_1942">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58597.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>I tre aquilotti (1942)</p>
       </a>
@@ -295,7 +371,7 @@
     <div class="canale no-logo" id="I_complessi_1965">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58598.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>I complessi (1965)</p>
       </a>
@@ -304,7 +380,7 @@
     <div class="canale no-logo" id="I_due_nemici_1961">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58599.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>I due nemici (1961)</p>
       </a>
@@ -313,7 +389,7 @@
     <div class="canale no-logo" id="Il_boom_1963">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58600.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Il boom (1963)</p>
       </a>
@@ -322,7 +398,7 @@
     <div class="canale no-logo" id="Il_comune_senso_del_pudore_1976">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58601.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Il comune senso del pudore (1976)</p>
       </a>
@@ -331,7 +407,7 @@
     <div class="canale no-logo" id="Il_conte_Max_1957">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58602.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Il conte Max (1957)</p>
       </a>
@@ -340,7 +416,7 @@
     <div class="canale no-logo" id="Il_disco_volante_1964">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58603.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Il disco volante (1964)</p>
       </a>
@@ -349,7 +425,7 @@
     <div class="canale no-logo" id="Il_giudizio_universale_1961">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58604.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Il giudizio universale (1961)</p>
       </a>
@@ -358,7 +434,7 @@
     <div class="canale no-logo" id="Il_malato_immaginario_1979">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58605.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Il malato immaginario (1979)</p>
       </a>
@@ -367,7 +443,7 @@
     <div class="canale no-logo" id="Il_marchese_del_Grillo_1981">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58606.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Il marchese del Grillo (1981)</p>
       </a>
@@ -376,7 +452,7 @@
     <div class="canale no-logo" id="Il_Marito_1957_Sordi">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58607.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Il Marito 1957 Sordi</p>
       </a>
@@ -385,7 +461,7 @@
     <div class="canale no-logo" id="Il_medico_della_mutua_1968">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58608.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Il medico della mutua (1968)</p>
       </a>
@@ -394,7 +470,7 @@
     <div class="canale no-logo" id="Il_moralista_1959">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58609.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Il moralista (1959)</p>
       </a>
@@ -403,7 +479,7 @@
     <div class="canale no-logo" id="Il_presidente_del_Borgorosso_Football_Club_1970">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58610.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Il presidente del Borgorosso Football Club (1970)</p>
       </a>
@@ -412,7 +488,7 @@
     <div class="canale no-logo" id="Il_Professor_Dottor_Guido_Tersilli_Primario_1969_Sordi">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58611.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Il Professor Dottor Guido Tersilli Primario....1969 Sordi</p>
       </a>
@@ -421,7 +497,7 @@
     <div class="canale no-logo" id="Il_seduttore_1954">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58612.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Il seduttore (1954)</p>
       </a>
@@ -430,7 +506,7 @@
     <div class="canale no-logo" id="Il_vedovo_1959">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58613.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Il vedovo (1959)</p>
       </a>
@@ -439,7 +515,7 @@
     <div class="canale no-logo" id="Il_vigile_1960">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58614.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Il vigile (1960)</p>
       </a>
@@ -448,7 +524,7 @@
     <div class="canale no-logo" id="In_nome_del_popolo_sovrano_1990">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58615.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>In nome del popolo sovrano (1990)</p>
       </a>
@@ -457,7 +533,7 @@
     <div class="canale no-logo" id="I_nostri_mariti_1966">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58616.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>I nostri mariti (1966)</p>
       </a>
@@ -466,7 +542,7 @@
     <div class="canale no-logo" id="I_nuovi_mostri_1977">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58617.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>I nuovi mostri (1977)</p>
       </a>
@@ -475,7 +551,7 @@
     <div class="canale no-logo" id="Io_e_Caterina_1980">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58618.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Io e Caterina (1980)</p>
       </a>
@@ -484,7 +560,7 @@
     <div class="canale no-logo" id="Io_so_che_tu_sai_che_io_so_1982">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58619.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Io so che tu sai che io so (1982)</p>
       </a>
@@ -493,7 +569,7 @@
     <div class="canale no-logo" id="I_vitelloni_1953">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58620.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>I vitelloni (1953)</p>
       </a>
@@ -502,7 +578,7 @@
     <div class="canale no-logo" id="L_arte_di_arrangiarsi_1954">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58621.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>L'arte di arrangiarsi (1954)</p>
       </a>
@@ -511,7 +587,7 @@
     <div class="canale no-logo" id="L_avaro_1990">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58622.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>L'avaro (1990)</p>
       </a>
@@ -520,7 +596,7 @@
     <div class="canale no-logo" id="L_ingorgo_1979">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58623.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>L'ingorgo (1979)</p>
       </a>
@@ -529,7 +605,7 @@
     <div class="canale no-logo" id="Ladro_lui_ladra_lei_1958">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58624.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ladro lui, ladra lei (1958)</p>
       </a>
@@ -538,7 +614,7 @@
     <div class="canale no-logo" id="La_grande_guerra_1959">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58625.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>La grande guerra (1959)</p>
       </a>
@@ -547,7 +623,7 @@
     <div class="canale no-logo" id="Le_coppie_1970">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58626.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Le coppie (1970)</p>
       </a>
@@ -556,7 +632,7 @@
     <div class="canale no-logo" id="Lo_scapolo_1955">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58627.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Lo scapolo (1955)</p>
       </a>
@@ -565,7 +641,7 @@
     <div class="canale no-logo" id="Lo_sceicco_bianco_1952">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58628.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Lo sceicco bianco (1952)</p>
       </a>
@@ -574,7 +650,7 @@
     <div class="canale no-logo" id="Lo_Scocciatore_1954_Sordi">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58629.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Lo Scocciatore 1954 Sordi</p>
       </a>
@@ -583,7 +659,7 @@
     <div class="canale no-logo" id="Lo_scopone_scientifico_1972">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58630.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Lo scopone scientifico (1972)</p>
       </a>
@@ -592,7 +668,7 @@
     <div class="canale no-logo" id="Mafioso_1962">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58631.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Mafioso (1962)</p>
       </a>
@@ -601,7 +677,7 @@
     <div class="canale no-logo" id="Mamma_mia_che_impressione_1951">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58632.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Mamma mia, che impressione! (1951)</p>
       </a>
@@ -610,7 +686,7 @@
     <div class="canale no-logo" id="Mio_figlio_Nerone_1956">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58633.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Mio figlio Nerone (1956)</p>
       </a>
@@ -619,7 +695,7 @@
     <div class="canale no-logo" id="Mi_permette_babbo_1956">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58634.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Mi permette babbo! (1956)</p>
       </a>
@@ -628,7 +704,7 @@
     <div class="canale no-logo" id="Nestore_l_ultima_corsa_1994">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58635.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Nestore, l'ultima corsa (1994)</p>
       </a>
@@ -637,7 +713,7 @@
     <div class="canale no-logo" id="Permette_Alberto_Sordi_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58636.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Permette? Alberto Sordi (2020)</p>
       </a>
@@ -646,7 +722,7 @@
     <div class="canale no-logo" id="Polvere_di_stelle_1973">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58637.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Polvere di stelle (1973)</p>
       </a>
@@ -655,7 +731,7 @@
     <div class="canale no-logo" id="Quei_temerari_sulle_macchine_volanti_1965">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58638.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Quei temerari sulle macchine volanti (1965)</p>
       </a>
@@ -664,7 +740,7 @@
     <div class="canale no-logo" id="Quelle_strane_occasioni_1976">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58639.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Quelle strane occasioni (1976)</p>
       </a>
@@ -673,7 +749,7 @@
     <div class="canale no-logo" id="Racconti_d_estate_1958">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58640.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Racconti d'estate (1958)</p>
       </a>
@@ -682,7 +758,7 @@
     <div class="canale no-logo" id="Riusciranno_I_Nostri_Eroi_A_Ritrovare_L_Amico_1968_Sordi">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58641.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Riusciranno I Nostri Eroi A Ritrovare L'Amico....1968 Sordi</p>
       </a>
@@ -691,7 +767,7 @@
     <div class="canale no-logo" id="Romanzo_di_un_giovane_povero_1995">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58642.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Romanzo di un giovane povero (1995)</p>
       </a>
@@ -700,7 +776,7 @@
     <div class="canale no-logo" id="Scusi_Lei_E_Favorevole_O_Contrario_1967_Sordi">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58643.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Scusi Lei E Favorevole O Contrario 1967 Sordi</p>
       </a>
@@ -709,7 +785,7 @@
     <div class="canale no-logo" id="Sono_Un_Fenomeno_Paranormale_1959_Sordi">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58644.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Sono Un Fenomeno Paranormale 1959 Sordi</p>
       </a>
@@ -718,7 +794,7 @@
     <div class="canale no-logo" id="Sotto_il_sole_di_Roma_1948">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58645.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Sotto il sole di Roma (1948)</p>
       </a>
@@ -727,7 +803,7 @@
     <div class="canale no-logo" id="Souvenir_d_Italie_1957">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58646.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Souvenir d'Italie (1957)</p>
       </a>
@@ -736,7 +812,7 @@
     <div class="canale no-logo" id="Tutti_a_casa_1960">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58647.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Tutti a casa (1960)</p>
       </a>
@@ -745,7 +821,7 @@
     <div class="canale no-logo" id="Tutti_dentro_1984">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58648.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Tutti dentro (1984)</p>
       </a>
@@ -754,7 +830,7 @@
     <div class="canale no-logo" id="Un_americano_a_Roma_1954">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58649.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Un americano a Roma (1954)</p>
       </a>
@@ -763,7 +839,7 @@
     <div class="canale no-logo" id="Una_vita_difficile_1961">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58650.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Una vita difficile (1961)</p>
       </a>
@@ -772,7 +848,7 @@
     <div class="canale no-logo" id="Un_borghese_piccolo_piccolo_1977">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58651.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Un borghese piccolo piccolo (1977)</p>
       </a>
@@ -781,7 +857,7 @@
     <div class="canale no-logo" id="Un_eroe_dei_nostri_tempi_1955">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58652.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Un eroe dei nostri tempi (1955)</p>
       </a>
@@ -790,7 +866,7 @@
     <div class="canale no-logo" id="Un_Giorno_In_Pretura_1953_Sordi">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58653.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Un Giorno In Pretura 1953 Sordi</p>
       </a>
@@ -799,7 +875,7 @@
     <div class="canale no-logo" id="Un_italiano_in_America_1967">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58654.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Un italiano in America (1967)</p>
       </a>

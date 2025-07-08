@@ -6,133 +6,209 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
   <style>
-    body {
-      background-color: #1a1a1a;
-      color: #fff;
-      font-family: 'Open Sans', sans-serif;
-      margin: 0;
-      padding: 20px;
-    }
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
 
-    h1 {
-      text-align: center;
-      margin-bottom: 40px;
-    }
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
 
-    .griglia {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 20px;
-      justify-items: center;
-    }
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
 
-    .tile, .canale {
-      background-color: #292929;
-      border-radius: 10px;
-      text-align: center;
-      color: #fff;
-      padding: 15px;
-      transition: transform 0.2s, box-shadow 0.2s;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
 
-    .tile:hover, .canale:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-    }
+h1 {
+  font-size: 4rem;
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+}
 
-    .tile {
-      font-weight: bold;
-      font-size: 1.1em;
-    }
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
 
-    .canale a {
-      text-decoration: none;
-      color: inherit;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
 
-    .canale img {
-      width: 100%;
-      height: 120px;
-      object-fit: contain;
-      border-radius: 8px;
-      background-color: #111;
-      margin-bottom: 10px;
-    }
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
 
-    .canale p {
-      margin: 0;
-      font-size: 0.95em;
-    }
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
 
-    .placeholder-logo {
-      width: 100%;
-      height: 120px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #444, #222);
-      font-size: 2em;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      color: #eee;
-    }
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
 
-    .canale.no-logo:hover .placeholder-logo {
-      background: linear-gradient(135deg, #555, #333);
-    }
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
 
-    @media screen and (orientation: portrait) {
-      .griglia {
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      }
+.canale a {
+  text-decoration: none;
+  color: inherit;
+}
 
-      .canale img, .placeholder-logo {
-        height: 100px;
-      }
 
-      .canale p {
-        font-size: 0.9em;
-      }
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+  text-decoration: none;
+}
 
-      body {
-        padding: 15px;
-      }
-    }
 
-    @media screen and (orientation: landscape) {
-      .griglia {
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      }
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
 
-      .canale img, .placeholder-logo {
-        height: 140px;
-      }
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
 
-      .canale p {
-        font-size: 1em;
-      }
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
 
-      body {
-        padding: 30px;
-      }
-    }
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
 
-    .back {
-      text-align: center;
-      margin-top: 40px;
-    }
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
 
-    .back a {
-      color: #aaa;
-      text-decoration: none;
-      font-size: 16px;
-    }
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
   </style>
 </head>
 <body>
@@ -142,7 +218,7 @@
     <div class="canale no-logo" id="10_cose_da_fare_prima_di_lasciarsi_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59525.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>10 cose da fare prima di lasciarsi (2020)</p>
       </a>
@@ -151,7 +227,7 @@
     <div class="canale no-logo" id="After_2019">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59526.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>After (2019)</p>
       </a>
@@ -160,7 +236,7 @@
     <div class="canale no-logo" id="After_2_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59527.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>After 2 (2020)</p>
       </a>
@@ -169,7 +245,7 @@
     <div class="canale no-logo" id="Amici_di_letto_2011">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59528.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Amici di letto (2011)</p>
       </a>
@@ -178,7 +254,7 @@
     <div class="canale no-logo" id="Amori_in_corsa_2004">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59529.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Amori in corsa (2004)</p>
       </a>
@@ -187,7 +263,7 @@
     <div class="canale no-logo" id="A_un_metro_da_te_2019">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59530.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>A un metro da te (2019)</p>
       </a>
@@ -196,7 +272,7 @@
     <div class="canale no-logo" id="Before_Sunset_Prima_del_tramonto_2004">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59531.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Before Sunset - Prima del tramonto (2004)</p>
       </a>
@@ -205,7 +281,7 @@
     <div class="canale no-logo" id="Cambio_vita_2011">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59532.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Cambio vita (2011)</p>
       </a>
@@ -214,7 +290,7 @@
     <div class="canale no-logo" id="Cosa_mi_lasci_di_te_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59533.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Cosa mi lasci di te (2020)</p>
       </a>
@@ -223,7 +299,7 @@
     <div class="canale no-logo" id="Cruise_2018">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59534.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Cruise (2018)</p>
       </a>
@@ -232,7 +308,7 @@
     <div class="canale no-logo" id="Dean_2016">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59535.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Dean (2016)</p>
       </a>
@@ -241,7 +317,7 @@
     <div class="canale no-logo" id="Dopo_la_tempesta_2019">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59536.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Dopo la tempesta (2019)</p>
       </a>
@@ -250,7 +326,7 @@
     <div class="canale no-logo" id="Genio_per_amore_1994">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59537.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Genio per amore (1994)</p>
       </a>
@@ -259,7 +335,7 @@
     <div class="canale no-logo" id="Ho_cercato_il_tuo_nome_2012">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59538.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ho cercato il tuo nome (2012)</p>
       </a>
@@ -268,7 +344,7 @@
     <div class="canale no-logo" id="Ho_voglia_di_te_2007">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59539.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ho voglia di te (2007)</p>
       </a>
@@ -277,7 +353,7 @@
     <div class="canale no-logo" id="Inga_Lindstrom_Tango_Di_Mezza_Estate_2010_Romantici">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59540.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Inga Lindstrom Tango Di Mezza Estate 2010 Romantici</p>
       </a>
@@ -286,7 +362,7 @@
     <div class="canale no-logo" id="Irresistible_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59541.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Irresistible (2020)</p>
       </a>
@@ -295,7 +371,7 @@
     <div class="canale no-logo" id="L_assistente_della_Star_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59542.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>L'assistente della Star (2020)</p>
       </a>
@@ -304,7 +380,7 @@
     <div class="canale no-logo" id="L_estate_del_mio_primo_bacio_2006">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59543.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>L'estate del mio primo bacio (2006)</p>
       </a>
@@ -313,7 +389,7 @@
     <div class="canale no-logo" id="L_hotel_degli_amori_smarriti_2019">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59544.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>L'hotel degli amori smarriti (2019)</p>
       </a>
@@ -322,7 +398,7 @@
     <div class="canale no-logo" id="La_neve_nel_cuore_2005">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59545.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>La neve nel cuore (2005)</p>
       </a>
@@ -331,7 +407,7 @@
     <div class="canale no-logo" id="La_ragazza_del_mondo_2016">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59546.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>La ragazza del mondo (2016)</p>
       </a>
@@ -340,7 +416,7 @@
     <div class="canale no-logo" id="La_spia_russa_2016">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59547.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>La spia russa (2016)</p>
       </a>
@@ -349,7 +425,7 @@
     <div class="canale no-logo" id="La_vita_che_volevamo_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59548.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>La vita che volevamo (2020)</p>
       </a>
@@ -358,7 +434,7 @@
     <div class="canale no-logo" id="La_vita_che_vorrei_2004">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59549.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>La vita che vorrei (2004)</p>
       </a>
@@ -367,7 +443,7 @@
     <div class="canale no-logo" id="Lei_è_troppo_per_me_2010">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59550.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Lei è troppo per me (2010)</p>
       </a>
@@ -376,7 +452,7 @@
     <div class="canale no-logo" id="Lola_And_Jeremy_2017_Romantici">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59551.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Lola And Jeremy 2017 Romantici</p>
       </a>
@@ -385,7 +461,7 @@
     <div class="canale no-logo" id="Love_And_Other_Drugs_2010_Romantici">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59552.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Love And Other Drugs 2010 Romantici</p>
       </a>
@@ -394,7 +470,7 @@
     <div class="canale no-logo" id="Magari_2019_Romantici">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59553.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Magari 2019 Romantici</p>
       </a>
@@ -403,7 +479,7 @@
     <div class="canale no-logo" id="Mai_dire_sempre_2002">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59554.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Mai dire sempre (2002)</p>
       </a>
@@ -412,7 +488,7 @@
     <div class="canale no-logo" id="Mai_stata_baciata_1999">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59555.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Mai stata baciata (1999)</p>
       </a>
@@ -421,7 +497,7 @@
     <div class="canale no-logo" id="Man_Up_Un_amore_per_caso_2015">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59556.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Man Up - Un amore per caso (2015)</p>
       </a>
@@ -430,7 +506,7 @@
     <div class="canale no-logo" id="Nelle_tue_mani_2018">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59557.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Nelle tue mani (2018)</p>
       </a>
@@ -439,7 +515,7 @@
     <div class="canale no-logo" id="Nessuno_come_noi_2018">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59558.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Nessuno come noi (2018)</p>
       </a>
@@ -448,7 +524,7 @@
     <div class="canale no-logo" id="Nessuno_si_salva_da_solo_2015">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59559.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Nessuno si salva da solo (2015)</p>
       </a>
@@ -457,7 +533,7 @@
     <div class="canale no-logo" id="Parlami_d_amore_2008">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59560.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Parlami d'amore (2008)</p>
       </a>
@@ -466,7 +542,7 @@
     <div class="canale no-logo" id="Per_sempre_la_mia_ragazza_2018">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59561.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Per sempre la mia ragazza (2018)</p>
       </a>
@@ -475,7 +551,7 @@
     <div class="canale no-logo" id="Quello_che_so_sull_amore_2012">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59562.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Quello che so sull’amore (2012)</p>
       </a>
@@ -484,7 +560,7 @@
     <div class="canale no-logo" id="Romeo_And_Juliet_2013_Romantici">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59563.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Romeo And Juliet 2013 Romantici</p>
       </a>
@@ -493,7 +569,7 @@
     <div class="canale no-logo" id="Save_the_Last_Dance_2001">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59564.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Save the Last Dance (2001)</p>
       </a>
@@ -502,7 +578,7 @@
     <div class="canale no-logo" id="Save_the_Last_Dance_2_2006">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59565.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Save the Last Dance 2 (2006)</p>
       </a>
@@ -511,7 +587,7 @@
     <div class="canale no-logo" id="Se_solo_fosse_vero_2005">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59566.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Se solo fosse vero (2005)</p>
       </a>
@@ -520,7 +596,7 @@
     <div class="canale no-logo" id="The_Cutting_Edge_1_Vincere_Insieme_1992_Romantici">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59567.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>The Cutting Edge 1 Vincere Insieme 1992 Romantici</p>
       </a>
@@ -529,7 +605,7 @@
     <div class="canale no-logo" id="The_Cutting_Edge_2_In_Due_Per_La_Vittoria_2006_Romantici">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59568.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>The Cutting Edge 2 In Due Per La Vittoria 2006 Romantici</p>
       </a>
@@ -538,7 +614,7 @@
     <div class="canale no-logo" id="The_Cutting_Edge_3_Inseguendo_La_Vittoria_2008_Romantici">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59569.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>The Cutting Edge 3 Inseguendo La Vittoria 2008 Romantici</p>
       </a>
@@ -547,7 +623,7 @@
     <div class="canale no-logo" id="The_Cutting_Edge_4_Fire_And_Ice_2010_Romantici">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59570.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>The Cutting Edge 4 Fire And Ice 2010 Romantici</p>
       </a>
@@ -556,7 +632,7 @@
     <div class="canale no-logo" id="The_Last_Song_2010">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59571.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>The Last Song (2010)</p>
       </a>
@@ -565,7 +641,7 @@
     <div class="canale no-logo" id="The_Lost_Husband_2020_Romantici">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59572.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>The Lost Husband 2020 Romantici</p>
       </a>
@@ -574,7 +650,7 @@
     <div class="canale no-logo" id="The_Ramen_Girl_2008">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59573.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>The Ramen Girl (2008)</p>
       </a>
@@ -583,7 +659,7 @@
     <div class="canale no-logo" id="The_Swing_Of_Things_2020_Romantici">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59574.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>The Swing Of Things 2020 Romantici</p>
       </a>
@@ -592,7 +668,7 @@
     <div class="canale no-logo" id="Ti_sposo_ma_non_troppo_2014">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59575.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Ti sposo ma non troppo (2014)</p>
       </a>
@@ -601,7 +677,7 @@
     <div class="canale no-logo" id="Tre_metri_sopra_il_cielo_2004">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59576.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Tre metri sopra il cielo (2004)</p>
       </a>
@@ -610,7 +686,7 @@
     <div class="canale no-logo" id="Tutto_l_amore_per_Grace_2018">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59577.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Tutto l’amore per Grace (2018)</p>
       </a>
@@ -619,7 +695,7 @@
     <div class="canale no-logo" id="Una_folle_passione_2014">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59578.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Una folle passione (2014)</p>
       </a>
@@ -628,7 +704,7 @@
     <div class="canale no-logo" id="Una_lozione_d_amore_2011">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59579.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Una lozione d'amore (2011)</p>
       </a>
@@ -637,7 +713,7 @@
     <div class="canale no-logo" id="Un_amore_a_5_stelle_2002">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59580.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Un amore a 5 stelle (2002)</p>
       </a>
@@ -646,7 +722,7 @@
     <div class="canale no-logo" id="Una_notte_con_la_regina_2015">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59581.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Una notte con la regina (2015)</p>
       </a>
@@ -655,7 +731,7 @@
     <div class="canale no-logo" id="Un_avventura_2019">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59582.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Un'avventura (2019)</p>
       </a>
@@ -664,7 +740,7 @@
     <div class="canale no-logo" id="Vicino_all_orizzonte_2019">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59583.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Vicino all'orizzonte (2019)</p>
       </a>
@@ -673,7 +749,7 @@
     <div class="canale no-logo" id="Alessandra_Un_grande_amore_e_niente_più_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67826.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Alessandra - Un grande amore e niente più (2020)</p>
       </a>
@@ -682,7 +758,7 @@
     <div class="canale no-logo" id="All_My_Life_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67827.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>All My Life (2020)</p>
       </a>
@@ -691,7 +767,7 @@
     <div class="canale no-logo" id="Break_2018">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67828.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Break (2018)</p>
       </a>
@@ -700,7 +776,7 @@
     <div class="canale no-logo" id="Dolcezze_d_autunno_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67829.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Dolcezze d'autunno (2020)</p>
       </a>
@@ -709,7 +785,7 @@
     <div class="canale no-logo" id="Endings_Beginnings_Ricomincio_da_te_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67830.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Endings , Beginnings - Ricomincio da te (2020)</p>
       </a>
@@ -718,7 +794,7 @@
     <div class="canale no-logo" id="I_colori_dell_amore_2021">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67831.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>I colori dell'amore (2021)</p>
       </a>
@@ -727,7 +803,7 @@
     <div class="canale no-logo" id="Il_Primo_Raccolto_2020_Romantici">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67832.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Il Primo Raccolto 2020 Romantici</p>
       </a>
@@ -736,7 +812,7 @@
     <div class="canale no-logo" id="Inga_Lindstrom_Cuore_Di_Ghiaccio_2013_Romantici">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67833.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Inga Lindstrom Cuore Di Ghiaccio 2013 Romantici</p>
       </a>
@@ -745,7 +821,7 @@
     <div class="canale no-logo" id="Inga_Lindstrom_Il_Vero_Amore_2012_Romantici">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67834.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Inga Lindstrom Il Vero Amore 2012 Romantici</p>
       </a>
@@ -754,7 +830,7 @@
     <div class="canale no-logo" id="Inga_Lindstrom_Screzi_D_Amore_2018_Romantici">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67835.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Inga Lindstrom Screzi D'Amore 2018 Romantici</p>
       </a>
@@ -763,7 +839,7 @@
     <div class="canale no-logo" id="Into_the_Beat_Il_tuo_cuore_balla_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67836.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Into the Beat - Il tuo cuore balla (2020)</p>
       </a>
@@ -772,7 +848,7 @@
     <div class="canale no-logo" id="L_amore_non_va_in_vacanza_2006">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67837.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>L'amore non va in vacanza (2006)</p>
       </a>
@@ -781,7 +857,7 @@
     <div class="canale no-logo" id="L_anello_perfetto_2021">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67838.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>L'anello perfetto (2021)</p>
       </a>
@@ -790,7 +866,7 @@
     <div class="canale no-logo" id="La_galleria_dei_cuori_infranti_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67839.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>La galleria dei cuori infranti (2020)</p>
       </a>
@@ -799,7 +875,7 @@
     <div class="canale no-logo" id="La_vita_all_improvviso_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67840.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>La vita all’improvviso (2020)</p>
       </a>
@@ -808,7 +884,7 @@
     <div class="canale no-logo" id="Life_In_A_Year_Un_Anno_Ancora_2020_Romantici">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67841.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Life In A Year Un Anno Ancora 2020 Romantici</p>
       </a>
@@ -817,7 +893,7 @@
     <div class="canale no-logo" id="Little_Italy_Pizza_amore_e_fantasia_2018">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67842.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Little Italy - Pizza, amore e fantasia (2018)</p>
       </a>
@@ -826,7 +902,7 @@
     <div class="canale no-logo" id="Resta_Anche_Domani_If_I_Stay_2014_Romantici">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67843.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Resta Anche Domani If I Stay 2014 Romantici</p>
       </a>
@@ -835,7 +911,7 @@
     <div class="canale no-logo" id="Rosamunde_Pilcher_Tempesta_d_amore_2019">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67844.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Rosamunde Pilcher: Tempesta d'amore (2019)</p>
       </a>
@@ -844,7 +920,7 @@
     <div class="canale no-logo" id="Sul_più_bello_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67845.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Sul più bello (2020)</p>
       </a>
@@ -853,7 +929,7 @@
     <div class="canale no-logo" id="Sylvie_s_Love_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67846.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Sylvie's Love (2020)</p>
       </a>
@@ -862,7 +938,7 @@
     <div class="canale no-logo" id="The_Danish_Girl_2015">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67847.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>The Danish Girl (2015)</p>
       </a>
@@ -871,7 +947,7 @@
     <div class="canale no-logo" id="The_Photograph_Gli_scatti_di_mia_madre_2020">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67848.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>The Photograph: Gli scatti di mia madre (2020)</p>
       </a>
@@ -880,7 +956,7 @@
     <div class="canale no-logo" id="This_Little_Love_Of_Mine_2021_Romantici">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67849.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>This Little Love Of Mine 2021 Romantici</p>
       </a>
@@ -889,7 +965,7 @@
     <div class="canale no-logo" id="Un_Lungo_Weekend_2021">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67850.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Un Lungo Weekend (2021)</p>
       </a>
@@ -898,7 +974,7 @@
     <div class="canale no-logo" id="Un_matrimonio_da_salvare_2019">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67851.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Un matrimonio da salvare (2019)</p>
       </a>
@@ -907,7 +983,7 @@
     <div class="canale no-logo" id="Un_principe_tutto_mio_2004">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67852.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Un principe tutto mio (2004)</p>
       </a>
@@ -916,7 +992,7 @@
     <div class="canale no-logo" id="Un_sogno_per_te_2019">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67853.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Un sogno per te (2019)</p>
       </a>

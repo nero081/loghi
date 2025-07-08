@@ -7,16 +7,190 @@
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 
   <style>
-    body {
-      background-color: #1a1a1a;
-      color: #fff;
-      font-family: 'Open Sans', sans-serif;
-      margin: 0;
-      padding: 20px;
-    }
-	
-	    
-	  /* Immagine di sfondo trasparente che segue lo scroll */
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+h1 {
+  font-size: 4rem;
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+}
+
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
+
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
+
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
+
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
+
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+}
+
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
+
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
 #background-image {
   position: fixed;
   top: 0;
@@ -24,642 +198,559 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.2; /* Trasparenza desiderata */
-  pointer-events: none; /* Per non interferire con altri elementi */
-  z-index: -1; /* Dietro tutto */
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
 }
-
-    h1 {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    .griglia {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 20px;
-      justify-items: center;
-    }
-
-    .tile {
-	  width: 75%;
-      background-color: #292929;
-      border-radius: 10px;
-      text-align: center;
-      color: #fff;
-      padding: 15px;
-      transition: transform 0.2s, box-shadow 0.2s;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      font-weight: bold;
-      font-size: 1.1em;
-      text-decoration: none;
-    }
-	
-	.tile img {
-  width: 100%;
-  max-width: 150px;
-  border-radius: 12px;
-  transition: transform 0.3s ease;
-}
-
-.tile:hover img {
-  transform: scale(1.1);
-}
-
-    .tile:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-    }
-
-    .tile:focus {
-      outline: 2px solid #fff;
-      background-color: #3a3a3a;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-    }
-
-    @media screen and (orientation: portrait) {
-      .griglia {
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      }
-
-      .tile {
-        font-size: 1em;
-        padding: 12px;
-      }
-
-      body {
-        padding: 15px;
-      }
-    }
-
-    @media screen and (orientation: landscape) {
-      .griglia {
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      }
-
-      .tile {
-        font-size: 1.1em;
-        padding: 16px;
-      }
-
-      body {
-        padding: 30px;
-  
-    }
-	}
   </style>
 </head>
 <body>
-
-  <img id="background-image" src="https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png" alt="Sfondo trasparente" />
-  <h1>🎞️ Film & Serie</h1>
+  <h1>📁 Film & Serie</h1>
   <div class="griglia">
-  
-   <a class="tile" href="search.html" tabindex="0">
+    
+	<a class="canale" href="search.html" tabindex="0">
   <div style="font-size: 48px;">🔍</div>
   <div>⭐Cerca⭐️</div>
 </a>
-    
-     <a class="tile" href="⭐️STORICI⭐️.html" tabindex="0">
+
+     <a class="canale" href="⭐️STORICI⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️STORICI⭐️</div>
+  <div><p>⭐️STORICI⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️XXX_ADULTI_1⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️XXX_ADULTI_1⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️XXX ADULTI 1⭐️</div>
+  <div><p>⭐️XXX ADULTI 1⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️EROTICI⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️EROTICI⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️EROTICI⭐️</div>
+  <div><p>⭐️EROTICI⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️-NUOVI-INSERITI-2023-⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️-NUOVI-INSERITI-2023-⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️-NUOVI-INSERITI-2023-⭐️</div>
+  <div><p>⭐️-NUOVI-INSERITI-2023-⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️⭐️⭐️⭐️⭐️--NUOVI_FILM_AGGIUNTI_--⭐️⭐️⭐️⭐️⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️⭐️⭐️⭐️⭐️--NUOVI_FILM_AGGIUNTI_--⭐️⭐️⭐️⭐️⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️⭐️⭐️⭐️⭐️--NUOVI FILM AGGIUNTI --⭐️⭐️⭐️⭐️⭐️</div>
+  <div><p>⭐️⭐️⭐️⭐️⭐️--NUOVI FILM AGGIUNTI --⭐️⭐️⭐️⭐️⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️⭐️⭐️⭐️⭐️--NUOVI_FILM_AGGIUNTI_-2025-⭐️⭐️⭐️⭐️⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️⭐️⭐️⭐️⭐️--NUOVI_FILM_AGGIUNTI_-2025-⭐️⭐️⭐️⭐️⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️⭐️⭐️⭐️⭐️--NUOVI FILM AGGIUNTI -2025-⭐️⭐️⭐️⭐️⭐️</div>
+  <div><p>⭐️⭐️⭐️⭐️⭐️--NUOVI FILM AGGIUNTI -2025-⭐️⭐️⭐️⭐️⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Film_2023⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Film_2023⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Film 2023⭐️</div>
+  <div><p>⭐️Film 2023⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Film_Cult⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Film_Cult⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Film Cult⭐️</div>
+  <div><p>⭐️Film Cult⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Netflix⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Netflix⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Netflix⭐️</div>
+  <div><p>⭐️Netflix⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Animazione⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Animazione⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Animazione⭐️</div>
+  <div><p>⭐️Animazione⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Avventura⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Avventura⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Avventura⭐️</div>
+  <div><p>⭐️Avventura⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Azione⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Azione⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Azione⭐️</div>
+  <div><p>⭐️Azione⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Cartoni⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Cartoni⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Cartoni⭐️</div>
+  <div><p>⭐️Cartoni⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Documentari⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Documentari⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Documentari⭐️</div>
+  <div><p>⭐️Documentari⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Commedia⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Commedia⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Commedia⭐️</div>
+  <div><p>⭐️Commedia⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Commedia_Italiana⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Commedia_Italiana⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Commedia Italiana⭐️</div>
+  <div><p>⭐️Commedia Italiana⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Disney⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Disney⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Disney⭐️</div>
+  <div><p>⭐️Disney⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Drammatici_M-Z⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Drammatici_M-Z⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Drammatici M-Z⭐️</div>
+  <div><p>⭐️Drammatici M-Z⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Drammatici_A-L⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Drammatici_A-L⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Drammatici A-L⭐️</div>
+  <div><p>⭐️Drammatici A-L⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Fantascienza⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Fantascienza⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Fantascienza⭐️</div>
+  <div><p>⭐️Fantascienza⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Cinepanettone⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Cinepanettone⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Cinepanettone⭐️</div>
+  <div><p>⭐️Cinepanettone⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Kevin_Costner⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Kevin_Costner⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Kevin Costner⭐️</div>
+  <div><p>⭐️Kevin Costner⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Mario_Merola⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Mario_Merola⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Mario Merola⭐️</div>
+  <div><p>⭐️Mario Merola⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Tomas_Milian⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Tomas_Milian⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Tomas Milian⭐️</div>
+  <div><p>⭐️Tomas Milian⭐️</p></div>
 </a>
     
-     <a class="tile" href="Al_Pacino.html" tabindex="0">
+     <a class="canale" href="Al_Pacino.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>Al Pacino</div>
+  <div><p>Al Pacino</p></div>
 </a>
     
-     <a class="tile" href="Brad_Pitt.html" tabindex="0">
+     <a class="canale" href="Brad_Pitt.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>Brad Pitt</div>
+  <div><p>Brad Pitt</p></div>
 </a>
     
-     <a class="tile" href="⭐️Renato_Pozzetto⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Renato_Pozzetto⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Renato Pozzetto⭐️</div>
+  <div><p>⭐️Renato Pozzetto⭐️</p></div>
 </a>
     
-     <a class="tile" href="Harrison_Ford.html" tabindex="0">
+     <a class="canale" href="Harrison_Ford.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>Harrison Ford</div>
+  <div><p>Harrison Ford</p></div>
 </a>
     
-     <a class="tile" href="Arnold_SCHWARZENEGGER.html" tabindex="0">
+     <a class="canale" href="Arnold_SCHWARZENEGGER.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>Arnold SCHWARZENEGGER</div>
+  <div><p>Arnold SCHWARZENEGGER</p></div>
 </a>
     
-     <a class="tile" href="⭐️Steven_SEAGAL⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Steven_SEAGAL⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Steven SEAGAL⭐️</div>
+  <div><p>⭐️Steven SEAGAL⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Will_Smith⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Will_Smith⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Will Smith⭐️</div>
+  <div><p>⭐️Will Smith⭐️</p></div>
 </a>
     
-     <a class="tile" href="Jhon_TRAVOLTA.html" tabindex="0">
+     <a class="canale" href="Jhon_TRAVOLTA.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>Jhon TRAVOLTA</div>
+  <div><p>Jhon TRAVOLTA</p></div>
 </a>
     
-     <a class="tile" href="⭐️Massimo_Troisi⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Massimo_Troisi⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Massimo Troisi⭐️</div>
+  <div><p>⭐️Massimo Troisi⭐️</p></div>
 </a>
     
-     <a class="tile" href="Jean_Claude_Van_Damme.html" tabindex="0">
+     <a class="canale" href="Jean_Claude_Van_Damme.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>Jean Claude Van Damme</div>
+  <div><p>Jean Claude Van Damme</p></div>
 </a>
     
-     <a class="tile" href="⭐️Carlo_Verdone⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Carlo_Verdone⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Carlo Verdone⭐️</div>
+  <div><p>⭐️Carlo Verdone⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Paolo_Villaggio⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Paolo_Villaggio⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Paolo Villaggio⭐️</div>
+  <div><p>⭐️Paolo Villaggio⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Alvaro_Vitali⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Alvaro_Vitali⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Alvaro Vitali⭐️</div>
+  <div><p>⭐️Alvaro Vitali⭐️</p></div>
 </a>
     
-     <a class="tile" href="Denzel_Washington.html" tabindex="0">
+     <a class="canale" href="Denzel_Washington.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>Denzel Washington</div>
+  <div><p>Denzel Washington</p></div>
 </a>
     
-     <a class="tile" href="⭐️Bud_Spencer⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Bud_Spencer⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Bud Spencer⭐️</div>
+  <div><p>⭐️Bud Spencer⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Nicolas_CAGE⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Nicolas_CAGE⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Nicolas CAGE⭐️</div>
+  <div><p>⭐️Nicolas CAGE⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Celentano⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Celentano⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Celentano⭐️</div>
+  <div><p>⭐️Celentano⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Nino_D'angelo⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Nino_D'angelo⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Nino D'angelo⭐️</div>
+  <div><p>⭐️Nino D'angelo⭐️</p></div>
 </a>
     
-     <a class="tile" href="EDUARDO_DE_FILIPPO.html" tabindex="0">
+     <a class="canale" href="EDUARDO_DE_FILIPPO.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>EDUARDO DE FILIPPO</div>
+  <div><p>EDUARDO DE FILIPPO</p></div>
 </a>
     
-     <a class="tile" href="⭐️Robert_DE_NIRO⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Robert_DE_NIRO⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Robert DE NIRO⭐️</div>
+  <div><p>⭐️Robert DE NIRO⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Leonardo_DI_CAPRIO⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Leonardo_DI_CAPRIO⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Leonardo DI CAPRIO⭐️</div>
+  <div><p>⭐️Leonardo DI CAPRIO⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Franco_e_Ciccio⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Franco_e_Ciccio⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Franco e Ciccio⭐️</div>
+  <div><p>⭐️Franco e Ciccio⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Tom_Hanks⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Tom_Hanks⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Tom Hanks⭐️</div>
+  <div><p>⭐️Tom Hanks⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Diego_Abatantuono⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Diego_Abatantuono⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Diego Abatantuono⭐️</div>
+  <div><p>⭐️Diego Abatantuono⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Leonardo_Pieraccioni⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Leonardo_Pieraccioni⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Leonardo Pieraccioni⭐️</div>
+  <div><p>⭐️Leonardo Pieraccioni⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Alberto_Sordi⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Alberto_Sordi⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Alberto Sordi⭐️</div>
+  <div><p>⭐️Alberto Sordi⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Dario_Argento⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Dario_Argento⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Dario Argento⭐️</div>
+  <div><p>⭐️Dario Argento⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Toto⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Toto⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Toto⭐️</div>
+  <div><p>⭐️Toto⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Lino_Banfi⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Lino_Banfi⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Lino Banfi⭐️</div>
+  <div><p>⭐️Lino Banfi⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Aldo_Giovanni_E_Giacomo⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Aldo_Giovanni_E_Giacomo⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Aldo Giovanni E Giacomo⭐️</div>
+  <div><p>⭐️Aldo Giovanni E Giacomo⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Tom_CRUISE⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Tom_CRUISE⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Tom CRUISE⭐️</div>
+  <div><p>⭐️Tom CRUISE⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Liam_Neeson⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Liam_Neeson⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Liam Neeson⭐️</div>
+  <div><p>⭐️Liam Neeson⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Vincenzo_Salemme⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Vincenzo_Salemme⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Vincenzo Salemme⭐️</div>
+  <div><p>⭐️Vincenzo Salemme⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Silvester_STALLONE⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Silvester_STALLONE⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Silvester STALLONE⭐️</div>
+  <div><p>⭐️Silvester STALLONE⭐️</p></div>
 </a>
     
-     <a class="tile" href="Bruce_Willis.html" tabindex="0">
+     <a class="canale" href="Bruce_Willis.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>Bruce Willis</div>
+  <div><p>Bruce Willis</p></div>
 </a>
     
-     <a class="tile" href="⭐️Checco_Zalone⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Checco_Zalone⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Checco Zalone⭐️</div>
+  <div><p>⭐️Checco Zalone⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Romantici⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Romantici⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Romantici⭐️</div>
+  <div><p>⭐️Romantici⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Horror⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Horror⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Horror⭐️</div>
+  <div><p>⭐️Horror⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Thriller⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Thriller⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Thriller⭐️</div>
+  <div><p>⭐️Thriller⭐️</p></div>
 </a>
     
-     <a class="tile" href="FILM_CATTOLICI.html" tabindex="0">
+     <a class="canale" href="FILM_CATTOLICI.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>FILM CATTOLICI</div>
+  <div><p>FILM CATTOLICI</p></div>
 </a>
     
-     <a class="tile" href="⭐️Western⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Western⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Western⭐️</div>
+  <div><p>⭐️Western⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Tematici_Bambini_⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Tematici_Bambini_⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Tematici Bambini ⭐️</div>
+  <div><p>⭐️Tematici Bambini ⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️Tematici_Film_⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️Tematici_Film_⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️Tematici Film ⭐️</div>
+  <div><p>⭐️Tematici Film ⭐️</p></div>
 </a>
     
-     <a class="tile" href="007_SAGA.html" tabindex="0">
+     <a class="canale" href="007_SAGA.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>007 SAGA</div>
+  <div><p>007 SAGA</p></div>
 </a>
     
-     <a class="tile" href="Alien_SAGA.html" tabindex="0">
+     <a class="canale" href="Alien_SAGA.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>Alien SAGA</div>
+  <div><p>Alien SAGA</p></div>
 </a>
     
-     <a class="tile" href="Il_Signore_Degli_Anelli_SAGA.html" tabindex="0">
+     <a class="canale" href="Il_Signore_Degli_Anelli_SAGA.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>Il Signore Degli Anelli SAGA</div>
+  <div><p>Il Signore Degli Anelli SAGA</p></div>
 </a>
     
-     <a class="tile" href="Pirati_Dei_Caraibii_SAGA.html" tabindex="0">
+     <a class="canale" href="Pirati_Dei_Caraibii_SAGA.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>Pirati Dei Caraibii SAGA</div>
+  <div><p>Pirati Dei Caraibii SAGA</p></div>
 </a>
     
-     <a class="tile" href="Harry_Potter_SAGA.html" tabindex="0">
+     <a class="canale" href="Harry_Potter_SAGA.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>Harry Potter SAGA</div>
+  <div><p>Harry Potter SAGA</p></div>
 </a>
     
-     <a class="tile" href="Michael_Jai_White.html" tabindex="0">
+     <a class="canale" href="Michael_Jai_White.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>Michael Jai White</div>
+  <div><p>Michael Jai White</p></div>
 </a>
     
-     <a class="tile" href="⭐️XXX_ADULTI_2⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️XXX_ADULTI_2⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️XXX ADULTI 2⭐️</div>
+  <div><p>⭐️XXX ADULTI 2⭐️</p></div>
 </a>
     
-     <a class="tile" href="⭐️XXX⭐️.html" tabindex="0">
+     <a class="canale" href="⭐️XXX⭐️.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>⭐️XXX⭐️</div>
+  <div><p>⭐️XXX⭐️</p></div>
 </a>
     
-     <a class="tile" href="primafila.html" tabindex="0">
+     <a class="canale" href="primafila.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>primafila</div>
+  <div><p>primafila</p></div>
 </a>
     
-     <a class="tile" href="CANALE24.html" tabindex="0">
+     <a class="canale" href="CANALE24.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>CANALE24</div>
+  <div><p>CANALE24</p></div>
 </a>
     
-     <a class="tile" href="PRIMAFILA-SERVER.html" tabindex="0">
+     <a class="canale" href="PRIMAFILA-SERVER.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>PRIMAFILA-SERVER</div>
+  <div><p>PRIMAFILA-SERVER</p></div>
 </a>
     
-     <a class="tile" href="Programmi_Tv.html" tabindex="0">
+     <a class="canale" href="Programmi_Tv.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>Programmi Tv</div>
+  <div><p>Programmi Tv</p></div>
 </a>
     
-     <a class="tile" href="Serie_Rai_&_Mediaset.html" tabindex="0">
+     <a class="canale" href="Serie_Rai_&_Mediaset.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>Serie Rai & Mediaset</div>
+  <div><p>Serie Rai & Mediaset</p></div>
 </a>
     
-     <a class="tile" href="SERIE-TV-A.html" tabindex="0">
+     <a class="canale" href="SERIE-TV-A.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>SERIE-TV-A</div>
+  <div><p>SERIE-TV-A</p></div>
 </a>
     
-     <a class="tile" href="SERIE-TV-B.html" tabindex="0">
+     <a class="canale" href="SERIE-TV-B.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>SERIE-TV-B</div>
+  <div><p>SERIE-TV-B</p></div>
 </a>
     
-     <a class="tile" href="SERIE-TV-C.html" tabindex="0">
+     <a class="canale" href="SERIE-TV-C.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>SERIE-TV-C</div>
+  <div><p>SERIE-TV-C</p></div>
 </a>
     
-     <a class="tile" href="SERIE-TV-D.html" tabindex="0">
+     <a class="canale" href="SERIE-TV-D.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>SERIE-TV-D</div>
+  <div><p>SERIE-TV-D</p></div>
 </a>
     
-     <a class="tile" href="SERIE-TV-F.html" tabindex="0">
+     <a class="canale" href="SERIE-TV-F.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>SERIE-TV-F</div>
+  <div><p>SERIE-TV-F</p></div>
 </a>
     
-     <a class="tile" href="SERIE-TV-G.html" tabindex="0">
+     <a class="canale" href="SERIE-TV-G.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>SERIE-TV-G</div>
+  <div><p>SERIE-TV-G</p></div>
 </a>
     
-     <a class="tile" href="MASSA-DI-SERIE-MISTE.html" tabindex="0">
+     <a class="canale" href="MASSA-DI-SERIE-MISTE.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>MASSA-DI-SERIE-MISTE</div>
+  <div><p>MASSA-DI-SERIE-MISTE</p></div>
 </a>
     
-     <a class="tile" href="SERIE-TV-E.html" tabindex="0">
+     <a class="canale" href="SERIE-TV-E.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>SERIE-TV-E</div>
+  <div><p>SERIE-TV-E</p></div>
 </a>
     
-     <a class="tile" href="SERIE-TV-N.html" tabindex="0">
+     <a class="canale" href="SERIE-TV-N.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>SERIE-TV-N</div>
+  <div><p>SERIE-TV-N</p></div>
 </a>
     
-     <a class="tile" href="SERIE-TV-W.html" tabindex="0">
+     <a class="canale" href="SERIE-TV-W.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>SERIE-TV-W</div>
+  <div><p>SERIE-TV-W</p></div>
 </a>
     
-     <a class="tile" href="SERIE-TV-Z.html" tabindex="0">
+     <a class="canale" href="SERIE-TV-Z.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>SERIE-TV-Z</div>
+  <div><p>SERIE-TV-Z</p></div>
 </a>
     
-     <a class="tile" href="SERIE-TV-H.html" tabindex="0">
+     <a class="canale" href="SERIE-TV-H.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>SERIE-TV-H</div>
+  <div><p>SERIE-TV-H</p></div>
 </a>
     
-     <a class="tile" href="SERIE-TV-I.html" tabindex="0">
+     <a class="canale" href="SERIE-TV-I.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>SERIE-TV-I</div>
+  <div><p>SERIE-TV-I</p></div>
 </a>
     
-     <a class="tile" href="SERIE-TV-L.html" tabindex="0">
+     <a class="canale" href="SERIE-TV-L.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>SERIE-TV-L</div>
+  <div><p>SERIE-TV-L</p></div>
 </a>
     
-     <a class="tile" href="SERIE-TV-M.html" tabindex="0">
+     <a class="canale" href="SERIE-TV-M.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>SERIE-TV-M</div>
+  <div><p>SERIE-TV-M</p></div>
 </a>
     
-     <a class="tile" href="SERIE-TV-0.html" tabindex="0">
+     <a class="canale" href="SERIE-TV-0.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>SERIE-TV-0</div>
+  <div><p>SERIE-TV-0</p></div>
 </a>
     
-     <a class="tile" href="SERIE-TV-P.html" tabindex="0">
+     <a class="canale" href="SERIE-TV-P.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>SERIE-TV-P</div>
+  <div><p>SERIE-TV-P</p></div>
 </a>
     
-     <a class="tile" href="SERIE-TV-T.html" tabindex="0">
+     <a class="canale" href="SERIE-TV-T.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>SERIE-TV-T</div>
+  <div><p>SERIE-TV-T</p></div>
 </a>
     
-     <a class="tile" href="SERIE-TV-S.html" tabindex="0">
+     <a class="canale" href="SERIE-TV-S.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>SERIE-TV-S</div>
+  <div><p>SERIE-TV-S</p></div>
 </a>
     
-     <a class="tile" href="SERIE-TV-U.html" tabindex="0">
+     <a class="canale" href="SERIE-TV-U.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>SERIE-TV-U</div>
+  <div><p>SERIE-TV-U</p></div>
 </a>
     
-     <a class="tile" href="SERIE-TV-Y.html" tabindex="0">
+     <a class="canale" href="SERIE-TV-Y.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>SERIE-TV-Y</div>
+  <div><p>SERIE-TV-Y</p></div>
 </a>
     
-     <a class="tile" href="SERIE-TV-X.html" tabindex="0">
+     <a class="canale" href="SERIE-TV-X.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>SERIE-TV-X</div>
+  <div><p>SERIE-TV-X</p></div>
 </a>
     
-     <a class="tile" href="SERIE-TV-V.html" tabindex="0">
+     <a class="canale" href="SERIE-TV-V.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>SERIE-TV-V</div>
+  <div><p>SERIE-TV-V</p></div>
 </a>
     
-     <a class="tile" href="SERIE-TV-Q.html" tabindex="0">
+     <a class="canale" href="SERIE-TV-Q.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>SERIE-TV-Q</div>
+  <div><p>SERIE-TV-Q</p></div>
 </a>
     
-     <a class="tile" href="SERIE-TV-R.html" tabindex="0">
+     <a class="canale" href="SERIE-TV-R.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>SERIE-TV-R</div>
+  <div><p>SERIE-TV-R</p></div>
 </a>
     
-     <a class="tile" href="NUOVI-INSERITI-2024.html" tabindex="0">
+     <a class="canale" href="NUOVI-INSERITI-2024.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>NUOVI-INSERITI-2024</div>
+  <div><p>NUOVI-INSERITI-2024</p></div>
 </a>
     
-     <a class="tile" href="Serie_Discovery_Plus.html" tabindex="0">
+     <a class="canale" href="Serie_Discovery_Plus.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>Serie Discovery Plus</div>
+  <div><p>Serie Discovery Plus</p></div>
 </a>
     
-     <a class="tile" href="Serie_Disney.html" tabindex="0">
+     <a class="canale" href="Serie_Disney.html" tabindex="0">
   <div style="font-size: 48px;">🎬</div>
-  <div>Serie Disney</div>
+  <div><p>Serie Disney</p></div>
 </a>
     
   </div>

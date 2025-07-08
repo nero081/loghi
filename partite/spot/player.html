@@ -1,64 +1,37 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <title>Player con Audio e Fullscreen</title>
+  <meta charset="UTF-8">
+  <title>Player</title>
   <style>
     body {
       margin: 0;
       background: #000;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      height: 100vh;
-      color: white;
+      justify-content: center;
       font-family: sans-serif;
-      user-select: none;
-      cursor: pointer;
     }
-    #play-button {
-      padding: 20px 40px;
-      background: #1e90ff;
-      border-radius: 8px;
-      font-size: 24px;
-      text-align: center;
-      user-select: none;
-    }
-    video {
-      display: none;
-      width: 100vw;
-      height: 100vh;
-      object-fit: contain;
-      background: black;
+    a {
+      color: #ccc;
+      margin-top: 40px;
+      text-decoration: none;
+      font-size: 18px;
     }
   </style>
 </head>
 <body>
-  <div id="play-button">▶ Clicca per riprodurre </div>
-  <video id="video" controls>
-    <source src="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55886.mp4" type="video/mp4" />
-    Il tuo browser non supporta il video HTML5.
-  </video>
-
+  <h2 style="color: #eee;">Riproduzione Canale</h2>
   <script>
-    const playBtn = document.getElementById('play-button');
-    const video = document.getElementById('video');
-
-    playBtn.addEventListener('click', () => {
-      playBtn.style.display = 'none';
-      video.style.display = 'block';
-      video.play().then(() => {
-        if (video.requestFullscreen) {
-          video.requestFullscreen();
-        } else if (video.webkitRequestFullscreen) {
-          video.webkitRequestFullscreen();
-        } else if (video.msRequestFullscreen) {
-          video.msRequestFullscreen();
-        }
-      }).catch(e => {
-        console.log('Errore riproduzione:', e);
-      });
-    });
+    const params = new URLSearchParams(window.location.search);
+    const url = params.get('url');
+    if (url) {
+      window.location.href = decodeURIComponent(url);
+    } else {
+      document.body.innerHTML = '<p style="color:white;">❌ Nessun URL fornito</p>';
+    }
   </script>
+  <a href="index.html">⟵ Torna alla home</a>
 </body>
 </html>

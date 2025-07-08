@@ -6,133 +6,209 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
   <style>
-    body {
-      background-color: #1a1a1a;
-      color: #fff;
-      font-family: 'Open Sans', sans-serif;
-      margin: 0;
-      padding: 20px;
-    }
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
 
-    h1 {
-      text-align: center;
-      margin-bottom: 40px;
-    }
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
 
-    .griglia {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 20px;
-      justify-items: center;
-    }
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
 
-    .tile, .canale {
-      background-color: #292929;
-      border-radius: 10px;
-      text-align: center;
-      color: #fff;
-      padding: 15px;
-      transition: transform 0.2s, box-shadow 0.2s;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
 
-    .tile:hover, .canale:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-    }
+h1 {
+  font-size: 4rem;
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+}
 
-    .tile {
-      font-weight: bold;
-      font-size: 1.1em;
-    }
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
 
-    .canale a {
-      text-decoration: none;
-      color: inherit;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
 
-    .canale img {
-      width: 100%;
-      height: 120px;
-      object-fit: contain;
-      border-radius: 8px;
-      background-color: #111;
-      margin-bottom: 10px;
-    }
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
 
-    .canale p {
-      margin: 0;
-      font-size: 0.95em;
-    }
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
 
-    .placeholder-logo {
-      width: 100%;
-      height: 120px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #444, #222);
-      font-size: 2em;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      color: #eee;
-    }
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
 
-    .canale.no-logo:hover .placeholder-logo {
-      background: linear-gradient(135deg, #555, #333);
-    }
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
 
-    @media screen and (orientation: portrait) {
-      .griglia {
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      }
+.canale a {
+  text-decoration: none;
+  color: inherit;
+}
 
-      .canale img, .placeholder-logo {
-        height: 100px;
-      }
 
-      .canale p {
-        font-size: 0.9em;
-      }
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+  text-decoration: none;
+}
 
-      body {
-        padding: 15px;
-      }
-    }
 
-    @media screen and (orientation: landscape) {
-      .griglia {
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      }
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
 
-      .canale img, .placeholder-logo {
-        height: 140px;
-      }
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
 
-      .canale p {
-        font-size: 1em;
-      }
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
 
-      body {
-        padding: 30px;
-      }
-    }
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
 
-    .back {
-      text-align: center;
-      margin-top: 40px;
-    }
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
 
-    .back a {
-      color: #aaa;
-      text-decoration: none;
-      font-size: 16px;
-    }
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
   </style>
 </head>
 <body>
@@ -142,7 +218,7 @@
     <div class="canale no-logo" id="6_Bullets_2012">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45011.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>6 Bullets (2012)</p>
       </a>
@@ -151,7 +227,7 @@
     <div class="canale no-logo" id="Accerchiato_1993">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45012.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Accerchiato (1993)</p>
       </a>
@@ -160,7 +236,7 @@
     <div class="canale no-logo" id="Aquila_nera_1988">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45013.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Aquila nera (1988)</p>
       </a>
@@ -169,7 +245,7 @@
     <div class="canale no-logo" id="A_rischio_della_vita_1995">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45014.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>A rischio della vita (1995)</p>
       </a>
@@ -178,7 +254,7 @@
     <div class="canale no-logo" id="Black_water_2018">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45015.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Black water (2018)</p>
       </a>
@@ -187,7 +263,7 @@
     <div class="canale no-logo" id="Colpi_proibiti_1990">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45016.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Colpi proibiti (1990)</p>
       </a>
@@ -196,7 +272,7 @@
     <div class="canale no-logo" id="Double_Impact_La_vendetta_finale_1991">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45017.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Double Impact - La vendetta finale (1991)</p>
       </a>
@@ -205,7 +281,7 @@
     <div class="canale no-logo" id="Double_Team_Gioco_di_squadra_1997">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45018.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Double Team - Gioco di squadra (1997)</p>
       </a>
@@ -214,7 +290,7 @@
     <div class="canale no-logo" id="Dragon_Eyes_Gli_Occhi_Del_Dragone_2012_Van_Damme">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45019.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Dragon Eyes Gli Occhi Del Dragone 2012 Van Damme</p>
       </a>
@@ -223,7 +299,7 @@
     <div class="canale no-logo" id="Enemies_Closer_2013_Van_Damme">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45020.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Enemies Closer 2013 Van Damme</p>
       </a>
@@ -232,7 +308,7 @@
     <div class="canale no-logo" id="Fino_all_inferno_1999">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45021.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Fino all'inferno (1999)</p>
       </a>
@@ -241,7 +317,7 @@
     <div class="canale no-logo" id="Giochi_Di_Morte_Assassination_Games_2011_Van_Damme">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45022.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Giochi Di Morte Assassination Games 2011 Van Damme</p>
       </a>
@@ -250,7 +326,7 @@
     <div class="canale no-logo" id="Hell_Esplode_la_furia_2003">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45023.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Hell - Esplode la furia (2003)</p>
       </a>
@@ -259,7 +335,7 @@
     <div class="canale no-logo" id="Kickboxer_Il_nuovo_guerriero_1989">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45024.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Kickboxer - Il nuovo guerriero (1989)</p>
       </a>
@@ -268,7 +344,7 @@
     <div class="canale no-logo" id="Kickboxer_4_L_aggressore_1994">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45025.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Kickboxer 4 - L'aggressore (1994)</p>
       </a>
@@ -277,7 +353,7 @@
     <div class="canale no-logo" id="Kickboxer_La_vendetta_del_guerriero_2016">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45026.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Kickboxer - La vendetta del guerriero (2016)</p>
       </a>
@@ -286,7 +362,7 @@
     <div class="canale no-logo" id="Kickboxer_Retaliation_2018">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45027.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Kickboxer - Retaliation (2018)</p>
       </a>
@@ -295,7 +371,7 @@
     <div class="canale no-logo" id="Kickboxers_Vendetta_Personale_1985_Van_Damme">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45028.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Kickboxers Vendetta Personale 1985 Van Damme</p>
       </a>
@@ -304,7 +380,7 @@
     <div class="canale no-logo" id="Kill_Em_All_Uccidili_Tutti_2017_Van_Damme">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45029.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Kill Em All Uccidili Tutti 2017 Van Damme</p>
       </a>
@@ -313,7 +389,7 @@
     <div class="canale no-logo" id="La_prova_1996">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45030.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>La prova (1996)</p>
       </a>
@@ -322,7 +398,7 @@
     <div class="canale no-logo" id="Lionheart_Scommessa_Vincente_1991_Van_Damme">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45031.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Lionheart Scommessa Vincente 1991 Van Damme</p>
       </a>
@@ -331,7 +407,7 @@
     <div class="canale no-logo" id="L_ultimo_mercenario_2021">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45032.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>L'ultimo mercenario (2021)</p>
       </a>
@@ -340,7 +416,7 @@
     <div class="canale no-logo" id="Maximum_Risk_1996">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45033.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Maximum Risk (1996)</p>
       </a>
@@ -349,7 +425,7 @@
     <div class="canale no-logo" id="Pound_of_Flesh_2015">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45034.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Pound of Flesh (2015)</p>
       </a>
@@ -358,7 +434,7 @@
     <div class="canale no-logo" id="Scia_Di_Morte_2004_Van_Damme">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45035.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Scia Di Morte 2004 Van Damme</p>
       </a>
@@ -367,7 +443,7 @@
     <div class="canale no-logo" id="Senza_esclusione_di_colpi_1988">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45036.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Senza esclusione di colpi (1988)</p>
       </a>
@@ -376,7 +452,7 @@
     <div class="canale no-logo" id="Senza_tregua_1993">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45037.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Senza tregua (1993)</p>
       </a>
@@ -385,7 +461,7 @@
     <div class="canale no-logo" id="Street_Fighter_Sfida_finale_1994">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45038.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Street Fighter - Sfida finale (1994)</p>
       </a>
@@ -394,7 +470,7 @@
     <div class="canale no-logo" id="The_Bouncer_2018">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45039.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>The Bouncer (2018)</p>
       </a>
@@ -403,7 +479,7 @@
     <div class="canale no-logo" id="The_Hard_Corps_2007_Van_Damme">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45040.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>The Hard Corps 2007 Van Damme</p>
       </a>
@@ -412,7 +488,7 @@
     <div class="canale no-logo" id="The_Legionary_Fuga_all_inferno_1998">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45041.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>The Legionary - Fuga all'inferno (1998)</p>
       </a>
@@ -421,7 +497,7 @@
     <div class="canale no-logo" id="The_Replicant_2001">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45042.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>The Replicant (2001)</p>
       </a>
@@ -430,7 +506,7 @@
     <div class="canale no-logo" id="Timecop_Indagine_dal_futuro_1994">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45043.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Timecop - Indagine dal futuro (1994)</p>
       </a>
@@ -439,7 +515,7 @@
     <div class="canale no-logo" id="Universal_Soldier_Il_giorno_del_giudizio_2012">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45044.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Universal Soldier - Il giorno del giudizio (2012)</p>
       </a>
@@ -448,7 +524,7 @@
     <div class="canale no-logo" id="Universal_Soldier_I_Nuovi_Eroi_1992_Van_Damme">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45045.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Universal Soldier I Nuovi Eroi 1992 Van Damme</p>
       </a>
@@ -457,7 +533,7 @@
     <div class="canale no-logo" id="Universal_Soldier_Regeneration_2009">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45046.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Universal Soldier - Regeneration (2009)</p>
       </a>
@@ -466,7 +542,7 @@
     <div class="canale no-logo" id="Until_Death_Fino_Alla_Morte_2007_Van_Damme">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45047.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Until Death Fino Alla Morte 2007 Van Damme</p>
       </a>
@@ -475,7 +551,7 @@
     <div class="canale no-logo" id="Vendetta_e_redenzione_2014">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45048.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Vendetta e redenzione (2014)</p>
       </a>
@@ -484,7 +560,7 @@
     <div class="canale no-logo" id="We_Die_Young_2019">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45049.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>We Die Young (2019)</p>
       </a>
@@ -493,7 +569,7 @@
     <div class="canale no-logo" id="Welcome_To_The_Jungle_2013_Van_Damme">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45050.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Welcome To The Jungle 2013 Van Damme</p>
       </a>
@@ -502,7 +578,7 @@
     <div class="canale no-logo" id="6_Bullets_2012">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58349.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>6 Bullets (2012)</p>
       </a>
@@ -511,7 +587,7 @@
     <div class="canale no-logo" id="Accerchiato_1993">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58350.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Accerchiato (1993)</p>
       </a>
@@ -520,7 +596,7 @@
     <div class="canale no-logo" id="Aquila_nera_1988">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58351.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Aquila nera (1988)</p>
       </a>
@@ -529,7 +605,7 @@
     <div class="canale no-logo" id="A_rischio_della_vita_1995">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58352.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>A rischio della vita (1995)</p>
       </a>
@@ -538,7 +614,7 @@
     <div class="canale no-logo" id="Black_water_2018">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58353.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Black water (2018)</p>
       </a>
@@ -547,7 +623,7 @@
     <div class="canale no-logo" id="Colpi_proibiti_1990">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58354.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Colpi proibiti (1990)</p>
       </a>
@@ -556,7 +632,7 @@
     <div class="canale no-logo" id="Darkness_of_Man_2024">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58355.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Darkness of Man (2024)</p>
       </a>
@@ -565,7 +641,7 @@
     <div class="canale no-logo" id="Double_Impact_La_vendetta_finale_1991">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58356.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Double Impact - La vendetta finale (1991)</p>
       </a>
@@ -574,7 +650,7 @@
     <div class="canale no-logo" id="Double_Team_Gioco_di_squadra_1997">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58357.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Double Team - Gioco di squadra (1997)</p>
       </a>
@@ -583,7 +659,7 @@
     <div class="canale no-logo" id="Dragon_Eyes_Gli_Occhi_Del_Dragone_2012_Van_Damme">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58358.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Dragon Eyes Gli Occhi Del Dragone 2012 Van Damme</p>
       </a>
@@ -592,7 +668,7 @@
     <div class="canale no-logo" id="Enemies_Closer_2013_Van_Damme">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58359.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Enemies Closer 2013 Van Damme</p>
       </a>
@@ -601,7 +677,7 @@
     <div class="canale no-logo" id="Fino_all_inferno_1999">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58360.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Fino all'inferno (1999)</p>
       </a>
@@ -610,7 +686,7 @@
     <div class="canale no-logo" id="Giochi_Di_Morte_Assassination_Games_2011_Van_Damme">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58361.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Giochi Di Morte Assassination Games 2011 Van Damme</p>
       </a>
@@ -619,7 +695,7 @@
     <div class="canale no-logo" id="Hell_Esplode_la_furia_2003">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58362.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Hell - Esplode la furia (2003)</p>
       </a>
@@ -628,7 +704,7 @@
     <div class="canale no-logo" id="Kickboxer_Il_nuovo_guerriero_1989">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58363.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Kickboxer - Il nuovo guerriero (1989)</p>
       </a>
@@ -637,7 +713,7 @@
     <div class="canale no-logo" id="Kickboxer_4_L_aggressore_1994">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58364.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Kickboxer 4 - L'aggressore (1994)</p>
       </a>
@@ -646,7 +722,7 @@
     <div class="canale no-logo" id="Kickboxer_La_vendetta_del_guerriero_2016">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58365.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Kickboxer - La vendetta del guerriero (2016)</p>
       </a>
@@ -655,7 +731,7 @@
     <div class="canale no-logo" id="Kickboxer_Retaliation_2018">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58366.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Kickboxer - Retaliation (2018)</p>
       </a>
@@ -664,7 +740,7 @@
     <div class="canale no-logo" id="Kickboxers_Vendetta_Personale_1985_Van_Damme">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58367.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Kickboxers Vendetta Personale 1985 Van Damme</p>
       </a>
@@ -673,7 +749,7 @@
     <div class="canale no-logo" id="Kill_Em_All_Uccidili_Tutti_2017_Van_Damme">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58368.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Kill Em All Uccidili Tutti 2017 Van Damme</p>
       </a>
@@ -682,7 +758,7 @@
     <div class="canale no-logo" id="La_prova_1996">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58369.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>La prova (1996)</p>
       </a>
@@ -691,7 +767,7 @@
     <div class="canale no-logo" id="Lionheart_Scommessa_Vincente_1991_Van_Damme">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58370.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Lionheart Scommessa Vincente 1991 Van Damme</p>
       </a>
@@ -700,7 +776,7 @@
     <div class="canale no-logo" id="L_ultimo_mercenario_2021">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58371.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>L'ultimo mercenario (2021)</p>
       </a>
@@ -709,7 +785,7 @@
     <div class="canale no-logo" id="Maximum_Risk_1996">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58372.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Maximum Risk (1996)</p>
       </a>
@@ -718,7 +794,7 @@
     <div class="canale no-logo" id="Pound_of_Flesh_2015">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58373.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Pound of Flesh (2015)</p>
       </a>
@@ -727,7 +803,7 @@
     <div class="canale no-logo" id="Scia_Di_Morte_2004_Van_Damme">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58374.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Scia Di Morte 2004 Van Damme</p>
       </a>
@@ -736,7 +812,7 @@
     <div class="canale no-logo" id="Senza_esclusione_di_colpi_1988">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58375.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Senza esclusione di colpi (1988)</p>
       </a>
@@ -745,7 +821,7 @@
     <div class="canale no-logo" id="Senza_tregua_1993">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58376.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Senza tregua (1993)</p>
       </a>
@@ -754,7 +830,7 @@
     <div class="canale no-logo" id="Street_Fighter_Sfida_finale_1994">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58377.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Street Fighter - Sfida finale (1994)</p>
       </a>
@@ -763,7 +839,7 @@
     <div class="canale no-logo" id="The_Bouncer_2018">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58378.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>The Bouncer (2018)</p>
       </a>
@@ -772,7 +848,7 @@
     <div class="canale no-logo" id="The_Gardener_2025">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58379.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>The Gardener (2025)</p>
       </a>
@@ -781,7 +857,7 @@
     <div class="canale no-logo" id="The_Hard_Corps_2007_Van_Damme">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58380.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>The Hard Corps 2007 Van Damme</p>
       </a>
@@ -790,7 +866,7 @@
     <div class="canale no-logo" id="The_Legionary_Fuga_all_inferno_1998">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58381.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>The Legionary - Fuga all'inferno (1998)</p>
       </a>
@@ -799,7 +875,7 @@
     <div class="canale no-logo" id="The_Replicant_2001">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58382.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>The Replicant (2001)</p>
       </a>
@@ -808,7 +884,7 @@
     <div class="canale no-logo" id="Timecop_Indagine_dal_futuro_1994">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58383.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Timecop - Indagine dal futuro (1994)</p>
       </a>
@@ -817,7 +893,7 @@
     <div class="canale no-logo" id="Universal_Soldier_Il_giorno_del_giudizio_2012">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58384.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Universal Soldier - Il giorno del giudizio (2012)</p>
       </a>
@@ -826,7 +902,7 @@
     <div class="canale no-logo" id="Universal_Soldier_I_Nuovi_Eroi_1992_Van_Damme">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58385.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Universal Soldier I Nuovi Eroi 1992 Van Damme</p>
       </a>
@@ -835,7 +911,7 @@
     <div class="canale no-logo" id="Universal_Soldier_Regeneration_2009">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58386.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Universal Soldier: Regeneration (2009)</p>
       </a>
@@ -844,7 +920,7 @@
     <div class="canale no-logo" id="Until_Death_Fino_Alla_Morte_2007_Van_Damme">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58387.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Until Death Fino Alla Morte 2007 Van Damme</p>
       </a>
@@ -853,7 +929,7 @@
     <div class="canale no-logo" id="Vendetta_e_redenzione_2014">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58388.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Vendetta e redenzione (2014)</p>
       </a>
@@ -862,7 +938,7 @@
     <div class="canale no-logo" id="We_Die_Young_2019">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58389.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>We Die Young (2019)</p>
       </a>
@@ -871,7 +947,7 @@
     <div class="canale no-logo" id="Welcome_To_The_Jungle_2013_Van_Damme">
       <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58390.mp4" target="_blank">
         
-          <div class="placeholder-logo">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
         <p>Welcome To The Jungle 2013 Van Damme</p>
       </a>
