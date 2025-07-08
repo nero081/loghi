@@ -171,3 +171,9 @@ h1::before {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+@media (orientation: landscape) {
+  .griglia {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
