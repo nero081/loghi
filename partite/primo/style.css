@@ -41,6 +41,13 @@ h1::before {
   transform-origin: center;
 }
 
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+  justify-items: center;
+}
+
 .tile, .canale {
   background-color: #292929;
   border-radius: 10px;
@@ -158,18 +165,4 @@ h1::before {
   opacity: 0.2; /* Trasparenza desiderata */
   pointer-events: none; /* Per non interferire con altri elementi */
   z-index: -1; /* Dietro tutto */
-* {
-  box-sizing: border-box;
-}
-
-.griglia {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-}
-
-.griglia > * {
-  padding: 1rem;
-  width: 100%; /* Assicurati che l'elemento riempia la colonna */
-  position: relative; /* evita posizionamenti assoluti non controllati */
 }
