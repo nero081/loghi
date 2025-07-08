@@ -166,3 +166,8 @@ h1::before {
   pointer-events: none; /* Per non interferire con altri elementi */
   z-index: -1; /* Dietro tutto */
 }
+@media (orientation: portrait) {
+  .griglia {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
