@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+ 
+  <style>
+  body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
+    iframe {
+      width: 100%;
+      border: none;
+    }
+  </style>
+  <script>
+    function resizeIframe(iframe) {
+      iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
+    }
+  </script>
+</head>
+<body>
+  
+  <iframe 
+    src="index.html" 
+    onload="resizeIframe(this)">
+  </iframe>
+
+</body>
+</html>
