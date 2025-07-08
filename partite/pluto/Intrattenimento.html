@@ -7,7 +7,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
+   /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
 
 body {
   position: relative;
@@ -20,7 +23,23 @@ body {
   padding: 20px;
   color: #2d2d2d;
   text-align: center;
+  z-index: 0;
 }
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
+
 
 h1 {
   font-size: 4rem;
@@ -52,9 +71,10 @@ h1::before {
 
 .griglia {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
   justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
 }
 
 .tile, .canale {
@@ -65,25 +85,19 @@ h1::before {
   color: #fff;
   padding: 15px;
   transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
 }
 
 .tile:hover, .canale:hover {
   transform: scale(1.05);
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
 }
 
 .tile {
   font-weight: bold;
   font-size: 1.1em;
-}
-
-.canale img {
-  width: 100%;
-  height: 120px;
-  object-fit: contain;
-  border-radius: 8px;
-  background-color: #111;
-  margin-bottom: 10px;
 }
 
 .canale {
@@ -99,14 +113,23 @@ h1::before {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   padding: 10px;
   position: relative; /* per stellina */
-  z-index: 1;
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
 }
+
+.canale a {
+  text-decoration: none;
+  color: inherit;
+}
+
 
 .canale p {
   color: yellow;
   margin: 0;
   font-size: 0.95em;
+  text-decoration: none;
 }
+
 
 .canale:focus {
   transform: scale(1.1) rotate(-3deg);
@@ -114,6 +137,17 @@ h1::before {
     0 10px 20px rgba(0, 0, 0, 0.35),
     inset 0 0 15px #fff5c7;
   z-index: 10;
+  position: relative;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
 }
 
 /* Stellina burst piccola su ogni canale */
@@ -162,6 +196,19 @@ h1::before {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
 }
   </style>
 </head>
