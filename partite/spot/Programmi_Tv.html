@@ -1,0 +1,5398 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Programmi Tv</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+h1 {
+  font-size: 4rem;
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+}
+
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
+
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
+
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
+
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
+
+.canale a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+  text-decoration: none;
+}
+
+
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
+
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
+  </style>
+</head>
+<body>
+  <h1>Programmi Tv</h1>
+  <div class="griglia">
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E01">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70008.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E01</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E02">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70009.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E02</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E03">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70010.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E03</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E04">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70011.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E04</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E05">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70012.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E05</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E06">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70013.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E06</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E07">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70014.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E07</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E08">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70015.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E08</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E09">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70016.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E09</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E10">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70017.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E10</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E11">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70018.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E11</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E12">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70019.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E12</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E13">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70020.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E13</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E14">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70021.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E14</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E15">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70022.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E15</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E16">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70023.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E16</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E17">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70024.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E17</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E18">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70025.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E18</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E19">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70026.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E19</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E20">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70027.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E20</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E21">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70028.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E21</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E22">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70029.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E22</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E23">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70030.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E23</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E24">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70031.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E24</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E25">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70032.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E25</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E26">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70033.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E26</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E27">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70034.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E27</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E28">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70035.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E28</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E29">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70036.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E29</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E30">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70037.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E30</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E31">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70038.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E31</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E32">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70039.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E32</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E33">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70040.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E33</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E34">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70041.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E34</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E35">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70042.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E35</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E36">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70043.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E36</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E37">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70044.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E37</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E38">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70045.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E38</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E39">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70046.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E39</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E40">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70047.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E40</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E41">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70048.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E41</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E42">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70049.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E42</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E43">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70050.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E43</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E44">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70051.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E44</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E45">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70052.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E45</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E46">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70053.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E46</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E47">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70054.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E47</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E48">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70055.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E48</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E49">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70056.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E49</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E50">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70057.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E50</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E51">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70058.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E51</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E52">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70059.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E52</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E53">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70060.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E53</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E54">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70061.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E54</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E55">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70062.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E55</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E56">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70063.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E56</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E57">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70064.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E57</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E58">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70065.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E58</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E59">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70066.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E59</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E60">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70067.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E60</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E61">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70068.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E61</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E62">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70069.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E62</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E63">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70070.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E63</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E64">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70071.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E64</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E65">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70072.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E65</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E66">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70073.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E66</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E67">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70074.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E67</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E68">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70075.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E68</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E69">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70076.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E69</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E70">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70077.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E70</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E71">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70078.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E71</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E72">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70079.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E72</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E73">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70080.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E73</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E74">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70081.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E74</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E75">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70082.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E75</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E76">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70083.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E76</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E77">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70084.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E77</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E78">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70085.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E78</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E79">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70086.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E79</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E80">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70087.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E80</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E81">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70088.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E81</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E82">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70089.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E82</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E83">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70090.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E83</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E84">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70091.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E84</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E85">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70092.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E85</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E86">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70093.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E86</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E87">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70094.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E87</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E88">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70095.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E88</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E89">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70096.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E89</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E90">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70097.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E90</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E91">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70098.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E91</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E92">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70099.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E92</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E93">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70100.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E93</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E94">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70101.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E94</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E95">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70102.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E95</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E96">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70103.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E96</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E97">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70104.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E97</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E98">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70105.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E98</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E99">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70106.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E99</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E100">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70107.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E100</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E101">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70108.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E101</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E102">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70109.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E102</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E103">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70110.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E103</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E104">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70111.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E104</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E105">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70112.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E105</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E106">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70113.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E106</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E107">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70114.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E107</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E108">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70115.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E108</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E109">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70116.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E109</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E110">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70117.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E110</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E111">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70118.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E111</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E112">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70119.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E112</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E113">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70120.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E113</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_Borghese_4_Ristoranti_S01_E114">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70121.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro Borghese - 4 Ristoranti S01 E114</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Landscapers_Un_crimine_quasi_perfetto_S01_E01">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/51287.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Landscapers - Un crimine quasi perfetto S01 E01</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Landscapers_Un_crimine_quasi_perfetto_S01_E02">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/51288.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Landscapers - Un crimine quasi perfetto S01 E02</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Landscapers_Un_crimine_quasi_perfetto_S01_E03">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/51289.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Landscapers - Un crimine quasi perfetto S01 E03</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Landscapers_Un_crimine_quasi_perfetto_S01_E04">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/51290.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Landscapers - Un crimine quasi perfetto S01 E04</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Landscapers_Un_crimine_quasi_perfetto_S01_E05">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/51291.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Landscapers - Un crimine quasi perfetto S01 E05</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Landscapers_Un_crimine_quasi_perfetto_S01_E06">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/51292.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Landscapers - Un crimine quasi perfetto S01 E06</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Landscapers_Un_crimine_quasi_perfetto_S01_E07">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/51293.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Landscapers - Un crimine quasi perfetto S01 E07</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Landscapers_Un_crimine_quasi_perfetto_S01_E08">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/51294.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Landscapers - Un crimine quasi perfetto S01 E08</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Landscapers_Un_crimine_quasi_perfetto_S01_E09">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/51295.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Landscapers - Un crimine quasi perfetto S01 E09</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E01">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70225.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E01</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E02">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70226.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E02</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E03">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70227.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E03</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E04">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70228.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E04</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E05">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70229.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E05</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E06">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70230.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E06</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E07">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70231.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E07</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E08">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70232.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E08</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E09">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70233.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E09</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E10">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70234.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E10</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E11">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70235.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E11</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E12">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70236.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E12</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E13">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70237.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E13</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E14">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70238.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E14</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E15">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70239.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E15</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E16">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70240.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E16</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E17">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70241.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E17</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E18">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70242.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E18</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E19">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70243.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E19</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E20">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70244.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E20</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E21">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70245.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E21</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E22">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70246.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E22</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E23">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70247.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E23</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E24">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70248.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E24</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E25">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70249.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E25</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E26">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70250.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E26</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E27">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70251.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E27</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E28">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70252.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E28</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E29">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70253.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E29</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E30">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70254.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E30</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E31">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70255.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E31</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E32">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70256.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E32</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E33">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70257.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E33</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E34">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70258.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E34</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E35">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70259.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E35</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E36">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70260.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E36</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E37">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70261.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E37</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E38">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70262.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E38</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E39">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70263.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E39</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E40">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70264.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E40</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E41">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70265.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E41</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E42">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70266.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E42</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E43">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70267.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E43</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E44">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70268.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E44</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E45">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70269.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E45</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E46">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70270.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E46</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E47">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70271.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E47</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Factor_S01_E48">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70272.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X Factor S01 E48</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_amore_strappato_S01_E01">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/27146.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'amore strappato S01 E01</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_amore_strappato_S01_E02">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/27147.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'amore strappato S01 E02</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_amore_strappato_S01_E03">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/27148.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'amore strappato S01 E03</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Coronavirus_in_poche_parole_S01_E01">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/27706.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Coronavirus, in poche parole S01 E01</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Coronavirus_in_poche_parole_S01_E02">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/27707.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Coronavirus, in poche parole S01 E02</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Coronavirus_in_poche_parole_S01_E03">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/27708.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Coronavirus, in poche parole S01 E03</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S01_E01">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29638.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S01 E01</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S01_E02">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29639.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S01 E02</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S01_E03">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29640.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S01 E03</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S01_E04">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29641.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S01 E04</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S01_E05">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29642.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S01 E05</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S02_E01">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29643.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S02 E01</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S02_E02">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29644.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S02 E02</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S02_E03">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29645.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S02 E03</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S02_E04">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29646.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S02 E04</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S02_E05">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29647.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S02 E05</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S02_E06">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29648.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S02 E06</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S02_E07">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29649.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S02 E07</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S02_E08">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29650.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S02 E08</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S03_E01">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29651.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S03 E01</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S03_E02">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29652.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S03 E02</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S03_E03">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29653.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S03 E03</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S03_E04">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29654.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S03 E04</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S03_E05">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29655.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S03 E05</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S03_E06">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29656.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S03 E06</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S03_E07">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29657.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S03 E07</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S03_E08">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29658.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S03 E08</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S04_E01">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29659.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S04 E01</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S04_E02">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29660.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S04 E02</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S04_E03">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29661.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S04 E03</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S04_E04">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29662.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S04 E04</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S04_E05">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29663.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S04 E05</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S04_E06">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29664.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S04 E06</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S04_E07">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29665.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S04 E07</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S04_E08">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29666.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S04 E08</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S05_E01">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29667.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S05 E01</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S05_E02">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29668.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S05 E02</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S05_E03">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29669.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S05 E03</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S05_E04">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29670.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S05 E04</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S05_E05">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29671.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S05 E05</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S05_E06">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29672.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S05 E06</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S05_E07">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29673.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S05 E07</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S05_E08">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29674.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S05 E08</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S06_E01">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29675.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S06 E01</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S06_E02">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29676.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S06 E02</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S06_E03">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29677.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S06 E03</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S06_E04">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29678.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S06 E04</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S06_E05">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29679.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S06 E05</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S06_E06">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29680.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S06 E06</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S06_E07">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29681.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S06 E07</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bruno_Barbieri_4_hotel_S06_E08">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29682.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bruno Barbieri - 4 hotel S06 E08</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Adrian_S01_E01">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29696.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Adrian S01 E01</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Adrian_S01_E02">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29697.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Adrian S01 E02</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Adrian_S01_E03">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/29698.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Adrian S01 E03</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lupin_3_S01_E01">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/30787.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lupin 3 S01 E01</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lupin_3_S01_E02">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/30788.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lupin 3 S01 E02</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lupin_3_S01_E03">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/30789.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lupin 3 S01 E03</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lupin_3_S01_E04">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/30790.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lupin 3 S01 E04</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lupin_3_S01_E05">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/30791.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lupin 3 S01 E05</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lupin_3_S01_E06">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/30792.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lupin 3 S01 E06</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lupin_3_S01_E07">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/30793.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lupin 3 S01 E07</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lupin_3_S01_E08">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/30794.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lupin 3 S01 E08</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lupin_3_S01_E09">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/30795.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lupin 3 S01 E09</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lupin_3_S01_E10">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/30796.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lupin 3 S01 E10</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lupin_3_S01_E11">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/30797.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lupin 3 S01 E11</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lupin_3_S01_E12">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/30798.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lupin 3 S01 E12</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lupin_3_S01_E13">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/30799.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lupin 3 S01 E13</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lupin_3_S01_E14">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/30800.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lupin 3 S01 E14</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lupin_3_S01_E15">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/30801.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lupin 3 S01 E15</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lupin_3_S01_E16">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/30802.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lupin 3 S01 E16</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lupin_3_S01_E17">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/30803.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lupin 3 S01 E17</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Inventing_Anna_S01_E01">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/61017.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Inventing Anna S01 E01</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Inventing_Anna_S01_E02">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/61018.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Inventing Anna S01 E02</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Inventing_Anna_S01_E03">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/61019.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Inventing Anna S01 E03</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Inventing_Anna_S01_E04">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/61020.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Inventing Anna S01 E04</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Inventing_Anna_S01_E05">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/61021.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Inventing Anna S01 E05</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Inventing_Anna_S01_E06">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/61022.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Inventing Anna S01 E06</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Inventing_Anna_S01_E07">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/61023.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Inventing Anna S01 E07</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Inventing_Anna_S01_E08">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/61024.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Inventing Anna S01 E08</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Inventing_Anna_S01_E09">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/61025.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Inventing Anna S01 E09</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tú_también_lo_harías_Tacito_accordo_S01_E01">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/54831.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tú también lo harías - Tacito accordo S01 E01</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tú_también_lo_harías_Tacito_accordo_S01_E02">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/54832.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tú también lo harías - Tacito accordo S01 E02</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tú_también_lo_harías_Tacito_accordo_S01_E03">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/54833.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tú también lo harías - Tacito accordo S01 E03</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Gangnam_B_Side_S01_E01">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/54834.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Gangnam B-Side S01 E01</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Gangnam_B_Side_S01_E02">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/54835.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Gangnam B-Side S01 E02</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Paradise_S01_E01">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/55894.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Paradise S01 E01</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Paradise_S01_E02">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/55895.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Paradise S01 E02</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Paradise_S01_E03">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/55896.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Paradise S01 E03</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E01">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70283.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E01</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E02">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70284.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E02</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E03">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70285.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E03</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E04">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70286.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E04</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E05">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70287.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E05</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E06">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70288.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E06</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E07">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70289.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E07</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E08">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70290.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E08</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E09">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70291.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E09</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E10">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70292.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E10</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E11">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70293.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E11</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E12">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70294.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E12</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E13">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70295.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E13</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E14">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70296.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E14</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E15">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70297.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E15</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E16">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70298.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E16</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E17">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70299.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E17</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E18">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70300.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E18</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E19">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70301.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E19</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E20">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70302.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E20</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E21">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70303.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E21</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E22">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70304.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E22</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E23">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70305.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E23</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E24">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70306.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E24</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E25">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70307.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E25</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E26">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70308.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E26</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E27">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70309.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E27</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E28">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70310.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E28</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E29">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70311.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E29</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E30">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70312.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E30</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E31">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70313.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E31</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E32">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70314.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E32</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E33">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70315.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E33</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E34">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70316.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E34</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E35">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70317.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E35</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E36">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70318.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E36</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E37">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70319.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E37</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E38">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70320.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E38</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E39">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70321.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E39</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E40">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70322.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E40</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E41">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70323.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E41</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E42">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70324.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E42</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E43">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70325.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E43</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E44">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70326.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E44</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E45">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70327.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E45</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E46">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70328.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E46</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E47">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70329.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E47</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E48">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70330.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E48</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E49">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70331.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E49</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E50">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70332.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E50</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E51">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70333.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E51</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E52">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70334.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E52</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E53">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70335.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E53</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E54">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70336.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E54</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E55">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70337.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E55</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E56">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70338.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E56</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E57">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70339.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E57</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E58">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70340.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E58</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E59">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70341.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E59</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E60">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70342.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E60</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E61">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70343.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E61</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E62">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70344.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E62</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E63">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70345.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E63</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E64">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70346.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E64</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E65">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70347.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E65</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E66">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70348.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E66</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E67">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70349.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E67</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E68">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70350.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E68</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E69">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70351.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E69</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E70">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70352.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E70</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E71">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70353.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E71</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E72">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70354.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E72</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E73">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70355.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E73</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E74">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70356.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E74</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E75">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70357.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E75</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E76">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70358.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E76</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E77">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70359.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E77</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E78">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70360.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E78</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E79">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70361.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E79</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E80">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70362.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E80</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E81">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70363.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E81</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E82">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70364.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E82</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E83">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70365.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E83</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E84">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70366.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E84</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E85">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70367.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E85</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E86">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70368.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E86</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E87">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70369.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E87</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E88">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70370.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E88</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E89">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70371.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E89</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E90">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70372.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E90</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E91">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70373.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E91</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E92">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70374.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E92</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E93">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70375.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E93</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E94">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70376.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E94</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E95">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70377.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E95</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E96">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70378.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E96</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E97">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70379.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E97</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E98">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70380.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E98</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E99">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70381.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E99</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E100">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70382.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E100</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E101">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70383.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E101</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E102">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70384.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E102</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E103">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70385.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E103</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E104">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70386.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E104</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E105">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70387.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E105</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E106">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70388.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E106</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E107">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70389.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E107</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E108">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70390.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E108</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E109">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70391.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E109</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E110">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70392.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E110</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E111">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70393.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E111</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E112">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70394.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E112</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E113">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70395.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E113</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E114">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70396.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E114</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E115">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70397.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E115</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E116">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70398.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E116</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E117">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70399.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E117</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E118">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70400.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E118</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E119">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70401.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E119</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E120">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70402.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E120</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E121">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70403.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E121</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E122">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70404.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E122</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E123">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70405.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E123</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E124">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70406.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E124</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E125">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70407.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E125</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E126">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70408.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E126</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E127">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70409.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E127</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E128">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70410.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E128</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E129">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70411.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E129</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E130">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70412.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E130</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E131">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70413.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E131</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E132">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70414.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E132</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E133">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70415.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E133</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E134">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70416.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E134</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E135">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70417.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E135</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E136">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70418.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E136</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E137">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70419.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E137</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E138">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70420.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E138</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E139">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70421.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E139</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E140">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70422.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E140</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E141">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70423.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E141</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E142">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70424.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E142</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E143">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70425.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E143</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E144">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70426.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E144</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E145">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70427.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E145</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E146">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70428.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E146</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E147">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70429.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E147</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E148">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70430.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E148</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E149">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70431.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E149</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E150">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70432.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E150</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E151">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70433.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E151</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E152">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70434.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E152</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E153">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70435.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E153</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E154">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70436.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E154</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E155">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70437.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E155</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E156">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70438.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E156</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E157">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70439.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E157</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E158">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70440.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E158</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E159">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70441.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E159</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E160">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70442.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E160</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E161">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70443.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E161</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E162">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70444.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E162</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E163">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70445.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E163</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E164">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70446.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E164</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E165">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70447.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E165</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E166">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70448.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E166</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E167">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70449.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E167</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E168">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70450.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E168</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E169">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70451.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E169</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E170">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70452.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E170</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E171">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70453.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E171</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S01_E172">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70454.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S01 E172</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E01">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70455.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E01</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E02">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70456.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E02</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E03">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70457.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E03</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E04">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70458.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E04</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E05">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70459.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E05</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E06">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70460.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E06</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E07">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70461.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E07</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E08">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70462.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E08</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E09">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70463.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E09</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E10">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70464.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E10</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E11">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70465.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E11</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E12">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70466.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E12</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E13">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70467.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E13</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E14">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70468.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E14</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E15">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70469.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E15</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E16">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70470.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E16</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E17">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70471.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E17</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E18">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70472.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E18</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E19">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70473.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E19</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E20">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70474.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E20</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E21">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70475.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E21</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E22">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70476.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E22</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E23">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70477.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E23</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E24">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70478.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E24</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E25">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70479.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E25</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E26">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70480.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E26</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E27">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70481.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E27</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E28">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70482.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E28</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E29">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70483.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E29</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E30">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70484.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E30</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E31">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70485.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E31</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E32">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70486.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E32</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E33">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70487.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E33</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E34">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70488.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E34</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E35">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70489.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E35</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E36">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70490.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E36</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E37">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70491.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E37</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E38">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70492.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E38</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E39">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70493.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E39</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E40">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70494.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E40</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E41">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70495.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E41</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E42">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70496.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E42</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E43">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70497.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E43</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E44">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70498.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E44</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E45">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70499.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E45</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E46">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70500.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E46</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E47">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70501.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E47</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E48">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70502.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E48</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E49">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70503.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E49</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E50">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70504.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E50</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E51">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70505.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E51</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E52">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70506.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E52</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E53">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70507.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E53</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E54">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70508.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E54</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E55">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70509.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E55</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E56">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70510.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E56</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E57">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70511.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E57</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E58">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70512.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E58</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E59">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70513.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E59</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E60">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70514.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E60</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E61">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70515.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E61</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E62">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70516.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E62</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E63">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70517.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E63</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E64">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70518.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E64</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E65">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70519.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E65</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E66">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70520.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E66</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E67">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70521.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E67</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E68">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70522.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E68</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E69">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70523.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E69</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E70">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70524.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E70</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E71">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70525.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E71</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E72">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70526.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E72</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E73">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70527.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E73</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E74">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70528.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E74</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E75">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70529.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E75</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E76">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70530.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E76</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E77">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70531.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E77</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E78">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70532.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E78</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E79">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70533.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E79</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E80">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70534.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E80</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E81">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70535.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E81</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E82">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70536.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E82</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E83">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70537.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E83</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E84">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70538.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E84</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E85">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70539.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E85</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E86">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70540.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E86</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E87">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70541.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E87</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E88">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70542.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E88</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E89">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70543.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E89</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E90">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70544.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E90</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E91">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70545.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E91</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E92">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70546.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E92</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E93">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70547.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E93</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E94">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70548.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E94</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E95">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70549.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E95</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E96">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70550.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E96</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E97">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70551.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E97</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E98">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70552.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E98</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E99">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70553.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E99</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E100">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70554.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E100</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E101">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70555.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E101</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E102">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70556.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E102</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E103">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70557.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E103</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E104">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70558.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E104</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E105">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70559.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E105</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E106">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70560.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E106</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E107">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70561.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E107</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E108">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70562.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E108</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E109">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70563.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E109</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E110">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70564.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E110</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E111">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70565.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E111</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E112">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70566.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E112</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E113">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70567.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E113</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E114">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70568.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E114</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E115">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70569.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E115</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E116">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70570.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E116</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E117">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70571.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E117</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E118">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70572.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E118</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E119">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70573.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E119</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E120">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70574.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E120</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E121">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70575.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E121</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E122">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70576.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E122</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E123">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70577.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E123</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E124">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70578.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E124</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E125">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70579.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E125</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E126">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70580.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E126</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E127">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70581.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E127</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E128">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70582.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E128</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E129">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70583.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E129</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E130">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70584.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E130</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E131">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70585.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E131</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E132">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70586.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E132</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E133">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70587.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E133</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E134">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70588.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E134</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E135">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70589.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E135</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E136">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70590.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E136</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E137">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70591.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E137</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E138">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70592.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E138</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E139">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70593.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E139</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E140">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70594.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E140</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E141">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70595.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E141</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E142">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70596.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E142</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E143">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70597.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E143</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Celebrity_MasterChef_Italia_S02_E144">
+      <a href="http://163.172.51.230:80/series/vood-chanell/BhBphgxjPp/70598.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Celebrity MasterChef Italia S02 E144</p>
+      </a>
+    </div>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>

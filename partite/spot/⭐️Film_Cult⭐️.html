@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>⭐️Film Cult⭐️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+h1 {
+  font-size: 4rem;
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+}
+
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
+
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
+
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
+
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
+
+.canale a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+  text-decoration: none;
+}
+
+
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
+
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
+  </style>
+</head>
+<body>
+  <h1>⭐️Film Cult⭐️</h1>
+  <div class="griglia">
+    
+    <div class="canale no-logo" id="A_Beautiful_Mind_2001">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62466.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>A Beautiful Mind (2001)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Airport_1970">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62467.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Airport (1970)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alba_Rossa_Red_Dawn_1984_Cult">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62468.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alba Rossa Red Dawn 1984 Cult</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alpha_Dog_2012_Cult">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62469.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alpha Dog 2012 Cult</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Apocalypse_Now_1979">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62470.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Apocalypse Now (1979)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Balla_coi_lupi_1990">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62471.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Balla coi lupi (1990)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Best_2000">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62472.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Best (2000)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Blues_Brothers_1980_Cult">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62473.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Blues Brothers 1980 Cult</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Boris_Giuliano_2016_Cult">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62474.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Boris Giuliano 2016 Cult</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Calore_e_polvere_1983">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62475.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Calore e polvere (1983)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Carnage_2011">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62476.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Carnage (2011)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Chapter_27_2007">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62477.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Chapter 27 (2007)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Christiane_F_Noi_i_ragazzi_dello_zoo_di_Berlino_1981">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62478.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Christiane F. - Noi i ragazzi dello zoo di Berlino (1981)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Dimenticare_Palermo_1990">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62479.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Dimenticare Palermo (1990)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Donnie_Darko_2001">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62480.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Donnie Darko (2001)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Dream_Team_2013_Cult">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62481.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Dream Team 2013 Cult</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="E_T_l_extra_terrestre_1982">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62482.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>E.T. l'extra-terrestre (1982)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Easy_Rider_1969_Cult">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62483.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Easy Rider 1969 Cult</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Everest_2015">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62484.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Everest (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Febbre_a_90_1997">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62485.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Febbre a 90° (1997)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Felicia_Impastato_2016">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62486.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Felicia Impastato (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fortapàsc_2009">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62487.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fortapàsc (2009)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ghost_Fantasma_1990">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62488.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ghost - Fantasma (1990)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Giovanni_Falcone_1993">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62489.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Giovanni Falcone (1993)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Goal_1_2005_Cult">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62490.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Goal 1 2005 Cult</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Goal_II_Vivere_un_sogno_2007">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62491.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Goal II - Vivere un sogno (2007)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hermano_2010">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62492.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Hermano (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hooligans_2005">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62493.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Hooligans (2005)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_4_dell_oca_selvaggia_1978">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62494.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I 4 dell'oca selvaggia (1978)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_cento_passi_2000">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62495.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I cento passi (2000)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_Goonies_1985">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62496.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I Goonies (1985)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_guerrieri_della_notte_1979">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62497.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I guerrieri della notte (1979)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_camorrista_1986">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62498.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il camorrista (1986)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_colore_viola_1985">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62499.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il colore viola (1985)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_generale_Dalla_Chiesa_2007">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62500.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il generale Dalla Chiesa (2007)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_giudice_ragazzino_1994">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62501.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il giudice ragazzino (1994)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_grande_Lebowski_1998">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62502.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il grande Lebowski (1998)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_maledetto_United_2009">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62503.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il maledetto United (2009)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_mio_amico_Eric_2009">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62504.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il mio amico Eric (2009)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_tè_nel_deserto_1990">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62505.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il tè nel deserto (1990)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_sette_samurai_1954">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62506.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I sette samurai (1954)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Jimi_All_Is_By_My_Side_2014_Cult">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62507.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Jimi All Is By My Side 2014 Cult</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Jimmy_Grimble_2001_Cult">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62508.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Jimmy Grimble 2001 Cult</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_attimo_fuggente_1989">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62509.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'attimo fuggente (1989)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_inferno_di_cristallo_1974">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62510.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'inferno di cristallo (1974)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_inferno_sommerso_1979">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62511.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'inferno sommerso (1979)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_ombra_nera_del_Vesuvio_1987">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62512.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'ombra nera del Vesuvio (1987)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_ultimo_cacciatore_1980">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62513.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'ultimo cacciatore (1980)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_ultimo_Dei_Corleonesi_2007">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62514.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'ultimo Dei Corleonesi (2007)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_battaglia_di_Midway_1976">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62515.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La battaglia di Midway (1976)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_finestra_di_fronte_2003">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62516.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La finestra di fronte (2003)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_leggenda_del_pianista_sull_oceano_1998">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62517.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La leggenda del pianista sull'oceano (1998)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Mosca_1_1980_Cult">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62518.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Mosca 1 1980 Cult</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_mosca_2_1989">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62519.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La mosca 2 (1989)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Sicurezza_Degli_Oggetti_2001_Cult">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62520.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Sicurezza Degli Oggetti 2001 Cult</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_vita_è_bella_1997">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62521.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La vita è bella (1997)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_voce_del_silenzio_1993">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62522.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La voce del silenzio (1993)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Legge_Criminale_1988_Cult">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62523.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Legge Criminale 1988 Cult</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Le_iene_1992">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62524.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Le iene (1992)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Looking_for_Lennon_2018">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62525.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Looking for Lennon (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lo_sciacallo_2014">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62526.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lo sciacallo (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lucky_Luciano_L_Impero_Del_Crimine_1991_Cult">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62527.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lucky Luciano L'Impero Del Crimine 1991 Cult</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_Ultimo_Bacio_2000_Cult">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62528.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L’Ultimo Bacio 2000 Cult</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Marcellino_pane_e_vino_1955">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62529.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Marcellino pane e vino (1955)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Marley_2012">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62530.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Marley (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="McCanick_2013_Cult">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62531.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>McCanick 2013 Cult</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mery_per_sempre_1989">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62532.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mery per sempre (1989)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mississippi_Burning_Le_radici_dell_odio_1988">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62533.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mississippi Burning - Le radici dell'odio (1988)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Naso_Di_Cane_1987_Cult">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62534.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Naso Di Cane 1987 Cult</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Oltre_la_porta_1982">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62535.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Oltre la porta (1982)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Onora_il_padre_e_la_madre_2007">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62536.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Onora il padre e la madre (2007)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Paolo_Borsellino_I_57_giorni_2012">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62537.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Paolo Borsellino - I 57 giorni (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Pele_2016_Cult">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62538.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Pele'2016 Cult</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Point_Blank_2010">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62539.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Point Blank (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Pusher_2012">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62540.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Pusher (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Qualcuno_volò_sul_nido_del_cuculo_1975">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62541.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Qualcuno volò sul nido del cuculo (1975)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ragazzi_fuori_1990">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62542.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ragazzi fuori (1990)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ray_2004">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62543.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ray (2004)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sabato_italiano_1992">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62544.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sabato italiano (1992)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Scanners_1981">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62545.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Scanners (1981)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Shakespeare_a_colazione_1987">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62546.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Shakespeare a colazione (1987)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sognando_Beckham_2002">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62547.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sognando Beckham (2002)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sospesi_nel_tempo_1996">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62548.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sospesi nel tempo (1996)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Space_Station_76_2014">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62549.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Space Station 76 (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Takers_2010">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62550.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Takers (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Talk_Radio_1988">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62551.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Talk Radio (1988)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_giorno_di_ordinaria_follia_1993">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62552.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un giorno di ordinaria follia (1993)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_uomo_perbene_1999">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62553.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un uomo perbene (1999)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Via_col_vento_1939">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62554.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Via col vento (1939)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Volano_Coltelli_2012_Cult">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62555.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Volano Coltelli 2012 Cult</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Vulcano_Los_Angeles_1997_1997">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62556.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Vulcano - Los Angeles 1997 (1997)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="When_You_re_Strange_The_Doors_2010_Cult">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62557.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>When You’re Strange The Doors 2010 Cult</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_ladro_di_bambini_1992">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62558.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il ladro di bambini (1992)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Kramer_contro_Kramer_1979">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62559.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Kramer contro Kramer (1979)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Paolo_Borsellino_2004">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/62560.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Paolo Borsellino (2004)</p>
+      </a>
+    </div>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>

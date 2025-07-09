@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Denzel Washington</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+h1 {
+  font-size: 4rem;
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+}
+
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
+
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
+
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
+
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
+
+.canale a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+  text-decoration: none;
+}
+
+
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
+
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
+  </style>
+</head>
+<body>
+  <h1>Denzel Washington</h1>
+  <div class="griglia">
+    
+    <div class="canale no-logo" id="2_Guns_Cani_Sciolti_2013_Wash">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45135.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2 Guns Cani Sciolti 2013 Wash</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Allarme_rosso_1995">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45136.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Allarme rosso (1995)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="American_Gangster_2007">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45137.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>American Gangster (2007)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Attacco_Al_Potere_The_Siege_1998_Wash">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45138.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Attacco Al Potere The Siege 1998 Wash</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Barriere_2016">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45139.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Barriere (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Codice_Genesi_2010">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45140.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Codice Genesi (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Déjà_Vu_Corsa_contro_il_tempo_2006">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45141.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Déjà Vu - Corsa contro il tempo (2006)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="End_Of_Justice_Nessuno_è_Innocente_2018_Wash">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45142.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>End Of Justice Nessuno è Innocente 2018 Wash</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fino_all_ultimo_indizio_2021">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45143.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fino all’ultimo indizio (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Flight_2012">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45144.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Flight (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Glory_Uomini_di_gloria_1989">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45145.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Glory - Uomini di gloria (1989)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Grido_Di_Libertà_1989_Wash">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45146.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Grido Di Libertà 1989 Wash</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="He_Got_Game_1998">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45147.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>He Got Game (1998)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hurricane_Il_grido_dell_innocenza_1999">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45148.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Hurricane - Il grido dell'innocenza (1999)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_collezionista_di_ossa_1999">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45149.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il collezionista di ossa (1999)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_coraggio_della_verità_1996">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45150.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il coraggio della verità (1996)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_diavolo_in_blu_1995">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45151.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il diavolo in blu (1995)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_rapporto_Pelican_1993">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45152.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il rapporto Pelican (1993)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_sapore_della_vittoria_Uniti_si_vince_2000">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45153.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il sapore della vittoria - Uniti si vince (2000)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_tocco_del_male_1998">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45154.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il tocco del male (1998)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Inside_Man_2006">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45155.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Inside Man (2006)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Jamaica_Cop_1989">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45156.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Jamaica Cop (1989)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="John_Q_2002">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45157.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>John Q (2002)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Macbeth_2011">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45158.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Macbeth - 2011</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Malcolm_X_1992">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45159.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Malcolm X (1992)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Man_on_Fire_Il_fuoco_della_vendetta_2004">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45160.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Man on Fire - Il fuoco della vendetta (2004)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mo_Better_Blues_1990">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45161.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mo' Better Blues (1990)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Molto_rumore_per_nulla_1993">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45162.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Molto rumore per nulla (1993)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Out_of_Time_2003">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45163.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Out of Time (2003)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Pelham_123_Ostaggi_in_metropolitana_2009">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45164.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Pelham 123: Ostaggi in metropolitana (2009)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Philadelphia_1993">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45165.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Philadelphia (1993)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Power_Potere_1986">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45166.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Power - Potere (1986)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Safe_House_Nessuno_è_al_sicuro_2012">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45167.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Safe House - Nessuno è al sicuro (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Storia_di_un_soldato_1984">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45168.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Storia di un soldato (1984)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Equalizer_Il_vendicatore_2014">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45169.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Equalizer - Il vendicatore (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Equalizer_2_Senza_perdono_2018">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45170.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Equalizer 2 - Senza perdono (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Equalizer_3_Senza_tregua_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45171.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Equalizer 3 - Senza tregua (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Great_Debaters_Il_potere_della_parola_2007">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45172.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Great Debaters - Il potere della parola - 2007</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Manchurian_Candidate_2004">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45173.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Manchurian Candidate (2004)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Training_Day_2001">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45174.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Training Day (2001)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_fantasma_per_amico_1990">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45175.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un fantasma per amico (1990)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Uno_sguardo_dal_cielo_1996">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45176.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Uno sguardo dal cielo (1996)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Unstoppable_Fuori_controllo_2010">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/45177.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Unstoppable - Fuori controllo (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2_Guns_Cani_Sciolti_2013_Wash">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58476.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2 Guns Cani Sciolti 2013 Wash</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Allarme_rosso_1995">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58477.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Allarme rosso (1995)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="American_Gangster_2007">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58478.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>American Gangster (2007)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Attacco_Al_Potere_The_Siege_1998_Wash">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58479.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Attacco Al Potere The Siege 1998 Wash</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Barriere_2016">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58480.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Barriere (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Codice_Genesi_2010">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58481.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Codice Genesi (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Déjà_Vu_Corsa_contro_il_tempo_2006">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58482.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Déjà Vu - Corsa contro il tempo (2006)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="End_Of_Justice_Nessuno_è_Innocente_2018_Wash">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58483.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>End Of Justice Nessuno è Innocente 2018 Wash</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fino_all_ultimo_indizio_2021">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58484.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fino all’ultimo indizio (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Flight_2012">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58485.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Flight (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Glory_Uomini_di_gloria_1989">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58486.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Glory - Uomini di gloria (1989)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Grido_Di_Libertà_1989_Wash">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58487.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Grido Di Libertà 1989 Wash</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="He_Got_Game_1998">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58488.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>He Got Game (1998)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hurricane_Il_grido_dell_innocenza_1999">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58489.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Hurricane - Il grido dell'innocenza (1999)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_collezionista_di_ossa_1999">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58490.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il collezionista di ossa (1999)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_coraggio_della_verità_1996">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58491.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il coraggio della verità (1996)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_diavolo_in_blu_1995">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58492.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il diavolo in blu (1995)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_rapporto_Pelican_1993">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58494.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il rapporto Pelican (1993)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_sapore_della_vittoria_Uniti_si_vince_2000">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58495.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il sapore della vittoria - Uniti si vince (2000)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_tocco_del_male_1998">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58496.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il tocco del male (1998)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Inside_Man_2006">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58497.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Inside Man (2006)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Jamaica_Cop_1989">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58498.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Jamaica Cop (1989)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="John_Q_2002">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58499.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>John Q. (2002)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Macbeth_2021_Wash">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58500.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Macbeth 2021 Wash</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Malcolm_X_1992">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58501.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Malcolm X (1992)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Man_on_Fire_Il_fuoco_della_vendetta_2004">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58502.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Man on Fire - Il fuoco della vendetta (2004)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mo_Better_Blues_1990">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58503.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mo' Better Blues (1990)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Molto_rumore_per_nulla_1993">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58504.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Molto rumore per nulla (1993)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Out_of_Time_2003">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58505.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Out of Time (2003)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Pelham_123_Ostaggi_in_metropolitana_2009">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58506.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Pelham 123: Ostaggi in metropolitana (2009)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Philadelphia_1993">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58507.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Philadelphia (1993)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Power_Potere_1986">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58508.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Power - Potere (1986)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Safe_House_Nessuno_è_al_sicuro_2012">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58509.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Safe House - Nessuno è al sicuro (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Storia_di_un_soldato_1984">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58510.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Storia di un soldato (1984)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Equalizer_Il_vendicatore_2014">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58511.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Equalizer - Il vendicatore (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Equalizer_2_Senza_perdono_2018">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58512.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Equalizer 2 - Senza perdono (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Equalizer_3_Senza_tregua_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58513.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Equalizer 3 - Senza tregua (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Great_Debaters_2007_Wash">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58514.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Great Debaters 2007 Wash</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Manchurian_Candidate_2004">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58515.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Manchurian Candidate (2004)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Training_Day_2001">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58516.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Training Day (2001)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_fantasma_per_amico_1990">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58517.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un fantasma per amico (1990)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Uno_sguardo_dal_cielo_1996">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58518.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Uno sguardo dal cielo (1996)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Unstoppable_Fuori_controllo_2010">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/58519.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Unstoppable - Fuori controllo (2010)</p>
+      </a>
+    </div>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>

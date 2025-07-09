@@ -1,0 +1,5614 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>⭐️⭐️⭐️⭐️⭐️--NUOVI FILM AGGIUNTI --⭐️⭐️⭐️⭐️⭐️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+h1 {
+  font-size: 4rem;
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+}
+
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
+
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
+
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
+
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
+
+.canale a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+  text-decoration: none;
+}
+
+
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
+
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
+  </style>
+</head>
+<body>
+  <h1>⭐️⭐️⭐️⭐️⭐️--NUOVI FILM AGGIUNTI --⭐️⭐️⭐️⭐️⭐️</h1>
+  <div class="griglia">
+    
+    <div class="canale no-logo" id="Il_maestro_che_promise_il_mare_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55886.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il maestro che promise il mare - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Linda_e_il_pollo_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55887.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Linda e il pollo! - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Nightbitch_Bestia_di_notte_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55888.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Nightbitch - Bestia di notte - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Quell_estate_con_Irène_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55889.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Quell’estate con Irène - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Dead_Don_t_Hurt_I_morti_non_soffrono_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55891.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Dead Don't Hurt - I morti non soffrono - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Simulant_Il_futuro_è_per_sempre_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53096.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Simulant - Il futuro è per sempre - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Snag_Capitolo_uno_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53097.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Snag: Capitolo uno - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Union_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53098.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Union - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alien_Romulus_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53130.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alien: Romulus (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_vita_segreta_degli_oranghi_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53131.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La vita segreta degli oranghi (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_stanza_degli_omicidi_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53132.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La stanza degli omicidi - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Nice_Girls_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53133.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Nice Girls - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Power_la_polizia_negli_Stati_Uniti_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53134.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Power: la polizia negli Stati Uniti (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Untold_The_Murder_of_Air_McNair_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53135.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Untold: The Murder of Air McNair - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Falla_girare_2_Offline_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53136.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Falla girare 2 - Offline (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Falla_girare_2022">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53137.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Falla girare - 2022</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Incoming_I_nuovi_arrivati_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53138.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Incoming - I nuovi arrivati (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sarò_con_te_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53140.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sarò con te (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sarò_con_te_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53141.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sarò con te - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fama_da_assassino_Killer_Reputation">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53175.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fama da assassino - Killer Reputation</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fuoco_mortale_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53176.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fuoco mortale (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_esorcismo_Ultimo_atto_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53177.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'esorcismo - Ultimo atto (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="MaXXXine_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53178.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>MaXXXine (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Príncipes_salvajes_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53179.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Príncipes salvajes - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Blink_Twice_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53181.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Blink Twice (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fama_da_assassino_2019">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53182.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fama da assassino - 2019</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Giovani_ossessioni_2020">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53183.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Giovani ossessioni - 2020</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sorelle_s_fortunate_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53185.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sorelle (s)fortunate - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Deliverance_La_redenzione_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53186.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Deliverance - La redenzione - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Puppetman_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53187.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Puppetman - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Una_storia_nera_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53188.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Una storia nera - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_uomo_tranquillo_Bad_Blood_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53189.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un uomo tranquillo – Bad Blood - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Crow_Il_corvo_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53227.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Crow - Il corvo (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="12_ore_per_la_fine_del_mondo_2022">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53228.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>12 ore per la fine del mondo - 2022</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Firenado_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53229.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Firenado - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Green_Border_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53230.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Green Border - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hero_Mode_2021">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53231.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Hero Mode - 2021</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_magico_mondo_di_Harold_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53232.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il magico mondo di Harold - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Please_Don_t_Destroy_The_Treasure_of_Foggy_Mountain_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53233.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Please Don't Destroy: The Treasure of Foggy Mountain - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Verano_en_rojo_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53234.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Verano en rojo - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Time_Escape__I_miei_amici_Dinosauri">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53235.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Time Escape_ I miei amici Dinosauri</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Untold_Hope_Solo_vs_U_S_Soccer_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53236.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Untold: Hope Solo vs. U.S. Soccer - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Anselm_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53242.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Anselm - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Barbie_and_Stacie_to_the_Rescue_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53243.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Barbie and Stacie to the Rescue - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cat_Dog_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53244.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cat & Dog - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Green_Border_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53245.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Green Border - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Immaculate_La_prescelta_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53246.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Immaculate - La prescelta - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mary_e_lo_spirito_di_mezzanotte_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53247.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mary e lo spirito di mezzanotte - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Rebel_Ridge_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53248.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Rebel Ridge - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Verano_en_rojo_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53249.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Verano en rojo - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Well_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53250.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Well - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Una_spiegazione_per_tutto_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53251.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Una spiegazione per tutto - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Apollo_13_una_storia_di_sopravvivenza_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53267.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Apollo 13: una storia di sopravvivenza (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_magico_mondo_di_Harold_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53268.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il magico mondo di Harold - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Io_e_il_secco_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53269.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Io e il secco (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="MaXXXine_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53270.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>MaXXXine (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Seydou_Il_sogno_non_ha_colore_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53271.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Seydou - Il sogno non ha colore - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Someone_Like_You_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53272.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Someone Like You - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Well_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53273.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Well - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Crow_Il_corvo_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53274.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Crow - Il corvo - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Acsexybility_Il_diritto_alla_sessualità_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53283.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Acsexybility: Il diritto alla sessualità - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Annalisa_Tutti_in_Arena_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53284.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Annalisa - Tutti in Arena - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Beetlejuice_Beetlejuice_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53285.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Beetlejuice Beetlejuice (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Best_Man_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53286.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Best Man - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Deep_Dark_Discesa_nell_abisso_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53287.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Deep Dark - Discesa nell'abisso - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bandida_La_numero_uno_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53288.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bandida - La numero uno - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Boxer_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53289.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Boxer - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Confidenza_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53290.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Confidenza - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cucinare_con_amore_2018">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53291.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cucinare con amore - 2018</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_pretendente_2022">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/53292.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il pretendente - 2022</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cintura_nera_Jung_do_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54543.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cintura nera Jung-do - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Uglies_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54544.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Uglies - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="CIA_Un_uomo_nel_mirino_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54545.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>CIA - Un uomo nel mirino - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Outlawed_Il_fuorilegge_2018">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54546.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Outlawed - Il fuorilegge - 2018</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Air_Force_One_Down_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54547.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Air Force One Down - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="みなに幸あれ_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54548.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>みなに幸あれ - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Blue_Lock_Il_Film_Episodio_Nagi_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54549.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Blue Lock Il Film - Episodio Nagi (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Brothers_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54550.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Brothers - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Camp_Estivo_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54552.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Camp Estivo - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Due_vite_parallele_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54553.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Due vite parallele - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="El_Paraíso_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54554.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>El Paraíso - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Era_mio_figlio_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54555.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Era mio figlio - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Furiosa_A_Mad_Max_Saga_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54556.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Furiosa: A Mad Max Saga - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Guerra_e_rivolta_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54557.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Guerra e rivolta - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Half_Baked_Totally_High_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54558.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Half Baked: Totally High - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Haunted_Heart_L_isola_dell_inganno_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54559.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Haunted Heart - L'isola dell'inganno - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Heartless_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54560.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Heartless - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_robot_selvaggio_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54561.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il robot selvaggio - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_robot_selvaggio_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54562.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il robot selvaggio - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Io_e_il_secco_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54563.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Io e il secco - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lonely_Planet_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54564.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lonely Planet - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Miller_s_Girl_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54565.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Miller's Girl - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_rapina_del_secolo_2020">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54566.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La rapina del secolo - 2020</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Napad_La_rapina_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54567.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Napad - La rapina (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Old_2021">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54568.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Old (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Omo_nero_e_Bucefalo_in_Kurdistan_iracheno_m720p_2024_ID36754">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54569.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Omo nero e Bucefalo in Kurdistan iracheno [m720p] (2024) [ID36754]</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Outside_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54570.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Outside - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Pericolosamente_vicini_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54571.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Pericolosamente vicini - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Poolman_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54572.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Poolman - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Shoshana_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54573.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Shoshana - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Someone_like_you_L_eco_del_cuore_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54574.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Someone like you – L’eco del cuore - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Forge_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54575.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Forge - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Good_Half_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54576.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Good Half - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Shadow_Strays_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54577.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Shadow Strays - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Wasp_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54578.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Wasp - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Troppo_azzurro_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54579.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Troppo azzurro - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Troppo_cattivi_Un_Halloween_troppo_cattivo_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54580.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Troppo cattivi - Un Halloween troppo cattivo - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Volare_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54581.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Volare - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Pacco_doppio_pacco_e_contropaccotto_1993">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54582.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Pacco, doppio pacco e contropaccotto - 1993</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Brigitte_Bardot_Forever_2022">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54583.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Brigitte Bardot Forever - 2022</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="C_era_una_volta_in_Bhutan_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54584.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>C'era una volta in Bhutan - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_buco_Capitolo_2_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54585.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il buco - Capitolo 2 (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_cacciatore_delle_tenebre_2002">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54586.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il cacciatore delle tenebre - 2002</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Joker_Folie_à_Deux_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54588.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Joker: Folie à Deux (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_uomo_che_amava_gli_UFO_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54589.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'uomo che amava gli UFO (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_uomo_che_amava_gli_UFO_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54590.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'uomo che amava gli UFO - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Outside_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54591.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Outside - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Project_Silence_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54592.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Project Silence - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Shell_of_Fear_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54593.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Shell of Fear (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sweet_Bobby_Il_mio_incubo_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54594.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sweet Bobby - Il mio incubo (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Shadow_Strays_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54595.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Shadow Strays - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="TMZ_Presents_The_Downfall_of_Diddy_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54596.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>TMZ Presents: The Downfall of Diddy (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Woman_of_the_Hour_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54597.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Woman of the Hour (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Woman_of_the_Hour_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54598.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Woman of the Hour - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Terrifier_3_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54620.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Terrifier 3 - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Babes_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54685.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Babes - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Blue_Cave_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54686.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Blue Cave - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Canary_Black_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54687.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Canary Black - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Disco_Ruin_40_anni_di_club_culture_italiana_2021">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54688.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Disco Ruin - 40 anni di club culture italiana - 2021</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fenomeno_Rocketr">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54689.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fenomeno Rocketr</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="French_Girl_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54690.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>French Girl - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Inter_Due_Stelle_sul_Cuore_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54691.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Inter. Due Stelle sul Cuore - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_uomo_che_disse_no_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54692.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'uomo che disse no - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lupi_mannari_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54693.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lupi mannari - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="My_Hero_Academia_You_re_Next_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54694.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>My Hero Academia: You're Next - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Smile_2_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54695.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Smile 2 (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Una_Via_Fredda_per_l_inferno_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54696.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Una Via Fredda per l 'inferno - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="30_anni_di_meno_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54697.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>30 anni (di meno) - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Don_t_Move_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54698.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Don't Move (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Venom_The_Last_Dance_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54699.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Venom: The Last Dance (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Appartamento_7A_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54723.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Appartamento 7A (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ari_2016">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54724.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ari (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Centurion_Uniti_per_vincere_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54725.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Centurion: Uniti per vincere (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hold_Your_Breath_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54726.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Hold Your Breath (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="House_of_Spoils_720p">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54727.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>House.of.Spoils.720p</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_divorzio_1970">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54728.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il divorzio (1970)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_segreto_di_Liberato_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54729.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il segreto di Liberato (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Jailbreak_Love_on_the_Run_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54730.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Jailbreak: Love on the Run - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="SpongeBob_Kamp_Spavento_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54731.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>SpongeBob: Kamp Spavento - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Killer_Heat_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54732.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Killer Heat (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_vita_straordinaria_di_Ibelin_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54733.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La vita straordinaria di Ibelin (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_vittima_invisibile_il_caso_Eliza_Samudio_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54734.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La vittima invisibile: il caso Eliza Samudio (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Never_Let_Go_A_un_passo_dal_male_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54735.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Never Let Go - A un passo dal male (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sing_Thriller_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54736.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sing: Thriller (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_vero_gentiluomo_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54737.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un vero gentiluomo - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="SeAcabó_Diario_de_las_campeonas_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54778.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>#SeAcabó: Diario de las campeonas - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Apocalisse_Z_l_inizio_della_fine_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54779.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Apocalisse Z: l'inizio della fine - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Avanzers_Italian_Superheroes_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54780.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Avanzers - Italian Superheroes - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="HAIKYU_Battaglia_all_ultimo_Rifiuto_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54781.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>HAIKYU!! Battaglia all'ultimo Rifiuto - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Iddu_L_ultimo_padrino_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54782.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Iddu - L'ultimo padrino (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_vita_straordinaria_di_Ibelin_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54783.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La vita straordinaria di Ibelin - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Let_Go_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54784.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Let Go - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="LIBRE">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54785.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>LIBRE</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Martha_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54786.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Martha - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Space_Oddity_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54787.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Space Oddity - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Godless_The_Eastfield_Exorcism_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54788.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Godless - The Eastfield Exorcism - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Time_Cut_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54789.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Time Cut - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_fratelli_Menendez">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54880.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I fratelli Menendez</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_invenzione_di_noi_due_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54881.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'invenzione di noi due - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Martha_Stewart_una_storia_americana_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54882.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Martha Stewart: una storia americana - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Terrifier_3_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54883.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Terrifier 3 - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Amen_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54914.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Amen - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Amici_per_caso_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54915.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Amici per caso - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Appuntamento_a_Natale_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54916.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Appuntamento a Natale - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_mio_posto_è_qui_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54917.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il mio posto è qui - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Pedro_Páramo_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54918.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Pedro Páramo - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Vincent_deve_morire_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54919.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Vincent deve morire - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Gli_ultimi_dieci_giorni_tra_il_bene_e_il_male_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54920.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Gli ultimi dieci giorni tra il bene e il male (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Longlegs_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54921.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Longlegs - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ma_chi_ti_conosce_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54922.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ma chi ti conosce? (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="10_Lives_Un_gatto_fortunato_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54963.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>10 Lives - Un gatto fortunato - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Darker_Shades_of_Summer_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54964.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Darker Shades of Summer - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Here_After_L_aldilà_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54965.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Here After - L'aldilà - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hot_Frosty_Una_magia_di_Natale_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54966.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Hot Frosty - Una magia di Natale - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_morte_è_un_problema_dei_vivi_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54967.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La morte è un problema dei vivi - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Long_Distance_Senza_ossigeno_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54968.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Long Distance - Senza ossigeno - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Look_Back_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54969.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Look Back - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Parthenope_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54970.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Parthenope (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="touch_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54971.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>touch - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_oggi_alla_volta_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/54972.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un oggi alla volta - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Return_of_the_King_la_caduta_e_l_ascesa_di_Elvis_Presley_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55007.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Return of the King: la caduta e l'ascesa di Elvis Presley - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Apprentice_Alle_origini_di_Trump_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55008.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Apprentice - Alle origini di Trump (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Los_niños_perdidos_40_giorni_nella_foresta_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55011.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Los niños perdidos - 40 giorni nella foresta - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Uno_Rosso_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55012.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Uno Rosso (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="When_Evil_Lurks_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55013.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>When Evil Lurks - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Berlinguer_La_grande_ambizione_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55044.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Berlinguer. La grande ambizione (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fancy_Dance_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55045.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fancy Dance - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Non_riattaccare_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55046.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Non riattaccare (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Speak_No_Evil_Non_parlare_con_gli_sconosciuti_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55047.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Speak No Evil - Non parlare con gli sconosciuti - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Instigators_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55048.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Instigators - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Buy_Now_L_inganno_del_consumismo_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55072.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Buy Now - L'inganno del consumismo (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="GTMAX_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55073.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>GTMAX (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Merry_Gentlemen_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55074.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Merry Gentlemen - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Escort_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55075.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Escort - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Giurato_numero_2_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55076.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Giurato numero 2 (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bytte_Bytte_Barn_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55077.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bytte Bytte Barn - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Skincare_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55078.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Skincare - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="A_Mistake_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55114.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>A Mistake - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Giurato_numero_2_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55115.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Giurato numero 2 (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tigri_e_iene_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55116.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tigri e iene - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Anna_2019">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55117.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Anna - 2019</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Blitz_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55118.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Blitz - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Joy_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55119.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Joy - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Out_of_My_Mind_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55120.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Out of My Mind - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Pimpinero_Morte_e_contrabbando_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55121.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Pimpinero: Morte e contrabbando - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Spellbound_L_incantesimo_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55122.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Spellbound - L'incantesimo - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Piano_Lesson_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55123.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Piano Lesson - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="1992_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55124.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>1992 - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ennio_Doris_C_e_anche_domani_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55125.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ennio Doris - C'è anche domani - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_tempo_del_sogno_Dream_Time_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55128.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il tempo del sogno - Dream Time - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_coda_del_diavolo_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55129.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La coda del diavolo - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Non_riattaccare_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55130.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Non riattaccare - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Our_Little_Secret_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55131.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Our Little Secret (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fino_alla_fine_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55211.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fino alla fine (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Greedy_People_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55212.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Greedy People (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_GGG_Il_Grande_Gigante_Gentile_2016">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55213.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il GGG - Il Grande Gigante Gentile - 2016</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Improvvisamente_a_Natale_mi_sposo_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55214.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Improvvisamente a Natale mi sposo - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_innocenza_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55215.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'innocenza (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ricomincio_Da_Taaac_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55216.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ricomincio Da Taaac (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Amore_e_swing">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55217.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Amore e swing</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Era_solo_un_messaggio_prima_di_Natale">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55218.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Era solo un messaggio prima di Natale</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mia_2017">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55219.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mia (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Christmas_on_Windmill_Way_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55220.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Christmas on Windmill Way - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bringing_Christmas_Home_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55221.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bringing Christmas Home - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Spellbound_L_incantesimo_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55222.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Spellbound - L'incantesimo (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_più_bel_regalo_di_Natale_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55223.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il più bel regalo di Natale - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Animale_Umano_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55241.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Animale | Umano (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Corvo_Bianco_Il_cecchino_del_Donbas_2022">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55242.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Corvo Bianco - Il cecchino del Donbas - 2022</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Din_Don_Quando_meno_te_lo_aspetti_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55243.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Din Don - Quando meno te lo aspetti - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="FRAGILE_La_storia_di_Nicolò_Fagioli_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55244.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>FRAGILE - La storia di Nicolò Fagioli (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Jack_Whitehall_Missione_Natale_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55245.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Jack Whitehall Missione Natale - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Spellbound_L_incantesimo_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55246.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Spellbound - L'incantesimo (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Substance_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55247.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Substance (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Witches_2002">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55248.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Witches (2002)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Wicked_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55249.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Wicked (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Wolfs_Lupi_solitari_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55250.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Wolfs - Lupi solitari (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Blackwater_Lane_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55251.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Blackwater Lane - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hildegart_La_Vergine_Rossa_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55253.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Hildegart - La Vergine Rossa (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_treno_dei_bambini_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55254.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il treno dei bambini (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_vita_accanto_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55255.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La vita accanto (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="That_Christmas_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55256.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>That Christmas - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Afraid_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55299.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Afraid - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Gunner_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55300.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Gunner - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Le_avventure_di_Jim_Bottone_2020">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55301.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Le avventure di Jim Bottone - 2020</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Saturday_Night_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55302.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Saturday Night - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Biggest_Heist_Ever_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55303.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Biggest Heist Ever - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Dear_Santa_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55304.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Dear Santa - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Finché_notte_non_ci_separi_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55305.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Finché notte non ci separi - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Madame_Clicquot_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55306.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Madame Clicquot - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Prima_dell_alba_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55307.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Prima dell'alba - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Maria_Antonietta_La_storia_vera_2006">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55308.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Maria Antonietta - La storia vera - 2006</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Strawberry_Mansion_La_casa_di_fragola_2021">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55309.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Strawberry Mansion - La casa di fragola - 2021</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Siege_L_assedio_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55310.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Siege - L'assedio - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Una_mamma_senza_freni_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55311.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Una mamma senza freni - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Oceania_2_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55425.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Oceania 2 - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Our_Little_Secret_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55426.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Our Little Secret (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Campo_di_battaglia_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55427.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Campo di battaglia (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Carry_On_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55428.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Carry-On - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Exhuma_La_tomba_del_diavolo_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55430.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Exhuma - La tomba del diavolo (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_caso_Josette_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55431.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il caso Josette (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Overlord_Il_film_Capitolo_del_Santo_Regno_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55432.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Overlord: Il film - Capitolo del Santo Regno (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Butcher_s_Crossing_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55445.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Butcher's Crossing - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Circle_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55446.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Circle (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_assassino_di_Crescent_City_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55447.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L’assassino di Crescent City - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_più_mirabolante_recita_di_Natale_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55448.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La più mirabolante recita di Natale - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Buffalo_Kids_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55474.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Buffalo Kids (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Damaged_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55475.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Damaged - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Kraven_Il_cacciatore_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55476.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Kraven - Il cacciatore (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_regina_delle_nevi_e_la_principessa_2022">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55477.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La regina delle nevi e la principessa - 2022</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_assassino_di_Crescent_City_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55478.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L’assassino di Crescent City - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Megalopolis_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55479.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Megalopolis (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Buffalo_Kids_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55484.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Buffalo Kids - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Damaged_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55485.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Damaged (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Kraven_Il_cacciatore_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55486.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Kraven - Il cacciatore - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_regina_delle_nevi_e_la_principessa_2022">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55487.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La regina delle nevi e la principessa (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_assassino_di_Crescent_City_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55488.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L’assassino di Crescent City (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Best_Christmas_Pageant_Ever_1983">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55489.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Best Christmas Pageant Ever (1983)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Legend_of_Catclaws_Mountain_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55490.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Legend of Catclaws Mountain - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Killer_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55491.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Killer (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Animale_Umano_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55492.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Animale | Umano - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Gli_agnelli_possono_pascolare_in_pace_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55493.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Gli agnelli possono pascolare in pace - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_magico_mondo_di_Billie_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55494.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il magico mondo di Billie - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_viaggio_di_Adam_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55495.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il viaggio di Adam - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_spiaggia_dei_gabbiani_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55496.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La spiaggia dei gabbiani - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Niko_e_la_slitta_di_Babbo_Natale_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55497.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Niko e la slitta di Babbo Natale - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Presunta_innocente_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55498.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Presunta innocente - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Running_on_Empty_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55499.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Running on Empty - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tra_un_tempio_e_l_altro_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55500.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tra un tempio e l'altro - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Vi_Dichiaro_Moglie_E_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55501.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Vi Dichiaro Moglie E… - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Woken_Nulla_è_come_sembra_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55502.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Woken - Nulla è come sembra - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Amore_a_39_gradi_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55503.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Amore a 39 gradi (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Der_Doktor_L_ombra_della_morte">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55504.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Der Doktor - L'ombra della morte</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ferry_2_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55505.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ferry 2 (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Dirt_Mötley_Crüe_2019">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55506.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Dirt: Mötley Crüe (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Six_Triple_Eight_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55507.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Six Triple Eight (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="TRENTATRE_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55508.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>TRENTATRE 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alaska_Baby_il_documentario_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55611.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alaska Baby, il documentario (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="E_la_festa_continua_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55612.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>E la festa continua! - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_male_dentro_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55613.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il male dentro - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Iron_Fighter_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55614.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Iron Fighter - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Kill_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55615.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Kill - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mufasa_Il_re_leone_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55616.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mufasa - Il re leone (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_avventura_spaziale_Un_film_dei_Looney_Tunes_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55617.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un'avventura spaziale - Un film dei Looney Tunes - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cerebrum_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55618.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cerebrum - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_cacciatori_di_tesori_La_perla_del_mare_del_sud_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55619.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I cacciatori di tesori - La perla del mare del sud - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Diavolo_è_Dragan_Cygan_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55620.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Diavolo è Dragan Cygan - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Verità_Nuda_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55621.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Verità Nuda - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="È_colpa_tua_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55622.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>È colpa tua? - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="NATALE_IN_CASA_CUPIELLO_VINCENZO_SALEMME">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55623.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>NATALE IN CASA CUPIELLO  VINCENZO SALEMME</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cortina_Express_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55624.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cortina Express (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Come_far_litigare_mamma_e_papà_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55642.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Come far litigare mamma e papà (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_conte_di_Montecristo_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55643.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il conte di Montecristo - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_ultima_settimana_di_settembre_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55644.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L’ultima settimana di settembre - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Natale_a_Christmas_Island_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55645.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Natale a Christmas Island - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Take_Cover_Al_riparo_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55646.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Take Cover - Al riparo - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Avicii_I_m_Tim_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55648.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Avicii - I'm Tim (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Avicii_My_Last_Show_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55649.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Avicii - My Last Show (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bookworm_Una_mitica_avventura_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55650.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bookworm - Una mitica avventura (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Coppia_aperta_quasi_spalancata_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55651.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Coppia aperta quasi spalancata - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="CVLT_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55652.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>CVLT - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Enigma_Rol_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55653.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Enigma Rol - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="LEGO_Marvel_Avengers_Mission_Demolition_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55654.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>LEGO Marvel Avengers: Mission Demolition - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Absolution_Storia_criminale_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55671.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Absolution - Storia criminale (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Avicii_My_Last_Show_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55672.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Avicii - My Last Show (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mica_è_Colpa_Mia_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55675.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mica è Colpa Mia - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Numero_24_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55676.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Numero 24 (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Questi_fantasmi_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55678.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Questi fantasmi - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Wallace_e_Gromit_Le_piume_della_vendetta_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55718.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Wallace e Gromit - Le piume della vendetta (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ale_2021">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55720.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ale - 2021</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Parachute_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55721.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Parachute - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sonic_3_Il_film_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55722.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sonic  3 - Il film (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Guardians_of_Time_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55730.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Guardians of Time - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="KonoSuba_La_leggenda_di_Crimson_2019">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55731.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>KonoSuba - La leggenda di Crimson - 2019</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="KonoSuba_La_leggenda_di_Crimson_2019">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55732.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>KonoSuba - La leggenda di Crimson - 2019</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Michael_Jackson_L_uomo_dietro_la_maschera_2022">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55733.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Michael Jackson - L'uomo dietro la maschera - 2022</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Stanotte_a_Roma_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55734.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Stanotte a Roma - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Martha_Stewart_una_storia_americana_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55766.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Martha Stewart: una storia americana - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Nella_mente_di_un_cane_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55767.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Nella mente di un cane (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ruthless_Lo_spietato_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55768.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ruthless: Lo spietato - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Vermiglio_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55769.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Vermiglio (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="A_spasso_con_Madeleine_m720p_2022_ID37016">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55779.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>A spasso con Madeleine [m720p] (2022) [ID37016]</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_tempo_che_ci_vuole_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55780.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il tempo che ci vuole (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_misura_del_dubbio_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55782.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La misura del dubbio - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Nosferatu_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55784.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Nosferatu (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ozi_La_voce_della_foresta_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55785.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ozi - La voce della foresta - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="In_the_Blood_2014">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55786.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>In the Blood - 2014</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Armor_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55787.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Armor (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Survivre_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55789.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Survivre (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Amore_e_swing_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55817.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Amore e swing - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Der_Doktor_L_ombra_della_morte">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55818.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Der Doktor - L'ombra della morte</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Deserto_Particular_2021">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55819.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Deserto Particular - 2021</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Familia_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55820.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Familia - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Inarrestabile_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55821.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Inarrestabile - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Kane_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55822.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Kane - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Monte_Verità_2021">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55823.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Monte Verità - 2021</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Christmas_on_Windmill_Way_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55824.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Christmas on Windmill Way - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sofia_2018">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55825.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sofia - 2018</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tutto_in_un_giorno_2022">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55827.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tutto in un giorno - 2022</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_appuntamento_regale_per_Natale_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55828.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un appuntamento regale per Natale - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hotspot_Amore_senza_rete_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55831.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Hotspot - Amore senza rete (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_amore_indica_la_via_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55832.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'amore indica la via - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cinedramma_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55833.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cinedramma - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Flow_Un_mondo_da_salvare_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55834.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Flow - Un mondo da salvare - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hadik_la_leggenda_di_un_guerriero_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55835.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Hadik: la leggenda di un guerriero - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_paradosso_del_tempo_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55836.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il paradosso del tempo - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Kane_L_uomo_dai_tre_volti">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55838.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Kane -L'uomo dai tre volti</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Night_of_the_Killer_Bears_2022">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55839.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Night of the Killer Bears - 2022</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Questione_di_chimica_2022">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55840.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Questione di chimica - 2022</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Year_10_Sopravvivenza_Letale_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55841.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Year 10 - Sopravvivenza Letale - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_maestro_che_promise_il_mare_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55843.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il maestro che promise il mare - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Love_Lies_Bleeding_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55844.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Love Lies Bleeding - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Quell_estate_con_Irène_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55845.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Quell’estate con Irène - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Terrifier_L_inizio_2013">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55846.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Terrifier - L'inizio - 2013</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Killer_s_Game_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/55847.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Killer's Game - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Matrimonio_all_italiana_1964">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56053.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Matrimonio all'italiana - 1964</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_amore_e_altre_seghe_mentali_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56077.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L’amore e altre seghe mentali (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Making_Of_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56078.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Making Of - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alessandro_il_grande_1956">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56171.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alessandro il grande - 1956</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Black_Lotus_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56172.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Black Lotus - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Buy_Me_2017">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56173.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Buy Me - 2017</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Clean_Up_Crew_Specialisti_in_lavori_sporchi_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56174.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Clean Up Crew - Specialisti in lavori sporchi - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Diana_morte_di_una_principessa_2022">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56175.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Diana: morte di una principessa - 2022</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Expedition_China_2017">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56177.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Expedition China - 2017</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Genesis_2_0_2018">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56178.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Genesis 2.0 - 2018</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Girasoli_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56179.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Girasoli - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_branco_L_omicidio_di_Desirée_Piovanelli">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56180.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il branco - L'omicidio di Desirée Piovanelli</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_mistero_delle_gemelline_scomparse_2022">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56181.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il mistero delle gemelline scomparse - 2022</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_ascesa_del_crimine_2007">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56182.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L' ascesa del crimine - 2007</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Making_Of_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56183.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Making Of - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Rachel_sta_per_sposarsi_2008">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56184.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Rachel sta per sposarsi - 2008</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Senza_via_d_uscita_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56185.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Senza via d'uscita - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sparita_nel_nulla_Il_caso_Elena_Ceste">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56186.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sparita nel nulla - Il caso Elena Ceste</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Super_Size_Me_2_Holy_Chicken_2019">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56187.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Super Size Me 2: Holy Chicken! - 2019</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Una_preghiera_per_morire_1987">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56188.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Una preghiera per morire - 1987</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bogotá_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56221.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bogotá (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cassino_in_Ischia_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56222.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cassino in Ischia (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Clean_Up_Crew_Specialisti_in_lavori_sporchi_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56223.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Clean Up Crew - Specialisti in lavori sporchi - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hayao_Miyazaki_e_l_airone_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56224.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Hayao Miyazaki e l'airone - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_progetto_del_cuore_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56225.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il progetto del cuore - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_velo_nuziale_L_eredità_2022">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56226.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il velo nuziale - L'eredità - 2022</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_velo_nuziale_Una_dolce_attesa_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56227.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il velo nuziale - Una dolce attesa - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_velo_nuziale_Ritorno_a_Venezia_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56228.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il velo nuziale - Ritorno a Venezia - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_velo_nuziale_Luna_di_miele_in_Grecia_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56229.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il velo nuziale - Luna di miele in Grecia - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_albero_dei_desideri_2020">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56230.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'albero dei desideri - 2020</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cassino_in_Ischia_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56363.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cassino in Ischia - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Piece_by_Piece_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56365.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Piece by Piece - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Reality_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56366.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Reality - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Bobot_Energie_del_mondo_2018">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56367.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Bobot - Energie del mondo - 2018</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="200_lupo_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56389.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>200% lupo - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bagman_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56390.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bagman - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cassino_in_Ischia_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56391.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cassino in Ischia - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Emilia_Pérez_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56393.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Emilia Pérez - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Escape_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56394.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Escape - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Limonov_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56395.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Limonov - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Weekend_a_Taipei_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56398.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Weekend a Taipei - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Comunione_con_delitti_1976">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56399.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Comunione con delitti - 1976</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mamma_qui_comando_io_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56402.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mamma qui comando io - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_fantasma_accanto_a_me_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56404.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un fantasma accanto a me - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Blades_in_the_Darkness_2022">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56420.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Blades in the Darkness - 2022</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Gli_immortali_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56421.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Gli immortali - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_oro_di_Scampia_2014">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56422.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'oro di Scampia - 2014</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Temptation_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56426.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Temptation - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="This_Time_Next_Year_Cosa_fai_a_Capodanno_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56427.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>This Time Next Year - Cosa fai a Capodanno? - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Aftermath_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56429.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Aftermath - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Con_la_grazia_di_un_Dio_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56502.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Con la grazia di un Dio - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Nadal_King_of_Paris_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56503.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Nadal: King of Paris - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="September_5_La_diretta_che_cambiò_la_storia_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56504.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>September 5 - La diretta che cambiò la storia - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_amore_in_città_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56522.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'amore in città - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_anima_gemella_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56523.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'anima gemella - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Reagan_Un_presidente_sotto_i_riflettori_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56524.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Reagan: Un presidente sotto i riflettori - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Conclave_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56556.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Conclave - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Paddington_in_Peru_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56557.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Paddington in Peru (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Eterno_visionario_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56573.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Eterno visionario - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hellhound_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56574.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Hellhound - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_ragazzi_della_Nickel_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56576.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I ragazzi della Nickel - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mimì_Il_principe_delle_tenebre_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56577.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mimì - Il principe delle tenebre - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="No_way_up_Senza_via_di_uscita_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56578.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>No way up - Senza via di uscita - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Pink_Floyd_Syd_Barrett_Have_You_Got_It_Yet_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56579.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Pink Floyd / Syd Barrett: Have You Got It Yet? - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Reagan_Un_presidente_sotto_i_riflettori_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56580.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Reagan - Un presidente sotto i riflettori - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Steppenwolf_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56581.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Steppenwolf - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Last_Redemption_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56582.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Last Redemption - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Trifole_Le_radici_dimenticate_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56583.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Trifole - Le radici dimenticate - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Vittoria_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56584.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Vittoria - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2_fantasmi_di_troppo_2021">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56585.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2 fantasmi di troppo - 2021</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Finalmente_libera_2022">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56586.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Finalmente libera - 2022</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_gigante_della_strada_1976">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56587.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il gigante della strada - 1976</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_colori_dell_anima_The_Colors_Within_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56650.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I colori dell'anima - The Colors Within - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Me_contro_Te_Il_film_Operazione_spie_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56651.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Me contro Te: Il film - Operazione spie (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Non_sono_quello_che_sono_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56652.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Non sono quello che sono - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Nella_terra_dei_lupi_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56653.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Nella terra dei lupi - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Here_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56663.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Here - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_orchestra_stonata_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56665.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'orchestra stonata - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_banda_di_Don_Chisciotte_Missione_Mulini_a_Vento_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56666.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La banda di Don Chisciotte - Missione Mulini a Vento - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Leggere_Lolita_a_Teheran_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56667.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Leggere Lolita a Teheran - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Maria_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56668.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Maria - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Rido_perché_ti_amo_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56669.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Rido perché ti amo - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_corpo_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56670.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il corpo - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="J_Loop_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56672.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>J Loop - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Modi_Tre_giorni_sulle_ali_della_follia_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56673.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Modi - Tre giorni sulle ali della follia - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Una_terapia_di_gruppo_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56676.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Una terapia di gruppo - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bloom_Up_A_Swinger_Couple_Story_2021">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56733.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bloom Up: A Swinger Couple Story - 2021</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Due_babysitter_all_improvviso">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56734.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Due babysitter all'improvviso</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_cacciatori_di_tesori_La_Regina_serpente_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56735.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I cacciatori di tesori - La Regina serpente - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="In_Inghilterra_con_amore">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56736.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>In Inghilterra con amore</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_attrice_e_il_cowboy_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56737.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'attrice e il cowboy - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Matrimonio_all_improvviso_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56738.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Matrimonio all'improvviso - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Per_sempre_insieme_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56740.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Per sempre insieme - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Stranger_Eyes_Sguardi_nascosti_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56742.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Stranger Eyes - Sguardi nascosti - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_principe_del_mio_cuore_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56743.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il principe del mio cuore - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Vendetta_implacabile_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56744.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Vendetta implacabile - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Aladino_cerca_moglie_2018">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56746.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Aladino cerca moglie - 2018</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="B_F_F_Best_Friends_Forever_o_quasi_2020">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56747.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>B.F.F. Best Friends Forever... o quasi - 2020</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Chi_ha_ucciso_Michael_Jackson">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56748.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Chi ha ucciso Michael Jackson</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_delitto_di_Garlasco_Tutta_la_verità">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56750.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il delitto di Garlasco – Tutta la verità</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Intrigo_a_Malta_2021">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56751.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Intrigo a Malta - 2021</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Io_Gisèle_Pelicot_Tutta_la_verità">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56752.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Io, Gisèle Pelicot – Tutta la verità</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_rinascita_della_tigre_2022">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56753.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La rinascita della tigre - 2022</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Monsters_and_Men_2018">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56755.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Monsters and Men - 2018</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Paddington_in_Perù_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56757.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Paddington in Perù - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Martial_Avenger_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56759.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Martial Avenger - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Totto_chan_The_Little_Girl_at_the_Window_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/56760.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Totto-chan: The Little Girl at the Window - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Arf_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59898.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Arf - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bangkok_Dog_Missione_finale_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59899.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bangkok Dog - Missione finale - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fratelli_di_sangue_2006">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59901.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fratelli di sangue - 2006</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fratelli_di_sangue_2020">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59902.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fratelli di sangue - 2020</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hey_Joe_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59903.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Hey Joe - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Invasion_Sotto_attacco_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59904.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Invasion - Sotto attacco - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_fratellanza_2017">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59906.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La fratellanza - 2017</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Le_Déluge_Gli_ultimi_giorni_di_Maria_Antonietta_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59907.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Le Déluge - Gli ultimi giorni di Maria Antonietta - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Marvel_Dietro_la_maschera_2021">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59908.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Marvel - Dietro la maschera - 2021</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Marvel_Studios_Expanding_the_Universe_2019">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59909.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Marvel Studios: Expanding the Universe - 2019</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hard_Home_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/61111.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Hard Home - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_giorno_dell_incontro_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/61112.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il giorno dell'incontro - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_meravigliosa_storia_di_Henry_Sugar_e_altre_tre_storie_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/61113.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La meravigliosa storia di Henry Sugar ...e altre tre storie - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Fire_Inside_Lotta_per_la_vittoria_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/61114.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Fire Inside: Lotta per la vittoria - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Freud_L_ultima_analisi_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/64037.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Freud - L'ultima analisi - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_bambina_che_raccontava_i_film_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/64038.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La bambina che raccontava i film - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Me_contro_Te_presenta_Cattivissimi_a_Natale_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/64039.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Me contro Te presenta Cattivissimi a Natale - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Noryang_La_battaglia_finale_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/64040.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Noryang: La battaglia finale - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Criature_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/64096.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Criature - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Dicono_di_te_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/64097.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Dicono di te - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Founders_Day_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/64098.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Founders Day - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Get_Away_Fuga_senza_uscita_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/64099.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Get Away: Fuga senza uscita - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_bambina_che_raccontava_i_film_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/64100.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La bambina che raccontava i film - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ops_È_già_Natale_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/64101.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ops! È già Natale - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Una_notte_a_New_York_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/64102.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Una notte a New York - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Venom_1981">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/65955.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Venom - 1981</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="You_Can_t_Run_Forever_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/65956.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>You Can't Run Forever - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="7_chili_in_7_giorni_1986">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67971.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>7 chili in 7 giorni - 1986</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Babygirl_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67972.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Babygirl - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Disney_Gallery_Star_Wars_The_Book_of_Boba_Fett">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67973.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Disney Gallery - Star Wars -The Book of Boba Fett</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Io_sono_un_po_matto_e_tu_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67974.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Io sono un po' matto... e tu? - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_Impero_dei_sogni_La_storia_della_trilogia_di_Star_Wars_2004">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67975.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'Impero dei sogni: La storia della trilogia di Star Wars - 2004</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="99_lune_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/69102.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>99 lune - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Jurassic_Pet_Ritorno_al_mondo_perduto">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/69103.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Jurassic Pet - Ritorno al mondo perduto</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Nosso_Lar_2_Astral_City_2_The_Messengers_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/69104.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Nosso Lar 2 - Astral City 2: The Messengers - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sezione_8_2022">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/69105.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sezione 8 - 2022</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Viaggio_a_Betlemme_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/69106.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Viaggio a Betlemme - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bourák_2020">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/69235.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bourák - 2020</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_principessa_e_il_ranocchio_2009">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/69236.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La principessa e il ranocchio - 2009</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ratatouille_2007">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/69237.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ratatouille - 2007</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mufasa_Il_Re_Leone_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/69271.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mufasa: Il Re Leone - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Brutalist_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/69272.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Brutalist (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Image_of_You_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/69619.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Image of You - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Io_e_te_dobbiamo_parlare_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/69620.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Io e te dobbiamo parlare (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sleeping_Dogs_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/69622.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sleeping Dogs - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Better_Man_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/70169.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Better Man - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_nostra_alba_Break_of_Dawn_2022">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/70172.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La nostra alba - Break of Dawn - 2022</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Last_Straw_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/70173.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Last Straw - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Le_occasioni_dell_amore_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/70174.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Le occasioni dell'amore - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Living_with_Michael_Jackson_2003">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/70175.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Living with Michael Jackson - 2003</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Maggie_Simpson_e_il_ritorno_nella_Galassia_lontana_lontana_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/70176.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Maggie Simpson e il ritorno nella Galassia lontana lontana - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Image_of_You_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/70178.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Image of You - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Questa_è_la_mia_casa_2013">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/70180.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Questa è la mia casa - 2013</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Food_for_Profit_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/70182.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Food for Profit - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Le_occasioni_dell_amore_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/70183.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Le occasioni dell'amore - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mister_green_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/70184.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mister green - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Non_dirmi_che_hai_paura_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/70185.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Non dirmi che hai paura - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bentu_2022">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/70191.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bentu - 2022</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Dead_like_me_Il_film_2009">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/70600.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Dead like me - Il film - 2009</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Diamanti_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/70601.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Diamanti (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mister_Green_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/70603.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mister Green - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Nella_rete_dell_inganno_2011">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/70604.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Nella rete dell'inganno - 2011</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Christine_La_macchina_infernale_1983">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/70605.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Christine - La macchina infernale (1983)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Domino_2019">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/70606.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Domino (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_segreti_di_Osage_County_2013">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/70607.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I segreti di Osage County (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Killer_Klowns_from_Outer_Space_1988">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/70608.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Killer Klowns from Outer Space (1988)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Maial_College_2_2006">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/70609.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Maial College 2 (2006)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mi_chiamano_Radio_2003">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/70610.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mi chiamano Radio (2003)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Prima_di_mezzanotte_1988">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/70611.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Prima di mezzanotte - 1988</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Amore_in_safari_2018">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/70641.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Amore in safari - 2018</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Barbie_grande_città_grandi_sogni_2021">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/70643.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Barbie grande città, grandi sogni - 2021</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_gioco_dell_inganno_2010">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/70646.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il gioco dell'inganno - 2010</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Infuso_d_amore_2021">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/70647.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Infuso d'amore - 2021</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tutenstein_Una_mummia_al_museo_Il_film_2008">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/70648.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tutenstein - Una mummia al museo - Il film - 2008</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Jesús_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/70685.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Jesús - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Maria_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/70686.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Maria - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cars_2_2011">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/71158.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cars 2 - 2011</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cars_3_2017">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/71159.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cars 3 - 2017</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cars_Motori_ruggenti_2006">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/71160.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cars - Motori ruggenti - 2006</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Christmas_Bells_La_fede_ritrovata_2022">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/71161.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Christmas Bells – La fede ritrovata - 2022</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cuori_di_Vetro_2009">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/71162.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cuori di Vetro - 2009</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Le_incredibili_storie_di_Carl_Attrezzi_2010">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/71163.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Le incredibili storie di Carl Attrezzi - 2010</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Oh_Canada_I_tradimenti_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/71164.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Oh, Canada - I tradimenti - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Per_amore_della_verità_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/71165.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Per amore della verità - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Per_il_mio_bene_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/71166.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Per il mio bene - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Stealing_Cars_2016">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/71167.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Stealing Cars - 2016</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Os_Carrinhos_em_A_Grande_Corrida_2006">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/71168.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Os Carrinhos em: A Grande Corrida - 2006</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Uno_bianca_2001">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/71169.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Uno bianca - 2001</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Escape_the_Field_2022">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/71190.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Escape the Field - 2022</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Glory_Hole_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/71191.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Glory Hole - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_regina_d_Africa_1952">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/71193.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La regina d'Africa - 1952</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Per_amore_della_verità_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/71195.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Per amore della verità - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Quasi_a_casa_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/71197.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Quasi a casa - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Quell_estate_con_Irène_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/71198.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Quell’estate con Irène - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Schindler_la_vera_storia_1983">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/71199.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Schindler: la vera storia - 1983</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Lesson_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/71200.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Lesson - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Dolore_nascosto_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/71269.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Dolore nascosto - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_storia_di_Souleymane_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/71270.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La storia di Souleymane - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Thelma_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/71274.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Thelma - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Berlin_Nobody_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/71661.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Berlin Nobody - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_vento_dell_Amnesia_1990">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/71662.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il vento dell'Amnesia - 1990</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Io_sono_ancora_qui_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/71663.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Io sono ancora qui - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Kryptic_2025">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/71664.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Kryptic - 2025</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_incubo_oltre_il_giardino_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/71665.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'incubo oltre il giardino - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Finalmente_le_mille_e_una_notte_1972">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/71666.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Finalmente le mille e una notte - 1972</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ricordi_rubati_2023">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/71667.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ricordi rubati - 2023</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Scianèl_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/71668.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Scianèl - 2024</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Y2K_La_rivolta_digitale_2024">
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/71669.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Y2K: La rivolta digitale - 2024</p>
+      </a>
+    </div>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>
