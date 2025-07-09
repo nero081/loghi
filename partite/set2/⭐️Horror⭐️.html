@@ -1,0 +1,4905 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>⭐️Horror⭐️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    <style>
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+h1 {
+  font-size: 4rem;
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+}
+
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
+
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
+
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
+
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
+
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+}
+
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
+
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.canale a {
+  text-decoration: none;
+  color: inherit;
+  </style>
+</head>
+<body>
+  <h1>⭐️Horror⭐️</h1>
+  <div class="griglia">
+
+  <div class="canale" id="28_giorni_dopo_2002">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59375.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          28 giorni dopo (2002)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="28_settimane_dopo_2007">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59376.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          28 settimane dopo (2007)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="30_Giorni_Di_Buio_1_2007_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59377.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          30 Giorni Di Buio 1 2007 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="30_giorni_di_buio_II_2010">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59378.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          30 giorni di buio II (2010)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="31_2016">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59379.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          31 (2016)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Alta_tensione_2003">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59380.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Alta tensione (2003)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Ancora_pochi_passi_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59381.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Ancora pochi passi (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Animal_Il_segreto_della_foresta_2014">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59382.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Animal - Il segreto della foresta (2014)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Antrum_Il_film_maledetto_2018">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59383.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Antrum - Il film maledetto (2018)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Apocalisse_Zero_2014_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59384.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Apocalisse Zero 2014 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Babadook_2014">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59385.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Babadook (2014)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Bedevil_Non_Installarla_2016_Horror">
+    
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59386.mkv" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Bedevil Non Installarla 2016 Horror
+          
+            <strong style="color: red;">[AVI/MPG/MKV]</strong>
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Belfagor_2001_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59387.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Belfagor 2001 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="You_Better_Watch_Out_2016">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59388.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          You Better Watch Out (2016)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Black_Christmas_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59389.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Black Christmas (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Bliss_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59390.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Bliss (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Blood_Quantum_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59391.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Blood Quantum (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Body_Cam_2020_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59392.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Body Cam 2020 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Cabin_Fever_2002_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59393.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Cabin Fever 2002 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Camper_Killer_2018">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59394.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Camper Killer (2018)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Cimitero_Vivente_1_1989_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59395.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Cimitero Vivente 1 1989 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Cimitero_vivente_2_1992">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59396.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Cimitero vivente 2 (1992)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Countdown_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59397.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Countdown (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Creepshow_1982">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59398.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Creepshow (1982)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Creepshow_2_1987">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59399.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Creepshow 2 (1987)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Creepshow_3_2006">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59400.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Creepshow 3 (2006)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Cursed_Il_maleficio_2005">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59401.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Cursed - Il maleficio (2005)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Darlin_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59402.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Darlin' (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Day_Of_The_Dead_1_Il_Giorno_Degli_Zombi_1985_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59403.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Day Of The Dead 1 Il Giorno Degli Zombi 1985 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Day_of_the_Dead_2_Contagium_2005">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59404.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Day of the Dead 2: Contagium (2005)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Day_of_the_Dead_Bloodline_2017">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59405.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Day of the Dead: Bloodline (2017)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Dead_On_Campus_2014_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59406.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Dead On Campus 2014 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Death_Tunnel_La_maledizione_2005">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59407.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Death Tunnel - La maledizione (2005)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Doctor_Sleep_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59408.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Doctor Sleep (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Dog_Soldiers_2002">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59409.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Dog Soldiers (2002)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Drowning_Ghost_Oscure_presenze_2004">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59410.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Drowning Ghost - Oscure presenze (2004)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Eloise_2017_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59411.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Eloise 2017 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Escape_Room_The_game_2017">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59412.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Escape Room - The game (2017)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Everybloody_s_End_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59413.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Everybloody's End (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Evil_Eye_L_Occhio_Del_Male_2020_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59414.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Evil Eye L'Occhio Del Male 2020 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Fabula_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59415.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Fabula (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Fantasy_Island_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59416.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Fantasy Island (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="February_L_innocenza_del_male_2017">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59417.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          February - L'innocenza del male (2017)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Frankenstein_s_Army_2013">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59418.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Frankenstein's Army (2013)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Fright_Night_Il_vampiro_della_porta_accanto_2011">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59419.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Fright Night - Il vampiro della porta accanto (2011)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Gangsters_Guns_Zombies_2012">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59420.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Gangsters, Guns & Zombies (2012)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Ghosthunters_2016">
+    
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59421.mkv" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Ghosthunters (2016)
+          
+            <strong style="color: red;">[AVI/MPG/MKV]</strong>
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Gretel_e_Hansel_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59422.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Gretel e Hansel (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Halloween_Night_2014">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59423.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Halloween Night (2014)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Haunt_La_casa_del_terrore_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59424.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Haunt - La casa del terrore (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Here_Comes_the_Devil_2012">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59425.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Here Comes the Devil (2012)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Hereditary_Le_radici_del_male_2018">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59426.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Hereditary - Le radici del male (2018)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Hole_L_abisso_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59427.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Hole - L'abisso (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Hostile_2017_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59428.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Hostile 2017 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="I_Famelici_2017">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59429.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          I Famelici (2017)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Il_Collezionista_Di_Occhi_1_2006_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59430.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Il Collezionista Di Occhi 1 2006 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Il_Collezionista_Di_Occhi_2_2013_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59431.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Il Collezionista Di Occhi 2 2013 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Il_convento_Heretiks_2018">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59432.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Il convento - Heretiks (2018)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Il_Figlio_Del_Diavolo_2019_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59433.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Il Figlio Del Diavolo 2019 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Incarnate_Non_potrai_nasconderti_2016">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59434.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Incarnate - Non potrai nasconderti (2016)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Infection_2015">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59435.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Infection (2015)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="It_Follows_2014_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59436.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          It Follows 2014 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="I_Tredici_Spettri_2001_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59437.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          I Tredici Spettri 2001 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Jackals_La_setta_degli_sciacalli_2017">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59438.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Jackals - La setta degli sciacalli (2017)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Jeepers_Creepers_Il_canto_del_diavolo_2001">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59439.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Jeepers Creepers - Il canto del diavolo (2001)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Jeepers_Creepers_Il_canto_del_diavolo_2_2003">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59440.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Jeepers Creepers - Il canto del diavolo 2 (2003)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="L_ultimo_esorcismo_2010">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59441.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          L'ultimo esorcismo (2010)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="L_uomo_invisibile_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59442.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          L'uomo invisibile (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="La_Bara_The_Coffin_2008_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59443.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          La Bara The Coffin 2008 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="La_casa_del_diavolo_2005">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59444.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          La casa del diavolo (2005)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="La_città_verrà_distrutta_all_alba_2010">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59445.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          La città verrà distrutta all'alba (2010)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="La_creatura_dei_ghiacci_2009">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59446.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          La creatura dei ghiacci (2009)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="La_foresta_dei_misteri_2008">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59447.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          La foresta dei misteri (2008)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="La_madre_2013">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59448.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          La madre (2013)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="La_paura_trema_contro_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59449.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          La paura trema contro (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="La_piramide_2014">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59450.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          La piramide (2014)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Lasciami_entrare_2008">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59451.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Lasciami entrare (2008)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Le_colline_hanno_gli_occhi_2006">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59452.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Le colline hanno gli occhi (2006)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Le_colline_hanno_gli_occhi_2_2007">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59453.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Le colline hanno gli occhi 2 (2007)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Little_Dead_Rotting_Hood_2016">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59454.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Little Dead Rotting Hood (2016)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="L_alba_dei_morti_viventi_2004">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59455.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          L'alba dei morti viventi (2004)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="L_ultima_casa_a_sinistra_2009">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59456.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          L'ultima casa a sinistra (2009)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Marrowbone_2017">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59457.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Marrowbone (2017)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Martyrs_2008">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59458.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Martyrs (2008)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Me_and_the_Devil_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59459.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Me and the Devil (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Mistero_al_castello_di_Blackwood_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59460.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Mistero al castello di Blackwood (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Monsters_2011_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59461.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Monsters 2011 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="My_Little_Sister_2016">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59462.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          My Little Sister (2016)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Necropolis_La_città_dei_morti_2014">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59463.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Necropolis - La città dei morti (2014)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Night_of_the_Wolf_2014">
+    
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59464.mkv" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Night of the Wolf (2014)
+          
+            <strong style="color: red;">[AVI/MPG/MKV]</strong>
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Non_Avere_Paura_Del_Buio_2012_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59465.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Non Avere Paura Del Buio 2012 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Oculus_Il_riflesso_del_male_2013">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59466.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Oculus - Il riflesso del male (2013)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Oltre_Il_Male_At_The_Devil_s_Door_2014_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59467.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Oltre Il Male At The Devil's Door 2014 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Orphan_2009">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59468.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Orphan (2009)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Ouija_2014">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59469.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Ouija (2014)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Ouija_House_2018">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59470.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Ouija House (2018)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Ouija_L_origine_del_male_2016">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59471.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Ouija - L'origine del male (2016)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Polaroid_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59472.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Polaroid (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Pop_Black_Posta_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59473.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Pop Black Posta (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Prey_La_preda_2016">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59474.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Prey - La preda (2016)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Rabid_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59475.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Rabid (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="REC_1_La_Paura_In_Diretta_2007_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59476.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          REC 1 La Paura In Diretta 2007 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="REC_2_2009_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59477.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          REC 2 2009 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="REC_3_La_Genesi_2012_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59478.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          REC 3 La Genesi 2012 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="REC_4_Apocalypse_2014_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59479.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          REC 4 Apocalypse 2014 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Rottweiler_2004">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59480.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Rottweiler (2004)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Satanic_2016">
+    
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59481.mkv" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Satanic (2016)
+          
+            <strong style="color: red;">[AVI/MPG/MKV]</strong>
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Scare_Campaign_2016">
+    
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59482.mkv" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Scare Campaign (2016)
+          
+            <strong style="color: red;">[AVI/MPG/MKV]</strong>
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Scary_Stories_to_Tell_in_the_Dark_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59483.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Scary Stories to Tell in the Dark (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Shanda_s_River_2018">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59484.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Shanda's River (2018)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Sharon_Tate_Tra_incubo_e_realtà_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59485.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Sharon Tate – Tra incubo e realtà (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Shortcut_Non_tutte_le_strade_portano_a_casa_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59486.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Shortcut - Non tutte le strade portano a casa (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Shrooms_Trip_Senza_Ritorno_2006_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59487.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Shrooms Trip Senza Ritorno 2006 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Silent_Hill_2006">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59488.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Silent Hill (2006)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Stake_Land_2010">
+    
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59489.mkv" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Stake Land (2010)
+          
+            <strong style="color: red;">[AVI/MPG/MKV]</strong>
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Stake_Land_II_2016">
+    
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59490.mkv" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Stake Land II (2016)
+          
+            <strong style="color: red;">[AVI/MPG/MKV]</strong>
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Stigmate_1999">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59491.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Stigmate (1999)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Stomach_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59492.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Stomach (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Stung_2015">
+    
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59493.mkv" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Stung (2015)
+          
+            <strong style="color: red;">[AVI/MPG/MKV]</strong>
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Take_Shelter_2012_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59494.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Take Shelter 2012 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Terrifier_1_2016_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59495.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Terrifier 1 2016 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Terror_Take_Away_2018">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59496.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Terror Take Away (2018)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Amityville_Murders_2018_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59497.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Amityville Murders 2018 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Banana_Splits_Movie_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59498.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Banana Splits Movie (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Boy_1_2016_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59499.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Boy 1 2016 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Boy_2_La_maledizione_di_Brahms_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59500.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Boy 2 - La maledizione di Brahms (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Bye_Bye_Man_2017">
+    
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59501.mkv" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Bye Bye Man (2017)
+          
+            <strong style="color: red;">[AVI/MPG/MKV]</strong>
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Collector_2009">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59502.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Collector (2009)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Cured_2017">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59503.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Cured (2017)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_End_L_inferno_fuori_2017">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59504.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The End? L'inferno fuori (2017)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Exorcism_of_Emily_Rose_2005">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59505.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Exorcism of Emily Rose (2005)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Green_Inferno_1_2015_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59506.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Green Inferno 1 2015 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Heretics_2017">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59507.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Heretics (2017)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Innkeepers_2011">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59508.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Innkeepers (2011)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Lie_La_Bugia_2018_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59509.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Lie La Bugia 2018 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Mermaid_Lake_of_the_Dead_2018">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59510.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Mermaid - Lake of the Dead (2018)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Nest_Il_nido_2019">
+    
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59511.mkv" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Nest (Il nido) (2019)
+          
+            <strong style="color: red;">[AVI/MPG/MKV]</strong>
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Nun_1_2005_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59512.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Nun 1 2005 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Room_La_stanza_del_desiderio_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59513.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Room - La stanza del desiderio (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Strangers_Prey_at_Night_2018">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59514.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Strangers: Prey at Night (2018)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Ward_Il_Reparto_2011_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59515.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Ward Il Reparto 2011 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Turistas_2006">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59516.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Turistas (2006)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Under_the_Shadow_Il_diavolo_nell_ombra_2016">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59517.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Under the Shadow - Il diavolo nell'ombra (2016)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Urban_Legend_1_1998_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59518.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Urban Legend 1 1998 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Urban_Legend_Final_Cut_2000">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59519.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Urban Legend: Final Cut (2000)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Urban_Legend_3_Bloody_Mary_2005_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59520.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Urban Legend 3 Bloody Mary 2005 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Vampire_2011">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59521.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Vampire (2011)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Wind_Chill_Ghiaccio_rosso_sangue_2007">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59522.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Wind Chill - Ghiaccio rosso sangue (2007)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="XX_Donne_da_morire_2017">
+    
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/59523.mkv" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          XX - Donne da morire (2017)
+          
+            <strong style="color: red;">[AVI/MPG/MKV]</strong>
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="You_die_Scarica_l_app_poi_muori_2018">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F59524.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          You die - Scarica l’app, poi muori (2018)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="1408_2007">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62561.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          1408 (2007)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Antlers_Spirito_insaziabile_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62562.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Antlers - Spirito insaziabile (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Black_Phone_2022">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62563.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Black Phone (2022)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Bloodthirsty_Sete_Di_Sangue_2020_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62564.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Bloodthirsty Sete Di Sangue 2020 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Bloody_Calendar_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62565.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Bloody Calendar (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Bodies_Bodies_Bodies_2022">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62566.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Bodies Bodies Bodies (2022)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Books_of_Blood_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62567.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Books of Blood (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Breeder_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62568.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Breeder (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Candyman_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62569.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Candyman (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Censor_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62570.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Censor (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Cuori_strappati_2022">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62571.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Cuori strappati (2022)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Dark_Spell_Il_maleficio_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62572.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Dark Spell - Il maleficio (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Demonic_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62573.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Demonic (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="ESP_Fenomeni_paranormali_2011">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62574.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          ESP - Fenomeni paranormali (2011)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="ESP²_Fenomeni_paranormali_2012">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62575.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          ESP² - Fenomeni paranormali (2012)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Fila_19_Incubo_ad_alta_quota_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62576.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Fila 19 - Incubo ad alta quota (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Follow_Me_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62577.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Follow Me (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Grimcutty_2022_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62578.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Grimcutty 2022 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Il_mostro_della_cripta_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62579.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Il mostro della cripta (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="In_Fabric_2018">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62580.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          In Fabric (2018)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="In_The_Trap_Nella_Trappola_2019_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62581.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          In The Trap Nella Trappola 2019 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="L_uomo_nel_buio_Man_in_the_Dark_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62582.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          L'uomo nel buio - Man in the Dark (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="La_Abuela_Legami_Di_Sangue_2021_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62583.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          La Abuela Legami Di Sangue 2021 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="La_casa_in_fondo_al_lago_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62584.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          La casa in fondo al lago (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="La_casa_nella_palude_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62585.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          La casa nella palude (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="La_stirpe_del_male_2014">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62586.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          La stirpe del male (2014)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Leprechaun_Le_Origini_2014_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62587.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Leprechaun Le Origini 2014 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Leprechaun_Returns_2018">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62588.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Leprechaun Returns (2018)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Let_It_Snow_2021_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62589.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Let It Snow 2021 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Luciferina_2018">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62590.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Luciferina (2018)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Malignant_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62591.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Malignant (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Mara_2018">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62592.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Mara (2018)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Martyrs_Lane_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62593.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Martyrs Lane (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Matriarch_2022">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62594.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Matriarch (2022)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Meander_Trappola_Mortale_2020_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62595.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Meander Trappola Mortale 2020 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Mirrors_Riflessi_Di_Paura_1_2008_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62596.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Mirrors Riflessi Di Paura 1 2008 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Riflessi_di_paura_2_2010">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62597.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Riflessi di paura 2 (2010)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Monstrous_2022">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62598.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Monstrous (2022)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Motherly_Istinto_Primordiale_2021_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62599.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Motherly Istinto Primordiale 2021 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="My_Best_Friend_s_Exorcism_2022">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62600.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          My Best Friend's Exorcism (2022)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Nanny_2022">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62601.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Nanny (2022)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Nope_2022">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62602.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Nope (2022)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Paranormal_Activity_1_2007_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62603.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Paranormal Activity 1 2007 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Paranormal_Activity_2_2010">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62604.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Paranormal Activity 2 (2010)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Paranormal_Activity_3_2011">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62605.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Paranormal Activity 3 (2011)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Paranormal_Activity_4_2012">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62606.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Paranormal Activity 4 (2012)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Paranormal_Activity_5_Il_Segnato_2014_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62607.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Paranormal Activity 5 Il Segnato 2014 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Paranormal_Activity_Dimensione_fantasma_2015">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62608.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Paranormal Activity: Dimensione fantasma (2015)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Paranormal_Activity_Parente_prossimo_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62609.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Paranormal Activity - Parente prossimo (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Possession_L_Appartamento_Del_Diavolo_2021_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62610.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Possession L'Appartamento Del Diavolo 2021 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Possessor_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62611.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Possessor (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Post_Mortem_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62612.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Post Mortem (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Run_Sweetheart_Run_2022_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62613.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Run Sweetheart Run 2022 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Sacrifice_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62614.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Sacrifice (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Scherzi_mortali_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62615.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Scherzi mortali (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Seance_Piccoli_omicidi_tra_amiche_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62616.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Seance - Piccoli omicidi tra amiche (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Separazione_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62617.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Separazione (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Sissy_2022">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62618.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Sissy (2022)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Smile_2022">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62619.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Smile (2022)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Son_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62620.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Son (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Superdeep_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62621.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Superdeep (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Sweetheart_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62622.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Sweetheart (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Atticus_Institute_2015">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62623.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Atticus Institute (2015)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Bunker_Game_2022">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62624.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Bunker Game (2022)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Cellar_2022">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62625.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Cellar (2022)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Dark_and_the_Wicked_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62626.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Dark and the Wicked (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Djinn_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62627.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Djinn (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Feast_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62628.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Feast (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Innocents_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62629.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Innocents (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Invitation_2022">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62630.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Invitation (2022)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Menu_2022">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62631.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Menu (2022)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Other_Side_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62632.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Other Side (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Possession_2012">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62633.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Possession (2012)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Reckoning_2020_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62634.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Reckoning 2020 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Sadness_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62635.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Sadness (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Sandman_2017">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62636.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Sandman (2017)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Twin_L_altro_volto_del_male_2022">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62637.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Twin - L'altro volto del male (2022)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="They_Talk_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62638.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          They Talk (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Umma_2022">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62639.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Umma (2022)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Warm_Bodies_2013">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62640.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Warm Bodies (2013)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Witch_Hunt_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62641.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Witch Hunt (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Wolf_Hunter_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62642.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Wolf Hunter (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Wrong_Turn_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62643.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Wrong Turn (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="X_A_Sexy_Horror_Story_2022">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62644.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          X - A Sexy Horror Story (2022)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="1BR_Benvenuti_nell_incubo_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62645.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          1BR - Benvenuti nell'incubo (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="A_cena_con_il_lupo_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62646.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          A cena con il lupo (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Aftermath_2021_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62647.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Aftermath 2021 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="A_Girl_Walks_Home_Alone_at_Night_2014">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62648.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          A Girl Walks Home Alone at Night (2014)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Antebellum_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62649.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Antebellum (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="AquaSlash_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62650.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          AquaSlash (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="A_Quiet_Place_Un_posto_tranquillo_2018">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62651.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          A Quiet Place - Un posto tranquillo (2018)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="A_Quiet_Place_2_2020_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62652.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          A Quiet Place 2 2020 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Baba_Yaga_Incubo_nella_foresta_oscura_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62653.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Baba Yaga - Incubo nella foresta oscura (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Behind_The_Mask_2006_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62654.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Behind The Mask 2006 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Bingo_Hell_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62655.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Bingo Hell (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Black_As_Night_Nero_Come_La_Notte_2021_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62656.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Black As Night Nero Come La Notte 2021 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Blood_Story_Let_Me_In_2011_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62657.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Blood Story Let Me In 2011 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Blood_Vessel_Nave_Assassina_2019_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62658.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Blood Vessel Nave Assassina 2019 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Caleb_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62659.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Caleb (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Cannibal_Holocaust_1980">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62660.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Cannibal Holocaust (1980)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Case_39_2009">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62661.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Case 39 (2009)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Chimera_2018">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62662.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Chimera (2018)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Come_Play_Gioca_con_me_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62663.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Come Play - Gioca con me (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Contracted_Fase_1_2013_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62664.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Contracted Fase 1 2013 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Contracted_Fase_2_2015_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62665.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Contracted Fase 2 2015 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Cruel_Peter_2019_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62666.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Cruel Peter 2019 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Eat_Local_A_Cena_Con_I_Vampiri_2019_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62667.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Eat Local A Cena Con I Vampiri 2019 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Fade_Out_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62668.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Fade Out (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Fantasmi_di_guerra_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62669.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Fantasmi di guerra (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Freaky_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62670.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Freaky (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Funhouse_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62671.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Funhouse (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Game_of_death_2017">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62672.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Game of death (2017)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Here_Alone_2016">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62673.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Here Alone (2016)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Il_terrore_del_silenzio_2016">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62674.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Il terrore del silenzio (2016)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="I_guardiani_della_notte_2004">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62675.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          I guardiani della notte (2004)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Il_cavaliere_del_male_1995">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62676.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Il cavaliere del male (1995)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Il_rito_delle_streghe_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62677.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Il rito delle streghe (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Il_sacro_male_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62678.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Il sacro male (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Il_serpente_e_l_arcobaleno_1988">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62679.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Il serpente e l'arcobaleno (1988)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Il_settimo_giorno_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62680.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Il settimo giorno (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Il_tuo_sepolcro_la_nostra_alcova_Beyond_the_Omega_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62681.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Il tuo sepolcro... la nostra alcova - Beyond the Omega (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Inferno_1980">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62682.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Inferno (1980)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Inside_À_l_intérieur_2007">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62683.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Inside - À l'intérieur (2007)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Insidiae_Nemoris_Trappola_In_Fondo_Al_Bosco_2017_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62684.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Insidiae Nemoris Trappola In Fondo Al Bosco 2017 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="L_Evocazione_We_Summon_The_Darkness_2019_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62685.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          L'Evocazione We Summon The Darkness 2019 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="La_Casa_Di_Jack_2019_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62686.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          La Casa Di Jack 2019 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="La_ragazza_del_terzo_piano_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62687.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          La ragazza del terzo piano (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Madres_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62688.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Madres (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="May_2002_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62689.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          May 2002 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Non_mi_uccidere_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62690.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Non mi uccidere (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Ore_11_14_Destino_Fatale_2003_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62691.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Ore 11-14 Destino Fatale 2003 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Peninsula_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62692.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Peninsula (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Ravage_La_Caccia_E_aperta_2019_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62693.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Ravage La Caccia E aperta 2019 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Relic_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62694.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Relic (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Session_9_2001">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62695.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Session 9 (2001)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Spare_Parts_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62696.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Spare Parts (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Spell_Maleficio_2020_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62697.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Spell Maleficio 2020 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Block_Island_Sound_2020_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62698.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Block Island Sound 2020 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Conjuring_Il_caso_Enfield_2016">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62699.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Conjuring - Il caso Enfield (2016)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Conjuring_Per_ordine_del_diavolo_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62700.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Conjuring - Per ordine del diavolo (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Dare_Obbligo_o_Verità_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62701.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Dare - Obbligo o Verità (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Dentist_1_1996_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62702.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Dentist 1 1996 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Dentist_2_1998">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62703.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Dentist 2 (1998)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Empty_Man_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62704.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Empty Man (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Endless_Viaggi_Nel_Tempo_2017_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62705.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Endless Viaggi Nel Tempo 2017 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Holly_Kane_Experiment_2017">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62706.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Holly Kane Experiment (2017)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Lazarus_Effect_2015">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62707.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Lazarus Effect (2015)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Manor_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62708.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Manor (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Night_House_La_Casa_Oscura_2020_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62709.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Night House La Casa Oscura 2020 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Old_Ways_2020_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62710.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Old Ways 2020 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Turning_La_casa_del_male_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62711.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Turning - La casa del male (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Vigil_2020_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62712.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Vigil 2020 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Wicked_2013">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62713.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Wicked (2013)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Wicked_Gift_2017">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62714.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Wicked Gift (2017)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Witch_2015_Horror">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62715.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Witch 2015 Horror
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Wretched_La_madre_oscura_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62716.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Wretched - La madre oscura (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Time_Lapse_2014">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62717.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Time Lapse (2014)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Train_2008">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62718.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Train (2008)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Ve_ne_dovevate_andare_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62719.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Ve ne dovevate andare (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="West_of_Hell_2018">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62720.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          West of Hell (2018)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Wolf_Creek_2005">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62721.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Wolf Creek (2005)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Wolf_Creek_2_La_preda_sei_tu_2013">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62722.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Wolf Creek 2 - La preda sei tu (2013)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Wrong_Turn_Il_bosco_ha_fame_2003">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62723.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Wrong Turn - Il bosco ha fame (2003)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Wrong_Turn_2_Senza_via_di_uscita_2007">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62724.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Wrong Turn 2 - Senza via di uscita (2007)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Wrong_Turn_3_Svolta_mortale_2009">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62725.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Wrong Turn 3 - Svolta mortale (2009)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Wrong_Turn_4_La_montagna_dei_folli_2011">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62726.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Wrong Turn 4 - La montagna dei folli (2011)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Wrong_Turn_5_Bagno_di_sangue_2012">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62727.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Wrong Turn 5 - Bagno di sangue (2012)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Wrong_Turn_6_Last_Resort_2014">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62728.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Wrong Turn 6 - Last Resort (2014)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Z_vuole_giocare_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62729.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Z: vuole giocare (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Sharknado_2013">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62757.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Sharknado (2013)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Sharknado_2_The_Second_One_2014_Saga">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62758.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Sharknado 2 The Second One 2014 Saga
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Sharknado_3_Oh_Hell_No_2015_Saga">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62759.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Sharknado 3 Oh Hell No 2015 Saga
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Sharknado_4_The_4th_Awakens_2016_Saga">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62760.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Sharknado 4 The 4th Awakens 2016 Saga
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Sharknado_5_Global_Swarming_2017">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62761.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Sharknado 5: Global Swarming (2017)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Sharknado_6_L_Ultimo_Sharknado_Era_ora_2018_Saga">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62762.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Sharknado 6 L’Ultimo Sharknado Era ora 2018 Saga
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="1_La_Bambola_Assassina_1988_Saga">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62769.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          1 La Bambola Assassina 1988 Saga
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="La_bambola_assassina_2_1990">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62770.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          La bambola assassina 2 (1990)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="La_bambola_assassina_3_1991">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62771.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          La bambola assassina 3 (1991)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="4_La_Bambola_Assassina_La_Sposa_Di_Chucky_1998_Saga">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62772.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          4 La Bambola Assassina La Sposa Di Chucky 1998 Saga
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="5_La_Bambola_Assassina_Il_Figlio_Di_Chucky_2004_Saga">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62773.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          5 La Bambola Assassina Il Figlio Di Chucky 2004 Saga
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="6_La_Bambola_Assassina_La_Maledizione_Di_Ckucky_2013_Saga">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62774.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          6 La Bambola Assassina La Maledizione Di Ckucky 2013 Saga
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="7_La_Bambola_Assassina_Il_Culto_Di_Chucky_2017_Saga">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62775.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          7 La Bambola Assassina Il Culto Di Chucky 2017 Saga
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="8_La_Bambola_Assassina_2019_Saga">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F62776.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          8 La Bambola Assassina 2019 Saga
+          
+        </p>
+      </a>
+  </div>
+
+
+  </div>
+  <div class="back" style="margin-top: 30px;">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>

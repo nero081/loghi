@@ -1,0 +1,3081 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>⭐️Commedia Italiana⭐️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    <style>
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+h1 {
+  font-size: 4rem;
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+}
+
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
+
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
+
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
+
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
+
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+}
+
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
+
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.canale a {
+  text-decoration: none;
+  color: inherit;
+  </style>
+</head>
+<body>
+  <h1>⭐️Commedia Italiana⭐️</h1>
+  <div class="griglia">
+
+  <div class="canale" id="I_soliti_idioti_Il_film_2011">
+    
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/15227.mkv" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          I soliti idioti - Il film - 2011
+          
+            <strong style="color: red;">[AVI/MPG/MKV]</strong>
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="I_2_soliti_idioti_2012">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F15730.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          I 2 soliti idioti (2012)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Vengo_anch_io_2018">
+    
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/15744.avi" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Vengo anch'io - 2018
+          
+            <strong style="color: red;">[AVI/MPG/MKV]</strong>
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Adorabile_nemica_2017">
+    
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67394.mkv" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Adorabile nemica (2017)
+          
+            <strong style="color: red;">[AVI/MPG/MKV]</strong>
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="American_Pie_1999">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67395.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          American Pie (1999)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="American_Pie_2_2001">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67396.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          American Pie 2 (2001)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="American_Pie_Il_matrimonio_2003">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67397.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          American Pie - Il matrimonio (2003)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="American_Pie_presenta_Band_Camp_2005">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67398.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          American Pie presenta: Band Camp (2005)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="American_Pie_presenta_Nudi_alla_meta_2006">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67399.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          American Pie presenta: Nudi alla meta (2006)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="American_Pie_presenta_Beta_House_2007">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67400.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          American Pie presenta: Beta House (2007)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="American_Pie_presenta_Il_manuale_del_sesso_2009">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67401.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          American Pie presenta: Il manuale del sesso (2009)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="American_Pie_Ancora_insieme_2012">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67402.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          American Pie: Ancora insieme (2012)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Amiche_da_morire_2013">
+    
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67403.mkv" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Amiche da morire (2013)
+          
+            <strong style="color: red;">[AVI/MPG/MKV]</strong>
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="A_Napoli_non_piove_mai_2015">
+    
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67404.mkv" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          A Napoli non piove mai (2015)
+          
+            <strong style="color: red;">[AVI/MPG/MKV]</strong>
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Bad_Moms_1_Mamme_Molto_Cattive_2016_Comedy">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67405.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Bad Moms 1 Mamme Molto Cattive 2016 Comedy
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Baywatch_2017">
+    
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67406.mkv" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Baywatch (2017)
+          
+            <strong style="color: red;">[AVI/MPG/MKV]</strong>
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Bridget_Jones_s_Baby_2016">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67407.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Bridget Jones's Baby (2016)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Calciatrice_per_caso_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67408.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Calciatrice per caso (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Cattivi_vicini_2_2016">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67409.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Cattivi vicini 2 (2016)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Ci_devo_pensare_2015">
+    
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67410.mkv" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Ci devo pensare (2015)
+          
+            <strong style="color: red;">[AVI/MPG/MKV]</strong>
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Classe_Z_2017">
+    
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67411.mkv" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Classe Z (2017)
+          
+            <strong style="color: red;">[AVI/MPG/MKV]</strong>
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Cognati_per_caso_2016">
+    
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67412.mkv" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Cognati per caso (2016)
+          
+            <strong style="color: red;">[AVI/MPG/MKV]</strong>
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Come_diventare_grandi_nonostante_i_genitori_2016">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67413.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Come diventare grandi nonostante i genitori (2016)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Crazy_Night_Festa_col_morto_2017">
+    
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67414.mkv" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Crazy Night - Festa col morto (2017)
+          
+            <strong style="color: red;">[AVI/MPG/MKV]</strong>
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Diario_di_una_schiappa_2010">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67415.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Diario di una schiappa (2010)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Diario_di_una_schiappa_2_La_legge_dei_più_grandi_2011">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67416.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Diario di una schiappa 2 - La legge dei più grandi (2011)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Diario_di_una_schiappa_Vita_da_cani_2012">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67417.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Diario di una schiappa - Vita da cani (2012)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Diario_di_una_schiappa_Portatemi_a_casa_2017">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67418.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Diario di una schiappa - Portatemi a casa! (2017)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Famiglia_all_improvviso_Istruzioni_non_incluse_2016">
+    
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67419.mkv" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Famiglia all'improvviso - Istruzioni non incluse (2016)
+          
+            <strong style="color: red;">[AVI/MPG/MKV]</strong>
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Fausto_E_Furio_Nun_Potemo_Perde_2015_Comedy">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67420.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Fausto E Furio Nun Potemo Perde 2015 Comedy
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Femmine_contro_maschi_2011">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67421.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Femmine contro maschi (2011)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Fottute_2017">
+    
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67422.mkv" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Fottute! (2017)
+          
+            <strong style="color: red;">[AVI/MPG/MKV]</strong>
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Fuck_you_prof_2013">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67423.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Fuck you, prof! (2013)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Giù_al_Nord_2008">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67424.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Giù al Nord (2008)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Good_Boys_Quei_cattivi_ragazzi_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67425.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Good Boys - Quei cattivi ragazzi (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Grandi_bugie_tra_amici_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67426.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Grandi bugie tra amici (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="I_babysitter_2016">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67427.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          I babysitter (2016)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Io_E_Marley_2009_Comedy">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67428.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Io E Marley 2009 Comedy
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Italiano_medio_2015">
+    
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67429.mkv" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Italiano medio (2015)
+          
+            <strong style="color: red;">[AVI/MPG/MKV]</strong>
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Johnny_Stecchino_1991">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67430.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Johnny Stecchino (1991)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Killing_Hasselhoff_2017">
+    
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67431.mkv" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Killing Hasselhoff (2017)
+          
+            <strong style="color: red;">[AVI/MPG/MKV]</strong>
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Ladre_per_caso_2017">
+    
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67432.mkv" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Ladre per caso (2017)
+          
+            <strong style="color: red;">[AVI/MPG/MKV]</strong>
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="La_matassa_2009">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67433.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          La matassa (2009)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="La_Parrucchiera_2017">
+    
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67434.mkv" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          La Parrucchiera (2017)
+          
+            <strong style="color: red;">[AVI/MPG/MKV]</strong>
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="La_Prima_Vacanza_Non_Si_Scorda_Mai_2019_Comedy">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67435.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          La Prima Vacanza Non Si Scorda Mai 2019 Comedy
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="La_ragazza_dei_miei_sogni_2017">
+    
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67436.mkv" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          La ragazza dei miei sogni (2017)
+          
+            <strong style="color: red;">[AVI/MPG/MKV]</strong>
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Martian_Child_Un_bambino_da_amare_2007">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67437.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Martian Child - Un bambino da amare (2007)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Mio_fratello_rincorre_i_dinosauri_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67438.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Mio fratello rincorre i dinosauri (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Mollami_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67439.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Mollami (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Mr_Bean_s_Holiday_2007">
+    
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67440.mkv" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Mr. Bean's Holiday (2007)
+          
+            <strong style="color: red;">[AVI/MPG/MKV]</strong>
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Ovunque_tu_sarai_2017">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67441.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Ovunque tu sarai (2017)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Parto_col_folle_2010">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67442.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Parto col folle (2010)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Quel_bravo_ragazzo_2016">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67443.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Quel bravo ragazzo (2016)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Questione_di_karma_2017">
+    
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67444.mkv" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Questione di karma (2017)
+          
+            <strong style="color: red;">[AVI/MPG/MKV]</strong>
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Sapore_di_te_2014">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67445.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Sapore di te (2014)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Scusate_se_esisto_2014">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67446.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Scusate se esisto! (2014)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Stuber_Autista_d_assalto_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67447.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Stuber - Autista d'assalto (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Tutto_molto_bello_2014">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67448.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Tutto molto bello (2014)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Una_bugia_di_troppo_2012">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67449.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Una bugia di troppo (2012)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Una_settimana_da_Dio_2003">
+    
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67450.mkv" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Una settimana da Dio (2003)
+          
+            <strong style="color: red;">[AVI/MPG/MKV]</strong>
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Una_top_model_nel_mio_letto_2006">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67451.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Una top model nel mio letto (2006)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Un_bacio_2016">
+    
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67452.mkv" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Un bacio (2016)
+          
+            <strong style="color: red;">[AVI/MPG/MKV]</strong>
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Un_boss_in_salotto_2014">
+    
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67453.mkv" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Un boss in salotto (2014)
+          
+            <strong style="color: red;">[AVI/MPG/MKV]</strong>
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Un_paese_quasi_perfetto_2016">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67454.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Un paese quasi perfetto (2016)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Vita_Cuore_Battito_2016">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67455.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Vita, Cuore, Battito (2016)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Wilson_2017">
+    
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/67456.mkv" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Wilson (2017)
+          
+            <strong style="color: red;">[AVI/MPG/MKV]</strong>
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Zoolander_2001">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67457.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Zoolander (2001)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Zoolander_No_2_2016">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67458.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Zoolander No. 2 (2016)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Addio_al_nubilato_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67665.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Addio al nubilato (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Al_posto_tuo_2016">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67666.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Al posto tuo (2016)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Amici_miei_Come_tutto_ebbe_inizio_2011">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67667.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Amici miei - Come tutto ebbe inizio (2011)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Amore_a_seconda_vista_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67668.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Amore a seconda vista (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Amore_inaspettato_2017">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67669.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Amore inaspettato (2017)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Amore_matrimoni_e_altri_disastri_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67670.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Amore, matrimoni e altri disastri (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="An_American_Pickle_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67671.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          An American Pickle (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Arrapaho_Squallor_1984_Comedy">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67672.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Arrapaho Squallor 1984 Comedy
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="BabySitting_2014_Comedy">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67673.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          BabySitting 2014 Comedy
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Bad_Trip_2020_Comedy">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67674.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Bad Trip 2020 Comedy
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Bar_Sport_2011">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67675.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Bar Sport (2011)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Blackout_Love_2021_Comedy">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67676.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Blackout Love 2021 Comedy
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Blindspotting_2018">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67677.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Blindspotting (2018)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Bob_Marys_Criminali_a_domicilio_2018">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67678.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Bob & Marys - Criminali a domicilio (2018)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Boys_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67679.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Boys (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Burraco_fatale_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67680.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Burraco fatale (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Cani_e_gatti_3_Zampe_unite_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67681.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Cani e gatti 3 - Zampe unite (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Carnaval_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67682.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Carnaval (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Chick_Fight_Le_Ragazze_Del_Ring_2020_Comedy">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67683.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Chick Fight Le Ragazze Del Ring 2020 Comedy
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Comedians_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67684.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Comedians (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Come_farsi_lasciare_in_10_giorni_2003">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67685.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Come farsi lasciare in 10 giorni (2003)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Croce_e_delizia_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67686.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Croce e delizia (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Cucciolo_1998">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67687.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Cucciolo (1998)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Detective_in_erba_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67688.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Detective in erba (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Divine_La_fidanzata_dell_Altro_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67689.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Divine - La fidanzata dell'Altro (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Divorzio_a_Las_Vegas_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67690.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Divorzio a Las Vegas (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Easy_Living_La_Vita_Facile_2019_Comedy">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67691.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Easy Living La Vita Facile 2019 Comedy
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Est_Dittatura_Last_Minute_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67692.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Est - Dittatura Last Minute (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Forse_E_Solo_Mal_Di_Mare_2020_Comedy">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67693.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Forse E Solo Mal Di Mare 2020 Comedy
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Forte_2020_Comedy">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67694.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Forte 2020 Comedy
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Fratelli_d_Italia_1989">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67695.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Fratelli d'Italia (1989)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Free_Guy_Eroe_per_gioco_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67696.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Free Guy - Eroe per gioco (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Fuck_you_prof_2_2015">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67697.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Fuck you, prof! 2 (2015)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Fuga_a_Parigi_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67698.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Fuga a Parigi (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Full_Out_2_You_Got_This_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67699.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Full Out 2: You Got This! (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Genitori_vs_influencer_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67700.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Genitori vs influencer (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Gli_amici_delle_vacanze_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67701.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Gli amici delle vacanze (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Guida_sexy_per_brave_ragazze_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67702.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Guida sexy per brave ragazze (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Here_After_Anime_Gemelle_2021_Comedy">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67703.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Here After Anime Gemelle 2021 Comedy
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Il_club_dei_divorziati_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67704.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Il club dei divorziati (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Il_Conte_Max_1991">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67705.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Il Conte Max (1991)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Il_diavolo_veste_Prada_2006">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67706.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Il diavolo veste Prada (2006)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Il_distinto_gentiluomo_1992">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67707.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Il distinto gentiluomo (1992)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Il_figlio_più_piccolo_2010">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67708.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Il figlio più piccolo (2010)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Il_Meglio_Deve_Ancora_Venire_2020_Comedy">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67709.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Il Meglio Deve Ancora Venire 2020 Comedy
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Il_principe_cerca_figlio_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67710.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Il principe cerca figlio (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Il_principe_cerca_moglie_1988">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67711.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Il principe cerca moglie (1988)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Il_silenzio_grande_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67712.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Il silenzio grande (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Il_tuo_ex_non_muore_mai_2018">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67713.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Il tuo ex non muore mai (2018)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Imprevisti_digitali_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67714.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Imprevisti digitali (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Insieme_per_davvero_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67715.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Insieme per davvero (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="I_predatori_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67716.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          I predatori (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Joe_Dirt_1_Le_Avventure_2001_Comedy">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67717.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Joe Dirt 1 Le Avventure 2001 Comedy
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Julie_Julia_2009">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67718.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Julie & Julia (2009)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Kate_Leopold_2001">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67719.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Kate & Leopold (2001)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="L_acchiappadenti_2010">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67720.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          L'acchiappadenti (2010)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="L_Acchiappadenti_2_2013_Comedy">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67721.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          L'Acchiappadenti 2 2013 Comedy
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="L_arte_della_truffa_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67722.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          L'arte della truffa (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="L_uomo_che_comprò_la_luna_2018">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67723.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          L'uomo che comprò la luna (2018)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="La_competizione_2018">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67724.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          La competizione (2018)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="La_dura_verità_2009">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67725.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          La dura verità (2009)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="La_famiglia_Addams_1991">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67726.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          La famiglia Addams (1991)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="La_kryptonite_nella_borsa_2011">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67727.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          La kryptonite nella borsa (2011)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="La_mia_vita_a_stelle_e_strisce_2003">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67728.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          La mia vita a stelle e strisce (2003)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="La_pazza_gioia_2016">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67729.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          La pazza gioia (2016)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="La_prima_cosa_bella_2010">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67730.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          La prima cosa bella (2010)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="La_rapina_del_secolo_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67731.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          La rapina del secolo (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="La_rivolta_delle_ex_2009">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67732.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          La rivolta delle ex (2009)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Lasciali_parlare_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67733.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Lasciali parlare (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="La_scuola_più_bella_del_mondo_2014">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67734.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          La scuola più bella del mondo (2014)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="La_Tristezza_Ha_Il_Sonno_Leggero_2020_Comedy">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67735.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          La Tristezza Ha Il Sonno Leggero 2020 Comedy
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Lockdown_all_italiana_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67736.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Lockdown all'italiana (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Locked_Down_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67737.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Locked Down (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="LOL_Pazza_del_mio_migliore_amico_2012">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67738.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          LOL - Pazza del mio migliore amico (2012)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Lo_sbirro_di_Belleville_2018">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67739.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Lo sbirro di Belleville (2018)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Lost_in_London_2017">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67740.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Lost in London (2017)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Magari_2019_Comedy">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67741.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Magari 2019 Comedy
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Maledetta_Primavera_2020_Comedy">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67742.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Maledetta Primavera 2020 Comedy
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Malvagi_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67743.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Malvagi (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Maschi_contro_femmine_2010">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67744.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Maschi contro femmine (2010)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Maschile_singolare_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67745.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Maschile singolare (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Mean_Girls_1_2004_Comedy">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67746.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Mean Girls 1 2004 Comedy
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Mean_Girls_2_2011">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67747.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Mean Girls 2 (2011)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Me_contro_Te_Il_film_Il_mistero_della_scuola_incantata_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67748.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Me contro Te: Il film - Il mistero della scuola incantata (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Mia_Moglie_E_Un_Fantasma_2021_Comedy">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67749.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Mia Moglie E Un Fantasma 2021 Comedy
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Mi_Manda_Picone_1983_Comedy">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67750.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Mi Manda Picone 1983 Comedy
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Non_ci_resta_che_vincere_2018">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67751.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Non ci resta che vincere (2018)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Non_Sposate_Le_Mie_Figlie_1_2014_Comedy">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67752.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Non Sposate Le Mie Figlie 1 2014 Comedy
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Non_ti_presento_i_miei_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67753.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Non ti presento i miei (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Notte_brava_a_Las_Vegas_2008">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67754.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Notte brava a Las Vegas (2008)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Nove_lune_e_mezza_2017">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67755.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Nove lune e mezza (2017)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Oh_Mio_Dio_2017_Comedy">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67756.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Oh Mio Dio 2017 Comedy
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Ostaggi_2021_Comedy">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67757.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Ostaggi 2021 Comedy
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Penelope_2006">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67758.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Penelope (2006)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Pessime_Storie_2020_Comedy">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67759.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Pessime Storie 2020 Comedy
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Piacere_Michele_Imperatore_2008">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67760.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Piacere Michele Imperatore (2008)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Pitch_Perfect_1_Voices_2012_Comedy">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67761.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Pitch Perfect 1 Voices 2012 Comedy
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Pitch_Perfect_3_2017">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67762.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Pitch Perfect 3 (2017)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Proprio_lui_2016">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67763.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Proprio lui? (2016)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Quel_mostro_di_suocera_2005">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67764.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Quel mostro di suocera (2005)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Raid_Una_poliziotta_fuori_di_testa_2017">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67765.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Raid - Una poliziotta fuori di testa (2017)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Rifkins_Festival_2021_Comedy">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67766.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Rifkins Festival 2021 Comedy
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Roald_Beatrix_Un_incontro_magico_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67767.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Roald & Beatrix - Un incontro magico (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Safety_Sempre_al_tuo_fianco_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67768.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Safety - Sempre al tuo fianco (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Sai_tenere_un_segreto_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67769.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Sai tenere un segreto? (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Santa_Maradona_2001">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67770.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Santa Maradona (2001)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="School_of_Mafia_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67771.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          School of Mafia (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Scrittore_per_caso_2009">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67772.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Scrittore per caso (2009)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Selvaggi_1995">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67773.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Selvaggi (1995)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Se_sei_così_ti_dico_sì_2011">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67774.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Se sei così, ti dico sì (2011)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Simpatici_antipatici_1998">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67775.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Simpatici & antipatici (1998)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Si_ringrazia_la_regione_Puglia_per_averci_fornito_i_milanesi_1982">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67776.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Si ringrazia la regione Puglia per averci fornito i milanesi (1982)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Sky_Sharks_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67777.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Sky Sharks (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Sliding_Doors_1998">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67778.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Sliding Doors (1998)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Smetto_quando_voglio_2014">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67779.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Smetto quando voglio (2014)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Smetto_quando_voglio_Masterclass_2017">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67780.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Smetto quando voglio - Masterclass (2017)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Sognando_A_New_York_2021_Comedy">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67781.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Sognando A New York 2021 Comedy
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Someone_Somewhere_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67782.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Someone, Somewhere (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Space_Jam_New_Legends_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67783.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Space Jam - New Legends (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Spontaneous_Una_storia_d_amore_esplosiva_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67784.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Spontaneous - Una storia d’amore esplosiva (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Suburbicon_2017">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67785.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Suburbicon (2017)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Superintelligence_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67786.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Superintelligence (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Thank_You_for_Smoking_2005">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67787.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Thank You for Smoking (2005)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Climb_La_salita_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67788.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Climb - La salita (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Tootsie_1982">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67789.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Tootsie (1982)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Tutta_la_vita_davanti_2008">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67790.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Tutta la vita davanti (2008)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Tutti_per_Uma_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67791.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Tutti per Uma (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Un_amore_di_testimone_2008">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67792.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Un amore di testimone (2008)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Un_divano_a_Tunisi_2020">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67793.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Un divano a Tunisi (2020)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Uomini_Uomini_Uomini_1995_Comedy">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67794.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Uomini Uomini Uomini 1995 Comedy
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Va_bene_così_2021">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67795.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Va bene così (2021)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Viva_l_Italia_2012">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67796.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Viva l'Italia (2012)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Zombies_2_2020_Comedy">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F67797.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Zombies 2 2020 Comedy
+          
+        </p>
+      </a>
+  </div>
+
+
+  </div>
+  <div class="back" style="margin-top: 30px;">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>

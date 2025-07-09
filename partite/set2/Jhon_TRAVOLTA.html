@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Jhon TRAVOLTA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    <style>
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+h1 {
+  font-size: 4rem;
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+}
+
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
+
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
+
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
+
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
+
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+}
+
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
+
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.canale a {
+  text-decoration: none;
+  color: inherit;
+  </style>
+</head>
+<body>
+  <h1>Jhon TRAVOLTA</h1>
+  <div class="griglia">
+
+  <div class="canale" id="A_Civil_Action_1998">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F44965.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          A Civil Action (1998)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="A_Love_Song_For_Bobby_Long_2004_Travolta">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F44966.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          A Love Song For Bobby Long 2004 Travolta
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Basic_2003">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F44967.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Basic (2003)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Be_Cool_2005">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F44968.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Be Cool (2005)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Blow_Out_1981">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F44969.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Blow Out (1981)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Carrie_Lo_sguardo_di_Satana_1976">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F44970.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Carrie - Lo sguardo di Satana (1976)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Codice_Swordfish_2001">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F44971.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Codice: Swordfish (2001)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Die_Hart_2023">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F44972.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Die Hart (2023)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Due_come_noi_1983">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F44973.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Due come noi (1983)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Get_Shorty_1995">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F44974.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Get Shorty (1995)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Gotti_Il_primo_Padrino_2018">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F44975.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Gotti - Il primo Padrino (2018)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Grease_1978_Travolta">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F44976.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Grease 1978 Travolta
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Io_Sono_Vendetta_2016_Travolta">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F44977.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Io Sono Vendetta 2016 Travolta
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Killing_Season_2013">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F44978.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Killing Season (2013)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="La_febbre_del_sabato_sera_1977">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F44979.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          La febbre del sabato sera (1977)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="La_figlia_del_generale_1999">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F44980.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          La figlia del generale (1999)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="La_rosa_velenosa_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F44981.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          La rosa velenosa (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Le_belve_2012">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F44982.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Le belve (2012)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Lonely_Hearts_2006">
+    
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44983.avi" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Lonely Hearts (2006)
+          
+            <strong style="color: red;">[AVI/MPG/MKV]</strong>
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Michael_1996">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F44984.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Michael (1996)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Nella_valle_della_violenza_2016">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F44985.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Nella valle della violenza (2016)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Nome_in_codice_Broken_Arrow_1996">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F44986.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Nome in codice: Broken Arrow (1996)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Phenomenon_1996">
+    
+      <a href="http://163.172.51.230:80/movie/vood-chanell/BhBphgxjPp/44987.avi" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Phenomenon (1996)
+          
+            <strong style="color: red;">[AVI/MPG/MKV]</strong>
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Pulp_Fiction_1994">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F44988.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Pulp Fiction (1994)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Senti_Chi_Parla_1_1989_Travolta">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F44989.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Senti Chi Parla 1 1989 Travolta
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Senti_chi_parla_2_1990">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F44990.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Senti chi parla 2 (1990)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Senti_chi_parla_adesso_1993">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F44991.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Senti chi parla adesso! (1993)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Speed_Kills_2018">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F44992.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Speed Kills (2018)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Squadra_49_2004">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F44993.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Squadra 49 (2004)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Staying_Alive_1983">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F44994.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Staying Alive (1983)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Svalvolati_on_the_road_2007">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F44995.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Svalvolati on the road (2007)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Fanatic_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F44996.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Fanatic (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Forger_Il_falsario_2014">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F44997.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Forger - Il falsario (2014)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Punisher_2004">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F44998.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Punisher (2004)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Trading_Paint_Oltre_la_leggenda_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F44999.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Trading Paint - Oltre la leggenda (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Urban_Cowboy_1980">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F45000.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Urban Cowboy (1980)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="A_Civil_Action_1998">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F58286.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          A Civil Action (1998)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="A_Love_Song_For_Bobby_Long_2004_Travolta">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F58287.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          A Love Song For Bobby Long 2004 Travolta
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Basic_2003">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F58288.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Basic (2003)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Be_Cool_2005">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F58289.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Be Cool (2005)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Blow_Out_1981">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F58290.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Blow Out (1981)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Carrie_Lo_sguardo_di_Satana_1976">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F58291.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Carrie - Lo sguardo di Satana (1976)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Cash_Out_2_2025_Travolta">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F58292.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Cash Out 2 2025 Travolta
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Cash_Out_I_maghi_del_furto_2024">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F58293.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Cash Out - I maghi del furto (2024)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Codice_Swordfish_2001">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F58294.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Codice: Swordfish (2001)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Die_Hart_2023">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F58295.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Die Hart (2023)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Due_come_noi_1983">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F58296.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Due come noi (1983)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Get_Shorty_1995">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F58297.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Get Shorty (1995)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Gotti_Il_primo_Padrino_2018">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F58298.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Gotti - Il primo Padrino (2018)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Grease_1978_Travolta">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F58299.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Grease 1978 Travolta
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Io_sono_vendetta_2016">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F58300.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Io sono vendetta (2016)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Killing_Season_2013">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F58301.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Killing Season (2013)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="La_febbre_del_sabato_sera_1977">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F58302.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          La febbre del sabato sera (1977)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="La_figlia_del_generale_1999">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F58303.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          La figlia del generale (1999)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="La_rosa_velenosa_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F58304.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          La rosa velenosa (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Le_belve_2012">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F58305.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Le belve (2012)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Lonely_Hearts_2006">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F58306.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Lonely Hearts (2006)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Michael_1996">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F58307.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Michael (1996)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Mob_Land_2023">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F58308.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Mob Land (2023)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Nella_valle_della_violenza_2016">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F58309.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Nella valle della violenza (2016)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Nome_in_codice_Broken_Arrow_1996">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F58310.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Nome in codice: Broken Arrow (1996)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Phenomenon_1996">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F58311.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Phenomenon (1996)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Pulp_Fiction_1994">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F58312.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Pulp Fiction (1994)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Senti_Chi_Parla_1_1989_Travolta">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F58313.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Senti Chi Parla 1 1989 Travolta
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Senti_chi_parla_2_1990">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F58314.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Senti chi parla 2 (1990)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Senti_chi_parla_adesso_1993">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F58315.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Senti chi parla adesso! (1993)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Speed_Kills_2018">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F58316.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Speed Kills (2018)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Squadra_49_2004">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F58317.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Squadra 49 (2004)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Staying_Alive_1983">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F58318.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Staying Alive (1983)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Svalvolati_on_the_road_2007">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F58319.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Svalvolati on the road (2007)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="The_Fanatic_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F58320.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          The Fanatic (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Trading_Paint_Oltre_la_leggenda_2019">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F58323.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Trading Paint - Oltre la leggenda (2019)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Urban_Cowboy_1980">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F58324.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Urban Cowboy (1980)
+          
+        </p>
+      </a>
+  </div>
+
+
+  </div>
+  <div class="back" style="margin-top: 30px;">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>

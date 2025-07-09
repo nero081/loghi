@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>⭐️Franco e Ciccio⭐️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    <style>
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+h1 {
+  font-size: 4rem;
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+}
+
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
+
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
+
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
+
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
+
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+}
+
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
+
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.canale a {
+  text-decoration: none;
+  color: inherit;
+  </style>
+</head>
+<body>
+  <h1>⭐️Franco e Ciccio⭐️</h1>
+  <div class="griglia">
+
+  <div class="canale" id="00_2_agenti_segretissimi_1964">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57817.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          00-2 agenti segretissimi (1964)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="2_mafiosi_contro_Al_Capone_1966">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57818.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          2 mafiosi contro Al Capone (1966)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="2_mattacchioni_al_Moulin_Rouge_1964">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57819.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          2 mattacchioni al Moulin Rouge (1964)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Appuntamento_a_Ischia_1960">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57820.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Appuntamento a Ischia (1960)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Armiamoci_e_partite_1971">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57821.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Armiamoci e partite! (1971)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Avventura_al_motel_1963">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57822.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Avventura al motel (1963)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Ciccio_perdona_io_no_1968">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57823.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Ciccio perdona... io no! (1968)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Come_svaligiammo_la_Banca_d_Italia_1966">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57824.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Come svaligiammo la Banca d'Italia (1966)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Continuavano_a_chiamarli_er_più_e_er_meno_1972">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57825.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Continuavano a chiamarli... er più e er meno (1972)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Don_Chisciotte_e_Sancio_Panza_1968">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57826.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Don Chisciotte e Sancio Panza (1968)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Don_Franco_e_Don_Ciccio_nell_anno_della_contestazione_1970">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57827.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Don Franco e Don Ciccio nell'anno della contestazione (1970)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Due_Mafiosi_Contro_Goldginger_1965_Fc">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57828.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Due Mafiosi Contro Goldginger 1965 Fc
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Due_mafiosi_nel_Far_West_1964">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57829.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Due mafiosi nel Far West (1964)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Farfallon_1974">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57830.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Farfallon (1974)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Franco_Ciccio_e_il_pirata_Barbanera_1969">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57831.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Franco, Ciccio e il pirata Barbanera (1969)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Franco_Ciccio_e_le_vedove_allegre_1968">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57832.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Franco, Ciccio e le vedove allegre (1968)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Gerarchi_si_muore_1961">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57833.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Gerarchi si muore (1961)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Gli_imbroglioni_1963">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57834.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Gli imbroglioni (1963)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="I_due_assi_del_guantone_1971">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57835.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          I due assi del guantone (1971)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="I_due_della_F_1_alla_corsa_più_pazza_pazza_del_mondo_1971">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57836.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          I due della F. 1 alla corsa più pazza, pazza del mondo (1971)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="I_due_della_legione_1962">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57837.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          I due della legione (1962)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="I_due_evasi_di_Sing_Sing_1964">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57838.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          I due evasi di Sing Sing (1964)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="I_Due_Figli_Di_Ringo_1966_Fc">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57839.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          I Due Figli Di Ringo 1966 Fc
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="I_due_gattoni_a_nove_code_e_mezza_ad_Amsterdam_1972">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57840.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          I due gattoni a nove code... e mezza ad Amsterdam (1972)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="I_due_maghi_del_pallone_1970">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57841.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          I due maghi del pallone (1970)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="I_due_pericoli_pubblici_1964">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57842.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          I due pericoli pubblici (1964)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="I_due_sergenti_del_generale_Custer_1965">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57843.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          I due sergenti del generale Custer (1965)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="I_due_toreri_1964">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57844.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          I due toreri (1964)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="I_due_vigili_1967">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57845.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          I due vigili (1967)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="I_figli_del_leopardo_1965">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57846.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          I figli del leopardo (1965)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Il_clan_dei_due_Borsalini_1971">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57847.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Il clan dei due Borsalini (1971)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Il_Figlioccio_del_padrino_1973">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57848.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Il Figlioccio del padrino (1973)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Il_lungo_il_corto_il_gatto_1967">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57849.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Il lungo, il corto, il gatto (1967)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Il_sergente_Rompiglioni_1973">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57850.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Il sergente Rompiglioni (1973)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Il_sergente_Rompiglioni_diventa_caporale_1975">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57851.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Il sergente Rompiglioni diventa... caporale (1975)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="I_marziani_hanno_12_mani_1964">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57852.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          I marziani hanno 12 mani (1964)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="I_motorizzati_1962">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57853.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          I motorizzati (1962)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Indovina_chi_viene_a_merenda_1969">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57854.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Indovina chi viene a merenda? (1969)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="I_nipoti_di_Zorro_1968">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57855.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          I nipoti di Zorro (1968)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="L_amore_primitivo_1964">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57856.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          L'amore primitivo (1964)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="L_Eredità_Dello_Zio_Buonanima_1975_Fc">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57857.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          L'Eredità Dello Zio Buonanima 1975 Fc
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="L_Esorciccio_1975">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57858.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          L'Esorciccio (1975)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="L_onorata_società_1961">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57859.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          L'onorata società (1961)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="L_oro_del_mondo_1968">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57860.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          L'oro del mondo (1968)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Ladro_E_Guardia_1969_Fc">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57861.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Ladro E Guardia 1969 Fc
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Ma_che_musica_maestro_1971">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57862.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Ma che musica maestro (1971)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Ma_Chi_Ti_Ha_Dato_La_Patente_1970_Fc">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57863.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Ma Chi Ti Ha Dato La Patente 1970 Fc
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Nel_sole_1967">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57864.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Nel sole (1967)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Obiettivo_ragazze_1963">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57865.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Obiettivo ragazze (1963)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Per_un_pugno_nell_occhio_1965">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57866.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Per un pugno nell'occhio (1965)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Riuscira_L_Avvocato_Franco_Benenato_A_Sconfiggere_Il_Suo_Pretore_1971_Fc">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57867.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Riuscira' L'Avvocato Franco Benenato A Sconfiggere Il Suo...Pretore 1971 Fc
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Stasera_mi_butto_1967">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57868.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Stasera mi butto (1967)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Ultimo_tango_a_Zagarol_1973">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57869.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Ultimo tango a Zagarol (1973)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="Un_mostro_e_mezzo_1964">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57870.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          Un mostro e mezzo (1964)
+          
+        </p>
+      </a>
+  </div>
+
+  <div class="canale" id="W_le_donne_1970">
+    
+      <a href="player.html?url=http%3A%2F%2F163.172.51.230%3A80%2Fmovie%2Fvood-chanell%2FBhBphgxjPp%2F57871.mp4" target="_blank">
+    
+        
+          <div style="font-size: 48px;">🎬</div>
+        
+        <p>
+          W le donne (1970)
+          
+        </p>
+      </a>
+  </div>
+
+
+  </div>
+  <div class="back" style="margin-top: 30px;">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>
