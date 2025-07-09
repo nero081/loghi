@@ -6,14 +6,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
-      background: #111;
-      color: white;
-      font-family: sans-serif;
-      padding: 30px;
-      text-align: center;
-    }
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
 
-    input, select {
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
+
+    input {
       padding: 10px;
       font-size: 18px;
       margin: 10px;
@@ -21,6 +41,8 @@
       border: 1px solid #444;
       background: #222;
       color: #eee;
+      width: 90%;
+      max-width: 400px;
     }
 
     .results {
@@ -70,12 +92,6 @@
       color: #0af;
     }
 
-    .result .details p {
-      margin: 4px 0;
-      font-size: 14px;
-      color: #ccc;
-    }
-
     .result a.btn {
       background: #0af;
       color: #000;
@@ -106,83 +122,62 @@
   </style>
 </head>
 <body>
-  <h1>🔎 Cerca un Canale</h1>
-  <input type="text" id="search" placeholder="Es. Calcio, Viva a Vida..." />
-  <select id="groupFilter">
-    <option value="">🎯 Tutti i gruppi</option>
-  </select>
+  <h1>🔎 Cerca Serie</h1>
+  <input type="text" id="search" placeholder="Cerca..." />
 
   <div class="results" id="results"></div>
   <p class="no-results" id="noResults" style="display:none;">😢 Nessun canale trovato</p>
   <br>
   <a href="index.html">⟵ Torna alla home</a>
 
-  <script>
-    let data = [];
-    let groups = new Set();
+ <script>
+  let data = [];
 
-    // Carica i canali
-    fetch('https://raw.githubusercontent.com/nero081/loghi/refs/heads/main/partite/spot/search.json')
-      .then(res => res.json())
-      .then(json => {
-        data = json;
-        json.forEach(item => groups.add(item.group));
-        populateGroups();
-        renderResults();
-      });
+  fetch('search.json')
+    .then(res => res.json())
+    .then(json => {
+      data = json;
+    });
 
-    function populateGroups() {
-      const filter = document.getElementById('groupFilter');
-      [...groups].sort().forEach(group => {
-        const opt = document.createElement('option');
-        opt.value = group;
-        opt.textContent = group;
-        filter.appendChild(opt);
-      });
+  document.getElementById('search').addEventListener('input', () => {
+    renderResults();
+  });
+
+  function renderResults() {
+    const term = document.getElementById('search').value.toLowerCase().trim();
+    const list = document.getElementById('results');
+    const noResults = document.getElementById('noResults');
+
+    list.innerHTML = '';
+    noResults.style.display = 'none';
+
+    if (term.length === 0) return; // aspetta almeno un carattere
+
+    const filtered = data.filter(item => item.name.toLowerCase().includes(term));
+
+    if (filtered.length === 0) {
+      noResults.style.display = 'block';
+      return;
     }
 
-    document.getElementById('search').addEventListener('input', renderResults);
-    document.getElementById('groupFilter').addEventListener('change', renderResults);
+    filtered.sort((a, b) => a.name.localeCompare(b.name));
 
-    function renderResults() {
-      const term = document.getElementById('search').value.toLowerCase();
-      const groupSel = document.getElementById('groupFilter').value;
-      const list = document.getElementById('results');
-      const noResults = document.getElementById('noResults');
+    filtered.forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'result';
 
-      list.innerHTML = '';
-      noResults.style.display = 'none';
+      div.innerHTML = `
+        <div class="details">
+          <h3>${item.name}</h3>
+        </div>
+        <a href="${item.url}" target="_blank" class="btn">Vai</a>
+      `;
+      list.appendChild(div);
+    });
+  }
+</script>
 
-      const filtered = data.filter(item => {
-        const matchTerm = item.name.toLowerCase().includes(term) || item.group.toLowerCase().includes(term);
-        const matchGroup = !groupSel || item.group === groupSel;
-        return matchTerm && matchGroup;
-      });
 
-      if (filtered.length === 0) {
-        noResults.style.display = 'block';
-        return;
-      }
 
-      filtered.sort((a, b) => a.name.localeCompare(b.name));
-
-      filtered.forEach(item => {
-        const div = document.createElement('div');
-        div.className = 'result';
-
-        const logo = item.logo || 'https://via.placeholder.com/64x64?text=📺'; // fallback logo
-
-        div.innerHTML = `
-          <img src="${logo}" alt="${item.name}" class="logo" />
-          <div class="details">
-            <h3>${item.name}</h3>
-            <p>📁 ${item.group}</p>
-          </div>
-          <a href="${item.url}" target="_blank" class="btn">Guarda</a>
-        `;
-        list.appendChild(div);
-      });
-    }
-  </script>
 </body>
 </html>
