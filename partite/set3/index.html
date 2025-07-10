@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
   <style>
-    <style>
     /* Box sizing globale per evitare problemi dimensioni */
 * {
   box-sizing: border-box;
@@ -42,7 +41,7 @@ body::before {
 
 
 h1 {
-  font-size: 4rem;
+  font-size: clamp(2rem, 5vw, 4rem);
   color: #0055a4;
   text-shadow:
     2px 2px 0 #ffcc00,
@@ -52,7 +51,12 @@ h1 {
   position: relative;
   z-index: 1;
   display: inline-block;
+  max-width: 90vw;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
+
 
 /* Stellina burst sul titolo */
 h1::before {
@@ -117,11 +121,19 @@ h1::before {
   box-sizing: border-box;
 }
 
+.canale a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
 .canale p {
   color: yellow;
   margin: 0;
   font-size: 0.95em;
+  text-decoration: none;
 }
+
 
 .canale:focus {
   transform: scale(1.1) rotate(-3deg);
@@ -202,103 +214,69 @@ h1::before {
   pointer-events: none;
   z-index: -1;
 }
-
-.canale a {
-  text-decoration: none;
-  color: inherit;
   </style>
 </head>
 <body>
   <h1>◈ Film Al Cinema FOX ◈</h1>
   <div class="griglia">
-
-  <div class="canale" id="Fox_Vetrina_Sala_Cinema">
     
-      <a href="player.html?url=http%3A%2F%2Fg05pmo.portpr02.com%3A80%2Flive%2FZAnt%2Fazcbn%2F549304.m3u8" target="_blank">
-    
+    <div class="canale no-logo" id="Fox_Vetrina_Sala_Cinema">
+      <a href="http://g05pmo.portpr02.com:80/live/ZAnt/azcbn/549304.m3u8" target="_blank">
         
-          <div style="font-size: 48px;">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
-        <p>
-          Fox - Vetrina Sala Cinema
-          
-        </p>
+        <p>Fox - Vetrina Sala Cinema</p>
       </a>
-  </div>
-
-  <div class="canale" id="Fox_Sala_Cinema_1">
+    </div>
     
-      <a href="player.html?url=http%3A%2F%2Fg05pmo.portpr02.com%3A80%2Flive%2FZAnt%2Fazcbn%2F549303.m3u8" target="_blank">
-    
+    <div class="canale no-logo" id="Fox_Sala_Cinema_1">
+      <a href="http://g05pmo.portpr02.com:80/live/ZAnt/azcbn/549303.m3u8" target="_blank">
         
-          <div style="font-size: 48px;">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
-        <p>
-          Fox - Sala Cinema 1
-          
-        </p>
+        <p>Fox - Sala Cinema 1</p>
       </a>
-  </div>
-
-  <div class="canale" id="Fox_Sala_Cinema_2">
+    </div>
     
-      <a href="player.html?url=http%3A%2F%2Fg05pmo.portpr02.com%3A80%2Flive%2FZAnt%2Fazcbn%2F549302.m3u8" target="_blank">
-    
+    <div class="canale no-logo" id="Fox_Sala_Cinema_2">
+      <a href="http://g05pmo.portpr02.com:80/live/ZAnt/azcbn/549302.m3u8" target="_blank">
         
-          <div style="font-size: 48px;">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
-        <p>
-          Fox - Sala Cinema 2
-          
-        </p>
+        <p>Fox - Sala Cinema 2</p>
       </a>
-  </div>
-
-  <div class="canale" id="Fox_Sala_Cinema_3">
+    </div>
     
-      <a href="player.html?url=http%3A%2F%2Fg05pmo.portpr02.com%3A80%2Flive%2FZAnt%2Fazcbn%2F549301.m3u8" target="_blank">
-    
+    <div class="canale no-logo" id="Fox_Sala_Cinema_3">
+      <a href="http://g05pmo.portpr02.com:80/live/ZAnt/azcbn/549301.m3u8" target="_blank">
         
-          <div style="font-size: 48px;">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
-        <p>
-          Fox - Sala Cinema 3
-          
-        </p>
+        <p>Fox - Sala Cinema 3</p>
       </a>
-  </div>
-
-  <div class="canale" id="Fox_Sala_Cinema_4">
+    </div>
     
-      <a href="player.html?url=http%3A%2F%2Fg05pmo.portpr02.com%3A80%2Flive%2FZAnt%2Fazcbn%2F549305.m3u8" target="_blank">
-    
+    <div class="canale no-logo" id="Fox_Sala_Cinema_4">
+      <a href="http://g05pmo.portpr02.com:80/live/ZAnt/azcbn/549305.m3u8" target="_blank">
         
-          <div style="font-size: 48px;">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
-        <p>
-          Fox - Sala Cinema 4
-          
-        </p>
+        <p>Fox - Sala Cinema 4</p>
       </a>
-  </div>
-
-  <div class="canale" id="Fox_Sala_Cinema_5">
+    </div>
     
-      <a href="player.html?url=http%3A%2F%2Fg05pmo.portpr02.com%3A80%2Flive%2FZAnt%2Fazcbn%2F549300.m3u8" target="_blank">
-    
+    <div class="canale no-logo" id="Fox_Sala_Cinema_5">
+      <a href="http://g05pmo.portpr02.com:80/live/ZAnt/azcbn/549300.m3u8" target="_blank">
         
-          <div style="font-size: 48px;">🎬</div>
+         <div style="font-size: 48px;">🎬</div>
         
-        <p>
-          Fox - Sala Cinema 5
-          
-        </p>
+        <p>Fox - Sala Cinema 5</p>
       </a>
-  </div>
-
-
-  </div>
+    </div>
     
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
   </div>
 </body>
 </html>
