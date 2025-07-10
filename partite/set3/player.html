@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Player</title>
+  
+  <!-- Inclusione delle librerie Clappr e Dash-Shaka -->
+  <script src="https://cdn.jsdelivr.net/gh/clappr/clappr@latest/dist/clappr.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/clappr/dash-shaka-playback@latest/dist/dash-shaka-playback.js"></script>
+</head>
+<body>
+    <div id="player"></div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const urlParam = params.get('url');
+
+if (urlParam) {
+  const sourceUrl = decodeURIComponent(urlParam);
+  var player = new Clappr.Player({
+    parentId: "#player",
+    source: sourceUrl,
+    autoPlay: true,
+    mute: true,
+    plugins: [DashShakaPlayback],
+    shakaConfiguration: {
+      preferredAudioLanguage: 'it-',
+      streaming: {
+        rebufferingGoal: 15
+      }
+    }
+  });
+
+  player.on(Clappr.Events.PLAYER_READY, () => {
+    try {
+      player.setMute(true);          // Garantisce autoplay senza audio
+      player.setFullscreen(true);    // Cerca di entrare in fullscreen
+      player.play();                 // Avvia la riproduzione
+    } catch (e) {
+      console.log('Impossibile entrare in fullscreen automaticamente:', e);
+    }
+  });
+} else {
+  document.body.innerHTML = '<p style="color:white;">❌ Nessun URL fornito</p>';
+}
+</script>
+  <a href="index.html">⟵ Torna alla home</a>
+</body>
+</html>
