@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>IPTV Protetta</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.11.2/controls.min.css" />
+  <style>
+    html, body { margin: 0; padding: 0; height: 100%; background: #282c34; font-family: Arial, sans-serif; overflow: hidden; }
+    #app-container { display: none; height: 100vh; display: flex; }
+   
+    /* Modifiche per playlist a griglia */
+    #playlist {
+      width: 320px; background: #282c34; color: white; overflow-y: auto; border-right: 1px solid #444;
+      padding: 20px; box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+    }
+    #search-input {
+      padding: 10px; border: 1px solid #444; border-radius: 5px; background: #3c4043; color: white;
+      font-size: 1em; margin-bottom: 10px;
+    }
+    #video-list {
+      list-style: none; padding: 0; margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    /* Gruppi come intestazioni */
+    .group-header {
+      width: 100%;
+      font-weight: bold;
+      background-color: #444;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      user-select: none;
+      margin-top: 15px;
+    }
+    /* Singolo canale a icona */
+    #video-list li {
+      width: 90px;
+      cursor: pointer;
+      background: #20232a;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #61dafb88;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 8px 5px;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+      text-align: center;
+      user-select: none;
+    }
+    #video-list li:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px #61dafb;
+    }
+    #video-list li img {
+      width: 70px;
+      height: 70px;
+      object-fit: contain;
+      border-radius: 6px;
+      margin-bottom: 5px;
+    }
+    #video-list li span {
+      font-size: 0.85em;
+      color: white;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      width: 100%;
+    }
+
+    #video-container { flex: 1; display: flex; flex-direction: column; position: relative; z-index: 2; }
+    #video { flex: 1; width: 100%; height: 100%; background: black; }
+  </style>
+</head>
+<body>
+  <div id="app-container" style="display:flex;">
+    <div id="playlist">
+      <!-- Rimosso il selettore qualità -->
+     
+      <ul id="video-list"></ul>
+    </div>
+    <div id="video-container">
+      <video autoplay id="video" poster="https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png" tabindex="0"></video>
+      <div id="video-ui"></div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.11.2/shaka-player.compiled.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.11.2/shaka-player.ui.min.js"></script>
+  <script src="https://dbghelp.github.io/M3U8Interpreter.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.0.4/pako.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="https://dbghelp.github.io/xml-epg.js"></script>
+  <script>
+    const xmlepg = new XMLEPG();
+    const searchInput = document.getElementById("search-input");
+    const videoList = document.getElementById("video-list");
+    const videoElement = document.getElementById("video");
+    const videoContainer = document.getElementById("video-container");
+    let channels = [];
+    let groupedChannels = null; // Variabile che gestisce i gruppi
+    let displayedChannels = [];
+    let player;
+    let focusableItems = [];
+    let currentFocusIndex = 0;
+
+    document.addEventListener("keydown", (e) => {
+      if (focusableItems.length === 0) return;
+      switch (e.key) {
+        case "ArrowDown":
+          currentFocusIndex = (currentFocusIndex + 1) % focusableItems.length;
+          updateFocus();
+          break;
+        case "ArrowUp":
+          currentFocusIndex = (currentFocusIndex - 1 + focusableItems.length) % focusableItems.length;
+          updateFocus();
+          break;
+        case "Enter":
+        case " ":
+          focusableItems[currentFocusIndex].click();
+          break;
+        case "Escape":
+          document.exitFullscreen?.();
+          break;
+      }
+    });
+
+    function updateFocus() {
+      focusableItems.forEach((el, i) => {
+        el.style.outline = i === currentFocusIndex ? "2px solid #61dafb" : "none";
+      });
+      if (focusableItems[currentFocusIndex]) {
+        focusableItems[currentFocusIndex].scrollIntoView({ block: "nearest" });
+      }
+    }
+
+    function parseAndSetPlaylist(content) {
+      const interpreter = new M3U8Interpreter(content);
+      interpreter.parse();
+      channels = interpreter.getChannels();
+
+      // Creiamo oggetto dei gruppi solo se ci sono
+      groupedChannels = {};
+      channels.forEach((c) => {
+        const group = c.groupTitle;
+        if (group) {
+          if (!groupedChannels[group]) groupedChannels[group] = [];
+          groupedChannels[group].push(c);
+        }
+      });
+
+      // Se non ci sono gruppi, impostiamo a null
+      if (Object.keys(groupedChannels).length === 0) {
+        groupedChannels = null; // Nessun gruppo
+      }
+
+      buildGroupList();
+      updateFocusableItems();
+    }
+
+    function buildGroupList() {
+      videoList.innerHTML = "";
+
+      if (groupedChannels === null) {
+        // Nessun gruppo, mostra tutti i canali senza intestazioni
+        channels.forEach(c => {
+          const li = document.createElement("li");
+          li.innerHTML = `<img src="${c.tvgLogo}" alt="" /><span class="video-title">${c.channelName}</span>`;
+          li.onclick = () => {
+            loadVideo(c.manifestUrl, c.licenseKey);
+            document.querySelectorAll("#video-list li").forEach(el => el.classList.remove("active"));
+            li.classList.add("active");
+          };
+          videoList.appendChild(li);
+        });
+      } else {
+        // Ci sono gruppi, crea intestazioni
+        Object.keys(groupedChannels).forEach((group) => {
+          const li = document.createElement("li");
+          li.className = "group-header";
+          li.textContent = group;
+          li.dataset.expanded = "false";
+          li.onclick = () => toggleGroup(group);
+          videoList.appendChild(li);
+        });
+      }
+    }
+
+    function toggleGroup(groupName) {
+      const parentLi = Array.from(document.querySelectorAll("li.group-header"))
+        .find(li => li.textContent === groupName);
+
+      const isExpanded = parentLi.dataset.expanded === "true";
+
+      if (isExpanded) {
+        document.querySelectorAll(`li[data-parent="${groupName}"]`).forEach(li => li.remove());
+        parentLi.dataset.expanded = "false";
+      } else {
+        const channelsInGroup = groupedChannels[groupName];
+        channelsInGroup.forEach(c => {
+          const li = document.createElement("li");
+          li.innerHTML = `<img src="${c.tvgLogo}" alt="" /><span class="video-title">${c.channelName}</span>`;
+          li.onclick = () => {
+            loadVideo(c.manifestUrl, c.licenseKey);
+            document.querySelectorAll("#video-list li").forEach(el => el.classList.remove("active"));
+            li.classList.add("active");
+          };
+          li.dataset.parent = groupName;
+          parentLi.insertAdjacentElement("afterend", li);
+        });
+        parentLi.dataset.expanded = "true";
+      }
+      updateFocusableItems();
+    }
+
+    function filterPlaylist(term) {
+      if (!term) {
+        // Nessun filtro, ricostruisci tutto
+        parseAndSetPlaylist(originalContent); // Devi conservare il contenuto originale
+      } else {
+        const filteredChannels = channels.filter(c =>
+          c.channelName.toLowerCase().includes(term)
+        );
+        groupedChannels = {};
+        filteredChannels.forEach(c => {
+          const group = c.groupTitle;
+          if (group) {
+            if (!groupedChannels[group]) groupedChannels[group] = [];
+            groupedChannels[group].push(c);
+          }
+        });
+        if (Object.keys(groupedChannels).length === 0) {
+          groupedChannels = null;
+        }
+        buildGroupList();
+      }
+    }
+
+    function updateFocusableItems(focusElement = null) {
+      focusableItems = Array.from(document.querySelectorAll("#video-list li"));
+      if (focusElement) {
+        const index = focusableItems.indexOf(focusElement);
+        if (index >= 0) {
+          currentFocusIndex = index;
+        }
+      } else {
+        if (currentFocusIndex >= focusableItems.length) currentFocusIndex = 0;
+      }
+      updateFocus();
+    }
+
+    function loadVideo(manifestUrl, licenseKey) {
+      if (licenseKey && !Array.isArray(licenseKey))
+        licenseKey = JSON.parse(decodeURIComponent(licenseKey));
+      if (licenseKey)
+        licenseKey.forEach(({ keyId, key }) =>
+          player.configure({ drm: { clearKeys: { [keyId]: key } } })
+        );
+      player.load(manifestUrl)
+        .then(() => {
+          videoElement.play();
+          goFullscreen();
+        })
+        .catch(console.error);
+      document.querySelectorAll("#video-list li").forEach(el => el.classList.remove("active"));
+    }
+
+    function goFullscreen() {
+      if (videoContainer.requestFullscreen) videoContainer.requestFullscreen();
+      else if (videoContainer.webkitRequestFullscreen) videoContainer.webkitRequestFullscreen();
+      else if (videoContainer.msRequestFullscreen) videoContainer.msRequestFullscreen();
+    }
+
+    // Variabile per contenuto originale
+    let originalContent = '';
+
+    shaka.polyfill.installAll();
+    window.onload = () => {
+      player = new shaka.Player(videoElement);
+      const ui = new shaka.ui.Overlay(player, document.getElementById("video-container"), videoElement);
+      ui.configure({
+        controlPanelElements: [
+          'captions',     
+          'play_pause',
+          'mute',
+          'volume',
+          'time_and_duration',
+          'fullscreen',
+          'audio'
+        ]
+      });
+      const githubPlaylistUrl = "skychannel.m3u";
+      fetch(githubPlaylistUrl)
+        .then(res => res.text())
+        .then(content => {
+          originalContent = content; // Salva il contenuto originale
+          parseAndSetPlaylist(content);
+        });
+
+      searchInput.addEventListener("input", () =>
+        filterPlaylist(searchInput.value.toLowerCase())
+      );
+    };
+  </script>
+</body>
+</html>

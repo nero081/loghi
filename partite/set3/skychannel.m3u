@@ -1,0 +1,64 @@
+#EXTM3U
+
+#EXTINF:-1 tvg-name="Sky Cinema Uno FHD" tvg-id="Sky Cinema Uno FHD"  tvg-logo="https://i.postimg.cc/YSfjFtWT/cuno.png" group-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Sky_Cinema_-_Logo_2020.svg/640px-Sky_Cinema_-_Logo_2020.svg.png",Sky Cinema Uno HD
+#KODIPROP:inputstreamaddon=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=dash
+#KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
+#KODIPROP:inputstream.adaptive.license_key=111571675d8183ed169725564cded6d9:e077dedf383c8aed73d38567a8e6a046
+https://g003-lin-it-cmaf-prd-ak.pcdn07.cssott02.com/nowitlin1/Content/CMAF_CTR_S1/Live/channel(skycinemauno)/master_2hr-aac.mpd?c3.ri=13738658451536292567
+
+#EXTINF:-1 tvg-name="SkyCinemaDue.it" tvg-id="Sky Cinema Due FHD"  tvg-logo="https://i.postimg.cc/nzFrYNKr/due.png" group-logo="",Sky Cinema Due HD
+#KODIPROP:inputstreamaddon=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=dash
+#KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
+#KODIPROP:inputstream.adaptive.license_key=11152c4ea1a3bffdd277ce333e54631a:17f0c028800dbcb294b9aebbae1f7e0c
+https://g003-lin-it-cmaf-prd-ak.pcdn07.cssott02.com/nowitlin1/Content/CMAF_CTR_S1/Live/channel(skycinemadue)/master_2hr-aac.mpd?c3.ri=13718110803190716579
+
+#EXTINF:-1 tvg-name="Sky Cinema Comedy FHD" tvg-id="Sky Cinema Comedy FHD"  tvg-logo="https://i.postimg.cc/1t3RNwPN/comedy.png" group-logo="",Sky Cinema Comedy HD
+#KODIPROP:inputstreamaddon=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=dash
+#KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
+#KODIPROP:inputstream.adaptive.license_key=1115676eca79233f2919b53f1a1709b8:72298a31b1b015b52adc03ab222494c2
+https://g003-lin-it-cmaf-prd-ak.pcdn07.cssott02.com/nowitlin1/Content/CMAF_CTR_S1/Live/channel(skycinemacomedy)/master_2hr-aac.mpd?c3.ri=13693340996731298948
+
+#EXTINF:-1 tvg-name="Sky Cinema Action FHD" tvg-id="Sky Cinema Action HD"  tvg-logo="https://i.postimg.cc/hPkG3X8H/action.png" group-logo="",Sky Cinema Action HD
+#KODIPROP:inputstreamaddon=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=dash
+#KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
+#KODIPROP:inputstream.adaptive.license_key=11150443883da4df27e25110d10fca31:83b6390471a083e00f8f3aff2a271be9
+https://g003-lin-it-cmaf-prd-ak.pcdn07.cssott02.com/nowitlin1/Content/CMAF_CTR_S1/Live/channel(skycinemaaction)/master_2hr-aac.mpd?c3.ri=13661252857892013852
+
+#EXTINF:-1 tvg-name="SkyCinemaFamily.it" tvg-id="Sky Cinema Family FHD"  tvg-logo="https://i.postimg.cc/j5R4x4Dp/family.png" group-logo="",Sky Cinema Family HD
+#KODIPROP:inputstreamaddon=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=dash
+#KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
+#KODIPROP:inputstream.adaptive.license_key=1115074065832f74af7e279e1203adce:20ece4131fbec82ac7ff056838512143
+https://g003-lin-it-cmaf-prd-cf.pcdn07.cssott02.com/nowitlin1/Content/CMAF_CTR_S1/Live/channel(skycinemafamily)/master_2hr-aac.mpd?c3.ri=13506441594923767386
+
+#EXTINF:-1 tvg-name="SkyCinemaCollection.it" tvg-id="Sky Cinema Collection HD" tvg-logo="https://i.postimg.cc/Y0VS795L/collection.png" group-logo="",Sky Cinema Collection HD
+#KODIPROP:inputstreamaddon=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=dash
+#KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
+#KODIPROP:inputstream.adaptive.license_key=11155d8a1fe0b211137c206354e16d2a:7f07d0ef693893a84162d51c1c7259f3
+https://g003-lin-it-cmaf-prd-ak.pcdn07.cssott02.com/nowitlin1/Content/CMAF_CTR_S1/Live/channel(skycinemacollection)/master_2hr-aac.mpd?c3.ri=13496027046809252187
+
+#EXTINF:-1 tvg-name="SkyCinemaDrama.it" tvg-id="Sky Cinema Drama FHD" tvg-logo="https://i.postimg.cc/R0RVFXrB/drama.png" group-logo="",Sky Cinema Drama HD
+#KODIPROP:inputstreamaddon=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=dash
+#KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
+#KODIPROP:inputstream.adaptive.license_key=11155ad807b90b9570fb8cce067f6166:74c4430ed8142190e52d4b303286696f
+https://g003-lin-it-cmaf-prd-ak.pcdn07.cssott02.com/nowitlin1/Content/CMAF_CTR_S1/Live/channel(skycinemadrama)/master_2hr-aac.mpd?c3.ri=13496027046809277453
+
+#EXTINF:-1 tvg-name="SkyCinemaSuspense.it" tvg-id="Sky Cinema Suspense HD" tvg-logo="https://i.postimg.cc/7ZSLvqmb/suspense.png" group-logo="",Sky Cinema Suspense HD
+#KODIPROP:inputstreamaddon=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=dash
+#KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
+#KODIPROP:inputstream.adaptive.license_key=1115d04562a1c328a84b2dab41244cba:5cf8c65d4177349308d7043384880659
+https://g003-lin-it-cmaf-prd-ak.pcdn07.cssott02.com/nowitlin1/Content/CMAF_CTR_S1/Live/channel(skycinemasuspense)/master_2hr-aac.mpd?c3.ri=13738658451536326348
+
+#EXTINF:-1 tvg-name="SkyCinemaRomance.it" tvg-id="Sky Cinema Romance FHD" tvg-logo="https://i.postimg.cc/d0vVwgx6/romance.png" group-logo="",Sky Cinema Romance HD
+#KODIPROP:inputstreamaddon=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=dash
+#KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
+#KODIPROP:inputstream.adaptive.license_key=1115dbeea57d2fadedc278956bcbfb02:3eee23f97ae49a81c03356599a614fca
+https://g003-lin-it-cmaf-prd-ak.pcdn07.cssott02.com/nowitlin1/Content/CMAF_CTR_S1/Live/channel(skycinemaromance)/master_2hr-aac.mpd?c3.ri=13731621602308766562
