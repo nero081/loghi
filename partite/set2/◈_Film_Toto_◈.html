@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>◈ Film Toto ◈</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  max-width: 90vw;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
+
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
+
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
+
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
+
+.canale a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+  text-decoration: none;
+}
+
+
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
+
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
+  </style>
+</head>
+<body>
+  <h1>◈ Film Toto ◈</h1>
+  <div class="griglia">
+    
+    <div class="canale no-logo" id="47_Morto_Che_Parla">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90789.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>47 Morto Che Parla</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Animali_Pazzi">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90805.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Animali Pazzi -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Arrangiatevi">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90745.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Arrangiatevi</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Capriccio_All_italiana">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90711.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Capriccio All'italiana -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Che_Fine_Ha_Fatto_Totò_Baby">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90722.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Che Fine Ha Fatto Totò Baby?</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Chi_Si_Ferma_è_Perduto">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90740.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Chi Si Ferma è Perduto</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Destinazione_Piovarolo">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90764.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Destinazione Piovarolo</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Dov_è_La_Libertà">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90776.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Dov'è La Libertà   ?</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fermo_Con_Le_Mani">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90806.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fermo Con Le Mani! -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fifa_E_Arena">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90798.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fifa E Arena</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Figaro_Qua_Figaro_Là">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90791.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Figaro Qua    Figaro Là</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Gambe_D_oro">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90753.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Gambe D'oro</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Gli_Amanti_Latini">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90717.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Gli Amanti Latini</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Gli_Onorevoli">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90728.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Gli Onorevoli</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Guardie_E_Ladri">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90787.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Guardie E Ladri</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_Due_Colonnelli">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90727.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I Due Colonnelli</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_Due_Marescialli">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90736.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I Due Marescialli -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_Due_Orfanelli">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90800.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I Due Orfanelli -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_Ladri">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90748.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I Ladri</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_ladri_1959">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/269707.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I ladri (1959)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Comandante">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90723.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Comandante</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Coraggio">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90763.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Coraggio</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Giorno_Più_Corto">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90730.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Giorno Più Corto</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Medico_Dei_Pazzi">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90771.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Medico Dei Pazzi</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Monaco_Di_Monza">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90721.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Monaco Di Monza -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Più_Comico_Spettacolo_Del_Mondo">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90782.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Più Comico Spettacolo Del Mondo</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Ratto_Delle_Sabine">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90801.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Ratto Delle Sabine</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_Pompieri_Di_Viggiù">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90797.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I Pompieri Di Viggiù</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_Soliti_Ignoti">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90754.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I Soliti Ignoti</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_Tartassati">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90746.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I Tartassati</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_Tre_Ladri">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90770.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I Tre Ladri</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_allegro_Fantasma">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90803.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'allegro Fantasma -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_imperatore_Di_Capri">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90794.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'imperatore Di Capri</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_oro_Di_Napoli">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90768.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'oro Di Napoli</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_uomo_La_Bestia_E_La_Virtù">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90784.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'uomo, La Bestia E La Virtù</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Banda_Degli_Onesti">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90761.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Banda Degli Onesti</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Cambiale">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90747.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Cambiale</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Legge_è_Legge">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90752.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Legge è Legge</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Mandragola">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90716.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Mandragola</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Le_Belle_Famiglie">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90720.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Le Belle Famiglie</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Le_Motorizzate">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90725.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Le Motorizzate</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Le_Sei_Mogli_Di_Barbablù">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90790.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Le Sei Mogli Di Barbablù</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Le_Streghe">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90712.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Le Streghe</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Letto_A_Tre_Piazze">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/196770.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Letto A Tre Piazze</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lo_Smemorato_Di_Collegno">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90732.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lo Smemorato Di Collegno</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Miseria_E_Nobiltà">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90772.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Miseria E Nobiltà</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Napoli_milionaria_1950">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90792.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Napoli milionaria (1950)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Noi_Duri">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90744.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Noi Duri</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Operazione_San_Gennaro">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90713.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Operazione San Gennaro</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Questa_è_La_Vita">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90777.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Questa è La Vita</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Racconti_Romani">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90762.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Racconti Romani</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Risate_Di_Gioia">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90741.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Risate Di Gioia</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Rita_La_Figlia_Americana">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90715.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Rita, La Figlia Americana</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="San_Giovanni_Decollato">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90804.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>San Giovanni Decollato -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sette_Ore_Di_Guai">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90774.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sette Ore Di Guai</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Siamo_Uomini_O_Caporali">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90765.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Siamo Uomini O Caporali? -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Signori_Si_Nasce">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90743.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Signori Si Nasce</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sua_Eccellenza_Si_Fermò_A_Mangiare">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90738.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sua Eccellenza Si Fermò A Mangiare</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tempi_Nostri">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90773.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tempi Nostri</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tototarzan">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90780.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tototarzan</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Totò_Fabrizi_E_I_Giovani_D_oggi">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90742.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Totò, Fabrizi E I Giovani D'oggi</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Totò_Lascia_O_Raddoppia">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90760.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Totò, Lascia O Raddoppia?</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Totò_Peppino_E_I_Fuorilegge">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90758.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Totò, Peppino E I Fuorilegge</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Totò_Peppino_E_La_Dolce_Vita">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90739.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Totò, Peppino E La Dolce Vita</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Totò_Peppino_E_La_Malafemmina">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90759.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Totò, Peppino E La    Malafemmina</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Totò_Peppino_E_Le_Fanatiche">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90755.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Totò, Peppino E Le Fanatiche</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Totò_Vittorio_E_La_Dottoressa">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90757.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Totò, Vittorio E La Dottoressa</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Totò_A_Colori">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90786.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Totò A Colori</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Totò_Al_Giro_D_Italia">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90799.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Totò Al Giro D'Italia -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Totò_All_inferno">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90766.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Totò All'inferno</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Totò_A_Parigi">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90751.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Totò A Parigi</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Totò_Cerca_Casa">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90795.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Totò Cerca Casa -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Totò_Cerca_Moglie">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90781.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Totò Cerca Moglie -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Totò_Cerca_Pace">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90769.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Totò Cerca Pace</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Totò_Contro_I_4">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90729.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Totò Contro I 4 -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Totò_Contro_Il_Pirata_Nero">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90719.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Totò Contro Il Pirata Nero</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Totò_Contro_Maciste">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90735.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Totò Contro Maciste -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Totò_D_Arabia">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90718.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Totò D'Arabia</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Totò_Diabolicus">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90734.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Totò Diabolicus -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Totò_Di_Notte_N_1">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90731.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Totò Di Notte N  1</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Totò_E_Carolina">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90767.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Totò E Carolina</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Totò_E_Cleopatra">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90724.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Totò E Cleopatra -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Totò_E_I_Re_Di_Roma">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90775.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Totò E I Re Di Roma</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Totò_E_Le_Donne">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90785.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Totò E Le Donne -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Totò_E_Marcellino">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90756.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Totò E Marcellino</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Totò_E_Peppino_Divisi_A_Berlino">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90733.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Totò E Peppino Divisi A Berlino</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Totò_Eva_E_Il_Pennello_Proibito">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90749.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Totò Eva E Il Pennello Proibito -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Totò_Le_Mokò">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90793.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Totò Le Mokò</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Totò_Nella_Fossa_Dei_Leoni">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90802.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Totò Nella Fossa Dei Leoni</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Totò_Nella_Luna">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90750.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Totò Nella Luna</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Totò_Sceicco">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90778.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Totò Sceicco</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Totò_Sexy">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90726.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Totò Sexy -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Totò_Terzo_Uomo">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90788.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Totò Terzo Uomo</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Totòtruffa_62">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90737.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Totòtruffa '62</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Uccellacci_E_Uccellini">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90714.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Uccellacci E Uccellini -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Una_Di_Quelle">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90783.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Una Di Quelle</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_Turco_Napoletano">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90779.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un Turco Napoletano</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Yvonne_La_Nuit">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90796.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Yvonne La Nuit</p>
+      </a>
+    </div>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>

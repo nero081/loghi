@@ -1,0 +1,3540 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>◈ Film Romantici ◈</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  max-width: 90vw;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
+
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
+
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
+
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
+
+.canale a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+  text-decoration: none;
+}
+
+
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
+
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
+  </style>
+</head>
+<body>
+  <h1>◈ Film Romantici ◈</h1>
+  <div class="griglia">
+    
+    <div class="canale no-logo" id="Marked_Men_Rule_Shaw_2025">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/648320.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Marked Men: Rule + Shaw (2025)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Beyond_the_Lights_Trova_la_tua_voce_2014">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/647691.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Beyond the Lights - Trova la tua voce (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_bodyguard_e_la_principessa_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/645858.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il bodyguard e la principessa (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Storia_di_noi_due_1999">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/645824.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Storia di noi due (1999)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Qualcuno_come_te_2001">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/645799.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Qualcuno come te (2001)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mektoub_My_Love_Canto_Uno_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/645467.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mektoub, My Love - Canto Uno (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="We_Live_in_Time_Tutto_il_tempo_che_abbiamo_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/645401.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>We Live in Time - Tutto il tempo che abbiamo (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Winter_Spring_Summer_or_Fall_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/644387.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Winter Spring Summer or Fall (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Perfect_Man_2005">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/641076.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Perfect Man (2005)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Le_castagne_sono_buone_1970">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/636119.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Le castagne sono buone (1970)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Piovuta_dal_cielo_1999">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/635869.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Piovuta dal cielo (1999)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Qualcosa_di_speciale_2009">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/632996.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Qualcosa di speciale (2009)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Another_you_2025">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/632339.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Another you (2025)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Scatta_l_amore_2025">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/632084.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Scatta l'amore (2025)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Per_sempre_insieme_Take_My_Hand_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/632083.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Per sempre insieme - Take My Hand (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lo_straniero_che_venne_dal_mare_1998">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/631468.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lo straniero che venne dal mare (1998)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_gioco_per_due_2001">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/629469.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un gioco per due (2001)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Romance_Cigarettes_2005">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/629245.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Romance & Cigarettes (2005)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="This_Time_Next_Year_Cosa_fai_a_Capodanno_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/629129.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>This Time Next Year - Cosa fai a Capodanno? (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Per_una_sola_estate_2000">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/627140.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Per una sola estate (2000)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Trappola_d_amore_1994">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/625474.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Trappola d'amore (1994)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Quando_arriva_l_amore_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/624171.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Quando arriva l'amore (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Prima_dell_alba_1995">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/622769.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Prima dell'alba (1995)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tutte_contro_lui_2014">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/622669.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tutte contro lui (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_posto_nel_mio_cuore_2014">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/622106.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un posto nel mio cuore (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Amore_a_39_gradi_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/621901.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Amore a 39 gradi (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Non_dire_sì_2005">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/620933.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Non dire sì (2005)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Riscatto_d_amore_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/612906.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Riscatto d'amore (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="French_Girl_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/568175.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>French Girl (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="After">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/87600.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>After</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Unnamed">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154448.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Unnamed</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="IoSonoQui_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/343446.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>#IoSonoQui (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="ScrivimiAncora_2014">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/245347.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>#ScrivimiAncora (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="10_cose_che_odio_di_te_1999">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/292101.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>10 cose che odio di te (1999)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="12_Metri_D_amore">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215922.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>12 Metri D'amore</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="14_Giorni_Una_storia_d_amore_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/423414.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>14 Giorni - Una storia d'amore (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="27_volte_in_bianco_2008">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/481398.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>27 volte in bianco (2008)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="40_giorni_40_notti_2002">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/287009.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>40 giorni & 40 notti (2002)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="A_Beautiful_Mind_2001">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/444925.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>A Beautiful Mind (2001)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Across_The_Universe">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215409.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Across The Universe</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Adaline_L_eterna_Giovinezza">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/184847.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Adaline - L'eterna Giovinezza</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="A_Family_Affair_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/543501.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>A Family Affair (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="After_2_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/179029.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>After 2 (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="After_3_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/292748.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>After 3 (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="After_4_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/425558.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>After 4 (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="After_5_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/489452.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>After 5 (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="A_Hong_Kong_è_già_domani_2016">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/281740.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>A Hong Kong è già domani (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alla_ricerca_di_Jane_2013">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/284773.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alla ricerca di Jane (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="All_My_Life_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/228311.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>All My Life (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="A_Lockdown_Lovestory_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/519007.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>A Lockdown Lovestory (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Amarsi_1994">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/258592.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Amarsi (1994)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Amore_Altri_Rimedi_2010">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/273540.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Amore & Altri Rimedi (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Amore_Altri_Rimedi_2010">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/386965.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Amore & Altri Rimedi (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Amore_al_primo_morso_1979">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/430109.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Amore al primo morso (1979)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Amore_con_interessi_1993">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/447189.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Amore con interessi (1993)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Amore_in_linea_2008">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/369647.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Amore in linea (2008)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Amore_per_sempre_1992">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/342905.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Amore per sempre (1992)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Amori_In_Corsa">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/142581.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Amori In Corsa ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ancora_più_bello_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/304770.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ancora più bello (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="A_piedi_nudi_2014">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/455204.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>A piedi nudi (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="A_Piedi_Nudi_Nel_Parco">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/142593.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>A Piedi Nudi Nel Parco ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="APPuntamento_con_l_more_2014">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/286446.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>APPuntamento con l'@more (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ardente_pazienza_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442440.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ardente pazienza (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Art_of_Love_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/532548.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Art of Love (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="At_Midnight_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/455194.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>At Midnight (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Attraverso_i_miei_occhi_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/534977.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Attraverso i miei occhi (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Avanti_1972">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/478257.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Avanti! (1972)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Becoming_Jane_Il_ritratto_di_una_donna_contro_2007">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/440056.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Becoming Jane - Il ritratto di una donna contro (2007)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Before_Midnight_2013">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/552222.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Before Midnight (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Before_Sunset_Prima_del_tramonto_2004">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/474298.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Before Sunset - Prima del tramonto (2004)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Blackout_Love_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/272786.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Blackout Love (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Blue_Valentine_2010">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/465011.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Blue Valentine (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bold_Pilot_Leggenda_di_un_campione">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/227501.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bold Pilot - Leggenda di un campione</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bounce_2000">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/286588.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bounce (2000)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="BoyGirl_Questione_di_sesso_2006">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290857.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>BoyGirl - Questione di... sesso (2006)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bros_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/438136.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bros (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="C_è_Post_Per_Te">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/186421.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>C'è Post@ Per Te</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Can_t_buy_my_love_Non_puoi_comprare_il_mio_amore_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/478315.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Can't buy my love - Non puoi comprare il mio amore (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Carol">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/143966.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Carol</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cento_e_una_notte_1995">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/468165.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cento e una notte (1995)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Chiamami_aquila_1981">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/351453.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Chiamami aquila (1981)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cime_Tempestose_1992">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/236149.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cime Tempestose (1992)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cinque_appuntamenti_al_buio_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/525490.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cinque appuntamenti al buio (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Coincidenze_d_amore_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/541038.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Coincidenze d'amore (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Colpita_Da_Una_Stella">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/213344.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Colpita Da Una Stella</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cosa_Mi_Lasci_Di_Te">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/115323.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cosa Mi Lasci Di Te ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Crazylove_2005">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/459750.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Crazylove (2005)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Crossroads_Le_strade_della_vita_2002">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/489145.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Crossroads - Le strade della vita (2002)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Crush_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/392224.avi" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Crush (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Da_ciao_ad_addio_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/405004.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Da ciao ad addio (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Dalle_5_alle_7_Due_ore_per_l_amore_2014">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/286740.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Dalle 5 alle 7 - Due ore per l'amore (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Dance_With_Me_1998">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/481889.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Dance With Me (1998)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Dedicato_a_una_Stella_1976">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/243611.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Dedicato a una Stella (1976)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Destinazione_Matrimonio">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/177617.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Destinazione Matrimonio</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Diario_segreto_di_un_viaggio_a_New_York_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/281744.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Diario segreto di un viaggio a New York (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Dieci_Inverni_2009">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/308574.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Dieci Inverni (2009)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Diorama_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/411521.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Diorama (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Disobedience_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/296659.avi" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Disobedience (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Divine_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/258604.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Divine (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Domeniche_da_Tiffany_2010">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/550479.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Domeniche da Tiffany (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Don_Jon">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/212225.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Don Jon</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Dopo_La_Tempesta">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/196959.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Dopo La Tempesta</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Downton_Abbey_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/348742.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Downton Abbey (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Due_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291406.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Due (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="E_all_improvviso_arriva_l_amore_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/518879.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>E all'improvviso arriva l'amore (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Eddie_Sunny_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/404737.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Eddie & Sunny (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Emma">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/200645.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Emma</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Emma_1996">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/352718.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Emma (1996)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Endless">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/186147.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Endless</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Endless_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/443225.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Endless (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Era_ora_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/464108.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Era ora (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Eravamo_canzoni_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/288219.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Eravamo canzoni (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Espiazione_2007">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/310303.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Espiazione (2007)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Eternal_Love_L_eternità_in_un_attimo_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/387483.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Eternal Love - L'eternità in un attimo (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ex_Amici_Come_Prima">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/143163.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ex - Amici Come Prima! ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fantasie_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/403498.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fantasie (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Faraway_Un_isola_per_cambiare_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/462706.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Faraway - Un'isola per cambiare (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Febbre_a_90_1997">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/391299.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Febbre a 90° (1997)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fermati_qui_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/393356.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fermati qui (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Find_Me_Falling_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/546275.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Find Me Falling (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fingernails_Una_diagnosi_d_amore_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/494982.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fingernails - Una diagnosi d’amore (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="First_Love_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/410518.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>First Love (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Funny_Girl_1968">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/406420.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Funny Girl (1968)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Gli_amori_di_Anaïs_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/424706.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Gli amori di Anaïs (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Gli_Anni_Dei_Ricordi">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/142596.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Gli Anni Dei Ricordi ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Gold_Coast_Viaggio_verso_il_nuovo_mondo_2015">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/274172.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Gold Coast - Viaggio verso il nuovo mondo (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Happy_Ending_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/480150.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Happy Ending (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Harry_Ti_Presento_Sally">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/186549.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Harry Ti Presento Sally</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hello_Again_Un_giorno_per_sempre_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/471974.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Hello Again - Un giorno per sempre (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ho_cercato_il_tuo_nome_2012">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/284785.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ho cercato il tuo nome (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Honeymoonish_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/536582.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Honeymoonish (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hotspot_Amore_senza_rete_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/550891.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Hotspot - Amore senza rete (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_colori_dell_amore_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/263053.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I colori dell'amore (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_giovani_amanti_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/436727.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I giovani amanti (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Casanova_di_Federico_Fellini_1976">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/286327.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Casanova di Federico Fellini (1976)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_cielo_è_ovunque_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/351687.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il cielo è ovunque (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Club_Di_Jane_Austen">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/219103.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Club Di Jane Austen</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_drago_di_mio_padre_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/438124.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il drago di mio padre (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_giorno_in_più_2011">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/550480.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il giorno in più (2011)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_gusto_dell_amore_2010">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/454836.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il gusto dell'amore (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_limoni_d_inverno_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/534491.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I limoni d'inverno (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_piacere_è_tutto_mio_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/459694.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il piacere è tutto mio (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_principe_che_ho_sempre_sognato_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/444840.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il principe che ho sempre sognato (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_profumo_dell_erba_selvatica_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/274058.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il profumo dell'erba selvatica (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_senso_dell_amore">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/238621.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il senso dell'amore</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_tempo_delle_mele_1980">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/250337.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il tempo delle mele (1980)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_tempo_delle_mele_2_1982">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/250338.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il tempo delle mele 2 (1982)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_tempo_delle_mele_3_1988">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/250342.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il tempo delle mele 3 (1988)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_velo_dipinto_2006">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/444338.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il velo dipinto (2006)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Imagine_Me_You_2005">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/458909.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Imagine Me & You (2005)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_Met_a_Girl_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/372822.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I Met a Girl (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Insieme_per_Davvero_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/273120.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Insieme per Davvero (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Insonnia_D_amore">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/186419.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Insonnia D'amore</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="In_the_Mood_for_Love_2000">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/466901.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>In the Mood for Love (2000)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Intreccio_di_destini_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/372673.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Intreccio di destini (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Io_ballo_da_sola_1996">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/478596.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Io ballo da sola (1996)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Io_e_lei_2015">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/490260.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Io e lei (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Io_rimango_qui_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291163.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Io rimango qui (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_Passi_Dell_amore">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/155028.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I Passi Dell'amore</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_promessi_sposi_1941">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/468151.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I promessi sposi (1941)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ischia_operazione_amore_1966">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/495012.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ischia operazione amore (1966)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="It_Ends_with_Us_Siamo_Noi_a_dire_basta_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/552221.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>It Ends with Us - Siamo Noi a dire basta (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Kindling_Un_estate_da_ricordare_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/533841.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Kindling - Un estate da ricordare (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Knight_Of_Cups">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/216406.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Knight Of Cups</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Kysset_L_impazienza_del_cuore_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/497455.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Kysset - L'impazienza del cuore (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_adolescente_1976">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/546271.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'adolescente (1976)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_altra_Metà">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/142589.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'altra Metà ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_altra_metà_dell_amore_2001">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/351088.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'altra metà dell'amore (2001)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_amante_pura_1958">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/533121.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'amante pura (1958)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_amore_all_improvviso_2011">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/465014.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'amore all'improvviso (2011)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_amore_che_resta">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/231218.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'amore che resta</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_amore_Ha_Due_Facce">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/142590.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'amore Ha Due Facce ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_amore_ritrovato_2004">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/475169.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'amore ritrovato (2004)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_amore_secondo_Isabelle_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/514549.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'amore secondo Isabelle (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_estate_più_calda_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/477697.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'estate più calda (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_ultima_lettera_d_amore_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/274268.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'ultima lettera d'amore (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_ultima_volta_insieme_1981">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/342907.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'ultima volta insieme (1981)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_ultimo_Paradiso">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/222284.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'ultimo Paradiso</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_uomo_Che_Sussurrava_Ai_Cavalli">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/214225.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'uomo Che Sussurrava Ai Cavalli</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_bella_ed_il_miliardario_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/461595.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La bella ed il miliardario (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_bisbetica_domata_2_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/512781.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La bisbetica domata 2 (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Bonne_1986">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/455200.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Bonne (1986)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Casa_Sul_Lago_Del_Tempo">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/182907.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Casa Sul Lago Del Tempo</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_competizione_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/254958.avi" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La competizione (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_donna_per_me_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/395283.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La donna per me (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Dura_Verità">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/185557.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Dura Verità</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lady_Oscar_Il_film_1979">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/218079.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lady Oscar - Il film (1979)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_figlia_del_mio_capo_2003">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/511853.avi" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La figlia del mio capo (2003)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_fonte_meravigliosa_1949">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/311005.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La fonte meravigliosa (1949)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_fortuna_viene_dal_cielo_1942">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/531835.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La fortuna viene dal cielo (1942)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_galleria_dei_cuori_infranti_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/443890.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La galleria dei cuori infranti (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_lista_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/513020.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La lista (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_lista_di_Mr_Malcolm_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/439081.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La lista di Mr. Malcolm (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_memoria_del_cuore_2012">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/477685.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La memoria del cuore (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_parte_della_sposa_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/429634.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La parte della sposa (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Pianista_2001">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/403983.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Pianista (2001)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Ragazza_Del_Dipinto">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/142599.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Ragazza Del Dipinto ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Ragazza_Della_Porta_Accanto">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/142598.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Ragazza Della Porta Accanto ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Ragazza_Del_Punk_Innamorato">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/129629.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Ragazza Del Punk Innamorato ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_schivata_2003">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/429648.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La schivata (2003)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_vita_in_un_attimo_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/407650.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La vita in un attimo (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Le_armi_del_cuore_2015">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/287305.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Le armi del cuore (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Le_Bianche_Tracce_Della_Vita">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/142582.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Le Bianche Tracce Della Vita ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Le_Cose_Che_Non_Ti_Ho_Detto">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/143465.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Le Cose Che Non Ti Ho Detto</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Le_parole_che_voglio_dirti_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/490742.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Le parole che voglio dirti (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Letters_to_Juliet_2010">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/352773.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Letters to Juliet (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lezioni_d_amore_2008">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/420948.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lezioni d'amore (2008)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Life_in_a_Year_Un_anno_ancora_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/286225.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Life in a Year - Un anno ancora (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Liz_Dick_2012">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/455202.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Liz & Dick (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Long_Story_Short_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/310300.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Long Story Short (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Long_Weekend_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/269856.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Long Weekend (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lost_in_Translation_L_amore_tradotto_2003">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/403501.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lost in Translation - L'amore tradotto (2003)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Love_Affair_Un_grande_amore_1994">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/493910.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Love Affair - Un grande amore (1994)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Love_Again_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/475708.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Love Again (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Love_and_secrets_2010">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/481046.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Love and secrets (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lo_Zar_e_la_Ballerina_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/283835.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lo Zar e la Ballerina (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mai_Stata_Baciata">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/216494.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mai Stata Baciata</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Maria_e_l_amore_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/512970.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Maria e l'amore (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Marry_Me_Sposami_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/368334.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Marry Me - Sposami (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Midnight_in_Paris_2011">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/550394.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Midnight in Paris (2011)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Monday_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/392020.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Monday (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mon_roi_Il_mio_re_2015">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/432693.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mon roi - Il mio re (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Musica_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/533761.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Musica (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="My_Life_Questa_mia_vita_1993">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/545334.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>My Life - Questa mia vita (1993)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="My_Name_Is_Joe_1998">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/289816.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>My Name Is Joe (1998)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mystic_Pizza">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/142597.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mystic Pizza ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Nemmeno_io_ti_voglio_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/315089.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Nemmeno io ti voglio (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Nessuno_Si_Salva_Da_Solo">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/212945.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Nessuno Si Salva Da Solo</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Nine_Months_Imprevisti_D_amore">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215898.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Nine Months - Imprevisti D'amore</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ofelia_Amore_e_Morte_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/257929.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ofelia - Amore e Morte (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ogni_giorno_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/372672.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ogni giorno (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Oltre_l_universo_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/434204.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Oltre l’universo (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="One_Day">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/155482.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>One Day</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="One_Love">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/142584.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>One Love</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="One_True_Loves_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/516594.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>One True Loves (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Only_You_Amore_a_prima_vista_1994">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/479169.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Only You - Amore a prima vista (1994)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Opera_Senza_Autore">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/142585.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Opera Senza Autore ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ordinary_Love_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/430226.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ordinary Love (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="P_S_I_Love_You_2007">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/284777.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>P.S. I Love You (2007)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Palm_Springs_Vivi_Come_Se_Non_Ci_Fosse_Un_Domani">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201163.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Palm Springs - Vivi Come Se Non Ci Fosse Un Domani</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Paradise">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/213647.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Paradise</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Paradiso_Inferno">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/116188.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Paradiso+Inferno ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Parlami_d_amore_2008">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/245261.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Parlami d'amore (2008)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Parla_più_forte_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/430273.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Parla più forte (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Passione_ribelle_2000">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/286597.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Passione ribelle (2000)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Passion_of_Mind_2000">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/286598.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Passion of Mind (2000)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Patto_d_amore_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/254959.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Patto d'amore (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Pazzo_per_lei">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/229657.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Pazzo per lei</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Pensiero_d_amore_1969">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/553301.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Pensiero d'amore (1969)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Per_sempre_la_mia_ragazza_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/306558.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Per sempre la mia ragazza (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Per_Sfortuna_Che_Ci_Sei">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/219952.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Per Sfortuna Che Ci Sei</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Persuasione">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/218271.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Persuasione</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Per_tutta_la_vita_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/372128.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Per tutta la vita (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Piacere_sono_un_po_incinta_2010">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/459745.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Piacere, sono un po' incinta (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Piccole_donne_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/91288.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Piccole donne (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Piccolo_Grande_Amore">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/186164.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Piccolo Grande Amore</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Possession_Una_storia_romantica_2002">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/534772.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Possession - Una storia romantica (2002)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Prima_di_Andare_Via_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/472963.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Prima di Andare Via (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Primo_amore_2004">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/529200.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Primo amore (2004)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Principessa_cercasi_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/532862.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Principessa cercasi (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Purple_Hearts_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/408064.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Purple Hearts (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Qualcosa_è_cambiato">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/236648.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Qualcosa è cambiato</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Quando_l_amore_bussa_in_ufficio_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/345288.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Quando l'amore bussa in ufficio (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Quando_meno_te_lo_aspetti_2004">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/488380.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Quando meno te lo aspetti (2004)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Queen_Bees_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/408684.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Queen Bees (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Quello_che_non_so_di_te_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/345289.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Quello che non so di te (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Quello_Che_Veramente_Importa">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/142595.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Quello Che Veramente Importa ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ricchi_d_amore_2_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/546078.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ricchi d'amore 2 (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ricomincio_da_te_Endings_Beginnings_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/273281.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ricomincio da te - Endings, Beginnings (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Rifkin_s_Festival_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/286264.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Rifkin's Festival (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Rimbalzi_d_amore_2010">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/283973.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Rimbalzi d'amore (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ritratto_Della_Giovane_In_Fiamme">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/119211.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ritratto Della Giovane In Fiamme ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Romantiche_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/476465.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Romantiche (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Rosaline_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/429641.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Rosaline (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sabrina">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/214191.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sabrina -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sapore_Di_Hamburger">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/142586.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sapore Di Hamburger ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sayonara_1957">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/401596.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sayonara (1957)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sbucato_Dal_Passato">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/213632.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sbucato Dal Passato</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Scandalo_a_Filadelfia_1940">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/447833.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Scandalo a Filadelfia (1940)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Scarpette_rosse_1948">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/533112.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Scarpette rosse (1948)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Scelta_D_amore_La_Storia_Di_Hilary_E_Victor">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/142601.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Scelta D'amore - La Storia Di Hilary E Victor ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Secret_Love_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/436905.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Secret Love (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="See_You_on_Venus_Ci_vediamo_su_Venere_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/497290.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>See You on Venus - Ci vediamo su Venere (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Segui_il_tuo_cuore_2010">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/495013.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Segui il tuo cuore (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Segui_il_tuo_cuore_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/512390.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Segui il tuo cuore (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Semplicemente_irresistibile_1999">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/513304.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Semplicemente irresistibile (1999)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Separati_innamorati_2012">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/481668.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Separati innamorati (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Seta_2007">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/265192.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Seta (2007)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sex_Appeal_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/382446.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sex Appeal (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Shakespeare_In_Love">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/184043.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Shakespeare In Love</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sir_Cenerentola_a_Mumbai_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/423410.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sir - Cenerentola a Mumbai (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Solo_gli_amanti_sopravvivono_2013">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/343854.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Solo gli amanti sopravvivono (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Someone_Like_You_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/549014.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Someone Like You (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Song_to_Song_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/344768.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Song to Song (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sotto_Il_Sole_Della_Toscana">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/155103.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sotto Il Sole Della Toscana</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Spin_Out_Amore_in_testacoda_2016">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/296594.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Spin Out - Amore in testacoda (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Spoiler_Alert_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/512825.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Spoiler Alert (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Stanotte_stiamo_insieme_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/461626.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Stanotte stiamo insieme (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Stargirl">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/142594.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Stargirl ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Storia_di_mia_moglie_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/439336.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Storia di mia moglie (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sul_Più_Bello">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/196764.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sul Più Bello</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Supernova_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/287022.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Supernova (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sweet_November_Dolce_Novembre">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/184044.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sweet November - Dolce Novembre</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Idea_of_You_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/537109.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Idea of You (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Italian_Recipe_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/455223.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Italian Recipe (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Kissing_Booth_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/284317.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Kissing Booth (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Kissing_Booth_3_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/283201.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Kissing Booth 3 (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Land_of_Dreams_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/459744.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Land of Dreams (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Last_Summer_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/245348.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Last Summer (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Ramen_Girl">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/193248.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Ramen Girl</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Rebound_Ricomincio_dall_amore_2009">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/473553.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Rebound - Ricomincio dall'amore (2009)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Secret_La_forza_di_sognare_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/266092.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Secret: La forza di sognare (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Souvenir">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/237262.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Souvenir</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Souvenir_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/441923.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Souvenir (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Wedding_Date_L_amore_ha_il_suo_prezzo_2005">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/372111.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Wedding Date - L'amore ha il suo prezzo (2005)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Women_2008">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/444622.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Women (2008)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="This_Little_Love_of_Mine_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/272795.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>This Little Love of Mine (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ti_mangio_il_cuore_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/446390.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ti mangio il cuore (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Time_Freak">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/143416.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Time Freak</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Time_Is_Up_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/329075.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Time Is Up (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Time_is_up_2_Game_of_Love_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/433670.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Time is up 2 - Game of Love (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tin_Cup_1996">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/481336.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tin Cup (1996)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ti_odio_anzi_no_ti_amo_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/352354.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ti odio, anzi no, ti amo! (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ti_odio_ti_lascio_ti_2006">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/491597.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ti odio, ti lascio, ti... (2006)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tristano_Isotta_2006">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/315061.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tristano & Isotta (2006)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tutta_colpa_dell_amore_2002">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/345877.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tutta colpa dell'amore (2002)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tutti_i_santi_giorni_2012">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/344769.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tutti i santi giorni (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tutto_può_accadere_1991">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/548477.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tutto può accadere (1991)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tutto_può_accadere_a_Broadway_2015">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/312987.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tutto può accadere a Broadway (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tutto_può_cambiare_2013">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/550689.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tutto può cambiare (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Two_Weeks_Notice_Due_Settimane_Per_Innamorarsi">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/193374.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Two Weeks Notice - Due Settimane Per Innamorarsi</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ultimo_tango_a_Parigi_1972">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/246574.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ultimo tango a Parigi (1972)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Una_casa_alla_fine_del_mondo_2004">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/296600.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Una casa alla fine del mondo (2004)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Una_coppia_alla_deriva_1987">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/477679.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Una coppia alla deriva (1987)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Una_donna_in_carriera_1988">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/392022.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Una donna in carriera (1988)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Una_donna_per_amica_2014">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/349576.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Una donna per amica (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Una_gran_voglia_di_vivere_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/452735.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Una gran voglia di vivere (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_amore_a_5_stelle">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/228028.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un amore a 5 stelle</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_amore_all_improvviso_2009">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/313109.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un amore all'improvviso (2009)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_amore_così_grande_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/394821.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un amore così grande (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_amore_in_fondo_al_mare_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/479511.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un amore in fondo al mare (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_amore_senza_fine_2014">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/351432.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un amore senza fine (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_amore_splendido_1957">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/275846.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un amore splendido (1957)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_amore_splendido_1957">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/342908.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un amore splendido (1957)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Una_proposta_per_dire_sì_2010">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/283881.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Una proposta per dire sì (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Una_ragazza_e_il_suo_sogno_2003">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/340557.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Una ragazza e il suo sogno (2003)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Una_relazione_passeggera_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/473612.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Una relazione passeggera (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Una_storia_d_amore_e_di_desiderio_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/428647.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Una storia d'amore e di desiderio (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_colpo_di_fortuna_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/532719.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un colpo di fortuna (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_giorno_di_pioggia_a_New_York_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/457006.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un giorno di pioggia a New York (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Uno_splendido_disastro_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/470692.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Uno splendido disastro (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Uno_splendido_disastro_2_Il_matrimonio_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/539770.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Uno splendido disastro 2 - Il matrimonio (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_principe_in_giacca_e_cravatta_2010">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/340721.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un principe in giacca e cravatta (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_principe_per_l_estate_2016">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/477678.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un principe per l'estate (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_regalo_da_Tiffany_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442444.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un regalo da Tiffany (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_uomo_tranquillo">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/227754.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un uomo tranquillo</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Urban_Cowboy_1980">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/342909.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Urban Cowboy (1980)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Vagando_nell_oscurità_Wander_Darkly">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/235640.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Vagando nell’oscurità - Wander Darkly</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Varsity_Blues">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/142583.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Varsity Blues ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Via_Da_Las_Vegas">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/142587.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Via Da Las Vegas ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Vicino_all_orizzonte_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/474300.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Vicino all'orizzonte (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Vicky_Cristina_Barcelona">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/142592.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Vicky Cristina Barcelona ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Vizi_di_famiglia_2005">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/509567.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Vizi di famiglia (2005)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Walking_on_Sunshine_2014">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/296403.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Walking on Sunshine (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Waves_Le_onde_della_vita">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/236962.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Waves - Le onde della vita</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="What_s_Love_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/477947.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>What's Love? (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="William_e_Kate_Un_amore_da_favola_2012">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/550482.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>William e Kate - Un amore da favola (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Zack_Miri_Amore_A_Primo_Sesso">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/142588.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Zack & Miri - Amore A    Primo Sesso ()</p>
+      </a>
+    </div>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,2244 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>◈ Film Musicali ◈</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  max-width: 90vw;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
+
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
+
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
+
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
+
+.canale a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+  text-decoration: none;
+}
+
+
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
+
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
+  </style>
+</head>
+<body>
+  <h1>◈ Film Musicali ◈</h1>
+  <div class="griglia">
+    
+    <div class="canale no-logo" id="Champagne_Peppino_di_Capri_2025">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/637134.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Champagne - Peppino di Capri (2025)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="StreetDance_2_2012">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/636650.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>StreetDance 2 (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Io_Giusy_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/631522.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Io Giusy (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="A_Complete_Unknown_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/631521.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>A Complete Unknown (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_delinquente_del_rock_n_roll_1957">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/629174.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il delinquente del rock'n'roll (1957)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="A_proposito_di_Davis_2013">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/629170.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>A proposito di Davis (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Belle_of_New_York_1952">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/627923.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Belle of New York (1952)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Finalement_Storia_di_una_tromba_che_si_innamora_di_un_pianoforte_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/627918.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Finalement - Storia di una tromba che si innamora di un pianoforte (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Finalement_storia_di_una_tromba_che_si_innamora_di_un_pianoforte_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/622703.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Finalement: storia di una tromba che si innamora di un pianoforte (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ghosts_1997">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/611608.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ghosts (1997)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_m_Magic_1978">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/611609.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I'm Magic (1978)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="8_Mile">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/89278.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>8 Mile</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Aline_La_voce_dell_amore_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/393206.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Aline - La voce dell'amore (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="All_Eyez_On_Me">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/89271.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>All Eyez On Me</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="All_That_Jazz_Lo_spettacolo_comincia_1979">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/488645.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>All That Jazz - Lo spettacolo comincia (1979)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alvaro_piuttosto_corsaro_1954">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/286734.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alvaro piuttosto corsaro (1954)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="A_Night_at_the_Roxbury_1998">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/273472.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>A Night at the Roxbury (1998)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Annarè">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/377754.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Annarè</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Another_Cinderella_Story_2008">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/394258.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Another Cinderella Story (2008)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Appuntamento_in_Riviera_1962">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/292179.avi" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Appuntamento in Riviera (1962)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="A_Proposito_Di_Rose">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/212273.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>A Proposito Di Rose</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="A_Star_Is_Born_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/80830.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>A Star Is Born (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="A_Time_for_Dancing">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/227551.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>A Time for Dancing</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Attanasio_cavallo_vanesio_1953">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/286735.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Attanasio cavallo vanesio (1953)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Autumn_Beat_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/438135.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Autumn Beat (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Backstage_Dietro_le_quinte_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/429568.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Backstage - Dietro le quinte (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Back_to_Black_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/542887.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Back to Black (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ballo_Ballo">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/218552.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ballo Ballo</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Beats_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/85617.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Beats (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Beat_Street_1984">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/283207.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Beat Street (1984)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bel_Canto_the_Opera_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/274727.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bel Canto the Opera (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bikini_Beach_1964">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/529040.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bikini Beach (1964)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Blinded_by_the_Light_Travolto_dalla_musica_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/388281.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Blinded by the Light - Travolto dalla musica (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Blues_Brothers_Il_mito_continua_1998">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/76196.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Blues Brothers - Il mito continua (1998)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bohemian_Rhapsody">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/80984.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bohemian Rhapsody</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bordella_1976">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/283208.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bordella (1976)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Born_to_Be_Blue_2015">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/272337.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Born to Be Blue (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Breakdance_1984">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/274728.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Breakdance (1984)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Breaking_Dance_2015">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/480920.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Breaking Dance (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Brigadoon_1954">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/309265.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Brigadoon (1954)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cabaret_1972">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/283209.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cabaret (1972)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cadillac_Records_2008">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/274729.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cadillac Records (2008)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cantando_sotto_la_pioggia_1952">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/269692.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cantando sotto la pioggia (1952)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Carosello_Carosone">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/237876.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Carosello Carosone</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Carosello_napoletano_1954">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/286736.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Carosello napoletano (1954)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cenerentola_a_Parigi_1957">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/488646.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cenerentola a Parigi (1957)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Center_Stage_Turn_It_Up_2008">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/482652.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Center Stage: Turn It Up (2008)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cerasella_1959">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/286737.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cerasella (1959)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Chicago_2002">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/283210.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Chicago (2002)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Chimera_1968">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/268192.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Chimera (1968)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ciao_Ni_1979">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290389.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ciao Ni! (1979)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cuore_matto_matto_da_legare_1967">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/269693.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cuore matto... matto da legare (1967)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Dance_Flick_2009">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/482998.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Dance Flick (2009)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Detroit_Rock_City_1999">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/273399.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Detroit Rock City (1999)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Dietro_l_angolo_1938">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/524022.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Dietro l'angolo (1938)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Dirty_Dancing_Balli_proibiti_1987">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/219490.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Dirty Dancing - Balli proibiti (1987)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Dirty_Dancing_2_2004">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/78550.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Dirty Dancing 2 (2004)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Dreamgirls_2006">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/283211.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Dreamgirls (2006)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="E_nata_una_stella_1976">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/274730.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>E' nata una stella (1976)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Elvis_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/410232.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Elvis (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Elvis_il_re_del_rock_1979">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/274731.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Elvis, il re del rock (1979)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Elvis_on_Tour_1972">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/274732.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Elvis on Tour (1972)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Elvis_Presley_The_Classic_Broadcasts_2007">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/427397.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Elvis Presley: The Classic Broadcasts (2007)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ero_una_popstar_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/423065.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ero una popstar (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Evita_1996">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/274733.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Evita (1996)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Famoso_Sfera_Ebbasta">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201048.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Famoso - Sfera Ebbasta</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Figlio_delle_stelle_1979">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/286738.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Figlio delle stelle (1979)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Flashdance_1983">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/77102.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Flashdance (1983)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fly_Vola_verso_i_tuoi_sogni_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/461827.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fly - Vola verso i tuoi sogni (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Footloose_1984">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/77099.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Footloose (1984)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Funny_Girl_1968">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/488647.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Funny Girl (1968)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Gianni_Schicchi_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/349572.avi" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Gianni Schicchi (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Gli_occhi_di_Tammy_Faye_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/349407.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Gli occhi di Tammy Faye (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Gli_Stati_Uniti_contro_Billie_Holiday_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/410641.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Gli Stati Uniti contro Billie Holiday (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Grease_Brillantina_1978">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/77426.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Grease - Brillantina (1978)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Grease_Live_2016">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/75635.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Grease Live! (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hair_1979">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/274734.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Hair (1979)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hearts_Beat_Loud">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/180469.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Hearts Beat Loud</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hello_Dolly_1969">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/283212.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Hello, Dolly! (1969)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hello_Dolly_1969">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/488648.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Hello, Dolly! (1969)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="High_School_Musical">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/112077.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>High School Musical</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="High_School_Musical_2">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/112078.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>High School Musical 2</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="High_School_Musical_3_Senior_Year">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154640.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>High School Musical 3: Senior Year</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hollywood_Stargirl_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/401513.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Hollywood Stargirl (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Honey">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/111274.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Honey</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Honey_2_Lotta_Ad_Ogni_Passo">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/111275.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Honey 2 - Lotta Ad Ogni Passo</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Honey_3_Il_coraggio_di_ballare_2016">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/111276.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Honey 3 - Il coraggio di ballare (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_figli_del_secolo_1953">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/283213.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I figli del secolo (1953)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_cantante_del_luna_park_1964">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/544619.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il cantante del luna park (1964)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_pescatore_della_Louisiana_1950">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/488649.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il pescatore della Louisiana (1950)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_ragazzo_che_sorride_1969">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/541527.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il ragazzo che sorride (1969)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_ritmo_del_successo_2000">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/465148.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il ritmo del successo (2000)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_solista_2009">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/283214.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il solista (2009)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_suo_nome_è_Donna_Rosa_1969">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/269696.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il suo nome è Donna Rosa (1969)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Violinista_Del_Diavolo">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154458.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Violinista Del Diavolo</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="In_ginocchio_da_te_1964">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/268193.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>In ginocchio da te (1964)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Interstella">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/138938.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Interstella  ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Into_the_Beat_Il_tuo_cuore_balla_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/250341.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Into the Beat - Il tuo cuore balla (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Into_the_Woods_2014">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/283215.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Into the Woods (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Io_bacio_tu_baci_1961">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/268185.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Io bacio... tu baci (1961)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Io_Non_Sono_Qui_2007">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/283216.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Io Non Sono Qui (2007)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_Racconti_Dello_Zio_Tom">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/105030.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I Racconti Dello Zio Tom -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_re_del_mambo_1992">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/284789.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I re del mambo (1992)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_Saw_the_Light_2016">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/283217.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I Saw the Light (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Jersey_Boys_2014">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/283218.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Jersey Boys (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Jimi_All_Is_by_My_Side_2013">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/441433.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Jimi: All Is by My Side (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Jolly_Blu_1998">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/283219.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Jolly Blu (1998)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Juke_box_Urli_d_amore_1959">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/268187.avi" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Juke box - Urli d'amore (1959)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Kiss_and_Cry_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/85620.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Kiss and Cry (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_allegra_fattoria_1950">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/488650.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'allegra fattoria (1950)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_assistente_Della_Star">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/151193.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'assistente Della Star</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Bamba_1987">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/286330.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Bamba (1987)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_famiglia_Bélier_2014">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/339378.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La famiglia Bélier (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_febbre_del_sabato_sera_1977">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/77104.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La febbre del sabato sera (1977)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_La_Land">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/74991.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La La Land</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_mascotte_dell_aeroporto_1934">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/268196.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La mascotte dell'aeroporto (1934)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_storia_di_Glenn_Miller_1954">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/488651.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La storia di Glenn Miller (1954)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Le_Ragazze_Del_Coyote_Ugly">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/94305.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Le Ragazze Del Coyote Ugly</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Le_ragazze_della_terra_sono_facili_1988">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/283220.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Le ragazze della terra sono facili (1988)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Les_choristes_I_ragazzi_del_coro_2004">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/514550.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Les choristes - I ragazzi del coro (2004)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Les_Misérables_2012">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/475929.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Les Misérables (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lisa_dagli_occhi_blu_1969">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/274736.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lisa dagli occhi blu (1969)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lovely_Boy_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290083.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lovely Boy (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Love_N_Dancing_2009">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/488379.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Love N' Dancing (2009)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Madri_pericolose_1960">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/268188.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Madri pericolose (1960)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ma_Rainey_s_Black_Bottom">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206753.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ma Rainey's Black Bottom</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mina_fuori_la_guardia_1961">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/268189.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mina... fuori la guardia (1961)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mi_vedrai_tornare_1966">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/286739.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mi vedrai tornare (1966)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Monkey_Business_Quattro_Folli_In_Alto_Mare">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/191588.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Monkey Business - Quattro Folli In Alto Mare</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Moulin_Rouge">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206386.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Moulin Rouge!</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Music">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/229494.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Music</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Nata_per_vincere_2004">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/288217.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Nata per vincere (2004)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Nel_sole_1967">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/274737.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Nel sole (1967)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Nessuno_mi_può_giudicare_1966">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/479510.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Nessuno mi può giudicare (1966)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="New_York_Academy_2016">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/312159.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>New York Academy (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="New_York_Academy_Freedance_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/312158.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>New York Academy - Freedance (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Nine_2009">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/274738.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Nine (2009)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Non_son_degno_di_te_1965">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/268194.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Non son degno di te (1965)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Non_stuzzicate_la_zanzara_1967">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/274739.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Non stuzzicate la zanzara (1967)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Notorious_B_I_G_2009">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/230758.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Notorious B.I.G. (2009)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Notre_Dame_De_Paris_Live_Arena_Di_Verona">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/116216.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Notre Dame De Paris - Live Arena Di Verona</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Oliver_1968">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/274740.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Oliver! (1968)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="On_Air_Storia_Di_Un_Successo">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201122.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>On Air - Storia Di Un Successo</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Once_Una_volta_2007">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/551618.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Once - Una volta (2007)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Opening_Night_2016">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/71752.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Opening Night (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Our_Footloose_Remake_2011">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/77098.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Our Footloose Remake (2011)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Peggio_per_me_meglio_per_te_1967">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/274741.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Peggio per me... meglio per te (1967)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Per_amore_per_magia_1967">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/268190.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Per amore... per magia... (1967)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Perdono_1966">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/274742.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Perdono (1966)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Piange_il_telefono_1975">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/269703.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Piange… il telefono (1975)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Piccola_stella_1934">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/268197.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Piccola stella (1934)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Piccoli_gangsters_1976">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/283221.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Piccoli gangsters (1976)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Pitch_Perfect_2005">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/77479.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Pitch Perfect (2005)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Pitch_Perfect_2_2015">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/65004.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Pitch Perfect 2 (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Pitch_Perfect_3_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/77486.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Pitch Perfect 3 (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Pomi_d_ottone_e_manici_di_scopa_1971">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/274743.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Pomi d'ottone e manici di scopa (1971)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Press_Play_La_musica_della_nostra_vita_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/406226.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Press Play - La musica della nostra vita (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Press_Play_La_musica_della_nostra_vita_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/427849.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Press Play - La musica della nostra vita (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Pure_Country">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/228030.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Pure Country</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Purple_Rain_1984">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/274744.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Purple Rain (1984)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Quando_l_amore_brucia_l_anima_Walk_the_Line_2005">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/296289.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Quando l'amore brucia l'anima - Walk the Line (2005)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Quasi_famosi_2000">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/409309.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Quasi famosi (2000)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Queen_Rock_Montreal_Live_Aid_2007">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/81309.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Queen: Rock Montreal & Live Aid (2007)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Questo_pazzo_pazzo_mondo_della_canzone_1965">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/283222.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Questo pazzo, pazzo mondo della canzone (1965)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Questo_Pazzo_Pazzo_Mondo_Della_Canzone">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/141053.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Questo Pazzo Pazzo Mondo Della Canzone ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Radiofreccia_1998">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/85621.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Radiofreccia (1998)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ragazzi_del_Juke_Box_1959">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/268186.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ragazzi del Juke-Box (1959)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Respect_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/315002.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Respect (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Riderà_Cuore_matto_1967">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/274745.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Riderà! - Cuore matto (1967)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Rita_la_figlia_americana_1965">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/274746.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Rita, la figlia americana (1965)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Rita_la_zanzara_1966">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/274747.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Rita la zanzara (1966)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Rocketman">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/89443.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Rocketman</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Rock_of_Ages">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/227604.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Rock of Ages</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Rock_Star_2001">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/296663.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Rock Star (2001)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Rondine_senza_nido_1938">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/268198.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Rondine senza nido (1938)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sanremo_La_grande_sfida_1960">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/274748.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sanremo - La grande sfida (1960)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Saranno_Famosi_1980">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/274749.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Saranno Famosi (1980)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Save_the_Last_Dance">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/227343.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Save the Last Dance</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Save_the_Last_Dance_2">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/227344.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Save the Last Dance 2</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Scritto_sul_vento_1947">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/513454.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Scritto sul vento (1947)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Scrivimi_una_canzone_2007">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/283223.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Scrivimi una canzone (2007)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="SDF_Street_Dance_Fighters_2004">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/273479.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>SDF - Street Dance Fighters (2004)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Se_non_avessi_più_te_1965">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/268195.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Se non avessi più te (1965)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sid_Nancy">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/219512.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sid & Nancy</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sing_Street">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/143967.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sing Street ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sister_Act_Una_Svitata_In_Abito_Da_Suora">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/98714.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sister Act - Una Svitata In Abito Da Suora -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sister_Act_2_Più_Svitata_Che_Mai">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/98715.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sister Act 2 - Più Svitata Che Mai -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sognando_a_New_York_In_the_Heights_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/284281.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sognando a New York - In the Heights (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sound_of_Metal_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/480332.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sound of Metal (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sparkle_La_luce_del_successo_2012">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/283224.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sparkle - La luce del successo (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Spettacolo_di_varietà_1953">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/535111.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Spettacolo di varietà (1953)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Spice_Girls_Il_film_1997">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/275819.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Spice Girls - Il film (1997)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Stasera_mi_butto_1967">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/283225.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Stasera mi butto (1967)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Stepping_Dalla_Strada_Al_Palcoscenico">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215816.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Stepping - Dalla Strada Al Palcoscenico</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Stepping_2_La_strada_del_successo_2010">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/549704.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Stepping 2 - La strada del successo (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Straight_Outta_Compton">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/227563.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Straight Outta Compton</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="StreetDance_2">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/111277.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>StreetDance 2 -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="StreetDance_3D_2010">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/387533.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>StreetDance 3D (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ten_thousand_saints_2015">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/304745.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ten thousand saints (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Blues_Brothers_I_fratelli_Blues_1980">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/76197.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Blues Brothers - I fratelli Blues (1980)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Doors_1991">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/87394.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Doors (1991)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Greatest_Showman">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/75475.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Greatest Showman</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Identical_2014">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/283226.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Identical (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Last_Supper">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/112543.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Last Supper -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Latin_Dream">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/71987.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Latin Dream</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Rocker_Il_Batterista_Nudo">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/212762.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Rocker - Il Batterista Nudo</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Rocky_Horror_Picture_Show_1975_SUB_ITA">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/533179.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Rocky Horror Picture Show (1975) SUB ITA</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Song_Remains_the_Same_1976">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/274735.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Song Remains the Same (1976)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="This_Is_Måneskin_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/267560.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>This Is Måneskin (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tina_What_s_Love_Got_to_Do_with_It_1993">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/340061.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tina - What's Love Got to Do with It (1993)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tutti_Insieme_Appassionatamente">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/113960.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tutti Insieme Appassionatamente</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tutti_per_uno_1964">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/274750.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tutti per uno (1964)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Una_canzone_per_mio_padre_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/310138.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Una canzone per mio padre (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Una_lacrima_sul_viso_1964">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/269708.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Una lacrima sul viso (1964)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_americano_a_Parigi_1951">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/274751.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un americano a Parigi (1951)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Urlatori_alla_sbarra_1960">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/268191.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Urlatori alla sbarra (1960)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Victor_Victoria_1982">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/540426.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Victor Victoria (1982)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Vite_da_popstar_2016">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/296587.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Vite da popstar (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Voglio_danzar_con_te_1937">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/535546.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Voglio danzar con te (1937)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="We_Are_Your_Friends_2015">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/531133.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>We Are Your Friends (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="West_Side_Story_1961">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/274752.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>West Side Story (1961)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Whitney_Una_voce_diventata_leggenda_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/455228.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Whitney - Una voce diventata leggenda (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Zum_Zum_Zum_La_canzone_che_mi_passa_per_la_testa_1968">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/274753.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Zum Zum Zum - La canzone che mi passa per la testa (1968)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Zum_Zum_Zum_n_2_Sarà_capitato_anche_a_voi_1969">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/274754.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Zum Zum Zum n.2 - Sarà capitato anche a voi (1969)</p>
+      </a>
+    </div>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>

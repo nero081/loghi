@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>◈ Film Aldo Fabrizi ◈</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  max-width: 90vw;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
+
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
+
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
+
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
+
+.canale a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+  text-decoration: none;
+}
+
+
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
+
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
+  </style>
+</head>
+<body>
+  <h1>◈ Film Aldo Fabrizi ◈</h1>
+  <div class="griglia">
+    
+    <div class="canale no-logo" id="Siamo_tutti_inquilini_1953">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/608350.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Siamo tutti inquilini (1953)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="7_monaci_d_oro_1966">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/424989.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>7 monaci d'oro (1966)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Altri_tempi_Zibaldone_n_1_1952">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/435735.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Altri tempi - Zibaldone n. 1 (1952)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Antonio_di_Padova_1949">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/435736.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Antonio di Padova (1949)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Avanti_c_è_posto_1942">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/435737.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Avanti c'è posto... (1942)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Benvenuto_Reverendo_1950">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/435738.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Benvenuto Reverendo! (1950)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="C_eravamo_Tanto_Amati">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/195791.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>C'eravamo Tanto Amati</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Campo_de_fiori_1943">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/435739.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Campo de' fiori (1943)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cose_da_pazzi_1954">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/435740.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cose da pazzi (1954)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Donatella">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/216491.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Donatella</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Emigrantes_1948">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/435741.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Emigrantes (1948)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fra_Manisco_cerca_guai_1961">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/435743.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fra' Manisco cerca guai (1961)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Francesco_giullare_di_Dio_1950">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/435742.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Francesco, giullare di Dio (1950)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Gerarchi_si_muore_1961">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/435744.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Gerarchi si muore (1961)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Giovanni_Senzapensieri_1986">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/435745.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Giovanni Senzapensieri (1986)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Gli_italiani_e_le_donne_1962">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/435746.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Gli italiani e le donne (1962)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hanno_rubato_un_tram_1954">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/435747.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Hanno rubato un tram (1954)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_4_monaci_1962">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/425271.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I 4 monaci (1962)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_4_tassisti_1963">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/435748.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I 4 tassisti (1963)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_due_compari_1955">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/425272.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I due compari (1955)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_delitto_di_Giovanni_Episcopo_1947">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/435749.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il delitto di Giovanni Episcopo (1947)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_ginecologo_della_mutua_1977">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/435750.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il ginecologo della mutua (1977)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_maestro_1957">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/392489.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il maestro (1957)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_pappagalli_1955">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/424995.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I pappagalli (1955)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_prepotenti_1958">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/435751.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I prepotenti (1958)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_età_dell_amore_1953">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/435752.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'età dell'amore (1953)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Famiglia_Passaguai">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/214106.avi" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Famiglia Passaguai</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Voce_Del_Silenzio">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/137519.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Voce Del Silenzio ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Le_Meraviglie_di_Aladino_1961">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/435753.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Le Meraviglie di Aladino (1961)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Made_in_Italy_1965">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/435754.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Made in Italy (1965)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mio_figlio_professore_1946">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/435755.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mio figlio professore (1946)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mi_permette_babbo_1956">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/435756.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mi permette babbo! (1956)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Nerone">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201395.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Nerone</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Papà_diventa_mamma_1952">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/435757.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Papà diventa mamma (1952)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Parigi_è_sempre_Parigi_1951">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/435758.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Parigi è sempre Parigi (1951)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Prepotenti_più_di_prima_1959">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/435759.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Prepotenti più di prima (1959)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Prima_comunione_1950">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/435760.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Prima comunione (1950)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Roma_città_aperta_1945">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/423409.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Roma città aperta (1945)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Signori_in_carrozza_1951">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/435761.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Signori, in carrozza! (1951)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tombolo_paradiso_nero_1947">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/435762.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tombolo, paradiso nero (1947)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tre_passi_a_nord_1951">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/435763.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tre passi a nord (1951)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_militare_e_mezzo_1960">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/435764.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un militare e mezzo (1960)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Vita_da_cani_1950">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/435765.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Vita da cani (1950)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Vivere_in_pace_1947">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/435766.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Vivere in pace (1947)</p>
+      </a>
+    </div>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>

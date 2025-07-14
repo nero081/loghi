@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>◈ Film Anna Magnani ◈</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  max-width: 90vw;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
+
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
+
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
+
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
+
+.canale a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+  text-decoration: none;
+}
+
+
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
+
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
+  </style>
+</head>
+<body>
+  <h1>◈ Film Anna Magnani ◈</h1>
+  <div class="griglia">
+    
+    <div class="canale no-logo" id="Correva_l_anno_di_grazia_1870_1972">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/243323.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>...Correva l'anno di grazia 1870 (1972)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="1943_Un_incontro_1971">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/243303.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>1943: Un incontro (1971)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Abbasso_la_miseria_1945">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/243304.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Abbasso la miseria! (1945)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Abbasso_la_ricchezza_1946">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/243306.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Abbasso la ricchezza! (1946)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Assunta_Spina_1948">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/243310.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Assunta Spina (1948)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bellissima_1951">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/243313.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bellissima (1951)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Camicie_rosse_1952">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/243314.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Camicie rosse (1952)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Campo_de_fiori_1943">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/243301.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Campo de' fiori (1943)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cavalleria_1936">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/243298.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cavalleria (1936)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_bandito_1946">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/243307.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il bandito (1946)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Io_sono_Anna_Magnani_1980">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/243326.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Io sono Anna Magnani (1980)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_automobile_1971">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/243324.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'automobile (1971)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_onorevole_Angelina_1947">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/243309.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'onorevole Angelina (1947)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_ultima_carrozzella_1943">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/243302.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'ultima carrozzella (1943)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_carrozza_d_oro_1952">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/243315.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La carrozza d'oro (1952)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_cieca_di_Sorrento_1934">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/243295.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La cieca di Sorrento (1934)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_guerra_dei_vulcani_2012">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/243327.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La guerra dei vulcani (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Passione_di_Anna_Magnani_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/243328.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Passione di Anna Magnani (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_principessa_Tarakanova_1938">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/243299.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La principessa Tarakanova (1938)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_rosa_tatuata_1955">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/243316.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La rosa tatuata (1955)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_sciantosa_1971">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/243322.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La sciantosa (1971)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lo_sconosciuto_di_San_Marino_1948">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/243308.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lo sconosciuto di San Marino (1948)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mamma_Roma_1962">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/243321.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mamma Roma (1962)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Molti_sogni_per_le_strade_1951">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/243311.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Molti sogni per le strade (1951)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Nella_città_l_inferno_1959">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/243318.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Nella città l'inferno (1959)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Pelle_di_serpente_1960">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/243319.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Pelle di serpente (1960)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Quei_due_1935">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/243297.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Quei due (1935)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Risate_di_gioia_1960">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/243320.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Risate di gioia (1960)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Suor_Letizia_1956">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/243317.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Suor Letizia (1956)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tempo_massimo_1934">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/243296.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tempo massimo (1934)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Teresa_Venerdì_1941">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/243300.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Teresa Venerdì (1941)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_sorriso_uno_schiaffo_un_bacio_in_bocca_1975">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/243325.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un sorriso, uno schiaffo, un bacio in bocca (1975)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Vulcano_1950">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/243312.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Vulcano (1950)</p>
+      </a>
+    </div>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>

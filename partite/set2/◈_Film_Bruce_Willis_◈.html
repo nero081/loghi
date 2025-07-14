@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>◈ Film Bruce Willis ◈</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  max-width: 90vw;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
+
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
+
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
+
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
+
+.canale a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+  text-decoration: none;
+}
+
+
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
+
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
+  </style>
+</head>
+<body>
+  <h1>◈ Film Bruce Willis ◈</h1>
+  <div class="griglia">
+    
+    <div class="canale no-logo" id="10_Minutes_Gone_10_Minuti_Per_Morire">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215344.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>10 Minutes Gone - 10 Minuti Per Morire</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="58_Minuti_Per_Morire_Die_Harder">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215287.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>58 Minuti Per Morire - Die Harder</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Acts_Of_Violence">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215340.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Acts Of Violence</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alpha_Dog">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215315.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alpha Dog</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ancora_Vivo">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215298.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ancora Vivo</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Appuntamento_Al_Buio">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215286.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Appuntamento Al Buio</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Armageddon_Giudizio_Finale">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215302.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Armageddon - Giudizio Finale</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Attacco_Al_Potere">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215303.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Attacco Al Potere</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bandits">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215309.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bandits</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Billy_Bathgate_A_Scuola_Di_Gangster">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215289.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Billy Bathgate - A Scuola Di Gangster</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="C_era_Una_Volta_A_Los_Angeles">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215338.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>C'era Una Volta A Los Angeles</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Catch_44">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215324.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Catch  44</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Codice_Mercury">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215304.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Codice Mercury</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Corrective_Measures_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/517945.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Corrective Measures (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Detective_Knight_Fine_dei_giochi_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/475237.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Detective Knight: Fine dei giochi (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Die_Hard_Duri_A_Morire">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215296.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Die Hard - Duri A Morire</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Die_Hard_Un_Buon_Giorno_Per_Morire">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215330.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Die Hard - Un Buon Giorno Per Morire</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Die_Hard_Vivere_O_Morire">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215318.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Die Hard - Vivere O Morire</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Extraction">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215333.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Extraction</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="FBI_Protezione_Testimoni">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215307.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>FBI: Protezione Testimoni</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="FBI_Protezione_Testimoni_2">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215312.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>FBI: Protezione Testimoni 2</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fire_With_Fire">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215350.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fire With Fire</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="First_Kill">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215339.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>First Kill</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Four_Rooms">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215297.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Four Rooms</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fuori_dalla_legge_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/472962.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fuori dalla legge (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Gasoline_Alley_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390433.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Gasoline Alley (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="G_I_Joe_La_Vendetta">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215331.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>G I  Joe - La Vendetta</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Glass">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215345.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Glass</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Grindhouse_Planet_Terror">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215319.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Grindhouse - Planet Terror</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hard_Kill">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215348.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Hard Kill</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hostage">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215313.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Hostage</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hudson_Hawk_Il_Mago_Del_Furto">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215290.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Hudson Hawk - Il Mago Del Furto</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Colore_Della_Notte">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215295.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Colore Della Notte</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Falò_Delle_Vanità">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215288.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Falò Delle Vanità</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Giustiziere_Della_Notte_Death_Wish">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215341.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Giustiziere Della Notte - Death Wish</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Mondo_Dei_Replicanti">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215321.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Mondo Dei Replicanti</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Quinto_Elemento">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215300.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Quinto Elemento</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_Mercenari_The_Expendables">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215322.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I Mercenari - The Expendables</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_Mercenari_2">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215325.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I Mercenari 2</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Impatto_Imminente">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215294.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Impatto Imminente</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_Predoni">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215336.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I Predoni</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_esercito_Delle_12_Scimmie">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215299.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'esercito Delle 12 Scimmie</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_ombra_Del_Testimone">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215291.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'ombra Del Testimone</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_ultima_Alba">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215311.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'ultima Alba</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_ultimo_Boy_Scout_Missione_Sopravvivere">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215292.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'ultimo Boy Scout - Missione Sopravvivere</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Colazione_Dei_Campioni">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215305.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Colazione Dei Campioni</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Fredda_Luce_Del_Giorno">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215326.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Fredda Luce Del Giorno</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Morte_Ti_Fa_Bella">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215293.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Morte Ti Fa Bella</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Looper_In_Fuga_Dal_Passato">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215327.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Looper - In Fuga Dal Passato</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Midnight_in_the_Switchgrass_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/289045.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Midnight in the Switchgrass (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Moonrise_Kingdom_Una_Fuga_D_amore">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215328.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Moonrise Kingdom - Una Fuga D'amore</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Motherless_Brooklyn_I_Segreti_Di_Una_Città">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215346.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Motherless Brooklyn - I Segreti Di Una Città</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Red">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215323.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Red</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Red_2">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215332.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Red 2</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Reprisal">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215342.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Reprisal</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Resa_Dei_Conti_Precious_Cargo">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215337.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Resa Dei Conti - Precious Cargo</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Rock_The_Kasbah">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215334.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Rock The Kasbah</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sin_City">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215314.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sin City</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Slevin_Patto_Criminale">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215316.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Slevin - Patto Criminale</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Solo_2_Ore">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215317.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Solo 2 Ore</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sotto_Corte_Marziale">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215310.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sotto Corte Marziale</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Survive_The_Night">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215349.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Survive The Night</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Assassination_Al_Centro_Del_Complotto">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215320.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Assassination - Al Centro Del Complotto</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Bombing_La_Battaglia_Di_Chongqing">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215343.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Bombing - La Battaglia Di Chongqing</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Jackal">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215301.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Jackal</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Sixth_Sense_Il_Sesto_Senso">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215306.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Sixth Sense - Il Sesto Senso</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Trauma_Center_Caccia_Al_Testimone">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215347.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Trauma Center - Caccia Al Testimone</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Una_Ragazza_A_Las_Vegas">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215329.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Una Ragazza A Las Vegas</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Unbreakable_Il_Predestinato">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215308.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Unbreakable - Il Predestinato</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Vice">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215335.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Vice</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="White_Elephant_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/475994.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>White Elephant (2022)</p>
+      </a>
+    </div>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>

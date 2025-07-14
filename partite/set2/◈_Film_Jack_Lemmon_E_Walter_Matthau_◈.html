@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>◈ Film Jack Lemmon E Walter Matthau ◈</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  max-width: 90vw;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
+
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
+
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
+
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
+
+.canale a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+  text-decoration: none;
+}
+
+
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
+
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
+  </style>
+</head>
+<body>
+  <h1>◈ Film Jack Lemmon E Walter Matthau ◈</h1>
+  <div class="griglia">
+    
+    <div class="canale no-logo" id="Airport_77_1977">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290120.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Airport '77 (1977)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Airport_1970">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290104.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Airport (1970)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Americani_1992">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290115.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Americani (1992)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="America_oggi_1993">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290116.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>America oggi (1993)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="A_qualcuno_piace_caldo_1959">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290091.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>A qualcuno piace caldo (1959)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Attenti_alle_vedove_1959">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290092.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Attenti alle vedove (1959)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Che_cosa_è_successo_tra_mio_padre_e_tua_madre_1972">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290106.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Che cosa è successo tra mio padre e tua madre? (1972)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Come_uccidere_vostra_moglie_1965">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290100.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Come uccidere vostra moglie (1965)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Così_è_la_vita_1986">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290113.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Così è la vita! (1986)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cowboy_1958">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290089.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cowboy (1958)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Due_irresistibili_brontoloni_1993">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290117.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Due irresistibili brontoloni (1993)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fuga_dalla_Casa_Bianca_1996">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290119.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fuga dalla Casa Bianca (1996)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Gli_impenitenti_1997">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290121.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Gli impenitenti (1997)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_giorni_del_vino_e_delle_rose_1962">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290095.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I giorni del vino e delle rose (1962)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_prigioniero_della_seconda_strada_1975">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290109.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il prigioniero della seconda strada (1975)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Irma_la_dolce_1963">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290097.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Irma la dolce (1963)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="JFK_Un_caso_ancora_aperto_1991">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290114.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>JFK - Un caso ancora aperto (1991)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_affittacamere_1962">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290096.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'affittacamere (1962)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_appartamento_1960">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290093.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'appartamento (1960)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_grande_corsa_1965">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290101.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La grande corsa (1965)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_leggenda_di_Bagger_Vance_2000">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290124.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La leggenda di Bagger Vance (2000)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_nave_matta_di_Mister_Roberts_1955">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290087.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La nave matta di Mister Roberts (1955)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_nave_più_scassata_dell_esercito_1960">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290094.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La nave più scassata dell'esercito (1960)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_parola_ai_giurati_1997">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290122.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La parola ai giurati (1997)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_ragazza_del_secolo_1954">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290085.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La ragazza del secolo (1954)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_strana_coppia_1968">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290103.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La strana coppia (1968)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_strana_coppia_2_1998">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290123.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La strana coppia 2 (1998)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Maccheroni_1985">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290112.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Maccheroni (1985)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Missing_Scomparso_1982">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290111.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Missing - Scomparso (1982)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Non_per_soldi_ma_per_denaro_1966">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290102.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Non per soldi... ma per denaro (1966)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Off_Limits_Proibito_ai_militari_1957">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290088.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Off Limits - Proibito ai militari (1957)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Phffft_e_l_amore_si_sgonfia_1954">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290086.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Phffft... e l'amore si sgonfia (1954)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Prima_pagina_1974">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290108.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Prima pagina (1974)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Salvate_la_tigre_1973">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290107.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Salvate la tigre (1973)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Scusa_me_lo_presti_tuo_marito_1964">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290099.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Scusa, me lo presti tuo marito? (1964)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sindrome_cinese_1979">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290110.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sindrome cinese (1979)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sotto_l_albero_yum_yum_1963">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290098.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sotto l'albero yum yum (1963)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="That_s_Amore_Due_improbabili_seduttori_1995">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290118.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>That's Amore - Due improbabili seduttori (1995)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Una_strega_in_paradiso_1958">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290090.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Una strega in paradiso (1958)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_provinciale_a_New_York_1970">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290105.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un provinciale a New York (1970)</p>
+      </a>
+    </div>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>

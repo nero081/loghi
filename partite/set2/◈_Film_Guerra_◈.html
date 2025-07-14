@@ -1,0 +1,1758 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>◈ Film Guerra ◈</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  max-width: 90vw;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
+
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
+
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
+
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
+
+.canale a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+  text-decoration: none;
+}
+
+
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
+
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
+  </style>
+</head>
+<body>
+  <h1>◈ Film Guerra ◈</h1>
+  <div class="griglia">
+    
+    <div class="canale no-logo" id="Le_due_vie_del_destino_The_Railway_Man_2013">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/646100.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Le due vie del destino - The Railway Man (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Suite_francese_2015">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/645375.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Suite francese (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Inno_di_battaglia_1957">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/642209.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Inno di battaglia (1957)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_isola_in_via_degli_Uccelli_1997">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/630974.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'isola in via degli Uccelli (1997)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Stalingrad_2013">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/629178.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Stalingrad (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Guerreros_2002">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/627919.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Guerreros (2002)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="U_571_2000">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/623323.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>U-571 (2000)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hamburger_Hill_Collina_937_1987">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/622323.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Hamburger Hill - Collina 937 (1987)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Quell_ultimo_ponte_1977">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/621048.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Quell'ultimo ponte (1977)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Prima_dell_alba_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/620687.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Prima dell'alba (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Finchè_dura_la_tempesta_1963">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/611070.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Finchè dura la tempesta (1963)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Unnamed">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154163.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Unnamed</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/93093.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>-</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="12_soldiers_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/78291.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>12 soldiers (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="38_parallelo_missione_compiuta_1959">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/540150.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>38° parallelo: missione compiuta (1959)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="300">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/213616.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>300</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="800_eroi_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291740.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>800 eroi (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="1917_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/273398.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>1917 (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="1918_I_giorni_del_coraggio_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/243592.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>1918 – I giorni del coraggio (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Adam_Resurrected_2008">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/272336.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Adam Resurrected (2008)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Affondate_la_Bismarck_1960">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/459389.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Affondate la Bismarck! (1960)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="AK_47_Kalashnikov">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/236650.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>AK-47 - Kalashnikov</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alexander">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/207397.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alexander</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Al_soldo_di_tutte_le_bandiere_1970">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/341436.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Al soldo di tutte le bandiere (1970)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="American_Sniper_2014">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/84068.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>American Sniper (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Apocalypse_Now_1979">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/65210.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Apocalypse Now (1979)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="A_Private_War_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/83046.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>A Private War (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Arrivederci_Ragazzi">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/219277.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Arrivederci, Ragazzi</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ayla">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/207114.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ayla</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bastardi_senza_gloria_2009">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/65150.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bastardi senza gloria (2009)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Benvenuti_a_Sarajevo_1997">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/305355.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Benvenuti a Sarajevo (1997)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Billy_Lynn_Un_Giorno_Da_Eroe">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/74954.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Billy Lynn - Un Giorno Da Eroe</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Birra_ghiacciata_ad_Alessandria_1958">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/475497.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Birra ghiacciata ad Alessandria (1958)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Brothers_2009">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/296285.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Brothers (2009)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Caccia_al_12_uomo_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/83981.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Caccia al 12° uomo (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Campo_19_2008">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/553295.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Campo 19 (2008)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Castello_Di_Sabbia_Ta_En">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/71149.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Castello Di Sabbia Ta En</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Centurion">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/65165.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Centurion</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cielo_di_fuoco_1949">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/326979.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cielo di fuoco (1949)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cleopatra">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/142917.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cleopatra ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Conspiracy_Soluzione_finale_2001">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/393278.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Conspiracy - Soluzione finale (2001)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Countdown_Dimensione_zero_1980">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/391356.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Countdown - Dimensione zero (1980)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cristo_si_è_fermato_a_Eboli_1979">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/286117.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cristo si è fermato a Eboli (1979)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Danger_Close_La_Battaglia_Di_Long_Tan">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/151201.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Danger Close - La Battaglia Di Long Tan</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Devotion_Sulle_ali_dell_onore_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/467528.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Devotion - Sulle ali dell'onore (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Diavoli_alati_1951">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/535849.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Diavoli alati (1951)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Dove_Osano_Le_Aquile">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/142414.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Dove Osano Le Aquile ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Era_Mio_Figlio">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/182154.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Era Mio Figlio</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Flags_Of_Our_Fathers">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/71916.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Flags Of Our Fathers</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fuga_da_Sobibor_1987">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/492280.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fuga da Sobibor (1987)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Full_Metal_Jacket">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/89581.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Full Metal Jacket</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fury">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/104217.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fury</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Gli_Eroi_Del_Pacifico">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/207115.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Gli Eroi Del Pacifico</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Gli_eroi_di_Telemark_1965">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/391731.avi" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Gli eroi di Telemark (1965)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Gli_ultimi_10_giorni_di_Hitler_1973">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/288641.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Gli ultimi 10 giorni di Hitler (1973)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Gli_ultimi_eroi_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/511677.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Gli ultimi eroi (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Good_Morning_Vietnam">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/89466.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Good Morning, Vietnam</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Greyhound_Il_Nemico_Invisibile">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/180477.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Greyhound: Il Nemico Invisibile</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Guernica_Cronaca_di_una_strage_2016">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/71079.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Guernica: Cronaca di una strage (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hurricane_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/84353.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Hurricane (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_4_dell_oca_selvaggia_1978">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/511577.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I 4 dell'oca selvaggia (1978)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_Cannoni_Di_Navarone">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/142413.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I Cannoni Di Navarone ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_cannoni_di_Navarone_1961">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291386.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I cannoni di Navarone (1961)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_dannati_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/548380.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I dannati (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_barone_rosso_1971">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/427242.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il barone rosso (1971)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Battaglione_Perduto">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/214104.avi" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Battaglione Perduto</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_cacciatore">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/89465.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il cacciatore</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_destino_di_un_soldato_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/513134.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il destino di un soldato (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Disertore">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/218110.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Disertore</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Dottor_Zivago">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/112768.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Dottor Zivago</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_giardino_dei_Finzi_Contini_1970">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/289739.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il giardino dei Finzi Contini (1970)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_giorno_più_lungo_1962">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/254978.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il giorno più lungo (1962)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_grande_uno_rosso_1980">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/392019.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il grande uno rosso (1980)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_ministero_della_guerra_sporca_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/546577.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il ministero della guerra sporca (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Nemico_Alle_Porte">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/71915.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Nemico Alle Porte</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_ponte_di_Waterloo_1940">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/445155.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il ponte di Waterloo (1940)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Ponte_Sul_Fiume_Kwai">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/177619.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Ponte Sul Fiume Kwai</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_segreto_di_Santa_Vittoria_1969">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/341441.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il segreto di Santa Vittoria (1969)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_sergente_York_1941">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/475511.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il sergente York (1941)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_treno_crociato_1943">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/536584.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il treno crociato (1943)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_vento_che_accarezza_l_erba_2006">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/289813.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il vento che accarezza l'erba (2006)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_mastini_della_guerra_1980">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/341442.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I mastini della guerra (1980)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="In_amore_e_in_guerra_1958">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/429646.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>In amore e in guerra (1958)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Io_sono_tuo_padre_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/519155.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Io sono tuo padre (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_ragazzi_di_Tuskegee_1995">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/475469.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I ragazzi di Tuskegee (1995)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Joyeux_Noël_una_verità_dimenticata_dalla_storia_2005">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/533039.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Joyeux Noël: una verità dimenticata dalla storia (2005)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="K_19_2002">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/84571.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>K-19 (2002)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Kilo_Due_Bravo_Ad_Un_Passo_Dalla_Morte">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154689.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Kilo Due Bravo - Ad Un Passo Dalla Morte</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_agnese_va_a_morire_1976">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/448954.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'agnese va a morire (1976)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_arma_dell_inganno_Operazione_Mincemeat_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/398153.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'arma dell'inganno - Operazione Mincemeat (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_inferno_è_per_gli_eroi_1962">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/403982.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'inferno è per gli eroi (1962)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_uomo_dal_cuore_di_ferro_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/84892.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'uomo dal cuore di ferro (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_urlo_della_battaglia_1962">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/541073.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'urlo della battaglia (1962)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_battaglia_dei_giganti_1965">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/340556.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La battaglia dei giganti (1965)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_battaglia_dell_ultimo_panzer_1969">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/533230.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La battaglia dell'ultimo panzer (1969)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Battaglia_Di_Hacksaw_Ridge">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/92036.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Battaglia Di Hacksaw Ridge -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Battaglia_Di_Jadotville">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/65251.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Battaglia Di Jadotville</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_battaglia_dimenticata_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291742.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La battaglia dimenticata (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_battaglia_di_Midway_1976">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/341444.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La battaglia di Midway (1976)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_battaglia_di_Rio_della_Plata_1956">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/446391.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La battaglia di Rio della Plata (1956)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_brigata_del_diavolo_1968">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/475475.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La brigata del diavolo (1968)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_caduta_Gli_ultimi_giorni_di_Hitler_2004">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/288642.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La caduta - Gli ultimi giorni di Hitler (2004)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_grande_illusione_1937">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/533818.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La grande illusione (1937)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lancaster_Skies">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/121062.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lancaster Skies ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Land_of_Mine_Sotto_la_sabbia_2015">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/76782.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Land of Mine - Sotto la sabbia (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_notte_dell_aquila_1976">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/341445.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La notte dell'aquila (1976)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_seconda_via_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/519153.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La seconda via (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Sottile_Linea_Rossa">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215285.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Sottile Linea Rossa</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_tregua_1997">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/268662.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La tregua (1997)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_tua_pelle_o_la_mia_1965">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/341443.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La tua pelle o la mia (1965)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lawrence_D_Arabia">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/173183.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lawrence D'Arabia</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Le_quattro_giornate_di_Napoli_1962">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/286332.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Le quattro giornate di Napoli (1962)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Le_spie_di_Churchill_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/342503.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Le spie di Churchill (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lezioni_di_persiano">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/228891.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lezioni di persiano</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lo_sbarco_di_Anzio_1968">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/481665.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lo sbarco di Anzio (1968)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Macbeth_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/340718.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Macbeth (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mare_caldo_1958">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/548006.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mare caldo (1958)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Memphis_Belle_1990">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/269852.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Memphis Belle (1990)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Michael_Collins_1996">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/286595.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Michael Collins (1996)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Miracolo_a_Sant_Anna_2008">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/269853.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Miracolo a Sant'Anna (2008)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Monuments_Men">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/172350.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Monuments Men</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Orizzonti_di_gloria_1957">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390435.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Orizzonti di gloria (1957)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Patton_generale_d_acciaio_1970">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/305219.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Patton, generale d'acciaio (1970)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Paura_e_desiderio_1953">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/343861.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Paura e desiderio (1953)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Pearl_Harbor">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/74946.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Pearl Harbor</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Pianura_rossa_1954">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/480158.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Pianura rossa (1954)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Platoon">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/89580.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Platoon</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Quando_le_mani_si_sfiorano_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291927.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Quando le mani si sfiorano (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Quo_Vadis_Aida_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/341082.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Quo Vadis, Aida? (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Red_Ghost_The_nazi_hunter_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/420672.avi" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Red Ghost - The nazi hunter (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Red_Snake">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/151188.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Red Snake</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Resistance_La_battaglia_di_Sebastopoli_2015">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/65279.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Resistance - La battaglia di Sebastopoli (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Resistance_La_battaglia_di_Sebastopoli_2015">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/526166.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Resistance - La battaglia di Sebastopoli (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Resistance_La_voce_del_silenzio_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/151203.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Resistance - La voce del silenzio (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Rogue_Warfare_1">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154685.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Rogue Warfare 1</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Rogue_Warfare_2_The_Hunt">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154686.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Rogue Warfare 2 : The Hunt</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Rogue_Warfare_3_Death_Of_A_Nation">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154687.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Rogue Warfare 3 : Death Of A Nation</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Se_diserti_ti_sposo_2013">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/71157.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Se diserti ti sposo (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Senza_destino_2005">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/394516.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Senza destino (2005)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sergente_Rex_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/76455.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sergente Rex (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sobibor_La_Grande_Fuga">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/92781.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sobibor - La Grande Fuga -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Specchio_per_le_allodole_1979">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/490368.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Specchio per le allodole (1979)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Spiaggia_rossa_1967">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/448669.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Spiaggia rossa (1967)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Squadrone_303_La_grande_battaglia_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/253591.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Squadrone 303 - La grande battaglia (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Stalag_17_1953">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/392895.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Stalag 17 (1953)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Stalingrad_1993">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/454824.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Stalingrad (1993)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Stalingrad_1993">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/478350.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Stalingrad (1993)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Storia_di_un_soldato_1984">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/243606.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Storia di un soldato (1984)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="T_34_Eroi_d_acciaio_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/289391.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>T-34 - Eroi d'acciaio (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Taking_Chance_Il_Ritorno_Di_Un_Eroe">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/205778.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Taking Chance - Il Ritorno Di Un Eroe</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Terra_e_Libertà_1995">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/289817.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Terra e Libertà (1995)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Balkan_Line">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/237263.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Balkan Line</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Bombing_La_battaglia_di_Chongqing_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/78743.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Bombing - La battaglia di Chongqing (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Fox_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/519008.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Fox (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Great_Raid_Un_pugno_di_eroi_2005">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/536974.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Great Raid - Un pugno di eroi (2005)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Great_War">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/215257.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Great War</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Hurt_Locker">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/218289.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Hurt Locker</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Rifleman_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/267708.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Rifleman (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tigerland_2000">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/273481.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tigerland (2000)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tora_Tora_Tora_1970">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/310704.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tora! Tora! Tora! (1970)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="U_Boot_96_1981">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/369650.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>U-Boot 96 (1981)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Una_Questione_Privata">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/75170.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Una Questione Privata</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_giorno_da_leoni_1961">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/341446.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un giorno da leoni (1961)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_posto_all_inferno_1969">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/351689.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un posto all'inferno (1969)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_uomo_ordinario_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/389072.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un uomo ordinario (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_ombra_negli_occhi_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/374475.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un’ombra negli occhi (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Urla_del_silenzio_1984">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/475531.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Urla del silenzio (1984)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Uss_Indianapolis_Ita_En">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/71984.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Uss Indianapolis Ita En</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Vittorie_perdute_1978">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/341447.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Vittorie perdute (1978)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Wunderland_L_Ultima_Offensiva_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/305951.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Wunderland - L'Ultima Offensiva (2018)</p>
+      </a>
+    </div>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>

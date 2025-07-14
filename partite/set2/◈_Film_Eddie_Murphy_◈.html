@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>◈ Film Eddie Murphy ◈</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  max-width: 90vw;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
+
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
+
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
+
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
+
+.canale a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+  text-decoration: none;
+}
+
+
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
+
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
+  </style>
+</head>
+<body>
+  <h1>◈ Film Eddie Murphy ◈</h1>
+  <div class="griglia">
+    
+    <div class="canale no-logo" id="48_Ore">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/119377.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>48 Ore ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ancora_48_Ore">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/119378.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ancora 48 Ore ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Beverly_Hills_Cop_Un_Piedipiatti_A_Beverly_Hills">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/119379.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Beverly Hills Cop - Un Piedipiatti A Beverly Hills ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Beverly_Hills_Cop_II_Un_Piedipiatti_A_Beverly_Hills_II">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/119380.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Beverly Hills Cop II - Un Piedipiatti A Beverly Hills II ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Beverly_Hills_Cop_III_Un_Piedipiatti_A_Beverly_Hills_III">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/119381.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Beverly Hills Cop III - Un Piedipiatti A Beverly Hills III ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bowfinger">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/119382.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bowfinger ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Dreamgirls">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/119383.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Dreamgirls ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Harlem_Nights">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/119384.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Harlem Nights ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Bambino_D_oro">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/119385.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Bambino D'oro ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_distinto_gentiluomo_1992">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/445149.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il distinto gentiluomo (1992)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Dottor_Dolittle">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/119386.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Dottor Dolittle ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Dottor_Dolittle_2">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/119387.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Dottor Dolittle 2 ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Genio">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/119388.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Genio ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Principe_Cerca_Moglie">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/119389.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Principe Cerca Moglie ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Principe_Delle_Donne">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/119390.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Principe Delle Donne ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Professore_Matto">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/119391.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Professore Matto ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Immagina_Che">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/119392.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Immagina Che ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Casa_Dei_Fantasmi">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/119393.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Casa Dei Fantasmi</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Famiglia_Del_Professore_Matto">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/119394.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Famiglia Del Professore Matto ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Le_Spie">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/119395.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Le Spie ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Life">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/119396.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Life ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Norbit">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/182902.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Norbit</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Nudo_E_Crudo">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/119397.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Nudo E Crudo ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Piacere_Dave">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/119398.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Piacere Dave ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Pluto_Nash">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/119399.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Pluto Nash ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Showtime">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/119400.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Showtime ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tower_Heist_Colpo_Ad_Alto_Livello">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/119401.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tower Heist - Colpo Ad Alto Livello ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Uno_Sbirro_Tuttofare">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/119402.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Uno Sbirro Tuttofare ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Vampiro_a_Brooklyn_1995">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/473226.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Vampiro a Brooklyn (1995)</p>
+      </a>
+    </div>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>

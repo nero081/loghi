@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>◈ Film Charles Bronson ◈</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  max-width: 90vw;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
+
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
+
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
+
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
+
+.canale a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+  text-decoration: none;
+}
+
+
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
+
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
+  </style>
+</head>
+<body>
+  <h1>◈ Film Charles Bronson ◈</h1>
+  <div class="griglia">
+    
+    <div class="canale no-logo" id="10_minuti_a_mezzanotte">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/239344.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>10 minuti a mezzanotte</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="10_secondi_per_fuggire">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/239696.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>10 secondi per fuggire</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Al_soldo_di_tutte_le_bandiere">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/239333.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Al soldo di tutte le bandiere</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="C_era_una_volta_il_West">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/239330.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>C'era una volta il West</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Caccia_selvaggia">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/239342.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Caccia selvaggia</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Candidato_all_obitorio_1976">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/546787.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Candidato all'obitorio (1976)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Chato">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/239335.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Chato</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Città_violenta">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/239334.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Città violenta</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_giustiziere_della_notte">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/239337.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il giustiziere della notte</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_giustiziere_della_notte_2">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/239343.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il giustiziere della notte 2</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_giustiziere_della_notte_3_1985">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/449844.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il giustiziere della notte 3 (1985)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_giustiziere_della_notte_4">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/239346.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il giustiziere della notte 4</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_giustiziere_della_notte_5">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/239348.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il giustiziere della notte 5</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_padrone_del_mondo">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/239328.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il padrone del mondo</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_magnifici_sette">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/239327.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I magnifici sette</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Io_non_credo_a_nessuno">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/239338.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Io non credo a nessuno</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Joe_Valachi_I_segreti_di_Cosa_Nostra_1972">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/289815.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Joe Valachi - I segreti di Cosa Nostra (1972)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_assassino_di_pietra_1973">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/533123.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'assassino di pietra (1973)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_eroe_della_strada">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/239339.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'eroe della strada</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_uomo_venuto_dalla_pioggia">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/239331.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'uomo venuto dalla pioggia</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lupo_solitario">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/239347.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lupo solitario</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Professione_assassino">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/239336.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Professione assassino</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Quella_sporca_dozzina">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/239329.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Quella sporca dozzina</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sfida_a_White_Buffalo">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/239340.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sfida a White Buffalo</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sospetti_in_famigllia">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/239349.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sospetti in famigllia</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Telefon">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/239341.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Telefon</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Twinky">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/239332.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Twinky</p>
+      </a>
+    </div>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>

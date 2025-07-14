@@ -1,0 +1,4521 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>◈ Film Fantascienza ◈</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  max-width: 90vw;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
+
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
+
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
+
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
+
+.canale a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+  text-decoration: none;
+}
+
+
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
+
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
+  </style>
+</head>
+<body>
+  <h1>◈ Film Fantascienza ◈</h1>
+  <div class="griglia">
+    
+    <div class="canale no-logo" id="Beyond_Re_Animator_2003">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/648356.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Beyond Re-Animator (2003)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cypher_2002">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/647027.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cypher (2002)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Conquest_1983">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/645408.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Conquest (1983)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cyborg_Conquest_2009">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/645409.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cyborg Conquest (2009)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Y2K_La_rivolta_digitale_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/644398.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Y2K: La rivolta digitale (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Godzilla_vs_Kong_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/643504.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Godzilla vs. Kong (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Rottweiler_2004">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/642322.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Rottweiler (2004)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Star_Trek_Section_31_2025">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/642147.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Star Trek: Section 31 (2025)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Machine_2013">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/637715.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Machine (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Invasion_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/632080.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Invasion (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_notte_della_cometa_1984">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/627475.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La notte della cometa (1984)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Immortal_Ad_Vitam_2004">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/627138.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Immortal Ad Vitam (2004)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_leggenda_di_Kaspar_Hauser_2013">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/626407.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La leggenda di Kaspar Hauser (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Star_Trek_Section_31_2025">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/625534.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Star Trek: Section 31 (2025)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Year_10_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/624792.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Year 10 (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Survive_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/624105.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Survive (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Daft_Punk_s_Electroma_2006">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/623049.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Daft Punk's Electroma (2006)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Terminator_Destino_oscuro_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/621451.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Terminator - Destino oscuro (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Stuff_Il_gelato_che_uccide_1985">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/613249.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Stuff - Il gelato che uccide (1985)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Moebius_1996">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/611318.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Moebius (1996)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Long_Distance_Senza_ossigeno_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/611073.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Long Distance - Senza ossigeno (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2030_Fuga_per_il_futuro_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/554212.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2030 Fuga per il futuro (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Assalto_alla_Terra_1954">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/554215.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Assalto alla Terra (1954)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Unnamed">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/177509.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Unnamed</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Dopo_La_Caduta_Di_New_York">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/193287.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>- Dopo La Caduta Di New York</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Fortezza">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/141485.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>- La Fortezza ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="6_Giorni_Sulla_Terra">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/176971.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>6 Giorni Sulla Terra</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="21_12_La_Profezia_Dei_Maya">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/177512.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>21-12- La Profezia Dei Maya</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="100_gradi_sotto_zero">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/230907.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>100 gradi sotto zero</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="400_Giorni_Simulazione_Spazio_Ita_En">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/71761.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>400 - Giorni Simulazione Spazio Ita En</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="400_Giorni_Simulazione_Spazio">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/194020.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>400 Giorni - Simulazione Spazio</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2001_Odissea_nello_spazio_1968">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/286313.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2001: Odissea nello spazio (1968)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2067_Battaglia_per_il_futuro_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/258001.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2067 - Battaglia per il futuro (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2307_Winter_s_Dream_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/76688.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2307 - Winter's Dream (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="3022_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/195508.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>3022 (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_Sopravvissuti">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/182911.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>: I Sopravvissuti</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="A_X_L_Un_amicizia_extraordinaria_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/445406.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>A-X-L - Un'amicizia extraordinaria (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="A_I_Intelligenza_Artificiale_2001">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/387681.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>A.I. - Intelligenza Artificiale (2001)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ad_Astra">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/90214.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ad Astra -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="After_Earth_Ita_En">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/65144.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>After Earth Ita En</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="After_Yang_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/441538.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>After Yang (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Age_of_Tomorrow">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/228274.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Age of Tomorrow</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ai_confini_della_realtà_Il_film_1983">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/549010.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ai confini della realtà - Il film (1983)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Air_I_custodi_del_risveglio_2015">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/266985.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Air - I custodi del risveglio (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="A_I_Rising_Il_Futuro_è_Adesso">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/89282.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>A I  Rising - Il Futuro è Adesso</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alba_d_acciaio_1987">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/342041.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alba d'acciaio (1987)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alien_Expedition">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/93497.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alien Expedition -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alien_Nation">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154450.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alien Nation</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Aliens_Vs_Predator_2">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/135975.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Aliens Vs  Predator 2 ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alien_Vs_Predator">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/135974.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alien Vs  Predator ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alita_Angelo_della_battaglia_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/86873.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alita - Angelo della battaglia (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Allegiant_2016">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/75869.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Allegiant (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Altered_Paura_dallo_spazio_profondo_2006">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/539490.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Altered - Paura dallo spazio profondo (2006)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Andron_The_Black_Labyrinth">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201037.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Andron - The Black Labyrinth</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Aniara_Rotta_Su_Marte">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201157.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Aniara - Rotta Su Marte</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Annientamento">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/75178.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Annientamento</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Anno_2000_La_corsa_della_morte_1975">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/342042.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Anno 2000 - La corsa della morte (1975)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Anon_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/85919.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Anon (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Another_Earth_2011">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/523859.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Another Earth (2011)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ant_Man_and_the_Wasp_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/78147.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ant-Man and the Wasp (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Apocalypse_Hell">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/230787.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Apocalypse - Hell</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Aporia_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/536581.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Aporia (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Archive">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/205705.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Archive</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Armageddon_Giudizio_finale_1998">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/65201.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Armageddon - Giudizio finale (1998)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Arma_Non_Convenzionale">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/177861.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Arma Non Convenzionale</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Arrival">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/71901.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Arrival</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Arrival_2016">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/428666.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Arrival (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Arès">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/75090.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Arès</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Atlantic_Rim_2013">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/423407.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Atlantic Rim (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Attack_The_Block_Invasione_Aliena">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/185884.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Attack The Block - Invasione Aliena</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Attraction">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/153979.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Attraction</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Attraction_2_Invasion">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201624.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Attraction 2: Invasion</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Avatar_2009">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/445509.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Avatar (2009)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bagliori_nel_buio_1993">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/408732.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bagliori nel buio (1993)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Battaglie_nella_galassia_1978">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/287077.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Battaglie nella galassia (1978)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Battaglie_nella_galassia_1978">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/342043.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Battaglie nella galassia (1978)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Battledogs_2013">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/315052.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Battledogs (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Battleship">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/74613.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Battleship</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Belfagor_Il_Fantasma_Del_Louvre">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/71896.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Belfagor - Il Fantasma Del Louvre</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Benvenuti_A_Ieri">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/109893.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Benvenuti A Ieri</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bermuda_Tentacles_2014">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/268622.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bermuda Tentacles (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Beyond_Skyline_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/75560.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Beyond Skyline (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Blade_Runner_1982">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/462755.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Blade Runner (1982)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Blade_Runner_2049_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/462756.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Blade Runner 2049 (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Blindness_Cecità_2008">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/490104.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Blindness - Cecità (2008)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Blob_Il_fluido_che_uccide_1988">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/393155.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Blob - Il fluido che uccide (1988)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bloodshot">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/111254.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bloodshot</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Breach_Incubo_nello_spazio_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/269775.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Breach - Incubo nello spazio (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bright_Ita_En">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/72691.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bright Ita En</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bumblebee_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/83176.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bumblebee (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Capitan_Nova_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/468768.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Capitan Nova (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Captive_State_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/86601.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Captive State (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cell_2016">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/474991.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cell (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Chaos_Walking_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/267703.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Chaos Walking (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Chimera_Strain">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/218334.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Chimera Strain</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Chronicle_2012">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/306211.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Chronicle (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Classe">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/146338.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Classe</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Classe_1999_II_Il_supplente_1994">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/423010.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Classe 1999 II - Il supplente (1994)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cloud_Atlas">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154447.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cloud Atlas</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cloverfield_2008">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/329495.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cloverfield (2008)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cocoon_Il_ritorno_1988">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/443450.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cocoon - Il ritorno (1988)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cocoon_L_energia_dell_universo_1985">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/443545.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cocoon - L'energia dell'universo (1985)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Code_8">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/94527.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Code 8 -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cold_Skin_La_creatura_di_Atlantide_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/78701.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cold Skin - La creatura di Atlantide (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Colpi_di_luce_1985">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/430113.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Colpi di luce (1985)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Coma">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/204752.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Coma</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Contact">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/71903.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Contact</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Corto_circuito_1986">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/77097.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Corto circuito (1986)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Corto_circuito_2_1988">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/77096.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Corto circuito 2 (1988)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cosmo_2000_Battaglie_negli_spazi_stellari_1978">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/539147.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cosmo 2000 - Battaglie negli spazi stellari (1978)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cowboys_Aliens_2011">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390186.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cowboys & Aliens (2011)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Creators_The_Past_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/452731.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Creators: The Past (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cyber_Bride_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/288656.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cyber Bride (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Dante_01">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/237136.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Dante 01</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Dark_City_1998">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/492348.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Dark City (1998)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Darkest_Minds_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/78292.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Darkest Minds (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Darkman_II_Il_Ritorno_Di_Durant">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154451.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Darkman II - Il Ritorno Di Durant</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Darkman_III_Darkman_Morirai">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154452.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Darkman III - Darkman Morirai</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Deep_Impact">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/182261.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Deep Impact</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Deus_La_sfera_nera_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/465756.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Deus - La sfera nera (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Divergent_2014">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/75871.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Divergent (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Doctor_Who_Il_giorno_del_dottore_2013">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/253050.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Doctor Who - Il giorno del dottore (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Doom_2005">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/455701.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Doom (2005)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Doomsday_Il_giorno_del_giudizio_2008">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/345751.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Doomsday - Il giorno del giudizio (2008)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Dracula_Untold">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/74561.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Dracula Untold</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Dredd_Il_Giudice_Dell_apocalisse">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/88750.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Dredd - Il Giudice Dell'apocalisse</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Dual_il_clone_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/405737.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Dual - il clone (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Dune_Parte_due_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/533852.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Dune - Parte due (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Elysium">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/65177.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Elysium</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Encounter">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/177507.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Encounter</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Encounter_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/312229.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Encounter (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ender_s_Game_2013">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/84540.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ender's Game (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Equals">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/71120.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Equals</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Equilibrium">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/153187.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Equilibrium</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Essi_Vivono">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/156012.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Essi Vivono</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Everything_Everywhere_All_at_Once_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/447708.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Everything Everywhere All at Once (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="eXistenZ_1999">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/403441.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>eXistenZ (1999)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ex_Machina_2015">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/534088.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ex Machina (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Explorer">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/74559.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Explorer</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Extinction_Sopravvissuti_2015">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/548610.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Extinction - Sopravvissuti (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fallen">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/74565.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fallen</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fantasmi_da_Marte">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/229107.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fantasmi da Marte</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fase_IV_Distruzione_Terra_1974">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/491991.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fase IV - Distruzione Terra (1974)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fase_IV_Distruzione_Terra_1974">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/512608.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fase IV - Distruzione Terra (1974)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fenomeni_paranormali_incontrollabili">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/238618.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fenomeni paranormali incontrollabili</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Figli_dell_intelligenza_artificiale_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/516592.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Figli dell'intelligenza artificiale (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Final_Fantasy_The_Spirit_Within">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/65114.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Final Fantasy - The Spirit Within</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Finch_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/296661.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Finch (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Firestarter_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/406419.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Firestarter - 2022</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Flash_Gordon_1980">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/315825.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Flash Gordon (1980)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Flash_Gordon_1980">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/342044.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Flash Gordon (1980)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Flatliners_Linea_Mortale_Ita_En">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/74555.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Flatliners Linea Mortale Ita En</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Foxtrot_Six">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/222294.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Foxtrot Six</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Frammenti_dal_passato_Reminiscence_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/286224.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Frammenti dal passato - Reminiscence (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Freaks">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/94240.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Freaks -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Frequencies">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/71897.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Frequencies</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Frequency_Il_futuro_è_in_ascolto">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/230863.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Frequency - Il futuro è in ascolto</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fuga_Per_Il_Futuro">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/75199.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fuga Per Il Futuro</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Game_Therapy_2015">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/460005.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Game Therapy (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Gantz_L_inizio_2010">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/75592.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Gantz - L'inizio (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Garm_Wars_L_ultimo_druido_2014">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/254648.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Garm Wars: L'ultimo druido (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Gattaca_La_porta_dell_universo_1997">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/267566.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Gattaca - La porta dell'universo (1997)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ghost_in_the_Shell_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/65163.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ghost in the Shell (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ghost_Rider_2007">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/77042.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ghost Rider (2007)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ghost_Rider_Spirito_di_vendetta_2011">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/77041.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ghost Rider - Spirito di vendetta (2011)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Giochi_Stellari">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/114058.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Giochi Stellari -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Gioco_mortale_The_Manhattan_Project_1986">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/308917.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Gioco mortale - The Manhattan Project (1986)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Godzilla">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/75015.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Godzilla</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Godzilla_1954">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/445147.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Godzilla (1954)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Godzilla_e_Kong_Il_nuovo_impero_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/539554.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Godzilla e Kong - Il nuovo impero (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Godzilla_II_King_Of_The_Monsters">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/89817.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Godzilla II - King Of The Monsters</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Godzilla_II_King_of_the_Monsters_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/407602.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Godzilla II - King of the Monsters (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Godzilla_Minus_One_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/541135.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Godzilla Minus One (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Gravity">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/74540.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Gravity</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Guardiani_della_Galassia_Holiday_Special_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/440678.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Guardiani della Galassia Holiday Special (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Halo_Nightfall_2014">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/311189.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Halo - Nightfall (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Halo_The_Fall_Reach_2015">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/311190.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Halo - The Fall Reach (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Halo_4_Forward_Unto_Dawn_2012">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/306771.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Halo 4: Forward Unto Dawn (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hansel_Gretel_Cacciatori_di_streghe_2013">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/77464.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Hansel & Gretel - Cacciatori di streghe (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hellboy">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/153511.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Hellboy -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hello_World_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/246083.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Hello World (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="High_Life">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/182160.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>High Life</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hulk">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/109628.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Hulk</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Humandroid">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/65127.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Humandroid</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hypnotic_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/482657.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Hypnotic (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_m_Your_Man_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/465503.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I'm Your Man (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_12_Disastri_Di_Natale">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201396.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I 12 Disastri Di Natale</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_Am_Mother_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/85446.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I Am Mother (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_figli_del_fuoco_1990">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/549077.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I figli del fuoco (1990)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_figli_dello_spazio_1958">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/539154.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I figli dello spazio (1958)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_Guardiani_Del_Destino">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/182906.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I Guardiani Del Destino</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_canto_del_cigno_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/314746.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il canto del cigno (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Cavaliere_Oscuro_2_Il_Ritorno">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/75087.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Cavaliere Oscuro 2 Il Ritorno</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_cervello_che_non_voleva_morire_1962">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/548466.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il cervello che non voleva morire (1962)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Colore_Venuto_Dallo_Spazio">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/196930.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Colore Venuto Dallo Spazio</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Illang_Uomini_e_lupi_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/78204.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Illang - Uomini e lupi (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_mio_nemico_1985">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/475937.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il mio nemico (1985)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_mondo_dei_replicanti_2009">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/213619.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il mondo dei replicanti (2009)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_mondo_dei_robot_1973">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/475512.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il mondo dei robot (1973)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_mostro_dei_mari_1955">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/541198.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il mostro dei mari (1955)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_mostro_del_pianeta_perduto_1955">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/539157.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il mostro del pianeta perduto (1955)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_pianeta_proibito_1956">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442099.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il pianeta proibito (1956)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Quinto_Elemento">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/74543.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Quinto Elemento</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_ragazzo_invisibile_2014">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/74597.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il ragazzo invisibile (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_ragazzo_invisibile_Seconda_generazione_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/76146.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il ragazzo invisibile - Seconda generazione (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_replicante_1986">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/153976.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il replicante (1986)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Tagliaerbe">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/156013.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Tagliaerbe</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_terrore_sul_mondo_1956">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/448661.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il terrore sul mondo (1956)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_terrore_viene_dalla_pioggia_1973">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/514620.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il terrore viene dalla pioggia (1973)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Tredicesimo_Piano">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/211267.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Tredicesimo Piano</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_magnifici_sette_nello_spazio">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/232593.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I magnifici sette nello spazio</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Incoming_Fuga_dalla_prigione_orbitante_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/403199.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Incoming - Fuga dalla prigione orbitante (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Incontri_Ravvicinati_Del_Terzo_Tipo">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/186550.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Incontri Ravvicinati Del Terzo Tipo</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Independence_Day_1996">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/65160.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Independence Day (1996)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Independence_Day_Rigenerazione_2016">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/73052.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Independence Day - Rigenerazione (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Independence_Day_Saster_La_nuova_minaccia_2013">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/193285.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Independence Day-Saster - La nuova minaccia (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Infinite_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/289843.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Infinite (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Inseminoid_Un_tempo_nel_futuro_1981">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442074.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Inseminoid - Un tempo nel futuro (1981)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Interferenze">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154453.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Interferenze</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Interstellar">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/88317.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Interstellar</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="In_Time_2011">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/87247.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>In Time (2011)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Invasion">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/213850.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Invasion</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Invasion_2">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/213851.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Invasion 2</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Io_Robot">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/177826.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Io, Robot</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_Origins_2014">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/284774.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I Origins (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Io_Sono_Leggenda">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/109685.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Io Sono Leggenda</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ipersonnia_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/449944.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ipersonnia (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_ragazzi_venuti_dal_Brasile_1978">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291888.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I ragazzi venuti dal Brasile (1978)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_sopravvissuti_del_2000_1983">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/539155.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I sopravvissuti del 2000 (1983)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Jupiter_Il_Destino_Dell_universo">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/75033.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Jupiter - Il Destino Dell'universo</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Jurassic_Galaxy">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154456.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Jurassic Galaxy</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Justice_League">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/75107.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Justice League</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="K_PAX_Da_Un_Altro_Mondo">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/151269.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>K-PAX - Da Un Altro Mondo</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Killerobots_Monsters_of_Man_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/393349.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Killerobots - Monsters of Man (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Kill_Mode">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/175551.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Kill Mode</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Kill_Switch_La_guerra_dei_mondi_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/82905.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Kill Switch – La guerra dei mondi (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Kobra_1973">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/344557.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Kobra (1973)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_alieno">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/216268.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'alieno</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_anno_Del_Contatto">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/74539.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'anno Del Contatto</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_invasione_degli_astromostri_1965">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/289387.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'invasione degli astromostri (1965)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_invasione_degli_ultracorpi_1956">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/448662.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'invasione degli ultracorpi (1956)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_odissea_del_Neptune_nell_impero_sommerso_1973">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/492533.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'odissea del Neptune nell'impero sommerso (1973)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_ultima_odissea_1977">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/493015.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'ultima odissea (1977)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_ultimo_giorno_sulla_terra_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/392228.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'ultimo giorno sulla terra (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_ultimo_sole_della_notte">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/238630.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'ultimo sole della notte</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_uomo_Bicentenario">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/143444.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'uomo Bicentenario</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_uomo_che_fuggì_dal_futuro_1971">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/542230.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'uomo che fuggì dal futuro (1971)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_Uomo_Che_Venne_Dalla_Terra">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154446.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'Uomo Che Venne Dalla Terra</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_uomo_che_venne_dalla_Terra_2007">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/445161.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'uomo che venne dalla Terra (2007)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_uomo_che_visse_nel_futuro_1960">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442899.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'uomo che visse nel futuro (1960)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_uomo_d_acciaio_2013">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/77044.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'uomo d'acciaio (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_uomo_Del_Giorno_Dopo">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/143124.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'uomo Del Giorno Dopo ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_uomo_Della_Scatola_Magica">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/207094.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'uomo Della Scatola Magica</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_uomo_invisibile_1933">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/445162.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'uomo invisibile (1933)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_uomo_senza_ombra_2000">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/303575.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'uomo senza ombra (2000)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_uomo_venuto_dall_impossibile_1979">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/455230.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'uomo venuto dall'impossibile (1979)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_A_Apocalypse_Apocalisse_a_Los_Angeles">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/235310.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L.A. Apocalypse - Apocalisse a Los Angeles</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_città_degli_acquanauti_1971">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/496620.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La città degli acquanauti (1971)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_città_degli_acquanauti_1971">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/539165.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La città degli acquanauti (1971)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Città_Verrà_Distrutta_All_alba">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/88386.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Città Verrà Distrutta All'alba</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Cosa">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/94276.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Cosa</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_cura_dal_benessere_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/475266.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La cura dal benessere (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_decima_vittima_1965">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/342046.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La decima vittima (1965)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_donna_perfetta_2004">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/494427.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La donna perfetta (2004)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Guerra_Dei_Mondi">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/65148.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Guerra Dei Mondi</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_guerra_dei_mondi_1953">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/445167.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La guerra dei mondi (1953)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_maledizione_di_Komodo_2004">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/433667.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La maledizione di Komodo (2004)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Moglie_Dell_astronauta">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/184045.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Moglie Dell'astronauta</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Mosca_2">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206184.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Mosca 2</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Land_of_the_Lost_2009">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/306584.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Land of the Lost (2009)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lanterna_Verde">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/65154.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lanterna Verde</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Quinta_Onda">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/65220.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Quinta Onda</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_quinta_onda_2016">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/424138.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La quinta onda (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_rivincita_dell_incredibile_Hulk_1988">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/342047.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La rivincita dell'incredibile Hulk (1988)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_terra_dei_figli_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/394519.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La terra dei figli (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Terra_trema_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/84410.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Terra trema (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Torre_Nera_Ita_En">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/71975.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Torre Nera Ita En</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_vendetta_del_ragno_nero_2001">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/519515.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La vendetta del ragno nero (2001)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Zona_Morta">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/190978.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Zona Morta</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Le_ultime_24_ore_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/78573.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Le ultime 24 ore (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Life_Non_Oltrepassare_Il_Limite_Ita_En">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/65226.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Life - Non Oltrepassare Il Limite Ita En</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Life_Like">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206762.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Life Like</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Light_of_My_Life_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/444341.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Light of My Life (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Linea_mortale_1990">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/530187.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Linea mortale (1990)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Little_Fish_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/265216.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Little Fish (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lo_Chiamavano_Jeeg_Robot">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/65207.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lo Chiamavano Jeeg Robot</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Logan_The_Wolverine">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/65000.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Logan - The Wolverine</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lo_Spazio_Che_Ci_Unisce">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/211268.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lo Spazio Che Ci Unisce</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lost_in_Space_1998">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/283194.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lost in Space (1998)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Macchine_Mortali">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/83122.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Macchine Mortali -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Maximum_Ride_2016">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/71799.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Maximum Ride (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mega_Shark_Vs_Giant_Octopus">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/173197.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mega Shark Vs  Giant Octopus</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Metropolis_1927">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/447824.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Metropolis (1927)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mimzy_Il_segreto_dell_universo_2007">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/306557.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mimzy - Il segreto dell'universo (2007)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Minority_Report">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/65184.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Minority Report</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mission_Mars">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/198737.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mission Mars</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mission_to_Mars_2000">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/464054.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mission to Mars (2000)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mondocane_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/312540.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mondocane (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Monolith_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/536583.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Monolith (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Moon_2009">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/87245.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Moon (2009)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Moonfall_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/387532.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Moonfall (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Moonfall_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/425375.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Moonfall (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Morbius_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/388039.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Morbius (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Morgan">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/169084.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Morgan</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mother_Android_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/338646.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mother/Android (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mr_Nobody_2009">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/254569.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mr. Nobody (2009)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mute">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/75083.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mute</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Natastrofe_2014">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469772.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Natastrofe (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Navigator">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/109995.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Navigator -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ninja_contro_Alieni_2010">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/447827.avi" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ninja contro Alieni (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Oblivion_2013">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/65152.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Oblivion (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Occupation_Rainfall_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/295313.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Occupation: Rainfall (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Only_Minaccia_Letale_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/183944.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Only - Minaccia Letale (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Orwell">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/216404.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Orwell</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Osiride_Il_9_pianeta_2016">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/76341.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Osiride - Il 9° pianeta (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Oxygène_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/262431.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Oxygène (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Pacific_Rim_2013">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/76257.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Pacific Rim (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Pacific_Rim_La_rivolta_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/76256.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Pacific Rim - La rivolta (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Paesaggio_con_mano_invisibile_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/511394.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Paesaggio con mano invisibile (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Pandemic_2016">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/267705.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Pandemic (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Pandorum_L_universo_parallelo_2009">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/266988.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Pandorum - L'universo parallelo (2009)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Passengers_2016">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/471809.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Passengers (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Paycheck">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/65198.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Paycheck</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="PF3_Oxigen_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/262948.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>PF3 - Oxigen (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Phantasm_IV_Oblivion_1998">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/430124.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Phantasm IV: Oblivion (1998)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Philadelphia_Experiment">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/186140.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Philadelphia Experiment</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Philadelphia_Experiment_II">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/186141.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Philadelphia Experiment II</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Pianeta_rosso">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/229235.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Pianeta rosso</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="PLAN_75_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/490370.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>PLAN 75 (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Powder_un_incontro_straordinario_con_un_altro_essere_1995">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/287241.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Powder - un incontro straordinario con un altro essere (1995)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Power_Rangers_Ita_En">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/71765.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Power Rangers Ita En</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Predator">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/94275.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Predator</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Predator_2">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/177860.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Predator 2</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Predestination">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154457.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Predestination</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Project_Gemini_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/436369.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Project Gemini (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Prospect_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/85962.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Prospect (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Proximity">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/177502.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Proximity</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Proximity_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/266792.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Proximity (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Python_Spirali_di_paura_2000">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/295450.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Python - Spirali di paura (2000)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Radius_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/78208.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Radius (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Re_Animator_1985">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/262511.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Re-Animator (1985)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Re_Animator_2_1990">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/262512.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Re-Animator 2 (1990)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ready_Player_One_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/76276.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ready Player One (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Rendel_Il_vigilante_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/76840.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Rendel - Il vigilante (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Replicas_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/84352.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Replicas (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Restore_Point_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/540628.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Restore Point (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Revolt">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/235967.avi" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Revolt</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ricky_Una_Storia_D_amore_E_Libertà">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/213633.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ricky - Una Storia D'amore E Libertà</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Rim_of_the_World_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/85476.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Rim of the World (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Riot_Girls_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/377661.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Riot Girls (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Robot_Overlords_2015">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/449621.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Robot Overlords (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Robot_War_1989">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/327448.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Robot War (1989)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Rollerball_1975">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/342048.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Rollerball (1975)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ruby_Red_2013">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/77432.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ruby Red (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ruby_Red_II_Il_segreto_di_Zaffiro_2014">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/77431.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ruby Red II - Il segreto di Zaffiro (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ruby_Red_III_Verde_smeraldo_2016">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/77430.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ruby Red III - Verde smeraldo (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Rupture_2016">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/84034.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Rupture (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Salto_Nel_Buio">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/142427.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Salto Nel Buio ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Salyut_7_La_storia_di_un_impresa_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/75994.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Salyut 7 - La storia di un'impresa (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Saturn_3_1980">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390831.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Saturn 3 (1980)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Scanners_1981">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/345290.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Scanners (1981)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Scanners_2_Il_nuovo_ordine_1991">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/388551.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Scanners 2 - Il nuovo ordine (1991)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Scanners_3_1992">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/388552.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Scanners 3 (1992)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sea_Fever_Contagio_In_Alto_Mare">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/219515.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sea Fever - Contagio In Alto Mare</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Secret_Headquarters_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/410643.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Secret Headquarters (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="See_You_Yesterday_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/272414.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>See You Yesterday (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Segnali_Dal_Futuro">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/109691.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Segnali Dal Futuro</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Self_less">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/214108.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Self/less</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Serenity">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/75098.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Serenity</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Settlers_Colonia_Marziana_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/339379.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Settlers Colonia Marziana (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Seven_Sisters">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/75200.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Seven Sisters</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sfera_1998">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/441922.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sfera (1998)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sharkman_una_nuova_razza_di_predatori_2005">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/292187.avi" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sharkman - una nuova razza di predatori (2005)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Signs">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/116144.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Signs ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Singularity_L_attacco_dei_robot_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/85723.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Singularity - L'attacco dei robot (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Skylines_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/287092.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Skylines (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sky_Sharks_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/243965.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sky Sharks (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Snowpiercer_2013">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/87487.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Snowpiercer (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sonic_Il_Film">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/94563.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sonic - Il Film</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sopravvissuti_2015">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/436370.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sopravvissuti (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Space_Vampires_1985">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/440612.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Space Vampires (1985)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Specie_mortale_1995">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/477226.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Specie mortale (1995)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Species_II_Specie_mortale_II_1998">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/477228.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Species II - Specie mortale II (1998)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Species_III_Specie_mortale_III_2004">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/477229.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Species III - Specie mortale III (2004)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Spectral">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/65268.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Spectral</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Spider_Man_Homecoming">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/71911.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Spider Man - Homecoming</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Splice_2009">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/253598.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Splice (2009)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sputnik_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/256557.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sputnik (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sputnik_NU">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/238710.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sputnik (NU)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Stargate">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/113286.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Stargate -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Stargate_SG_1_L_arca_della_verità_2008">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/447835.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Stargate SG-1 - L'arca della verità (2008)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Starman">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/173293.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Starman</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Strange_Days_1995">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/87401.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Strange Days (1995)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Suicide_Squad">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/65131.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Suicide Squad</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sunshine_2007">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/249228.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sunshine (2007)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Super_8">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/74595.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Super 8</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Superintelligence_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/287903.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Superintelligence (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Synchronic_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/281759.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Synchronic (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Taking_Earth">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/75103.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Taking Earth</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Teenage_Space_Vampires">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/236668.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Teenage Space Vampires</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tenet">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/177555.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tenet</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tentacoli">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/235955.avi" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tentacoli</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Terminus">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/218556.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Terminus</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Terrore_dallo_spazio_profondo_1978">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/286314.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Terrore dallo spazio profondo (1978)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Terrore_dal_profondo_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/534685.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Terrore dal profondo (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Terrore_nello_spazio_1965">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/447838.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Terrore nello spazio (1965)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Abyss_1989">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/461502.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Abyss (1989)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Arrival_1996">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/428665.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Arrival (1996)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Block_Island_Sound">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/236001.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Block Island Sound</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Butterfly_Effect_2">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/112472.avi" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Butterfly Effect 2</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Butterfly_Effect_Director_s_Cut">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/110989.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Butterfly Effect: Director's Cut</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Cell_La_cellula_2000">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/409308.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Cell - La cellula (2000)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Clone_chiave_per_l_immortalità_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/433668.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Clone: chiave per l'immortalità (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Darkest_Dawn_2016">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/452255.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Darkest Dawn (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Day_After_Il_Giorno_Dopo">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/141513.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Day After - Il Giorno Dopo ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Divergent_Series_Insurgent_2015">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/75870.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Divergent Series - Insurgent (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Endless_Viaggi_nel_tempo">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/229230.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Endless - Viaggi nel tempo</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Faculty_1998">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/271109.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Faculty (1998)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Giver_Il_Mondo_Di_Jonas">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/91283.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Giver - Il Mondo Di Jonas</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Giver_Il_mondo_di_Jonas_2014">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/310305.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Giver - Il mondo di Jonas (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Host">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/65119.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Host</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Last_Days_on_Mars_2013">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/534058.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Last Days on Mars (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Last_Scout_L_ultima_Missione">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/74996.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Last Scout - L'ultima Missione</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_New_Mutants_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/177951.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The New Mutants (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Philadelphia_Experiment">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/186142.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Philadelphia Experiment</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Predator">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/79761.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Predator</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Recall_L_invasione_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/85724.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Recall - L'invasione (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Time_Machine">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/216339.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Time Machine</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Titan">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/75231.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Titan</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Visitor_from_the_Future_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/490745.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Visitor from the Future (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Wandering_Earth_L_inizio_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/529028.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Wandering Earth - L'inizio (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tides_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/286603.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tides (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Time_Lapse">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/93866.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Time Lapse</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Timeline_Ai_Confini_Del_Tempo">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/114151.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Timeline - Ai Confini Del Tempo -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Time_Wars_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/482091.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Time Wars (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tomorrowland_Il_Mondo_Di_Domani">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/118453.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tomorrowland - Il Mondo Di Domani ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Total_Recall_Atto_Di_Forza">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/216484.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Total Recall - Atto Di Forza</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Toxic_I_Am_Toxic_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/272409.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Toxic - I Am Toxic (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Transcendence">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/65143.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Transcendence</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tron">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/218076.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tron</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tron_Legacy">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/218077.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tron - Legacy</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="UFO_Sweden_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/506876.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>UFO Sweden (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ultimatum_Alla_Terra">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/88369.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ultimatum Alla Terra</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ultimatum_alla_Terra_1951">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/491042.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ultimatum alla Terra (1951)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ultracorpi_L_invasione_continua_1993">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469759.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ultracorpi - L'invasione continua (1993)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Una_Luna_Chiamata_Europa">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/104961.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Una Luna Chiamata Europa -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Under_The_Skin">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/129079.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Under The Skin ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Upgrade_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/81315.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Upgrade (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Upside_Down">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/219303.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Upside Down</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Valerian_E_La_Città_Dei_Mille_Pianeti_Ita_En">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/73071.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Valerian E La Città Dei Mille Pianeti Ita En</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Vanilla_Sky_2001">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/83986.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Vanilla Sky (2001)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Vesper_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/512928.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Vesper (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Viaggio_allucinante_1966">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/539384.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Viaggio allucinante (1966)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Viaggio_Nell_isola_Misteriosa">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/93237.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Viaggio Nell'isola Misteriosa -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Vice">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154454.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Vice</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Victor_La_storia_segreta_del_dottor_Frankenstein_2015">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/244646.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Victor: La storia segreta del dottor Frankenstein (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Videodrome">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/177553.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Videodrome</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Villaggio_dei_dannati_1995">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/402361.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Villaggio dei dannati (1995)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Viral">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/235957.avi" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Viral</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Virtual_revolution_2016">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/76595.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Virtual revolution (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Virus_1999">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/549017.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Virus (1999)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Vivarium">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/112545.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Vivarium -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Voyagers_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/281764.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Voyagers (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Warcraft_L_inizio">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/65132.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Warcraft - L'inizio</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="WarGames_Giochi_Di_Guerra">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/109996.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>WarGames - Giochi Di Guerra</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="War_Games_Ita_En">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/65203.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>War Games Ita En</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="War_of_the_Worlds_L_invasione_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/489946.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>War of the Worlds - L'invasione (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Weaponized">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/104962.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Weaponized</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Wifelike_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/511396.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Wifelike (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Wolverine_L_immortale">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/65137.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Wolverine - L'immortale</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Wonder_Woman_Ita_En">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/65026.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Wonder Woman Ita En</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="World_invasion_2011">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/441845.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>World invasion (2011)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Files_Il_film_1998">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/403987.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X-Files - Il film (1998)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Files_Voglio_crederci_2008">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/403988.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X-Files - Voglio crederci (2008)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Men_Apocalisse_2016">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/65217.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X-Men - Apocalisse (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Men_Dark_Phoenix">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/89815.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X-Men - Dark Phoenix</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Zone_414_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/292093.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Zone 414 (2021)</p>
+      </a>
+    </div>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>

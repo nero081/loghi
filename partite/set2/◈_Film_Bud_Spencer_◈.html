@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>◈ Film Bud Spencer ◈</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  max-width: 90vw;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
+
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
+
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
+
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
+
+.canale a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+  text-decoration: none;
+}
+
+
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
+
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
+  </style>
+</head>
+<body>
+  <h1>◈ Film Bud Spencer ◈</h1>
+  <div class="griglia">
+    
+    <div class="canale no-logo" id="altrimenti_ci_arrabbiamo_1974">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442593.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>...altrimenti ci arrabbiamo! (1974)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="continuavano_a_chiamarlo_Trinità_1971">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442584.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>...continuavano a chiamarlo Trinità (1971)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Più_forte_ragazzi_1972">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442587.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>...Più forte ragazzi! (1972)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="4_mosche_di_velluto_grigio_1971">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442586.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>4 mosche di velluto grigio (1971)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Al_di_là_della_legge_1968">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442578.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Al di là della legge (1968)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Anche_gli_angeli_mangiano_fagioli_1973">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442590.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Anche gli angeli mangiano fagioli (1973)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Annibale_1959">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442576.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Annibale (1959)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Banana_Joe_1982">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442608.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Banana Joe (1982)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bomber_1982">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442609.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bomber (1982)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Botte_di_Natale_1994">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442616.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Botte di Natale (1994)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cane_e_gatto_1983">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442610.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cane e gatto (1983)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Charleston_1977">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442597.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Charleston (1977)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Chissà_perché_capitano_tutte_a_me_1980">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442604.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Chissà perché... capitano tutte a me (1980)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Chi_trova_un_amico_trova_un_tesoro_1981">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442606.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Chi trova un amico trova un tesoro (1981)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Dio_perdona_io_no_1967">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442577.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Dio perdona... io no! (1967)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_due_superpiedi_quasi_piatti_1977">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442598.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I due superpiedi quasi piatti (1977)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_corsaro_nero_1971">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442585.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il corsaro nero (1971)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_soldato_di_ventura_1976">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442596.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il soldato di ventura (1976)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Io_sto_con_gli_ippopotami_1979">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442603.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Io sto con gli ippopotami (1979)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_quattro_dell_Ave_Maria_1968">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442579.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I quattro dell'Ave Maria (1968)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_collina_degli_stivali_1969">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442581.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La collina degli stivali (1969)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lo_chiamavano_Bulldozer_1978">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442599.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lo chiamavano Bulldozer (1978)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lo_chiamavano_Trinità_1970">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442583.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lo chiamavano Trinità... (1970)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Miami_Supercops_1985">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442613.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Miami Supercops (1985)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Nati_con_la_camicia_1983">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442611.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Nati con la camicia (1983)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Non_c_è_due_senza_quattro_1984">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442612.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Non c'è due senza quattro (1984)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Occhio_alla_penna_1981">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442607.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Occhio alla penna (1981)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Oggi_a_me_domani_a_te_1968">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442580.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Oggi a me... domani a te! (1968)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Padre_Speranza_2005">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442617.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Padre Speranza (2005)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Pari_e_dispari_1978">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442600.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Pari e dispari (1978)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Piedone_a_Hong_Kong_1975">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442595.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Piedone a Hong Kong (1975)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Piedone_d_Egitto_1980">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442605.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Piedone d'Egitto (1980)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Piedone_l_africano_1978">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442601.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Piedone l'africano (1978)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Piedone_lo_sbirro_1973">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442591.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Piedone lo sbirro (1973)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Porgi_l_altra_guancia_1974">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442594.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Porgi l'altra guancia (1974)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Si_può_fare_amigo_1972">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442588.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Si può fare… amigo (1972)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Superfantagenio_1986">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442614.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Superfantagenio (1986)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Torino_nera_1972">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442589.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Torino nera (1972)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Una_ragione_per_vivere_e_una_per_morire_1972">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442592.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Una ragione per vivere e una per morire (1972)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_esercito_di_5_uomini_1969">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442582.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un esercito di 5 uomini (1969)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Uno_sceriffo_extraterrestre_poco_extra_e_molto_terrestre_1979">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442602.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Uno sceriffo extraterrestre... poco extra e molto terrestre (1979)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_piede_in_paradiso_1991">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442615.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un piede in paradiso (1991)</p>
+      </a>
+    </div>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>

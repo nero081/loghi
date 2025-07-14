@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>◈ Film Biografici ◈</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  max-width: 90vw;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
+
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
+
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
+
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
+
+.canale a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+  text-decoration: none;
+}
+
+
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
+
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
+  </style>
+</head>
+<body>
+  <h1>◈ Film Biografici ◈</h1>
+  <div class="griglia">
+    
+    <div class="canale no-logo" id="1944_La_battaglia_di_Cassino">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/251199.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>1944. La battaglia di Cassino</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Adidas_vs_Puma_2016">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/88380.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Adidas vs Puma (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Amadeus">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/118459.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Amadeus ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Amy">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/94109.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Amy ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Borg_McEnroe">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/155106.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Borg McEnroe</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Che_Guerriglia">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/196077.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Che - Guerriglia</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Che_L_argentino">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/114876.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Che - L'argentino -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Chiamatemi_Francesco_Il_Papa_Della_Gente">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/143419.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Chiamatemi Francesco - Il Papa Della Gente</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Chiara_Ferragni_Unposted">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154589.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Chiara Ferragni: Unposted</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Coach_Carter">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/155105.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Coach Carter</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Creation_L_evoluzione_di_Darwin_2009">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/255102.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Creation - L'evoluzione di Darwin (2009)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Creature_del_cielo">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/240131.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Creature del cielo</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Diego_Maradona">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/91282.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Diego Maradona -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Doctor_Who_Un_Avventura_Nello_Spazio_E_Nel_Tempo">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/74560.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Doctor Who Un Avventura Nello Spazio E Nel Tempo</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Driven_Il_Caso_DeLorean">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/93142.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Driven - Il Caso DeLorean -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ennio_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/389065.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ennio (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Enrico_Piaggio_Un_Sogno_Italiano">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/99283.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Enrico Piaggio - Un Sogno Italiano -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Enzo_Ferrari_2003">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/136296.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Enzo Ferrari (2003)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Escobar_Il_fascino_del_male_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/78556.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Escobar - Il fascino del male (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fabrizio_De_André_Principe_Libero_1_Parte">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/93096.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fabrizio De André: - Principe Libero -  - 1 Parte</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fabrizio_De_André_Principe_Libero_2_Parte">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/93097.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fabrizio De André: - Principe Libero -  - 2 Parte</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Faccia_D_angelo_Parte_1">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/93094.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Faccia D'angelo - Parte 1</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Faccia_D_angelo_Parte_2">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/93095.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Faccia D'angelo - Parte 2</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Florence">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/69949.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Florence</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Gino_Bartali_L_intramontabile_2006">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/307075.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Gino Bartali - L'intramontabile (2006)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Giovanni_Falcone_L_uomo_Che_Sfidò_Cosa_Nostra_1">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/196522.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Giovanni Falcone, L'uomo Che Sfidò Cosa Nostra 1</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Giovanni_Falcone_L_uomo_Che_Sfidò_Cosa_Nostra_2">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/196523.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Giovanni Falcone, L'uomo Che Sfidò Cosa Nostra 2</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hammamet">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/92101.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Hammamet -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_caso_Enzo_Tortora_Dove_eravamo_rimasti_2012">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/307076.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il caso Enzo Tortora - Dove eravamo rimasti? (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Magico_Mondo_Di_Walt_Disney">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/172280.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Magico Mondo Di Walt Disney</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_magnate_greco_1978">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/393018.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il magnate greco - 1978</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Peccato_Il_Furore_Di_Michelangelo">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/114185.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Peccato - Il Furore Di Michelangelo -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Segreto_Di_Nikola_Tesla">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/196078.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Segreto Di Nikola Tesla</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Io_Sono_Mia">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/125862.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Io Sono Mia</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Io_sono_Mia_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/307077.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Io sono Mia (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lassù_qualcuno_mi_ama_1956">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/393019.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lassù qualcuno mi ama (1956)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Storia_Elsa_Morante_Parte_1">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/125832.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Storia - Elsa Morante - Parte 1 ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Storia_Elsa_Morante_Parte_2">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/125833.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Storia - Elsa Morante - Parte 2 ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Storia_Elsa_Morante_Parte_3">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/125834.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Storia - Elsa Morante - Parte 3 ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Laura_Pausini_Piacere_di_conoscerti_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/388725.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Laura Pausini - Piacere di conoscerti (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Louis_van_Beethoven_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/255293.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Louis van Beethoven (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Maria_Goretti_1_Parte">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/98406.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Maria Goretti () 1 Parte</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Maria_Goretti_2_Parte">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/98407.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Maria Goretti ()  2 Parte</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Marie_Curie">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206183.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Marie Curie</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Maudie_Una_Vita_A_Colori">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/72475.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Maudie: Una Vita A Colori ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mike_Tyson_Tutta_La_Verità">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154590.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mike Tyson: Tutta La Verità</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Miracoli_Dal_Cielo">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/71129.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Miracoli Dal Cielo</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Missione_Anthropoid">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/93856.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Missione Anthropoid -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mussolini_Ultimo_Atto">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/136185.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mussolini - Ultimo Atto ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Neruda">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/71101.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Neruda</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Padre_Pio_Tra_Cielo_E_Terra">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/226979.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Padre Pio: Tra Cielo E Terra</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Pelé_2016">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/71160.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Pelé (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Permette_Alberto_Sordi">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/110768.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Permette? Alberto Sordi -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Professor_Marston_The_Wonder_Women">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/75010.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Professor Marston & The Wonder Women</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Quando_corre_Nuvolari_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/85473.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Quando corre Nuvolari (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Race_Il_colore_della_vittoria">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/231274.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Race - Il colore della vittoria</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Rino_Gaetano_Ma_Il_Cielo_è_Sempre_Più_Blu_Parte_1">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/125863.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Rino Gaetano - Ma Il Cielo è Sempre Più Blu - Parte 1 ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Rino_Gaetano_Ma_Il_Cielo_è_Sempre_Più_Blu_Parte_2">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/125864.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Rino Gaetano - Ma Il Cielo è Sempre Più Blu - Parte 2 ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Rita_Levi_Montalcini_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/307078.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Rita Levi-Montalcini (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Salvo_D_Acquisto_2003">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/307079.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Salvo D'Acquisto (2003)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Snowden">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/71124.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Snowden</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Steve_Jobs">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/230967.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Steve Jobs</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Storia_Di_Nilde">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/104742.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Storia Di Nilde -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ted_Bundy_Fascino_Criminale">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/85106.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ted Bundy - Fascino Criminale</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Blind_Side_2009">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/71801.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Blind Side (2009)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Devil_s_Double">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/211269.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Devil's Double</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Founder_Ita_En">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/71123.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Founder Ita En</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Van_Gogh_Sulla_Soglia_Dell_eternità">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/83914.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Van Gogh - Sulla Soglia Dell'eternità</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Vi_Presento_Christopher_Robin">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/75025.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Vi Presento Christopher Robin</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Vittoria_E_Abdul">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/74554.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Vittoria E Abdul</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Volevo_Nascondermi">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201042.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Volevo Nascondermi</p>
+      </a>
+    </div>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>◈ Film Carlo Verdone ◈</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  max-width: 90vw;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
+
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
+
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
+
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
+
+.canale a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+  text-decoration: none;
+}
+
+
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
+
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
+  </style>
+</head>
+<body>
+  <h1>◈ Film Carlo Verdone ◈</h1>
+  <div class="griglia">
+    
+    <div class="canale no-logo" id="Acqua_E_Sapone">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/104293.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Acqua E Sapone -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Al_Lupo_Al_Lupo">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/104299.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Al Lupo, Al Lupo</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Benedetta_Follia">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/104315.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Benedetta Follia -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bianco_Rosso_E_Verdone">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/104291.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bianco Rosso E Verdone -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Borotalco">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/104292.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Borotalco</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="C_era_Un_Cinese_In_Coma">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/119249.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>C'era Un Cinese In Coma ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Compagni_Di_Scuola">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/104297.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Compagni Di Scuola</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cuori_Nella_Tormenta">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/104294.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cuori Nella Tormenta -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Gallo_Cedrone">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/119250.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Gallo Cedrone ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Grande_Grosso_E_Verdone">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/104306.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Grande Grosso E Verdone -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_Due_Carabinieri">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/104295.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I Due Carabinieri</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Bambino_E_Il_Poliziotto">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/110375.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Bambino E Il Poliziotto -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Mio_Miglior_Nemico">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/116212.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Mio Miglior Nemico ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Io_e_mia_sorella_1987">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/547068.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Io e mia sorella (1987)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Io_Loro_E_Lara">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/104308.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Io Loro E Lara -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Italians">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/104307.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Italians -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_abbiamo_Fatta_Grossa">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/104314.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'abbiamo Fatta Grossa</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_amore_è_Eterno_Finché_Dura">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/104303.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'amore è Eterno Finché Dura</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Grande_Bellezza">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/104312.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Grande Bellezza</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Maledetto_Il_Giorno_Che_T_ho_Incontrato">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/104300.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Maledetto Il Giorno Che T'ho Incontrato -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Manuale_D_amore">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/104304.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Manuale D'amore -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Manuale_D_amore_2_Capitoli_Successivi">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/104305.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Manuale D'amore 2 Capitoli Successivi -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Manuale_D_amore_3">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/104310.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Manuale D'amore 3</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Niente_Paura">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/104309.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Niente Paura -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Perdiamoci_di_vista">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/227751.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Perdiamoci di vista</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Posti_In_Piedi_In_Paradiso">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/104311.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Posti In Piedi In Paradiso</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Si_vive_una_volta_sola_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/262510.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Si vive una volta sola (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sotto_Una_Buona_Stella">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/104313.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sotto Una Buona Stella -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Stasera_A_Casa_Di_Alice">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/104298.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Stasera A Casa Di Alice</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Troppo_Forte">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/104296.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Troppo Forte -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_Sacco_Bello">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/104290.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un Sacco Bello</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Viaggi_Di_Nozze">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/104301.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Viaggi Di Nozze</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Zora_La_Vampira">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/104302.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Zora La Vampira -</p>
+      </a>
+    </div>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>

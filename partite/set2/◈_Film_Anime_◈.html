@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>◈ Film Anime ◈</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  max-width: 90vw;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
+
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
+
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
+
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
+
+.canale a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+  text-decoration: none;
+}
+
+
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
+
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
+  </style>
+</head>
+<body>
+  <h1>◈ Film Anime ◈</h1>
+  <div class="griglia">
+    
+    <div class="canale no-logo" id="Naruto_Il_film_La_prigione_insanguinata_2011">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/647024.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Naruto: Il film - La prigione insanguinata (2011)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Naruto_il_film_I_guardiani_del_Regno_della_Luna_Crescente_2006">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/647023.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Naruto il film: I guardiani del Regno della Luna Crescente (2006)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Naruto_Il_film_La_leggenda_della_pietra_di_Gelel_2005">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/647022.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Naruto: Il film - La leggenda della pietra di Gelel (2005)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Naruto_Il_film_La_primavera_nel_Paese_della_Neve_2004">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/647021.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Naruto: Il film - La primavera nel Paese della Neve (2004)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Saga_of_Tanya_the_Evil_2021_SUB_ITA">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/645145.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Saga of Tanya the Evil (2021) SUB ITA</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Saga_of_Tanya_the_Evil_Movie_2019_SUB_ITA">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/645144.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Saga of Tanya the Evil Movie (2019) SUB ITA</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Saint_Young_Men_2013_SUB_ITA">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/643831.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Saint Young Men (2013) SUB ITA</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Amon_Apocalypse_of_Devilman_2000">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/641013.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Amon - Apocalypse of Devilman (2000)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_nostra_alba_Break_of_Dawn_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/640513.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La nostra alba - Break of Dawn (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="UFO_Robot_Gattaiger_La_grande_battaglia_dei_dischi_volanti_1975">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/623566.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>UFO Robot Gattaiger - La grande battaglia dei dischi volanti (1975)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Overlord_Il_film_Capitolo_del_Santo_Regno_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/622705.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Overlord: Il film - Capitolo del Santo Regno (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Plastic_Little_1994">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/613205.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Plastic Little (1994)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Rayearth_Il_sogno_di_Emeraude_1997_Parte_3">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/612952.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Rayearth - Il sogno di Emeraude (1997) - Parte 3</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Rayearth_Il_sogno_di_Emeraude_1997_Parte_2">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/612951.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Rayearth - Il sogno di Emeraude (1997) - Parte 2</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Rayearth_Il_sogno_di_Emeraude_1997_Parte_1">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/612950.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Rayearth - Il sogno di Emeraude (1997) - Parte 1</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="My_Hero_Academia_You_re_Next_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/557162.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>My Hero Academia: You're Next (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="5_Cm_Al_Secondo">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/94251.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>5 Cm Al Secondo -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Amon_Apocalypse_of_Devilman_2000">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/289482.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Amon - Apocalypse of Devilman (2000)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Anche_Se_Il_Mondo_Finisse_Domani">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/185369.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Anche Se Il Mondo Finisse Domani</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Art_of_Fighting_1993">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/514652.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Art of Fighting (1993)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Card_Captor_Sakura_The_Movie_1999">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/345203.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Card Captor Sakura - The Movie (1999)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cardcaptor_Sakura_Clear_Card_Prologo_I_due_orsi_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/345204.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cardcaptor Sakura Clear Card - Prologo I due orsi (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Colorful_2010">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/306621.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Colorful (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Constantine_City_of_Demons_The_Movie_2018_SUB_ITA">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/497912.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Constantine: City of Demons - The Movie (2018) SUB ITA</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Darkside_Blues_1994">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/514642.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Darkside Blues (1994)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Demon_City_Shinjuku_La_città_dei_mostri_1988">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/491756.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Demon City Shinjuku - La città dei mostri (1988)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Demon_Slayer_Il_Treno_Mugen_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/273315.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Demon Slayer: Il Treno Mugen (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Evangelion_1_11_You_Are_Not_Alone_2007">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/274722.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Evangelion: 1.11 You Are (Not) Alone (2007)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Evangelion_2_22_You_Can_Not_Advance_2009">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/275075.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Evangelion: 2.22 You Can (Not) Advance (2009)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Evangelion_3_33_You_Can_Not_Redo_2012">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/275351.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Evangelion: 3.33 You Can (Not) Redo (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fairy_Tail_Movie_1_Priestess_of_the_Phoenix_2012">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/511189.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fairy Tail Movie 1 - Priestess of the Phoenix (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fairy_Tail_Movie_2_Dragon_Cry_2017_SUB_ITA">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/511188.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fairy Tail Movie 2 - Dragon Cry (2017) SUB ITA</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fatal_Fury_2_La_sfida_di_Wolfgang_Krauser_1993">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/514645.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fatal Fury 2: La sfida di Wolfgang Krauser (1993)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fatal_Fury_La_leggenda_del_lupo_famelico_1992">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/514643.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fatal Fury: La leggenda del lupo famelico (1992)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fatal_Fury_The_Motion_Picture_1994">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/514644.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fatal Fury: The Motion Picture (1994)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fresh_Pretty_Cure_Le_Pretty_Cure_nel_Regno_dei_giocattoli_2009">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/266788.avi" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fresh Pretty Cure! - Le Pretty Cure nel Regno dei giocattoli (2009)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fullmetal_Alchemist_The_Movie_Il_conquistatore_di_Shamballa">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/235920.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fullmetal Alchemist - The Movie: Il conquistatore di Shamballa</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ghost_in_the_Shell_1995">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/519136.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ghost in the Shell (1995)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Goblin_Slayer_Goblin_s_Crown_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/382318.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Goblin Slayer: Goblin's Crown (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Goodbye_DonGless_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/468982.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Goodbye, DonGless! (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Castello_Errante_Di_Howl">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/169086.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Castello Errante Di Howl</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_giardino_delle_parole_2013">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/519510.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il giardino delle parole (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_ragazzo_e_l_airone_2023_SUB_ITA">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/534649.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il ragazzo e l'airone (2023) SUB ITA</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Infini_T_Force_the_Movie_Farewell_Gatchaman_My_Friend_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/514646.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Infini-T Force the Movie: Farewell Gatchaman My Friend (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Inuyasha_the_Movie_1_Un_sentimento_che_trascende_il_tempo_2001">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/445267.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Inuyasha the Movie 1 - Un sentimento che trascende il tempo (2001)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Inuyasha_the_Movie_2_Il_castello_al_di_là_dello_specchio_2002">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/445268.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Inuyasha the Movie 2 - Il castello al di là dello specchio (2002)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Inuyasha_the_Movie_3_La_spada_del_dominatore_del_mondo_2003">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/445269.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Inuyasha the Movie 3 - La spada del dominatore del mondo (2003)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Inuyasha_the_Movie_4_L_isola_del_fuoco_scarlatto_2004">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/445270.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Inuyasha the Movie 4 - L'isola del fuoco scarlatto (2004)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Jujutsu_Kaisen_0_The_Movie_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/424556.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Jujutsu Kaisen 0: The Movie (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ken_il_guerriero_La_leggenda_del_vero_salvatore_2008">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/267137.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ken il guerriero - La leggenda del vero salvatore (2008)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ken_il_guerriero_La_leggenda_di_Hokuto_2006">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/267136.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ken il guerriero - La leggenda di Hokuto (2006)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ken_il_guerriero_La_leggenda_di_Raoul_2007">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/267138.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ken il guerriero - La leggenda di Raoul (2007)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ken_il_guerriero_La_leggenda_di_Toki_2008">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/267139.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ken il guerriero - La leggenda di Toki (2008)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Città_Incantata">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/169087.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Città Incantata</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Forma_Della_Voce">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/94252.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Forma Della Voce -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lamù_Beautiful_Dreamer">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/186435.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lamù - Beautiful Dreamer</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Liz_e_l_uccellino_azzurro_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/408062.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Liz e l'uccellino azzurro (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Made_in_Abyss_Dawn_of_the_Deep_Soul_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/295350.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Made in Abyss: Dawn of the Deep Soul (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Maris_the_Wondergirl_1986">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/514647.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Maris the Wondergirl (1986)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mary_e_il_fiore_della_strega_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/244287.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mary e il fiore della strega (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mobile_Suit_Gundam_Hathaway_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/290528.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mobile Suit Gundam Hathaway (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="MONSTERS_Centotré_emozioni_Inferno_del_drago_volante_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/518750.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>MONSTERS - Centotré emozioni... Inferno del drago volante (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="My_Hero_Academia_The_Movie_Two_Heroes">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/94255.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>My Hero Academia - The Movie - Two Heroes -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Naruto_La_via_dei_ninja_2012">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/552379.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Naruto - La via dei ninja (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Naruto_Shippuden_Eredi_Della_Volontà_Del_Fuoco">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/131750.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Naruto Shippuden - Eredi Della Volontà Del Fuoco ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Naruto_Shippuden_Il_Maestro_E_Il_Discepolo">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/131748.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Naruto Shippuden - Il Maestro E Il Discepolo ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Naruto_Shippuden_L_esercito_Fantasma">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/131747.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Naruto Shippuden - L'esercito Fantasma ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Naruto_Shippuden_La_Torre_Perduta">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/131749.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Naruto Shippuden - La Torre Perduta ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Night_Warriors_Darkstalkers_Revenge_1997">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/389014.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Night Warriors: Darkstalkers Revenge (1997)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ninja_Scroll_1993">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/512181.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ninja Scroll (1993)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Oltre_le_fiamme_1985">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/514650.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Oltre le fiamme (1985)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="One_Piece_Avventura_all_Isola_spirale_2001">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/393545.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>One Piece - Avventura all'Isola spirale (2001)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="One_Piece_Film_Red_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/462625.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>One Piece Film: Red (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Paprika_Sognando_un_sogno_2006">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/402303.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Paprika - Sognando un sogno (2006)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Perfect_Blue_1998">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/542846.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Perfect Blue (1998)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Pretty_Cure_Max_Heart_2_Amici_per_sempre_2005">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/266787.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Pretty Cure Max Heart 2 - Amici per sempre (2005)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Pretty_Cure_Splash_Star_Le_leggendarie_guerriere_2006">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/266791.avi" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Pretty Cure Splash Star - Le leggendarie guerriere (2006)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="PROMARE">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/94550.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>PROMARE -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ride_Your_Wave">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/200740.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ride Your Wave</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Samurai_Spirits_Apocalisse_a_Edo_1994">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/514651.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Samurai Spirits - Apocalisse a Edo (1994)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Slayers_L_eredità_degli_elfi_1996">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/256880.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Slayers - L'eredità degli elfi (1996)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Slayers_La_città_dei_Golem_1997">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/256881.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Slayers - La città dei Golem (1997)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Slayers_Le_terme_di_Mipross_1995">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/256879.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Slayers - Le terme di Mipross (1995)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Spy_x_Family_Code_White_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/548382.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Spy x Family Code: White (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Steins_Gate_The_Movie_Load_Region_of_Déjà_Vu_2013">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/289483.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Steins;Gate: The Movie - Load Region of Déjà Vu (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Suzume_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/497460.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Suzume (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Suzume_2022_SUB_ITA">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/494434.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Suzume (2022) SUB ITA</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sword_Art_Online_Progressive_Scherzo_of_a_Deep_Night_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/512156.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sword Art Online: Progressive - Scherzo of a Deep Night (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tamagotchi_The_Movie_2007">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/496275.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tamagotchi: The Movie (2007)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tekkonkinkreet_Soli_contro_tutti_2006">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/521256.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tekkonkinkreet - Soli contro tutti (2006)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="That_Time_I_Got_Reincarnated_as_a_Slime_Movie_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/468792.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>That Time I Got Reincarnated as a Slime Movie (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_First_Slam_Dunk_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/532017.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The First Slam Dunk (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Last_Naruto_the_Movie_2014">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/514649.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Last: Naruto the Movie (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Una_lettera_per_Momo_2012">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/530935.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Una lettera per Momo (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Vampire_Hunter_D_Bloodlust_2000">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/549016.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Vampire Hunter D - Bloodlust (2000)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Viaggio_Verso_Agartha">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/94253.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Viaggio Verso Agartha</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Voglio_mangiare_il_tuo_pancreas_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/492474.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Voglio mangiare il tuo pancreas (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Weathering_With_You">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/94254.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Weathering With You -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Wolf_Children_Ame_e_Yuki_i_bambini_lupo_2012">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/489985.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Wolf Children - Ame e Yuki i bambini lupo (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Words_Bubble_Up_Like_Soda_Pop_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/514654.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Words Bubble Up Like Soda Pop (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Yes_Pretty_Cure_5_GoGo_Buon_compleanno_carissima_Nozomi_2008">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/266790.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Yes! Pretty Cure 5 GoGo! - Buon compleanno carissima Nozomi (2008)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Your_Name">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/94256.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Your Name -</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Yu_Yu_Hakusho_I_guerrieri_dell_inferno_1994">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/514655.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Yu Yu Hakusho: I guerrieri dell'inferno (1994)</p>
+      </a>
+    </div>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>

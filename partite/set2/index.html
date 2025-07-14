@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Seleziona Gruppo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+  <style>
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+h1 {
+  font-size: 4rem;
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+}
+
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
+
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
+
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
+
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
+
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+}
+
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
+
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
+  </style>
+</head>
+<body>
+  <h1>📽️ Film</h1>
+  <div class="griglia">
+  
+  <a class="canale" href="search.html" tabindex="0">
+  <div style="font-size: 48px;">🔎</div>
+  <div><p>Cerca Serie</p></div>
+</a>
+    
+     <a class="canale" href="◈_Film_Anime_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Anime ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Animazione_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Animazione ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Cartoni_Animati_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Cartoni Animati ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Studio_Ghibli_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Studio Ghibli ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Ficarra_e_Picone_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Ficarra e Picone ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Massimo_Boldi_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Massimo Boldi ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Antonio_Albanese_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Antonio Albanese ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Aldo,_Giovanni_e_Giacomo_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Aldo, Giovanni e Giacomo ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Aldo_Fabrizi_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Aldo Fabrizi ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Toto_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Toto ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Massimo_Troisi_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Massimo Troisi ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Alberto_Sordi_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Alberto Sordi ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Lino_Banfi_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Lino Banfi ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Adriano_Celentano_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Adriano Celentano ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Vincenzo_Salemme_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Vincenzo Salemme ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Leonardo_Pieraccioni_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Leonardo Pieraccioni ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Renato_Pozzetto_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Renato Pozzetto ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Carlo_Verdone_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Carlo Verdone ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Christian_De_Sica_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Christian De Sica ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Bud_Spencer_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Bud Spencer ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Franco_e_Ciccio_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Franco e Ciccio ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Diego_Abatantuono_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Diego Abatantuono ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Nino_D'Angelo_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Nino D'Angelo ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Mario_Merola__◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Mario Merola  ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_FIlm_Jerry_Cala_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ FIlm Jerry Cala ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Fabio_De_Luigi_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Fabio De Luigi ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Alessandro_Siani_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Alessandro Siani ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Biagio_Izzo_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Biagio Izzo ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Checco_Zalone_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Checco Zalone ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Alvaro_Vitali_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Alvaro Vitali ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Edoardo_Leo_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Edoardo Leo ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Gigi_Proietti_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Gigi Proietti ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Roberto_Benigni_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Roberto Benigni ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Dario_Argento_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Dario Argento ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Giuliano_Gemma_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Giuliano Gemma ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Pupi_Avati_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Pupi Avati ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Nino_Manfredi_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Nino Manfredi ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Eduardo_De_Filippo_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Eduardo De Filippo ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Vittorio_De_Sica_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Vittorio De Sica ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Anna_Magnani_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Anna Magnani ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Pier_Paolo_Pasolini_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Pier Paolo Pasolini ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Francesco_Nuti_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Francesco Nuti ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Marco_Giallini_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Marco Giallini ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Alessandro_Gassman_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Alessandro Gassman ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Rocco_Papaleo_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Rocco Papaleo ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Sophia_Loren_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Sophia Loren ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Elio_Germano_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Elio Germano ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Gina_Lollobrigida_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Gina Lollobrigida ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Amedeo_Nazzari_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Amedeo Nazzari ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Lando_Buzzanca_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Lando Buzzanca ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Tomas_Milian_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Tomas Milian ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Sergio_Leone_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Sergio Leone ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Claudio_Amendola_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Claudio Amendola ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Jason_Statham_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Jason Statham ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Walter_Matthau_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Walter Matthau ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Danny_De_Vito_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Danny De Vito ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Jean-Claude_Van_Damme_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Jean-Claude Van Damme ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Mel_Gibson_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Mel Gibson ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Brad_Pitt_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Brad Pitt ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Al_Pacino_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Al Pacino ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Agatha_Christie_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Agatha Christie ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_John_Wayne__◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film John Wayne  ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Alfred_Hitchcock_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Alfred Hitchcock ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Leslie_Nielsen_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Leslie Nielsen ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_David_Lynch__◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film David Lynch  ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Bruce_Lee_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Bruce Lee ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Jim_Carrey_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Jim Carrey ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Liam_Neeson_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Liam Neeson ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Clint_Eastwood_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Clint Eastwood ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Tom_Hanks_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Tom Hanks ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Arnold_Schwarzenegger_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Arnold Schwarzenegger ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Sylvester_Stallone_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Sylvester Stallone ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Harrison_Ford_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Harrison Ford ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Steven_Seagal_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Steven Seagal ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Tommy_Lee_Jones_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Tommy Lee Jones ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Julia_Roberts_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Julia Roberts ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Will_Smith_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Will Smith ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Ben_Stiller_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Ben Stiller ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Denzel_Washington_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Denzel Washington ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Eddie_Murphy_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Eddie Murphy ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Jet_Li_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Jet Li ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_John_Travolta_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film John Travolta ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Jhonny_Deep_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Jhonny Deep ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Leonardo_Di_Caprio_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Leonardo Di Caprio ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Mark_Wahlberg_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Mark Wahlberg ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Nicolas_Cage_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Nicolas Cage ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Robert_De_Niro_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Robert De Niro ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Tom_Cruise_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Tom Cruise ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Quentin_Tarantino_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Quentin Tarantino ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Woody_Allen_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Woody Allen ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Michael_Douglas_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Michael Douglas ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Jackie_Chan_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Jackie Chan ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Dwayne_Johnson_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Dwayne Johnson ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Kevin_Costner_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Kevin Costner ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Jerry_Lewis_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Jerry Lewis ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Adam_Sandler_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Adam Sandler ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Jean_Reno_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Jean Reno ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Keanu_Reeves_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Keanu Reeves ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Marilyn_Monroe_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Marilyn Monroe ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Audrey_Hepburn_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Audrey Hepburn ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Elvis_Presley__◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Elvis Presley  ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Bruce_Willis_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Bruce Willis ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Diane_Keaton_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Diane Keaton ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Charlie_Chaplin_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Charlie Chaplin ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Anthony_Hopkins_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Anthony Hopkins ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_George_Clooney_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film George Clooney ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Robert_Redford_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Robert Redford ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Paul_Newman_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Paul Newman ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Steve_McQueen_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Steve McQueen ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Martin_Scorsese_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Martin Scorsese ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Alicia_Silverstone__◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Alicia Silverstone  ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Bob_Hoskins_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Bob Hoskins ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Charles_Bronson_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Charles Bronson ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Matthew_McConaughey_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Matthew McConaughey ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Jean-Paul_Belmondo_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Jean-Paul Belmondo ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Alain_Delon_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Alain Delon ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Bradley_Cooper_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Bradley Cooper ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Inga_Lindstrom_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Inga Lindstrom ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Freddie_Prinze_Jr_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Freddie Prinze Jr ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Tony_Jaa_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Tony Jaa ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Christian_Bale_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Christian Bale ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Gerard_Butler_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Gerard Butler ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Jack_Nicholson_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Jack Nicholson ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Chuck_Norris_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Chuck Norris ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Sean_Penn_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Sean Penn ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Pierce_Brosnan_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Pierce Brosnan ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Patrick_Swayze_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Patrick Swayze ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Tom_Hardy_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Tom Hardy ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Gianmaria_Volonté_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Gianmaria Volonté ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Jack_Lemmon_E_Walter_Matthau_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Jack Lemmon E Walter Matthau ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Drew_Barrymore_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Drew Barrymore ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Meryl_Streep_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Meryl Streep ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Morgan_Freeman_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Morgan Freeman ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Seth_Rogen_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Seth Rogen ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Jack_Black_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Jack Black ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Steve_Martin_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Steve Martin ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Tracy_Spencer_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Tracy Spencer ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Robin_Williams_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Robin Williams ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Gregory_Peck_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Gregory Peck ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Dustin_Hoffman_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Dustin Hoffman ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Cary_Grant_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Cary Grant ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Angelina_Jolie_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Angelina Jolie ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Jennifer_Lopez_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Jennifer Lopez ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Stanlio_&_Ollio_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Stanlio & Ollio ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Horror_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Horror ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_FHD_1080p_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film FHD 1080p ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Fantasy_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Fantasy ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Azione_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Azione ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Fantascienza_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Fantascienza ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Drammatici_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Drammatici ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_per_Non_Udenti_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film per Non Udenti ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Avventura_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Avventura ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Thriller_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Thriller ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Commedia_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Commedia ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_4k_UHD_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film 4k UHD ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Romantici_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Romantici ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Western_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Western ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Al_Cinema_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Al Cinema ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Famiglia_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Famiglia ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Guerra_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Guerra ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Disney+_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Disney+ ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Sky_Primafila_Premiere_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Sky Primafila Premiere ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Sky_PrimaFila_OnDemand_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Sky PrimaFila OnDemand ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Musicali_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Musicali ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_di_Natale_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film di Natale ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Documentari_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Documentari ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_General_Movies_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ General Movies ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Polizeschi_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Polizeschi ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Polizieschi_anni_70_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Polizieschi anni 70 ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_d'autore_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film d'autore ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_Biografici_◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film Biografici ◈</p></div>
+</a>
+
+    
+     <a class="canale" href="◈_Film_3D__◈.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>◈ Film 3D  ◈</p></div>
+</a>
+
+    
+  </div>
+</body>
+</html>

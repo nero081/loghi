@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>◈ Film Inga Lindstrom ◈</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  max-width: 90vw;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
+
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
+
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
+
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
+
+.canale a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+  text-decoration: none;
+}
+
+
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
+
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
+  </style>
+</head>
+<body>
+  <h1>◈ Film Inga Lindstrom ◈</h1>
+  <div class="griglia">
+    
+    <div class="canale no-logo" id="2004_Ritorno_al_passato">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259215.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2004 - Ritorno al passato</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2004_Sulla_via_del_tramonto">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259216.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2004 - Sulla via del tramonto</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2005_Amore_di_mezza_estate">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259217.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2005 - Amore di mezza estate</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2005_Il_lupo_solitario">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259218.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2005 - Il lupo solitario</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2005_Ombre_dal_passato">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259219.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2005 - Ombre dal passato</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2005_Sonata_romantica">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259220.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2005 - Sonata romantica</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2005_Un_accusa_infamante">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259221.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2005 - Un'accusa infamante</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2006_Gli_orsi_di_Mariafred">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259222.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2006 - Gli orsi di Mariafred</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2006_La_signora_del_faro">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259223.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2006 - La signora del faro</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2006_Nella_rete_dell_amore">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259224.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2006 - Nella rete dell'amore</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2006_Nuvole_su_Sommarholm">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259225.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2006 - Nuvole su Sommarholm</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2007_Emma_Svennson_e_l_amore">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259226.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2007 - Emma Svennson e l'amore</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2007_Giorni_d_estate_sul_lago_Lilja">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259227.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2007 - Giorni d'estate sul lago Lilja</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2007_I_cavalli_di_Monte_Caterina">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259228.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2007 - I cavalli di Monte Caterina</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2007_Un_weekend_a_Soderholm">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259229.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2007 - Un weekend a Soderholm</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2008_L_incantesimo_di_Sandbergen">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259230.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2008 - L'incantesimo di Sandbergen</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2008_La_festa_di_Hanna">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259231.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2008 - La festa di Hanna</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2008_Legami_di_sangue">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259232.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2008 - Legami di sangue</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2008_Matrimonio_a_Hardingsholm">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259233.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2008 - Matrimonio a Hardingsholm</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2008_Un_estate_a_Norrsunda">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259234.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2008 - Un'estate a Norrsunda</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2009_Il_cuore_di_mio_padre">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259235.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2009 - Il cuore di mio padre</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2009_Mia_e_le_sue_sorelle">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259236.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2009 - Mia e le sue sorelle</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2010_Il_mio_finto_fidanzato">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259237.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2010 - Il mio finto fidanzato</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2010_Tango_di_mezza_estate">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259238.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2010 - Tango di mezza estate</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2010_Un_amore_impossibile">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259239.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2010 - Un'amore impossibile</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2010_Un_segno_del_destino">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259240.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2010 - Un segno del destino</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2011_La_casa_oscura">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259241.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2011 - La casa oscura</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2011_La_melodia_del_vento">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259242.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2011 - La melodia del vento</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2011_Scelte_affrettate">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259243.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2011 - Scelte affrettate</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2012_Il_vero_amore">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259244.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2012 - Il vero amore</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2012_Quattro_donne_e_l_amore">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259245.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2012 - Quattro donne e l'amore</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2012_Un_giorno_al_lago">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259246.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2012 - Un giorno al lago</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2013_Cuore_di_ghiaccio">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259247.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2013 - Cuore di ghiaccio</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2013_Il_cigno_nero">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259248.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2013 - Il cigno nero</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2013_I_segreti_del_castello">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259249.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2013 - I segreti del castello</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2013_La_speranza_in_un_amore">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259250.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2013 - La speranza in un amore</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2013_Una_scintilla_d_amore">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259251.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2013 - Una scintilla d'amore</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2014_Il_sogno_di_Elin">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259252.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2014 - Il sogno di Elin</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2014_Ricomincio_da_te">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259253.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2014 - Ricomincio da te</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2014_Sommerlund_per_sempre">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259254.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2014 - Sommerlund per sempre</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2015_Eredità_contesa">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259255.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2015 - Eredità contesa</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2015_Nella_tua_vita">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259256.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2015 - Nella tua vita</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2016_I_tulipani_dell_amore">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259257.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2016 - I tulipani dell'amore</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2016_L_amore_non_muore_mai">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259258.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2016 - L'amore non muore mai</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2016_Le_nozze_di_Greta">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259259.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2016 - Le nozze di Greta</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2016_Nuovi_amori">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259260.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2016 - Nuovi amori</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2016_Ritorno_a_casa">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259261.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2016 - Ritorno a casa</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2016_Tutti_pazzi_per_Elin">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259262.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2016 - Tutti pazzi per Elin</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2017_Incanto_d_amore">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259263.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2017 - Incanto d'amore</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2017_La_casa_sul_lago">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259264.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2017 - La casa sul lago</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2017_Segreti_di_famiglia">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259265.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2017 - Segreti di famiglia</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2017_Una_blogger_in_cucina">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259266.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2017 - Una blogger in cucina</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2017_Una_sorpresa_dal_passato">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259267.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2017 - Una sorpresa dal passato</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2018_L_altra_figlia">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259268.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2018 - L'altra figlia</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2018_Scherzi_d_amore">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259269.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2018 - Scherzi d'amore</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="2018_Tutta_la_verità">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/259270.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>2018 - Tutta la verità</p>
+      </a>
+    </div>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>

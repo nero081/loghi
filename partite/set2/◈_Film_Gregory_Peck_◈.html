@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>◈ Film Gregory Peck ◈</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  max-width: 90vw;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
+
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
+
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
+
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
+
+.canale a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+  text-decoration: none;
+}
+
+
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
+
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
+  </style>
+</head>
+<body>
+  <h1>◈ Film Gregory Peck ◈</h1>
+  <div class="griglia">
+    
+    <div class="canale no-logo" id="Arabesque_1966">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442041.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Arabesque (1966)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cape_Fear_Il_promontorio_della_paura_1991">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442043.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cape Fear - Il promontorio della paura (1991)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cielo_di_fuoco_1949">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442044.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cielo di fuoco (1949)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cielo_giallo_1948">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442071.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cielo giallo (1948)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Davide_e_Betsabea_1951">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442045.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Davide e Betsabea (1951)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Duello_al_sole_1946">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442046.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Duello al sole (1946)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_cannoni_di_Navarone_1961">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442069.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I cannoni di Navarone (1961)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_buio_oltre_la_siepe_1962">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442047.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il buio oltre la siepe (1962)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_cucciolo_1946">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442048.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il cucciolo (1946)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_grande_paese_1958">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442066.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il grande paese (1958)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_grande_peccatore_1949">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442068.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il grande peccatore (1949)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_solitario_di_Rio_Grande_1971">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442064.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il solitario di Rio Grande (1971)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Io_ti_salverò_1945">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442065.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Io ti salverò (1945)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_ragazzi_venuti_dal_Brasile_1978">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442067.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I ragazzi venuti dal Brasile (1978)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_soldi_degli_altri_1991">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442061.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I soldi degli altri (1991)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_avamposto_degli_uomini_perduti_1951">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442060.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'avamposto degli uomini perduti (1951)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_oca_selvaggia_colpisce_ancora_1980">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442049.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'oca selvaggia colpisce ancora (1980)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_oro_di_Mackenna_1969">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442050.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'oro di Mackenna (1969)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_ultima_spiaggia_1959">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442051.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'ultima spiaggia (1959)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_donna_del_destino_1957">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442052.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La donna del destino (1957)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_mia_pistola_per_Billy_1974">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442042.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La mia pistola per Billy (1974)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_notte_dell_agguato_1968">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442053.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La notte dell'agguato (1968)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Le_avventure_del_capitano_Hornblower_1951">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442054.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Le avventure del capitano Hornblower (1951)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Le_chiavi_del_Paradiso_1944">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442055.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Le chiavi del Paradiso (1944)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Le_nevi_del_Chilimangiaro_1952">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442056.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Le nevi del Chilimangiaro (1952)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mac_Arthur_il_generale_ribelle_1977">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442057.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mac Arthur il generale ribelle (1977)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mirage_1965">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442058.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mirage (1965)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Moby_Dick_La_balena_bianca_1956">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442059.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Moby Dick - La balena bianca (1956)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Romantico_avventuriero_1950">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442063.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Romantico avventuriero (1950)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_uomo_senza_scampo_1970">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442070.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un uomo senza scampo (1970)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Vacanze_romane_1953">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442062.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Vacanze romane (1953)</p>
+      </a>
+    </div>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>

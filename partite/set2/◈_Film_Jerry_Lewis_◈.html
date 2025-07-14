@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>◈ Film Jerry Lewis ◈</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  max-width: 90vw;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
+
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
+
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
+
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
+
+.canale a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+  text-decoration: none;
+}
+
+
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
+
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
+  </style>
+</head>
+<body>
+  <h1>◈ Film Jerry Lewis ◈</h1>
+  <div class="griglia">
+    
+    <div class="canale no-logo" id="3_sul_divano_1966">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469203.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>3 sul divano (1966)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Arizona_Dream_1993">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469211.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Arizona Dream (1993)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Artisti_e_modelle_1955">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469178.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Artisti e modelle (1955)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Attente_ai_marinai_1952">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469172.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Attente ai marinai! (1952)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bentornato_picchiatello_1980">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469208.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bentornato picchiatello (1980)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Boeing_Boeing_1965">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469200.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Boeing Boeing (1965)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="C_era_una_volta_un_piccolo_naviglio_1959">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469187.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>C'era una volta un piccolo naviglio (1959)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Dove_vai_sono_guai_1963">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469195.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Dove vai sono guai! (1963)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hollywood_o_morte_1956">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469180.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Hollywood o morte! (1956)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_7_magnifici_Jerry_1965">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469202.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I 7 magnifici Jerry (1965)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_corrotti_The_Trust_2016">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469214.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I corrotti - The Trust (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_figli_del_secolo_1953">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469174.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I figli del secolo (1953)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_balio_asciutto_1958">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469185.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il balio asciutto (1958)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_cantante_matto_1952">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/470834.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il cantante matto (1952)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_caporale_Sam_1952">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469173.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il caporale Sam (1952)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_cenerentolo_1960">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469189.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il cenerentolo (1960)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_ciarlatano_1967">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469205.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il ciarlatano (1967)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_circo_a_tre_piste_1954">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469215.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il circo a tre piste (1954)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_commediante_1995">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469213.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il commediante (1995)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_delinquente_delicato_1957">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469183.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il delinquente delicato (1957)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_marmittone_1957">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469184.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il marmittone (1957)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_mattatore_di_Hollywood_1961">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469192.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il mattatore di Hollywood (1961)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_nipote_picchiatello_1955">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469179.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il nipote picchiatello (1955)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_ponticello_sul_fiume_dei_guai_1958">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469186.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il ponticello sul fiume dei guai (1958)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_sergente_di_legno_1950">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469169.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il sergente di legno (1950)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_villaggio_più_pazzo_del_mondo_1959">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469188.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il villaggio più pazzo del mondo (1959)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Irma_va_a_Hollywood_1950">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469170.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Irma va a Hollywood (1950)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Jerry_8_e_3_4_1964">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469198.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Jerry 8 e 3/4 (1964)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Jerryssimo_1969">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469206.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Jerryssimo! (1969)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_idolo_delle_donne_1961">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469193.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'idolo delle donne (1961)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_mia_amica_Irma_1949">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/472075.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La mia amica Irma (1949)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_principessa_di_Bali_1953">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469175.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La principessa di Bali (1953)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Le_folli_notti_del_dottor_Jerryll_1963">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469196.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Le folli notti del dottor Jerryll (1963)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mezzogiorno_di_fifa_1956">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469181.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mezzogiorno... di fifa (1956)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Morti_di_paura_1953">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469176.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Morti di paura (1953)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mr_sabato_sera_1992">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469210.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mr. sabato sera (1992)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Non_alzare_il_ponte_abbassa_il_fiume_1968">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469691.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Non alzare il ponte, abbassa il fiume (1968)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Occhio_alla_palla_1953">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469177.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Occhio alla palla (1953)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Pazzi_pupe_e_pillole_1964">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469199.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Pazzi, pupe e pillole (1964)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Quel_fenomeno_di_mio_figlio_1951">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469171.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Quel fenomeno di mio figlio (1951)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Questo_pazzo_pazzo_mondo_della_canzone_1964">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469197.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Questo pazzo, pazzo mondo della canzone (1964)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ragazzo_tuttofare_1960">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469190.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ragazzo tuttofare (1960)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Re_per_una_notte_1982">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469209.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Re per una notte (1982)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Scusi_dov_è_il_fronte_1970">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469207.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Scusi, dov'è il fronte? (1970)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sherlocko_investigatore_sciocco_1962">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469194.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sherlocko investigatore sciocco (1962)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Stazione_luna_1966">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469204.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Stazione luna (1966)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_marziano_sulla_Terra_1960">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/469191.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un marziano sulla Terra (1960)</p>
+      </a>
+    </div>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>

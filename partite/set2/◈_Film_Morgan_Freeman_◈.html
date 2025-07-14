@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>◈ Film Morgan Freeman ◈</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  max-width: 90vw;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
+
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
+
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
+
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
+
+.canale a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+  text-decoration: none;
+}
+
+
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
+
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
+  </style>
+</head>
+<body>
+  <h1>◈ Film Morgan Freeman ◈</h1>
+  <div class="griglia">
+    
+    <div class="canale no-logo" id="Al_vertice_della_tensione_2002">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291580.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Al vertice della tensione (2002)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="A_spasso_con_Daisy_1989">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291569.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>A spasso con Daisy (1989)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Attacco_al_potere_Olympus_Has_Fallen_2013">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291598.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Attacco al potere - Olympus Has Fallen (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Attacco_al_potere_2_2016">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291607.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Attacco al potere 2 (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Attacco_al_potere_3_Angel_Has_Fallen_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291613.avi" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Attacco al potere 3 - Angel Has Fallen (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Batman_Begins_2005">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291584.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Batman Begins (2005)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ben_Hur_2016">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291608.avi" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ben-Hur (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Conta_su_di_me_1989">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291570.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Conta su di me (1989)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Danny_the_dog_2005">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291585.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Danny the dog (2005)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Deep_Impact_1998">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291578.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Deep Impact (1998)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Gli_spietati_1992">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291573.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Gli spietati (1992)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Glory_Uomini_di_gloria_1989">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291571.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Glory - Uomini di gloria (1989)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Gone_Baby_Gone_2007">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291588.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Gone Baby Gone (2007)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="High_Crimes_Crimini_di_stato_2002">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291581.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>High Crimes - Crimini di stato (2002)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_cavaliere_oscuro_2008">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291591.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il cavaliere oscuro (2008)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_cavaliere_oscuro_Il_ritorno_2012">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291596.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il cavaliere oscuro - Il ritorno (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_collezionista_1997">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291577.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il collezionista (1997)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_vento_del_perdono_2005">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291586.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il vento del perdono (2005)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Insospettabili_sospetti_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291611.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Insospettabili sospetti (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Invictus_L_invincibile_2009">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291593.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Invictus - L'invincibile (2009)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_incredibile_storia_di_Winter_il_delfino_2011">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291602.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'incredibile storia di Winter il delfino (2011)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_rosa_velenosa_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291614.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La rosa velenosa (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Last_Vegas_2013">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291599.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Last Vegas (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Le_ali_della_libertà_1994">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291574.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Le ali della libertà (1994)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lo_schiaccianoci_e_i_quattro_regni_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291612.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lo schiaccianoci e i quattro regni (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lucy_2014">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291603.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lucy (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Million_Dollar_Baby_2004">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291583.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Million Dollar Baby (2004)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Nella_morsa_del_ragno_2001">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291579.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Nella morsa del ragno (2001)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Non_è_mai_troppo_tardi_2007">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291589.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Non è mai troppo tardi (2007)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Now_You_See_Me_I_maghi_del_crimine_2013">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291600.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Now You See Me - I maghi del crimine (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Now_You_See_Me_2_2016">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291609.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Now You See Me 2 (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Oblivion_2013">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291601.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Oblivion (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Red_2010">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291595.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Red (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Robin_Hood_Principe_dei_ladri_1991">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291572.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Robin Hood - Principe dei ladri (1991)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ruth_Alex_L_amore_cerca_casa_2014">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291604.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ruth & Alex - L'amore cerca casa (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Seven_1995">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291575.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Seven (1995)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ted_2_2015">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291605.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ted 2 (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Code_2009">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291594.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Code (2009)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Contract_2006">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291587.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Contract (2006)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Magic_of_Belle_Isle_2012">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291597.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Magic of Belle Isle (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_impresa_da_Dio_2007">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291590.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un'impresa da Dio (2007)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Una_settimana_da_Dio_2003">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291582.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Una settimana da Dio (2003)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Virus_letale_1995">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291576.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Virus letale (1995)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Wanted_Scegli_il_tuo_destino_2008">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291592.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Wanted - Scegli il tuo destino (2008)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="È_solo_l_inizio_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291610.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>È solo l'inizio (2017)</p>
+      </a>
+    </div>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>

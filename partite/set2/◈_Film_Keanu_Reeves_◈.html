@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>◈ Film Keanu Reeves ◈</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  max-width: 90vw;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
+
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
+
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
+
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
+
+.canale a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+  text-decoration: none;
+}
+
+
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
+
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
+  </style>
+</head>
+<body>
+  <h1>◈ Film Keanu Reeves ◈</h1>
+  <div class="griglia">
+    
+    <div class="canale no-logo" id="47_Ronin">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206645.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>47 Ronin</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="A_Scanner_Darkly_Un_Oscuro_Scrutare">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206636.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>A Scanner Darkly - Un Oscuro Scrutare</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Belli_E_Dannati">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206618.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Belli E Dannati</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Bill_Ted_Face_the_Music_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/345282.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Bill & Ted Face the Music (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Constantine">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206635.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Constantine</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Destinazione_Matrimonio">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206653.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Destinazione Matrimonio</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Dracula_Di_Bram_Stoker">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206621.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Dracula Di Bram Stoker</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fino_all_osso_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206651.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fino all'osso (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Generation_Um">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206642.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Generation Um</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hardball_2001">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/448413.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Hardball (2001)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Henry_s_Crime">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206641.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Henry's Crime</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Profumo_Del_Mosto_Selvatico">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206624.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Profumo Del Mosto Selvatico</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Johnny_Mnemonic">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206626.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Johnny Mnemonic</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="John_Wick_2014">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/389896.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>John Wick (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="John_Wick_Capitolo_2_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/389895.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>John Wick - Capitolo 2 (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="John_Wick_3_Parabellum_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/378443.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>John Wick 3 - Parabellum (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="John_Wick_4_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/473537.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>John Wick 4 (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Knock_Knock">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206646.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Knock Knock</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_Avvocato_Del_Diavolo">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206627.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'Avvocato Del Diavolo</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Casa_Sul_Lago_Del_Tempo">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206637.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Casa Sul Lago Del Tempo</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Notte_Non_Aspetta">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206638.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Notte Non Aspetta</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Vita_Segreta_Della_Signora_Lee">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206640.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Vita Segreta Della Signora Lee</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Le_riserve_2000">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/389346.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Le riserve (2000)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Man_Of_Tai_Chi">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206643.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Man Of Tai Chi</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Man_of_Tai_Chi_2013">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/438644.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Man of Tai Chi (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Matrix">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206628.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Matrix</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Matrix_Reloaded">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206633.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Matrix Reloaded</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Matrix_Revolutions">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206634.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Matrix Revolutions</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Molto_Rumore_Per_Nulla">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206622.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Molto Rumore Per Nulla</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Nell_ombra_di_un_delitto_2016">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206647.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Nell'ombra di un delitto (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Piccolo_Buddha">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206623.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Piccolo Buddha</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Point_Break_Punto_di_rottura_1991">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206619.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Point Break - Punto di rottura (1991)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Reazione_a_catena_1996">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/407038.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Reazione a catena (1996)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Replicas">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206654.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Replicas</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Siberia_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206655.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Siberia (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Speed">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206625.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Speed</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sweet_November_Dolce_Novembre">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206630.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sweet November - Dolce Novembre</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Bad_Batch_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206648.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Bad Batch (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Gift_Il_Dono">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206631.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Gift - Il Dono</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Neon_Demon">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206649.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Neon Demon</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Watcher">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206632.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Watcher</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ti_Amerò_Fino_Ad_Ammazzarti">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206617.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ti Amerò    Fino Ad Ammazzarti</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ultimatum_Alla_Terra">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206639.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ultimatum Alla Terra</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Una_doppia_verità_2016">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206650.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Una doppia verità (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_Mitico_Viaggio">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206620.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un Mitico Viaggio</p>
+      </a>
+    </div>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>

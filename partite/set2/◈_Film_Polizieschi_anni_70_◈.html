@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>◈ Film Polizieschi anni 70 ◈</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  max-width: 90vw;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
+
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
+
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
+
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
+
+.canale a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+  text-decoration: none;
+}
+
+
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
+
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
+  </style>
+</head>
+<body>
+  <h1>◈ Film Polizieschi anni 70 ◈</h1>
+  <div class="griglia">
+    
+    <div class="canale no-logo" id="A_Tutte_Le_Auto_Della_Polizia">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154470.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>A Tutte Le Auto Della Polizia</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Banditi_A_Milano">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154471.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Banditi A Milano</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cani_Arrabbiati">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154472.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cani Arrabbiati</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Confessione_Di_Un_Commissario_Di_Polizia_Al_Procuratore_Della_Repubblica">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/193406.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Confessione Di Un Commissario Di Polizia Al Procuratore Della Repubblica</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Con_La_Rabbia_Agli_Occhi">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/193407.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Con La Rabbia Agli Occhi</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Diamanti_Sporchi_Di_Sangue">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/193408.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Diamanti Sporchi Di Sangue</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Gardenia_Il_Giustiziere_Della_Mala">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154473.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Gardenia - Il Giustiziere Della Mala</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Gli_Amici_Di_Nick_Hezard">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/193409.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Gli Amici Di Nick Hezard</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Boss">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/193410.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Boss</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Cinico_L_infame_Il_Violento">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154474.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Cinico L'infame Il Violento</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Cittadino_Si_Ribella">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154475.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Cittadino Si Ribella</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Clan_Dei_Siciliani">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154476.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Clan Dei Siciliani</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Consigliori">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/193411.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Consigliori</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Conto_è_Chiuso">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/193412.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Conto è Chiuso</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Giorno_Della_Civetta">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/193413.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Giorno Della Civetta</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Giustiziere_Sfida_La_Città">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154477.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Giustiziere Sfida La Città</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Poliziotto_è_Marcio">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154478.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Poliziotto è Marcio</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Trucido_E_Lo_Sbirro">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154479.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Trucido E Lo Sbirro</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Indagine_Su_Un_Cittadino_Al_Di_Sopra_Di_Ogni_Sospetto">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/193414.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Indagine Su Un Cittadino Al Di Sopra Di Ogni Sospetto</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Indagine_Su_Un_Delitto_Perfetto">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/193415.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Indagine Su Un Delitto Perfetto</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Io_Ho_Paura">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154480.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Io Ho Paura</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_Ragazzi_Della_Roma_Violenta">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154481.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I Ragazzi Della Roma Violenta</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Italia_A_Mano_Armata">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154482.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Italia A Mano Armata</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Banda_Del_Gobbo">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154483.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Banda Del Gobbo</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Banda_Del_Trucido">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154484.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Banda Del Trucido</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Banda_Vallanzasca">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154485.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Banda Vallanzasca</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Belva_Col_Mitra">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154486.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Belva Col Mitra</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Città_Gioca_D_azzardo">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/193416.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Città Gioca D'azzardo</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Città_Sconvolta_Caccia_Spietata_Ai_Rapinatori">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154487.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Città Sconvolta Caccia Spietata Ai Rapinatori</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Legge_Violenta_Della_Squadra_Anticrimine">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154488.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Legge Violenta Della Squadra Anticrimine</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Mala_Ordina">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154489.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Mala Ordina</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Malavita_Attacca_La_Polizia_Risponde">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154490.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Malavita Attacca    La Polizia Risponde!</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Mano_Spietata_Della_Legge">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154491.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Mano Spietata Della Legge</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Polizia_Accusa_Il_Servizio_Segreto_Uccide">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154492.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Polizia Accusa: Il Servizio Segreto Uccide</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Polizia_Ha_Le_Mani_Legate">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154495.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Polizia Ha Le Mani Legate</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Polizia_Incrimina_La_Legge_Assolve">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154496.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Polizia Incrimina La Legge Assolve</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Polizia_Interviene_Ordine_Di_Uccidere">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154497.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Polizia Interviene - Ordine Di Uccidere</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Polizia_Ringrazia">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154498.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Polizia Ringrazia</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Polizia_Sta_A_Guardare">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154499.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Polizia Sta A Guardare</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Polizia_è_Al_Servizio_Del_Cittadino">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154493.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Polizia è Al Servizio Del Cittadino?</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Polizia_è_Sconfitta">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154494.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Polizia è Sconfitta</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Luca_Il_Contrabbandiere">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/193417.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Luca Il Contrabbandiere</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Milano_Il_Clan_Dei_Calabresi">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/193418.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Milano: Il Clan Dei Calabresi</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Milano_Calibro_9">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154500.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Milano Calibro 9</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Milano_Odia_La_Polizia_Non_Può_Sparare">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154501.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Milano Odia - La Polizia Non Può Sparare</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Milano_Rovente">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154502.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Milano Rovente</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Milano_Trema_La_Polizia_Vuole_Giustizia">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154503.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Milano Trema - La Polizia Vuole Giustizia</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Milano_Violenta">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154504.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Milano Violenta</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Napoli_La_Camorra_Sfida_La_Città_Risponde">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154505.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Napoli    La Camorra Sfida La Città Risponde</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Napoli_Palermo_New_York_Il_Trangolo_Della_Camorra">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154506.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Napoli Palermo New York Il Trangolo Della Camorra</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Napoli_Si_Ribella">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154507.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Napoli Si Ribella</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Napoli_Spara">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154508.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Napoli Spara</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Napoli_Violenta">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154509.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Napoli Violenta</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Paura_In_Città">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154510.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Paura In Città</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Piedone_Lo_Sbirro">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/193419.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Piedone Lo Sbirro</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Poliziotti_Violenti">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/193420.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Poliziotti Violenti</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Poliziotto_Senza_Paura">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154511.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Poliziotto Senza Paura</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Poliziotto_Sprint">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/193421.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Poliziotto Sprint</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Provincia_Violenta">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154512.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Provincia Violenta</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Quelli_Dell_antirapina_4_Minuti_Per_4_Miliardi">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154513.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Quelli Dell'antirapina 4 Minuti Per 4 Miliardi</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Quelli_Della_Calibro_38">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154514.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Quelli Della Calibro 38</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Revolver">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/193422.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Revolver</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Roma_A_Mano_Armata">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154515.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Roma A Mano Armata</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Roma_Drogata_La_Polizia_Non_Può_Intervenire">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154516.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Roma Drogata - La Polizia Non Può Intervenire</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Roma_Violenta">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154517.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Roma Violenta</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sbirro_La_Tua_Legge_è_Lenta_La_Mia_No">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154518.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sbirro La Tua Legge è Lenta    La Mia    No</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Squadra_Volante">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154519.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Squadra Volante</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tony_L_altra_Faccia_Della_Torino_Violenta">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154520.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tony L'altra Faccia Della Torino Violenta</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Torino_Nera">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/193423.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Torino Nera</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Torino_Violenta">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154521.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Torino Violenta</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_Poliziotto_Scomodo">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154522.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un Poliziotto Scomodo</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_Tipo_Con_Una_Faccia_Strana_Ti_Cerca_Per_Ucciderti">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/193424.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un Tipo Con Una Faccia Strana Ti Cerca Per Ucciderti</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Uomini_Si_Nasce_Poliziotti_Si_Muore">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/154523.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Uomini Si Nasce Poliziotti Si Muore</p>
+      </a>
+    </div>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>

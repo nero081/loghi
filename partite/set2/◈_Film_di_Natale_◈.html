@@ -1,0 +1,2091 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>◈ Film di Natale ◈</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  max-width: 90vw;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
+
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
+
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
+
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
+
+.canale a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+  text-decoration: none;
+}
+
+
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
+
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
+  </style>
+</head>
+<body>
+  <h1>◈ Film di Natale ◈</h1>
+  <div class="griglia">
+    
+    <div class="canale no-logo" id="Ops_È_già_Natale_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/636639.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ops! È già Natale (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Last_Christmas_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/626435.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Last Christmas (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cortina_Express_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/622324.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cortina Express (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_matrimonio_sotto_l_albero_L_amore_a_Natale_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/622177.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un matrimonio sotto l'albero - L'amore a Natale (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Natale_country_di_SpongeBob_e_Sandy_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/622138.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Natale country di SpongeBob e Sandy (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="A_Nonsense_Christmas_with_Sabrina_Carpenter_2024_SUB_ITA">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/621446.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>A Nonsense Christmas with Sabrina Carpenter (2024) SUB ITA</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Uno_Rosso_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/621151.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Uno Rosso (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Niko_e_la_slitta_di_Babbo_Natale_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/621057.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Niko e la slitta di Babbo Natale (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_più_mirabolante_recita_di_Natale_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/621055.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La più mirabolante recita di Natale (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Dear_Santa_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/620681.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Dear Santa (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Quel_Natale_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/613576.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Quel Natale (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Jack_Whitehall_Missione_Natale_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/613559.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Jack Whitehall: Missione Natale (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_incontro_regale_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/613216.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un incontro regale (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Riportare_a_casa_il_Natale_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/613215.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Riportare a casa il Natale (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Christmas_on_Windmill_Way_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/613214.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Christmas on Windmill Way (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Era_solo_un_messaggio_prima_di_Natale_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/613213.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Era solo un messaggio prima di Natale (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Con_amore_Babbo_Natale_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/613202.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>...Con amore Babbo Natale (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sorella_di_neve_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/613005.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sorella di neve (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Our_Little_Secret_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/613003.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Our Little Secret (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Improvvisamente_a_Natale_mi_sposo_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/613000.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Improvvisamente a Natale mi sposo (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Merry_Gentlemen_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/612337.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Merry Gentlemen (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hot_Frosty_Una_magia_di_Natale_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/611118.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Hot Frosty - Una magia di Natale (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Appuntamento_a_Natale_2024">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/608415.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Appuntamento a Natale (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="8_Bit_Christmas_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/312657.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>8-Bit Christmas (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="10_Giorni_Con_Babbo_Natale">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/205366.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>10 Giorni Con Babbo Natale</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="12_regali_di_Natale_2015">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/440837.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>12 regali di Natale (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="12_Volte_Natale_2011">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/311655.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>12 Volte Natale (2011)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="A_1000_km_dal_Natale_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/316281.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>A 1000 km dal Natale (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="A_Casa_Per_Natale">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201413.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>A Casa Per Natale</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="A_Christmas_Carol">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201424.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>A Christmas Carol</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="A_Christmas_No_1_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/315945.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>A Christmas No. 1 (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="A_Christmas_Story_Christmas_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442367.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>A Christmas Story Christmas (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="A_Cinderella_Story_Christmas_Wish_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/311748.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>A Cinderella Story: Christmas Wish (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alla_Ricerca_Della_Stella_Del_Natale">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/203973.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alla Ricerca Della Stella Del Natale</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Amore_Natale_e_baccalà_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/312160.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Amore, Natale e... baccalà (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Babbo_Natale_e_i_libri_magici_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/305984.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Babbo Natale e i libri magici (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Babbo_Natale_in_prova_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/308615.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Babbo Natale in prova (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Babbo_Natale_non_viene_da_Nord_2015">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/344375.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Babbo Natale non viene da Nord (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Baby_Boss_Un_Natale_speciale_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/444342.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Baby Boss - Un Natale speciale (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Beethoven_L_avventura_Di_Natale">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201427.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Beethoven - L'avventura Di Natale</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Best_Christmas_Ever_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/497241.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Best. Christmas. Ever! (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Blizzard_La_Renna_di_Babbo_Natale_2003">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/311134.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Blizzard - La Renna di Babbo Natale (2003)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Buon_Natale_da_Candy_Cane_Lane_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/511386.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Buon Natale da Candy Cane Lane (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Camino_Acceso_Con_Musiche_Natalizie">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/203711.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Camino Acceso Con Musiche Natalizie</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Canto_Di_Natale_Di_Topolino">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201402.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Canto Di Natale Di Topolino</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Capodanno_A_New_York">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201428.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Capodanno A New York</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Caro_Babbo_Natale">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201408.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Caro Babbo Natale</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Che_Fine_Ha_Fatto_Santa_Clause">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201416.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Che Fine Ha Fatto Santa Clause?</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Chi_ha_incastrato_Babbo_Natale_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/436677.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Chi ha incastrato Babbo Natale? (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Chilly_Christmas_2012">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/307566.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Chilly Christmas (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Christmas_Drop_Operazione_Regali">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201452.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Christmas Drop: Operazione Regali</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Christmas_In_Love">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201418.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Christmas In Love</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Christmas_in_Wonderland_2007">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/513094.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Christmas in Wonderland (2007)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Come_sempre_a_Natale_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/511671.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Come sempre a Natale (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Concerto_di_Natale_con_i_Flintstones_1994">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/312228.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Concerto di Natale con i Flintstones (1994)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Credo_a_Babbo_Natale_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/443306.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Credo a Babbo Natale (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Dawid_i_Elfy_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/311653.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Dawid i Elfy (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Diario_di_una_schiappa_a_Natale_Si_salvi_chi_può_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/511886.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Diario di una schiappa a Natale - Si salvi chi può! (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Din_Don_5_Bianco_Natale_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/444188.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Din Don 5 - Bianco Natale (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Due_cuori_e_un_tesoro_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/444816.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Due cuori e un tesoro (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Elf_Un_Elfo_Di_Nome_Buddy">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201417.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Elf - Un Elfo Di Nome Buddy</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Elf_Me_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/498293.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Elf Me (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Elliot_La_piccola_renna_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/444182.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Elliot - La piccola renna (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ernesto_salva_il_Natale_1988">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/310131.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ernesto salva il Natale (1988)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Falling_for_Christmas_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/438039.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Falling for Christmas (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Festa_In_Casa_Muppet">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201409.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Festa In Casa Muppet</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Finalmente_Natale_2007">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/445609.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Finalmente Natale (2007)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fred_Claus_Un_Fratello_Sotto_L_albero">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201423.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fred Claus - Un Fratello Sotto L'albero</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fuga_Dal_Natale">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201419.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fuga Dal Natale</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Giusto_in_tempo_per_Natale_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442315.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Giusto in tempo per Natale (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Harold_Kumar_Un_Natale_Da_Ricordare">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201429.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Harold & Kumar - Un Natale Da Ricordare</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hercules_Il_Cane_di_Babbo_Natale_2011">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/291906.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Hercules - Il Cane di Babbo Natale (2011)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Home_Sweet_Home_Alone_Mamma_ho_perso_l_aereo_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/305212.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Home Sweet Home Alone - Mamma, ho perso l'aereo (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Calendario_Di_Natale">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201446.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Calendario Di Natale</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_figlio_di_Babbo_Natale_2011">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/316122.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il figlio di Babbo Natale (2011)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Grinch">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201415.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Grinch</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_miglior_Natale_della_mia_vita_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/444817.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il miglior Natale della mia vita (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_mio_desiderio_per_Natale_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/444818.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il mio desiderio per Natale (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_mio_principe_di_Natale_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/444839.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il mio principe di Natale (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Natale_che_ho_dimenticato_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/444819.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Natale che ho dimenticato (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Natale_che_ho_sempre_desiderato_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/444820.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Natale che ho sempre desiderato (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Natale_della_porta_accanto_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/436678.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Natale della porta accanto (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Natale_Dimenticato_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/441452.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Natale Dimenticato (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Peggior_Natale_Della_Mia_Vita">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201431.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Peggior Natale Della Mia Vita</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Piccolo_Lord">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201399.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Piccolo Lord</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Primo_Natale">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201448.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Primo Natale</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_segreto_di_Babbo_Natale_2013">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/306800.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il segreto di Babbo Natale (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_segreto_di_Natale_2014">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/477666.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il segreto di Natale (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_tuo_Natale_o_il_mio_2_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/511852.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il tuo Natale o il mio 2 (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_tuo_Natale_o_il_mio_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/441823.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il tuo Natale o il mio? (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_miei_pasticci_di_Natale_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/444821.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I miei pasticci di Natale (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Improvvisamente_Natale_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/441540.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Improvvisamente Natale (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Indovina_Chi_Viene_A_Natale">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201433.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Indovina Chi Viene A Natale?</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="In_fuga_con_Babbo_Natale_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/512484.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>In fuga con Babbo Natale (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Jack_Frost">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201414.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Jack Frost</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Jingle_Jangle_Un_avventura_Natalizia">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/203157.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Jingle Jangle: Un'avventura Natalizia</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Klaus_I_Segreti_Del_Natale">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206393.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Klaus - I Segreti Del Natale</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_albero_che_salvò_il_Natale_2014">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/478271.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'albero che salvò il Natale (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_era_glaciale_presenta_l_era_Natale_2011">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/512625.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'era glaciale presenta: l'era Natale (2011)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Banda_Dei_Babbi_Natale">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201425.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Banda Dei Babbi Natale</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_buona_strega_del_Natale_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/444830.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La buona strega del Natale (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Cena_Di_Natale">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201443.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Cena Di Natale</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_famiglia_Claus_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/496621.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La famiglia Claus (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_famiglia_Claus_2_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/496622.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La famiglia Claus 2 (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_famiglia_Claus_3_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/496623.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La famiglia Claus 3 (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_guerra_dei_papà_2014">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/308914.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La guerra dei papà (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_magia_del_Natale_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/308915.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La magia del Natale (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_mia_favola_di_Natale_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/310717.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La mia favola di Natale (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Neve_Nel_Cuore">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/207417.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Neve Nel Cuore</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lanny_Wayne_Buoni_vs_Cattivi_2011">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/498429.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lanny & Wayne - Buoni vs. Cattivi (2011)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_più_bella_storia_di_Dickens_1970">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/442441.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La più bella storia di Dickens (1970)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_sfilata_di_Natale_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/478276.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La sfilata di Natale (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Last_Christmas">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201449.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Last Christmas</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_Storia_Di_Babbo_Natale">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201404.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La Storia Di Babbo Natale</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Let_It_Snow_Innamorarsi_Sotto_La_Neve">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201450.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Let It Snow - Innamorarsi Sotto La Neve</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lo_schiaccianoci_e_il_flauto_magico_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/457245.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lo schiaccianoci e il flauto magico (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Lo_strano_Natale_di_Blanca_Snow_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/444822.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Lo strano Natale di Blanca Snow (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Love_Lights_Hanukkah_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/443305.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Love, Lights, Hanukkah! (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mamma_ho_perso_l_aereo_1990">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/438040.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mamma, ho perso l'aereo (1990)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mamma_Ho_Riperso_L_aereo_Mi_Sono_Smarrito_A_New_York">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201410.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mamma, Ho Riperso L'aereo: Mi Sono Smarrito A New York</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mamma_ho_riperso_l_aereo_Mi_sono_smarrito_a_New_York_1992">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/438041.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mamma, ho riperso l'aereo: Mi sono smarrito a New York (1992)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mamma_ho_perso_il_cane_2013">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/292048.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mamma ho perso il cane (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mariah_Carey_All_I_Want_for_Christmas_is_You_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/424558.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mariah Carey: All I Want for Christmas is You (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Matrimonio_sulla_neve_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/312051.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Matrimonio sulla neve (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Miracolo_Nella_34ª_Strada">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201411.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Miracolo Nella 34ª Strada</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Miracolo_Sull_8ª_Strada">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201405.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Miracolo Sull'8ª Strada</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mi_sono_perso_il_Natale_2006">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/303744.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mi sono perso il Natale (2006)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Natale_Folle_Natale">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201451.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Natale, Folle Natale</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Natale_di_nuovo_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/316282.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Natale... di nuovo?! (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Natale_a_8_Bit_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/497282.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Natale a 8 Bit (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Natale_a_casa_dei_Loud_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/449945.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Natale a casa dei Loud (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Natale_allo_Starlight_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/492354.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Natale allo Starlight (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Natale_A_Londra_Dio_Salvi_La_Regina">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201444.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Natale A Londra - Dio Salvi La Regina</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Natale_al_Plaza_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/312658.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Natale al Plaza (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Natale_a_Mistletoe_Farm_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/440166.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Natale a Mistletoe Farm (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Natale_a_Palm_Springs_2014">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/444844.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Natale a Palm Springs (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Natale_a_scuola_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/314716.avi" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Natale a scuola (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Natale_a_tutti_i_costi_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/444369.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Natale a tutti i costi (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Natale_a_Wonderland_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/478107.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Natale a Wonderland (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Natale_Col_Boss">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201442.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Natale Col Boss</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Natale_con_Bob_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/296509.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Natale con Bob (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Natale_con_il_babbo_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/297672.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Natale con il babbo (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Natale_con_te_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/438918.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Natale con te (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Natale_EXtraterrestre">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/202188.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Natale EXtraterrestre</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Natale_In_Affitto">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201420.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Natale In Affitto</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Natale_in_California_Luci_della_città_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/313669.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Natale in California: Luci della città (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Natale_sul_ghiaccio_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/311659.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Natale sul ghiaccio (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Natale_tra_le_stelle_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/444823.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Natale tra le stelle (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Natale_tutti_i_giorni_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/444552.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Natale tutti i giorni (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Nick_e_la_renna_che_non_sapeva_volare_2004">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/305217.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Nick e la renna che non sapeva volare (2004)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Niko_Una_renna_per_amico_2008">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/493680.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Niko - Una renna per amico (2008)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Non_Ti_Presento_I_Miei">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/206930.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Non Ti Presento I Miei</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ogni_Maledetto_Natale">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201436.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ogni Maledetto Natale</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Polo_Nord_La_Magica_Città_Del_Natale">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201437.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Polo Nord: La Magica Città Del Natale</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Qualcuno_Salvi_Il_Natale">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201447.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Qualcuno Salvi Il Natale</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Qualcuno_Salvi_Il_Natale_2">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/202313.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Qualcuno Salvi Il Natale 2</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Quel_Natale_che_ci_ha_fatto_incontrare_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/444845.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Quel Natale che ci ha fatto incontrare (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Santa_Clause">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201412.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Santa Clause</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Santa_Clause_è_Nei_Guai">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201422.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Santa Clause è Nei Guai</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Scambiamoci_a_Natale_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/311194.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Scambiamoci a Natale (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Scivolando_sulla_neve_2023">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/497339.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Scivolando sulla neve (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Scrooge_Canto_di_Natale_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/441921.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Scrooge - Canto di Natale (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Scrooge_Canto_di_Natale_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/443052.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Scrooge - Canto di Natale (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Seguendo_Una_Stella">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201438.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Seguendo Una Stella</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Se_scappo_mi_sposo_a_Natale_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/444824.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Se scappo mi sposo a Natale (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="S_O_S_Fantasmi">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201406.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>S O S  Fantasmi</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Spirited_Magia_di_Natale_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/439332.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Spirited - Magia di Natale (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sì_Virginia_Babbo_Natale_esiste_1991">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/511945.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sì Virginia, Babbo Natale esiste (1991)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Teddy_s_Christmas_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/513093.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Teddy's Christmas (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Best_Man_Holiday">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201434.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Best Man Holiday</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Binge_2_It_s_A_Wonderful_Binge_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/443307.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Binge 2 - It's A Wonderful Binge (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Christmas_Show_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/512756.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Christmas Show (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="This_Christmas_Natale_e_altri_guai_2007">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/314154.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>This Christmas - Natale e altri guai (2007)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tom_Jerry_Piccoli_Aiutanti_Di_Babbo_Natale">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201439.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tom & Jerry: Piccoli Aiutanti Di Babbo Natale</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Topolino_e_la_magia_del_Natale_1999">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/245349.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Topolino e la magia del Natale (1999)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Topolino_Strepitoso_Natale_2004">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/438646.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Topolino Strepitoso Natale! (2004)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tutti_Per_1_1_Per_Tutti">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/207418.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tutti Per 1 - 1 Per Tutti</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tutto_normale_il_prossimo_Natale_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/310816.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tutto normale il prossimo Natale (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Una_corona_a_Natale_2015">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/312052.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Una corona a Natale (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Una_famiglia_perfetta_2012">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/512757.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Una famiglia perfetta (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_Amico_Molto_Speciale">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201441.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un Amico Molto Speciale</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_Amore_Sotto_L_albero">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201421.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un Amore Sotto L'albero</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_anello_per_Natale_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/444825.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un anello per Natale (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Una_Poltrona_Per_Due">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201400.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Una Poltrona Per Due</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_bacio_prima_di_Natale_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/444826.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un bacio prima di Natale (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_bambino_chiamato_Natale_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/308916.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un bambino chiamato Natale (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_castello_per_Natale_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/309187.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un castello per Natale (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_cavaliere_per_Natale_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/309523.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un cavaliere per Natale (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_Fanta_Natale_2013">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/438647.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un Fanta Natale (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_gioioso_Natale_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/444827.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un gioioso Natale (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_Magico_Natale">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201403.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un Magico Natale</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_marito_per_Natale_2016">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/444828.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un marito per Natale (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_Natale_Con_I_Fiocchi">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201432.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un Natale Con I Fiocchi</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_Natale_da_Cenerentola_2016">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/388989.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un Natale da Cenerentola (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_Natale_da_Corgi_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/512784.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un Natale da Corgi (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_Natale_molto_bizzarro_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/444846.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un Natale molto bizzarro (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_Natale_pieno_di_Graça_2022">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/441547.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un Natale pieno di Graça (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_Natale_senza_tempo_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/444616.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un Natale senza tempo (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_Natale_Stupefacente">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201440.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un Natale Stupefacente</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_Natale_stupefacente_2014">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/511856.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un Natale stupefacente (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_Natale_x_2_2011">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/306854.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un Natale x 2 (2011)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_principe_per_Natale_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/441906.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un principe per Natale (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_principe_per_Natale_Matrimonio_reale_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/312513.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un principe per Natale - Matrimonio reale (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_principe_per_Natale_Royal_baby_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/325266.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un principe per Natale - Royal baby (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Un_safari_per_Natale_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/444344.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Un safari per Natale (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Vacanze_Di_Natale">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201401.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Vacanze Di Natale</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Zampa_E_La_Magia_Del_Natale">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/201426.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Zampa E La Magia Del Natale</p>
+      </a>
+    </div>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>

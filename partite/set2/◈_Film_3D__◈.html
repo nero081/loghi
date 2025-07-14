@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>◈ Film 3D  ◈</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  max-width: 90vw;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
+
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
+
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
+
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
+
+.canale a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+  text-decoration: none;
+}
+
+
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
+
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
+  </style>
+</head>
+<body>
+  <h1>◈ Film 3D  ◈</h1>
+  <div class="griglia">
+    
+    <div class="canale no-logo" id="3D_Avengers_Endgame_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390833.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>3D Avengers - Endgame (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="3D_Avengers_Infinity_War_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390834.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>3D Avengers - Infinity War (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="3D_Blade_Runner_2049_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/268784.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>3D Blade Runner 2049 (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="3D_Captain_America_Civil_War_2016">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390835.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>3D Captain America: Civil War (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="3D_Captain_Marvel_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390836.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>3D Captain Marvel (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="3D_Coco_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/268787.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>3D Coco (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="3D_Dumbo_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/268788.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>3D Dumbo (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="3D_Dune_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/336673.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>3D Dune (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="3D_Fast_Furious_Hobbs_Shaw_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/268789.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>3D Fast & Furious - Hobbs & Shaw (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="3D_Gemini_Man_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/268790.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>3D Gemini Man (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="3D_Il_drago_argentato_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/286453.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>3D Il drago argentato (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="3D_Jupiter_Il_destino_dell_universo_2015">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/139426.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>3D Jupiter - Il destino dell'universo (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="3D_Kong_Skull_Island_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/268791.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>3D Kong: Skull Island (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="3D_Shang_Chi_e_la_leggenda_dei_dieci_anelli_2021">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/336674.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>3D Shang-Chi e la leggenda dei dieci anelli (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="3D_Spider_Man_Far_from_Home_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/268792.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>3D Spider-Man: Far from Home (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="3D_The_Amazing_Spider_Man_2012">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/268793.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>3D The Amazing Spider-Man (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="3D_The_Amazing_Spider_Man_2_Il_potere_di_Electro_2014">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/268794.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>3D The Amazing Spider-Man 2 - Il potere di Electro (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="3D_Wonder_Woman_1984_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/268795.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>3D Wonder Woman 1984 (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="300_L_alba_di_un_impero_2014_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/314999.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>300 - L'alba di un impero (2014) 3D</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="African_Saffari_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/133930.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>African Saffari 3D</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Aladdin_2019_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/315000.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Aladdin (2019) 3D</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alice_Attraverso_Lo_Specchio">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/133931.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alice Attraverso Lo Specchio ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Alla_Ricerca_Di_Dory">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/133932.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alla Ricerca Di Dory ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Amazing_Africa">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/133933.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Amazing Africa ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Amazzonia">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/133936.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Amazzonia ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Amityville_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/185384.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Amityville 3D</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ant_Man">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/133937.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ant-Man ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Aquaman_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/141074.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Aquaman 3D ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Avatar">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/133938.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Avatar ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Avatar_La_via_dell_acqua_2022_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/478256.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Avatar - La via dell'acqua (2022) 3D</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Avengers_Age_Of_Ultron">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/133939.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Avengers - Age Of Ultron ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Batman_V_Superman_Dawn_Of_Justice">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/133940.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Batman V Superman - Dawn Of Justice ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Benvenuti_nella_giungla_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/228041.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Benvenuti nella giungla 3D</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Black_Panther_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/226811.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Black Panther 3D</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Black_Widow_2021_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/296666.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Black Widow (2021) 3D</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cattivissimo_Me_2">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/133941.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cattivissimo Me 2 ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cattivissimo_me_3_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/228042.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cattivissimo me 3 3D</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Cicogne_In_Missione">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/133942.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Cicogne In Missione ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Doctor_Strange_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/139424.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Doctor Strange 3D ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Doraemon_Il_Film">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/133943.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Doraemon - Il Film ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Fifa_World_Cup_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/139425.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Fifa World Cup 3D</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Frozen_Il_Regno_Di_Ghiaccio">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/133963.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Frozen - Il Regno Di Ghiaccio ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Geostorm_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/186660.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Geostorm 3D</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Godzilla_vs_Kong_2021_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/272814.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Godzilla vs. Kong (2021) 3D</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Guardiani_Della_Galassia">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/134672.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Guardiani Della Galassia ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Hercules_Il_Guerriero">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/135325.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Hercules - Il Guerriero ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_7_Nani">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/133964.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I 7 Nani ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Libro_Della_Giungla">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/136227.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Libro Della Giungla ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Piccolo_Principe_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/138936.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Piccolo Principe 3D ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_Re_Leone_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/142058.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il Re Leone 3D ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Inside_Out_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/138937.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Inside Out 3D ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="I_Puffi_2">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/134673.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>I Puffi 2 ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Jurassic_Park_1993_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/307063.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Jurassic Park (1993) 3D</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Jurassic_World_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/140094.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Jurassic World 3D ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Justice_League_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/228043.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Justice League 3D</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_era_Glaciale_In_Rotta_Di_Collisione_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/140095.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'era Glaciale - In Rotta Di Collisione 3D ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Le_avventure_di_Taddeo_l_esploratore_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/228044.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Le avventure di Taddeo l'esploratore 3D</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mad_Max_Fury_Road_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/141059.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mad Max: Fury Road 3D ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Maleficent_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/140216.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Maleficent 3D ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Matrix_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/228867.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Matrix 3D</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Miss_Peregrine_La_Casa_Dei_Ragazzi_Speciali_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/141058.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Miss Peregrine - La Casa Dei Ragazzi Speciali 3D ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Musei_Vaticani_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/141063.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Musei Vaticani 3D ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Pacific_Rim_La_rivolta_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/228045.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Pacific Rim - La rivolta 3D</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Pan_Viaggio_Sull_isola_Che_Non_C_è_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/142056.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Pan - Viaggio Sull'isola Che Non C'è 3D ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Paranormal_Activity_Dimensione_Fantasma_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/142057.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Paranormal Activity - Dimensione Fantasma 3D ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Pets_Vita_Da_Animali_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/140217.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Pets - Vita Da Animali 3D ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Pirati_dei_Caraibi_La_vendetta_di_Salazar_2017_FHD">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/474486.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Pirati dei Caraibi - La vendetta di Salazar (2017) FHD</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Rampage_Furia_Animale_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/226974.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Rampage - Furia Animale 3D</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ready_Player_One_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/226975.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ready Player One 3D</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Rio_2_Missione_Amazzonia_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/142725.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Rio 2 - Missione Amazzonia 3D ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ritorno_Alla_Vita_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/142959.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ritorno Alla Vita 3D ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="San_Andreas_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/142960.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>San Andreas 3D ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Snoopy_Friends_Il_Film_Dei_Peanuts_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/142059.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Snoopy & Friends - Il Film Dei Peanuts 3D ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Sopravvissuto_The_Martian_2015_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/248972.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Sopravvissuto - The Martian (2015) 3D</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Spider_Man_2_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/228868.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Spider-Man 2 3D</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Spider_Man_Homecoming_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/226976.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Spider-Man: Homecoming 3D</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Star_Trek_Il_futuro_ha_inizio_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/228869.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Star Trek - Il futuro ha inizio 3D</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Star_Wars_Gli_Ultimi_Jedi_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/226812.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Star Wars: Gli Ultimi Jedi 3D</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Step_Up_4_Revolution_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/141061.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Step Up 4 Revolution 3D ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Taddeo_L_esploratore_E_Il_Segreto_Di_Re_Mida_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/226813.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Taddeo L'esploratore E Il Segreto Di Re Mida 3D</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tartarughe_Ninja_III_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/228870.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tartarughe Ninja III 3D</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tarzan_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/228871.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tarzan 3D</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Best_Of_LG_3D_Pop_Up_Effects">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/133934.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Best Of LG 3D Pop Up Effects</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Final_Destination_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/185385.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Final Destination 3D</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_LEGO_Movie_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/228872.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The LEGO Movie 3D</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Walk_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/141060.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Walk 3D ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Thor_Ragnarok_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/226814.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Thor: Ragnarok 3D</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Thor_The_Dark_World_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/228873.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Thor: The Dark World 3D</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Titanic_1997_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/296667.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Titanic (1997) 3D</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tomb_Raider_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/226815.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tomb Raider 3D</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Turbo_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/228874.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Turbo 3D</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Valerian_E_La_Città_Dei_Mille_Pianeti_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/226816.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Valerian E La Città Dei Mille Pianeti 3D</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Venom_2018_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/296398.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Venom (2018) 3D</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="World_s_Best_SBS_3D_Popup_Effects">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/133935.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>World's Best SBS 3D Popup Effects</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Men_Apocalisse_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/141062.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X-Men - Apocalisse 3D ()</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="X_Men_Giorni_di_un_futuro_passato_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/228046.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>X-Men - Giorni di un futuro passato 3D</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Zambezia_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/228047.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Zambezia 3D</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Zootropolis_2016_3D">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/296668.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Zootropolis (2016) 3D</p>
+      </a>
+    </div>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>

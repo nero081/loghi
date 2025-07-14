@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>◈ Film Elio Germano ◈</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  max-width: 90vw;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
+
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
+
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
+
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
+
+.canale a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+  text-decoration: none;
+}
+
+
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
+
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
+  </style>
+</head>
+<body>
+  <h1>◈ Film Elio Germano ◈</h1>
+  <div class="griglia">
+    
+    <div class="canale no-logo" id="Alaska_2015">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390962.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Alaska (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ci_hai_rotto_papà_1993">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390939.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ci hai rotto papà (1993)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Come_Dio_comanda_2008">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390950.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Come Dio comanda (2008)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Concorrenza_sleale_2001">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390941.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Concorrenza sleale (2001)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Diaz_Don_t_Clean_Up_This_Blood_2012">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390956.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Diaz - Don't Clean Up This Blood (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Faccia_d_angelo_2012">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390957.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Faccia d'angelo (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_cielo_in_una_stanza_1999">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390940.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il cielo in una stanza (1999)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_giovane_favoloso_2014">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390961.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il giovane favoloso (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_mattino_ha_l_oro_in_bocca_2008">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390948.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il mattino ha l'oro in bocca (2008)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_passato_è_una_terra_straniera_2008">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390951.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il passato è una terra straniera (2008)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Il_sogno_di_Francesco_2016">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390964.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Il sogno di Francesco (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Io_sono_Tempesta_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390966.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Io sono Tempesta (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_incredibile_storia_dell_isola_delle_rose_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390970.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'incredibile storia dell'isola delle rose (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_ultima_ruota_del_carro_2013">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390960.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'ultima ruota del carro (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="L_uomo_senza_gravità_2019">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390969.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>L'uomo senza gravità (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_fine_è_il_mio_inizio_2010">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390955.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La fine è il mio inizio (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_nostra_vita_2010">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390954.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La nostra vita (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="La_tenerezza_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390965.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>La tenerezza (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Liberi_2003">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390943.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Liberi (2003)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Magnifica_presenza_2012">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390958.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Magnifica presenza (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Melissa_P_2005">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390945.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Melissa P. (2005)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Mio_fratello_è_figlio_unico_2007">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390949.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Mio fratello è figlio unico (2007)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Nessuna_qualità_agli_eroi_2007">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390952.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Nessuna qualità agli eroi (2007)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Ora_o_mai_più_2003">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390944.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Ora o mai più (2003)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Padroni_di_casa_2012">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390959.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Padroni di casa (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Questione_di_karma_2017">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390967.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Questione di karma (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Quo_vadis_baby_2005">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390946.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Quo vadis, baby? (2005)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Respiro_2002">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390942.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Respiro (2002)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Romanzo_criminale_2005">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390947.mkv" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Romanzo criminale (2005)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Suburra_2015">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390963.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Suburra (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Troppa_grazia_2018">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390968.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Troppa grazia (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Tutta_la_vita_davanti_2008">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390953.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Tutta la vita davanti (2008)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="Volevo_nascondermi_2020">
+      <a href="http://g05pmo.portpr02.com:80/movie/ZAnt/azcbn/390971.mp4" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>Volevo nascondermi (2020)</p>
+      </a>
+    </div>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>
