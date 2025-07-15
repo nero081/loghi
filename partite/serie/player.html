@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Player - NeroZone</title>
+  <style>
+    body {
+      background: #141414;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 2rem;
+    }
+
+    .back-btn {
+      background: #e50914;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background: #b20710;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(229, 9, 20, 0.4);
+    }
+
+    .player-info {
+      background: linear-gradient(135deg, rgba(229, 9, 20, 0.1), rgba(0, 0, 0, 0.8));
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border: 1px solid rgba(229, 9, 20, 0.2);
+    }
+
+    .player-info h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #e50914;
+    }
+
+    .meta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .meta span {
+      background: rgba(255,255,255,0.1);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+    }
+
+    .overview {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    .watch-btn {
+      display: block;
+      margin: 2rem auto;
+      background: #e50914;
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 30px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .watch-btn:hover {
+      background: #b20710;
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(229, 9, 20, 0.4);
+    }
+
+    .episode-selector {
+      background: rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .episode-selector label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+
+    .episode-selector select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      background: rgba(0,0,0,0.7);
+      color: #fff;
+      border: 2px solid rgba(255,255,255,0.2);
+      margin-bottom: 1rem;
+    }
+
+    .episodes-list {
+      max-height: 400px;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #e50914 transparent;
+      margin-top: 1rem;
+    }
+
+    .episode-item {
+      padding: 12px;
+      margin-bottom: 8px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .episode-item:hover {
+      background: rgba(229, 9, 20, 0.2);
+      border-color: #e50914;
+    }
+
+    .episode-item.active {
+      background: rgba(229, 9, 20, 0.3);
+      border-color: #e50914;
+    }
+
+    .episode-number {
+      font-weight: bold;
+      color: #e50914;
+      margin-bottom: 4px;
+    }
+
+    .episode-title {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .episode-item.focused {
+      outline: 2px solid #e50914;
+      background: rgba(229, 9, 20, 0.3);
+      transform: scale(1.02);
+    }
+	#enter-hint {
+  text-align: center;
+  font-size: 1rem;
+  opacity: 0.7;
+  margin-top: 0.5rem;
+  color: #ccc;
+}
+
+  </style>
+</head>
+<body>
+  <button class="back-btn" onclick="window.close()">← Chiudi</button>
+
+  <div class="player-info">
+    <h1 id="player-title"></h1>
+    <div class="meta" id="player-meta"></div>
+    <div class="overview" id="player-overview"></div>
+  </div>
+
+  <div id="episode-selector" class="episode-selector" style="display:none;">
+    <label for="season-select">Stagione:</label>
+    <select id="season-select"></select>
+
+    <div class="episodes-list" id="episodes-list"></div>
+  </div>
+
+  <button class="watch-btn" onclick="launchFullscreenPlayer()">🎬 Guarda</button>
+  <p id="enter-hint" style="text-align:center; font-size:1rem; opacity:0.7; margin-top:0.5rem;">
+  🎬 Premi <strong>Enter</strong> per avviare il player
+</p>
+
+
+  <script>
+    const API_KEY = '56dd0eb5ddacfa471fda68c68a550eb1';
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+    const type = urlParams.get('type');
+    const title = decodeURIComponent(urlParams.get('title') || '');
+
+    document.getElementById('player-title').textContent = title;
+
+    let episodeIndex = 0;
+
+    async function fetchDetails() {
+      const res = await fetch(`https://api.themoviedb.org/3/${type}/${id}?api_key=${API_KEY}&language=it-IT`);
+      return await res.json();
+    }
+
+    async function fetchSeasonEpisodes(tvId, seasonNumber) {
+      const res = await fetch(`https://api.themoviedb.org/3/tv/${tvId}/season/${seasonNumber}?api_key=${API_KEY}&language=it-IT`);
+      const data = await res.json();
+      return data.episodes || [];
+    }
+
+    async function initPlayer() {
+      const details = await fetchDetails();
+      document.getElementById('player-overview').textContent = details.overview || 'Nessuna descrizione disponibile.';
+      const metaDiv = document.getElementById('player-meta');
+      metaDiv.innerHTML = '';
+
+      if (type === 'movie') {
+        const year = details.release_date ? new Date(details.release_date).getFullYear() : 'N/A';
+        const duration = details.runtime ? `${details.runtime} min` : 'N/A';
+        const rating = details.vote_average ? `⭐ ${details.vote_average.toFixed(1)}` : 'N/A';
+        metaDiv.innerHTML = `
+          <span>🎬 Film</span>
+          <span>📅 ${year}</span>
+          <span>⏱️ ${duration}</span>
+          <span>${rating}</span>
+        `;
+      } else {
+        document.getElementById('episode-selector').style.display = 'block';
+        const year = details.first_air_date ? new Date(details.first_air_date).getFullYear() : 'N/A';
+        const seasons = details.seasons.filter(s => s.season_number > 0);
+        const rating = details.vote_average ? `⭐ ${details.vote_average.toFixed(1)}` : 'N/A';
+        metaDiv.innerHTML = `
+          <span>📺 Serie TV</span>
+          <span>📅 ${year}</span>
+          <span>🎭 ${seasons.length} stagioni</span>
+          <span>${rating}</span>
+        `;
+
+        const seasonSelect = document.getElementById('season-select');
+        seasonSelect.innerHTML = '';
+        for (const season of seasons) {
+          const option = document.createElement('option');
+          option.value = season.season_number;
+          option.textContent = `Stagione ${season.season_number}`;
+          seasonSelect.appendChild(option);
+        }
+
+        seasonSelect.addEventListener('change', async () => {
+          await loadEpisodes(id, parseInt(seasonSelect.value));
+        });
+
+        await loadEpisodes(id, seasons[0].season_number);
+      }
+    }
+
+    async function loadEpisodes(tvId, seasonNumber) {
+      const episodes = await fetchSeasonEpisodes(tvId, seasonNumber);
+      const episodesList = document.getElementById('episodes-list');
+      episodesList.innerHTML = '';
+      episodeIndex = 0;
+
+      episodes.forEach((ep, index) => {
+        const div = document.createElement('div');
+        div.className = 'episode-item';
+        div.innerHTML = `
+          <div class="episode-number">Episodio ${ep.episode_number}</div>
+          <div class="episode-title">${ep.name || `Episodio ${ep.episode_number}`}</div>
+        `;
+        div.dataset.season = seasonNumber;
+        div.dataset.episode = ep.episode_number;
+        div.onclick = () => {
+          document.querySelectorAll('.episode-item').forEach(el => el.classList.remove('active'));
+          div.classList.add('active');
+          episodeIndex = index;
+        };
+        episodesList.appendChild(div);
+      });
+
+      if (episodes.length > 0) {
+        episodesList.firstChild.classList.add('active');
+        episodesList.firstChild.classList.add('focused');
+      }
+    }
+
+    function getEpisodeItems() {
+      return Array.from(document.querySelectorAll('.episode-item'));
+    }
+
+    function updateEpisodeFocus() {
+      const items = getEpisodeItems();
+      items.forEach(item => item.classList.remove('focused'));
+      if (items.length > 0) {
+        episodeIndex = Math.max(0, Math.min(episodeIndex, items.length - 1));
+        items[episodeIndex].classList.add('focused');
+        items[episodeIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
+    document.addEventListener('keydown', e => {
+  const items = getEpisodeItems();
+  const isSerie = type === 'tv';
+
+  if (e.key === 'Enter') {
+    if (isSerie && items.length > 0) {
+      const focused = document.querySelector('.episode-item.focused');
+      if (focused) {
+        items.forEach(el => el.classList.remove('active'));
+        focused.classList.add('active');
+      } else {
+        items[episodeIndex]?.classList.add('active');
+      }
+    }
+    launchFullscreenPlayer();
+  }
+
+  if (isSerie && items.length > 0) {
+    if (e.key === 'ArrowDown') {
+      episodeIndex = (episodeIndex + 1) % items.length;
+      updateEpisodeFocus();
+    } else if (e.key === 'ArrowUp') {
+      episodeIndex = (episodeIndex - 1 + items.length) % items.length;
+      updateEpisodeFocus();
+    }
+  }
+});
+
+
+    function launchFullscreenPlayer() {
+      let url;
+      if (type === 'movie') {
+        url = `https://vixsrc.to/movie/${id}/?primaryColor=ff0000&lang=it`;
+      } else {
+        const active = document.querySelector('.episode-item.active');
+        const season = active?.dataset.season || 1;
+        const episode = active?.dataset.episode || 1;
+        url = `https://vixsrc.to/tv/${id}/${season}/${episode}/?primaryColor=ff0000&lang=it`;
+      }
+
+      const iframe = document.createElement('iframe');
+      iframe.src = url;
+      iframe.allowFullscreen = true;
+      iframe.style.position = 'fixed';
+      iframe.style.top = '0';
+      iframe.style.left = '0';
+      iframe.style.width = '100vw';
+      iframe.style.height = '100vh';
+      iframe.style.border = 'none';
+      iframe.style.zIndex = '9999';
+
+      document.body.appendChild(iframe);
+
+      if (iframe.requestFullscreen) {
+        iframe.requestFullscreen();
+      } else if (iframe.webkitRequestFullscreen) {
+        iframe.webkitRequestFullscreen();
+      } else if (iframe.mozRequestFullScreen) {
+        iframe.mozRequestFullScreen();
+      } else if (iframe.msRequestFullscreen) {
+        iframe.msRequestFullscreen();
+      }
+    }
+
+    initPlayer();
+  </script>
+</body>
+</html>

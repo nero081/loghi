@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NeroZone</title>
+  <style>
+    body {
+      background: #141414;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0,0,0,0.9);
+      padding: 1rem 4%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: bold;
+      color: #e50914;
+    }
+
+    #search {
+      padding: 10px 20px;
+      border-radius: 20px;
+      border: none;
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      width: 300px;
+    }
+
+    main {
+      margin-top: 80px;
+      padding: 2rem 4%;
+    }
+
+    section {
+      margin-bottom: 3rem;
+    }
+
+    section h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .carousel-container {
+      position: relative;
+      margin-bottom: 2rem;
+    }
+
+    .carousel {
+      display: flex;
+      overflow-x: auto;
+      gap: 1rem;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      scroll-behavior: smooth;
+      padding: 0 50px;
+    }
+
+    .carousel::-webkit-scrollbar {
+      display: none;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.8);
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.2rem;
+      z-index: 10;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(5px);
+    }
+
+    .carousel-btn:hover {
+      background: rgba(229, 9, 20, 0.9);
+      transform: translateY(-50%) scale(1.1);
+      box-shadow: 0 4px 15px rgba(229, 9, 20, 0.4);
+    }
+
+    .carousel-btn.prev {
+      left: 5px;
+    }
+
+    .carousel-btn.next {
+      right: 5px;
+    }
+
+    .card {
+      min-width: 200px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      scroll-snap-align: start;
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    .card:hover {
+      transform: scale(1.08) translateY(-10px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+      z-index: 10;
+    }
+
+    .card img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover img {
+      transform: scale(1.1);
+    }
+
+    .card .info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(transparent, rgba(0,0,0,0.9));
+      padding: 20px 10px 10px;
+      font-size: 0.9rem;
+      text-align: center;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .card.focused {
+      outline: 3px solid #e50914;
+      transform: scale(1.1);
+      z-index: 20;
+    }
+
+    #results {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">NeroZone</div>
+    <input type="text" id="search" placeholder="🔍 Cerca film, serie TV..." />
+  </header>
+
+  <main>
+    <div id="home">
+      <section id="trending">
+        <h2>🔥 Tendenze</h2>
+        <div class="carousel-container">
+          <button class="carousel-btn prev" onclick="scrollCarousel('trending', -1)">‹</button>
+          <div class="carousel" id="carousel-trending"></div>
+          <button class="carousel-btn next" onclick="scrollCarousel('trending', 1)">›</button>
+        </div>
+      </section>
+
+      <section id="nowPlaying">
+        <h2>🎬 Ultimi Film</h2>
+        <div class="carousel-container">
+          <button class="carousel-btn prev" onclick="scrollCarousel('nowPlaying', -1)">‹</button>
+          <div class="carousel" id="carousel-nowPlaying"></div>
+          <button class="carousel-btn next" onclick="scrollCarousel('nowPlaying', 1)">›</button>
+        </div>
+      </section>
+
+      <section id="popularMovies">
+        <h2>⭐ Film Popolari</h2>
+        <div class="carousel-container">
+          <button class="carousel-btn prev" onclick="scrollCarousel('popularMovies', -1)">‹</button>
+          <div class="carousel" id="carousel-popularMovies"></div>
+          <button class="carousel-btn next" onclick="scrollCarousel('popularMovies', 1)">›</button>
+        </div>
+      </section>
+
+      <section id="onTheAir">
+        <h2>📺 Ultime Serie</h2>
+        <div class="carousel-container">
+          <button class="carousel-btn prev" onclick="scrollCarousel('onTheAir', -1)">‹</button>
+          <div class="carousel" id="carousel-onTheAir"></div>
+          <button class="carousel-btn next" onclick="scrollCarousel('onTheAir', 1)">›</button>
+        </div>
+      </section>
+
+      <section id="popularTV">
+        <h2>🏆 Serie Popolari</h2>
+        <div class="carousel-container">
+          <button class="carousel-btn prev" onclick="scrollCarousel('popularTV', -1)">‹</button>
+          <div class="carousel" id="carousel-popularTV"></div>
+          <button class="carousel-btn next" onclick="scrollCarousel('popularTV', 1)">›</button>
+        </div>
+      </section>
+    </div>
+
+    <div id="results"></div>
+  </main>
+
+  <script>
+    const API_KEY = '56dd0eb5ddacfa471fda68c68a550eb1';
+    const endpoints = {
+      trending: 'trending/all/week',
+      nowPlaying: 'movie/now_playing',
+      popularMovies: 'movie/popular',
+      onTheAir: 'tv/on_the_air',
+      popularTV: 'tv/popular'
+    };
+
+    let carouselSections = ['trending', 'nowPlaying', 'popularMovies', 'onTheAir', 'popularTV'];
+    let activeCarouselIndex = 0;
+    let focusIndex = 0;
+    let resultsVisible = false;
+    let searching = false;
+
+    function makeCard(item) {
+      const div = document.createElement('div');
+      div.className = 'card';
+      const posterPath = item.poster_path ? `https://image.tmdb.org/t/p/w300${item.poster_path}` : 'https://via.placeholder.com/300x450/333/fff?text=No+Image';
+      div.innerHTML = `
+        <img src="${posterPath}" alt="${item.title || item.name}">
+        <div class="info">${item.title || item.name}</div>
+      `;
+      div.onclick = () => {
+        const isMovie = item.title !== undefined;
+        const type = isMovie ? 'movie' : 'tv';
+        const id = item.id;
+        const title = encodeURIComponent(item.title || item.name);
+        const url = `player.html?id=${id}&type=${type}&title=${title}`;
+        window.open(url, '_blank');
+      };
+      return div;
+    }
+
+    async function fetchList(type) {
+      const res = await fetch(`https://api.themoviedb.org/3/${endpoints[type]}?api_key=${API_KEY}&language=it-IT`);
+      const data = await res.json();
+      return data.results;
+    }
+
+    async function loadHome() {
+      const sections = carouselSections;
+      for (const section of sections) {
+        const items = await fetchList(section);
+        const container = document.getElementById(`carousel-${section}`);
+        container.innerHTML = '';
+        items.slice(0, 20).forEach(item => container.appendChild(makeCard(item)));
+      }
+      setTimeout(() => {
+        updateFocus();
+      }, 1000);
+    }
+
+    function scrollCarousel(sectionId, direction) {
+      const carousel = document.getElementById(`carousel-${sectionId}`);
+      const scrollAmount = 220;
+      const currentScroll = carousel.scrollLeft;
+      const targetScroll = currentScroll + (direction * scrollAmount * 3);
+      carousel.scrollTo({ left: targetScroll, behavior: 'smooth' });
+    }
+
+    function getVisibleCards() {
+      const sectionId = carouselSections[activeCarouselIndex];
+      const carousel = document.getElementById(`carousel-${sectionId}`);
+      return Array.from(carousel.querySelectorAll('.card'));
+    }
+
+    function updateFocus() {
+      carouselSections.forEach(sectionId => {
+        const carousel = document.getElementById(`carousel-${sectionId}`);
+        if (carousel) {
+          carousel.querySelectorAll('.card').forEach(card => card.classList.remove('focused'));
+        }
+      });
+
+      const cards = getVisibleCards();
+      if (cards.length > 0) {
+        focusIndex = Math.max(0, Math.min(focusIndex, cards.length - 1));
+        cards[focusIndex].classList.add('focused');
+        cards[focusIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+    }
+
+    function updateResultsFocus() {
+      const resultCards = Array.from(document.querySelectorAll('#results .card'));
+      resultCards.forEach(card => card.classList.remove('focused'));
+      if (resultCards.length > 0) {
+        focusIndex = Math.max(0, Math.min(focusIndex, resultCards.length - 1));
+        resultCards[focusIndex].classList.add('focused');
+        resultCards[focusIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+    }
+
+    document.getElementById('search').addEventListener('keydown', async e => {
+      if (e.key === 'Enter') {
+        const q = e.target.value.trim();
+        if (!q) return;
+        e.target.blur();
+        searching = true;
+        document.getElementById('home').style.display = 'none';
+        const resDiv = document.getElementById('results');
+        resDiv.innerHTML = '<p>Caricamento...</p>';
+        try {
+          const res = await fetch(`https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&query=${encodeURIComponent(q)}&language=it-IT`);
+          const data = await res.json();
+          resDiv.innerHTML = '';
+          resultsVisible = true;
+          focusIndex = 0;
+          if (data.results.length === 0) {
+            resDiv.innerHTML = '<p>Nessun risultato trovato</p>';
+          } else {
+            data.results.forEach(item => {
+              const card = makeCard(item);
+              resDiv.appendChild(card);
+            });
+            setTimeout(() => {
+              updateResultsFocus();
+              searching = false;
+            }, 300);
+          }
+        } catch (err) {
+          resDiv.innerHTML = '<p>Errore nella ricerca</p>';
+          searching = false;
+        }
+      }
+    });
+
+    document.addEventListener('keydown', e => {
+      const searchInput = document.getElementById('search');
+
+      if (e.key === '2') {
+        e.preventDefault();
+        searchInput.focus();
+        searchInput.select();
+        return;
+      }
+
+      if (document.activeElement === searchInput || searching) return;
+
+      if (resultsVisible) {
+        const resultCards = Array.from(document.querySelectorAll('#results .card'));
+        if (resultCards.length === 0) return;
+
+        if (e.key === 'ArrowRight') {
+          focusIndex = (focusIndex + 1) % resultCards.length;
+          updateResultsFocus();
+          return;
+        } else if (e.key === 'ArrowLeft') {
+          focusIndex = (focusIndex - 1 + resultCards.length) % resultCards.length;
+          updateResultsFocus();
+          return;
+        } else if (e.key === 'Enter') {
+          resultCards[focusIndex].click();
+          return;
+        } else if (e.key === 'Escape') {
+          resultsVisible = false;
+          document.getElementById('results').innerHTML = '';
+          document.getElementById('home').style.display = 'block';
+          updateFocus();
+          return;
+        }
+      }
+
+      const cards = getVisibleCards();
+      if (cards.length === 0) return;
+
+      if (e.key === 'ArrowRight') {
+        focusIndex = (focusIndex + 1) % cards.length;
+        updateFocus();
+      } else if (e.key === 'ArrowLeft') {
+        focusIndex = (focusIndex - 1 + cards.length) % cards.length;
+        updateFocus();
+      } else if (e.key === 'ArrowDown') {
+        if (activeCarouselIndex < carouselSections.length - 1) {
+          activeCarouselIndex++;
+          focusIndex = 0;
+          updateFocus();
+        }
+      } else if (e.key === 'ArrowUp') {
+        if (activeCarouselIndex > 0) {
+          activeCarouselIndex--;
+          focusIndex = 0;
+          updateFocus();
+        }
+      } else if (e.key === 'Enter') {
+        cards[focusIndex].click();
+      }
+    });
+
+    loadHome();
+  </script>
+</body>
+</html>
