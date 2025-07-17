@@ -1,855 +1,309 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VixFlix</title>
+  <meta charset="UTF-8" />
+  <title>Seleziona Gruppo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
 
-    body {
-      background: #141414;
-      color: #fff;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      line-height: 1.6;
-    }
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #2c1e1e, #1a1a1a, #2c5364, #a3d9ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
 
-    /* Header */
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      background: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 70%, transparent 100%);
-      backdrop-filter: blur(10px);
-      padding: 1rem 4%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: background 0.3s ease;
-    }
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
 
-    header.scrolled {
-      background: rgba(0,0,0,0.95);
-    }
 
-    .logo {
-      font-size: 2rem;
-      font-weight: bold;
-      color: #e50914;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-    }
+h1 {
+  font-size: 4rem;
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+}
 
-    .search-container {
-      position: relative;
-    }
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
 
-    #search {
-      padding: 12px 20px;
-      font-size: 1rem;
-      width: 350px;
-      border: 2px solid rgba(255,255,255,0.2);
-      border-radius: 25px;
-      background: rgba(0,0,0,0.7);
-      color: #fff;
-      transition: all 0.3s ease;
-      outline: none;
-    }
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
 
-    #search:focus {
-      border-color: #e50914;
-      box-shadow: 0 0 20px rgba(229, 9, 20, 0.3);
-      transform: scale(1.02);
-    }
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
 
-    #search::placeholder {
-      color: rgba(255,255,255,0.7);
-    }
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
 
-    /* Main Content */
-    main {
-      margin-top: 80px;
-    }
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
 
-    /* Hero Section */
-    .hero {
-      height: 70vh;
-      background: linear-gradient(45deg, #e50914, #b20710);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      margin-bottom: 3rem;
-      background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="10" cy="60" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="90" cy="40" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-    }
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
 
-    .hero-content h1 {
-      font-size: 4rem;
-      margin-bottom: 1rem;
-      text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
-    }
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+}
 
-    .hero-content p {
-      font-size: 1.5rem;
-      opacity: 0.9;
-      max-width: 600px;
-      margin: 0 auto;
-    }
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
 
-    /* Sections */
-    section {
-      margin: 3rem 0;
-    }
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
 
-    section h2 {
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
-      padding-left: 4%;
-      color: #fff;
-      position: relative;
-    }
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
 
-    section h2::before {
-      content: '';
-      position: absolute;
-      left: 4%;
-      bottom: -5px;
-      width: 60px;
-      height: 3px;
-      background: #e50914;
-    }
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
 
-    /* Carousel */
-    .carousel-container {
-      position: relative;
-      margin: 0 4%;
-    }
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
 
-    .carousel {
-      display: flex;
-      overflow-x: auto;
-      gap: 1rem;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-      scroll-behavior: smooth;
-      padding: 0 50px;
-    }
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
-    .carousel::-webkit-scrollbar {
-      display: none;
-    }
-
-    .carousel-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0,0,0,0.8);
-      color: white;
-      border: none;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 1.2rem;
-      z-index: 10;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      backdrop-filter: blur(5px);
-    }
-
-    .carousel-btn:hover {
-      background: rgba(229, 9, 20, 0.9);
-      transform: translateY(-50%) scale(1.1);
-      box-shadow: 0 4px 15px rgba(229, 9, 20, 0.4);
-    }
-
-    .carousel-btn.prev {
-      left: 5px;
-    }
-
-    .carousel-btn.next {
-      right: 5px;
-    }
-
-    .carousel-btn:disabled {
-      opacity: 0.3;
-      cursor: not-allowed;
-    }
-
-    .carousel-btn:disabled:hover {
-      background: rgba(0,0,0,0.8);
-      transform: translateY(-50%) scale(1);
-      box-shadow: none;
-    }
-
-    .card {
-      min-width: 200px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      scroll-snap-align: start;
-      position: relative;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    }
-
-    .card:hover {
-      transform: scale(1.08) translateY(-10px);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.5);
-      z-index: 10;
-    }
-
-    .card.clicked {
-      animation: cardClick 0.6s ease-out;
-    }
-
-    @keyframes cardClick {
-      0% { transform: scale(1); }
-      25% { transform: scale(1.1) rotateY(5deg); }
-      50% { transform: scale(1.05) rotateY(-2deg); }
-      75% { transform: scale(1.08) rotateY(1deg); }
-      100% { transform: scale(1.15) rotateY(0deg); opacity: 0; }
-    }
-
-    .card img {
-      width: 100%;
-      height: 300px;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-    }
-
-    .card:hover img {
-      transform: scale(1.1);
-    }
-
-    .card .info {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background: linear-gradient(transparent, rgba(0,0,0,0.9));
-      padding: 20px 10px 10px;
-      font-size: 0.9rem;
-      text-align: center;
-      font-weight: 600;
-      transform: translateY(100%);
-      transition: transform 0.3s ease;
-    }
-
-    .card:hover .info {
-      transform: translateY(0);
-    }
-
-    /* Results */
-    #results {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 2rem;
-      padding: 2rem 4%;
-    }
-
-    /* Player */
-    #player {
-      display: none;
-      padding: 2rem 4%;
-      min-height: 100vh;
-    }
-
-    .player-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 2rem;
-    }
-
-    .back-btn {
-      background: #e50914;
-      color: white;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 25px;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .back-btn:hover {
-      background: #b20710;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 15px rgba(229, 9, 20, 0.4);
-    }
-
-    .player-info {
-      background: linear-gradient(135deg, rgba(229, 9, 20, 0.1), rgba(0, 0, 0, 0.8));
-      border-radius: 12px;
-      padding: 2rem;
-      margin-bottom: 2rem;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(229, 9, 20, 0.2);
-    }
-
-    .player-info h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      color: #e50914;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-    }
-
-    .player-info .meta {
-      display: flex;
-      gap: 2rem;
-      margin-bottom: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .player-info .meta span {
-      background: rgba(255,255,255,0.1);
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
-      font-size: 0.9rem;
-      backdrop-filter: blur(5px);
-    }
-
-    .player-info .overview {
-      line-height: 1.6;
-      opacity: 0.9;
-      font-size: 1.1rem;
-    }
-
-    .player-content {
-      display: grid;
-      grid-template-columns: 1fr 300px;
-      gap: 2rem;
-    }
-
-    .video-container {
-      position: relative;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.5);
-    }
-
-    .episode-selector {
-      background: rgba(255,255,255,0.1);
-      border-radius: 12px;
-      padding: 1.5rem;
-      backdrop-filter: blur(10px);
-      height: fit-content;
-    }
-
-    .episode-selector h3 {
-      margin-bottom: 1rem;
-      color: #e50914;
-    }
-
-    .season-selector {
-      margin-bottom: 1.5rem;
-    }
-
-    .season-selector label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: 600;
-    }
-
-    .season-selector select {
-      width: 100%;
-      padding: 10px;
-      border: 2px solid rgba(255,255,255,0.2);
-      border-radius: 8px;
-      background: rgba(0,0,0,0.7);
-      color: #fff;
-      outline: none;
-      transition: border-color 0.3s ease;
-    }
-
-    .season-selector select:focus {
-      border-color: #e50914;
-    }
-
-    .episodes-list {
-      max-height: 400px;
-      overflow-y: auto;
-      scrollbar-width: thin;
-      scrollbar-color: #e50914 transparent;
-    }
-
-    .episode-item {
-      padding: 12px;
-      margin-bottom: 8px;
-      background: rgba(255,255,255,0.05);
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      border: 2px solid transparent;
-    }
-
-    .episode-item:hover {
-      background: rgba(229, 9, 20, 0.2);
-      border-color: #e50914;
-    }
-
-    .episode-item.active {
-      background: rgba(229, 9, 20, 0.3);
-      border-color: #e50914;
-    }
-
-    .episode-number {
-      font-weight: bold;
-      color: #e50914;
-      margin-bottom: 4px;
-    }
-
-    .episode-title {
-      font-size: 0.9rem;
-      opacity: 0.9;
-    }
-
-    .video-container iframe {
-      width: 100%;
-      height: 60vh;
-      border: none;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .player-content {
-        grid-template-columns: 1fr;
-      }
-      
-      .hero-content h1 {
-        font-size: 2.5rem;
-      }
-      
-      #search {
-        width: 250px;
-      }
-      
-      .card {
-        min-width: 150px;
-      }
-    }
-
-    /* Loading Animation */
-    .loading {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      border: 3px solid rgba(255,255,255,0.3);
-      border-radius: 50%;
-      border-top-color: #e50914;
-      animation: spin 1s ease-in-out infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
   </style>
 </head>
 <body>
-  <header id="header">
-    <div class="logo">VixFlix</div>
-    <div class="search-container">
-      <input type="text" id="search" placeholder="🔍 Cerca film, serie TV...">
-    </div>
-  </header>
-
-  <main>
-    <div id="home">
-      <section class="hero">
-        <div class="hero-content">
-          <h1>Benvenuto su VixFlix</h1>
-          <p>Scopri migliaia di film e serie TV in streaming</p>
-        </div>
-      </section>
-
-      <section id="trending">
-        <h2>🔥 Trending</h2>
-        <div class="carousel-container">
-          <button class="carousel-btn prev" onclick="scrollCarousel('trending', -1)">‹</button>
-          <div class="carousel"></div>
-          <button class="carousel-btn next" onclick="scrollCarousel('trending', 1)">›</button>
-        </div>
-      </section>
-      
-      <section id="nowPlaying">
-        <h2>🎬 Ultimi Film</h2>
-        <div class="carousel-container">
-          <button class="carousel-btn prev" onclick="scrollCarousel('nowPlaying', -1)">‹</button>
-          <div class="carousel"></div>
-          <button class="carousel-btn next" onclick="scrollCarousel('nowPlaying', 1)">›</button>
-        </div>
-      </section>
-      
-      <section id="popularMovies">
-        <h2>⭐ Film Popolari</h2>
-        <div class="carousel-container">
-          <button class="carousel-btn prev" onclick="scrollCarousel('popularMovies', -1)">‹</button>
-          <div class="carousel"></div>
-          <button class="carousel-btn next" onclick="scrollCarousel('popularMovies', 1)">›</button>
-        </div>
-      </section>
-      
-      <section id="onTheAir">
-        <h2>📺 Ultime Serie</h2>
-        <div class="carousel-container">
-          <button class="carousel-btn prev" onclick="scrollCarousel('onTheAir', -1)">‹</button>
-          <div class="carousel"></div>
-          <button class="carousel-btn next" onclick="scrollCarousel('onTheAir', 1)">›</button>
-        </div>
-      </section>
-      
-      <section id="popularTV">
-        <h2>🏆 Serie Popolari</h2>
-        <div class="carousel-container">
-          <button class="carousel-btn prev" onclick="scrollCarousel('popularTV', -1)">‹</button>
-          <div class="carousel"></div>
-          <button class="carousel-btn next" onclick="scrollCarousel('popularTV', 1)">›</button>
-        </div>
-      </section>
-    </div>
-
-    <div id="results"></div>
-
-    <div id="player">
-      <div class="player-header">
-        <button class="back-btn" onclick="goBack()">
-          ← Torna indietro
-        </button>
-      </div>
-      
-      <div class="player-info" id="player-info">
-        <h1 id="player-title"></h1>
-        <div class="meta" id="player-meta"></div>
-        <div class="overview" id="player-overview"></div>
-      </div>
-      
-      <div class="player-content">
-        <div class="video-container">
-          <iframe id="player-iframe" allowfullscreen></iframe>
-        </div>
-        <div class="episode-selector" id="episode-selector" style="display: none;">
-          <h3>Seleziona episodio</h3>
-          <div class="season-selector">
-            <label>Stagione:</label>
-            <select id="season-select"></select>
-          </div>
-          <div class="episodes-list" id="episodes-list"></div>
-        </div>
-      </div>
-    </div>
-  </main>
-
-  <script>
-    const API_KEY = '8265bd1679663a7ea12ac168da84d2e8';
-    const endpoints = {
-      trending: `trending/all/week`,
-      nowPlaying: `movie/now_playing`,
-      popularMovies: `movie/popular`,
-      onTheAir: `tv/on_the_air`,
-      popularTV: `tv/popular`
-    };
-
-    let currentItem = null;
-    let currentSeasons = [];
-
-    // Header scroll effect
-    window.addEventListener('scroll', () => {
-      const header = document.getElementById('header');
-      if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    });
-
-    async function fetchList(type) {
-      const res = await fetch(`https://api.themoviedb.org/3/${endpoints[type]}?api_key=${API_KEY}&language=it-IT`);
-      const j = await res.json();
-      return j.results;
-    }
-
-    async function fetchTVSeasons(tvId) {
-      const res = await fetch(`https://api.themoviedb.org/3/tv/${tvId}?api_key=${API_KEY}&language=it-IT`);
-      const data = await res.json();
-      return data.seasons || [];
-    }
-
-    async function fetchSeasonEpisodes(tvId, seasonNumber) {
-      const res = await fetch(`https://api.themoviedb.org/3/tv/${tvId}/season/${seasonNumber}?api_key=${API_KEY}&language=it-IT`);
-      const data = await res.json();
-      return data.episodes || [];
-    }
-
-    function makeCard(item) {
-      const div = document.createElement('div');
-      div.className = 'card';
-      const posterPath = item.poster_path ? `https://image.tmdb.org/t/p/w300${item.poster_path}` : 'https://via.placeholder.com/300x450/333/fff?text=No+Image';
-      div.innerHTML = `
-        <img src="${posterPath}" alt="${item.title || item.name}">
-        <div class="info">${item.title || item.name}</div>
-      `;
-      div.onclick = () => {
-        // Aggiungi animazione al clic
-        div.classList.add('clicked');
-        setTimeout(() => {
-          play(item);
-        }, 300);
-      };
-      return div;
-    }
-
-    function fillSection(sectionId, items) {
-      const carousel = document.querySelector(`#${sectionId} .carousel`);
-      carousel.innerHTML = '';
-      items.slice(0, 20).forEach(item => carousel.appendChild(makeCard(item)));
-      
-      // Aggiorna lo stato dei pulsanti
-      updateCarouselButtons(sectionId);
-    }
-
-    function scrollCarousel(sectionId, direction) {
-      const carousel = document.querySelector(`#${sectionId} .carousel`);
-      const scrollAmount = 220; // Larghezza card + gap
-      const currentScroll = carousel.scrollLeft;
-      const targetScroll = currentScroll + (direction * scrollAmount * 3); // Scorri 3 card alla volta
-      
-      carousel.scrollTo({
-        left: targetScroll,
-        behavior: 'smooth'
-      });
-      
-      // Aggiorna i pulsanti dopo lo scroll
-      setTimeout(() => updateCarouselButtons(sectionId), 300);
-    }
-
-    function updateCarouselButtons(sectionId) {
-      const carousel = document.querySelector(`#${sectionId} .carousel`);
-      const prevBtn = document.querySelector(`#${sectionId} .carousel-btn.prev`);
-      const nextBtn = document.querySelector(`#${sectionId} .carousel-btn.next`);
-      
-      if (carousel && prevBtn && nextBtn) {
-        prevBtn.disabled = carousel.scrollLeft <= 0;
-        nextBtn.disabled = carousel.scrollLeft >= (carousel.scrollWidth - carousel.clientWidth);
-      }
-    }
-
-    async function loadHome() {
-      try {
-        const [trending, np, pm, ota, ptv] = await Promise.all([
-          fetchList('trending'),
-          fetchList('nowPlaying'),
-          fetchList('popularMovies'),
-          fetchList('onTheAir'),
-          fetchList('popularTV')
-        ]);
-        
-        fillSection('trending', trending);
-        fillSection('nowPlaying', np);
-        fillSection('popularMovies', pm);
-        fillSection('onTheAir', ota);
-        fillSection('popularTV', ptv);
-        
-        // Aggiungi event listeners per lo scroll
-        ['trending', 'nowPlaying', 'popularMovies', 'onTheAir', 'popularTV'].forEach(sectionId => {
-          const carousel = document.querySelector(`#${sectionId} .carousel`);
-          carousel.addEventListener('scroll', () => updateCarouselButtons(sectionId));
-        });
-      } catch (error) {
-        console.error('Errore nel caricamento:', error);
-      }
-    }
-
-    function showModal(item) {
-      // Rimossa - non più necessaria
-    }
-
-    function closeModal() {
-      // Rimossa - non più necessaria
-    }
-
-    async function fetchItemDetails(item) {
-      const isMovie = item.title !== undefined;
-      const type = isMovie ? 'movie' : 'tv';
-      const res = await fetch(`https://api.themoviedb.org/3/${type}/${item.id}?api_key=${API_KEY}&language=it-IT`);
-      return await res.json();
-    }
-
-    async function play(item) {
-      currentItem = item;
-      const isMovie = item.title !== undefined;
-      const id = item.id;
-      
-      // Carica i dettagli completi
-      const details = await fetchItemDetails(item);
-      
-      // Aggiorna le informazioni del player
-      document.getElementById('player-title').textContent = item.title || item.name;
-      document.getElementById('player-overview').textContent = details.overview || 'Nessuna descrizione disponibile.';
-      
-      // Crea i metadata
-      const metaDiv = document.getElementById('player-meta');
-      metaDiv.innerHTML = '';
-      
-      if (isMovie) {
-        const year = details.release_date ? new Date(details.release_date).getFullYear() : 'N/A';
-        const duration = details.runtime ? `${details.runtime} min` : 'N/A';
-        const rating = details.vote_average ? `⭐ ${details.vote_average.toFixed(1)}` : 'N/A';
-        
-        metaDiv.innerHTML = `
-          <span>🎬 Film</span>
-          <span>📅 ${year}</span>
-          <span>⏱️ ${duration}</span>
-          <span>${rating}</span>
-        `;
-      } else {
-        const year = details.first_air_date ? new Date(details.first_air_date).getFullYear() : 'N/A';
-        const seasons = details.number_of_seasons ? `${details.number_of_seasons} stagioni` : 'N/A';
-        const rating = details.vote_average ? `⭐ ${details.vote_average.toFixed(1)}` : 'N/A';
-        
-        metaDiv.innerHTML = `
-          <span>📺 Serie TV</span>
-          <span>📅 ${year}</span>
-          <span>🎭 ${seasons}</span>
-          <span>${rating}</span>
-        `;
-      }
-      
-      // Mostra il player
-      document.getElementById('home').style.display = 'none';
-      document.getElementById('results').style.display = 'none';
-      document.getElementById('player').style.display = 'block';
-
-      if (isMovie) {
-        document.getElementById('episode-selector').style.display = 'none';
-        const url = `https://vixsrc.to/movie/${id}/?primaryColor=ff0000&lang=it`;
-        document.getElementById('player-iframe').src = url;
-      } else {
-        document.getElementById('episode-selector').style.display = 'block';
-        await loadTVSeasons(id);
-      }
-
-      // Scroll to top
-      window.scrollTo(0, 0);
-    }
-
-    async function loadTVSeasons(tvId) {
-      try {
-        const seasons = await fetchTVSeasons(tvId);
-        currentSeasons = seasons.filter(season => season.season_number > 0); // Esclude la stagione 0 (speciali)
-        
-        const seasonSelect = document.getElementById('season-select');
-        seasonSelect.innerHTML = '';
-        
-        currentSeasons.forEach(season => {
-          const option = document.createElement('option');
-          option.value = season.season_number;
-          option.textContent = `Stagione ${season.season_number} (${season.episode_count} episodi)`;
-          seasonSelect.appendChild(option);
-        });
-
-        if (currentSeasons.length > 0) {
-          await loadSeasonEpisodes(tvId, currentSeasons[0].season_number);
-          playEpisode(tvId, 1, 1); // Avvia automaticamente il primo episodio
-        }
-
-        seasonSelect.addEventListener('change', async (e) => {
-          const seasonNumber = parseInt(e.target.value);
-          await loadSeasonEpisodes(tvId, seasonNumber);
-          playEpisode(tvId, seasonNumber, 1); // Avvia il primo episodio della stagione selezionata
-        });
-      } catch (error) {
-        console.error('Errore nel caricamento delle stagioni:', error);
-      }
-    }
-
-    async function loadSeasonEpisodes(tvId, seasonNumber) {
-      try {
-        const episodes = await fetchSeasonEpisodes(tvId, seasonNumber);
-        const episodesList = document.getElementById('episodes-list');
-        episodesList.innerHTML = '';
-
-        episodes.forEach(episode => {
-          const episodeDiv = document.createElement('div');
-          episodeDiv.className = 'episode-item';
-          episodeDiv.innerHTML = `
-            <div class="episode-number">Episodio ${episode.episode_number}</div>
-            <div class="episode-title">${episode.name || `Episodio ${episode.episode_number}`}</div>
-          `;
-          episodeDiv.onclick = () => {
-            document.querySelectorAll('.episode-item').forEach(el => el.classList.remove('active'));
-            episodeDiv.classList.add('active');
-            playEpisode(tvId, seasonNumber, episode.episode_number);
-          };
-          episodesList.appendChild(episodeDiv);
-        });
-
-        // Attiva il primo episodio
-        if (episodes.length > 0) {
-          episodesList.firstChild.classList.add('active');
-        }
-      } catch (error) {
-        console.error('Errore nel caricamento degli episodi:', error);
-      }
-    }
-
-    function playEpisode(tvId, seasonNumber, episodeNumber) {
-      const url = `https://vixsrc.to/tv/${tvId}/${seasonNumber}/${episodeNumber}/?primaryColor=ff0000&lang=it`;
-      document.getElementById('player-iframe').src = url;
-    }
-
-    function goBack() {
-      document.getElementById('player').style.display = 'none';
-      document.getElementById('home').style.display = 'block';
-      document.getElementById('player-iframe').src = '';
-    }
-
-    // Search functionality
-    document.getElementById('search').addEventListener('keydown', async e => {
-      if (e.key === 'Enter') {
-        const q = e.target.value.trim();
-        if (!q) return;
-        
-        document.getElementById('home').style.display = 'none';
-        document.getElementById('player').style.display = 'none';
-        const resDiv = document.getElementById('results');
-        resDiv.innerHTML = '<div class="loading"></div>';
-        
-        try {
-          const res = await fetch(`https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&query=${encodeURIComponent(q)}&language=it-IT`);
-          const data = await res.json();
-          resDiv.innerHTML = '';
-          
-          if (data.results.length === 0) {
-            resDiv.innerHTML = '<p style="text-align:center;font-size:1.2rem;opacity:0.7;">Nessun risultato trovato</p>';
-          } else {
-            data.results.forEach(item => {
-              const card = makeCard(item);
-              resDiv.appendChild(card);
-            });
-          }
-        } catch (error) {
-          console.error('Errore nella ricerca:', error);
-          resDiv.innerHTML = '<p style="text-align:center;color:#e50914;">Errore durante la ricerca</p>';
-        }
-      }
-    });
-
-    // Close modal on outside click - RIMOSSA
-
-    // Initialize
-    loadHome();
-  </script>
+  <h1>🎬 Serie</h1>
+  <div class="griglia">
+  
+  
+   <a class="canale" href="search.html" tabindex="0">
+  <div style="font-size: 48px;">🔎</div>
+  <div><p>Cerca Serie</p></div>
+</a>
+    
+     <a class="canale" href="SerieTV_-_Popolari.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>SerieTV - Popolari</p></div>
+</a>
+    
+     <a class="canale" href="SerieTV_-_Più_Votate.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>SerieTV - Più Votate</p></div>
+</a>
+    
+     <a class="canale" href="SerieTV_-_Action_&_Adventure.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>SerieTV - Action & Adventure</p></div>
+</a>
+    
+     <a class="canale" href="SerieTV_-_Animazione.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>SerieTV - Animazione</p></div>
+</a>
+    
+     <a class="canale" href="SerieTV_-_Commedia.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>SerieTV - Commedia</p></div>
+</a>
+    
+     <a class="canale" href="SerieTV_-_Crime.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>SerieTV - Crime</p></div>
+</a>
+    
+     <a class="canale" href="SerieTV_-_Documentario.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>SerieTV - Documentario</p></div>
+</a>
+    
+     <a class="canale" href="SerieTV_-_Dramma.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>SerieTV - Dramma</p></div>
+</a>
+    
+     <a class="canale" href="SerieTV_-_Famiglia.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>SerieTV - Famiglia</p></div>
+</a>
+    
+     <a class="canale" href="SerieTV_-_Kids.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>SerieTV - Kids</p></div>
+</a>
+    
+     <a class="canale" href="SerieTV_-_Mistero.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>SerieTV - Mistero</p></div>
+</a>
+    
+     <a class="canale" href="SerieTV_-_News.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>SerieTV - News</p></div>
+</a>
+    
+     <a class="canale" href="SerieTV_-_Reality.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>SerieTV - Reality</p></div>
+</a>
+    
+     <a class="canale" href="SerieTV_-_Sci-Fi_&_Fantasy.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>SerieTV - Sci-Fi & Fantasy</p></div>
+</a>
+    
+     <a class="canale" href="SerieTV_-_Soap.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>SerieTV - Soap</p></div>
+</a>
+    
+     <a class="canale" href="SerieTV_-_Talk.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>SerieTV - Talk</p></div>
+</a>
+    
+     <a class="canale" href="SerieTV_-_War_&_Politics.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>SerieTV - War & Politics</p></div>
+</a>
+    
+     <a class="canale" href="SerieTV_-_Western.html" tabindex="0">
+  <div style="font-size: 48px;">🎬</div>
+  <div><p>SerieTV - Western</p></div>
+</a>
+    
+  </div>
 </body>
 </html>
