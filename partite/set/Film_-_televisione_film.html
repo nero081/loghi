@@ -1,0 +1,2341 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Film - televisione film</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: #1a1a1a;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  max-width: 90vw;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
+
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
+
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
+
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
+
+.canale a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+  text-decoration: none;
+}
+
+
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
+
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
+  </style>
+</head>
+<body>
+  <h1>Film - televisione film</h1>
+  <div class="griglia">
+    
+    <div class="canale " id="Ultimo_addio_al_nubilato_2025">
+      <a href="https://vixsrc.to/movie/1236706/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/3Rs7L8RhBzpQsaw1qJYlw3ESrsS.jpg" alt="Ultimo addio al nubilato (2025)" />
+        
+        <p>Ultimo addio al nubilato (2025)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Star_Trek_Section_31_2025">
+      <a href="https://vixsrc.to/movie/1114894/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/vD2BusqtJNBjtQ2FUPVwjNh4HmF.jpg" alt="Star Trek: Section 31 (2025)" />
+        
+        <p>Star Trek: Section 31 (2025)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Jack_Whitehall_Missione_Natale_2024">
+      <a href="https://vixsrc.to/movie/1388232/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/1NKZUwk18KCHHffTpoQh68PjYU9.jpg" alt="Jack Whitehall Missione Natale (2024)" />
+        
+        <p>Jack Whitehall Missione Natale (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Dear_Santa_2024">
+      <a href="https://vixsrc.to/movie/1097870/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/fRbDHbGBXg6kwQYr3CRYeKPJW5q.jpg" alt="Dear Santa (2024)" />
+        
+        <p>Dear Santa (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="SpongeBob_Kamp_Spavento_2024">
+      <a href="https://vixsrc.to/movie/1354627/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/aUOCmqkbCX94znDJNtSy1402Sie.jpg" alt="SpongeBob: Kamp Spavento (2024)" />
+        
+        <p>SpongeBob: Kamp Spavento (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="South_Park_La_fine_dell_obesità_2024">
+      <a href="https://vixsrc.to/movie/1290938/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/uYTzbL7OrDAQrhBrWIV9IptddHl.jpg" alt="South Park: La fine dell'obesità (2024)" />
+        
+        <p>South Park: La fine dell'obesità (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="South_Park_Non_adatto_ai_bambini_2023">
+      <a href="https://vixsrc.to/movie/1219926/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/kN5H9EhUqDWBAsbnbt2XNhS7BFe.jpg" alt="South Park (Non adatto ai bambini) (2023)" />
+        
+        <p>South Park (Non adatto ai bambini) (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Mr_Monk_s_Last_Case_A_Monk_Movie_2023">
+      <a href="https://vixsrc.to/movie/1100795/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/gj74sUGsPMg5qDQooh8GTs4MvbP.jpg" alt="Mr. Monk's Last Case: A Monk Movie (2023)" />
+        
+        <p>Mr. Monk's Last Case: A Monk Movie (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Christmas_on_Windmill_Way_2023">
+      <a href="https://vixsrc.to/movie/1150521/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/bRDWHhiVLllPWBU2ADV61acyqT7.jpg" alt="Christmas on Windmill Way (2023)" />
+        
+        <p>Christmas on Windmill Way (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Un_appuntamento_regale_per_Natale_2023">
+      <a href="https://vixsrc.to/movie/1142780/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/hirAgrKOkqhArsRI83KszcLnGpo.jpg" alt="Un appuntamento regale per Natale (2023)" />
+        
+        <p>Un appuntamento regale per Natale (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="I_terribili_nove_2023">
+      <a href="https://vixsrc.to/movie/936059/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/xQ5gUDV89oTPHHUxoD6OQLf9u94.jpg" alt="I terribili nove (2023)" />
+        
+        <p>I terribili nove (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Riportare_a_casa_il_Natale_2023">
+      <a href="https://vixsrc.to/movie/1142767/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/uXjZ75x4hoR3FaSnGfot1PKQasV.jpg" alt="Riportare a casa il Natale (2023)" />
+        
+        <p>Riportare a casa il Natale (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Era_solo_un_messaggio_prima_di_Natale_2023">
+      <a href="https://vixsrc.to/movie/1100642/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/e1fvQdD63RP2MS9jCB8jzg7fkdr.jpg" alt="Era solo un messaggio prima di Natale (2023)" />
+        
+        <p>Era solo un messaggio prima di Natale (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Amore_e_swing_2023">
+      <a href="https://vixsrc.to/movie/1104102/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/bGjcWn55YmVsDn1SORwqnHYPTLo.jpg" alt="Amore e swing (2023)" />
+        
+        <p>Amore e swing (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="La_vera_spaventosa_casa_dei_Loud_2023">
+      <a href="https://vixsrc.to/movie/1146147/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/9mwx4PyBXTbxuLprPSyopPoVqIM.jpg" alt="La vera spaventosa casa dei Loud (2023)" />
+        
+        <p>La vera spaventosa casa dei Loud (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Fragolina_Dolcecuore_e_la_Bestia_delle_Bacche_di_Bosco_2023">
+      <a href="https://vixsrc.to/movie/1186402/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/tYDxihIdCc6JAA7en5ZqvrbClb6.jpg" alt="Fragolina Dolcecuore e la Bestia delle Bacche di Bosco (2023)" />
+        
+        <p>Fragolina Dolcecuore e la Bestia delle Bacche di Bosco (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="A_Picture_of_Her_2023">
+      <a href="https://vixsrc.to/movie/1081439/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/ppqUB5Ff9twtngqOpdqIgHzM6ry.jpg" alt="A Picture of Her (2023)" />
+        
+        <p>A Picture of Her (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Due_cuori_a_Parigi_2023">
+      <a href="https://vixsrc.to/movie/1068818/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/le660GO6PxvUwsn9yD8TBdEghGc.jpg" alt="Due cuori a Parigi (2023)" />
+        
+        <p>Due cuori a Parigi (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Il_Natale_più_dolce_di_sempre_2023">
+      <a href="https://vixsrc.to/movie/1027330/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/535o8MJmkPEq6KxnEAcrsvwqkNF.jpg" alt="Il Natale più dolce di sempre (2023)" />
+        
+        <p>Il Natale più dolce di sempre (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Teen_Wolf_Il_film_2023">
+      <a href="https://vixsrc.to/movie/877703/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/4JIE0VIZoah5b5CCJEKuOkZzH3B.jpg" alt="Teen Wolf - Il film (2023)" />
+        
+        <p>Teen Wolf - Il film (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Scomparse_2023">
+      <a href="https://vixsrc.to/movie/1075540/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/qYAnweKuuLZXnIvPWHTHWd5IBSm.jpg" alt="Scomparse (2023)" />
+        
+        <p>Scomparse (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="I_colori_del_Natale_2022">
+      <a href="https://vixsrc.to/movie/1032591/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/arfVVSPDfhNZxZwbNOYGz4tozlE.jpg" alt="I colori del Natale (2022)" />
+        
+        <p>I colori del Natale (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Principessa_cercasi_2022">
+      <a href="https://vixsrc.to/movie/1038771/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/7TUBmgb7VdyxgdwjUlf6jJ7XF11.jpg" alt="Principessa cercasi (2022)" />
+        
+        <p>Principessa cercasi (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Natale_tutto_incluso_2022">
+      <a href="https://vixsrc.to/movie/1029578/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/7WSMNERoqgtOwV1Q5xDmAiLvMeE.jpg" alt="Natale tutto incluso (2022)" />
+        
+        <p>Natale tutto incluso (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Topolino_salva_il_Natale_ancora_2022">
+      <a href="https://vixsrc.to/movie/1037929/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/6kYw7XKqWARWPTgCWuJoFaU13IC.jpg" alt="Topolino salva il Natale (ancora!) (2022)" />
+        
+        <p>Topolino salva il Natale (ancora!) (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Il_musical_di_Natale_2022">
+      <a href="https://vixsrc.to/movie/1022685/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/f06n8vO4sevRsWwwzlkfTa3eRXt.jpg" alt="Il musical di Natale (2022)" />
+        
+        <p>Il musical di Natale (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="I_viaggiatori_2022">
+      <a href="https://vixsrc.to/movie/885303/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/uDJAvuOrULRF2cRYIElQkiyyh0N.jpg" alt="I viaggiatori (2022)" />
+        
+        <p>I viaggiatori (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Di_ritorno_per_Natale_2022">
+      <a href="https://vixsrc.to/movie/971503/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/9qBQDIED8O8ehWODVt3s304KQlt.jpg" alt="Di ritorno per Natale (2022)" />
+        
+        <p>Di ritorno per Natale (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="La_regina_del_Natale_2022">
+      <a href="https://vixsrc.to/movie/826451/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/2QEyIzzLfkoGqkmyoP6moRNqtXn.jpg" alt="La regina del Natale (2022)" />
+        
+        <p>La regina del Natale (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Il_mio_fantasma_di_Natale_2022">
+      <a href="https://vixsrc.to/movie/1027392/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/wqmHxRibt8EQIhRK0cXwIcYZpHg.jpg" alt="Il mio fantasma di Natale (2022)" />
+        
+        <p>Il mio fantasma di Natale (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="La_tavola_di_Natale_2022">
+      <a href="https://vixsrc.to/movie/961769/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/jeHCXKUjhebhyCsiK6N05Pi89HD.jpg" alt="La tavola di Natale (2022)" />
+        
+        <p>La tavola di Natale (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Natale_a_Londra_2022">
+      <a href="https://vixsrc.to/movie/974213/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/kpImzOJTLJp9OVy1mWo3p8QINkf.jpg" alt="Natale a Londra (2022)" />
+        
+        <p>Natale a Londra (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Halloween_con_la_Mummia_2_2022">
+      <a href="https://vixsrc.to/movie/936061/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/ayiRv2S1FtX8DgMv7VY4oL0FQPG.jpg" alt="Halloween con la Mummia 2 (2022)" />
+        
+        <p>Halloween con la Mummia 2 (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="LEGO_Star_Wars_Summer_Vacation_2022">
+      <a href="https://vixsrc.to/movie/980804/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/vUL5UXsL5DaYgGVd2GSeqIvMKfK.jpg" alt="LEGO Star Wars Summer Vacation (2022)" />
+        
+        <p>LEGO Star Wars Summer Vacation (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="South_Park_the_Streaming_Wars_Parte_2_2022">
+      <a href="https://vixsrc.to/movie/993729/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/rsfc5EVzWPtGcBiNKMXxDo2xvsQ.jpg" alt="South Park the Streaming Wars Parte 2 (2022)" />
+        
+        <p>South Park the Streaming Wars Parte 2 (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Il_pretendente_2022">
+      <a href="https://vixsrc.to/movie/1016661/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/zwkneUe28THVEQnDSTBHPoytPDY.jpg" alt="Il pretendente (2022)" />
+        
+        <p>Il pretendente (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Z_O_M_B_I_E_S_3_2022">
+      <a href="https://vixsrc.to/movie/809107/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/tiTECh46z2TxSwWv4wmW4TfYqiL.jpg" alt="Z-O-M-B-I-E-S 3 (2022)" />
+        
+        <p>Z-O-M-B-I-E-S 3 (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Beavis_Butt_Head_alla_conquista_dell_Universo_2022">
+      <a href="https://vixsrc.to/movie/828947/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/rVKMA2j8m8hWgsDyXOllXp8DsWI.jpg" alt="Beavis & Butt-Head alla conquista dell'Universo (2022)" />
+        
+        <p>Beavis & Butt-Head alla conquista dell'Universo (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Fidanzati_ma_non_troppo_2022">
+      <a href="https://vixsrc.to/movie/932107/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/jfAZQwr3dyQ7xybRgxjcud8URZi.jpg" alt="Fidanzati... ma non troppo! (2022)" />
+        
+        <p>Fidanzati... ma non troppo! (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="South_Park_the_Streaming_Wars_2022">
+      <a href="https://vixsrc.to/movie/974691/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/dfgZJlKYg5xm6dBl05bOKhfunXb.jpg" alt="South Park the Streaming Wars (2022)" />
+        
+        <p>South Park the Streaming Wars (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Ray_Donovan_The_Movie_2022">
+      <a href="https://vixsrc.to/movie/800425/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/5sw1EvOeXMGRZGWr18R4EiZs036.jpg" alt="Ray Donovan: The Movie (2022)" />
+        
+        <p>Ray Donovan: The Movie (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Hilda_e_il_Re_Montagna_2021">
+      <a href="https://vixsrc.to/movie/789708/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/s40AQNa7SLTsjd4sxoltRrj9Z25.jpg" alt="Hilda e il Re Montagna (2021)" />
+        
+        <p>Hilda e il Re Montagna (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="The_Amazing_Mr_Blunden_2021">
+      <a href="https://vixsrc.to/movie/897992/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/eQ6DKclRghjLL2G4jYPwZLMTM6l.jpg" alt="The Amazing Mr. Blunden (2021)" />
+        
+        <p>The Amazing Mr. Blunden (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Un_regalo_di_Natale_per_Daisy_2021">
+      <a href="https://vixsrc.to/movie/881500/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/iatxP43TMVqSFpCFM4JybepGg0I.jpg" alt="Un regalo di Natale per Daisy (2021)" />
+        
+        <p>Un regalo di Natale per Daisy (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Natale_di_nuovo_2021">
+      <a href="https://vixsrc.to/movie/762879/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/i55UR3vUwhqZ5w7046mraMtAg10.jpg" alt="Natale... di nuovo?! (2021)" />
+        
+        <p>Natale... di nuovo?! (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Il_sapore_del_Natale_2021">
+      <a href="https://vixsrc.to/movie/844819/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/s61c72BglqWXhXSJCPTRt3kxqMM.jpg" alt="Il sapore del Natale (2021)" />
+        
+        <p>Il sapore del Natale (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Il_Natale_di_Angel_Falls_2021">
+      <a href="https://vixsrc.to/movie/878401/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/7A4sPNcTnwtHW2lPaPrKHFVSMON.jpg" alt="Il Natale di Angel Falls (2021)" />
+        
+        <p>Il Natale di Angel Falls (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Solo_a_Natale_2021">
+      <a href="https://vixsrc.to/movie/874210/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/2qZHcsUvTBmx7OQunUQW1NAJi5c.jpg" alt="Solo a Natale (2021)" />
+        
+        <p>Solo a Natale (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Un_Natale_di_cuore_2021">
+      <a href="https://vixsrc.to/movie/878424/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/rNvfIcaYjQjczvW6o3qdB7W4vz.jpg" alt="Un Natale di cuore (2021)" />
+        
+        <p>Un Natale di cuore (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Natale_è_arrivato_2021">
+      <a href="https://vixsrc.to/movie/878417/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/ay1EBaNZa8Bkh8uvNhfJ9rY70pk.jpg" alt="Natale è arrivato (2021)" />
+        
+        <p>Natale è arrivato (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Il_disegno_di_Natale_2021">
+      <a href="https://vixsrc.to/movie/854146/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/tPEXSGfICG3Iqt4CqFKJBO9EDQe.jpg" alt="Il disegno di Natale (2021)" />
+        
+        <p>Il disegno di Natale (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Muppets_Haunted_Mansion_La_casa_stregata_2021">
+      <a href="https://vixsrc.to/movie/826914/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/7jIbAo18n99seEMcIRfqFWQIZHw.jpg" alt="Muppets Haunted Mansion: La casa stregata (2021)" />
+        
+        <p>Muppets Haunted Mansion: La casa stregata (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="LEGO_Star_Wars_Racconti_spaventosi_2021">
+      <a href="https://vixsrc.to/movie/857702/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/8w5CeiUUYTeqVjaKyLrvboifbTQ.jpg" alt="LEGO Star Wars: Racconti spaventosi (2021)" />
+        
+        <p>LEGO Star Wars: Racconti spaventosi (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Halloween_con_la_Mummia_2021">
+      <a href="https://vixsrc.to/movie/763873/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/4NgNvOOCKSTqAbhgZjK9JaKV9Sp.jpg" alt="Halloween con la Mummia (2021)" />
+        
+        <p>Halloween con la Mummia (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Il_lato_oscuro_delle_cheerleader_2021">
+      <a href="https://vixsrc.to/movie/786980/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/85qgG0i20e4vzy7EJdl4qHf1iu3.jpg" alt="Il lato oscuro delle cheerleader (2021)" />
+        
+        <p>Il lato oscuro delle cheerleader (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Oslo_2021">
+      <a href="https://vixsrc.to/movie/553087/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/jNe5sgGFmtLPzNiIBYVwMC8SqPH.jpg" alt="Oslo (2021)" />
+        
+        <p>Oslo (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="La_ricetta_dell_amore_2021">
+      <a href="https://vixsrc.to/movie/795640/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/ygHLhSSDQsciXblCWftsfCabtcw.jpg" alt="La ricetta dell'amore (2021)" />
+        
+        <p>La ricetta dell'amore (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Miraculous_World_Shanghai_La_leggenda_di_Ladydragon_2021">
+      <a href="https://vixsrc.to/movie/726684/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/qQ0VKsGRQ2ofAmswGNzZnvC1xPE.jpg" alt="Miraculous World: Shanghai - La leggenda di Ladydragon (2021)" />
+        
+        <p>Miraculous World: Shanghai - La leggenda di Ladydragon (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Carosello_Carosone_2021">
+      <a href="https://vixsrc.to/movie/790346/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/iposKZEIF4zbWCGsR89cBvHzmXq.jpg" alt="Carosello Carosone (2021)" />
+        
+        <p>Carosello Carosone (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="L_anello_perfetto_2021">
+      <a href="https://vixsrc.to/movie/779000/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/129I1vsNxsAIM5toFW1p43QpXfi.jpg" alt="L'anello perfetto (2021)" />
+        
+        <p>L'anello perfetto (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="La_bambina_che_non_voleva_cantare_2021">
+      <a href="https://vixsrc.to/movie/802817/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/hfLtMDQghwbVIf15UzEzb4TQvtu.jpg" alt="La bambina che non voleva cantare (2021)" />
+        
+        <p>La bambina che non voleva cantare (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Tutti_per_1_1_per_tutti_2020">
+      <a href="https://vixsrc.to/movie/715869/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/8PBmNXkiSskH6VzJ4FcmMH06QxK.jpg" alt="Tutti per 1 - 1 per tutti (2020)" />
+        
+        <p>Tutti per 1 - 1 per tutti (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Natale_in_casa_Cupiello_2020">
+      <a href="https://vixsrc.to/movie/769110/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/7SWjIbWpI9CiKHCWIvfO856cWfd.jpg" alt="Natale in casa Cupiello (2020)" />
+        
+        <p>Natale in casa Cupiello (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Asta_di_Natale_2020">
+      <a href="https://vixsrc.to/movie/746478/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/lOMggLnPGHoDHPEYS8Xr39lTVqb.jpg" alt="Asta di Natale (2020)" />
+        
+        <p>Asta di Natale (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Audrey_2020">
+      <a href="https://vixsrc.to/movie/757388/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/ikAgImz1rkedYM2mW0TeGZP1xdi.jpg" alt="Audrey (2020)" />
+        
+        <p>Audrey (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Nei_panni_di_una_principessa_Ci_risiamo_2020">
+      <a href="https://vixsrc.to/movie/643882/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/60OA2bPiu1ZOuAP7nAeFEb7nvHv.jpg" alt="Nei panni di una principessa: Ci risiamo! (2020)" />
+        
+        <p>Nei panni di una principessa: Ci risiamo! (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Un_Natale_senza_tempo_2020">
+      <a href="https://vixsrc.to/movie/746039/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/3QtYNYNTHDvpGIgztEMPiX1v70z.jpg" alt="Un Natale senza tempo (2020)" />
+        
+        <p>Un Natale senza tempo (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Critters_Attack_Il_ritorno_degli_extraroditori_2020">
+      <a href="https://vixsrc.to/movie/597856/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/7XyXPgmTsq9Il1BKsVlKgZbI783.jpg" alt="Critters Attack! - Il ritorno degli extraroditori (2020)" />
+        
+        <p>Critters Attack! - Il ritorno degli extraroditori (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Christmas_Drop_operazione_regali_2020">
+      <a href="https://vixsrc.to/movie/738646/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/zwgs341TFcN9CEM0ejzsyKlmZdk.jpg" alt="Christmas Drop: operazione regali (2020)" />
+        
+        <p>Christmas Drop: operazione regali (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Mezzanotte_al_Magnolia_2020">
+      <a href="https://vixsrc.to/movie/734280/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/gA0SwJiwm3cbzfXdVO5kYaoDaMk.jpg" alt="Mezzanotte al Magnolia (2020)" />
+        
+        <p>Mezzanotte al Magnolia (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Miraculous_World_New_York_eroi_uniti_2020">
+      <a href="https://vixsrc.to/movie/755812/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/kIHgjAkuzvKBnmdstpBOo4AfZah.jpg" alt="Miraculous World - New York, eroi uniti (2020)" />
+        
+        <p>Miraculous World - New York, eroi uniti (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Un_fidanzato_in_regalo_2020">
+      <a href="https://vixsrc.to/movie/715725/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/g7KsJPYKvE1r9oPinuAsHGALnH5.jpg" alt="Un fidanzato in regalo (2020)" />
+        
+        <p>Un fidanzato in regalo (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Upside_Down_Magic_Magia_Imperfetta_2020">
+      <a href="https://vixsrc.to/movie/671583/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/nPssJyLEty9EOUOkhWJx73UbNmR.jpg" alt="Upside-Down Magic - Magia Imperfetta (2020)" />
+        
+        <p>Upside-Down Magic - Magia Imperfetta (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Z_O_M_B_I_E_S_2_2020">
+      <a href="https://vixsrc.to/movie/599521/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/hUXKuy6jjhJQHfb2hYyeupyDnZk.jpg" alt="Z-O-M-B-I-E-S 2 (2020)" />
+        
+        <p>Z-O-M-B-I-E-S 2 (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="La_verità_nascosta_2020">
+      <a href="https://vixsrc.to/movie/689782/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/diak08Un4expQg94JACbXuJSt0J.jpg" alt="La verità nascosta (2020)" />
+        
+        <p>La verità nascosta (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Ninna_nanna_mortale_2020">
+      <a href="https://vixsrc.to/movie/687516/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/9a2NK6Bt1Pu6mtxRUO8dypVSKDN.jpg" alt="Ninna nanna mortale (2020)" />
+        
+        <p>Ninna nanna mortale (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Segreti_che_uccidono_2020">
+      <a href="https://vixsrc.to/movie/682433/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/aaGjeohZnuF73q18w7zSvNWyCva.jpg" alt="Segreti che uccidono (2020)" />
+        
+        <p>Segreti che uccidono (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Full_Out_2_You_Got_This_2020">
+      <a href="https://vixsrc.to/movie/696160/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/yeW1gOLWauwhFVleLwcW29RHLG2.jpg" alt="Full Out 2: You Got This! (2020)" />
+        
+        <p>Full Out 2: You Got This! (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Lady_Gucci_La_storia_di_Patrizia_Reggiani_2020">
+      <a href="https://vixsrc.to/movie/903629/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/jAA9XExXeWvaapVMPDkpHnmTWOY.jpg" alt="Lady Gucci: La storia di Patrizia Reggiani (2020)" />
+        
+        <p>Lady Gucci: La storia di Patrizia Reggiani (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Un_amore_sulla_neve_2020">
+      <a href="https://vixsrc.to/movie/656844/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/xkbG00xalkNttYqLE3Pj2LxRXvO.jpg" alt="Un amore sulla neve (2020)" />
+        
+        <p>Un amore sulla neve (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Spirit_Avventure_in_libertà_Lo_spirito_del_Natale_2019">
+      <a href="https://vixsrc.to/movie/653904/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/1DXtxVD75Uv9fL2t8xqcZblmu2m.jpg" alt="Spirit: Avventure in libertà - Lo spirito del Natale (2019)" />
+        
+        <p>Spirit: Avventure in libertà - Lo spirito del Natale (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Un_principe_per_Natale_Royal_baby_2019">
+      <a href="https://vixsrc.to/movie/587693/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/7N8fRSgrJhN1dZIbnVZ4dCHyn3s.jpg" alt="Un principe per Natale - Royal baby (2019)" />
+        
+        <p>Un principe per Natale - Royal baby (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Natale_al_Plaza_2019">
+      <a href="https://vixsrc.to/movie/630916/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/o94uiYVMIrdUSMawgjpmA6rP4jA.jpg" alt="Natale al Plaza (2019)" />
+        
+        <p>Natale al Plaza (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Noelle_2019">
+      <a href="https://vixsrc.to/movie/454467/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/ljxeeVQJra8O4slFsmmnf5NgFx4.jpg" alt="Noelle (2019)" />
+        
+        <p>Noelle (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Enrico_Piaggio_Un_sogno_italiano_2019">
+      <a href="https://vixsrc.to/movie/647579/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/7hjasPkxfhQYNPTWqUb0hCMh8aX.jpg" alt="Enrico Piaggio - Un sogno italiano (2019)" />
+        
+        <p>Enrico Piaggio - Un sogno italiano (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Un_Natale_da_favola_2019">
+      <a href="https://vixsrc.to/movie/615585/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/uODpjkTLI8njATnYG0SQ8UpMR9u.jpg" alt="Un Natale da favola (2019)" />
+        
+        <p>Un Natale da favola (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Vendetta_letale_2019">
+      <a href="https://vixsrc.to/movie/644682/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/1odTBUPDBlQrwX1Jo3QLLCvShdF.jpg" alt="Vendetta letale (2019)" />
+        
+        <p>Vendetta letale (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Steven_Universe_Il_film_2019">
+      <a href="https://vixsrc.to/movie/537061/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/8mRgpubxHqnqvENK4Bei30xMDvy.jpg" alt="Steven Universe: Il film (2019)" />
+        
+        <p>Steven Universe: Il film (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Fuga_dalla_setta_2019">
+      <a href="https://vixsrc.to/movie/633049/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/5mo7u6N9ry6irY8MyzarInkHa8p.jpg" alt="Fuga dalla setta (2019)" />
+        
+        <p>Fuga dalla setta (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="L_enigma_di_Medusa_2019">
+      <a href="https://vixsrc.to/movie/619396/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/tyCWbHojOWtGiLRAXdSr5ovXjQY.jpg" alt="L'enigma di Medusa (2019)" />
+        
+        <p>L'enigma di Medusa (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Due_donne_e_un_segreto_2019">
+      <a href="https://vixsrc.to/movie/665702/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/j3Rw26C6zl1KVOvzv6293Y9uBiY.jpg" alt="Due donne e un segreto (2019)" />
+        
+        <p>Due donne e un segreto (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Invader_Zim_e_il_Florpus_2019">
+      <a href="https://vixsrc.to/movie/472983/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/sZUGi2Hbz2kyUyHPbasZpKDMYqd.jpg" alt="Invader Zim e il Florpus (2019)" />
+        
+        <p>Invader Zim e il Florpus (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Ritorno_a_Midway_2019">
+      <a href="https://vixsrc.to/movie/609434/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/sf0O183gkYwEw4IByhsa45LHYoi.jpg" alt="Ritorno a Midway (2019)" />
+        
+        <p>Ritorno a Midway (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="La_vita_moderna_di_Rocko_Attrazione_statica_2019">
+      <a href="https://vixsrc.to/movie/439059/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/AfBc2fft23vOtVHWT1P8hTA8nsP.jpg" alt="La vita moderna di Rocko - Attrazione statica (2019)" />
+        
+        <p>La vita moderna di Rocko - Attrazione statica (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Descendants_3_2019">
+      <a href="https://vixsrc.to/movie/506574/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/7IRy0iHdaS0JI3ng4ZYlk5gLSFn.jpg" alt="Descendants 3 (2019)" />
+        
+        <p>Descendants 3 (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Uomo_contro_squalo_2019">
+      <a href="https://vixsrc.to/movie/616902/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/tnly7Hy9DEwm0b9dNjv34p1nigY.jpg" alt="Uomo contro squalo (2019)" />
+        
+        <p>Uomo contro squalo (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Duisburg_Linea_di_sangue_2019">
+      <a href="https://vixsrc.to/movie/604453/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/nPlA81QP61aUBQHwLmei5X9EXub.jpg" alt="Duisburg - Linea di sangue (2019)" />
+        
+        <p>Duisburg - Linea di sangue (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Mi_vendicherò_2019">
+      <a href="https://vixsrc.to/movie/592608/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/rVYnwoBa3mfJTLvIss96XUjEHBS.jpg" alt="Mi vendicherò (2019)" />
+        
+        <p>Mi vendicherò (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="A_volte_i_segreti_uccidono_2019">
+      <a href="https://vixsrc.to/movie/590372/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/7KeCHjTFyzrzPfAF95jvGp7hgiK.jpg" alt="A volte i segreti uccidono (2019)" />
+        
+        <p>A volte i segreti uccidono (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Edoardo_Ferrario_Temi_Caldi_2019">
+      <a href="https://vixsrc.to/movie/588362/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/hzPwwiHQtp4OAWsoHjC2gP3KDaF.jpg" alt="Edoardo Ferrario: Temi Caldi (2019)" />
+        
+        <p>Edoardo Ferrario: Temi Caldi (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Vera_La_giornata_dei_cuori_felici_2019">
+      <a href="https://vixsrc.to/movie/579473/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/dfVNS9J7RzmiFxnT5NEnWAXRLsL.jpg" alt="Vera: La giornata dei cuori felici (2019)" />
+        
+        <p>Vera: La giornata dei cuori felici (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Un_detective_alla_Bixler_High_2019">
+      <a href="https://vixsrc.to/movie/567966/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/lqLQbg1aFLMxlPxfHDyIVC4ejdF.jpg" alt="Un detective alla Bixler High (2019)" />
+        
+        <p>Un detective alla Bixler High (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Basta_un_paio_di_baffi_2019">
+      <a href="https://vixsrc.to/movie/732795/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/tPSDuJMpu6fFyNNPAwRFDvtGr1D.jpg" alt="Basta un paio di baffi (2019)" />
+        
+        <p>Basta un paio di baffi (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Un_Natale_su_misura_2018">
+      <a href="https://vixsrc.to/movie/550035/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/16YucDqd5xh35QtbrrFKdUuCOHd.jpg" alt="Un Natale su misura (2018)" />
+        
+        <p>Un Natale su misura (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Pretty_Little_Stalker_Tra_le_Pagine_della_Pazzia_2018">
+      <a href="https://vixsrc.to/movie/621300/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/jwchx8M01bS7JgCumJfxdyVc9FW.jpg" alt="Pretty Little Stalker - Tra le Pagine della Pazzia (2018)" />
+        
+        <p>Pretty Little Stalker - Tra le Pagine della Pazzia (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Social_Killer_2018">
+      <a href="https://vixsrc.to/movie/554617/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/hfxqW8QmN2Mzgflc8iJ9RReW0ew.jpg" alt="Social Killer (2018)" />
+        
+        <p>Social Killer (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Natale_a_Wonderland_2018">
+      <a href="https://vixsrc.to/movie/550032/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/imSbQzw53bdHEkz480QYFS7XLCW.jpg" alt="Natale a Wonderland (2018)" />
+        
+        <p>Natale a Wonderland (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Un_principe_per_Natale_Matrimonio_reale_2018">
+      <a href="https://vixsrc.to/movie/525041/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/2bLQTbFWrsunSVQsvOWZAAGACbf.jpg" alt="Un principe per Natale - Matrimonio reale (2018)" />
+        
+        <p>Un principe per Natale - Matrimonio reale (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Natale_con_un_Principe_2018">
+      <a href="https://vixsrc.to/movie/566039/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/aoj8UCgQ0vOm1kGKmoIAQRj5FoX.jpg" alt="Natale con un Principe (2018)" />
+        
+        <p>Natale con un Principe (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Natale_con_vista_2018">
+      <a href="https://vixsrc.to/movie/550385/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/kd6pg3IZtAqGg9tUzGbNPgUskZf.jpg" alt="Natale con vista (2018)" />
+        
+        <p>Natale con vista (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Finché_ex_non_ci_separi_2018">
+      <a href="https://vixsrc.to/movie/575019/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/rUC2dk54W7cFakgFjSHSgvId5dI.jpg" alt="Finché ex non ci separi (2018)" />
+        
+        <p>Finché ex non ci separi (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Jeremy_senza_freni_2018">
+      <a href="https://vixsrc.to/movie/467181/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/q5JErRcwd5BwhftO86U5OzLFpga.jpg" alt="Jeremy senza freni! (2018)" />
+        
+        <p>Jeremy senza freni! (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="L_ultimo_Sharknado_Era_ora_2018">
+      <a href="https://vixsrc.to/movie/523849/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/cDJbzDA0Z131pM7Bcb53TqdHRRF.jpg" alt="L'ultimo Sharknado - Era ora! (2018)" />
+        
+        <p>L'ultimo Sharknado - Era ora! (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Circondati_2018">
+      <a href="https://vixsrc.to/movie/542787/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/5y2VRgybwIe3dAXmwKAzwP3X21R.jpg" alt="Circondati (2018)" />
+        
+        <p>Circondati (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Megalodon_2018">
+      <a href="https://vixsrc.to/movie/523931/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/jRMVYSR55lvseGQOHJsAeMEUJ4z.jpg" alt="Megalodon (2018)" />
+        
+        <p>Megalodon (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="La_gemella_cattiva_2018">
+      <a href="https://vixsrc.to/movie/540899/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/fLDYkYONGvaHIPkwoCmcKXBDsPX.jpg" alt="La gemella cattiva (2018)" />
+        
+        <p>La gemella cattiva (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="2151_Minaccia_aliena_2018">
+      <a href="https://vixsrc.to/movie/352548/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/5Ib2zP4JcsGJNTXssE4AuDIg92N.jpg" alt="2151 - Minaccia aliena (2018)" />
+        
+        <p>2151 - Minaccia aliena (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Hey_Arnold_Il_film_della_giungla_2018">
+      <a href="https://vixsrc.to/movie/439058/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/k4CEG6gNm5PgQeMEoUsAqJULugU.jpg" alt="Hey Arnold! Il film della giungla (2018)" />
+        
+        <p>Hey Arnold! Il film della giungla (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="L_identità_rubata_2018">
+      <a href="https://vixsrc.to/movie/530451/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/wIGW4ILRU75ImjBUMq6Kw7dalvB.jpg" alt="L'identità rubata (2018)" />
+        
+        <p>L'identità rubata (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Z_O_M_B_I_E_S_2018">
+      <a href="https://vixsrc.to/movie/483980/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/snGVInrnUBK6LrfLZkOdbj5PpJo.jpg" alt="Z-O-M-B-I-E-S (2018)" />
+        
+        <p>Z-O-M-B-I-E-S (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Innamorarsi_sul_ghiaccio_2018">
+      <a href="https://vixsrc.to/movie/491408/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/iF7hEneMVFET1XebgmMqfTLaM6r.jpg" alt="Innamorarsi sul ghiaccio (2018)" />
+        
+        <p>Innamorarsi sul ghiaccio (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Matrimonio_sulla_neve_2017">
+      <a href="https://vixsrc.to/movie/488113/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/zsprSXns09y7PQADawTiHej2H1Q.jpg" alt="Matrimonio sulla neve (2017)" />
+        
+        <p>Matrimonio sulla neve (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="48_desideri_di_Natale_2017">
+      <a href="https://vixsrc.to/movie/490410/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/yz3BdtQuWxBvjyXqhwLCdzbTxj.jpg" alt="48 desideri di Natale (2017)" />
+        
+        <p>48 desideri di Natale (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Un_principe_per_Natale_2017">
+      <a href="https://vixsrc.to/movie/483104/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/x0IGQsMzVbsF7noj5cCfEk1GU7s.jpg" alt="Un principe per Natale (2017)" />
+        
+        <p>Un principe per Natale (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Never_Ending_Man_Hayao_Miyazaki_2017">
+      <a href="https://vixsrc.to/movie/459414/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/wflt0Md44eh1fYcaeB2w9Tr9D55.jpg" alt="Never Ending Man - Hayao Miyazaki (2017)" />
+        
+        <p>Never Ending Man - Hayao Miyazaki (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Sharknado_5_Global_Swarming_2017">
+      <a href="https://vixsrc.to/movie/438970/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/iEYddMwOXH666hRy4BUGAQOoLvv.jpg" alt="Sharknado 5: Global Swarming (2017)" />
+        
+        <p>Sharknado 5: Global Swarming (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Descendants_2_2017">
+      <a href="https://vixsrc.to/movie/417320/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/cTVpG1JnzyKazgHTZ7Pn6wTaGzC.jpg" alt="Descendants 2 (2017)" />
+        
+        <p>Descendants 2 (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="The_Wizard_of_Lies_2017">
+      <a href="https://vixsrc.to/movie/363992/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/eutYEMYZkI3uXZqDbbEi7nFgNQL.jpg" alt="The Wizard of Lies (2017)" />
+        
+        <p>The Wizard of Lies (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Il_mio_amico_è_una_bestia_2_2017">
+      <a href="https://vixsrc.to/movie/435737/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/bcAWtUu09ylQDhDKrKkAW9S7lA4.jpg" alt="Il mio amico è una bestia 2 (2017)" />
+        
+        <p>Il mio amico è una bestia 2 (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Due_cuori_e_una_tenda_2017">
+      <a href="https://vixsrc.to/movie/445913/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/uFwX0kQC8jIzHz9XQo2KOxtgaf1.jpg" alt="Due cuori e una... tenda! (2017)" />
+        
+        <p>Due cuori e una... tenda! (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Un_Natale_da_Cenerentola_2016">
+      <a href="https://vixsrc.to/movie/426808/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/yD4SvhjDKi7ppsceMbxXKgMBtUi.jpg" alt="Un Natale da Cenerentola (2016)" />
+        
+        <p>Un Natale da Cenerentola (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Ricatto_ad_alta_quota_2016">
+      <a href="https://vixsrc.to/movie/455509/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/drqEIjYFTzGfuXP0w1Az4bnzRJF.jpg" alt="Ricatto ad alta quota (2016)" />
+        
+        <p>Ricatto ad alta quota (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Miracoli_a_Natale_2016">
+      <a href="https://vixsrc.to/movie/428260/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/9px5UyM98gsKa327kaWNtiOQRvM.jpg" alt="Miracoli a Natale (2016)" />
+        
+        <p>Miracoli a Natale (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Le_leggende_del_Tempio_Nascosto_2016">
+      <a href="https://vixsrc.to/movie/424661/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/A4uB43sOjgfDzRh0q7DZKpH91Bj.jpg" alt="Le leggende del Tempio Nascosto (2016)" />
+        
+        <p>Le leggende del Tempio Nascosto (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Un_estate_d_amore_2016">
+      <a href="https://vixsrc.to/movie/411081/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/eR0PICDBoNDVZHWxZHLoif2MzED.jpg" alt="Un'estate d'amore (2016)" />
+        
+        <p>Un'estate d'amore (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Ice_Sharks_2016">
+      <a href="https://vixsrc.to/movie/407627/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/qgUI56HGH06H3vxXAXqt7DdNUnZ.jpg" alt="Ice Sharks (2016)" />
+        
+        <p>Ice Sharks (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Looking_Il_film_2016">
+      <a href="https://vixsrc.to/movie/371738/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/tQdda275rJqNi6Ifrf3ntWBsXDj.jpg" alt="Looking - Il film (2016)" />
+        
+        <p>Looking - Il film (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="All_the_Way_2016">
+      <a href="https://vixsrc.to/movie/347123/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/j4AEurmnYoRsA1nHhRK9AE4j2CL.jpg" alt="All the Way (2016)" />
+        
+        <p>All the Way (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Il_mio_amico_è_una_bestia_2016">
+      <a href="https://vixsrc.to/movie/378221/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/hrkulam0zPHsvt6oC6worZP1SdI.jpg" alt="Il mio amico è una bestia (2016)" />
+        
+        <p>Il mio amico è una bestia (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Sherlock_L_abominevole_sposa_2016">
+      <a href="https://vixsrc.to/movie/379170/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/2ub32LpCnTMJYgABe2L8x71MH4u.jpg" alt="Sherlock - L'abominevole sposa (2016)" />
+        
+        <p>Sherlock - L'abominevole sposa (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Swept_Under_Sulle_tracce_del_serial_killer_2015">
+      <a href="https://vixsrc.to/movie/372490/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/vsSnOpQzMK3vLG0rYpLfFgVv4az.jpg" alt="Swept Under - Sulle tracce del serial killer (2015)" />
+        
+        <p>Swept Under - Sulle tracce del serial killer (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="A_Christmas_Reunion_2015">
+      <a href="https://vixsrc.to/movie/369061/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/f4j4bCsBW8sge4Ajn14gXZAAa5C.jpg" alt="A Christmas Reunion (2015)" />
+        
+        <p>A Christmas Reunion (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Lei_è_la_mia_ossessione_2015">
+      <a href="https://vixsrc.to/movie/368702/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/8IVx7HM540KoP4fmkbetDmQsSVX.jpg" alt="Lei è la mia ossessione (2015)" />
+        
+        <p>Lei è la mia ossessione (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Un_principe_per_Natale_2015">
+      <a href="https://vixsrc.to/movie/369057/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/sQo4rIB7bGpqq5AzTg28GH01mjX.jpg" alt="Un principe per Natale (2015)" />
+        
+        <p>Un principe per Natale (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Quasi_sposi_2015">
+      <a href="https://vixsrc.to/movie/317114/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/hzI3DXZF8ycrJQHRQENHt0hUOUu.jpg" alt="Quasi sposi (2015)" />
+        
+        <p>Quasi sposi (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Garage_Sale_Mystery_Il_vestito_da_sposa_2015">
+      <a href="https://vixsrc.to/movie/348630/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/xae9wfwffK0QQ0VT8nyQkj19RvW.jpg" alt="Garage Sale Mystery: Il vestito da sposa (2015)" />
+        
+        <p>Garage Sale Mystery: Il vestito da sposa (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Descendants_2015">
+      <a href="https://vixsrc.to/movie/277217/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/65DkgHPSLVjgr6IYkpY9Aqqqid5.jpg" alt="Descendants (2015)" />
+        
+        <p>Descendants (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Sharknado_3_2015">
+      <a href="https://vixsrc.to/movie/331446/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/r8qy2CgaSjJYusWy3XkbZieK5aG.jpg" alt="Sharknado 3 (2015)" />
+        
+        <p>Sharknado 3 (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="San_Andreas_Quake_2015">
+      <a href="https://vixsrc.to/movie/339533/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/7xcHg94YfL0a0gg8edBVnn2QkJI.jpg" alt="San Andreas Quake (2015)" />
+        
+        <p>San Andreas Quake (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Il_mostro_di_Cleveland_2015">
+      <a href="https://vixsrc.to/movie/336845/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/ggZoGw2s7zbEGjJ4lTaGLSjsnRM.jpg" alt="Il mostro di Cleveland (2015)" />
+        
+        <p>Il mostro di Cleveland (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Garage_Sale_Mystery_La_camera_della_morte_2015">
+      <a href="https://vixsrc.to/movie/325071/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/xANcH7loLZSJ7UIBgC8IOPLNDir.jpg" alt="Garage Sale Mystery: La camera della morte (2015)" />
+        
+        <p>Garage Sale Mystery: La camera della morte (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Adam_Adam_2015">
+      <a href="https://vixsrc.to/movie/325813/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/Ak40eOsh7MK466eJmoIUMwNEWON.jpg" alt="Adam & Adam (2015)" />
+        
+        <p>Adam & Adam (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Capelli_ribelli_2015">
+      <a href="https://vixsrc.to/movie/317198/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/s6CLm25qeuNPjEqKkEnab4KBIx3.jpg" alt="Capelli ribelli (2015)" />
+        
+        <p>Capelli ribelli (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Garage_Sale_Mystery_Non_è_oro_tutto_ciò_che_luccica_2014">
+      <a href="https://vixsrc.to/movie/300778/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/cuscqZp7dIaQXvLOr4NPhfGfmS.jpg" alt="Garage Sale Mystery: Non è oro tutto ciò che luccica (2014)" />
+        
+        <p>Garage Sale Mystery: Non è oro tutto ciò che luccica (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Zodiac_il_segno_dell_apocalisse_2014">
+      <a href="https://vixsrc.to/movie/285135/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/lNZr7d7PsIc198MDJR2hsQG9aIZ.jpg" alt="Zodiac: il segno dell'apocalisse (2014)" />
+        
+        <p>Zodiac: il segno dell'apocalisse (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Sharknado_2_A_volte_ripiovono_2014">
+      <a href="https://vixsrc.to/movie/248504/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/GgZOBSNIkxz3qA66Jauv6VvIc.jpg" alt="Sharknado 2 - A volte ripiovono (2014)" />
+        
+        <p>Sharknado 2 - A volte ripiovono (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Zapped_La_nuova_vita_di_Zoey_2014">
+      <a href="https://vixsrc.to/movie/278774/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/n4NIXWJ1nSsEPJ64m1qzA8MLXuF.jpg" alt="Zapped - La nuova vita di Zoey (2014)" />
+        
+        <p>Zapped - La nuova vita di Zoey (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Il_grande_colpo_2014">
+      <a href="https://vixsrc.to/movie/216769/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/gccrJwdNv0roucBpG6Dus0gw4Xb.jpg" alt="Il grande colpo (2014)" />
+        
+        <p>Il grande colpo (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Cloud_9_2014">
+      <a href="https://vixsrc.to/movie/245473/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/1BD3erCSl1mh0VrTBg0g34wOWsQ.jpg" alt="Cloud 9 (2014)" />
+        
+        <p>Cloud 9 (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Mike_Tyson_tutta_la_verità_2013">
+      <a href="https://vixsrc.to/movie/210041/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/wVPuUYpAQTH01Hko5VUnZKkkcPt.jpg" alt="Mike Tyson: tutta la verità (2013)" />
+        
+        <p>Mike Tyson: tutta la verità (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="I_Murphy_2013">
+      <a href="https://vixsrc.to/movie/246569/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/v2ClGoeLyX4Vmgzk6Q80OANCFi6.jpg" alt="I Murphy (2013)" />
+        
+        <p>I Murphy (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Garage_Sale_Mystery_Il_mistero_della_statuetta_di_giada_2013">
+      <a href="https://vixsrc.to/movie/221791/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/AiPSRVR3tAsyWKmJnAyzbYC6u6C.jpg" alt="Garage Sale Mystery: Il mistero della statuetta di giada (2013)" />
+        
+        <p>Garage Sale Mystery: Il mistero della statuetta di giada (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Teen_Beach_Movie_2013">
+      <a href="https://vixsrc.to/movie/177888/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/sKrGe5EmDSyVaWM0uj7rJDQHRjB.jpg" alt="Teen Beach Movie (2013)" />
+        
+        <p>Teen Beach Movie (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Sharknado_2013">
+      <a href="https://vixsrc.to/movie/205321/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/atEmHkVFTSGRYt2PeCiziQqbZnI.jpg" alt="Sharknado (2013)" />
+        
+        <p>Sharknado (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Il_ritorno_dei_maghi_Alex_vs_Alex_2013">
+      <a href="https://vixsrc.to/movie/178682/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/9nXIGz6LGTecX0qqD8ofXGxJjkx.jpg" alt="Il ritorno dei maghi - Alex vs  Alex (2013)" />
+        
+        <p>Il ritorno dei maghi - Alex vs  Alex (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Mega_Tornado_2013">
+      <a href="https://vixsrc.to/movie/172767/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/268rvZNZD7DM4D3dbE0pQQB18rT.jpg" alt="Mega Tornado (2013)" />
+        
+        <p>Mega Tornado (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Holiday_Heist_Mamma_ho_visto_un_fantasma_2012">
+      <a href="https://vixsrc.to/movie/134375/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/nsRl6M33UjKNpHDIRoGW81WX89H.jpg" alt="Holiday Heist - Mamma, ho visto un fantasma (2012)" />
+        
+        <p>Holiday Heist - Mamma, ho visto un fantasma (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Bigfoot_2012">
+      <a href="https://vixsrc.to/movie/117856/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/j5ZuJTEzPxyifFTYs1BvGRQfLb3.jpg" alt="Bigfoot (2012)" />
+        
+        <p>Bigfoot (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Let_It_Shine_2012">
+      <a href="https://vixsrc.to/movie/114955/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/rmYB5cqacaYhIcLjAD9QRob7luz.jpg" alt="Let It Shine (2012)" />
+        
+        <p>Let It Shine (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Big_Time_Movie_2012">
+      <a href="https://vixsrc.to/movie/95754/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/tIFqLhlK8fhYnBCrrYedKHTzlhg.jpg" alt="Big Time Movie (2012)" />
+        
+        <p>Big Time Movie (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="12_Volte_Natale_2011">
+      <a href="https://vixsrc.to/movie/81393/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/sqJYYXhK3t5wObmRNaCZmW8YbnH.jpg" alt="12 Volte Natale (2011)" />
+        
+        <p>12 Volte Natale (2011)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Hide_Segreti_sepolti_2011">
+      <a href="https://vixsrc.to/movie/89827/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/5FycDjGmXXUKXC6iDBEqXMLVOMC.jpg" alt="Hide - Segreti sepolti (2011)" />
+        
+        <p>Hide - Segreti sepolti (2011)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Too_Big_to_Fail_Il_crollo_dei_giganti_2011">
+      <a href="https://vixsrc.to/movie/65034/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/pcrCKELIeNFfFrAoVFpMTpzTqVx.jpg" alt="Too Big to Fail - Il crollo dei giganti (2011)" />
+        
+        <p>Too Big to Fail - Il crollo dei giganti (2011)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Quando_l_amore_sboccia_a_Natale_2011">
+      <a href="https://vixsrc.to/movie/87313/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/zMQMbwNv9aRx9PmTqescVaVvyIy.jpg" alt="Quando l'amore sboccia a Natale (2011)" />
+        
+        <p>Quando l'amore sboccia a Natale (2011)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Best_Player_2011">
+      <a href="https://vixsrc.to/movie/60089/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/hIVXQM0X4rawgKa6VFPb84NBqKX.jpg" alt="Best Player (2011)" />
+        
+        <p>Best Player (2011)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="La_verità_non_può_aspettare_2011">
+      <a href="https://vixsrc.to/movie/63326/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/uipBee6eaDxEGjCvAonEnBX4g1e.jpg" alt="La verità non può aspettare (2011)" />
+        
+        <p>La verità non può aspettare (2011)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Avalon_High_2011">
+      <a href="https://vixsrc.to/movie/50479/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/hgS7dPj4e6IYzDXn5IHA6XIbKfl.jpg" alt="Avalon High (2011)" />
+        
+        <p>Avalon High (2011)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="La_festività_di_Kung_Fu_Panda_2010">
+      <a href="https://vixsrc.to/movie/50393/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/RPjIX7spUCTL4zr0XNpoafc3FI.jpg" alt="La festività di Kung Fu Panda (2010)" />
+        
+        <p>La festività di Kung Fu Panda (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Il_ragazzo_che_gridava_al_lupo_mannaro_2010">
+      <a href="https://vixsrc.to/movie/48186/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/gL2CAPlzCUy2cuck2jdlsLE1SOS.jpg" alt="Il ragazzo che gridava al lupo... mannaro (2010)" />
+        
+        <p>Il ragazzo che gridava al lupo... mannaro (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="La_mia_babysitter_è_un_vampiro_2010">
+      <a href="https://vixsrc.to/movie/63700/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/dUWPPf9kCmnO5TxP08zsa6u0YmP.jpg" alt="La mia babysitter è un vampiro (2010)" />
+        
+        <p>La mia babysitter è un vampiro (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Piano_perfetto_2010">
+      <a href="https://vixsrc.to/movie/153436/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/fgl7yqQXZF84xiZcejRXi4WC5ni.jpg" alt="Piano perfetto (2010)" />
+        
+        <p>Piano perfetto (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Camp_Rock_2_The_Final_Jam_2010">
+      <a href="https://vixsrc.to/movie/44244/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/8RSdWqC259zR72Jjo6ANAM4ndhM.jpg" alt="Camp Rock 2: The Final Jam (2010)" />
+        
+        <p>Camp Rock 2: The Final Jam (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="You_Don_t_Know_Jack_Il_dottor_morte_2010">
+      <a href="https://vixsrc.to/movie/36950/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/lrKP3Z7ag2YFHbXwjTq9KDM3LRQ.jpg" alt="You Don't Know Jack - Il dottor morte (2010)" />
+        
+        <p>You Don't Know Jack - Il dottor morte (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Stonehenge_Apocalypse_2010">
+      <a href="https://vixsrc.to/movie/39750/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/eHMeMg2UBu5aNUFVHYeWsKkwurT.jpg" alt="Stonehenge Apocalypse (2010)" />
+        
+        <p>Stonehenge Apocalypse (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Il_patto_di_Cenerentola_2010">
+      <a href="https://vixsrc.to/movie/70076/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/mxWIRpSnLyOQUDhqddo9S9n28U8.jpg" alt="Il patto di Cenerentola (2010)" />
+        
+        <p>Il patto di Cenerentola (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="I_due_presidenti_2010">
+      <a href="https://vixsrc.to/movie/45371/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/gY6bPaAQbjHpWrUTnAmWp8NWQIx.jpg" alt="I due presidenti (2010)" />
+        
+        <p>I due presidenti (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Legami_pericolosi_2010">
+      <a href="https://vixsrc.to/movie/149091/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/xNWJswBjQFgCMze5y3ovQi7MTAD.jpg" alt="Legami pericolosi (2010)" />
+        
+        <p>Legami pericolosi (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Quantum_Apocalypse_2010">
+      <a href="https://vixsrc.to/movie/32206/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/7hMBhDknvIDFtkohTcggXvIwYxg.jpg" alt="Quantum Apocalypse (2010)" />
+        
+        <p>Quantum Apocalypse (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Mi_ricordo_Anna_Frank_2010">
+      <a href="https://vixsrc.to/movie/92243/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/4FBgPhIN3tNWPQEacG9YZacyevz.jpg" alt="Mi ricordo Anna Frank (2010)" />
+        
+        <p>Mi ricordo Anna Frank (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Skyrunners_2009">
+      <a href="https://vixsrc.to/movie/28729/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/zhVHidKepWQQhtC2MIrbvfApdi6.jpg" alt="Skyrunners (2009)" />
+        
+        <p>Skyrunners (2009)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="MegaFault_La_terra_trema_2009">
+      <a href="https://vixsrc.to/movie/30289/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/wa3v5osMnFaEUImfMiWOTIjv2lQ.jpg" alt="MegaFault - La terra trema (2009)" />
+        
+        <p>MegaFault - La terra trema (2009)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Taking_chance_Il_ritorno_di_un_eroe_2009">
+      <a href="https://vixsrc.to/movie/25405/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/IyU8dWvpWmcDCPrLeKemBvU9H.jpg" alt="Taking chance - Il ritorno di un eroe (2009)" />
+        
+        <p>Taking chance - Il ritorno di un eroe (2009)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="I_maghi_di_Waverly_The_Movie_2009">
+      <a href="https://vixsrc.to/movie/26736/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/6qBoq2pvA2zWTXKb6HdVYgyIrmU.jpg" alt="I maghi di Waverly - The Movie (2009)" />
+        
+        <p>I maghi di Waverly - The Movie (2009)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Se_mi_guardi_mi_sciolgo_2008">
+      <a href="https://vixsrc.to/movie/15671/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/hUMqSl5a8d9jLYYDAJpp4jMuHMo.jpg" alt="Se mi guardi mi sciolgo (2008)" />
+        
+        <p>Se mi guardi mi sciolgo (2008)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Camp_Rock_2008">
+      <a href="https://vixsrc.to/movie/13655/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/7IXMqZnwccogptThay3togKIFWw.jpg" alt="Camp Rock (2008)" />
+        
+        <p>Camp Rock (2008)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Battlestar_Galactica_Razor_2007">
+      <a href="https://vixsrc.to/movie/69315/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/yY67dZEsmMHpSL1MMa0m8YnzaGi.jpg" alt="Battlestar Galactica - Razor (2007)" />
+        
+        <p>Battlestar Galactica - Razor (2007)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="L_abbazia_di_Northanger_2007">
+      <a href="https://vixsrc.to/movie/18093/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/tmJ0CVnrMMfTXXWwqvVH5a4CqNA.jpg" alt="L'abbazia di Northanger (2007)" />
+        
+        <p>L'abbazia di Northanger (2007)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="High_School_Musical_2_2007">
+      <a href="https://vixsrc.to/movie/13649/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/la2kiVWDm2vuB4APZDgCCmuBh4K.jpg" alt="High School Musical 2 (2007)" />
+        
+        <p>High School Musical 2 (2007)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="L_ultimo_pellerossa_2007">
+      <a href="https://vixsrc.to/movie/13470/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/xLpb4mQV6OYMFSbgWG9cn7b1ats.jpg" alt="L'ultimo pellerossa (2007)" />
+        
+        <p>L'ultimo pellerossa (2007)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="12_ore_per_vivere_2006">
+      <a href="https://vixsrc.to/movie/92759/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/tQjLdUi2LH9NpZ7bihLs2MKIPGd.jpg" alt="12 ore per vivere (2006)" />
+        
+        <p>12 ore per vivere (2006)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Leroy_Stitch_2006">
+      <a href="https://vixsrc.to/movie/21316/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/8ddTcTllI5U1Gq2EvGYE2CBprOS.jpg" alt="Leroy & Stitch (2006)" />
+        
+        <p>Leroy & Stitch (2006)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Flight_93_2006">
+      <a href="https://vixsrc.to/movie/10958/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/q2jz1F7u4u4jID3xaFjuUBFEpxl.jpg" alt="Flight 93 (2006)" />
+        
+        <p>Flight 93 (2006)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="High_School_Musical_2006">
+      <a href="https://vixsrc.to/movie/10947/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/spPEjwlWjXbrFElGitVTpbQq5AI.jpg" alt="High School Musical (2006)" />
+        
+        <p>High School Musical (2006)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Komodo_vs_Cobra_2005">
+      <a href="https://vixsrc.to/movie/28509/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/2dLwpe18MC3nIF5MmkWuB8waba9.jpg" alt="Komodo vs. Cobra (2005)" />
+        
+        <p>Komodo vs. Cobra (2005)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Frankenfish_2004">
+      <a href="https://vixsrc.to/movie/33641/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/wsz37AAeeghof4DFJZ0FxAeZN2H.jpg" alt="Frankenfish (2004)" />
+        
+        <p>Frankenfish (2004)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Halloweentown_High_Libri_e_magia_2004">
+      <a href="https://vixsrc.to/movie/34560/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/6KleuoBYESvacZVk30qYXzL0FCV.jpg" alt="Halloweentown High - Libri e magia (2004)" />
+        
+        <p>Halloweentown High - Libri e magia (2004)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="The_Librarian_Alla_ricerca_della_lancia_perduta_2004">
+      <a href="https://vixsrc.to/movie/14207/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/jgAN5yvso8ho9A8jMGGlIkCIwv.jpg" alt="The Librarian - Alla ricerca della lancia perduta (2004)" />
+        
+        <p>The Librarian - Alla ricerca della lancia perduta (2004)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Da_wo_die_Herzen_schlagen_2004">
+      <a href="https://vixsrc.to/movie/112834/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/9ywEi6Jii5vOMJiiikBL6Tw4Efg.jpg" alt="Da wo die Herzen schlagen (2004)" />
+        
+        <p>Da wo die Herzen schlagen (2004)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Charlie_Brown_e_il_racconto_di_Natale_2002">
+      <a href="https://vixsrc.to/movie/37556/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/eFmnl8xmvbJOOSNsLJc45QLxw39.jpg" alt="Charlie Brown e il racconto di Natale (2002)" />
+        
+        <p>Charlie Brown e il racconto di Natale (2002)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Mamma_ho_allagato_la_casa_2002">
+      <a href="https://vixsrc.to/movie/12536/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/i2dMZr3Wkdr2VtZZPbK0hFCKrgg.jpg" alt="Mamma, ho allagato la casa (2002)" />
+        
+        <p>Mamma, ho allagato la casa (2002)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Buon_San_Valentino_Charlie_Brown_2002">
+      <a href="https://vixsrc.to/movie/28069/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/wisbyMVYEMp4yGtTZUDVd3R9ZL3.jpg" alt="Buon San Valentino, Charlie Brown (2002)" />
+        
+        <p>Buon San Valentino, Charlie Brown (2002)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Halloweentown_II_La_vendetta_di_Kalabar_2001">
+      <a href="https://vixsrc.to/movie/34205/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/366Gd6SijgDECBTJtAzbnBzUJL3.jpg" alt="Halloweentown II - La vendetta di Kalabar (2001)" />
+        
+        <p>Halloweentown II - La vendetta di Kalabar (2001)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Halloweentown_Streghe_si_nasce_1998">
+      <a href="https://vixsrc.to/movie/27850/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/vj1YiC3WFJvmChIQG4X5FSTgwNW.jpg" alt="Halloweentown - Streghe si nasce (1998)" />
+        
+        <p>Halloweentown - Streghe si nasce (1998)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Casper_e_Wendy_Una_magica_amicizia_1998">
+      <a href="https://vixsrc.to/movie/39345/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/xKXEEBny64E5Olx7fIhd2M9k1CH.jpg" alt="Casper e Wendy - Una magica amicizia (1998)" />
+        
+        <p>Casper e Wendy - Una magica amicizia (1998)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="La_stella_di_Natale_1997">
+      <a href="https://vixsrc.to/movie/79818/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/HJem5FxbZ7nUpgcHRvqvED6yTz.jpg" alt="La stella di Natale (1997)" />
+        
+        <p>La stella di Natale (1997)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Doctor_Who_Il_Film_1996">
+      <a href="https://vixsrc.to/movie/15691/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/ulDxwTv7ymIkHgungTdPHBTQWDb.jpg" alt="Doctor Who - Il Film (1996)" />
+        
+        <p>Doctor Who - Il Film (1996)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Il_fascino_dell_inganno_1996">
+      <a href="https://vixsrc.to/movie/69945/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/jvyqO99xPHuKwqCfCXf0p2KBj7g.jpg" alt="Il fascino dell'inganno (1996)" />
+        
+        <p>Il fascino dell'inganno (1996)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="La_principessa_triste_1996">
+      <a href="https://vixsrc.to/movie/59154/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/pTPPxvB6CX7fbfjKqzrXgYpPppo.jpg" alt="La principessa triste (1996)" />
+        
+        <p>La principessa triste (1996)</p>
+      </a>
+    </div>
+    
+    <div class="canale no-logo" id="The_Great_Kandinsky_1995">
+      <a href="https://vixsrc.to/movie/243975/?lang=it" target="_blank">
+        
+         <div style="font-size: 48px;">🎬</div>
+        
+        <p>The Great Kandinsky (1995)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Born_to_Run_1993">
+      <a href="https://vixsrc.to/movie/70593/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/nWALvNVSJWKQFf6ZW3AcUzo2fTj.jpg" alt="Born to Run (1993)" />
+        
+        <p>Born to Run (1993)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="È_di_nuovo_Natale_Charlie_Brown_1992">
+      <a href="https://vixsrc.to/movie/23998/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/s9vy1JMuiaQz3mB6CsYDHGpZDdM.jpg" alt="È di nuovo Natale, Charlie Brown (1992)" />
+        
+        <p>È di nuovo Natale, Charlie Brown (1992)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="L_isola_del_tesoro_1990">
+      <a href="https://vixsrc.to/movie/26612/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/fCmRWcHXIiJMUtbIksOXp9ED6GP.jpg" alt="L'isola del tesoro (1990)" />
+        
+        <p>L'isola del tesoro (1990)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Dream_Date_1989">
+      <a href="https://vixsrc.to/movie/214999/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/p2W4ma4SEUsTDQayV0fBhPmmAxa.jpg" alt="Dream Date (1989)" />
+        
+        <p>Dream Date (1989)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Diritto_alla_vita_1986">
+      <a href="https://vixsrc.to/movie/48733/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/3nULUJdiW9zc2hzBDMphb7psvhO.jpg" alt="Diritto alla vita (1986)" />
+        
+        <p>Diritto alla vita (1986)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Unnatural_Causes_1986">
+      <a href="https://vixsrc.to/movie/263055/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/kJSBJ81DbbkBv9W7X1xDHWTnUHn.jpg" alt="Unnatural Causes (1986)" />
+        
+        <p>Unnatural Causes (1986)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Condor_1986">
+      <a href="https://vixsrc.to/movie/112837/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/kIPvGX5xXhe5zfeyZO5ExBq5agr.jpg" alt="Condor (1986)" />
+        
+        <p>Condor (1986)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Felice_Anno_Nuovo_Charlie_Brown_1986">
+      <a href="https://vixsrc.to/movie/51940/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/1t0MHjD8CKCmo1BVMQwnifzKDQR.jpg" alt="Felice Anno Nuovo, Charlie Brown (1986)" />
+        
+        <p>Felice Anno Nuovo, Charlie Brown (1986)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="The_Day_After_Il_giorno_dopo_1983">
+      <a href="https://vixsrc.to/movie/7012/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/5TcpZ3BI7B9GOqfP1farfsFuIj3.jpg" alt="The Day After - Il giorno dopo (1983)" />
+        
+        <p>The Day After - Il giorno dopo (1983)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Sii_il_mio_Valentino_Charlie_Brown_1975">
+      <a href="https://vixsrc.to/movie/31726/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/eYqT6tednj6dQzsL1D9cVtmAd7i.jpg" alt="Sii il mio Valentino, Charlie Brown (1975)" />
+        
+        <p>Sii il mio Valentino, Charlie Brown (1975)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="È_il_bracchetto_pasquale_Charlie_Brown_1974">
+      <a href="https://vixsrc.to/movie/28550/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/ePGC0SVEZVxPmonPSE1yO8y6oLj.jpg" alt="È il bracchetto pasquale, Charlie Brown (1974)" />
+        
+        <p>È il bracchetto pasquale, Charlie Brown (1974)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="È_il_Giorno_del_ringraziamento_Charlie_Brown_1973">
+      <a href="https://vixsrc.to/movie/13479/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/cJWKW4mDyqrsJv1FZb8RdXCRcp8.jpg" alt="È il Giorno del ringraziamento, Charlie Brown (1973)" />
+        
+        <p>È il Giorno del ringraziamento, Charlie Brown (1973)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Duel_1971">
+      <a href="https://vixsrc.to/movie/839/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/shucsx2yo0cIlnJU1RPrBFaTT9U.jpg" alt="Duel (1971)" />
+        
+        <p>Duel (1971)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="The_Intruders_1970">
+      <a href="https://vixsrc.to/movie/255086/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/kCl90IWdBgIacMVirIFpJ7mwfIl.jpg" alt="The Intruders (1970)" />
+        
+        <p>The Intruders (1970)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Aspettando_il_Grande_Cocomero_1966">
+      <a href="https://vixsrc.to/movie/13353/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/zfsA6O51fO3wvDrxGSwN2O4TJEE.jpg" alt="Aspettando il Grande Cocomero (1966)" />
+        
+        <p>Aspettando il Grande Cocomero (1966)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Un_Natale_da_Charlie_Brown_1965">
+      <a href="https://vixsrc.to/movie/13187/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/nZOUd25Vzk6fgpTCXF4mFldf1TL.jpg" alt="Un Natale da Charlie Brown (1965)" />
+        
+        <p>Un Natale da Charlie Brown (1965)</p>
+      </a>
+    </div>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>

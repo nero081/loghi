@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Film - Più Votati</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: #1a1a1a;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  max-width: 90vw;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
+
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
+
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
+
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
+
+.canale a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+  text-decoration: none;
+}
+
+
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
+
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
+  </style>
+</head>
+<body>
+  <h1>Film - Più Votati</h1>
+  <div class="griglia">
+    
+    <div class="canale " id="Schindler_s_List_1993">
+      <a href="https://vixsrc.to/movie/424/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/m0pV0fmMERzCvPVQbLLrPPLl5q1.jpg" alt="Schindler's List (1993)" />
+        
+        <p>Schindler's List (1993)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Il_pianista_2002">
+      <a href="https://vixsrc.to/movie/423/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/eZaGrYtMM2FnssT7WD4XfWbWEB8.jpg" alt="Il pianista (2002)" />
+        
+        <p>Il pianista (2002)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Pulp_Fiction_1994">
+      <a href="https://vixsrc.to/movie/680/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/9p10J9Xp7MuaVac56g8BwAuXEsA.jpg" alt="Pulp Fiction (1994)" />
+        
+        <p>Pulp Fiction (1994)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Nuovo_Cinema_Paradiso_1988">
+      <a href="https://vixsrc.to/movie/11216/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/3hcXpztAe9L6VLpDGwohS01ZSxw.jpg" alt="Nuovo Cinema Paradiso (1988)" />
+        
+        <p>Nuovo Cinema Paradiso (1988)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Interstellar_2014">
+      <a href="https://vixsrc.to/movie/157336/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/bMKiLh0mES4Uiococ240lbbTGXQ.jpg" alt="Interstellar (2014)" />
+        
+        <p>Interstellar (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Fight_Club_1999">
+      <a href="https://vixsrc.to/movie/550/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/rtNLQ8HbPElzEfrHjrzSr07prKT.jpg" alt="Fight Club (1999)" />
+        
+        <p>Fight Club (1999)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="L_Impero_colpisce_ancora_1980">
+      <a href="https://vixsrc.to/movie/1891/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/czJIccKq8oOsNNqOeCeBzWHGRCf.jpg" alt="L'Impero colpisce ancora (1980)" />
+        
+        <p>L'Impero colpisce ancora (1980)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Il_Signore_degli_Anelli_Le_due_torri_2002">
+      <a href="https://vixsrc.to/movie/121/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/fVKewiBPcY2dQujYEsnQmQ7lfRZ.jpg" alt="Il Signore degli Anelli - Le due torri (2002)" />
+        
+        <p>Il Signore degli Anelli - Le due torri (2002)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Quei_bravi_ragazzi_1990">
+      <a href="https://vixsrc.to/movie/769/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/7Ce724ZcEt7Id9EwBFFdXuvDxWA.jpg" alt="Quei bravi ragazzi (1990)" />
+        
+        <p>Quei bravi ragazzi (1990)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Psyco_1960">
+      <a href="https://vixsrc.to/movie/539/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/tdqX0MWaFHuGwUygYn7j6eluOdP.jpg" alt="Psyco (1960)" />
+        
+        <p>Psyco (1960)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Il_miglio_verde_1999">
+      <a href="https://vixsrc.to/movie/497/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/kptqTcldosy8JPf75JT16oTYUMB.jpg" alt="Il miglio verde (1999)" />
+        
+        <p>Il miglio verde (1999)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Parasite_2019">
+      <a href="https://vixsrc.to/movie/496243/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/mMM8kcfspicib7AmPTvf97Rarwn.jpg" alt="Parasite (2019)" />
+        
+        <p>Parasite (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Il_cavaliere_oscuro_2008">
+      <a href="https://vixsrc.to/movie/155/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/qIhsgno1mjbzUbs4H6DaRjhskAR.jpg" alt="Il cavaliere oscuro (2008)" />
+        
+        <p>Il cavaliere oscuro (2008)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Le_ali_della_libertà_1994">
+      <a href="https://vixsrc.to/movie/278/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/9OxcvTJwZDjQTFvY2NxiwnSrQS6.jpg" alt="Le ali della libertà (1994)" />
+        
+        <p>Le ali della libertà (1994)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Il_buono_il_brutto_il_cattivo_1966">
+      <a href="https://vixsrc.to/movie/429/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/2VTS3wRO59hPEHiXqMOkGaypJGe.jpg" alt="Il buono, il brutto, il cattivo (1966)" />
+        
+        <p>Il buono, il brutto, il cattivo (1966)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Il_padrino_Parte_II_1974">
+      <a href="https://vixsrc.to/movie/240/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/23NNNNLzaLnyTxwcuj680R7iBFH.jpg" alt="Il padrino - Parte II (1974)" />
+        
+        <p>Il padrino - Parte II (1974)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="C_era_una_volta_in_America_1984">
+      <a href="https://vixsrc.to/movie/311/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/7KuRRyFasbLFwanitRatvbymTpl.jpg" alt="C'era una volta in America (1984)" />
+        
+        <p>C'era una volta in America (1984)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="La_vita_è_bella_1997">
+      <a href="https://vixsrc.to/movie/637/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/Moz0CzJ44U9L3ADxlVE24LTwY4.jpg" alt="La vita è bella (1997)" />
+        
+        <p>La vita è bella (1997)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Il_Signore_degli_Anelli_Il_ritorno_del_re_2003">
+      <a href="https://vixsrc.to/movie/122/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/96XilLzI7bijsCG4l7oW6I62oad.jpg" alt="Il Signore degli Anelli - Il ritorno del re (2003)" />
+        
+        <p>Il Signore degli Anelli - Il ritorno del re (2003)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="La_parola_ai_giurati_1957">
+      <a href="https://vixsrc.to/movie/389/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/6lvkCuYuqpbmK1OPcv5oKleWbgV.jpg" alt="La parola ai giurati (1957)" />
+        
+        <p>La parola ai giurati (1957)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Il_padrino_1972">
+      <a href="https://vixsrc.to/movie/238/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/hGgz5ho658NECzErDayV5FQTemy.jpg" alt="Il padrino (1972)" />
+        
+        <p>Il padrino (1972)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Forrest_Gump_1994">
+      <a href="https://vixsrc.to/movie/13/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/pGZqc9jQ6F8klQZKm37NAAMH70o.jpg" alt="Forrest Gump (1994)" />
+        
+        <p>Forrest Gump (1994)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="I_sette_samurai_1954">
+      <a href="https://vixsrc.to/movie/346/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/e1rmQlUzbGmNUS59UC9cChYfFxa.jpg" alt="I sette samurai (1954)" />
+        
+        <p>I sette samurai (1954)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Il_Signore_degli_Anelli_La_compagnia_dell_anello_2001">
+      <a href="https://vixsrc.to/movie/120/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/nv6wnTxXYTbUTObE4VXu7bacPRt.jpg" alt="Il Signore degli Anelli - La compagnia dell'anello (2001)" />
+        
+        <p>Il Signore degli Anelli - La compagnia dell'anello (2001)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Qualcuno_volò_sul_nido_del_cuculo_1975">
+      <a href="https://vixsrc.to/movie/510/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/hpg2j8FhnnmbiRpoOU09M0sffJu.jpg" alt="Qualcuno volò sul nido del cuculo (1975)" />
+        
+        <p>Qualcuno volò sul nido del cuculo (1975)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="City_of_God_2002">
+      <a href="https://vixsrc.to/movie/598/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/f7KiBZsKDanOQ3h8W1TdrSLa7yV.jpg" alt="City of God (2002)" />
+        
+        <p>City of God (2002)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="KPop_Demon_Hunters_2025">
+      <a href="https://vixsrc.to/movie/803796/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/43c1efKzA1kigNzY0HBzeoXp8LR.jpg" alt="KPop Demon Hunters (2025)" />
+        
+        <p>KPop Demon Hunters (2025)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Spider_Man_Un_nuovo_universo_2018">
+      <a href="https://vixsrc.to/movie/324857/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/hGLeRHPE0hxMiS5H7l3uaAQ4IlW.jpg" alt="Spider-Man - Un nuovo universo (2018)" />
+        
+        <p>Spider-Man - Un nuovo universo (2018)</p>
+      </a>
+    </div>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>

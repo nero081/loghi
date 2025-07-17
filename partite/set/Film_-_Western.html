@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Film - Western</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    /* Box sizing globale per evitare problemi dimensioni */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: #1a1a1a;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #2d2d2d;
+  text-align: center;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* controlla la trasparenza */
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: #0055a4;
+  text-shadow:
+    2px 2px 0 #ffcc00,
+    4px 4px 0 #ff9900;
+  margin-bottom: 40px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  max-width: 90vw;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+
+/* Stellina burst sul titolo */
+h1::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,1 18,11 29,11 20,17 23,27 15,21 7,27 10,17 1,11 12,11" fill="%23ffcc00" stroke="%23ff9900" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurst 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px; /* Aumentato da 20px per più spazio hover */
+  justify-items: center;
+  padding: 10px; /* Padding per evitare il bordo stretto */
+}
+
+.tile, .canale {
+  background-color: #292929;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-sizing: border-box; /* Sicurezza */
+}
+
+.tile:hover, .canale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Porta in primo piano */
+  position: relative; /* Per rendere z-index efficace */
+}
+
+.tile {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.canale {
+  background: #292929;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 160px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px #fff3b0;
+  text-decoration: none;
+  color: #2d2d2d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  position: relative; /* per stellina */
+  overflow: hidden; /* evita overflow e sovrapposizioni */
+  box-sizing: border-box;
+}
+
+.canale a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.canale p {
+  color: yellow;
+  margin: 0;
+  font-size: 0.95em;
+  text-decoration: none;
+}
+
+
+.canale:focus {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 15px #fff5c7;
+  z-index: 10;
+  position: relative;
+}
+
+.canale img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+  display: block; /* per evitare spazi bianchi indesiderati */
+}
+
+/* Stellina burst piccola su ogni canale */
+.canale::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7" fill="%23ffcc00" stroke="%23ff9900" stroke-width="1.5"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparkleBurstSmall 3s infinite ease-in-out;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Animazione stellina cadente */
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.stellina {
+  position: fixed;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><polygon points='10,1 12,7 18,7 13,11 15,17 10,13 5,17 7,11 2,7 8,7' fill='%23ffcc00' stroke='%23ff9900' stroke-width='1.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Animazione gradiente di sfondo */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Immagine di sfondo trasparente che segue lo scroll */
+#background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
+  </style>
+</head>
+<body>
+  <h1>Film - Western</h1>
+  <div class="griglia">
+    
+    <div class="canale " id="Pedro_Páramo_2024">
+      <a href="https://vixsrc.to/movie/1069387/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/lpl7d2ALW2TkPt7ziXPGxGJrU0h.jpg" alt="Pedro Páramo (2024)" />
+        
+        <p>Pedro Páramo (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Horizon_An_American_Saga_Capitolo_1_2024">
+      <a href="https://vixsrc.to/movie/932086/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/fxcjfrM7RwTblLOWmIGM0DKyr8i.jpg" alt="Horizon: An American Saga - Capitolo 1 (2024)" />
+        
+        <p>Horizon: An American Saga - Capitolo 1 (2024)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Organ_Trail_2023">
+      <a href="https://vixsrc.to/movie/950141/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/s9nwiVMOVvnS2Jt6hdy7UHoFSD0.jpg" alt="Organ Trail (2023)" />
+        
+        <p>Organ Trail (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Circondato_2023">
+      <a href="https://vixsrc.to/movie/759584/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/6UjSXMl9uRmc1zpQwLA2NKTQnV5.jpg" alt="Circondato (2023)" />
+        
+        <p>Circondato (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Butcher_s_Crossing_2023">
+      <a href="https://vixsrc.to/movie/843846/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/2KdkRsYuzYPlJMLrV39gdjY3WkS.jpg" alt="Butcher's Crossing (2023)" />
+        
+        <p>Butcher's Crossing (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="The_Old_Way_2023">
+      <a href="https://vixsrc.to/movie/872954/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/8HCCYAIocXxMKn7J9yQfDX1vBM5.jpg" alt="The Old Way (2023)" />
+        
+        <p>The Old Way (2023)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Morto_per_un_dollaro_2022">
+      <a href="https://vixsrc.to/movie/843380/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/tepYZoEg5gkUwnwQD5Cx9ZqZ7iZ.jpg" alt="Morto per un dollaro (2022)" />
+        
+        <p>Morto per un dollaro (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="La_terra_di_Dio_2022">
+      <a href="https://vixsrc.to/movie/879990/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/jR1DUCP6OPkUkNi8CZjECFRzmGK.jpg" alt="La terra di Dio (2022)" />
+        
+        <p>La terra di Dio (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Winnetou_Le_origini_di_un_capo_2022">
+      <a href="https://vixsrc.to/movie/821292/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/yYDnIPJ4vAVc1pqm5juXO0GtqE1.jpg" alt="Winnetou - Le origini di un capo (2022)" />
+        
+        <p>Winnetou - Le origini di un capo (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Riscatto_d_amore_2022">
+      <a href="https://vixsrc.to/movie/698508/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/dDnR8otFzpSyCmTy0v3ru634Ov0.jpg" alt="Riscatto d'amore (2022)" />
+        
+        <p>Riscatto d'amore (2022)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Il_potere_del_cane_2021">
+      <a href="https://vixsrc.to/movie/600583/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/qTaYVeUaRuPWnVhjnQMq4nvMGLI.jpg" alt="Il potere del cane (2021)" />
+        
+        <p>Il potere del cane (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="The_Harder_They_Fall_2021">
+      <a href="https://vixsrc.to/movie/618162/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/9TM79v6w1qhKLAA23uP98DAe8Be.jpg" alt="The Harder They Fall (2021)" />
+        
+        <p>The Harder They Fall (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Old_Henry_2021">
+      <a href="https://vixsrc.to/movie/785663/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/eE1SL0QoDsvAMqQly56IkRtlN1W.jpg" alt="Old Henry (2021)" />
+        
+        <p>Old Henry (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Cry_Macho_Ritorno_a_casa_2021">
+      <a href="https://vixsrc.to/movie/749274/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/muqRVbqBPV5svZadE9e890EWrrE.jpg" alt="Cry Macho - Ritorno a casa (2021)" />
+        
+        <p>Cry Macho - Ritorno a casa (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Spirit_Il_ribelle_2021">
+      <a href="https://vixsrc.to/movie/637693/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/xxcfD1MkeekPk5sP8cRujx6RInx.jpg" alt="Spirit - Il ribelle (2021)" />
+        
+        <p>Spirit - Il ribelle (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Il_mondo_che_verrà_2021">
+      <a href="https://vixsrc.to/movie/506281/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/yqldwzQDSLWADLaVeSQfBpGO2aC.jpg" alt="Il mondo che verrà (2021)" />
+        
+        <p>Il mondo che verrà (2021)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Notizie_dal_mondo_2020">
+      <a href="https://vixsrc.to/movie/581032/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/bKWH5u18A5avg0OvAfya2DykyA8.jpg" alt="Notizie dal mondo (2020)" />
+        
+        <p>Notizie dal mondo (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Uno_di_noi_2020">
+      <a href="https://vixsrc.to/movie/596161/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/vnO2Hoq1SWWqGgpjIxK2nwpsZ8O.jpg" alt="Uno di noi (2020)" />
+        
+        <p>Uno di noi (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Concrete_Cowboy_2020">
+      <a href="https://vixsrc.to/movie/621954/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/qRW2poVt06WCVlIhrolWS5af4YV.jpg" alt="Concrete Cowboy (2020)" />
+        
+        <p>Concrete Cowboy (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="High_Ground_Il_cacciatore_di_taglie_2020">
+      <a href="https://vixsrc.to/movie/522466/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/qCmH0aQJmTBEnU2g9AI6bimoODZ.jpg" alt="High Ground - Il cacciatore di taglie (2020)" />
+        
+        <p>High Ground - Il cacciatore di taglie (2020)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Oro_piombo_2019">
+      <a href="https://vixsrc.to/movie/642035/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/9Nfh63NKE2x1RZE97Te2mnl3ope.jpg" alt="Oro & piombo (2019)" />
+        
+        <p>Oro & piombo (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Deadwood_Il_film_2019">
+      <a href="https://vixsrc.to/movie/538225/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/6NvrCak6fdyLOWZlBavHHDBbjpD.jpg" alt="Deadwood - Il film (2019)" />
+        
+        <p>Deadwood - Il film (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="The_Kid_2019">
+      <a href="https://vixsrc.to/movie/492565/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/5wK5e9Z8zoaimflHZeSAfrNkpu7.jpg" alt="The Kid (2019)" />
+        
+        <p>The Kid (2019)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="La_ballata_di_Buster_Scruggs_2018">
+      <a href="https://vixsrc.to/movie/537996/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/fiI2W5iVbqw9ZReJPrRktaU0Wae.jpg" alt="La ballata di Buster Scruggs (2018)" />
+        
+        <p>La ballata di Buster Scruggs (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="I_fratelli_Sisters_2018">
+      <a href="https://vixsrc.to/movie/440161/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/IODV6O00svruw0V44PbB0AnONp.jpg" alt="I fratelli Sisters (2018)" />
+        
+        <p>I fratelli Sisters (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="West_of_Hell_2018">
+      <a href="https://vixsrc.to/movie/533938/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/oJcuslAltQP7bxAI4J7Jk7dxvbx.jpg" alt="West of Hell (2018)" />
+        
+        <p>West of Hell (2018)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Hostiles_Ostili_2017">
+      <a href="https://vixsrc.to/movie/384680/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/mwBU7MbtvbUuhDTFm11g5oEs9rz.jpg" alt="Hostiles - Ostili (2017)" />
+        
+        <p>Hostiles - Ostili (2017)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="The_Hollow_Point_Punto_di_non_ritorno_2016">
+      <a href="https://vixsrc.to/movie/262982/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/hRupUiKEt8wuiLFUUhbW30qQNdT.jpg" alt="The Hollow Point - Punto di non ritorno (2016)" />
+        
+        <p>The Hollow Point - Punto di non ritorno (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="I_magnifici_sette_2016">
+      <a href="https://vixsrc.to/movie/333484/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/vnKOorV0xmGIOuGXGL5qRAeUimx.jpg" alt="I magnifici sette (2016)" />
+        
+        <p>I magnifici sette (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Hell_or_High_Water_2016">
+      <a href="https://vixsrc.to/movie/338766/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/z7M9gXN2e14in05FsGr2LBaagd0.jpg" alt="Hell or High Water (2016)" />
+        
+        <p>Hell or High Water (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Il_duello_2016">
+      <a href="https://vixsrc.to/movie/333386/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/fn9sifyK4SZFeQxJ5QBOE9D0na8.jpg" alt="Il duello (2016)" />
+        
+        <p>Il duello (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Brimstone_2016">
+      <a href="https://vixsrc.to/movie/324560/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/aNxU4eZrfiChOgCEtyKWSCExdEi.jpg" alt="Brimstone (2016)" />
+        
+        <p>Brimstone (2016)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="The_Hateful_Eight_2015">
+      <a href="https://vixsrc.to/movie/273248/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/2ogVOei8k5WPixP2RVJFMn16zII.jpg" alt="The Hateful Eight (2015)" />
+        
+        <p>The Hateful Eight (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Revenant_Redivivo_2015">
+      <a href="https://vixsrc.to/movie/281957/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/cw8HPomOzNql3l4xdaJJ8HGIZds.jpg" alt="Revenant - Redivivo (2015)" />
+        
+        <p>Revenant - Redivivo (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="The_Ridiculous_6_2015">
+      <a href="https://vixsrc.to/movie/347969/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/uXxoJpKBbFBJKsw9gQlugOzgOWr.jpg" alt="The Ridiculous 6 (2015)" />
+        
+        <p>The Ridiculous 6 (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="The_Dressmaker_Il_diavolo_è_tornato_2015">
+      <a href="https://vixsrc.to/movie/298382/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/reT5zKjXRvODkm9EJTm5Z0Xao2D.jpg" alt="The Dressmaker - Il diavolo è tornato (2015)" />
+        
+        <p>The Dressmaker - Il diavolo è tornato (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Bone_Tomahawk_2015">
+      <a href="https://vixsrc.to/movie/294963/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/ydtFNGj8F6jSVfQoI830xyKdEhO.jpg" alt="Bone Tomahawk (2015)" />
+        
+        <p>Bone Tomahawk (2015)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Young_Ones_L_ultima_generazione_2014">
+      <a href="https://vixsrc.to/movie/215379/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/k6bnwONpNr3UnyTOeRkiQsb6yml.jpg" alt="Young Ones - L'ultima generazione (2014)" />
+        
+        <p>Young Ones - L'ultima generazione (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Un_milione_di_modi_per_morire_nel_West_2014">
+      <a href="https://vixsrc.to/movie/188161/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/vlz6YYxo2XG2c1kh8OdpyITgjvw.jpg" alt="Un milione di modi per morire nel West (2014)" />
+        
+        <p>Un milione di modi per morire nel West (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="The_Salvation_2014">
+      <a href="https://vixsrc.to/movie/266285/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/lhKKsQtkTfgAMVKtx44ypG5HFLt.jpg" alt="The Salvation (2014)" />
+        
+        <p>The Salvation (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="The_Homesman_2014">
+      <a href="https://vixsrc.to/movie/264656/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/lBlZgnqCKdcCfj5B6coMX10yJUD.jpg" alt="The Homesman (2014)" />
+        
+        <p>The Homesman (2014)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="The_Lone_Ranger_2013">
+      <a href="https://vixsrc.to/movie/57201/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/oT1TJgXGoB7NMk84oWB76iz2ulk.jpg" alt="The Lone Ranger (2013)" />
+        
+        <p>The Lone Ranger (2013)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Django_Unchained_2012">
+      <a href="https://vixsrc.to/movie/68718/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/3Q41QdROiYoEMY0qXhfRMT5DbPd.jpg" alt="Django Unchained (2012)" />
+        
+        <p>Django Unchained (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Lawless_2012">
+      <a href="https://vixsrc.to/movie/82633/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/k0xpeuLKGEzbKSZc8Ta5MxEPeyW.jpg" alt="Lawless (2012)" />
+        
+        <p>Lawless (2012)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Cowboys_Aliens_2011">
+      <a href="https://vixsrc.to/movie/49849/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/fARMIkNaeFR5lh6vAk8GbYfM6nL.jpg" alt="Cowboys & Aliens (2011)" />
+        
+        <p>Cowboys & Aliens (2011)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Rango_2011">
+      <a href="https://vixsrc.to/movie/44896/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/oGi2tcoBfiDG0qg2gZhtksF2szF.jpg" alt="Rango (2011)" />
+        
+        <p>Rango (2011)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Mattie_2011">
+      <a href="https://vixsrc.to/movie/134675/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/hObSca86CSbKCinJzTQnbuQDhew.jpg" alt="Mattie (2011)" />
+        
+        <p>Mattie (2011)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Il_Grinta_2010">
+      <a href="https://vixsrc.to/movie/44264/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/CXUjd4tKkybWKrvmAQN9pDqAN2.jpg" alt="Il Grinta (2010)" />
+        
+        <p>Il Grinta (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Jonah_Hex_2010">
+      <a href="https://vixsrc.to/movie/20533/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/aGKBiQtJIqZTSyRtVHFy4EeyN6g.jpg" alt="Jonah Hex (2010)" />
+        
+        <p>Jonah Hex (2010)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="L_assassinio_di_Jesse_James_per_mano_del_codardo_Robert_Ford_2007">
+      <a href="https://vixsrc.to/movie/4512/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/cnSjjJakI7iUmIkGtvw0Q5NC9l.jpg" alt="L'assassinio di Jesse James per mano del codardo Robert Ford (2007)" />
+        
+        <p>L'assassinio di Jesse James per mano del codardo Robert Ford (2007)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Quel_treno_per_Yuma_2007">
+      <a href="https://vixsrc.to/movie/5176/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/rCGMLTCPX1jsXlGr6yLTHkfbruF.jpg" alt="Quel treno per Yuma (2007)" />
+        
+        <p>Quel treno per Yuma (2007)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="L_ultimo_pellerossa_2007">
+      <a href="https://vixsrc.to/movie/13470/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/xLpb4mQV6OYMFSbgWG9cn7b1ats.jpg" alt="L'ultimo pellerossa (2007)" />
+        
+        <p>L'ultimo pellerossa (2007)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="La_leggenda_di_Zorro_2005">
+      <a href="https://vixsrc.to/movie/1656/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/fehXpfbYyYeQkxrXyJveOFW1iER.jpg" alt="La leggenda di Zorro (2005)" />
+        
+        <p>La leggenda di Zorro (2005)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Oceano_di_fuoco_Hidalgo_2004">
+      <a href="https://vixsrc.to/movie/2023/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/aE7bfzG7wgzLxenRc9BBSAnt4bd.jpg" alt="Oceano di fuoco - Hidalgo (2004)" />
+        
+        <p>Oceano di fuoco - Hidalgo (2004)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Tremors_4_Agli_inizi_della_leggenda_2004">
+      <a href="https://vixsrc.to/movie/10891/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/vNA1mG4eAZlsg5xaRFsIFNQ24GJ.jpg" alt="Tremors 4 - Agli inizi della leggenda (2004)" />
+        
+        <p>Tremors 4 - Agli inizi della leggenda (2004)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="The_Missing_2003">
+      <a href="https://vixsrc.to/movie/12146/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/mGgPTXwORFMbsDsdfJjXXgCbAkD.jpg" alt="The Missing (2003)" />
+        
+        <p>The Missing (2003)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="2_cavalieri_a_Londra_2003">
+      <a href="https://vixsrc.to/movie/6038/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/dHnRKqoKv3VqLkL5LXjpHcI8HI7.jpg" alt="2 cavalieri a Londra (2003)" />
+        
+        <p>2 cavalieri a Londra (2003)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Spirit_Cavallo_selvaggio_2002">
+      <a href="https://vixsrc.to/movie/9023/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/wnCrtSSfMPvty9cJdsMPbWBFF8W.jpg" alt="Spirit - Cavallo selvaggio (2002)" />
+        
+        <p>Spirit - Cavallo selvaggio (2002)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Pallottole_cinesi_2000">
+      <a href="https://vixsrc.to/movie/8584/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/mKORqesUU1ns4JgMmkLVGEYfNMt.jpg" alt="Pallottole cinesi (2000)" />
+        
+        <p>Pallottole cinesi (2000)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Wild_Wild_West_1999">
+      <a href="https://vixsrc.to/movie/8487/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/6fylQ5xJn2SzZL6plUdLVvQjVf5.jpg" alt="Wild Wild West (1999)" />
+        
+        <p>Wild Wild West (1999)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="L_insaziabile_1999">
+      <a href="https://vixsrc.to/movie/10212/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/gC1nbCHdJrFiIhsR51jQPkJU9WM.jpg" alt="L'insaziabile (1999)" />
+        
+        <p>L'insaziabile (1999)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Ancora_vivo_1996">
+      <a href="https://vixsrc.to/movie/9333/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/h63TnyzBl77gxRVVRDYDTUIDh6N.jpg" alt="Ancora vivo (1996)" />
+        
+        <p>Ancora vivo (1996)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Dead_Man_1995">
+      <a href="https://vixsrc.to/movie/922/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/8UE8zUv0YZ5BopB0W32Q3IdJHXo.jpg" alt="Dead Man (1995)" />
+        
+        <p>Dead Man (1995)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Pronti_a_morire_1995">
+      <a href="https://vixsrc.to/movie/12106/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/yLjeAFcr1pcuj17Pr0IgSOvRPsJ.jpg" alt="Pronti a morire (1995)" />
+        
+        <p>Pronti a morire (1995)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Vento_di_passioni_1994">
+      <a href="https://vixsrc.to/movie/4476/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/rT7mikxhALBM0URgWh5o0uCQgHl.jpg" alt="Vento di passioni (1994)" />
+        
+        <p>Vento di passioni (1994)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Botte_di_Natale_1994">
+      <a href="https://vixsrc.to/movie/9287/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/i8XK868u6vDsZHeYwXSR5yMrkkt.jpg" alt="Botte di Natale (1994)" />
+        
+        <p>Botte di Natale (1994)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Wyatt_Earp_1994">
+      <a href="https://vixsrc.to/movie/12160/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/51LItgyecu2KMAtIchYogEykCIu.jpg" alt="Wyatt Earp (1994)" />
+        
+        <p>Wyatt Earp (1994)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Gli_spietati_1992">
+      <a href="https://vixsrc.to/movie/33/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/sorJusK8R693wst3JrqjW6VPIwl.jpg" alt="Gli spietati (1992)" />
+        
+        <p>Gli spietati (1992)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Cuori_ribelli_1992">
+      <a href="https://vixsrc.to/movie/11259/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/tvV3fu1MiEOb2Xr8v3lCoVgYhEl.jpg" alt="Cuori ribelli (1992)" />
+        
+        <p>Cuori ribelli (1992)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Lucky_Luke_1991">
+      <a href="https://vixsrc.to/movie/11175/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/ztHB9YpEf26fxQqokp8eXT8BCVR.jpg" alt="Lucky Luke (1991)" />
+        
+        <p>Lucky Luke (1991)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Carabina_Quigley_1990">
+      <a href="https://vixsrc.to/movie/9588/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/ggcq0V0Xy6b4gyeJIv9UqOjv2Hj.jpg" alt="Carabina Quigley (1990)" />
+        
+        <p>Carabina Quigley (1990)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Young_Guns_II_La_leggenda_di_Billy_the_Kid_1990">
+      <a href="https://vixsrc.to/movie/9086/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/4aq2OctDN1nkaQts0QLcuQM64nA.jpg" alt="Young Guns II - La leggenda di Billy the Kid (1990)" />
+        
+        <p>Young Guns II - La leggenda di Billy the Kid (1990)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Balla_coi_lupi_1990">
+      <a href="https://vixsrc.to/movie/581/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/ext2lih9ZlWTeSWudeyy93ZNITr.jpg" alt="Balla coi lupi (1990)" />
+        
+        <p>Balla coi lupi (1990)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Young_Guns_Giovani_pistole_1988">
+      <a href="https://vixsrc.to/movie/11967/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/36GjJgBc3z5heERCTpD88wcvhdm.jpg" alt="Young Guns - Giovani pistole (1988)" />
+        
+        <p>Young Guns - Giovani pistole (1988)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Renegade_Un_osso_troppo_duro_1987">
+      <a href="https://vixsrc.to/movie/11496/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/e9IfWqcwBTC9HoZEIfOa1B8w4of.jpg" alt="Renegade - Un osso troppo duro (1987)" />
+        
+        <p>Renegade - Un osso troppo duro (1987)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Occhio_alla_penna_1981">
+      <a href="https://vixsrc.to/movie/46445/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/nbadismD84xaGTFHSJwJp2lwUZS.jpg" alt="Occhio alla penna (1981)" />
+        
+        <p>Occhio alla penna (1981)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Verso_il_sud_1978">
+      <a href="https://vixsrc.to/movie/34130/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/5gYTYngX9LgVwF6nUHBXcmctVCr.jpg" alt="Verso il sud (1978)" />
+        
+        <p>Verso il sud (1978)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Stringi_i_denti_e_vai_1975">
+      <a href="https://vixsrc.to/movie/32617/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/mr5lXxADt3ux5SkvPVO2LD0bC2i.jpg" alt="Stringi i denti e vai! (1975)" />
+        
+        <p>Stringi i denti e vai! (1975)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Zorro_1975">
+      <a href="https://vixsrc.to/movie/18450/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/qKAJb4ZSHDCxxhcPRp04N60RTy1.jpg" alt="Zorro (1975)" />
+        
+        <p>Zorro (1975)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Mezzogiorno_e_mezzo_di_fuoco_1974">
+      <a href="https://vixsrc.to/movie/11072/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/jT6qfcuuc48r32lCtCsTe0PGXIq.jpg" alt="Mezzogiorno e mezzo di fuoco (1974)" />
+        
+        <p>Mezzogiorno e mezzo di fuoco (1974)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Il_mondo_dei_robot_1973">
+      <a href="https://vixsrc.to/movie/2362/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/ra0tvpzDY6AnpmQKZ6mhKHoljGw.jpg" alt="Il mondo dei robot (1973)" />
+        
+        <p>Il mondo dei robot (1973)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Giù_la_testa_1971">
+      <a href="https://vixsrc.to/movie/336/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/qTdmSJPOW3ts04BrBRTwieA3BY9.jpg" alt="Giù la testa (1971)" />
+        
+        <p>Giù la testa (1971)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="continuavano_a_chiamarlo_Trinità_1971">
+      <a href="https://vixsrc.to/movie/11829/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/v8TRduqnI4e22YzXITKss51Difv.jpg" alt="...continuavano a chiamarlo Trinità (1971)" />
+        
+        <p>...continuavano a chiamarlo Trinità (1971)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Il_piccolo_grande_uomo_1970">
+      <a href="https://vixsrc.to/movie/11040/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/llIL5iEKfPGGANuugIsJpmo1rI5.jpg" alt="Il piccolo grande uomo (1970)" />
+        
+        <p>Il piccolo grande uomo (1970)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Lo_chiamavano_Trinità_1970">
+      <a href="https://vixsrc.to/movie/9394/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/qo5KIMy80sJn8g8T5So3RLABht6.jpg" alt="Lo chiamavano Trinità... (1970)" />
+        
+        <p>Lo chiamavano Trinità... (1970)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="The_Intruders_1970">
+      <a href="https://vixsrc.to/movie/255086/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/kCl90IWdBgIacMVirIFpJ7mwfIl.jpg" alt="The Intruders (1970)" />
+        
+        <p>The Intruders (1970)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Il_dito_più_veloce_del_West_1969">
+      <a href="https://vixsrc.to/movie/11574/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/6UVd53sHp7WxAt19sWgGokIYPDA.jpg" alt="Il dito più veloce del West (1969)" />
+        
+        <p>Il dito più veloce del West (1969)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="C_era_una_volta_il_West_1968">
+      <a href="https://vixsrc.to/movie/335/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/3MPqF2iK6ZBoagnB5H1pjImHpHc.jpg" alt="C'era una volta il West (1968)" />
+        
+        <p>C'era una volta il West (1968)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Ciccio_perdona_io_no_1968">
+      <a href="https://vixsrc.to/movie/144968/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/obBLu9RUz1BSAjGKjBjIHsJ5rlB.jpg" alt="Ciccio perdona... io no! (1968)" />
+        
+        <p>Ciccio perdona... io no! (1968)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Il_buono_il_brutto_il_cattivo_1966">
+      <a href="https://vixsrc.to/movie/429/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/2VTS3wRO59hPEHiXqMOkGaypJGe.jpg" alt="Il buono, il brutto, il cattivo (1966)" />
+        
+        <p>Il buono, il brutto, il cattivo (1966)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Per_qualche_dollaro_in_più_1965">
+      <a href="https://vixsrc.to/movie/938/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/v0Zpaps6oLf3AQqfs0gbNQdaDUz.jpg" alt="Per qualche dollaro in più (1965)" />
+        
+        <p>Per qualche dollaro in più (1965)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Per_un_pugno_di_dollari_1964">
+      <a href="https://vixsrc.to/movie/391/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/ebhxO8MK33cTS9Z9bQKBPC71sxG.jpg" alt="Per un pugno di dollari (1964)" />
+        
+        <p>Per un pugno di dollari (1964)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="La_conquista_del_West_1962">
+      <a href="https://vixsrc.to/movie/11897/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/mAkubHpqwYGGstwVN520nSo8SFd.jpg" alt="La conquista del West (1962)" />
+        
+        <p>La conquista del West (1962)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Un_re_per_quattro_regine_1956">
+      <a href="https://vixsrc.to/movie/43310/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/4V24DfypAQ8Bzfh616gQ7VP2tT2.jpg" alt="Un re per quattro regine (1956)" />
+        
+        <p>Un re per quattro regine (1956)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="La_pistola_non_basta_1956">
+      <a href="https://vixsrc.to/movie/91472/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/dnUmUQNN7umDnHoaY51eHFv9Kg2.jpg" alt="La pistola non basta (1956)" />
+        
+        <p>La pistola non basta (1956)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Sette_spose_per_sette_fratelli_1954">
+      <a href="https://vixsrc.to/movie/16563/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/t79WxUazjcyPxruHLCxSSdoF8Jt.jpg" alt="Sette spose per sette fratelli (1954)" />
+        
+        <p>Sette spose per sette fratelli (1954)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Duello_all_ultimo_sangue_1953">
+      <a href="https://vixsrc.to/movie/43348/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/pFJo17VGc9m4DA8NHyMuGB5Y1hC.jpg" alt="Duello all'ultimo sangue (1953)" />
+        
+        <p>Duello all'ultimo sangue (1953)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="Pony_Post_1940">
+      <a href="https://vixsrc.to/movie/256220/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/5kg83UsNFbQyWwWPc33oSebN239.jpg" alt="Pony Post (1940)" />
+        
+        <p>Pony Post (1940)</p>
+      </a>
+    </div>
+    
+    <div class="canale " id="The_Trusted_Outlaw_1937">
+      <a href="https://vixsrc.to/movie/241454/?lang=it" target="_blank">
+        
+          <img src="https://image.tmdb.org/t/p/w500/3pkFreglNgIZHA30zIP1KHpZA8t.jpg" alt="The Trusted Outlaw (1937)" />
+        
+        <p>The Trusted Outlaw (1937)</p>
+      </a>
+    </div>
+    
+  </div>
+  <div class="back">
+    <a href="index.html">⟵ Torna alla home</a>
+  </div>
+</body>
+</html>
