@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Sky Cinema Suspense HD</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="none">
+    <meta name="referrer" content="no-referrer">
+    <meta name="theme-color" content="black">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <script src="https://cdn.jsdelivr.net/npm/clappr@latest/dist/clappr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/level-selector@latest/dist/level-selector.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/clappr-pip@latest/dist/clappr-pip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/clappr/dash-shaka-playback@latest/dist/dash-shaka-playback.min.js"></script>
+
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        background: black;
+      }
+      #player {
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+        background-color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="player"></div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        new Clappr.Player({
+          source: 'https://g003-lin-it-cmaf-prd-ak.pcdn07.cssott02.com/v~a-0-0_e~1752842929_s~c047d9db-368e-4123-9326-5c7879bb6202_u~1d8dfa3359e3fcf56c43f8e52616f1cd5b0f00f9adf2e8d7ce6a9990688c0208a89657236516a8c022ef01600abbd9a5_l~63_x~1d1a70bc2657818e570ed23ed2db3d58d04f2d9ff8207b02e6d5a106fe6bba7e/nowitlin1/Content/CMAF_CTR_S1/Live/channel(skycinemasuspense)/master_2hr-aac.mpd',
+          poster: { url: "https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png", showOnVideoEnd: false },
+		  parentId: "#player",
+          autoPlay: true,
+          width: "100%",
+          height: "100%",
+          plugins: [LevelSelector, ClapprPip.PipButton, ClapprPip.PipPlugin, DashShakaPlayback],
+          shakaConfiguration: {
+            drm: {
+              clearKeys: {"1115d04562a1c328a84b2dab41244cba": "5cf8c65d4177349308d7043384880659"}
+            }
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
