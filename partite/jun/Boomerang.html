@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Boomerang</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="none">
+    <meta name="referrer" content="no-referrer">
+    <meta name="theme-color" content="black">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <script src="https://cdn.jsdelivr.net/npm/clappr@latest/dist/clappr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/level-selector@latest/dist/level-selector.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/clappr-pip@latest/dist/clappr-pip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/clappr/dash-shaka-playback@latest/dist/dash-shaka-playback.min.js"></script>
+
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        background: black;
+      }
+      #player {
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+        background-color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="player"></div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        new Clappr.Player({
+          source: 'https://g003-lin-it-cmaf-prd-cf.pcdn07.cssott02.com/v~1-0-0_e~1752843219_f~0_g~1_s~c92e859d-ad71-4117-9e4f-cfe9062a294e_u~1d8dfa3359e3fcf56c43f8e52616f1cd5b0f00f9adf2e8d7ce6a9990688c0208a89657236516a8c022ef01600abbd9a5_k~A_l~55_x~506053658d74c9dff45ec91a8bc0a045/nowitlin1/Content/CMAF_CTR_S1/Live/channel(boomerang)/master_2hr-aac.mpd',
+          poster: { url: "https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png", showOnVideoEnd: false },
+		  parentId: "#player",
+          autoPlay: true,
+          width: "100%",
+          height: "100%",
+          plugins: [LevelSelector, ClapprPip.PipButton, ClapprPip.PipPlugin, DashShakaPlayback],
+          shakaConfiguration: {
+            drm: {
+              clearKeys: {"1115cc41a0daf57a22c1c81bd139b559": "31347f9bbc90713e972249b54ec882b2"}
+            }
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
