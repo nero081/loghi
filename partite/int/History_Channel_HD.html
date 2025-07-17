@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>History Channel HD</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="none">
+    <meta name="referrer" content="no-referrer">
+    <meta name="theme-color" content="black">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <script src="https://cdn.jsdelivr.net/npm/clappr@latest/dist/clappr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/level-selector@latest/dist/level-selector.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/clappr-pip@latest/dist/clappr-pip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/clappr/dash-shaka-playback@latest/dist/dash-shaka-playback.min.js"></script>
+
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        background: black;
+      }
+      #player {
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+        background-color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="player"></div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        new Clappr.Player({
+          source: 'https://g003-lin-it-cmaf-prd-ak.pcdn07.cssott02.com/v~a-0-0_e~1752839439_s~223a6d05-ba6e-4138-9616-d42045cb465e_u~1d8dfa3359e3fcf56c43f8e52616f1cd5b0f00f9adf2e8d7ce6a9990688c0208a89657236516a8c022ef01600abbd9a5_l~60_x~a8568903e897d55ed1cf02f807f2bb3ceb9ae97ea71703b59a1efcf775b93d04/nowitlin1/Content/CMAF_CTR_S1/Live/channel(historychannel)/master_2hr-aac.mpd',
+          poster: { url: "https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png", showOnVideoEnd: false },
+		  parentId: "#player",
+          autoPlay: true,
+          width: "100%",
+          height: "100%",
+          plugins: [LevelSelector, ClapprPip.PipButton, ClapprPip.PipPlugin, DashShakaPlayback],
+          shakaConfiguration: {
+            drm: {
+              clearKeys: {"11158db9a2522642c8da56416d94c6a3": "edb6a56266dde53f013d170d46b0b265"}
+            }
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

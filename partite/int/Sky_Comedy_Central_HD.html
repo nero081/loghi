@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Sky Comedy Central HD</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="none">
+    <meta name="referrer" content="no-referrer">
+    <meta name="theme-color" content="black">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <script src="https://cdn.jsdelivr.net/npm/clappr@latest/dist/clappr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/level-selector@latest/dist/level-selector.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/clappr-pip@latest/dist/clappr-pip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/clappr/dash-shaka-playback@latest/dist/dash-shaka-playback.min.js"></script>
+
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        background: black;
+      }
+      #player {
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+        background-color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="player"></div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        new Clappr.Player({
+          source: 'https://g003-lin-it-cmaf-prd-ak.pcdn07.cssott02.com/v~a-0-0_e~1752840054_s~9a4bef54-7cff-4e4c-9811-3c0c428ee6b8_u~1d8dfa3359e3fcf56c43f8e52616f1cd5b0f00f9adf2e8d7ce6a9990688c0208a89657236516a8c022ef01600abbd9a5_l~59_x~3601c95c725ae7980db125564843ddc9f469ca656cac8470a56dd746c4b1ea10/nowitlin1/Content/CMAF_CTR_S1/Live/channel(comedycentral)/master_2hr-aac.mpd',
+          poster: { url: "https://raw.githubusercontent.com/nero081/loghi/main/partite/primo/loghi/nero.png", showOnVideoEnd: false },
+		  parentId: "#player",
+          autoPlay: true,
+          width: "100%",
+          height: "100%",
+          plugins: [LevelSelector, ClapprPip.PipButton, ClapprPip.PipPlugin, DashShakaPlayback],
+          shakaConfiguration: {
+            drm: {
+              clearKeys: {"11155778dc9b7dde1e396a9110f09208": "c030cf978cbdc4a4c84fc68ab467942b"}
+            }
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
